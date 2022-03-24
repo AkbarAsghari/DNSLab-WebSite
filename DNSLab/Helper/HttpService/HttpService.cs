@@ -6,20 +6,17 @@ using System.Text.Json;
 
 namespace DNSLab.Helper.HttpService
 {
-    public class HttpService : IHttpService, IDisposable
+    public class HttpService : IHttpService
     {
         private readonly HttpClient _httpClient;
         private JsonSerializerOptions defaultJsonSerializationOption
             = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-        private readonly HttpInterceptorService Interceptor;
 
         //private const string BaseAddress = "http://192.168.1.7";
         private const string BaseAddress = "http://api.dnslab.ir";
-        public HttpService(HttpClient httpClient, HttpInterceptorService interceptor)
+        public HttpService(HttpClient httpClient)
         {
-            interceptor.RegisterEvent();
             _httpClient = httpClient;
-            Interceptor = interceptor;
         }
         public async Task<HttpResponseWraper<object>> Post<T>(string url, T data)
         {
@@ -116,7 +113,5 @@ namespace DNSLab.Helper.HttpService
             var responseString = await httpResponse.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(responseString, options);
         }
-
-        public void Dispose() => Interceptor.DisposeEvent();
     }
 }
