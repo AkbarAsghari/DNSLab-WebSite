@@ -1,8 +1,8 @@
 ﻿@using DNSLab.DTOs.IP
 @using DNSLab.Interfaces.Repository
 @inherits LayoutComponentBase
-@inject IIPRepository ipRepository
 @inject IStringLocalizer<Resource> localizer
+@inject IHttpContextAccessor httpContextAccessor
 
 <PageTitle>DNSLab</PageTitle>
 
@@ -33,8 +33,19 @@
 @code {
     private IPDTO IPDTO = new IPDTO();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        IPDTO = await ipRepository.GetIP();
+        IPDTO iPDTO = new IPDTO();
+
+        try
+        {
+            iPDTO.IPv4 = httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString();
+        }
+        catch (Exception ex)
+        {
+            //If Null reference exception (Please Enable WebSocket In Feature For IIS *Akbar*)
+            iPDTO.IPv4 = "Unavaible";
+        }
+        IPDTO = iPDTO;
     }
 }

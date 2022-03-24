@@ -24,7 +24,6 @@ builder.Services.AddScoped<ToastService>();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IDNSRepository, DNSRepository>();
-builder.Services.AddScoped<IIPRepository, IPRepository>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
@@ -41,6 +40,8 @@ builder.Services.AddSingleton<ApplicationExceptions>();
 builder.Services.AddTransient<HttpResponseExceptionHander>();
 // Add services to the container.
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddHttpContextAccessor();
 
 var host = builder.Build();
 
