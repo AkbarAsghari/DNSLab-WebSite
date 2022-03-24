@@ -1,4 +1,5 @@
-﻿using DNSLab.Helper.Extensions;
+﻿using Blazored.LocalStorage;
+using DNSLab.Helper.Extensions;
 using DNSLab.Interfaces.Auth;
 using Jdenticon;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -11,22 +12,22 @@ namespace DNSLab.Prividers
 {
     public class JWTAuthenticationStateProvider : AuthenticationStateProvider, IAuthService
     {
-        private readonly IJSRuntime JS;
+        private readonly ILocalStorageService localStorage;
         private readonly string TokenKey = "TOKENKEY";
         private AuthenticationState Anonymouse =>
             new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 
         private readonly HttpClient HttpClient;
 
-        public JWTAuthenticationStateProvider(IJSRuntime jS, HttpClient httpClient)
+        public JWTAuthenticationStateProvider(ILocalStorageService localStorage, HttpClient httpClient)
         {
-            this.JS = jS;
+            this.localStorage = localStorage;
             this.HttpClient = httpClient;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await JS.GetFromLocalStorage(TokenKey);
+            var token = await localStorage.GetItemAsync<string>(TokenKey);
             if (String.IsNullOrEmpty(token))
                 return Anonymouse;
 
@@ -89,14 +90,14 @@ namespace DNSLab.Prividers
 
         public async Task Login(string token)
         {
-            await JS.SetLocalStorage(TokenKey, token);
+            await localStorage.SetItemAsStringAsync(TokenKey, token);
             var authState = BuildAuthenticationState(token);
             NotifyAuthenticationStateChanged(Task.FromResult(authState));
         }
 
         public async Task Logout()
         {
-            await JS.RemoveFromLocalStorage(TokenKey);
+            await localStorage.RemoveItemAsync(TokenKey);
             HttpClient.DefaultRequestHeaders.Authorization = null;
             NotifyAuthenticationStateChanged(Task.FromResult(Anonymouse));
         }

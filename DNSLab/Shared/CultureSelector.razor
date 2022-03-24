@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
-@inject IJSRuntime JSRuntime
+@using Blazored.LocalStorage
+@inject ILocalStorageService localStorage
 @inject NavigationManager Nav
 
 <label class="switch">
@@ -12,18 +13,23 @@
     private CultureInfo _Culture = CultureInfo.CurrentCulture;
     private bool CultureChange
     {
-        get => _Culture == null ? true : _Culture.Name == "fa" ? true : false;
-        set => _Culture = value ? new CultureInfo("fa") : new CultureInfo("en");
+        get => _Culture == null ? true : _Culture.Name == "fa-FA" ? true : false;
+        set => _Culture = value ? new CultureInfo("fa-FA") : new CultureInfo("en-EN");
     }
 
-    public async Task Save()
+    public void Save()
     {
-        if ((CultureInfo.CurrentCulture.Name == "fa" && CultureChange) ||
-            (CultureInfo.CurrentCulture.Name == "en" && !CultureChange))
+        if ((CultureInfo.CurrentCulture.Name == "fa-FA" && CultureChange) ||
+            (CultureInfo.CurrentCulture.Name == "en-EN" && !CultureChange))
             return;
 
-        var js = (IJSInProcessRuntime)JSRuntime;
-        await js.InvokeVoidAsync("blazorCulture.set", _Culture.Name);
-        Nav.NavigateTo(Nav.Uri, forceLoad: true);
+        var uri = new Uri(Nav.Uri)
+              .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+        var cultureEscaped = Uri.EscapeDataString(_Culture.Name);
+        var uriEscaped = Uri.EscapeDataString(uri);
+
+         Nav.NavigateTo(
+                    $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
+                    forceLoad: true);
     }
 }

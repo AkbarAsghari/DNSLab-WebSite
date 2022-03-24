@@ -75,14 +75,10 @@
 
 
 @code {
-    protected async override Task OnAfterRenderAsync(bool firstRender)
+    protected async override Task OnInitializedAsync()
     {
-        if (firstRender)
-        {
-            base.OnInitialized();
-            var user = (await auth.GetAuthenticationStateAsync()).User;
-            if (user.Identity?.IsAuthenticated == true)
-                navigationManager.NavigateTo("Dashboard");
-        }
+        var user = (await auth.GetAuthenticationStateAsync()).User;
+        if (user.Identity?.IsAuthenticated == true)
+            navigationManager.NavigateTo("Dashboard");
     }
 }

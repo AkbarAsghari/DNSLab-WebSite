@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using DNSLab.Data;
 using DNSLab.Helper.Exceptions;
 using DNSLab.Helper.HttpService;
@@ -28,12 +29,13 @@ builder.Services.AddScoped<IIPRepository, IPRepository>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<JWTAuthenticationStateProvider>();
-builder.Services.AddScoped<AuthenticationStateProvider>(provider=>provider.GetRequiredService<JWTAuthenticationStateProvider>());
+builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
 
-builder.Services.AddSingleton<HttpClient>();
 
 builder.Services.AddHttpClientInterceptor();
 
@@ -46,14 +48,16 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 var host = builder.Build();
 
-//builder.Services.AddLocalization();
 
-//host.UseRequestLocalization("fa");
+var supportedCultures = new[] { "fa-FA", "en-EN" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
 
-//host.UseRequestLocalization(new RequestLocalizationOptions()
-//    .AddSupportedCultures(new[] { "en", "fa" })
-//    .AddSupportedUICultures(new[] { "en", "fa" }));
+host.UseRequestLocalization(localizationOptions);
 
+host.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (!host.Environment.IsDevelopment())
