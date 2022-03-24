@@ -1,0 +1,40 @@
+﻿@page "/dns/edit/{HostNameId:guid}"
+
+@inject IDNSRepository dnsRepository
+@inject NavigationManager _navManager;
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
+
+<PageTitle>@localizer["SEO_DNSEditTitle"]</PageTitle>
+<meta name="description" content="@localizer["SEO_DNSEditDescription"]" />
+<meta name="keywords" content="@localizer["SEO_DNSEditKeyWords"]" />
+
+<DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName" IsInProgress="isProgressing"/>
+@code {
+    private HostNameDTO hostName { get; set; } = new HostNameDTO();
+    private bool isProgressing = false;
+
+    [Parameter] public Guid HostNameId{ get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        hostName = await dnsRepository.GetHostName(HostNameId);
+    }
+
+    public async Task Update()
+    {
+        isProgressing = true;
+        hostName.Domain = "dnslab.ir";
+        hostName.RecordType = 1;
+
+        if (await dnsRepository.UpdateHostName(hostName))
+        {
+            _navManager.NavigateTo("dns/mydns");
+            toastService.ShowToast(localizer["HostNameUpdated"], Enums.ToastLevel.Success);
+        }
+        isProgressing = false;
+    }
+}

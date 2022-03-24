@@ -1,0 +1,34 @@
+﻿@page "/dns/create"
+
+@inject IDNSRepository dnsRepository
+@inject NavigationManager _navManager;
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
+
+<PageTitle>@localizer["SEO_DNSCreateTitle"]</PageTitle>
+<meta name="description" content="@localizer["SEO_DNSCreateDescription"]" />
+<meta name="keywords" content="@localizer["SEO_DNSCreateKeyWords"]" />
+
+<DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName" IsInProgress="isProgressing" />
+@code {
+    private HostNameDTO hostName = new HostNameDTO() { RecordType = 1 };
+    private bool isProgressing = false;
+
+    public async Task Create()
+    {
+        isProgressing = true;
+
+        hostName.Domain = "dnslab.ir";
+
+        if (await dnsRepository.CreateHostName(hostName))
+        {
+            _navManager.NavigateTo("dns/mydns");
+            toastService.ShowToast(localizer["HostNameCreated"], Enums.ToastLevel.Success);
+        }
+
+        isProgressing = false;
+    }
+}

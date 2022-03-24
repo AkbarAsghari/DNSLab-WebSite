@@ -1,0 +1,23 @@
+﻿@page "/download/win"
+@inject IStringLocalizer<Resource> localizer
+
+<PageTitle>@localizer["SEO_DownloadClientTitle"]</PageTitle>
+<meta name="description" content="@localizer["SEO_DownloadClientDescription"]" />
+<meta name="keywords" content="@localizer["SEO_DownloadClientKeyWords"]" />
+
+<div class="card mb-4">
+    <div class="card-header">@localizer["DynamicDNSUpdateClient"]</div>
+    <div class="card-body">
+
+        <!-- Form Row-->
+        <div class="row gx-3 mb-3">
+            <!-- Form Group (first name)-->
+            <div class="col-md-6">
+                <a class="btn btn-success" target="_blank" href="http://api.dnslab.ir/Files/setup/win/dnslab.msi">@localizer["DownloadNow"] (v1.4.0)</a>
+            </div>
+        </div>
+        <div class="row gx-3 mb-3">
+            <p>@localizer["WinClientMessage"]</p>
+        </div>
+    </div>
+</div>

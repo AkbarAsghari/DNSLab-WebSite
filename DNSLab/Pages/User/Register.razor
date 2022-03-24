@@ -1,0 +1,106 @@
+﻿@page "/user/register"
+@using DNSLab.DTOs.User
+@using DNSLab.Interfaces.Auth
+@using DNSLab.Interfaces.Repository
+
+@inject IAccountRepository accountReository
+@inject NavigationManager navigationManager
+@inject IAuthService authService
+@inject IStringLocalizer<Resource> localizer
+
+<PageTitle>@localizer["SEO_UserRegisterTitle"]</PageTitle>
+<meta name="description" content="@localizer["SEO_UserRegisterDescription"]" />
+<meta name="keywords" content="@localizer["SEO_UserRegisterKeyWords"]" />
+
+<NavBar />
+
+<div class="container-xl mt-5">
+    <div class="row">
+        <EditForm class="container-xl mt-4" Model=user OnValidSubmit="CreateUser">
+            <DataAnnotationsValidator />
+            <div class="card mb-4">
+                <div class="card-header">@localizer["RegisterAccount"]</div>
+                <div class="card-body">
+
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (first name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["FirstName"]</label>
+                            <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@user.FirstName" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.FirstName)" />
+                        </div>
+                        <!-- Form Group (last name)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["LastName"]</label>
+                            <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@user.LastName" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.LastName)" />
+                        </div>
+                    </div>
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1">@localizer["Email"]</label>
+                        <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@user.Email" required />
+                        <ValidationMessage class="invalid-feedback" For="@(()=> user.Email)" />
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
+                            <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@user.Mobile" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Mobile)" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["UserName"]</label>
+                            <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@user.Username" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Username)" />
+                        </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["Password"]</label>
+                            <InputPassword class="form-control" @bind-Value="@user.Password" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["ConfirmPassword"]</label>
+                            <InputPassword class="form-control" @bind-Value="@user.ConfirmPassword" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.ConfirmPassword)" />
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" disabled="@isSubmited">
+                        @if (isSubmited)
+                        {
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <text>@localizer["Loading"]...</text>
+                        }
+                        else
+                        {
+                            <text>@localizer["Register"]</text>
+                        }
+                    </button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private UserInfo user = new UserInfo();
+    private bool isSubmited = false;
+    private async Task CreateUser()
+    {
+        isSubmited = true;
+        var userToken = await accountReository.Register(user);
+        if (!String.IsNullOrEmpty(userToken))
+        {
+            await authService.Login(userToken);
+            navigationManager.NavigateTo("");
+        }
+        isSubmited = false;
+    }
+}

@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AAAADescription" xml:space="preserve">
+    <value>هاست نیم را به آدرس IPv6 نشان می دهد</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>درباره</value>
+  </data>
+  <data name="AccountDetails" xml:space="preserve">
+    <value>اطلاعات حساب</value>
+  </data>
+  <data name="AreYouSureDel" xml:space="preserve">
+    <value>آیا از حذف این رکورد مطمئن هستید؟</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>انصراف</value>
+  </data>
+  <data name="ChangeLanuguage" xml:space="preserve">
+    <value>تغییر زبان</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>تکرار رمز عبور</value>
+  </data>
+  <data name="CreateAHostName" xml:space="preserve">
+    <value>ساخت یک هاست جدید</value>
+  </data>
+  <data name="CreateGameServerH2" xml:space="preserve">
+    <value>ساخت سرور بازی</value>
+  </data>
+  <data name="CreateGameServerMessage" xml:space="preserve">
+    <value>به دوستان خود اجازه دهید به راحتی در هر زمان و هر مکان با هاست نیم به سرور بازی شما متصل شوند. یک URL سفارشی ایجاد کنید تا با دوستان خود به اشتراک بگذارید تا هم اکنون بازی در سرور خود را شروع کنید.</value>
+  </data>
+  <data name="CreateHostName" xml:space="preserve">
+    <value>ساخت هاست نیم</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>rtl</value>
+  </data>
+  <data name="DNSAliasDescription" xml:space="preserve">
+    <value>یک CNAME رکوردهای هاست نیم را کپی می کند</value>
+  </data>
+  <data name="DNSHostDescription" xml:space="preserve">
+    <value>رکوردی که هاست نیم را به آدرس IPv4 نشان می دهد</value>
+  </data>
+  <data name="Domain" xml:space="preserve">
+    <value>دامین</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>دانلود</value>
+  </data>
+  <data name="DownloadNow" xml:space="preserve">
+    <value>دانلود فایل نصبی</value>
+  </data>
+  <data name="DynamicDNSUpdateClient" xml:space="preserve">
+    <value>نرم افزار بروزرسانی داینامیک DNS</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="EditHostName" xml:space="preserve">
+    <value>ویرایش هاست نیم</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>پست الکترونیک</value>
+  </data>
+  <data name="Email_Is_Duplicate" xml:space="preserve">
+    <value>پست الکترونیک تکراری است</value>
+  </data>
+  <data name="Email_Is_Not_Valid" xml:space="preserve">
+    <value>پست الکترونیک معتبر نیست</value>
+  </data>
+  <data name="EnterYourHostName" xml:space="preserve">
+    <value>نام هاست خود را وارد نمایید مثال MyHost</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="ex" xml:space="preserve">
+    <value>مثال</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="FontFamily" xml:space="preserve">
+    <value>iran-sans</value>
+  </data>
+  <data name="HelloWorld" xml:space="preserve">
+    <value>سلام دنیا</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>خانه</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>هاست</value>
+  </data>
+  <data name="HostName" xml:space="preserve">
+    <value>هاست نیم</value>
+  </data>
+  <data name="HostNameAlias_Is_Not_Valid" xml:space="preserve">
+    <value>هدف (HostName Alias) معتبر نیست</value>
+  </data>
+  <data name="HostNameCreated" xml:space="preserve">
+    <value>هاست نیم ایجاد شد</value>
+  </data>
+  <data name="HostNames" xml:space="preserve">
+    <value>هاست های من</value>
+  </data>
+  <data name="HostNameUpdated" xml:space="preserve">
+    <value>هاست نیم بروز شد</value>
+  </data>
+  <data name="HostName_Is_Duplicate" xml:space="preserve">
+    <value>هاست نیم تکراری است</value>
+  </data>
+  <data name="HostName_Is_Not_Valid" xml:space="preserve">
+    <value>هاست نیم معتبر نیست</value>
+  </data>
+  <data name="IndexH1Message" xml:space="preserve">
+    <value>مشکل آی پی داینامیک دارید ؟</value>
+  </data>
+  <data name="IndexMessage" xml:space="preserve">
+    <value>یک هاست نیم راحت که قابل حفظ کردن هست بساز و برای همیشه متصل بمون</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>پیغام</value>
+  </data>
+  <data name="IPv4Address" xml:space="preserve">
+    <value> آدرس IPv4 (آی پی)</value>
+  </data>
+  <data name="IPv4Address_Is_Not_Valid" xml:space="preserve">
+    <value>آدرس IPv4 معتبر نیست</value>
+  </data>
+  <data name="IPv6Address" xml:space="preserve">
+    <value>آدرس IPv6</value>
+  </data>
+  <data name="IPv6Address_Is_Not_Valid" xml:space="preserve">
+    <value>آدرس IPv6 معتبر نیست</value>
+  </data>
+  <data name="ItsFree" xml:space="preserve">
+    <value>رایگان</value>
+  </data>
+  <data name="ItsFreeMessage" xml:space="preserve">
+    <value>بدون هیچ هزینه ای هاست نیم خودتو بساز و یه تجربه خوب بدست بیار</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>در حال بارگذاری</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>ورود</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>خروج</value>
+  </data>
+  <data name="Mobile_Is_Duplicate" xml:space="preserve">
+    <value>شماره همراه تکراری است</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>بعد</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>رمز عبور</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>شماره همراه</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>قبل</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>پروفایل</value>
+  </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>تصویر پروفایل</value>
+  </data>
+  <data name="Progressing" xml:space="preserve">
+    <value>در حال پردازش</value>
+  </data>
+  <data name="QuestionMark" xml:space="preserve">
+    <value>؟</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ثبت نام</value>
+  </data>
+  <data name="RegisterAccount" xml:space="preserve">
+    <value>ایجاد حساب</value>
+  </data>
+  <data name="RemoteAccessComputerH2" xml:space="preserve">
+    <value>دسترسی ریموت به سیستم</value>
+  </data>
+  <data name="RemoteAccessComputerMessage" xml:space="preserve">
+    <value>آیا از به خاطر سپردن آدرس IP خود برای دسترسی از راه دور یک دستگاه خسته شده اید؟ آیا آدرس IP شما دائماً تغییر می کند؟ Dynamic DNS ما به شما امکان می دهد بدون نیاز به آدرس IP ثابت از راه دور به دستگاه های خود دسترسی داشته باشید. تنها چیزی که باید به خاطر بسپارید هاست نیم خود است.</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>ذخیره تغییرات</value>
+  </data>
+  <data name="SEO_DNSCreateDescription" xml:space="preserve">
+    <value>هاست نیم خودتو ایجاد کن هاست نیم ها شامل IPv4 و IPv6 و CName میباشد</value>
+  </data>
+  <data name="SEO_DNSCreateKeyWords" xml:space="preserve">
+    <value>IPv4,IPv6,CName,A,AAAA,AliasHost,ساخت</value>
+  </data>
+  <data name="SEO_DNSCreateTitle" xml:space="preserve">
+    <value>ایجاد هاست نیم</value>
+  </data>
+  <data name="SEO_DNSEditDescription" xml:space="preserve">
+    <value>هاست نیم خودتو ویرایش کن هاست نیم ها شامل IPv4 و IPv6 و CName میباشد</value>
+  </data>
+  <data name="SEO_DNSEditKeyWords" xml:space="preserve">
+    <value>IPv4,IPv6,CName,A,AAAA,AliasHost,ویرایش</value>
+  </data>
+  <data name="SEO_DNSEditTitle" xml:space="preserve">
+    <value>ویرایش هاست نیم</value>
+  </data>
+  <data name="SEO_DownloadClientDescription" xml:space="preserve">
+    <value>با دانلود این نرم افزار میتونید آی پی های متغییر خودتونو به سایت dnslab اطلاع بدید</value>
+  </data>
+  <data name="SEO_DownloadClientKeyWords" xml:space="preserve">
+    <value>Client,dns,app,windows,win,دانلود</value>
+  </data>
+  <data name="SEO_DownloadClientTitle" xml:space="preserve">
+    <value>دانلود نرم افزار ویندوزی دی ان اس لب</value>
+  </data>
+  <data name="SEO_MyDNSDescription" xml:space="preserve">
+    <value>دی ان اس ها و هاست نیم های خودتو مدیریت کن</value>
+  </data>
+  <data name="SEO_MyDNSKeyWords" xml:space="preserve">
+    <value>DNS,Hosts,HostNames</value>
+  </data>
+  <data name="SEO_MyDNSTitle" xml:space="preserve">
+    <value>DNSLab من</value>
+  </data>
+  <data name="SEO_UserAuthDescription" xml:space="preserve">
+    <value>اهراز هویت برای ورود به سایت</value>
+  </data>
+  <data name="SEO_UserAuthKeyWords" xml:space="preserve">
+    <value>Auth,DNSLab,User,ورود</value>
+  </data>
+  <data name="SEO_UserAuthTitle" xml:space="preserve">
+    <value>اهراز هویت</value>
+  </data>
+  <data name="SEO_UserInfoDescription" xml:space="preserve">
+    <value>اطلاعات کاربری خودت رو مدیریت کن </value>
+  </data>
+  <data name="SEO_UserInfoKeyWords" xml:space="preserve">
+    <value>Info,Account,Update,User</value>
+  </data>
+  <data name="SEO_UserInfoTitle" xml:space="preserve">
+    <value>اطلاعات کاربری</value>
+  </data>
+  <data name="SEO_UserRegisterDescription" xml:space="preserve">
+    <value>یک حساب کاربری  رایگان ایجاد کن</value>
+  </data>
+  <data name="SEO_UserRegisterKeyWords" xml:space="preserve">
+    <value>Register,Free,Account</value>
+  </data>
+  <data name="SEO_UserRegisterTitle" xml:space="preserve">
+    <value>ایجاد حساب کاربری</value>
+  </data>
+  <data name="ShareYourLocalProjectH2" xml:space="preserve">
+    <value>اشتراک پروژه از سیستم خانگی</value>
+  </data>
+  <data name="ShareYourLocalProjectMessage" xml:space="preserve">
+    <value>پروژه رو روی سیستم خانگی اجرا کن و با آدرس دلخواهت با دوستات و همکارات اشتراک بذار</value>
+  </data>
+  <data name="SiteSettings" xml:space="preserve">
+    <value>تنظیمات سایت</value>
+  </data>
+  <data name="StayConnected" xml:space="preserve">
+    <value>همیشه متصل بمون</value>
+  </data>
+  <data name="StayConnectedMessage" xml:space="preserve">
+    <value>راه حل Dynamic DNS ما دسترسی از راه دور به هر دستگاه متصل به اینترنت را آسان می کند.</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>موفق</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>هدف</value>
+  </data>
+  <data name="ThereIsNoHost" xml:space="preserve">
+    <value>هنوز هاست نیمی ایجاد نشده است</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="Username_Is_Duplicate" xml:space="preserve">
+    <value>نام کاربری تکراری است</value>
+  </data>
+  <data name="Username_Is_Not_Valid" xml:space="preserve">
+    <value>نام کاربری معتبر نیست</value>
+  </data>
+  <data name="Username_Or_Password_Is_Wrong" xml:space="preserve">
+    <value>نام کاربری یا رمز عبور صحیح نیست</value>
+  </data>
+  <data name="User_Not_Found" xml:space="preserve">
+    <value>کاربر یافت نشد</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>خوش آمدید</value>
+  </data>
+  <data name="WinClientMessage" xml:space="preserve">
+    <value>سرویس گیرنده به‌روزرسانی دینامیک DNS ما به‌طور مداوم تغییرات آدرس IP را در پس‌زمینه بررسی می‌کند و هر زمان که DNS تغییر کند به‌طور خودکار در dnslab به‌روزرسانی می‌شود.</value>
+  </data>
+  <data name="YourEmail" xml:space="preserve">
+    <value>پست الکترونیک شما</value>
+  </data>
+  <data name="YourFirstName" xml:space="preserve">
+    <value>نام شما</value>
+  </data>
+  <data name="YourLastName" xml:space="preserve">
+    <value>نام خانوادگی شما</value>
+  </data>
+  <data name="YourPhoneNumber" xml:space="preserve">
+    <value>شماره همراه شما</value>
+  </data>
+  <data name="YourUsername" xml:space="preserve">
+    <value>نام کاربری شما</value>
+  </data>
+</root>

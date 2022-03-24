@@ -1,0 +1,29 @@
+﻿@using System.Globalization
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Nav
+
+<label class="switch">
+    <input type="checkbox" @bind=CultureChange>
+    <span class="slider"></span>
+</label>
+
+@code
+{
+    private CultureInfo _Culture = CultureInfo.CurrentCulture;
+    private bool CultureChange
+    {
+        get => _Culture == null ? true : _Culture.Name == "fa" ? true : false;
+        set => _Culture = value ? new CultureInfo("fa") : new CultureInfo("en");
+    }
+
+    public async Task Save()
+    {
+        if ((CultureInfo.CurrentCulture.Name == "fa" && CultureChange) ||
+            (CultureInfo.CurrentCulture.Name == "en" && !CultureChange))
+            return;
+
+        var js = (IJSInProcessRuntime)JSRuntime;
+        await js.InvokeVoidAsync("blazorCulture.set", _Culture.Name);
+        Nav.NavigateTo(Nav.Uri, forceLoad: true);
+    }
+}

@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'iran-sans','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
@@ -62,3 +62,82 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+.top-row-profile {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    padding-bottom: 0;
+    height: 100%;
+}
+
+    .top-row-profile > a {
+        height: inherit;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+        .top-row-profile > a > svg, img {
+            box-sizing: border-box;
+            padding: 0;
+            overflow: hidden;
+            height: inherit;
+            width: inherit;
+        }
+
+            img > svg {
+                height: inherit;
+                width: inherit;
+            }
+
+.nav-link > svg {
+    height: inherit;
+    width: inherit;
+    padding-top: inherit;
+    position: relative;
+    margin-right: -0.6rem;
+    padding-bottom: inherit;
+    margin-left: -0.4rem;
+}
+
+.page[style*="direction:rtl"] .nav-link > svg {
+    padding-left: inherit;
+}
+
+.page[style*="direction:ltr"] .nav-link > svg {
+    padding-right: inherit;
+}
+
+.top-row p {
+    color: darkgray;
+    font-size: inherit;
+    margin: inherit;
+}
+
+.index-product-img {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #fff;
+    border-radius: .75rem;
+}
+
+.page .index-page {
+    display: block;
+    width: 100%;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+/*Fonts*/
+@font-face {
+    font-family: 'iran-sans';
+    src: url('../fonts/sans.woff');
+}

@@ -1,0 +1,15 @@
+﻿@using Jdenticon
+
+<AuthorizeView>
+    <Authorized>
+        @((MarkupString)GenerateProfilePhoto(@context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value))
+    </Authorized>
+</AuthorizeView>
+@code {
+    [Parameter] public int Size { get; set; }
+
+    private string GenerateProfilePhoto(string userId)
+    {
+        return Identicon.FromValue(userId, size: Size == 0 ? 100 : Size).ToSvg();
+    }
+}

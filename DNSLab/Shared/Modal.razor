@@ -1,0 +1,50 @@
+﻿@inject IJSRuntime JS
+
+<!-- Modal -->
+<div class="modal fade" id="@Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                @Title
+            </div>
+            <div class="modal-body">
+                @Body
+            </div>
+            <div class="modal-footer">
+                @Footer
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    private string Id { get; set; }
+
+    [Parameter]
+    public RenderFragment Title { get; set; }
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+    [Parameter]
+    public RenderFragment Footer { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrEmpty(Id))
+            Id = "modal_" + Guid.NewGuid().ToString();
+    }
+
+    public async Task Open()
+    {
+        await JS.InvokeVoidAsync("BootstrapModal.ShowModal", Id);
+    }
+
+    public async Task Close()
+    {
+        await JS.InvokeVoidAsync("BootstrapModal.HideModal");
+    }
+}

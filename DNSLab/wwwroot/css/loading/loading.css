@@ -1,0 +1,15 @@
+﻿
+
+.loading {
+    background: transparent url(../../images/loading.gif) no-repeat 50%;
+    clear: both;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    min-height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    height:inherit
+       
+}

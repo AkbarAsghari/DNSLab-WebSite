@@ -1,0 +1,41 @@
+﻿@using DNSLab.Helper.Utilities
+<div class="timeline-item">
+    <div class="timeline-event">
+        <div class="widget has-shadow">
+            @if (String.IsNullOrEmpty(Header))
+            {
+                <div class="alert alert-light" role="alert">
+                    @Body
+                </div>
+            }
+            else
+            {
+                <div class="widget-header d-flex align-items-center">
+                    <div class="d-flex flex-column mr-auto">
+                        <div class="title">
+                            <span class="username">@Header</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    @Body
+                </div>
+            }
+        </div>
+        <div class="time-right">ایجاد شده در @GetRelativeTime</div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Header { get; set; }
+    [Parameter] public RenderFragment Body { get; set; }
+    [Parameter] public DateTime DateTime { get; set; }
+
+    private string GetRelativeTime
+    {
+        get
+        {
+            return RelativeTimeCalculator.Calc(DateTime);
+        }
+    }
+}

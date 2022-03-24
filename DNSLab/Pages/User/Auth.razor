@@ -1,0 +1,84 @@
+﻿@page "/user/auth"
+@using DNSLab.DTOs.User
+@using DNSLab.Interfaces.Auth
+@using DNSLab.Interfaces.Repository
+
+@inject IAccountRepository accountReository
+@inject NavigationManager navigationManager
+@inject IAuthService authService
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+@inject AuthenticationStateProvider auth
+
+<PageTitle>@localizer["SEO_UserAuthTitle"]</PageTitle>
+<meta name="description" content="@localizer["SEO_UserAuthDescription"]" />
+<meta name="keywords" content="@localizer["SEO_UserAuthKeyWords"]" />
+
+<NavBar />
+
+<div class="container-xl mt-5">
+    <div class="row">
+
+        <EditForm class="container-sm mt-4 col-lg-4" Model=user OnValidSubmit="CreateUser">
+            <DataAnnotationsValidator />
+            <div class="card mb-4">
+                <div class="card-header">@localizer["Login"]</div>
+                <div class="card-body">
+
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1">@localizer["UserName"]</label>
+                        <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@user.Username" required />
+                        <ValidationMessage class="invalid-feedback" For="@(()=> user.Username)" />
+                    </div>
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1">@localizer["Password"]</label>
+                        <InputPassword class="form-control" @bind-Value="@user.Password" required />
+                        <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" disabled="@isSubmited">
+                            @if (isSubmited)
+                            {
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <text>@localizer["Loading"]...</text>
+                            }
+                            else
+                            {
+                                <text>@localizer["Login"]</text>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var user = (await auth.GetAuthenticationStateAsync()).User;
+        if (user.Identity?.IsAuthenticated == true)
+            navigationManager.NavigateTo("Dashboard");
+    }
+
+    private AuthenticateDTO user = new AuthenticateDTO();
+    private bool isSubmited = false;
+    private async Task CreateUser()
+    {
+        isSubmited = true;
+        var userToken = await accountReository.Login(user);
+        if (!String.IsNullOrEmpty(userToken))
+        {
+            await authService.Login(userToken);
+            navigationManager.NavigateTo("");
+            toastService.ShowToast(localizer["Welcome"], Enums.ToastLevel.Success);
+        }
+        isSubmited = false;
+    }
+}

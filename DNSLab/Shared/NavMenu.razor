@@ -1,39 +1,78 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using DNSLab.DTOs.IP
+@inject IJSRuntime JS
+@inject IStringLocalizer<Resource> localizer
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">DNSLab</a>
+        <a class="navbar-brand" href=""><p>IP : @IPDTO.IPv4</p> </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
 </div>
-
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="user/info">
+                        <UserProfileImage /> @localizer["Profile"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Dashboard" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> @localizer["Home"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="dns/mydns">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> @localizer["HostNames"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="download/win">
+                        <span class="oi oi-data-transfer-download" aria-hidden="true"></span> @localizer["Download"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="user/logout">
+                        <span class="oi oi-power-standby" aria-hidden="true"></span> @localizer["Logout"] 
+                    </NavLink>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="user/auth" Match="NavLinkMatch.All">
+                        <span class="oi oi-person" aria-hidden="true"></span> @localizer["Login"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="user/register">
+                        <span class="oi oi-pencil" aria-hidden="true"></span> @localizer["Register"]
+                    </NavLink>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
     </nav>
 </div>
+<div id="particles-js"></div>
 
 @code {
     private bool collapseNavMenu = true;
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("StartPrticlesJS");
+        }
     }
 }

@@ -1,0 +1,14 @@
+﻿@page "/user/logout"
+@using DNSLab.Interfaces.Auth
+@inject IAuthService authService
+@inject NavigationManager navigationManager
+
+<p>Login out ...</p>
+
+@code {
+    protected async override Task OnInitializedAsync()
+    {
+        await authService.Logout();
+        navigationManager.NavigateTo("");
+    }
+}

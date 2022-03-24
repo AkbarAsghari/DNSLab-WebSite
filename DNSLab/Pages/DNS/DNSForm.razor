@@ -1,0 +1,118 @@
+﻿@using DNSLab.DTOs.DNS
+@using DNSLab.DTOs.IP
+@using DNSLab.Interfaces.Repository
+
+@inject IIPRepository ipRepository;
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">@Title</div>
+        <div class="card-body">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (first name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1">@localizer["HostName"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
+                </div>
+                <!-- Form Group (last name)-->
+                <div class="col-md-6">
+                    @switch (HostName.RecordType)
+                    {
+                        case 1:
+                            <label class="small mb-1">@localizer["IPv4Address"]</label>
+                            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
+                            break;
+                        case 2:
+                            <label class="small mb-1">@localizer["IPv6Address"]</label>
+                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
+                            break;
+                        case 3:
+                            <label class="small mb-1">@localizer["Target"]</label>
+                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
+                            break;
+                    }
+                </div>
+            </div>
+            <div class="row">
+                @if (IsNewRecord)
+                {
+                    <div class="col-md-4 col-xl-3">
+                        <div class="form-check">
+                            <label class="form-check-label" for="ARecord">
+                                DNS Host (A)
+                            </label>
+                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="ARecord" SelectedValue="1" @bind-Value="HostName.RecordType" />
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="AAAARecord">
+                                AAAA (IPv6)
+                            </label>
+                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="AAAARecord" SelectedValue="2" @bind-Value="HostName.RecordType" />
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="CNAMERecord">
+                                DNS Alias (CNAME)
+                            </label>
+                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="CNAMERecord" SelectedValue="3" @bind-Value="HostName.RecordType" />
+                        </div>
+                    </div>
+                }
+                <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)" >
+                    <div class="card border-info">
+                        <div class="card-header">@localizer["Description"]</div>
+                        <div class="card-body">
+                            @switch (HostName.RecordType)
+                            {
+                                case 1:
+                                    <h5 class="card-title">DNS Host (A)</h5>
+                                    <p class="card-text">@localizer["DNSHostDescription"]</p>
+                                    break;
+                                case 2:
+                                    <h5 class="card-title">AAAA (IPv6)</h5>
+                                    <p class="card-text">@localizer["AAAADescription"]</p>
+                                    break;
+                                case 3:
+                                    <h5 class="card-title">DNS Alias (CNAME)</h5>
+                                    <p class="card-text">@localizer["DNSAliasDescription"]</p>
+                                    break;
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
+        @if (IsInProgress)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <text>@localizer["Progressing"]...</text>
+        }
+        else
+        {
+            <text>@localizer["SaveChanges"]</text>
+        }
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] public HostNameDTO HostName { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public bool IsInProgress { get; set; } = false;
+    [Parameter] public bool IsNewRecord { get; set; } = false;
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (String.IsNullOrEmpty(HostName.IPv4Address))
+            HostName.IPv4Address = IPDTO.IPv4;
+    }
+}

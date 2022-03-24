@@ -1,9 +1,88 @@
 ﻿@page "/"
+@using System.Globalization
+@inject ToastService toast
+@inject IStringLocalizer<Resource> localizer
+@inject AuthenticationStateProvider auth
+@inject NavigationManager navigationManager
 
-<PageTitle>Index</PageTitle>
+<PageTitle>DNSLab</PageTitle>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<NavBar />
+<div class="index-page">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <div class="container-xl mt-5">
+        <div class="px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">@localizer["IndexH1Message"]</h1>
+            <div class="col-lg-9 mx-auto">
+                <p class="lead mb-5">@localizer["IndexMessage"]</p>
+            </div>
+        </div>
+
+        <div class="container px-4 py-5" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">@localizer["StayConnected"]</h2>
+            <p>@localizer["StayConnectedMessage"]</p>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Remote.svg" class="index-product-img" />
+                    </div>
+                    <h2>@localizer["RemoteAccessComputerH2"]</h2>
+                    <p>@localizer["RemoteAccessComputerMessage"]</p>
+                    @*<a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Game.svg" class="index-product-img" />
+                    </div>
+                    <h2>@localizer["CreateGameServerH2"]</h2>
+                    <p>@localizer["CreateGameServerMessage"]</p>
+                    @*<a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Project.svg" class="index-product-img" />
+                    </div>
+                    <h2>@localizer["ShareYourLocalProjectH2"]</h2>
+                    <p>@localizer["ShareYourLocalProjectMessage"]</p>
+                    @* <a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="py-5">
+            <h1 class="display-5 fw-bold text-white">@localizer["ItsFree"]</h1>
+            <div class="col-lg-8 mx-auto">
+                <p class="fs-6 mb-4">@localizer["ItsFreeMessage"]</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="user/register" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">@localizer["Register"]</a>
+                    <a href="user/auth" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">@localizer["Login"]</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+@code {
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            base.OnInitialized();
+            var user = (await auth.GetAuthenticationStateAsync()).User;
+            if (user.Identity?.IsAuthenticated == true)
+                navigationManager.NavigateTo("Dashboard");
+        }
+    }
+}

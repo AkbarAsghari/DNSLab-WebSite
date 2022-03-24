@@ -1,19 +1,40 @@
-﻿@inherits LayoutComponentBase
+﻿@using DNSLab.DTOs.IP
+@using DNSLab.Interfaces.Repository
+@inherits LayoutComponentBase
+@inject IIPRepository ipRepository
+@inject IStringLocalizer<Resource> localizer
 
 <PageTitle>DNSLab</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<div class="page" style="direction:@localizer["Direction"];font-family:@localizer["FontFamily"]">
+    <Toast />
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <CascadingValue Value="@IPDTO">
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+                    <div class="sidebar">
+                        <NavMenu />
+                    </div>
+                    <main>
+                        <article class="content px-4">
+                            @Body
+                        </article>
+                    </main>
+                </CascadingValue>
+            </Authorized>
+            <NotAuthorized>
+                @Body
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </div>
+
+@code {
+    private IPDTO IPDTO = new IPDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        IPDTO = await ipRepository.GetIP();
+    }
+}

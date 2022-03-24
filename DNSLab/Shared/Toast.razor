@@ -1,0 +1,12 @@
+﻿@using DNSLab.Services
+@inherits ToastBase
+
+<div class="custom-toast @(IsVisible ? "custom-toast-visible" : null) @BackgroundCssClass">
+    <div class="custom-toast-icon">
+        <img src="@IconImgSrc" />
+    </div>
+    <div class="custom-toast-body">
+        <h5>@Heading</h5>
+        <p>@Message</p>
+    </div>
+</div>

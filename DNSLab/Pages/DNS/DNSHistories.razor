@@ -1,0 +1,62 @@
+﻿@page "/DNS/Histories"
+@inject IDNSRepository dnsRepository
+@using DNSLab.DTOs.DNS
+@using DNSLab.Helper.Utilities
+@using DNSLab.Interfaces.Repository
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-12">
+            <div class="timeline timeline-line-solid">
+                @if (dNSChangeHistories != null)
+                {
+                    <span class="timeline-label">
+                        <span class="label bg-info">@RelativeTimeCalculator.Calc(dNSChangeHistories.Max(x=> x.UpdateDate == null ? x.CreateDate : x.UpdateDate)!.Value)</span>
+                    </span>
+                    @foreach (var item in dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
+                    {
+                        <TimeLineItem Header="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" DateTime="item.CreateDate">
+                            <Body>
+                                @if (item.ARecordHistories != null)
+                                    @foreach (var x in item.ARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <p class="d-inline"><code>@x.IPv4Address</code></p>
+                                        <p>@($"{RelativeTimeCalculator.Calc(x.CreateDate)} ثبت شده است {(x.UpdateDate == null ? String.Empty : $" و {RelativeTimeCalculator.Calc(x.UpdateDate.Value) } ویرایش شده است") }")</p>
+                                    }
+                                @if (item.AAAARecordHistories != null)
+                                    @foreach (var x in item.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <p class="d-inline"><code>@x.IPv6Address</code></p>
+                                        <p>@($"{RelativeTimeCalculator.Calc(x.CreateDate)} ثبت شده است {(x.UpdateDate == null ? String.Empty : $" و {RelativeTimeCalculator.Calc(x.UpdateDate.Value) } ویرایش شده است") }")</p>
+                                    }
+                                @if (item.CNameRecordHistories != null)
+                                    @foreach (var x in item.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <p class="d-inline"><code>@x.HostNameAlias</code></p>
+                                        <p>@($"{RelativeTimeCalculator.Calc(x.CreateDate)} ثبت شده است {(x.UpdateDate == null ? String.Empty : $" و {RelativeTimeCalculator.Calc(x.UpdateDate.Value) } ویرایش شده است") }")</p>
+                                    }
+                            </Body>
+                        </TimeLineItem>
+                    }
+                    <span class="timeline-label">
+                        <span class="label bg-warning">بیشتر (به زودی)</span>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    List<DNSChangeHistoryDTO> dNSChangeHistories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
+    }
+}
+
