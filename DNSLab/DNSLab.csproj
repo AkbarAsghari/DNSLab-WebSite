@@ -10,7 +10,6 @@
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="Jdenticon-net" Version="3.1.2" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.3" />
-		<PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.1.0" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 using Blazored.LocalStorage;
 using DNSLab.Data;
 using DNSLab.Helper.Exceptions;
+using DNSLab.Helper.Extensions;
 using DNSLab.Helper.HttpService;
 using DNSLab.Interfaces.Auth;
 using DNSLab.Interfaces.Helper;
@@ -13,7 +14,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Globalization;
-using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,13 +35,10 @@ builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.Get
 builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
 
-
-builder.Services.AddHttpClientInterceptor();
-
 builder.Services.AddLocalization();
 
 builder.Services.AddSingleton<ApplicationExceptions>();
-
+builder.Services.AddTransient<HttpResponseExceptionHander>();
 // Add services to the container.
 builder.Services.AddSingleton<WeatherForecastService>();
 
