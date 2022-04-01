@@ -3,24 +3,33 @@
 @inject ILocalStorageService localStorage
 @inject NavigationManager Nav
 
-<label class="switch">
-    <input type="checkbox" @bind=CultureChange>
-    <span class="slider"></span>
-</label>
+<select @bind="CultureChange" class="form-select">
+    @foreach (var cul in Cultures)
+    {
+        <option value="@cul.Name">@($"{cul.Parent.DisplayName} ({cul.Parent.Name})")</option>
+    }
+</select>
 
 @code
 {
-    private CultureInfo _Culture = CultureInfo.CurrentCulture;
-    private bool CultureChange
+    private List<CultureInfo> Cultures = new List<CultureInfo>()
     {
-        get => _Culture == null ? true : _Culture.Name == "fa-FA" ? true : false;
-        set => _Culture = value ? new CultureInfo("fa-FA") : new CultureInfo("en-EN");
+        new CultureInfo("en-EN"),
+        new CultureInfo("fa-FA")
+    };
+
+    private CultureInfo _Culture = CultureInfo.CurrentCulture;
+
+    private CultureInfo CultureChange
+    {
+        get => _Culture == null ? new CultureInfo("fa-FA") : _Culture.Name == "fa-FA" ? new CultureInfo("fa-FA") : new CultureInfo("en-EN");
+        set => _Culture = value;
     }
 
     public void Save()
     {
-        if ((CultureInfo.CurrentCulture.Name == "fa-FA" && CultureChange) ||
-            (CultureInfo.CurrentCulture.Name == "en-EN" && !CultureChange))
+        if ((CultureInfo.CurrentCulture.Name == CultureChange.Name) ||
+            (CultureInfo.CurrentCulture.Name == CultureChange.Name))
             return;
 
         var uri = new Uri(Nav.Uri)
@@ -28,8 +37,8 @@
         var cultureEscaped = Uri.EscapeDataString(_Culture.Name);
         var uriEscaped = Uri.EscapeDataString(uri);
 
-         Nav.NavigateTo(
-                    $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
-                    forceLoad: true);
+        Nav.NavigateTo(
+                   $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
+                   forceLoad: true);
     }
 }
