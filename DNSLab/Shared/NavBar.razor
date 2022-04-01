@@ -1,10 +1,12 @@
-﻿@inject IStringLocalizer<Resource> localizer;
+﻿@using DNSLab.DTOs.IP
+@inject IStringLocalizer<Resource> localizer;
+@inject IHttpContextAccessor httpContextAccessor
 
 <AuthorizeView>
     <NotAuthorized>
         <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="">DNSLab</a>
+                <a class="navbar-brand" href="">IP : @IPDTO.IPv4</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -31,3 +33,24 @@
         </nav>
     </NotAuthorized>
 </AuthorizeView>
+
+
+@code{
+ private IPDTO IPDTO = new IPDTO();
+
+    protected override void OnInitialized()
+    {
+        IPDTO iPDTO = new IPDTO();
+
+        try
+        {
+            iPDTO.IPv4 = httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString();
+        }
+        catch (Exception ex)
+        {
+            //If Null reference exception (Please Enable WebSocket In Feature For IIS *Akbar*)
+            iPDTO.IPv4 = "Unavaible";
+        }
+        IPDTO = iPDTO;
+    }
+}
