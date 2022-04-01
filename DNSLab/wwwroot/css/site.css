@@ -136,6 +136,16 @@ a, .btn-link {
     cursor: pointer;
 }
 
+.flag-icon-en {
+    background: url(../images/flags/us.svg);
+    background-repeat: no-repeat;
+}
+
+.flag-icon-fa {
+    background: url(../images/flags/ir.svg);
+    background-repeat: no-repeat;
+}
+
 /*Fonts*/
 @font-face {
     font-family: 'iran-sans';
