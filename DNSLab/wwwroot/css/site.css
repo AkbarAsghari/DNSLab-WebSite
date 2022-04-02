@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'iran-sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa !important;
 }
 
 h1:focus {
