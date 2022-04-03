@@ -1,17 +1,44 @@
 ﻿@page "/Section/{SectionName}"
 <div class="container p-5 bg-body rounded shadow-sm">
-    @*<div class="col-10 col-sm-8 col-lg-6">
-        <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-        </div>*@
+
     <p class="h1">@SectionName</p>
     <p>در این مقاله روش ساخت یک هاست نِیم رو مرحله به مرحله توضیح داده خواهد شد </p>
-    <p class="h2">مرحله اول : ساخت حساب کاربری</p>
+    <p class="h4">مرحله اول : ساخت حساب کاربری</p>
     <p>در صورتی که هنوز حساب کاربری ایجاد نکرده اید ابتدا <a href="section/حساب کاربری">این مطلب</a> را مطالعه فرمایید</p>
-    <p class="h2">مرحله دوم : ورود به حساب کاربری</p>
-    <p class="h2">مرحله سوم : انتخاب منوی <mark>هاست نِیم های من</mark> مطابق تصویر زیر</p>
+    <p class="h4">مرحله دوم : ورود به حساب کاربری</p>
+    <p class="h4">مرحله سوم : انتخاب منوی <mark>هاست نِیم های من</mark> مطابق تصویر زیر</p>
+    <img src="/images/Supports/MyHostName.png" class="rounded mx-auto d-block img-fluid" loading="lazy">
+    <p>پس از انتخاب صفحه لیست هاست نِیم های من باز خواهد شد که باید بر روی دکمه <mark>ساخت هاست نیم</mark> باید کلیک کنید که صفحه ای مشابه صفحه پایین باز خواهد شد</p>
+    <img src="/images/Supports/CreateHostName.png" class="rounded mx-auto d-block img-fluid" loading="lazy">
+    <p>همانطور که در تصویر بالا مشاهده میکنید 3 نوع هاست نیم در حال حاضر در سایت پشتیبانی میشود</p>
+    <ul>
+        <li>DNS Host (A)</li>
+        <li>AAAA (IPv6)</li>
+        <li>DNS Alias (CNAME)</li>
+    </ul>
+    <p>که به ترتیب توضیح داده خواهد شد</p>
+    <p class="h4">DNS Host (A)</p>
+    <p class="text-break">هاست نِیم A یا همان IPv4 یکی از پر استفاده ترین و محبوب ترین هاست نیم ها میباشد که برای آی پی های خانگی استفاده میشود و روش تنظیم آن به این صورت است که ابتدا باید یک هاست نِیم به دلخواه خود وارد نمایید 
+        مثال <mark>akbar</mark> بعد از آن باید آی پی مقصد را وارد نمایید که در اینجا بصورت پیش فرض آی پی عمومی دستگاهی که با آن وارد سایت شده اید 
+        تنظیم شده است مثال <mark>84.241.241.241</mark> . بعد از ذخیره تغییرات هاست نِیم شما ثبت شده و در صفحه هاست نِیم های من قابل مشاهده خواهد بود
+        اما برای تکمیل کار باید نرم افزار ویندوزی DNSLab را دانلود و نصب نمایید تا در صورت تغییر IP سایت مطلع شود ... جهت مشاهده راهنمای تنظیم اپلیکیشن ویندوزی کلیک کنید.
+        بعد از نصب نرم افزار دیگر نیاز به دانستن آی پی سیستم نیست و فقط کافیه آدرس هاست نِیم با dnslab.ir را وارد نمایید برای مثال akbar.dnslab.ir
+    </p>
+    <p class="h4">AAAA (IPv6)</p>
+    <p>
+        هاست نِیم AAAA (IPv6) در حال حاضر توسط شرکت های تهیه کننده اینترنت (ISP) در داخل کشور پشتیبانی نمیشود
+    </p>
+    <p class="h4">DNS Alias (CNAME)</p>
+    <p>
+        هاست نِیم DNS Alias (CNAME) نوعی دی ان اس است که بعنوان نام مستعار دی ان اس دیگر استفاده میشود و استفاده آن به این صورت است که فرض کنید ما یک هاست نِیم
+        داریم که آدرس آن MyHost.dnslab.ir میباشد و آی پی تنظیم شده روی آن 192.168.1.1 میباشد و ما میخواهیم نام دیگری برای این هاست نِیم تعریف کنیم 
+        مانند home.dnslab.ir بنابراین مطابق تصویر زیر باید مقادیر را وارد نماییم 
+    </p>
+    <p><mark>توجه داشته باشید که در صورت تغییر آی پی در آدرس دی ان اس اصلی که در مثال بالا MyHost.dnslab.ir بود آدرس آی پی home.dnslab.ir نیز بصورت خودکار تغییر میکند </mark></p>
+    <img src="/images/Supports/CreateHostName.png" class="rounded mx-auto d-block img-fluid" loading="lazy">
+
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+        <a href="support" class="btn btn-primary px-4 me-md-2">بازگشت به صفحه پشتیبانی</a>
     </div>
 </div>
 
