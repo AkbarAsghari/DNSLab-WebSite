@@ -23,6 +23,10 @@ a, .btn-link {
     padding-top: 1.1rem;
 }
 
+.content-not-auth {
+    padding-top: 2.0rem;
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }

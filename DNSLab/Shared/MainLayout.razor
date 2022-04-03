@@ -24,7 +24,10 @@
                 </CascadingValue>
             </Authorized>
             <NotAuthorized>
-                @Body
+                <NavBar />
+                <main class="content-not-auth">
+                    @Body
+                </main>
             </NotAuthorized>
         </AuthorizeView>
     </CascadingAuthenticationState>
