@@ -9,9 +9,9 @@
 <div class="page" style="direction:@localizer["Direction"];font-family:@localizer["FontFamily"]">
     <Toast />
     <CascadingAuthenticationState>
-        <AuthorizeView>
-            <Authorized>
-                <CascadingValue Value="@IPDTO">
+        <CascadingValue Value="@IPDTO">
+            <AuthorizeView>
+                <Authorized>
 
                     <div class="sidebar">
                         <NavMenu />
@@ -21,15 +21,16 @@
                             @Body
                         </article>
                     </main>
-                </CascadingValue>
-            </Authorized>
-            <NotAuthorized>
-                <NavBar />
-                <main class="content-not-auth">
-                    @Body
-                </main>
-            </NotAuthorized>
-        </AuthorizeView>
+
+                </Authorized>
+                <NotAuthorized>
+                    <NavBar />
+                    <main class="content-not-auth">
+                        @Body
+                    </main>
+                </NotAuthorized>
+            </AuthorizeView>
+        </CascadingValue>
     </CascadingAuthenticationState>
 </div>
 
