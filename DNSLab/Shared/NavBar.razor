@@ -1,17 +1,19 @@
 ﻿@using DNSLab.DTOs.IP
 @inject IStringLocalizer<Resource> localizer;
 @inject IHttpContextAccessor httpContextAccessor
+@inject IJSRuntime JS
 
 <AuthorizeView>
     <NotAuthorized>
-        <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="">IP : @IPDTO.IPv4</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 fixed-top">
+            <div class="container">
+                <a class="navbar-brand text-light" asp-area="" asp-page="/">IP : @IPDTO.IPv4</a>
+                <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="@NavMenuCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse" @onclick="CollapseNavMenu">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                                 <span class="oi oi-home" aria-hidden="true"></span> @localizer["Home"]
@@ -36,10 +38,34 @@
                 </div>
             </div>
         </nav>
+        <div id="particles-js"></div>
+
     </NotAuthorized>
 </AuthorizeView>
 
 
-@code{
- [CascadingParameter] public IPDTO IPDTO { get; set; }
+@code {
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    bool collapseNavMenu = true;
+
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    void CollapseNavMenu()
+    {
+        collapseNavMenu = true;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("StartPrticlesJS");
+        }
+    }
 }
