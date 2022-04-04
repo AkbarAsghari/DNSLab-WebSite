@@ -77,7 +77,6 @@
         {
             await authService.Login(userToken);
             navigationManager.NavigateTo("");
-            toastService.ShowToast(localizer["Welcome"], Enums.ToastLevel.Success);
         }
         isSubmited = false;
     }
