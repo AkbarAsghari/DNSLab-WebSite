@@ -1,7 +1,6 @@
 ﻿@using DNSLab.DTOs.IP
 @inject IStringLocalizer<Resource> localizer;
 @inject IHttpContextAccessor httpContextAccessor
-@inject IJSRuntime JS
 
 <AuthorizeView>
     <NotAuthorized>
@@ -38,8 +37,6 @@
                 </div>
             </div>
         </nav>
-        <div id="particles-js"></div>
-
     </NotAuthorized>
 </AuthorizeView>
 
@@ -59,13 +56,5 @@
     void CollapseNavMenu()
     {
         collapseNavMenu = true;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("StartPrticlesJS");
-        }
     }
 }
