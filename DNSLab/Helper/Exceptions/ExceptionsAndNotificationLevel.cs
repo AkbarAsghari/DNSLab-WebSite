@@ -86,6 +86,21 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "HostNameAlias_Is_Not_Valid",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["HostNameAlias_Is_Not_Valid"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Token_Not_Found_Exception",
+                         Level = Enums.ToastLevel.Error,
+                         NormalMessage = _localizer["Token_Not_Found_Exception"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Token_Expired_Exception",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Token_Expired_Exception"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Token_Used_Before_Exception",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Token_Used_Before_Exception"]
                     }
                 };
             }

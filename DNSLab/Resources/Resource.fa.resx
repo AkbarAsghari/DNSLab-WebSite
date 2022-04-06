@@ -405,6 +405,15 @@
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>هنوز هاست نیمی ایجاد نشده است</value>
   </data>
+  <data name="Token_Expired_Exception" xml:space="preserve">
+    <value>لینک (توکن) منقضی شده است</value>
+  </data>
+  <data name="Token_Not_Found_Exception" xml:space="preserve">
+    <value>لینک (توکن) یافت نشد</value>
+  </data>
+  <data name="Token_Used_Before_Exception" xml:space="preserve">
+    <value>لینک (توکن) یک دفعه استفاده شده است</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>نوع</value>
   </data>

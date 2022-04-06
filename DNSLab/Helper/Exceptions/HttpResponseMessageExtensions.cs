@@ -25,8 +25,11 @@ namespace DNSLab.Helper.Exceptions
         {
             if (!httpResponseMessage.IsSuccessStatusCode)
             {
+                if (await ShowToastMessageAsync(httpResponseMessage))
+                    return;
+
                 var statusCode = httpResponseMessage.StatusCode;
-                await ShowToastMessageAsync(httpResponseMessage);
+
                 switch (statusCode)
                 {
                     case HttpStatusCode.NotFound:
@@ -51,18 +54,20 @@ namespace DNSLab.Helper.Exceptions
 
             }
         }
-        private async Task ShowToastMessageAsync(HttpResponseMessage response)
+        private async Task<bool> ShowToastMessageAsync(HttpResponseMessage response)
         {
             string content = await response.Content!.ReadAsStringAsync();
             if (String.IsNullOrEmpty(content))
-                return;
+                return false;
 
             var error = JsonSerializer.Deserialize<ErrorDTO>(content!, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             var existMessage = _applicationExceptions.GetExceptions().FirstOrDefault(x => x.ExceptionStr == error!.Error);
             if (existMessage != null)
             {
                 _toastService.ShowToast(existMessage.NormalMessage, existMessage.Level);
+                return true;
             }
+            return false;
         }
     }
 }

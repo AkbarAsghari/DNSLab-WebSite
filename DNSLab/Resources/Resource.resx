@@ -405,6 +405,15 @@
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>There Is No Host</value>
   </data>
+  <data name="Token_Expired_Exception" xml:space="preserve">
+    <value>Token expired</value>
+  </data>
+  <data name="Token_Not_Found_Exception" xml:space="preserve">
+    <value>Token not found</value>
+  </data>
+  <data name="Token_Used_Before_Exception" xml:space="preserve">
+    <value>Token Used Before</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
