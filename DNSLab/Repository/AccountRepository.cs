@@ -69,5 +69,17 @@ namespace DNSLab.Repository
             else
                 return response.Response;
         }
+
+        public async Task<bool> ForgetPassword(ForgetPasswordDTO forgetPassword)
+        {
+            var response = await _httpService.Post<ForgetPasswordDTO, bool>($"/Auth/ForgetPassword", forgetPassword);
+            return response.Response;
+        }
+
+        public async Task<bool> ResetPassword(ResetPasswordDTO resetPassword)
+        {
+            var response = await _httpService.Post<ResetPasswordDTO, bool>($"/Auth/ForgetPassword", resetPassword);
+            return response.Response;
+        }
     }
 }
