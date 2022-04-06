@@ -78,7 +78,7 @@ namespace DNSLab.Repository
 
         public async Task<bool> ResetPassword(ResetPasswordDTO resetPassword)
         {
-            var response = await _httpService.Post<ResetPasswordDTO, bool>($"/Auth/ForgetPassword", resetPassword);
+            var response = await _httpService.Post<ResetPasswordDTO, bool>($"/Auth/ResetPassword", resetPassword);
             return response.Response;
         }
     }
