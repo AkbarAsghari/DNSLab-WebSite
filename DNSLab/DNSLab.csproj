@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="Jdenticon-net" Version="3.1.2" />
+		<PackageReference Include="MD.PersianDateTime.Standard" Version="2.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.3" />
 	</ItemGroup>
 
