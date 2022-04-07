@@ -3,10 +3,10 @@
 @inject ILocalStorageService localStorage
 @inject NavigationManager Nav
 
-<select @bind="CultureChange" class="form-select flag-icon-@(CultureChange.TwoLetterISOLanguageName)">
+<select @bind="CultureChange" class="form-select flag-icon-@(CultureChange.TwoLetterISOLanguageName) text-end">
     @foreach (var cul in Cultures)
     {
-        <option value="@cul.Name" class="text-end">@($"{cul.Parent.NativeName} ({cul.Parent.Name})")</option>
+        <option value="@cul.Name">@($"{cul.Parent.NativeName} ({cul.Parent.Name})")</option>
     }
 </select>
 
