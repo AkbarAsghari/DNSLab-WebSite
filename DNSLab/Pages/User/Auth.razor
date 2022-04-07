@@ -17,7 +17,7 @@
 <div class="container-xl mt-5">
     <div class="row">
 
-        <EditForm class="container-sm mt-4 col-lg-4" Model=user OnValidSubmit="CreateUser">
+        <EditForm class="container-sm mt-4 col-lg-4" Model=user OnValidSubmit="AuthUser">
             <DataAnnotationsValidator />
             <div class="card mb-4">
                 <div class="card-header">@localizer["Login"]</div>
@@ -67,7 +67,7 @@
 
     private AuthenticateDTO user = new AuthenticateDTO();
     private bool isSubmited = false;
-    private async Task CreateUser()
+    private async Task AuthUser()
     {
         isSubmited = true;
         var userToken = await accountReository.Login(user);
