@@ -26,7 +26,7 @@
                     <!-- Form Group (email address)-->
                     <div class="mb-3">
                         <label class="small mb-1">@localizer["UsernameOrEmail"]</label>
-                        <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@user.UsernameOrEmail" required />
+                        <InputText class="form-control" placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> user.UsernameOrEmail)" />
                     </div>
                     <!-- Form Group (email address)-->
