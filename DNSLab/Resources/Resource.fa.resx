@@ -420,6 +420,9 @@
   <data name="UserName" xml:space="preserve">
     <value>نام کاربری</value>
   </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>نام کاربری یا ایمیل</value>
+  </data>
   <data name="Username_Is_Duplicate" xml:space="preserve">
     <value>نام کاربری تکراری است</value>
   </data>

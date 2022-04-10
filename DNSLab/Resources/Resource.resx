@@ -420,6 +420,9 @@
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>Username Or Email</value>
+  </data>
   <data name="Username_Is_Duplicate" xml:space="preserve">
     <value>Username is duplicate</value>
   </data>

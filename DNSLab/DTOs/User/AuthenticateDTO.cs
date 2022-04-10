@@ -5,7 +5,7 @@ namespace DNSLab.DTOs.User
     public class AuthenticateDTO
     {
         [Required]
-        public string Username { get; set; }
+        public string UsernameOrEmail { get; set; }
         [Required]
         public string Password { get; set; }
     }
