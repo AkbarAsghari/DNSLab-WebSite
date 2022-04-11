@@ -69,5 +69,49 @@ namespace DNSLab.Repository
             var response = await _httpService.Put<HostNameDTO, bool>($"/DNS/update", hostName);
             return response.Response;
         }
+
+        //Token 
+
+        public async Task<string> GenerateTokenForAccessToUpdateHostNameSystem(CreateTokenDTO createToken)
+        {
+            var response = await _httpService.Post<CreateTokenDTO, string>($"/DNS/GenerateTokenForAccessToUpdateHostNameSystem", createToken);
+            return response.Response;
+        }
+
+        public async Task<bool> UpdateTokensDomainNameSystems(TokenAndDNSDTO tokenAndDNS)
+        {
+            var response = await _httpService.Put<TokenAndDNSDTO, bool>($"/DNS/UpdateTokensDomainNameSystems", tokenAndDNS);
+            return response.Response;
+        } 
+        
+        public async Task<bool> UpdateTokenName(TokenAndNameDTO tokenAndName)
+        {
+            var response = await _httpService.Put<TokenAndNameDTO, bool>($"/DNS/UpdateTokenName", tokenAndName);
+            return response.Response;
+        }
+
+        public async Task<bool> DeleteToken(Guid tokenId)
+        {
+            var response = await _httpService.Delete<bool>($"/DNS/DeleteToken?Id={tokenId}");
+            return response.Response;
+        }
+
+        public async Task<IEnumerable<TokenSummaryDTO>> GetTokenSummary()
+        {
+            var response = await _httpService.Get<IEnumerable<TokenSummaryDTO>>($"/DNS/GetTokensSummary");
+            if (response.Success)
+                return response.Response;
+
+            return new List<TokenSummaryDTO>();
+        }
+
+        public async Task<TokenDTO> GetToken(Guid tokenId)
+        {
+            var response = await _httpService.Get<TokenDTO>($"/DNS/GetToken?Id={tokenId}");
+            return response.Response;
+        }
+
+
+
     }
 }

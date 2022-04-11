@@ -1,5 +1,58 @@
-﻿<h3>TokenForm</h3>
+﻿@using DNSLab.Interfaces.Repository
+
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">@Title</div>
+        <div class="card-body">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (first name)-->
+                <div class="col-md-6">
+                    <label class="small mb-1">@localizer["HostName"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
+                </div>
+                <!-- Form Group (last name)-->
+                <div class="col-md-6">
+                    @switch (HostName.RecordType)
+                    {
+                        case 1:
+                            <label class="small mb-1">@localizer["IPv4Address"]</label>
+                            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
+                            break;
+                        case 2:
+                            <label class="small mb-1">@localizer["IPv6Address"]</label>
+                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
+                            break;
+                        case 3:
+                            <label class="small mb-1">@localizer["Target"]</label>
+                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
+                            break;
+                    }
+                </div>
+            </div>
+            <div class="row">
+                
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
+        @if (IsInProgress)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <text>@localizer["Progressing"]...</text>
+        }
+        else
+        {
+            <text>@localizer["SaveChanges"]</text>
+        }
+    </button>
+</EditForm>
 
 @code {
-
+    [Parameter] public bool IsInProgress { get; set; } = false;
 }
