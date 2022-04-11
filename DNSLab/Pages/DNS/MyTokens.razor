@@ -1,0 +1,124 @@
+﻿@page "/dns/mytokens"
+@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
+@inject IStringLocalizer<Resource> localizer
+@inject IDNSRepository dnsRepository
+@inject NavigationManager NavigationManager
+
+
+<Modal @ref="DeleteModal">
+    <Title>
+        <label>@localizer["AreYouSureDel"]</label>
+    </Title>
+    <Body>
+        <label>@localizer["TokenName"] : @deleteRcord.Name </label>
+    </Body>
+    <Footer>
+        <button type="button" class="btn btn-warning" @onclick=@(()=>DeleteModal.Close())>@localizer["Cancel"]</button>
+        <button type="submit" class="btn btn-danger" @onclick=@(()=>AcceptDelete()) disabled="@isInProgress">
+            @if (isInProgress)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <text>@localizer["Progressing"]...</text>
+            }
+            else
+            {
+                <text>@localizer["Delete"]</text>
+            }
+        </button>
+    </Footer>
+</Modal>
+
+<div class="card mb-4">
+    <div class="card-header">@localizer["Tokens"]</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <a class="btn btn-primary" href="dns/createtoken">@localizer["CreateToken"]</a>
+        </div>
+        <div class="mb-3">
+            @if (isLoading)
+            {
+                <Loading />
+            }
+            else if (tokenSummaries.Count() == 0)
+            {
+                <text>@localizer["ThereIsNoTokens"]</text>
+            }
+            else
+            {
+                @foreach (var item in tokenSummaries)
+                {
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-10 col-8">
+                            <div class="row">
+                                <div class="col-md-4 col-xl-4">
+                                    <p>@item.Name</p>
+                                </div>
+                                <div class="col-md-4 col-xl-5">
+                                   
+                                </div>
+                                <p class="col-md-4 col-xl-3">@localizer["HostNamesCount"] <a class="btn btn-sm btn-dark disabled">@item.HostNameCount</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <button type="button" class="btn btn-outline-warning" @onclick=@(()=>EditToken(item))>@localizer["Edit"]</button>
+                            <button type="button" class="btn btn-outline-danger" @onclick=@(()=>DeleteToken(item))>@localizer["Delete"]</button>
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+@code {
+    IEnumerable<TokenSummaryDTO> tokenSummaries;
+
+    Modal DeleteModal { get; set; }
+    TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
+
+    private bool isLoading = false;
+    private bool isInProgress = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTokensSummary();
+    }
+
+    private async Task LoadTokensSummary()
+    {
+        isLoading = true;
+        tokenSummaries = await dnsRepository.GetTokenSummary();
+        isLoading = false;
+    }
+
+    private async Task AcceptDelete()
+    {
+        isInProgress = true;
+        if (deleteRcord != null)
+        {
+            if (await dnsRepository.DeleteToken(deleteRcord.Id))
+            {
+                await DeleteModal.Close();
+                await LoadTokensSummary();
+            }
+        }
+        deleteRcord = new TokenSummaryDTO();
+
+        isInProgress = false;
+    }
+
+    private async Task DeleteToken(TokenSummaryDTO record)
+    {
+        deleteRcord = record;
+        await DeleteModal.Open();
+    }
+
+    private void EditToken(TokenSummaryDTO record)
+    {
+        NavigationManager.NavigateTo("dns/token/edit/" + record.Id);
+    }
+}

@@ -1,5 +1,5 @@
 ﻿@using DNSLab.Interfaces.Repository
-
+@*
 @inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
@@ -51,7 +51,7 @@
             <text>@localizer["SaveChanges"]</text>
         }
     </button>
-</EditForm>
+</EditForm>*@
 
 @code {
     [Parameter] public bool IsInProgress { get; set; } = false;

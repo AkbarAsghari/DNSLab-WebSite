@@ -13,5 +13,11 @@ namespace DNSLab.Interfaces.Repository
         Task<int> GetActiveDNSCount();
         Task<int> GetLast24HoursChangesCount();
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();
+        Task<string> GenerateTokenForAccessToUpdateHostNameSystem(CreateTokenDTO createToken);
+        Task<bool> UpdateTokensDomainNameSystems(TokenAndDNSDTO tokenAndDNS);
+        Task<bool> UpdateTokenName(TokenAndNameDTO tokenAndName);
+        Task<bool> DeleteToken(Guid tokenId);
+        Task<IEnumerable<TokenSummaryDTO>> GetTokenSummary();
+        Task<TokenDTO> GetToken(Guid tokenId);
     }
 }

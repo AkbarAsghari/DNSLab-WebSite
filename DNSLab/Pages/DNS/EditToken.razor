@@ -1,5 +1,7 @@
-﻿<h3>EditToken</h3>
+﻿@page "/dns/token/edit/{TokenId}"
+<h3>EditToken</h3>
+<p>@TokenId</p>
 
 @code {
-
+    [Parameter] public string TokenId { get; set; }
 }
