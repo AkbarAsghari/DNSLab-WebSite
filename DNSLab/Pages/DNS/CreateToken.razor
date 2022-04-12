@@ -1,7 +1,37 @@
 ﻿@page "/dns/createtoken"
+@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
 
-<h3>CreateToken</h3>
+@inject IDNSRepository dnsRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+
+<TokenForm @ref="@tokenForm" Title="CreateToken" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" IsInProgress="isProgressing" />
 
 @code {
+    private TokenForm tokenForm;
 
+    private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO()
+        {
+            HostNameIds = new List<Guid>()
+        };
+    private bool isProgressing = false;
+
+    public async Task Create()
+    {
+        isProgressing = true;
+
+        tokenAndDNS.HostNameIds = tokenForm.GetCheckHostNamesId();
+
+        var response = await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS);
+        if (!String.IsNullOrEmpty(response))
+        {
+            _navManager.NavigateTo("dns/mytokens");
+            toastService.ShowToast(localizer["TokenCreated"], Enums.ToastLevel.Success);
+        }
+
+        isProgressing = false;
+    }
 }

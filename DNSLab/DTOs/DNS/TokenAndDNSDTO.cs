@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DNSLab.DTOs.DNS
 {
-    public class TokenAndDNSDTO
+    public class TokenAndDNSDTO : TokenDTO
     {
-        public Guid TokenId { get; set; }
-        public IEnumerable<Guid> DomainNameSystemsIds { get; set; }
+        public IEnumerable<Guid> HostNameIds { get; set; }
     }
 }

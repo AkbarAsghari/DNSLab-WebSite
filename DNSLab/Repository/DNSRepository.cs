@@ -62,6 +62,15 @@ namespace DNSLab.Repository
         public async Task<PagedListDTO<HostNameDTO>> GetOwnHosts(PaginationDTO pagination)
         {
             return await _httpService.GetHelper<HostNameDTO>($"/DNS/Getallpaging", pagination);
+        } 
+        
+        public async Task<IEnumerable<HostSummaryDTO>> GetHostSummaries()
+        {
+            var response =  await _httpService.Get<IEnumerable<HostSummaryDTO>>($"/DNS/GetOwnHostsSummary");
+            if (response.Success)
+                return response.Response;
+
+            return new List<HostSummaryDTO>();
         }
 
         public async Task<bool> UpdateHostName(HostNameDTO hostName)
@@ -72,9 +81,9 @@ namespace DNSLab.Repository
 
         //Token 
 
-        public async Task<string> GenerateTokenForAccessToUpdateHostNameSystem(CreateTokenDTO createToken)
+        public async Task<string> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken)
         {
-            var response = await _httpService.Post<CreateTokenDTO, string>($"/DNS/GenerateTokenForAccessToUpdateHostNameSystem", createToken);
+            var response = await _httpService.Post<TokenAndDNSDTO, string>($"/DNS/GenerateTokenForAccessToUpdateHostNameSystem", createToken);
             return response.Response;
         }
 
@@ -84,9 +93,9 @@ namespace DNSLab.Repository
             return response.Response;
         } 
         
-        public async Task<bool> UpdateTokenName(TokenAndNameDTO tokenAndName)
+        public async Task<bool> UpdateTokenName(TokenDTO tokenAndName)
         {
-            var response = await _httpService.Put<TokenAndNameDTO, bool>($"/DNS/UpdateTokenName", tokenAndName);
+            var response = await _httpService.Put<TokenDTO, bool>($"/DNS/UpdateTokenName", tokenAndName);
             return response.Response;
         }
 

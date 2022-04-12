@@ -1,8 +1,11 @@
-﻿@using DNSLab.Interfaces.Repository
-@*
+﻿@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
+
+@inject IDNSRepository dnsRepository
+
 @inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
+<EditForm Model="TokenAndDNS" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="card mb-4">
         <div class="card-header">@Title</div>
@@ -11,32 +14,22 @@
             <!-- Form Row-->
             <div class="row gx-3 mb-3">
                 <!-- Form Group (first name)-->
-                <div class="col-md-6">
-                    <label class="small mb-1">@localizer["HostName"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
+                <div class="col-12">
+                    <label class="small mb-1">@localizer["TokenName"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> TokenAndDNS.Name)" />
                 </div>
                 <!-- Form Group (last name)-->
-                <div class="col-md-6">
-                    @switch (HostName.RecordType)
-                    {
-                        case 1:
-                            <label class="small mb-1">@localizer["IPv4Address"]</label>
-                            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
-                            break;
-                        case 2:
-                            <label class="small mb-1">@localizer["IPv6Address"]</label>
-                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
-                            break;
-                        case 3:
-                            <label class="small mb-1">@localizer["Target"]</label>
-                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
-                            break;
-                    }
+                <div class="col-6">
+                    @if (HostSummariesAndChecked != null)
+                        @foreach (var item in HostSummariesAndChecked)
+                        {
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" @bind="item.IsChecked">
+                                <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
+                            </div>
+                        }
                 </div>
-            </div>
-            <div class="row">
-                
             </div>
         </div>
     </div>
@@ -51,8 +44,33 @@
             <text>@localizer["SaveChanges"]</text>
         }
     </button>
-</EditForm>*@
+</EditForm>
 
 @code {
     [Parameter] public bool IsInProgress { get; set; } = false;
+    [Parameter] public string Title { get; set; } = String.Empty;
+    [Parameter]
+    public TokenAndDNSDTO TokenAndDNS { get; set; }
+
+    public IEnumerable<Guid> GetCheckHostNamesId()
+    {
+        return HostSummariesAndChecked.Where(x => x.IsChecked).Select(x => x.Id);
+    }
+
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked { get; set; } = new List<HostSummaryAndCheckedDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var HostSummaries = await dnsRepository.GetHostSummaries();
+
+        foreach (var item in HostSummaries)
+            HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
+                {
+                    Id = item.Id,
+                    Address = item.Address,
+                    IsChecked = TokenAndDNS.HostNameIds.Contains(item.Id)
+                });
+    }
 }

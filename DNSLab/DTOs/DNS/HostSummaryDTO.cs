@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DNSLab.DTOs.DNS
 {
-    public class CreateTokenDTO
+    public class HostSummaryDTO
     {
-        public string TokenName { get; set; }
-        public IEnumerable<Guid> DomainNameSystemsIds { get; set; }
+        public Guid Id { get; set; }
+        public string Address { get; set; }
     }
 }
