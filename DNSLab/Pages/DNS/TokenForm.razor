@@ -14,21 +14,30 @@
             <!-- Form Row-->
             <div class="row gx-3 mb-3">
                 <!-- Form Group (first name)-->
-                <div class="col-12">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <label class="small mb-1">@localizer["TokenName"]</label>
                     <InputText class="form-control" placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> TokenAndDNS.Name)" />
                 </div>
                 <!-- Form Group (last name)-->
-                <div class="col-6">
-                    @if (HostSummariesAndChecked != null)
-                        @foreach (var item in HostSummariesAndChecked)
-                        {
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
-                                <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
-                            </div>
-                        }
+                <hr class="my-2" />
+                <div class="col-12">
+                    <p>@localizer["SelectDNSTitle"]</p>
+                    <p class="alert alert-info">@localizer["SelectDNSDescription"]</p>
+                    <div class="row g-2">
+                        @if (HostSummariesAndChecked != null)
+                            @foreach (var item in HostSummariesAndChecked)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="border p-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
+                                            <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                    </div>
                 </div>
             </div>
         </div>

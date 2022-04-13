@@ -101,6 +101,16 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Token_Used_Before_Exception",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Token_Used_Before_Exception"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "TokenName_Is_Not_Valid",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["TokenName_Is_Not_Valid"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "No_HostName_Selected",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["No_HostName_Selected"]
                     }
                 };
             }

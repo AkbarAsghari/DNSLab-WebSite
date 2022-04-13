@@ -9,7 +9,7 @@
 @inject IStringLocalizer<Resource> localizer
 
 
-<TokenForm Title="Edit Token" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
+<TokenForm Title="@localizer["EditToken"]" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
 
 @code {
     [Parameter] public Guid TokenId { get; set; }

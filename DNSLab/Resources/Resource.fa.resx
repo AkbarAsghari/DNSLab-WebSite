@@ -150,6 +150,9 @@
   <data name="CreateHostName" xml:space="preserve">
     <value>ساخت هاست نیم</value>
   </data>
+  <data name="CreateToken" xml:space="preserve">
+    <value>ایجاد توکن</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="EditHostName" xml:space="preserve">
     <value>ویرایش هاست نیم</value>
   </data>
+  <data name="EditToken" xml:space="preserve">
+    <value>ویرایش توکن</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>پست الکترونیک</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="EnterYourHostName" xml:space="preserve">
     <value>نام هاست خود را وارد نمایید مثال MyHost</value>
+  </data>
+  <data name="EnterYourTokenName" xml:space="preserve">
+    <value>نام توکن خود را وارد نمایید</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>خطا</value>
@@ -227,6 +236,9 @@
   </data>
   <data name="HostNames" xml:space="preserve">
     <value>هاست های من</value>
+  </data>
+  <data name="HostNamesCount" xml:space="preserve">
+    <value>تعداد هاست نِیم های فعال</value>
   </data>
   <data name="HostNameUpdated" xml:space="preserve">
     <value>هاست نیم بروز شد</value>
@@ -282,11 +294,17 @@
   <data name="Next" xml:space="preserve">
     <value>بعد</value>
   </data>
+  <data name="No_HostName_Selected" xml:space="preserve">
+    <value>هیچ هاست نِیمی انتخاب نشده است</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>شماره همراه</value>
+  </data>
+  <data name="PleaseLoginFirst" xml:space="preserve">
+    <value>لطفا ابتدا وارد شوید</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>قبل</value>
@@ -317,6 +335,12 @@
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>ذخیره تغییرات</value>
+  </data>
+  <data name="SelectDNSDescription" xml:space="preserve">
+    <value>در این بخش هاست نِیم هایی که میخواهید با این توکن بروز شود را انتخاب نمایید</value>
+  </data>
+  <data name="SelectDNSTitle" xml:space="preserve">
+    <value>انتخاب هاست نِیم </value>
   </data>
   <data name="SEO_DNSCreateDescription" xml:space="preserve">
     <value>هاست نیم خودتو ایجاد کن هاست نیم ها شامل IPv4 و IPv6 و CName میباشد</value>
@@ -396,6 +420,9 @@
   <data name="StayConnectedMessage" xml:space="preserve">
     <value>راه حل Dynamic DNS ما دسترسی از راه دور به هر دستگاه متصل به اینترنت را آسان می کند.</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Success" xml:space="preserve">
     <value>موفق</value>
   </data>
@@ -404,6 +431,24 @@
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>هنوز هاست نیمی ایجاد نشده است</value>
+  </data>
+  <data name="ThereIsNoTokens" xml:space="preserve">
+    <value>هیچ توکن فعالی یافت نشد</value>
+  </data>
+  <data name="TokenCreated" xml:space="preserve">
+    <value>توکن ایجاد شد</value>
+  </data>
+  <data name="TokenName" xml:space="preserve">
+    <value>نام توکن</value>
+  </data>
+  <data name="TokenName_Is_Not_Valid" xml:space="preserve">
+    <value>نام توکن معتبر نیست</value>
+  </data>
+  <data name="Tokens" xml:space="preserve">
+    <value>توکن ها</value>
+  </data>
+  <data name="TokenUpdated" xml:space="preserve">
+    <value>توکن آپدیت شد</value>
   </data>
   <data name="Token_Expired_Exception" xml:space="preserve">
     <value>لینک (توکن) منقضی شده است</value>

@@ -8,7 +8,7 @@
 @inject IStringLocalizer<Resource> localizer
 
 
-<TokenForm Title="Create Token" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
+<TokenForm Title="@localizer["CreateToken"]" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
 
 @code {
     private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO()

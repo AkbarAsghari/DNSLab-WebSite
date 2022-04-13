@@ -1,7 +1,9 @@
 ﻿using DNSLab.DTOs.RestAPI;
 using DNSLab.Helper.Exceptions;
+using DNSLab.Resources;
 using DNSLab.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using System.Net;
 using System.Text.Json;
 
@@ -13,12 +15,14 @@ namespace DNSLab.Helper.Exceptions
         private readonly NavigationManager _navManager;
         private readonly ToastService _toastService;
         private readonly ApplicationExceptions _applicationExceptions;
+        private readonly IStringLocalizer<Resource> _localizer;
 
-        public HttpResponseExceptionHander(NavigationManager navManager, ToastService toastService, ApplicationExceptions applicationException)
+        public HttpResponseExceptionHander(NavigationManager navManager, ToastService toastService, ApplicationExceptions applicationException, IStringLocalizer<Resource> localizer)
         {
             _navManager = navManager;
             _toastService = toastService;
             _applicationExceptions = applicationException;
+            _localizer = localizer;
         }
 
         public async Task HandlerExceptionAsync(HttpResponseMessage httpResponseMessage)
@@ -39,7 +43,7 @@ namespace DNSLab.Helper.Exceptions
                         if (!_navManager.Uri.ToLower().EndsWith("/user/auth"))
                         {
                             _navManager.NavigateTo("/user/auth");
-                            _toastService.ShowToast("please first login", Enums.ToastLevel.Info);
+                            _toastService.ShowToast(_localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
                         }
                         break;
                     case HttpStatusCode.BadRequest:

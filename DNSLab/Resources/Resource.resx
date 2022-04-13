@@ -150,6 +150,9 @@
   <data name="CreateHostName" xml:space="preserve">
     <value>Create Host Name</value>
   </data>
+  <data name="CreateToken" xml:space="preserve">
+    <value>Create Token</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="EditHostName" xml:space="preserve">
     <value>Edit Host Name</value>
   </data>
+  <data name="EditToken" xml:space="preserve">
+    <value>Edit Token</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="EnterYourHostName" xml:space="preserve">
     <value>enter your host name</value>
+  </data>
+  <data name="EnterYourTokenName" xml:space="preserve">
+    <value>Enter Your Token Name</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
@@ -227,6 +236,9 @@
   </data>
   <data name="HostNames" xml:space="preserve">
     <value>Host Names</value>
+  </data>
+  <data name="HostNamesCount" xml:space="preserve">
+    <value>Active HostName Count</value>
   </data>
   <data name="HostNameUpdated" xml:space="preserve">
     <value>HostName updated</value>
@@ -282,11 +294,17 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="No_HostName_Selected" xml:space="preserve">
+    <value>No HostName Selected</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone Number</value>
+  </data>
+  <data name="PleaseLoginFirst" xml:space="preserve">
+    <value>Please Login First</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
@@ -317,6 +335,12 @@
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
+  </data>
+  <data name="SelectDNSDescription" xml:space="preserve">
+    <value>Select which host name you want update with this token</value>
+  </data>
+  <data name="SelectDNSTitle" xml:space="preserve">
+    <value>Select Host Name</value>
   </data>
   <data name="SEO_DNSCreateDescription" xml:space="preserve">
     <value>You Will Create New HostName As IPv4(A) , IPv6(AAAA) Or CName</value>
@@ -404,6 +428,24 @@
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>There Is No Host</value>
+  </data>
+  <data name="ThereIsNoTokens" xml:space="preserve">
+    <value>There is not tokens</value>
+  </data>
+  <data name="TokenCreated" xml:space="preserve">
+    <value>Token Created</value>
+  </data>
+  <data name="TokenName" xml:space="preserve">
+    <value>Token Name</value>
+  </data>
+  <data name="TokenName_Is_Not_Valid" xml:space="preserve">
+    <value>Token Name Is Not Valid</value>
+  </data>
+  <data name="Tokens" xml:space="preserve">
+    <value>Tokens</value>
+  </data>
+  <data name="TokenUpdated" xml:space="preserve">
+    <value>Token Updated</value>
   </data>
   <data name="Token_Expired_Exception" xml:space="preserve">
     <value>Token expired</value>
