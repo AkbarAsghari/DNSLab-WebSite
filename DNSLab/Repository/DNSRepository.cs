@@ -101,7 +101,7 @@ namespace DNSLab.Repository
 
         public async Task<bool> DeleteToken(Guid tokenId)
         {
-            var response = await _httpService.Delete<bool>($"/DNS/DeleteToken?Id={tokenId}");
+            var response = await _httpService.Delete<bool>($"/DNS/DeleteToken?tokenId={tokenId}");
             return response.Response;
         }
 
