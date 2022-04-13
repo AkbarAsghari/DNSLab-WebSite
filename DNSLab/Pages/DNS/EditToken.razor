@@ -1,7 +1,48 @@
-﻿@page "/dns/token/edit/{TokenId}"
-<h3>EditToken</h3>
-<p>@TokenId</p>
+﻿@page "/dns/token/edit/{TokenId:guid}"
+
+@using DNSLab.DTOs.DNS
+@using DNSLab.Interfaces.Repository
+
+@inject IDNSRepository dnsRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+
+<TokenForm Title="Edit Token" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
 
 @code {
-    [Parameter] public string TokenId { get; set; }
+    [Parameter] public Guid TokenId { get; set; }
+
+    private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO() { HostNameIds = new List<Guid>() };
+    private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked = new List<HostSummaryAndCheckedDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var HostSummaries = await dnsRepository.GetHostSummaries();
+        tokenAndDNS = await dnsRepository.GetToken(TokenId);
+
+        foreach (var item in HostSummaries)
+            HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
+                {
+                    Id = item.Id,
+                    Address = item.Address,
+                    IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
+                });
+    }
+
+    private bool isProgressing = false;
+
+    public async Task Update()
+    {
+        isProgressing = true;
+
+        if (await dnsRepository.UpdateTokensDomainNameSystems(tokenAndDNS))
+        {
+            _navManager.NavigateTo("dns/mytokens");
+            toastService.ShowToast(localizer["TokenUpdated"], Enums.ToastLevel.Success);
+        }
+
+        isProgressing = false;
+    }
 }

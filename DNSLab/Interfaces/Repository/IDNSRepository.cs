@@ -20,6 +20,6 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> UpdateTokenName(TokenDTO tokenAndName);
         Task<bool> DeleteToken(Guid tokenId);
         Task<IEnumerable<TokenSummaryDTO>> GetTokenSummary();
-        Task<TokenDTO> GetToken(Guid tokenId);
+        Task<TokenAndDNSDTO> GetToken(Guid tokenId);
     }
 }

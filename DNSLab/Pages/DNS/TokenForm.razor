@@ -25,7 +25,7 @@
                         @foreach (var item in HostSummariesAndChecked)
                         {
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" @onchange="(e) => FilterChangedBrand(item, e)">
+                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
                                 <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
                             </div>
                         }
@@ -49,26 +49,12 @@
 @code {
     [Parameter] public bool IsInProgress { get; set; } = false;
     [Parameter] public string Title { get; set; } = String.Empty;
-    [Parameter]
-    public TokenAndDNSDTO TokenAndDNS { get; set; }
+    [Parameter] public TokenAndDNSDTO TokenAndDNS { get; set; }
+    [Parameter] public List<HostSummaryAndCheckedDTO> HostSummariesAndChecked { get; set; }
 
 
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
-    private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked { get; set; } = new List<HostSummaryAndCheckedDTO>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        var HostSummaries = await dnsRepository.GetHostSummaries();
-
-        foreach (var item in HostSummaries)
-            HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
-                {
-                    Id = item.Id,
-                    Address = item.Address,
-                    IsChecked = TokenAndDNS.HostNameIds.Contains(item.Id)
-                });
-    }
 
     public event Action<List<HostSummaryAndCheckedDTO>> FiltersChanged;
 

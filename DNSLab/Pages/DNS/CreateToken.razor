@@ -8,16 +8,30 @@
 @inject IStringLocalizer<Resource> localizer
 
 
-<TokenForm @ref="@tokenForm" Title="CreateToken" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" IsInProgress="isProgressing" />
+<TokenForm Title="Create Token" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
 
 @code {
-    private TokenForm tokenForm;
-
     private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO()
         {
             HostNameIds = new List<Guid>()
         };
+
+    private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked = new  List<HostSummaryAndCheckedDTO>();
+
     private bool isProgressing = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var HostSummaries = await dnsRepository.GetHostSummaries();
+
+        foreach (var item in HostSummaries)
+            HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
+                {
+                    Id = item.Id,
+                    Address = item.Address,
+                    IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
+                });
+    }
 
     public async Task Create()
     {

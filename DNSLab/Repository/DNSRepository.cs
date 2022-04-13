@@ -114,13 +114,10 @@ namespace DNSLab.Repository
             return new List<TokenSummaryDTO>();
         }
 
-        public async Task<TokenDTO> GetToken(Guid tokenId)
+        public async Task<TokenAndDNSDTO> GetToken(Guid tokenId)
         {
-            var response = await _httpService.Get<TokenDTO>($"/DNS/GetToken?Id={tokenId}");
+            var response = await _httpService.Get<TokenAndDNSDTO>($"/DNS/GetToken?tokenId={tokenId}");
             return response.Response;
         }
-
-
-
     }
 }
