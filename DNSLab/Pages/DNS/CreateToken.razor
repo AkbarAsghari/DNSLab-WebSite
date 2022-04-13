@@ -23,10 +23,7 @@
     {
         isProgressing = true;
 
-        tokenAndDNS.HostNameIds = tokenForm.GetCheckHostNamesId();
-
-        var response = await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS);
-        if (!String.IsNullOrEmpty(response))
+        if (await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
             toastService.ShowToast(localizer["TokenCreated"], Enums.ToastLevel.Success);

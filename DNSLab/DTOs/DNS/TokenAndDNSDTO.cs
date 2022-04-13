@@ -8,6 +8,6 @@ namespace DNSLab.DTOs.DNS
 {
     public class TokenAndDNSDTO : TokenDTO
     {
-        public IEnumerable<Guid> HostNameIds { get; set; }
+        public ICollection<Guid> HostNameIds { get; set; }
     }
 }

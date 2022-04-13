@@ -25,7 +25,7 @@
                         @foreach (var item in HostSummariesAndChecked)
                         {
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" @bind="item.IsChecked">
+                                <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" @onchange="(e) => FilterChangedBrand(item, e)">
                                 <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
                             </div>
                         }
@@ -52,10 +52,6 @@
     [Parameter]
     public TokenAndDNSDTO TokenAndDNS { get; set; }
 
-    public IEnumerable<Guid> GetCheckHostNamesId()
-    {
-        return HostSummariesAndChecked.Where(x => x.IsChecked).Select(x => x.Id);
-    }
 
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
@@ -72,5 +68,23 @@
                     Address = item.Address,
                     IsChecked = TokenAndDNS.HostNameIds.Contains(item.Id)
                 });
+    }
+
+    public event Action<List<HostSummaryAndCheckedDTO>> FiltersChanged;
+
+    private void FilterChangedBrand(HostSummaryAndCheckedDTO item, ChangeEventArgs e)
+    {
+        item.IsChecked = !item.IsChecked;
+        if (item.IsChecked)
+        {
+            if (!TokenAndDNS.HostNameIds.Any(x => x == item.Id))
+                TokenAndDNS.HostNameIds.Add(item.Id);
+        }
+        else
+        {
+            if (TokenAndDNS.HostNameIds.Any(x => x == item.Id))
+                TokenAndDNS.HostNameIds.Remove(item.Id);
+        }
+        FiltersChanged?.Invoke(HostSummariesAndChecked);
     }
 }

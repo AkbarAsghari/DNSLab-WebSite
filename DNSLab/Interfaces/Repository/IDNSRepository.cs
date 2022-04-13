@@ -15,7 +15,7 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();
         Task<IEnumerable<HostSummaryDTO>> GetHostSummaries();
 
-        Task<string> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken);
+        Task<bool> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken);
         Task<bool> UpdateTokensDomainNameSystems(TokenAndDNSDTO tokenAndDNS);
         Task<bool> UpdateTokenName(TokenDTO tokenAndName);
         Task<bool> DeleteToken(Guid tokenId);

@@ -81,9 +81,9 @@ namespace DNSLab.Repository
 
         //Token 
 
-        public async Task<string> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken)
+        public async Task<bool> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken)
         {
-            var response = await _httpService.Post<TokenAndDNSDTO, string>($"/DNS/GenerateTokenForAccessToUpdateHostNameSystem", createToken);
+            var response = await _httpService.Post<TokenAndDNSDTO, bool>($"/DNS/GenerateTokenForAccessToUpdateHostNameSystem", createToken);
             return response.Response;
         }
 
