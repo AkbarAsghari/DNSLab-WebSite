@@ -135,6 +135,9 @@
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>تغییر زبان</value>
   </data>
+  <data name="Click" xml:space="preserve">
+    <value>کلیک کنید</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>تکرار رمز عبور</value>
   </data>
@@ -420,9 +423,6 @@
   <data name="StayConnectedMessage" xml:space="preserve">
     <value>راه حل Dynamic DNS ما دسترسی از راه دور به هر دستگاه متصل به اینترنت را آسان می کند.</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Success" xml:space="preserve">
     <value>موفق</value>
   </data>
@@ -488,6 +488,9 @@
   </data>
   <data name="WinClientMessage" xml:space="preserve">
     <value>سرویس گیرنده به‌روزرسانی دینامیک DNS ما به‌طور مداوم تغییرات آدرس IP را در پس‌زمینه بررسی می‌کند و هر زمان که DNS تغییر کند به‌طور خودکار در dnslab به‌روزرسانی می‌شود.</value>
+  </data>
+  <data name="YouHaveNoActiveDNS" xml:space="preserve">
+    <value>شما هیچ هاست نیم فعالی ندارید برای ایجاد هاست نیم جدید</value>
   </data>
   <data name="YourEmail" xml:space="preserve">
     <value>پست الکترونیک شما</value>

@@ -135,6 +135,9 @@
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>Change Language</value>
   </data>
+  <data name="Click" xml:space="preserve">
+    <value>click</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -485,6 +488,9 @@
   </data>
   <data name="WinClientMessage" xml:space="preserve">
     <value>Our Dynamic DNS Update Client continually checks for IP address changes in the background and automatically updates the DNS at dnslab whenever it changes.</value>
+  </data>
+  <data name="YouHaveNoActiveDNS" xml:space="preserve">
+    <value>you have no active hostname for create please</value>
   </data>
   <data name="YourEmail" xml:space="preserve">
     <value>your email</value>
