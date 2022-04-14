@@ -144,6 +144,9 @@
   <data name="CreateAHostName" xml:space="preserve">
     <value>ساخت یک هاست جدید</value>
   </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>تاریخ ثبت</value>
+  </data>
   <data name="CreateGameServerH2" xml:space="preserve">
     <value>ساخت سرور بازی</value>
   </data>
@@ -461,6 +464,9 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>نوع</value>
+  </data>
+  <data name="UpdateDate" xml:space="preserve">
+    <value>تاریخ ویرایش</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>نام کاربری</value>

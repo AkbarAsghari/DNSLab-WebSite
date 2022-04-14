@@ -144,6 +144,9 @@
   <data name="CreateAHostName" xml:space="preserve">
     <value>Create a Host Name</value>
   </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Create Date</value>
+  </data>
   <data name="CreateGameServerH2" xml:space="preserve">
     <value>Create a Game Server</value>
   </data>
@@ -461,6 +464,9 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="UpdateDate" xml:space="preserve">
+    <value>Update Date</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>

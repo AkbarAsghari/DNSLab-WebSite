@@ -52,13 +52,19 @@
                     <div class="row">
                         <div class="col-lg-10 col-8">
                             <div class="row">
-                                <div class="col-md-4 col-xl-4">
-                                    <p>@item.Name</p>
+                                <div class="col-4">
+                                    <p>@localizer["TokenName"] : @item.Name</p>
                                 </div>
-                                <div class="col-md-4 col-xl-5">
-                                   
+                                <div class="col-4">
+                                    <div class="row">
+                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        @if (@item.UpdateDate != null)
+                                        {
+                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                        }
+                                    </div>
                                 </div>
-                                <p class="col-md-4 col-xl-3">@localizer["HostNamesCount"] <a class="btn btn-sm btn-dark disabled">@item.HostNameCount</a></p>
+                                <p class="col-4">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
                             </div>
                         </div>
                         <div class="col-lg-2 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
