@@ -447,6 +447,9 @@
   <data name="TokenCreated" xml:space="preserve">
     <value>توکن ایجاد شد</value>
   </data>
+  <data name="TokenKey" xml:space="preserve">
+    <value>کلید</value>
+  </data>
   <data name="TokenName" xml:space="preserve">
     <value>نام توکن</value>
   </data>

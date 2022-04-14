@@ -2,7 +2,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="@Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-@_ModalSize" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 @Title
@@ -31,6 +31,28 @@
 
     [Parameter]
     public RenderFragment Footer { get; set; }
+
+    [Parameter]
+    public ModalSizeEnum ModalSize { get; set; } = ModalSizeEnum.Medium;
+
+    private string _ModalSize
+    {
+        get
+        {
+            switch (ModalSize)
+            {
+                case ModalSizeEnum.XLarge:
+                    return "xl";
+                case ModalSizeEnum.Large:
+                    return "lg";
+                case ModalSizeEnum.Medium:
+                default:
+                    return "md";
+                case ModalSizeEnum.Small:
+                    return "sm";
+            }
+        }
+    }
 
     protected override void OnInitialized()
     {

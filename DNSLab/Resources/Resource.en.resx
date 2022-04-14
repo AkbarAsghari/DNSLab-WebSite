@@ -447,6 +447,9 @@
   <data name="TokenCreated" xml:space="preserve">
     <value>Token Created</value>
   </data>
+  <data name="TokenKey" xml:space="preserve">
+    <value>Token Key</value>
+  </data>
   <data name="TokenName" xml:space="preserve">
     <value>Token Name</value>
   </data>
