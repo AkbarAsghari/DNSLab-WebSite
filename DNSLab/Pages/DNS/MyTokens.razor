@@ -43,13 +43,24 @@
             <p>@localizer["TokenName"] : @token.Name </p>
             <p>@localizer["TokenKey"] : <code>@token.Key</code></p>
             <p>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</p>
+            <hr />
+
             <div class="row m-1">
                 <p class="col-lg-4 col-md-9 col-sm-12 m-0">سیستم عامل های ینوکسی</p>
                 <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary">دانلود فایل sh.</a>
             </div>
+            <hr />
+
             <div class="row m-1">
                 <p class="col-lg-4 col-md-9 col-sm-12 m-0">سیستم عامل های ویندوز</p>
                 <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary">دانلود فایل ps1.</a>
+            </div>
+            <hr />
+
+            <div class="row m-1">
+                <p class="col-lg-3 col-md-9 col-sm-12 m-0">لینک بروزرسانی آی پی های توکن</p>
+                <code type="text" class="text-center link-primary">http://dnslab.ir/DNS/UDIBT?k=@token.Key</code>
+                <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
             </div>
         }
     </Body>
@@ -75,7 +86,7 @@
             }
             else
             {
-                @foreach (var item in tokenSummaries)
+                @foreach (var item in tokenSummaries.OrderByDescending(x=>x.CreateDate))
                 {
                     <hr />
                     <div class="row">
