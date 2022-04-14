@@ -138,6 +138,9 @@
   <data name="Click" xml:space="preserve">
     <value>click</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="Direction" xml:space="preserve">
     <value>ltr</value>

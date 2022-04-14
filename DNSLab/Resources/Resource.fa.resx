@@ -138,6 +138,9 @@
   <data name="Click" xml:space="preserve">
     <value>کلیک کنید</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>بستن</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>تکرار رمز عبور</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>توضیحات</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>جزئیات</value>
   </data>
   <data name="Direction" xml:space="preserve">
     <value>rtl</value>

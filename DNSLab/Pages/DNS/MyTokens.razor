@@ -29,6 +29,18 @@
     </Footer>
 </Modal>
 
+<Modal @ref="TokenDetailsModal">
+    <Title>
+        <label>@localizer["Details"]</label>
+    </Title>
+    <Body>
+        <label>@localizer["TokenName"] : @deleteRcord.Name </label>
+    </Body>
+    <Footer>
+        <button type="button" class="btn btn-warning" @onclick=@(()=>TokenDetailsModal.Close())>@localizer["Close"]</button>
+    </Footer>
+</Modal>
+
 <div class="card mb-4">
     <div class="card-header">@localizer["Tokens"]</div>
     <div class="card-body">
@@ -50,12 +62,12 @@
                 {
                     <hr />
                     <div class="row">
-                        <div class="col-lg-10 col-8">
+                        <div class="col-xxl-10 col-xl-9 col-lg-7 col-8 align-self-center">
                             <div class="row">
-                                <div class="col-4">
-                                    <p>@localizer["TokenName"] : @item.Name</p>
+                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["TokenName"] : @item.Name</p>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-sm-12 align-self-center">
                                     <div class="row">
                                         <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
                                         @if (@item.UpdateDate != null)
@@ -64,10 +76,13 @@
                                         }
                                     </div>
                                 </div>
-                                <p class="col-4">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
+                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                        <div class="col-xxl-2 col-xl-3 col-lg-5 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <button type="button" class="btn btn-outline-primary" @onclick=@(()=>OpenToken(item))>@localizer["Details"]</button>
                             <button type="button" class="btn btn-outline-warning" @onclick=@(()=>EditToken(item))>@localizer["Edit"]</button>
                             <button type="button" class="btn btn-outline-danger" @onclick=@(()=>DeleteToken(item))>@localizer["Delete"]</button>
                         </div>
@@ -83,6 +98,8 @@
     IEnumerable<TokenSummaryDTO> tokenSummaries;
 
     Modal DeleteModal { get; set; }
+    Modal TokenDetailsModal { get; set; }
+
     TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
 
     private bool isLoading = false;
@@ -116,6 +133,11 @@
         isInProgress = false;
     }
 
+    private async Task OpenToken(TokenSummaryDTO record)
+    {
+        deleteRcord = record;
+        await TokenDetailsModal.Open();
+    }
     private async Task DeleteToken(TokenSummaryDTO record)
     {
         deleteRcord = record;
