@@ -34,6 +34,14 @@
             set: (value) => window.localStorage['BlazorCulture'] = value
         };
     </script>
+
+    <script type="application/javascript">
+        $(window).on('popstate', function() {
+            $('.modal').modal('hide');
+            $( ".modal-backdrop" ).remove();
+            $( ".in" ).remove();
+        });
+    </script>
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body>
