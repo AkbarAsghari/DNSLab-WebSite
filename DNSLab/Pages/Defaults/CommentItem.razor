@@ -1,0 +1,21 @@
+﻿<div class="card w-100 shadow-1-strong rounded mb-4">
+    <div class="row g-0">
+        <div class="col-2 d-flex justify-content-center align-middle">
+            <UserProfileImage Size=70 UserId="@UserId.ToString()" />
+        </div>
+        <div class="col-10">
+            <div class="card-body">
+                <h5 class="card-title">@FullName</h5>
+                <p class="comment-text card-text">@CommentText</p>
+                <p class="card-text"><small class="text-muted">@CommentDate.CalcRelativeTime()</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Guid UserId { get; set; }
+    [Parameter] public string FullName { get; set; }
+    [Parameter] public string CommentText { get; set; }
+    [Parameter] public DateTime CommentDate { get; set; }
+}

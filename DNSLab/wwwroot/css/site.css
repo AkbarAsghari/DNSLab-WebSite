@@ -156,6 +156,10 @@ a, .btn-link {
     margin-bottom: 1.5rem;
 }
 
+.comment-text {
+    text-align: justify;
+}
+
 /*Fonts*/
 @font-face {
     font-family: 'iran-sans';

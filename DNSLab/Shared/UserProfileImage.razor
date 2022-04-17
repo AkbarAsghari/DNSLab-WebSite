@@ -2,11 +2,12 @@
 
 <AuthorizeView>
     <Authorized>
-        @((MarkupString)GenerateProfilePhoto(@context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value))
+        @((MarkupString)GenerateProfilePhoto(String.IsNullOrEmpty(UserId) ? @context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value : UserId))
     </Authorized>
 </AuthorizeView>
 @code {
     [Parameter] public int Size { get; set; }
+    [Parameter] public string UserId { get; set; } = String.Empty;
 
     private string GenerateProfilePhoto(string userId)
     {
