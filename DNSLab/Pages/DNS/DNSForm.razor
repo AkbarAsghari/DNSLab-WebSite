@@ -1,8 +1,4 @@
-﻿@using DNSLab.DTOs.DNS
-@using DNSLab.DTOs.IP
-@using DNSLab.Interfaces.Repository
-
-@inject IStringLocalizer<Resource> localizer
+﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
