@@ -59,7 +59,7 @@
         base.OnInitialized();
         var user = (await auth.GetAuthenticationStateAsync()).User;
         if (user.Identity?.IsAuthenticated == true)
-            navigationManager.NavigateTo("Dashboard");
+            navigationManager.NavigateTo("/");
     }
 
     private AuthenticateDTO user = new AuthenticateDTO();
