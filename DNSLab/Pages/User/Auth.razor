@@ -3,9 +3,7 @@
 @inject IAccountRepository accountReository
 @inject NavigationManager navigationManager
 @inject IAuthService authService
-@inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
-@inject AuthenticationStateProvider auth
 
 <PageTitle>@localizer["SEO_UserAuthTitle"]</PageTitle>
 <meta name="description" content="@localizer["SEO_UserAuthDescription"]" />
@@ -53,14 +51,6 @@
 </div>
 
 @code {
-
-    protected async override Task OnInitializedAsync()
-    {
-        base.OnInitialized();
-        var user = (await auth.GetAuthenticationStateAsync()).User;
-        if (user.Identity?.IsAuthenticated == true)
-            navigationManager.NavigateTo("/");
-    }
 
     private AuthenticateDTO user = new AuthenticateDTO();
     private bool isSubmited = false;
