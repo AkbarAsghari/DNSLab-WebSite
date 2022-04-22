@@ -1,0 +1,28 @@
+﻿@inject IStringLocalizer<Resource> localizer
+
+<footer class="bg-dark text-secondary px-4 text-center">
+    <div class="row py-5">
+        <!--Grid column-->
+        <div class="col-lg-7 col-md-6 mb-8 mb-md-0">
+            <h1 class="display-5 fw-bold text-white">@localizer["ItsFree"]</h1>
+            <div class="col-lg-8 mx-auto">
+                <p class="fs-6 mb-4">@localizer["ItsFreeMessage"]</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a href="user/register" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">@localizer["Register"]</a>
+                    <a href="user/auth" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">@localizer["Login"]</a>
+                </div>
+            </div>
+        </div>
+        <!--Grid column-->
+        <div class="col-lg-5 col-md-6 mb-4 mb-md-0 p-3">
+            <div class="rounded-circle d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 150px; height: 150px;">
+                <img src="images/Icons/Logo.png" alt="logo" loading="lazy" />
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3 text-white">
+            © 2022 Copyright:
+            <a class="text-white" href="https://dnslab.ir">DNSLab.ir</a>
+        </div>
+    </div>
+</footer>
