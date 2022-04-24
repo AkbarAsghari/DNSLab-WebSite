@@ -16,10 +16,9 @@ else
 {
     <AuthorizeView Context="authViewContext">
         <Authorized>
-
-            <div class="card mb-4">
-                <div class="row">
-                    <div class="col-xl-6">
+            <div class="container">
+                <div class="row g-2">
+                    <div class="col-xl-6 g-1">
                         <!-- Profile picture card-->
                     <div class="card mb-4 mb-xl-0">
                             <div class="card-header">@localizer["ProfilePicture"]</div>
@@ -28,18 +27,28 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6">
-                        <div class="card mb-2">
-                            <div class="card-header">@localizer["SiteSettings"]</div>
-                            <div class="card-body">
-                                <div class="row gx-3 mb-3">
-                                    <!-- Form Group (first name)-->
-                                <div class="col-md-6">
-                                        <label class="small mb-1">@localizer["ChangeLanuguage"]</label>
-                                        <div><CultureSelector @ref=cultureSelector /></div>
+                    <div class="row col-xl-6 g-1">
+                        <div class="col-xl-12 g-0">
+                            <div class="card mb-2">
+                                <div class="card-header">@localizer["SiteSettings"]</div>
+                                <div class="card-body">
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                            <label class="small mb-1">@localizer["ChangeLanuguage"]</label>
+                                            <div><CultureSelector @ref=cultureSelector /></div>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 g-0">
+                            <div class="card mb-2">
+                                <div class="card-header">تنظیمات امنیتی</div><!--!-->
+                            <div class="card-body">
+                                    <a class="btn btn-primary" href="user/changepassword">تغییر رمز عبور</a>
+                                </div>
                             </div>
                         </div>
                     </div>
