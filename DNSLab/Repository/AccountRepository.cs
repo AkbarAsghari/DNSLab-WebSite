@@ -81,5 +81,11 @@ namespace DNSLab.Repository
             var response = await _httpService.Post<ResetPasswordDTO, bool>($"/Auth/ResetPassword", resetPassword);
             return response.Response;
         }
+
+        public async Task<bool> ChangePassword(ChangePasswordDTO changePassword)
+        {
+            var response = await _httpService.Put<ChangePasswordDTO, bool>($"/Auth/ChangePassword", changePassword);
+            return response.Response;
+        }
     }
 }

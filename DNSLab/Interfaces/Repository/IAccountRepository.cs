@@ -8,6 +8,7 @@ namespace DNSLab.Interfaces.Repository
         Task<string> Login(AuthenticateDTO userInfo);
         Task<bool> ForgetPassword(ForgetPasswordDTO  forgetPassword);
         Task<bool> ResetPassword(ResetPasswordDTO resetPassword);
+        Task<bool> ChangePassword(ChangePasswordDTO changePassword);
         Task<string> Register(UserInfo userInfo);
         Task<bool> Update(UserInfo userInfo);
         Task<int> UsersCount();
