@@ -111,6 +111,11 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "No_HostName_Selected",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["No_HostName_Selected"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Password_Less_Than_8_Character",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Password_Less_Than_8_Character"]
                     }
                 };
             }

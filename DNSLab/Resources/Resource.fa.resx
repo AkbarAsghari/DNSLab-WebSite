@@ -309,8 +309,14 @@
   <data name="No_HostName_Selected" xml:space="preserve">
     <value>هیچ هاست نِیمی انتخاب نشده است</value>
   </data>
+  <data name="Old_Password_Is_Wrong" xml:space="preserve">
+    <value>رمز عبور قبلی اشتباه است</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
+  </data>
+  <data name="Password_Less_Than_8_Character" xml:space="preserve">
+    <value>رمز عبور نمیتواند کمتر از 8 کاراکتر باشد</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>شماره همراه</value>
