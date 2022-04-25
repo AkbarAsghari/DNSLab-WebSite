@@ -61,17 +61,16 @@
                             <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-12 p-2 p-4 px-0">
+                    <div class="p-4 px-0 d-flex">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="isAcceptLegalsTOS" required>
                             <label class="form-check-label" for="isAcceptLegalsTOS">
-                                شرایط و مقررات سایت را میپذیرم
+                                 <a class="text-decoration-underline" target="_blank" href="legal/tos">قوانین و مقررات</a> سایت را مطالعه و می پذیرم
                             </label>
                             <div class="invalid-feedback">
                                 برای ثبت نام شما باید قوانین و مقررات سایت را تایید نمایید
                             </div>
                         </div>
-                        <a target="_blank" href="legal/tos">مطالعه شرایط و مقررات سایت</a>
                     </div>
                     <button type="submit" class="btn btn-primary" disabled="@isSubmited">
                         @if (isSubmited)
