@@ -35,40 +35,44 @@
                         </div>
                     </div>
                     <!-- Form Group (email address)-->
-                    <div class="mb-3">
-                        <label class="small mb-1">@localizer["Email"]</label>
-                        <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@user.Email" required />
-                        <ValidationMessage class="invalid-feedback" For="@(()=> user.Email)" />
-                    </div>
-                    <!-- Form Row-->
                     <div class="row gx-3 mb-3">
-                        <!-- Form Group (phone number)-->
+                        <div class="col-md-6">
+                            <label class="small mb-1">@localizer["Email"]</label>
+                            <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@user.Email" required />
+                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Email)" />
+                        </div>
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
                             <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@user.Mobile" required />
                             <ValidationMessage class="invalid-feedback" For="@(()=> user.Mobile)" />
                         </div>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                        <!-- Form Group (phone number)-->
                         <div class="col-md-6">
                             <label class="small mb-1">@localizer["UserName"]</label>
                             <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@user.Username" required />
                             <ValidationMessage class="invalid-feedback" For="@(()=> user.Username)" />
                         </div>
-                    </div>
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1">@localizer["Password"]</label>
                             <InputPassword class="form-control" @bind-Value="@user.Password" required />
                             <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
                         </div>
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["ConfirmPassword"]</label>
-                            <InputPassword class="form-control" @bind-Value="@user.ConfirmPassword" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.ConfirmPassword)" />
-                        </div>
                     </div>
-
-
+                    <div class="col-lg-3 col-md-4 col-12 p-2 p-4 px-0">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="isAcceptLegalsTOS" required>
+                            <label class="form-check-label" for="isAcceptLegalsTOS">
+                                شرایط و مقررات سایت را میپذیرم
+                            </label>
+                            <div class="invalid-feedback">
+                                برای ثبت نام شما باید قوانین و مقررات سایت را تایید نمایید
+                            </div>
+                        </div>
+                        <a target="_blank" href="legal/tos">مطالعه شرایط و مقررات سایت</a>
+                    </div>
                     <button type="submit" class="btn btn-primary" disabled="@isSubmited">
                         @if (isSubmited)
                         {
