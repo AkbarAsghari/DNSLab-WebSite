@@ -24,6 +24,7 @@ builder.Services.AddScoped<ToastService>();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IDNSRepository, DNSRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
