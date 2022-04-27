@@ -1,25 +1,49 @@
-﻿@page "/Comment/Comment"
+﻿@inject IStringLocalizer<Resource> localizer
 
-
-<EditForm Model="CreateComment" OnValidSubmit="OnValidSubmit">
+<EditForm Model="comment" OnValidSubmit="OnValidSubmit">
     <div class="card mb-4">
-        <div class="card-header">ایجاد دیدگاه جدید</div>
+        <div class="card-header">@Title</div>
         <div class="card-body">
-
-            <!-- Form Row-->
             <div class="row gx-3 mb-3">
-                <!-- Form Group (first name)-->
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label class="small mb-1">متن پیام</label>
-                    <InputTextArea @bind-Value="CreateComment.Text" @bind:event="oninput" maxlength="@MAX_TEXT_COUNT" rows=4></InputTextArea>
-                    <label>Chars left: @(MAX_TEXT_COUNT - CreateComment?.Text?.Length)</label>
+                <div class="col-12">
+                    <label class="small mb-1">لطفا دیدگاه خود را با لبخند در باکس زیر بنویسید :)</label>
+                    <textarea class="form-control" placeholder="متن دیدگاه ..." rows="7"
+                              @bind="comment.Text"
+                              @bind:event="oninput"
+                              maxlength="@MAX_TEXT_COUNT" />
+                    @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
+                    {
+                        <label>تعداد کاراکتر های باقیمانده: @(MAX_TEXT_COUNT - comment.Text.Count())</label>
+                    }
                 </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
+                    @if (IsInProgress)
+                    {
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <text>@localizer["Progressing"]...</text>
+                    }
+                    else
+                    {
+                        @if (comment.Id == Guid.Empty)
+                        {
+                            <text> @localizer["Send"]</text>
+                        }
+                        else
+                        {
+                            <text> @localizer["SaveChanges"]</text>
+                        }
+                    }
+                </button>
             </div>
         </div>
     </div>
 </EditForm>
 @code {
-    const int MAX_TEXT_COUNT = 200;
-    [Parameter] public CreateCommentDTO CreateComment { get; set; } = new CreateCommentDTO();
+    const int MAX_TEXT_COUNT = 500;
+    [Parameter] public string Title { get; set; } = String.Empty;
+    [Parameter] public bool IsInProgress { get; set; } = false;
+    [Parameter] public CommentDTO comment { get; set; } = new CommentDTO { Text = String.Empty };
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

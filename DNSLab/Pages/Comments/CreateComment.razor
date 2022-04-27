@@ -1,5 +1,25 @@
-﻿<h3>CreateComment</h3>
+﻿@page "/Comment/New"
+@inject ICommentRepository commentRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+<CommentForm comment="createComment" IsInProgress="isInProgress" OnValidSubmit="Create" Title="ایجاد دیدگاه جدید"></CommentForm>
 
 @code {
+    private CommentDTO createComment = new CommentDTO { Text = String.Empty };
+    private bool isInProgress = false;
 
+    public async Task Create()
+    {
+        isInProgress = true;
+
+        if (await commentRepository.AddNewComment(createComment))
+        {
+            _navManager.NavigateTo("Comment/MyComments");
+            toastService.ShowToast(localizer["CommentSubmited"], Enums.ToastLevel.Success);
+        }
+
+        isInProgress = false;
+    }
 }

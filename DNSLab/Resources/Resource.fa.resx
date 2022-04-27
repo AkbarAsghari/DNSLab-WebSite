@@ -360,6 +360,9 @@
   <data name="SelectDNSTitle" xml:space="preserve">
     <value>انتخاب هاست نِیم </value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
   <data name="SEO_DNSCreateDescription" xml:space="preserve">
     <value>هاست نیم خودتو ایجاد کن هاست نیم ها شامل IPv4 و IPv6 و CName میباشد</value>
   </data>

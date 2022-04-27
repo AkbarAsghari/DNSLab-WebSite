@@ -1,5 +1,30 @@
-﻿<h3>EditComment</h3>
+﻿@page "/Comment/Edit"
+@inject ICommentRepository commentRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+<CommentForm comment="existComment" IsInProgress="isInProgress" OnValidSubmit="Update" Title="ویرایش دیدگاه"></CommentForm>
 
 @code {
+    private CommentDTO existComment = new CommentDTO { Text = String.Empty };
+    private bool isInProgress = false;
 
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    public async Task Update()
+    {
+        isInProgress = true;
+
+        if (await commentRepository.UpdateComment(existComment))
+        {
+            _navManager.NavigateTo("Comment/MyComments");
+            toastService.ShowToast(localizer["CommentUpdated"], Enums.ToastLevel.Success);
+        }
+
+        isInProgress = false;
+    }
 }
