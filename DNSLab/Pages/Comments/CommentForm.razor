@@ -1,0 +1,25 @@
+﻿@page "/Comment/Comment"
+
+
+<EditForm Model="CreateComment" OnValidSubmit="OnValidSubmit">
+    <div class="card mb-4">
+        <div class="card-header">ایجاد دیدگاه جدید</div>
+        <div class="card-body">
+
+            <!-- Form Row-->
+            <div class="row gx-3 mb-3">
+                <!-- Form Group (first name)-->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <label class="small mb-1">متن پیام</label>
+                    <InputTextArea @bind-Value="CreateComment.Text" @bind:event="oninput" maxlength="@MAX_TEXT_COUNT" rows=4></InputTextArea>
+                    <label>Chars left: @(MAX_TEXT_COUNT - CreateComment?.Text?.Length)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+@code {
+    const int MAX_TEXT_COUNT = 200;
+    [Parameter] public CreateCommentDTO CreateComment { get; set; } = new CreateCommentDTO();
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}
