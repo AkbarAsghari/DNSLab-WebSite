@@ -486,6 +486,9 @@
   <data name="UpdateDate" xml:space="preserve">
     <value>Update Date</value>
   </data>
+  <data name="UserComments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>User Name</value>
   </data>

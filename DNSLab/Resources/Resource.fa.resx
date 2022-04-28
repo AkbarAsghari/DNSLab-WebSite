@@ -486,6 +486,9 @@
   <data name="UpdateDate" xml:space="preserve">
     <value>تاریخ ویرایش</value>
   </data>
+  <data name="UserComments" xml:space="preserve">
+    <value>دیدگاه ها</value>
+  </data>
   <data name="UserName" xml:space="preserve">
     <value>نام کاربری</value>
   </data>

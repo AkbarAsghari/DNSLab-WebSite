@@ -4,6 +4,9 @@
     <Authorized>
         @((MarkupString)GenerateProfilePhoto(String.IsNullOrEmpty(UserId) ? @context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value : UserId))
     </Authorized>
+    <NotAuthorized>
+        @((MarkupString)GenerateProfilePhoto(UserId))
+    </NotAuthorized>
 </AuthorizeView>
 @code {
     [Parameter] public int Size { get; set; }

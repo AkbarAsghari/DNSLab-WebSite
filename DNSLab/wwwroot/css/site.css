@@ -95,6 +95,12 @@ a, .btn-link {
                 height: inherit;
                 width: inherit;
             }
+.comment-profile {
+    text-align-last: center;
+}
+.comment-profile > svg > rect {
+   fill:transparent
+}
 
 .nav-link > svg {
     height: inherit;
