@@ -116,6 +116,16 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Password_Less_Than_8_Character",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Password_Less_Than_8_Character"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Comment_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Comment_Not_Found"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Comment_Text_Is_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Comment_Text_Is_Empty"]
                     }
                 };
             }

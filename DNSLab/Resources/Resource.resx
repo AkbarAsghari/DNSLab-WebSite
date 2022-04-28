@@ -147,6 +147,12 @@
   <data name="CommentText" xml:space="preserve">
     <value>Comment Text</value>
   </data>
+  <data name="Comment_Not_Found" xml:space="preserve">
+    <value>Comment not found</value>
+  </data>
+  <data name="Comment_Text_Is_Empty" xml:space="preserve">
+    <value>Comment cannot be empty</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>

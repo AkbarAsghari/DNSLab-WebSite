@@ -147,6 +147,12 @@
   <data name="CommentText" xml:space="preserve">
     <value>متن دیدگاه</value>
   </data>
+  <data name="Comment_Not_Found" xml:space="preserve">
+    <value>دیدگاه یافت نشد</value>
+  </data>
+  <data name="Comment_Text_Is_Empty" xml:space="preserve">
+    <value>متن دیدگاه نباید خالی باشد</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>تکرار رمز عبور</value>
   </data>
