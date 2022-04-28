@@ -6,18 +6,18 @@
         <div class="card-body">
             <div class="row gx-3 mb-3">
                 <div class="col-12">
-                    <label class="small mb-1">لطفا دیدگاه خود را با لبخند در باکس زیر بنویسید :)</label>
-                    <textarea class="form-control" placeholder="متن دیدگاه ..." rows="7"
+                    <label class="small mb-1">@localizer["PleaseWriteYourComment"] :)</label>
+                    <textarea class="form-control" placeholder="@localizer["CommentText"]..." rows="7"
                               @bind="comment.Text"
                               @bind:event="oninput"
                               maxlength="@MAX_TEXT_COUNT" />
                     @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
                     {
-                        <label>تعداد کاراکتر های باقیمانده: @(MAX_TEXT_COUNT - comment.Text.Count())</label>
+                        <label>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - comment.Text.Count())</label>
                     }
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 gap-2">
                 <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
                     @if (IsInProgress)
                     {
@@ -26,16 +26,10 @@
                     }
                     else
                     {
-                        @if (comment.Id == Guid.Empty)
-                        {
-                            <text> @localizer["Send"]</text>
-                        }
-                        else
-                        {
-                            <text> @localizer["SaveChanges"]</text>
-                        }
+                        <text>تغییر رمز عبور</text>
                     }
                 </button>
+                <a class="btn btn-warning" href="Comment/MyComments">انصراف</a>
             </div>
         </div>
     </div>

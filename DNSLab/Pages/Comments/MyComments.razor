@@ -28,7 +28,7 @@
 </Modal>
 
 <div class="card mb-4">
-    <div class="card-header">@localizer["HostNames"]</div>
+    <div class="card-header">@localizer["MyComments"]</div>
     <div class="card-body">
         <div class="mb-3">
             <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
@@ -66,13 +66,13 @@
                                     @switch (@item.IsApproved)
                                     {
                                         case null:
-                                            <a class="btn btn-sm btn-secondary disabled">بررسی نشده</a>
+                                            <a class="btn btn-sm btn-secondary disabled">@localizer["NotChecked"]</a>
                                             break;
                                         case true:
-                                            <a class="btn btn-sm btn-success disabled">تایید شده</a>
+                                            <a class="btn btn-sm btn-success disabled">@localizer["Approved"]</a>
                                             break;
                                         case false:
-                                            <a class="btn btn-sm btn-danger disabled">عدم تایید</a>
+                                            <a class="btn btn-sm btn-danger disabled">@localizer["Disapproval"]</a>
                                             break;
                                     }
                                 </p>

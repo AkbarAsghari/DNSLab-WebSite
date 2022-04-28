@@ -4,7 +4,7 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<CommentForm comment="existComment" IsInProgress="isInProgress" OnValidSubmit="Update" Title="ویرایش دیدگاه"></CommentForm>
+<CommentForm comment="existComment" IsInProgress="isInProgress" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
 
 @code {
 

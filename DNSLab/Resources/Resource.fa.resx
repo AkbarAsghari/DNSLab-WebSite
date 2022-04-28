@@ -126,6 +126,9 @@
   <data name="AccountDetails" xml:space="preserve">
     <value>اطلاعات حساب</value>
   </data>
+  <data name="Approved" xml:space="preserve">
+    <value>تایید شده</value>
+  </data>
   <data name="AreYouSureDel" xml:space="preserve">
     <value>آیا از حذف این رکورد مطمئن هستید؟</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>بستن</value>
+  </data>
+  <data name="CommentText" xml:space="preserve">
+    <value>متن دیدگاه</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>تکرار رمز عبور</value>
@@ -159,6 +165,9 @@
   <data name="CreateHostName" xml:space="preserve">
     <value>ساخت هاست نیم</value>
   </data>
+  <data name="CreateNewComment" xml:space="preserve">
+    <value>ایجاد دیدگاه جدید</value>
+  </data>
   <data name="CreateToken" xml:space="preserve">
     <value>ایجاد توکن</value>
   </data>
@@ -173,6 +182,9 @@
   </data>
   <data name="Direction" xml:space="preserve">
     <value>rtl</value>
+  </data>
+  <data name="Disapproval" xml:space="preserve">
+    <value>عدم تایید</value>
   </data>
   <data name="DNSAliasDescription" xml:space="preserve">
     <value>یک CNAME رکوردهای هاست نیم را کپی می کند</value>
@@ -194,6 +206,9 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>ویرایش</value>
+  </data>
+  <data name="EditComment" xml:space="preserve">
+    <value>ویرایش دیدگاه</value>
   </data>
   <data name="EditHostName" xml:space="preserve">
     <value>ویرایش هاست نیم</value>
@@ -303,8 +318,14 @@
   <data name="Mobile_Is_Duplicate" xml:space="preserve">
     <value>شماره همراه تکراری است</value>
   </data>
+  <data name="MyComments" xml:space="preserve">
+    <value>دیدگاه های من</value>
+  </data>
   <data name="Next" xml:space="preserve">
     <value>بعد</value>
+  </data>
+  <data name="NotChecked" xml:space="preserve">
+    <value>بررسی نشده</value>
   </data>
   <data name="No_HostName_Selected" xml:space="preserve">
     <value>هیچ هاست نِیمی انتخاب نشده است</value>
@@ -323,6 +344,9 @@
   </data>
   <data name="PleaseLoginFirst" xml:space="preserve">
     <value>لطفا ابتدا وارد شوید</value>
+  </data>
+  <data name="PleaseWriteYourComment" xml:space="preserve">
+    <value>لطفا دیدگاه خود را با لبخند در باکس زیر بنویسید</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>قبل</value>
@@ -344,6 +368,9 @@
   </data>
   <data name="RegisterAccount" xml:space="preserve">
     <value>ایجاد حساب</value>
+  </data>
+  <data name="RemainingCharactersCount" xml:space="preserve">
+    <value>تعداد کاراکتر های باقیمانده</value>
   </data>
   <data name="RemoteAccessComputerH2" xml:space="preserve">
     <value>دسترسی ریموت به سیستم</value>
@@ -446,6 +473,9 @@
   </data>
   <data name="Target" xml:space="preserve">
     <value>هدف</value>
+  </data>
+  <data name="ThereIsNoComment" xml:space="preserve">
+    <value>هیچ دیدگاهی یافت نشد</value>
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>هنوز هاست نیمی ایجاد نشده است</value>
