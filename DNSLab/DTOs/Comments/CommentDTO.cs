@@ -10,7 +10,7 @@ namespace DNSLab.DTOs.Comments
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public bool IsApproved { get; set; }
+        public bool? IsApproved { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
     }

@@ -36,7 +36,7 @@ namespace DNSLab.Repository
             return result.Response;
         }
 
-        public async Task<bool> RemoveComment(Guid id)
+        public async Task<bool> DeleteComment(Guid id)
         {
             var result = await _httpService.Delete<bool>($"/Comment/Delete?Id={id}");
             return result.Response;

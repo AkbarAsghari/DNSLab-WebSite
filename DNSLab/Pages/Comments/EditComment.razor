@@ -1,4 +1,4 @@
-﻿@page "/Comment/Edit"
+﻿@page "/Comment/Edit/{CommentId:guid}"
 @inject ICommentRepository commentRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
@@ -7,12 +7,15 @@
 <CommentForm comment="existComment" IsInProgress="isInProgress" OnValidSubmit="Update" Title="ویرایش دیدگاه"></CommentForm>
 
 @code {
+
+    [Parameter] public Guid CommentId { get; set; }
+
     private CommentDTO existComment = new CommentDTO { Text = String.Empty };
     private bool isInProgress = false;
 
     protected override async Task OnInitializedAsync()
     {
-
+        existComment = await commentRepository.GetComment(CommentId);
     }
 
     public async Task Update()
