@@ -325,7 +325,7 @@
     <value>شماره همراه تکراری است</value>
   </data>
   <data name="Mobile_Is_Not_Valid" xml:space="preserve">
-    <value>Mobile is not valid</value>
+    <value>شماره همراه معتبر نمیباشد</value>
   </data>
   <data name="MyComments" xml:space="preserve">
     <value>دیدگاه های من</value>
