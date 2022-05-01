@@ -324,6 +324,9 @@
   <data name="Mobile_Is_Duplicate" xml:space="preserve">
     <value>Mobile is duplicate</value>
   </data>
+  <data name="Mobile_Is_Not_Valid" xml:space="preserve">
+    <value>Mobile is not valid</value>
+  </data>
   <data name="MyComments" xml:space="preserve">
     <value>My comments</value>
   </data>

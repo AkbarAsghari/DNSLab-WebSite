@@ -126,6 +126,11 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Comment_Text_Is_Empty",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Comment_Text_Is_Empty"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Mobile_Is_Not_Valid",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Mobile_Is_Not_Valid"]
                     }
                 };
             }
