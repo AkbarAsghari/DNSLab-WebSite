@@ -37,7 +37,7 @@ namespace DNSLab.Helper.Exceptions
                 switch (statusCode)
                 {
                     case HttpStatusCode.NotFound:
-                        _navManager.NavigateTo("/404");
+                        _navManager.NavigateTo("/404", true);
                         break;
                     case HttpStatusCode.Unauthorized:
                         if (!_navManager.Uri.ToLower().EndsWith("/user/auth"))
@@ -50,7 +50,7 @@ namespace DNSLab.Helper.Exceptions
                     case HttpStatusCode.Conflict:
                         break;
                     default:
-                        _navManager.NavigateTo("/500");
+                        _navManager.NavigateTo("/500", true);
                         break;
                 }
 
