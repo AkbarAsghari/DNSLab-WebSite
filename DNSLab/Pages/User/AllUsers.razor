@@ -1,0 +1,45 @@
+﻿@page "/user/AllUsers"
+@attribute [Authorize(Roles = "Admin")]
+@inject IAccountRepository accountReository
+
+@if (allUsers == null)
+{
+    <Loading />
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+                <th scope="col">CreateDate</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in allUsers)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    IEnumerable<UserInfo> allUsers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        allUsers = await accountReository.GetAll();
+    }
+}
