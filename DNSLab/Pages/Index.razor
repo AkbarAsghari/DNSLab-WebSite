@@ -67,6 +67,9 @@
                         <h1 class="text-center">@usersCount</h1>
                     }
                     <p class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</p>
+                    <AuthorizeView Roles="Admin" Context="adminContext">
+                        <a class="btn btn-dark position-absolute bottom-0 start-50 translate-middle-x w-100" href="/User/AllUsers">نمایش کاربران</a>
+                    </AuthorizeView>
                 </div>
             </div>
 

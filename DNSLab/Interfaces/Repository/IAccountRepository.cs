@@ -5,6 +5,7 @@ namespace DNSLab.Interfaces.Repository
     public interface IAccountRepository
     {
         Task<UserInfo> Get();
+        Task<IEnumerable<UserInfo>> GetAll();
         Task<string> Login(AuthenticateDTO userInfo);
         Task<bool> ForgetPassword(ForgetPasswordDTO  forgetPassword);
         Task<bool> ResetPassword(ResetPasswordDTO resetPassword);
