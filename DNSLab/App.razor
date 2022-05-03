@@ -1,6 +1,7 @@
-﻿<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
+﻿@using DNSLab.Pages.Errors
+<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
             <Authorizing>
                 <text>Please wait, we are authorizing you...</text>
             </Authorizing>
@@ -9,7 +10,7 @@
                 {
                     <DNSLab.Pages.User.Logout></DNSLab.Pages.User.Logout>
                 }
-                else if(!context.User.IsInRole("Admin"))
+                else if (!context.User.IsInRole("Admin"))
                 {
                     <p>Only system Admins Can See this Page.</p>
                 }
@@ -17,10 +18,6 @@
         </AuthorizeRouteView>
     </Found>
     <NotFound>
-        <CascadingAuthenticationState>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <p>Sorry, there is nothing at this address.</p>
-            </LayoutView>
-        </CascadingAuthenticationState>
+        <Error404 />
     </NotFound>
 </Router>
