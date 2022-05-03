@@ -15,6 +15,7 @@ else
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Email</th>
+                <th scope="col">Mobile</th>
                 <th scope="col">CreateDate</th>
                 <th scope="col">Role</th>
             </tr>
@@ -27,8 +28,9 @@ else
                     <td>@user.FirstName</td>
                     <td>@user.LastName</td>
                     <td>@user.Email</td>
-                    <td></td>
-                    <td></td>
+                    <td>@user.Mobile</td>
+                    <td>@user.CreateDate</td>
+                    <td>@user.Role</td>
                 </tr>
             }
         </tbody>
@@ -36,7 +38,7 @@ else
 }
 
 @code {
-    IEnumerable<UserInfo> allUsers;
+    IEnumerable<UserDTO> allUsers;
 
     protected override async Task OnInitializedAsync()
     {

@@ -88,9 +88,9 @@ namespace DNSLab.Repository
             return response.Response;
         }
 
-        public async Task<IEnumerable<UserInfo>> GetAll()
+        public async Task<IEnumerable<UserDTO>> GetAll()
         {
-            var response = await _httpService.Get<IEnumerable<UserInfo>>($"/Auth/getAll");
+            var response = await _httpService.Get<IEnumerable<UserDTO>>($"/Auth/getAll");
             if (!response.Success)
             {
                 return null;
