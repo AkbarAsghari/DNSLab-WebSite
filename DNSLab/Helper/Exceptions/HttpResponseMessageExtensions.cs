@@ -46,6 +46,8 @@ namespace DNSLab.Helper.Exceptions
                             _toastService.ShowToast(_localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
                         }
                         break;
+                    case HttpStatusCode.Forbidden:
+                        break;
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.Conflict:
                         break;
@@ -53,9 +55,6 @@ namespace DNSLab.Helper.Exceptions
                         _navManager.NavigateTo("/500", true);
                         break;
                 }
-
-
-
             }
         }
         private async Task<bool> ShowToastMessageAsync(HttpResponseMessage response)

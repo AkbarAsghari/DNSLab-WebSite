@@ -131,6 +131,11 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Mobile_Is_Not_Valid",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Mobile_Is_Not_Valid"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Old_Password_Is_Wrong",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Old_Password_Is_Wrong"]
                     }
                 };
             }
