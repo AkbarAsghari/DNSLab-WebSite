@@ -1,0 +1,4 @@
+﻿@page "/503"
+@layout ErrorsLayout
+@inject IStringLocalizer<Resource> localizer 
+<ErrorForm ErrorCode="503" ErrorMessage="@localizer["ServiceUnavailable"]"/>

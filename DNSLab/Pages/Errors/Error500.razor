@@ -1,3 +1,4 @@
 ﻿@page "/500"
 @layout ErrorsLayout
-<ErrorForm ErrorCode="500"  ErrorMessage="Internal error"/>
+@inject IStringLocalizer<Resource> localizer 
+<ErrorForm ErrorCode="500" ErrorMessage="@localizer["InternalServerError"]"/>

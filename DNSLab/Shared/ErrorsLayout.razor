@@ -1,5 +1,9 @@
 ﻿@inherits LayoutComponentBase
-@Body
+@inject IStringLocalizer<Resource> localizer
+
+<div class="page" style="direction:@localizer["Direction"];font-family:@localizer["FontFamily"]">
+    @Body
+</div>
 @code {
 
 }

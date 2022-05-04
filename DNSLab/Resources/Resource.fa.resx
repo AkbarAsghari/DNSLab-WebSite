@@ -249,6 +249,9 @@
   <data name="FontFamily" xml:space="preserve">
     <value>iran-sans</value>
   </data>
+  <data name="GoHome" xml:space="preserve">
+    <value>برو خونه</value>
+  </data>
   <data name="HelloWorld" xml:space="preserve">
     <value>سلام دنیا</value>
   </data>
@@ -290,6 +293,9 @@
   </data>
   <data name="Info" xml:space="preserve">
     <value>پیغام</value>
+  </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>خطای داخلی سرور</value>
   </data>
   <data name="IPv4Address" xml:space="preserve">
     <value> آدرس IPv4 (آی پی)</value>
@@ -341,6 +347,9 @@
   </data>
   <data name="Old_Password_Is_Wrong" xml:space="preserve">
     <value>رمز عبور قبلی اشتباه است</value>
+  </data>
+  <data name="PageNotFound" xml:space="preserve">
+    <value>صفحه یافت نشد</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>رمز عبور</value>
@@ -461,6 +470,9 @@
   </data>
   <data name="SEO_UserRegisterTitle" xml:space="preserve">
     <value>ایجاد حساب کاربری</value>
+  </data>
+  <data name="ServiceUnavailable" xml:space="preserve">
+    <value>سرویس در دسترس نیست</value>
   </data>
   <data name="ShareYourLocalProjectH2" xml:space="preserve">
     <value>اشتراک پروژه از سیستم خانگی</value>

@@ -1,3 +1,4 @@
 ﻿@page "/404"
 @layout ErrorsLayout
-<ErrorForm ErrorCode="404" ErrorMessage="Page not found"/>
+@inject IStringLocalizer<Resource> localizer 
+<ErrorForm ErrorCode="404" ErrorMessage="@localizer["PageNotFound"]"/>

@@ -20,8 +20,12 @@
     .permission_denied a {
         text-decoration: none;
     }
+#planet{
+    width:83%;
+}
 
 .denied__wrapper {
+    text-align:center;
     max-width: 390px;
     width: 100%;
     height: 390px;
@@ -47,7 +51,6 @@
     line-height: 23px;
     max-width: 330px;
     margin: 0px auto 30px auto;
-    font-family: "Dosis", sans-serif;
     font-weight: 400;
 }
 
@@ -81,7 +84,6 @@
     display: block;
     margin-bottom: 40px;
     margin-top: 25px;
-    font-family: "Dosis", sans-serif;
     font-weight: 400;
 }
 
