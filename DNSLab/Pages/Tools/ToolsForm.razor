@@ -1,4 +1,15 @@
 ﻿@page "/tools"
+@attribute [Authorize]
+
+@inject IStringLocalizer<Resource> localizer
+
+<div class="card mb-4">
+    <div class="card-header">@localizer["Tools"]</div>
+    <div class="card-body">
+        <a class="btn btn-primary" href="tools/ping">@localizer["PingChecker"]</a>
+        <a class="btn btn-primary" href="tools/port">@localizer["PortChecker"]</a>
+    </div>
+</div>
 
 @code {
 

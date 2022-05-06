@@ -369,6 +369,12 @@
   <data name="PingChecker" xml:space="preserve">
     <value>Ping Checker</value>
   </data>
+  <data name="PingIsNotOK" xml:space="preserve">
+    <value>Ping is not ok</value>
+  </data>
+  <data name="PingIsOK" xml:space="preserve">
+    <value>Ping is ok</value>
+  </data>
   <data name="PleaseLoginFirst" xml:space="preserve">
     <value>Please Login First</value>
   </data>
@@ -377,6 +383,12 @@
   </data>
   <data name="PortChecker" xml:space="preserve">
     <value>Port Checker</value>
+  </data>
+  <data name="PortIsNotOK" xml:space="preserve">
+    <value>Port is not open</value>
+  </data>
+  <data name="PortIsOK" xml:space="preserve">
+    <value>Port is open</value>
   </data>
   <data name="PortNumber" xml:space="preserve">
     <value>Port number</value>
@@ -545,6 +557,9 @@
   </data>
   <data name="Token_Used_Before_Exception" xml:space="preserve">
     <value>Token Used Before</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>

@@ -369,6 +369,12 @@
   <data name="PingChecker" xml:space="preserve">
     <value>بررسی پینگ</value>
   </data>
+  <data name="PingIsNotOK" xml:space="preserve">
+    <value>پینگ ندارید</value>
+  </data>
+  <data name="PingIsOK" xml:space="preserve">
+    <value>پینگ دارید</value>
+  </data>
   <data name="PleaseLoginFirst" xml:space="preserve">
     <value>لطفا ابتدا وارد شوید</value>
   </data>
@@ -377,6 +383,12 @@
   </data>
   <data name="PortChecker" xml:space="preserve">
     <value>بررسی پورت</value>
+  </data>
+  <data name="PortIsNotOK" xml:space="preserve">
+    <value>پورت باز نمیباشد</value>
+  </data>
+  <data name="PortIsOK" xml:space="preserve">
+    <value>پورت باز میباشد</value>
   </data>
   <data name="PortNumber" xml:space="preserve">
     <value>پورت</value>
@@ -545,6 +557,9 @@
   </data>
   <data name="Token_Used_Before_Exception" xml:space="preserve">
     <value>لینک (توکن) یک دفعه استفاده شده است</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>ابزارها</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>نوع</value>
