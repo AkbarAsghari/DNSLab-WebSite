@@ -135,6 +135,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Can_Not_Use_Private_Network_IP_Addresses" xml:space="preserve">
+    <value>You can not use Private Network IP Addresses</value>
+  </data>
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>Change Language</value>
   </data>

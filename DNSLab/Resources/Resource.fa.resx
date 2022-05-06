@@ -135,6 +135,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>انصراف</value>
   </data>
+  <data name="Can_Not_Use_Private_Network_IP_Addresses" xml:space="preserve">
+    <value>شما نمیتوانید از آدرس های شبکه خصوصی استفاده نمایید</value>
+  </data>
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>تغییر زبان</value>
   </data>

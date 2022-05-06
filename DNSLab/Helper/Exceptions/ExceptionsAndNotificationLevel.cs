@@ -136,6 +136,11 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Old_Password_Is_Wrong",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Old_Password_Is_Wrong"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Can_Not_Use_Private_Network_IP_Addresses",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Can_Not_Use_Private_Network_IP_Addresses"]
                     }
                 };
             }

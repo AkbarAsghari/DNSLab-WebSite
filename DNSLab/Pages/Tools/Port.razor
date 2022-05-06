@@ -51,14 +51,16 @@
     {
         isProgressing = true;
 
-        if (await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port))
-        {
-            toastService.ShowToast(localizer["PortIsOK"], Enums.ToastLevel.Success);
-        }
-        else
-        {
-            toastService.ShowToast(localizer["PortIsNotOK"], Enums.ToastLevel.Error);
-        }
+        var response = await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port);
+        if (response != null)
+            if (response == true)
+            {
+                toastService.ShowToast(localizer["PingIsOK"], Enums.ToastLevel.Success);
+            }
+            else
+            {
+                toastService.ShowToast(localizer["PingIsNotOK"], Enums.ToastLevel.Error);
+            }
 
         isProgressing = false;
     }
