@@ -25,17 +25,20 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" disabled="@isProgressing">
-        @if (isProgressing)
-        {
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <text>@localizer["Progressing"]...</text>
-        }
-        else
-        {
-            <text>@localizer["Check"]</text>
-        }
-    </button>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="submit" class="btn btn-primary" disabled="@isProgressing">
+            @if (isProgressing)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <text>@localizer["Progressing"]...</text>
+            }
+            else
+            {
+                <text>@localizer["Check"]</text>
+            }
+        </button>
+        <a class="btn btn-warning" href="tools">@localizer["Cancel"]</a>
+    </div>
 </EditForm>
 
 @code {
@@ -65,7 +68,7 @@
         if (String.IsNullOrEmpty(hostOrIPAddressAndPort.HostOrIPAddress))
             hostOrIPAddressAndPort.HostOrIPAddress = IPDTO.IPv4;
 
-         if (String.IsNullOrEmpty(hostOrIPAddressAndPort.Port))
+        if (String.IsNullOrEmpty(hostOrIPAddressAndPort.Port))
             hostOrIPAddressAndPort.Port = "80";
     }
 }

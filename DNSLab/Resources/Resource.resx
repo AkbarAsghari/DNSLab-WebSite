@@ -138,6 +138,9 @@
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>Change Language</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
+  </data>
   <data name="Click" xml:space="preserve">
     <value>click</value>
   </data>
@@ -285,6 +288,9 @@
   <data name="HostName_Is_Not_Valid" xml:space="preserve">
     <value>HostName is not valid</value>
   </data>
+  <data name="HostOrIPAddress" xml:space="preserve">
+    <value>Host or IP address</value>
+  </data>
   <data name="IndexH1Message" xml:space="preserve">
     <value>Dynamic IP address got you down?</value>
   </data>
@@ -360,11 +366,20 @@
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone Number</value>
   </data>
+  <data name="PingChecker" xml:space="preserve">
+    <value>Ping Checker</value>
+  </data>
   <data name="PleaseLoginFirst" xml:space="preserve">
     <value>Please Login First</value>
   </data>
   <data name="PleaseWriteYourComment" xml:space="preserve">
     <value>Please Write Your Comment Here</value>
+  </data>
+  <data name="PortChecker" xml:space="preserve">
+    <value>Port Checker</value>
+  </data>
+  <data name="PortNumber" xml:space="preserve">
+    <value>Port number</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>

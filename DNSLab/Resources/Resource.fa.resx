@@ -138,6 +138,9 @@
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>تغییر زبان</value>
   </data>
+  <data name="Check" xml:space="preserve">
+    <value>بررسی</value>
+  </data>
   <data name="Click" xml:space="preserve">
     <value>کلیک کنید</value>
   </data>
@@ -285,6 +288,9 @@
   <data name="HostName_Is_Not_Valid" xml:space="preserve">
     <value>هاست نیم معتبر نیست</value>
   </data>
+  <data name="HostOrIPAddress" xml:space="preserve">
+    <value>نشانی یا آی‌پی</value>
+  </data>
   <data name="IndexH1Message" xml:space="preserve">
     <value>مشکل آی پی داینامیک دارید ؟</value>
   </data>
@@ -360,11 +366,20 @@
   <data name="PhoneNumber" xml:space="preserve">
     <value>شماره همراه</value>
   </data>
+  <data name="PingChecker" xml:space="preserve">
+    <value>بررسی پینگ</value>
+  </data>
   <data name="PleaseLoginFirst" xml:space="preserve">
     <value>لطفا ابتدا وارد شوید</value>
   </data>
   <data name="PleaseWriteYourComment" xml:space="preserve">
     <value>لطفا دیدگاه خود را با لبخند در باکس زیر بنویسید</value>
+  </data>
+  <data name="PortChecker" xml:space="preserve">
+    <value>بررسی پورت</value>
+  </data>
+  <data name="PortNumber" xml:space="preserve">
+    <value>پورت</value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>قبل</value>
