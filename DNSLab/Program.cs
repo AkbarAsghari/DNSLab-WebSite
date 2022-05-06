@@ -25,6 +25,7 @@ builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IDNSRepository, DNSRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IIPRepository, IPRepository>();
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

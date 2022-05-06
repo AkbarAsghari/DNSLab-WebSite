@@ -4,6 +4,7 @@ namespace DNSLab.Interfaces.Repository
 {
     public interface IIPRepository
     {
-        Task<IPDTO> GetIP();
+        Task<bool> IPHavePing(string hostOrIPAddress);
+        Task<bool> IsIPAndPortOpen(string hostOrIPAddress, string port);
     }
 }
