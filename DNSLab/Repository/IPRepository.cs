@@ -20,7 +20,7 @@ namespace DNSLab.Repository
 
         public async Task<bool> IsIPAndPortOpen(string hostOrIPAddress, string port)
         {
-            var response = await _httpService.Get<bool>($"IP/IsIPAndPortOpen?hostOrIPAddress={hostOrIPAddress}&port={port}");
+            var response = await _httpService.Get<bool>($"/IP/IsIPAndPortOpen?hostOrIPAddress={hostOrIPAddress}&port={port}");
             return response.Response;
         }
     }

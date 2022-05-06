@@ -1,0 +1,71 @@
+﻿@page "/tools/port"
+
+@attribute [Authorize]
+
+@inject IIPRepository iPRepository
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="@hostOrIPAddressAndPort" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">@localizer["PortChecker"]</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                <div class="col-md-6">
+                    <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
+                    <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.HostOrIPAddress)" />
+                </div>
+                <div class="col-md-2">
+                    <label class="small mb-1">@localizer["PortNumber"]</label>
+                    <InputText class="form-control" placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.Port)" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled="@isProgressing">
+        @if (isProgressing)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <text>@localizer["Progressing"]...</text>
+        }
+        else
+        {
+            <text>@localizer["Check"]</text>
+        }
+    </button>
+</EditForm>
+
+@code {
+    private HostOrIPAddressAndPortDTO hostOrIPAddressAndPort = new HostOrIPAddressAndPortDTO();
+    private bool isProgressing = false;
+
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    public async Task OnValidSubmit()
+    {
+        isProgressing = true;
+
+        if (await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port))
+        {
+            toastService.ShowToast(localizer["PortIsOK"], Enums.ToastLevel.Success);
+        }
+        else
+        {
+            toastService.ShowToast(localizer["PortIsNotOK"], Enums.ToastLevel.Error);
+        }
+
+        isProgressing = false;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (String.IsNullOrEmpty(hostOrIPAddressAndPort.HostOrIPAddress))
+            hostOrIPAddressAndPort.HostOrIPAddress = IPDTO.IPv4;
+
+         if (String.IsNullOrEmpty(hostOrIPAddressAndPort.Port))
+            hostOrIPAddressAndPort.Port = "80";
+    }
+}
