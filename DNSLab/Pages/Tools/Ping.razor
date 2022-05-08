@@ -3,43 +3,22 @@
 @attribute [Authorize]
 
 @inject IIPRepository iPRepository
-@inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
-    <div class="card mb-4">
-        <div class="card-header">@localizer["PingChecker"]</div>
-        <div class="card-body">
-            <div class="row gx-3 mb-3">
-                <div class="col-md-6">
-                    <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
-                    <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddress.HostOrIPAddress)" />
-                </div>
-            </div>
+<ToolsForm Header="@localizer["PingChecker"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
+    <Body>
+        <div class="col-md-6">
+            <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
+            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+            <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddress.HostOrIPAddress)" />
         </div>
-    </div>
-    <div class="d-grid gap-2 d-md-block">
-        <button type="submit" class="btn btn-primary" disabled="@isProgressing">
-            @if (isProgressing)
-            {
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <text>@localizer["Progressing"]...</text>
-            }
-            else
-            {
-                <text>@localizer["Check"]</text>
-            }
-        </button>
-        <a class="btn btn-warning" href="tools">@localizer["Cancel"]</a>
-    </div>
-
-</EditForm>
+    </Body>
+</ToolsForm>
 
 @code {
     private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();
     private bool isProgressing = false;
+    private string result = String.Empty;
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
@@ -49,14 +28,16 @@
 
         var response = await iPRepository.IPHavePing(hostOrIPAddress.HostOrIPAddress);
         if (response != null)
+        {
             if (response == true)
-            {
-                toastService.ShowToast(localizer["PingIsOK"], Enums.ToastLevel.Success);
-            }
+                result = localizer["PingIsOK"];
             else
-            {
-                toastService.ShowToast(localizer["PingIsNotOK"], Enums.ToastLevel.Error);
-            }
+                result = localizer["PingIsNotOK"];
+        }
+        else
+        {
+            result = String.Empty;
+        }
 
         isProgressing = false;
     }

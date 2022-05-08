@@ -1,0 +1,49 @@
+﻿@attribute [Authorize]
+
+@inject IIPRepository iPRepository
+@inject IStringLocalizer<Resource> localizer
+
+@typeparam TItem
+
+<EditForm Model="@Model" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">@Header</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                @Body
+                @if (!String.IsNullOrEmpty(Result))
+                {
+                    <div class="col-md-12">
+                        <hr>
+                        <label class="tools-result">@Result</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="submit" class="btn btn-primary" disabled="@IsProgressing">
+            @if (IsProgressing)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <text>@localizer["Progressing"]...</text>
+            }
+            else
+            {
+                <text>@localizer["Check"]</text>
+            }
+        </button>
+        <a class="btn btn-warning" href="tools">@localizer["Cancel"]</a>
+    </div>
+
+</EditForm>
+
+@code {
+    [Parameter] public TItem Model{ get; set; }
+    [Parameter] public string Header { get; set; }
+    [Parameter] public RenderFragment Body { get; set; }
+    [Parameter] public EventCallback<EditContext> OnValidSubmit { get; set; }
+    [Parameter] public string Result { get; set; }
+    [Parameter] public bool IsProgressing{ get; set; }
+}

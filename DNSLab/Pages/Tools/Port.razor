@@ -3,47 +3,27 @@
 @attribute [Authorize]
 
 @inject IIPRepository iPRepository
-@inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="@hostOrIPAddressAndPort" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator />
-    <div class="card mb-4">
-        <div class="card-header">@localizer["PortChecker"]</div>
-        <div class="card-body">
-            <div class="row gx-3 mb-3">
-                <div class="col-md-6">
-                    <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
-                    <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.HostOrIPAddress)" />
-                </div>
-                <div class="col-md-2">
-                    <label class="small mb-1">@localizer["PortNumber"]</label>
-                    <InputText class="form-control" placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.Port)" />
-                </div>
-            </div>
+<ToolsForm Header="@localizer["PortChecker"]" Model="@hostOrIPAddressAndPort" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
+    <Body>
+        <div class="col-md-6">
+            <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
+            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
+            <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.HostOrIPAddress)" />
         </div>
-    </div>
-    <div class="d-grid gap-2 d-md-block">
-        <button type="submit" class="btn btn-primary" disabled="@isProgressing">
-            @if (isProgressing)
-            {
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <text>@localizer["Progressing"]...</text>
-            }
-            else
-            {
-                <text>@localizer["Check"]</text>
-            }
-        </button>
-        <a class="btn btn-warning" href="tools">@localizer["Cancel"]</a>
-    </div>
-</EditForm>
+        <div class="col-md-2">
+            <label class="small mb-1">@localizer["PortNumber"]</label>
+            <InputText class="form-control" placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
+            <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.Port)" />
+        </div>
+    </Body>
+</ToolsForm>
 
 @code {
     private HostOrIPAddressAndPortDTO hostOrIPAddressAndPort = new HostOrIPAddressAndPortDTO();
     private bool isProgressing = false;
+    private string result = String.Empty;
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
@@ -53,14 +33,16 @@
 
         var response = await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port);
         if (response != null)
+        {
             if (response == true)
-            {
-                toastService.ShowToast(localizer["PingIsOK"], Enums.ToastLevel.Success);
-            }
+                result = localizer["PortIsOK"];
             else
-            {
-                toastService.ShowToast(localizer["PingIsNotOK"], Enums.ToastLevel.Error);
-            }
+                result = localizer["PortIsNotOK"];
+        }
+        else
+        {
+            result = String.Empty;
+        }
 
         isProgressing = false;
     }
