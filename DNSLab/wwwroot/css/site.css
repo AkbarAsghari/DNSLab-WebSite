@@ -95,12 +95,14 @@ a, .btn-link {
                 height: inherit;
                 width: inherit;
             }
+
 .comment-profile {
     text-align-last: center;
 }
-.comment-profile > svg > rect {
-   fill:transparent
-}
+
+    .comment-profile > svg > rect {
+        fill: transparent
+    }
 
 .nav-link > svg {
     height: inherit;
@@ -110,6 +112,10 @@ a, .btn-link {
     margin-right: -0.6rem;
     padding-bottom: inherit;
     margin-left: -0.4rem;
+}
+
+.tools-result {
+    direction: ltr
 }
 
 .page[style*="direction:rtl"] .nav-link > svg {

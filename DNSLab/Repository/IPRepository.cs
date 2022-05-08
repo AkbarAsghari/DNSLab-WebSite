@@ -41,7 +41,7 @@ namespace DNSLab.Repository
 
         public async Task<string> ReverseLoopUp(string iPAddress)
         {
-            var response = await _httpService.Get<string>($"/IP/ReverseLoopUp?IPAddress={iPAddress}");
+            var response = await _httpService.Get<string>($"/IP/ReverseLookup?IPAddress={iPAddress}");
             if (response.Success)
                 return response.Response;
             else
