@@ -204,6 +204,9 @@
   <data name="DNSHostDescription" xml:space="preserve">
     <value>رکوردی که هاست نیم را به آدرس IPv4 نشان می دهد</value>
   </data>
+  <data name="DNSLookup" xml:space="preserve">
+    <value>جستجوی DNS (DNS lookup)</value>
+  </data>
   <data name="Domain" xml:space="preserve">
     <value>دامین</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="InternalServerError" xml:space="preserve">
     <value>خطای داخلی سرور</value>
+  </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>آدرس آی‌پی</value>
   </data>
   <data name="IPv4Address" xml:space="preserve">
     <value> آدرس IPv4 (آی پی)</value>
@@ -425,6 +431,9 @@
   </data>
   <data name="RemoteAccessComputerMessage" xml:space="preserve">
     <value>آیا از به خاطر سپردن آدرس IP خود برای دسترسی از راه دور یک دستگاه خسته شده اید؟ آیا آدرس IP شما دائماً تغییر می کند؟ Dynamic DNS ما به شما امکان می دهد بدون نیاز به آدرس IP ثابت از راه دور به دستگاه های خود دسترسی داشته باشید. تنها چیزی که باید به خاطر بسپارید هاست نیم خود است.</value>
+  </data>
+  <data name="ReverseLookup" xml:space="preserve">
+    <value>جستجوی معکوس (Reverse lookup)</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>ذخیره تغییرات</value>

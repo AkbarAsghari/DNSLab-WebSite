@@ -204,6 +204,9 @@
   <data name="DNSHostDescription" xml:space="preserve">
     <value>A record that points a hostname to an IPv4 address</value>
   </data>
+  <data name="DNSLookup" xml:space="preserve">
+    <value>DNS lookup</value>
+  </data>
   <data name="Domain" xml:space="preserve">
     <value>Domain</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="InternalServerError" xml:space="preserve">
     <value>Internal Server Error</value>
+  </data>
+  <data name="IPAddress" xml:space="preserve">
+    <value>IP address</value>
   </data>
   <data name="IPv4Address" xml:space="preserve">
     <value>IPv4 Address</value>
@@ -425,6 +431,9 @@
   </data>
   <data name="RemoteAccessComputerMessage" xml:space="preserve">
     <value>Tired of remembering your IP address to Remote Access a Device? Does your IP address change constantly? Our Dynamic DNS allows you to access your devices remotely without needing a Static IP address. All you need to remember is your hostname.</value>
+  </data>
+  <data name="ReverseLookup" xml:space="preserve">
+    <value>Reverse lookup</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
