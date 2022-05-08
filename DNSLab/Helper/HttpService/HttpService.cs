@@ -129,6 +129,10 @@ namespace DNSLab.Helper.HttpService
         private async Task<T> Deserialize<T>(HttpResponseMessage httpResponse, JsonSerializerOptions options)
         {
             var responseString = await httpResponse.Content.ReadAsStringAsync();
+            if (typeof(T) == typeof(String))
+            {
+                return (T)(object)responseString;
+            }
             return JsonSerializer.Deserialize<T>(responseString, options);
         }
     }
