@@ -205,7 +205,7 @@
     <value>رکوردی که هاست نیم را به آدرس IPv4 نشان می دهد</value>
   </data>
   <data name="DNSLookup" xml:space="preserve">
-    <value>جستجوی DNS (DNS lookup)</value>
+    <value>جستجوی دی‌ان‌اس(DNS lookup)</value>
   </data>
   <data name="Domain" xml:space="preserve">
     <value>دامین</value>
