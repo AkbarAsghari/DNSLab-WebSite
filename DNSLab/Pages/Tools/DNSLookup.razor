@@ -1,0 +1,69 @@
+﻿@page "/tools/dnslookup"
+
+@attribute [Authorize]
+
+@inject IIPRepository iPRepository
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">@localizer["DNSLookup"]</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                <div class="col-md-6">
+                    <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
+                    <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddress.HostOrIPAddress)" />
+                </div>
+                @if (!String.IsNullOrEmpty(Result))
+                {
+                    <div class="col-md-12">
+                        <hr>
+                        <label>@Result</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="submit" class="btn btn-primary" disabled="@isProgressing">
+            @if (isProgressing)
+            {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <text>@localizer["Progressing"]...</text>
+            }
+            else
+            {
+                <text>@localizer["Check"]</text>
+            }
+        </button>
+        <a class="btn btn-warning" href="tools">@localizer["Cancel"]</a>
+    </div>
+
+</EditForm>
+
+@code {
+    private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();
+    private string Result { get; set; }
+    private bool isProgressing = false;
+
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    public async Task OnValidSubmit()
+    {
+        isProgressing = true;
+
+        var response = await iPRepository.DNSLookup(hostOrIPAddress.HostOrIPAddress);
+        if (!String.IsNullOrEmpty(response))
+            Result = response;
+
+        isProgressing = false;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (String.IsNullOrEmpty(hostOrIPAddress.HostOrIPAddress))
+            hostOrIPAddress.HostOrIPAddress = IPDTO.IPv4;
+    }
+}
