@@ -43,10 +43,10 @@
             <hr />
 
             <div class="row">
-                <p class="col-lg-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
                 @if (@isRevoking)
                 {
-                    <div class="col-lg-2 btn-group tools-result">
+                    <p class="m-0 col-xl-5 col-lg-6 col-md-7">توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</p>
+                    <div class="col-lg-4 btn-group tools-result">
                         <button type="button" class="btn btn-sm btn-danger" @onclick=@(()=>ContinueRevokeKey()) disabled="@isInProgress">
                             @if (isInProgress)
                             {
@@ -63,6 +63,7 @@
                 }
                 else
                 {
+                    <p class="col-lg-4 col-xl-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
                     <button class="col-lg-2 btn btn-sm btn-outline-danger" @onclick=@(()=>ChangeRevokeStatus())>@localizer["RevokeKey"]</button>
                 }
 
