@@ -40,7 +40,35 @@
         else
         {
             <p>@localizer["TokenName"] : @token.Name </p>
-            <p>@localizer["TokenKey"] : <code>@token.Key</code></p>
+            <hr />
+
+            <div class="row">
+                <p class="col-lg-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
+                @if (@isRevoking)
+                {
+                    <div class="col-lg-2 btn-group tools-result">
+                        <button type="button" class="btn btn-sm btn-danger" @onclick=@(()=>ContinueRevokeKey()) disabled="@isInProgress">
+                            @if (isInProgress)
+                            {
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <text>@localizer["Progressing"]...</text>
+                            }
+                            else
+                            {
+                                <text>@localizer["Continue"]</text>
+                            }
+                        </button>
+                        <button type="button" class="btn btn-sm btn-success" @onclick=@(()=>ChangeRevokeStatus())>@localizer["Cancel"]</button>
+                    </div>
+                }
+                else
+                {
+                    <button class="col-lg-2 btn btn-sm btn-outline-danger" @onclick=@(()=>ChangeRevokeStatus())>@localizer["RevokeKey"]</button>
+                }
+
+            </div>
+            <hr />
+
             <p>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</p>
             <hr />
             <p>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</p>
@@ -58,8 +86,8 @@
             <p>لینک بروزرسانی آی پی های توکن</p>
             <div class="row m-1">
                 <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
-                <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
             </div>
+            <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
         }
     </Body>
     <Footer>
@@ -129,6 +157,7 @@
 
     private bool isLoading = false;
     private bool isInProgress = false;
+    private bool isRevoking = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -157,6 +186,23 @@
 
         isInProgress = false;
     }
+
+    private async Task ContinueRevokeKey()
+    {
+        isInProgress = true;
+
+        var newTokenKey = await dnsRepository.RevokeTokenKey(token.Id);
+
+        if (!String.IsNullOrEmpty(newTokenKey))
+        {
+            token.Key = newTokenKey;
+            isRevoking = false;
+        }
+
+        isInProgress = false;
+    }
+
+    private void ChangeRevokeStatus() => isRevoking = !isRevoking;
 
     private async Task OpenToken(TokenSummaryDTO record)
     {

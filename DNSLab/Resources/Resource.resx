@@ -162,6 +162,9 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
   <data name="CreateAHostName" xml:space="preserve">
     <value>Create a Host Name</value>
   </data>
@@ -434,6 +437,9 @@
   </data>
   <data name="ReverseLookup" xml:space="preserve">
     <value>Reverse lookup</value>
+  </data>
+  <data name="RevokeKey" xml:space="preserve">
+    <value>Revoke Key</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
