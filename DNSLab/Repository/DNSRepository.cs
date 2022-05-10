@@ -119,5 +119,11 @@ namespace DNSLab.Repository
             var response = await _httpService.Get<TokenAndDNSDTO>($"/DNS/GetToken?tokenId={tokenId}");
             return response.Response;
         }
+
+        public async Task<string> RevokeTokenKey(Guid tokenId)
+        {
+            var response = await _httpService.Put<string>($"/DNS/RevokeTokenKey?tokenId={tokenId}");
+            return response.Response;
+        }
     }
 }
