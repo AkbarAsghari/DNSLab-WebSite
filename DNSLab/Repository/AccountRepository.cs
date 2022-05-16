@@ -15,9 +15,9 @@ namespace DNSLab.Repository
             _httpService = httpService;
         }
 
-        public async Task<string> Register(UserInfo userInfo)
+        public async Task<string> Register(RegisterUserDTO registerUser)
         {
-            var response = await _httpService.Post<UserInfo, AuthUserDTO>($"/Auth/Register", userInfo);
+            var response = await _httpService.Post<RegisterUserDTO, AuthUserDTO>($"/Auth/Register", registerUser);
             if (!response.Success)
             {
                 return String.Empty;
@@ -99,6 +99,24 @@ namespace DNSLab.Repository
             {
                 return response.Response;
             }
+        }
+
+        public async Task<bool> ChangeEmail(ChangeEmailDTO changeEmail)
+        {
+            var response = await _httpService.Put<ChangeEmailDTO, bool>($"/Auth/ChangePassword", changeEmail);
+            return response.Response;
+        }
+
+        public async Task<bool> ResendConfirmEmailToken()
+        {
+            var response = await _httpService.Post<bool>($"/Auth/ResendConfirmEmailToken");
+            return response.Response;
+        }
+
+        public async Task<bool> ConfirmEmailWithToken(string Token)
+        {
+            var response = await _httpService.Post<bool>($"/Auth/ConfirmEmailWithToken?token={Token}");
+            return response.Response;
         }
     }
 }

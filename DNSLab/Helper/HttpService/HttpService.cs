@@ -153,6 +153,21 @@ namespace DNSLab.Helper.HttpService
             return JsonSerializer.Deserialize<T>(responseString, options);
         }
 
+        public async Task<HttpResponseWraper<TResponse>> Post<TResponse>(string url)
+        {
+            url = BaseAddress + url;
 
+            _httpResponseMessage = await _httpClient.PostAsync(url,null);
+            await httpResponseExceptionHander.HandlerExceptionAsync(_httpResponseMessage);
+            if (_httpResponseMessage.IsSuccessStatusCode)
+            {
+                var responseDeserialized = await Deserialize<TResponse>(_httpResponseMessage, defaultJsonSerializationOption);
+                return new HttpResponseWraper<TResponse>(responseDeserialized, true, _httpResponseMessage);
+            }
+            else
+            {
+                return new HttpResponseWraper<TResponse>(default, false, _httpResponseMessage);
+            }
+        }
     }
 }

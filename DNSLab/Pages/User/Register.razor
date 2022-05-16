@@ -13,66 +13,25 @@
 
 <div class="container-xl mt-5">
     <div class="row">
-        <EditForm class="container-xl mt-4" Model=user OnValidSubmit="CreateUser">
+        <EditForm class="container-md mt-4 col-lg-4" Model=registerUser OnValidSubmit="CreateUser">
             <DataAnnotationsValidator />
             <div class="card mb-4">
                 <div class="card-header">@localizer["RegisterAccount"]</div>
                 <div class="card-body">
 
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Form Group (first name)-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["FirstName"]</label>
-                            <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@user.FirstName" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.FirstName)" />
-                        </div>
-                        <!-- Form Group (last name)-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["LastName"]</label>
-                            <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@user.LastName" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.LastName)" />
-                        </div>
+                    <!-- Form Group (email address)-->
+                    <div class="mb-3">
+                        <label class="small mb-1">@localizer["Email"]</label>
+                        <InputText class="form-control" placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" required />
+                        <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Email)" />
                     </div>
                     <!-- Form Group (email address)-->
-                    <div class="row gx-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["Email"]</label>
-                            <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@user.Email" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Email)" />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
-                            <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@user.Mobile" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Mobile)" />
-                        </div>
+                    <div class="mb-3">
+                        <label class="small mb-1">@localizer["Password"]</label>
+                        <InputPassword class="form-control" @bind-Value="@registerUser.Password" required />
+                        <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Password)" />
                     </div>
-                    <!-- Form Row-->
-                    <div class="row gx-3 mb-3">
-                        <!-- Form Group (phone number)-->
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["UserName"]</label>
-                            <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@user.Username" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Username)" />
-                        </div>
-                        <div class="col-md-6">
-                            <label class="small mb-1">@localizer["Password"]</label>
-                            <InputPassword class="form-control" @bind-Value="@user.Password" required />
-                            <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
-                        </div>
-                    </div>
-                    <div class="p-4 px-0 d-flex">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="isAcceptLegalsTOS" required>
-                            <label class="form-check-label" for="isAcceptLegalsTOS">
-                                 <a class="text-decoration-underline" target="_blank" href="legal/tos">قوانین و مقررات</a> سایت را مطالعه و می پذیرم
-                            </label>
-                            <div class="invalid-feedback">
-                                برای ثبت نام شما باید قوانین و مقررات سایت را تایید نمایید
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" disabled="@isSubmited">
+                    <button type="submit" class="btn btn-primary col-12" disabled="@isSubmited">
                         @if (isSubmited)
                         {
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -80,9 +39,12 @@
                         }
                         else
                         {
-                            <text>@localizer["Register"]</text>
+                            <text>@localizer["Login"]</text>
                         }
                     </button>
+                    <div class="mt-3">
+                        <a href="user/ForgetPassword" class="text-center text-decoration-none text-muted">رمز خودتو فراموش کردی؟</a>
+                    </div>
                 </div>
             </div>
         </EditForm>
@@ -90,12 +52,12 @@
 </div>
 
 @code {
-    private UserInfo user = new UserInfo();
+    private RegisterUserDTO registerUser = new RegisterUserDTO();
     private bool isSubmited = false;
     private async Task CreateUser()
     {
         isSubmited = true;
-        var userToken = await accountReository.Register(user);
+        var userToken = await accountReository.Register(registerUser);
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
