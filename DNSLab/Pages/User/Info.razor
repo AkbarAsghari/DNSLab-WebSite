@@ -1,6 +1,6 @@
 ﻿@page "/user/info"
 
-@inject IAccountRepository accountReository
+@inject IAccountRepository accountRepository
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
@@ -55,48 +55,79 @@ else
                 </div>
                 <div class="row">
                     <EditForm class="col-xl-12" Model=userInfo OnValidSubmit="SaveChanges">
-                        <!-- Account details card-->
-                    <div class="card mb-4">
-                            <div class="card-header">@localizer["AccountDetails"]</div>
+                        <div class="card mb-4">
+                            <div class="card-header">@localizer["BasicInfo"]</div>
+                            <div class="card-body">
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">@localizer["Email"]</label>
+                                        <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" required />
+                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">@localizer["UserName"]</label>
+                                        <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" />
+                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Username)" />
+                                    </div>
+                                </div>
+                                @if (!@userInfo.IsEmailApproved)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @localizer["YourEmailNotApprovedYet"]
+                                        @if (!ResentButtonClicked)
+                                        {
+                                            <button type="button" class="btn btn-link" @onclick=@(()=>ResendActivationLink()) disabled="@isInProgress">
+                                                @if (isInProgress)
+                                                {
+                                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                    <text>@localizer["Progressing"]...</text>
+                                                }
+                                                else
+                                                {
+                                                    <text>@localizer["ResendActivationLink"]</text>
+                                                }
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">@localizer["PersonalInfo"]</div>
                             <div class="card-body">
                                 <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                     <!-- Form Group (first name)-->
                                 <div class="col-md-6">
                                         <label class="small mb-1">@localizer["FirstName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName" required />
+                                        <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.FirstName)" />
                                     </div>
                                     <!-- Form Group (last name)-->
                                 <div class="col-md-6">
                                         <label class="small mb-1">@localizer["LastName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName" required />
+                                        <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.LastName)" />
                                     </div>
                                 </div>
-                                <!-- Form Group (email address)-->
-                            <div class="mb-3">
-                                    <label class="small mb-1">@localizer["Email"]</label>
-                                    <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" required />
-                                    <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />
-                                </div>
                                 <!-- Form Row-->
                             <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1">@localizer["Company"]</label>
+                                        <InputText class="form-control" placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company" />
+                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Company)" />
+                                    </div>
                                     <!-- Form Group (phone number)-->
                                 <div class="col-md-6">
                                         <label class="small mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" required />
+                                        <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Mobile)" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="small mb-1">@localizer["UserName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" required />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Username)" />
-                                    </div>
+
                                 </div>
                                 <!-- Save changes button-->
-                            <button type="submit" class="btn btn-primary" disabled="@isSubmited">
-                                    @if (isSubmited)
+                            <button type="submit" class="btn btn-primary" disabled="@isInProgress">
+                                    @if (isInProgress)
                                     {
                                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         <text>@localizer["Loading"]...</text>
@@ -120,23 +151,40 @@ else
 @code {
     UserInfo userInfo;
     CultureSelector cultureSelector;
+    private bool isInProgress = false;
+    private bool ResentButtonClicked = false;
+
     protected async override Task OnInitializedAsync()
     {
-        userInfo = await accountReository.Get();
+        userInfo = await accountRepository.Get();
     }
-    private bool isSubmited = false;
 
     private async Task SaveChanges()
     {
-        isSubmited = true;
-        if (await accountReository.Update(userInfo))
+        isInProgress = true;
+        if (await accountRepository.Update(userInfo))
         {
             toastService.ShowToast("Changes saved", Enums.ToastLevel.Success);
         }
 
+        if (await accountRepository.ChangeEmail(new ChangeEmailDTO { Email = userInfo.Email }))
+        {
+            toastService.ShowToast("New Email Saved", Enums.ToastLevel.Success);
+        }
+
         cultureSelector.Save();
 
-        isSubmited = false;
+        isInProgress = false;
+    }
+
+    private async Task ResendActivationLink()
+    {
+        isInProgress = true;
+        if (await accountRepository.ResendConfirmEmailToken())
+        {
+            ResentButtonClicked = true;
+        }
+        isInProgress = false;
     }
 }
 
