@@ -103,7 +103,7 @@ namespace DNSLab.Repository
 
         public async Task<bool> ChangeEmail(ChangeEmailDTO changeEmail)
         {
-            var response = await _httpService.Put<ChangeEmailDTO, bool>($"/Auth/ChangePassword", changeEmail);
+            var response = await _httpService.Put<ChangeEmailDTO, bool>($"/Auth/ChangeEmail", changeEmail);
             return response.Response;
         }
 
