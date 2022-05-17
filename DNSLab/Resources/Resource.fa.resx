@@ -132,11 +132,17 @@
   <data name="AreYouSureDel" xml:space="preserve">
     <value>آیا از حذف این رکورد مطمئن هستید؟</value>
   </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>اطلاعات پایه</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>انصراف</value>
   </data>
   <data name="Can_Not_Use_Private_Network_IP_Addresses" xml:space="preserve">
     <value>شما نمیتوانید از آدرس های شبکه خصوصی استفاده نمایید</value>
+  </data>
+  <data name="ChangeEmailAddress" xml:space="preserve">
+    <value>تغییر آدرس ایمیل</value>
   </data>
   <data name="ChangeLanuguage" xml:space="preserve">
     <value>تغییر زبان</value>
@@ -158,6 +164,9 @@
   </data>
   <data name="Comment_Text_Is_Empty" xml:space="preserve">
     <value>متن دیدگاه نباید خالی باشد</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>نام شرکت</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>تکرار رمز عبور</value>
@@ -375,6 +384,9 @@
   <data name="Password_Less_Than_8_Character" xml:space="preserve">
     <value>رمز عبور نمیتواند کمتر از 8 کاراکتر باشد</value>
   </data>
+  <data name="PersonalInfo" xml:space="preserve">
+    <value>اطلاعات خصوصی</value>
+  </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>شماره همراه</value>
   </data>
@@ -434,6 +446,9 @@
   </data>
   <data name="RemoteAccessComputerMessage" xml:space="preserve">
     <value>آیا از به خاطر سپردن آدرس IP خود برای دسترسی از راه دور یک دستگاه خسته شده اید؟ آیا آدرس IP شما دائماً تغییر می کند؟ Dynamic DNS ما به شما امکان می دهد بدون نیاز به آدرس IP ثابت از راه دور به دستگاه های خود دسترسی داشته باشید. تنها چیزی که باید به خاطر بسپارید هاست نیم خود است.</value>
+  </data>
+  <data name="ResendActivationLink" xml:space="preserve">
+    <value>ارسال مجدد لینک فعال سازی</value>
   </data>
   <data name="ReverseLookup" xml:space="preserve">
     <value>جستجوی معکوس (Reverse lookup)</value>
@@ -620,6 +635,9 @@
   </data>
   <data name="YourEmail" xml:space="preserve">
     <value>پست الکترونیک شما</value>
+  </data>
+  <data name="YourEmailNotApprovedYet" xml:space="preserve">
+    <value>ایمیل شما هنوز تایید نشده است</value>
   </data>
   <data name="YourFirstName" xml:space="preserve">
     <value>نام شما</value>
