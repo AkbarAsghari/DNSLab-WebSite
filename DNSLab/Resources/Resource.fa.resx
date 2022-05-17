@@ -126,6 +126,9 @@
   <data name="AccountDetails" xml:space="preserve">
     <value>اطلاعات حساب</value>
   </data>
+  <data name="ActivationLinkSent" xml:space="preserve">
+    <value>لینک فعال سازی ارسال شد</value>
+  </data>
   <data name="Approved" xml:space="preserve">
     <value>تایید شده</value>
   </data>

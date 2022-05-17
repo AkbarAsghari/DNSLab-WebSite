@@ -1,0 +1,14 @@
+﻿@page "/User/ConfirmEmail/{Token}"
+@inject NavigationManager navigation
+@inject IAccountRepository accountReository
+
+@code {
+    [Parameter] public string Token { get; set; }
+    private bool isApprovedToken = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (await accountReository.ConfirmEmailWithToken(Token))
+            navigation.NavigateTo("/");
+    }
+}

@@ -95,10 +95,16 @@ else
                                 </div>
                                 @if (!@userInfo.IsEmailApproved)
                                 {
-                                    <div class="alert alert-danger" role="alert">
-                                        @localizer["YourEmailNotApprovedYet"]
-                                        @if (!ResentButtonClicked)
-                                        {
+                                    @if (ResentButtonClicked)
+                                    {
+                                        <div class="alert alert-success" role="alert">
+                                            <text>@localizer["ActivationLinkSent"]</text>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-danger" role="alert">
+                                            @localizer["YourEmailNotApprovedYet"]
                                             <button type="button" class="btn btn-link" @onclick=@(()=>ResendActivationLink()) disabled="@isInProgress">
                                                 @if (isInProgress)
                                                 {
@@ -110,8 +116,8 @@ else
                                                     <text>@localizer["ResendActivationLink"]</text>
                                                 }
                                             </button>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 }
                             </div>
                         </div>
@@ -222,6 +228,11 @@ else
         if (await accountRepository.ChangeEmail(changeEmail))
         {
             toastService.ShowToast("New Email Saved", Enums.ToastLevel.Success);
+
+            if (userInfo.Email.Trim().ToLower() != changeEmail.Email.Trim().ToLower())
+                userInfo.IsEmailApproved = false;
+
+            userInfo.Email = changeEmail.Email;
             await ChangeEmailModal.Close();
         }
 

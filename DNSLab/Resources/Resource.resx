@@ -126,6 +126,9 @@
   <data name="AccountDetails" xml:space="preserve">
     <value>Account Details</value>
   </data>
+  <data name="ActivationLinkSent" xml:space="preserve">
+    <value>Activation link sent</value>
+  </data>
   <data name="Approved" xml:space="preserve">
     <value>Approved</value>
   </data>
