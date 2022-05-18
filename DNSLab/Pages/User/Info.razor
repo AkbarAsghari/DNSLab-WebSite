@@ -87,7 +87,7 @@ else
                                 <div class="row gx-3 mb-3">
                                     <div class="col-xl-6">
                                         <div class="input-group tools-result">
-                                            <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" required />
+                                            <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" disabled/>
                                             <button class="btn btn-primary" type="button" @onclick=@(()=>OpenChangeEmailModal())>@localizer["ChangeEmailAddress"]</button>
                                         </div>
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />
