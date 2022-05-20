@@ -9,10 +9,9 @@
 <meta name="description" content="@localizer["SEO_DNSEditDescription"]" />
 <meta name="keywords" content="@localizer["SEO_DNSEditKeyWords"]" />
 
-<DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName" IsInProgress="isProgressing"/>
+<DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName"/>
 @code {
     private HostNameDTO hostName { get; set; } = new HostNameDTO();
-    private bool isProgressing = false;
 
     [Parameter] public Guid HostNameId{ get; set; }
 
@@ -23,15 +22,12 @@
 
     public async Task Update()
     {
-        isProgressing = true;
         hostName.Domain = "dnslab.ir";
-        hostName.RecordType = 1;
 
         if (await dnsRepository.UpdateHostName(hostName))
         {
             _navManager.NavigateTo("dns/mydns");
             toastService.ShowToast(localizer["HostNameUpdated"], Enums.ToastLevel.Success);
         }
-        isProgressing = false;
     }
 }

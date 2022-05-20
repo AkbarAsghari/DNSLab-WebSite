@@ -1,6 +1,6 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="HostName" OnValidSubmit="OnValidSubmit">
+<EditForm Model="HostName" OnValidSubmit="OnValidSubmit" Context=DNSContext>
     <DataAnnotationsValidator />
     <div class="card mb-4">
         <div class="card-header">@Title</div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 }
-                <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)" >
+                <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)">
                     <div class="card border-info">
                         <div class="card-header">@localizer["Description"]</div>
                         <div class="card-body">
@@ -84,24 +84,18 @@
 
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
-        @if (IsInProgress)
-        {
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <text>@localizer["Progressing"]...</text>
-        }
-        else
-        {
-            <text>@localizer["SaveChanges"]</text>
-        }
-    </button>
+    <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=ColorEnum.Primary
+                         Icon=IconEnum.Check
+                         EditContext=DNSContext
+                         OnClick=OnValidSubmit></BaseButtonComponent>
 </EditForm>
 
 @code {
     [Parameter] public HostNameDTO HostName { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public EventCallback OnValidSubmit { get; set; }
-    [Parameter] public bool IsInProgress { get; set; } = false;
     [Parameter] public bool IsNewRecord { get; set; } = false;
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 

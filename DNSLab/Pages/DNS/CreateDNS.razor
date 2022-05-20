@@ -10,15 +10,12 @@
 <meta name="description" content="@localizer["SEO_DNSCreateDescription"]" />
 <meta name="keywords" content="@localizer["SEO_DNSCreateKeyWords"]" />
 
-<DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName" IsInProgress="isProgressing" />
+<DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName"/>
 @code {
     private HostNameDTO hostName = new HostNameDTO() { RecordType = 1 };
-    private bool isProgressing = false;
 
     public async Task Create()
     {
-        isProgressing = true;
-
         hostName.Domain = "dnslab.ir";
 
         if (await dnsRepository.CreateHostName(hostName))
@@ -26,7 +23,5 @@
             _navManager.NavigateTo("dns/mydns");
             toastService.ShowToast(localizer["HostNameCreated"], Enums.ToastLevel.Success);
         }
-
-        isProgressing = false;
     }
 }
