@@ -89,6 +89,7 @@ else
                                             <BaseButtonComponent Caption=@localizer["Edit"]
                                                              IsBussyCaption=@localizer["Loading"]
                                                              Color=ColorEnum.Primary
+                                                             Icon=IconEnum.Pencil
                                                              OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
                                         </div>
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />

@@ -7,11 +7,17 @@
     else
     {
         <text>@Caption</text>
+        @if (Icon != null)
+        {
+            <text>@(" ")</text>
+            <span class="oi oi-@(Icon.ToString()!.ToLower().Replace("_","-"))"></span>
+        }
     }
 </button>
 
 @code {
     [Parameter] public ColorEnum Color { get; set; }
+    [Parameter] public IconEnum? Icon { get; set; }
     [Parameter] public string Caption { get; set; }
     [Parameter] public bool IsOutLine { get; set; }
     [Parameter] public bool IsBussy { get; set; }
