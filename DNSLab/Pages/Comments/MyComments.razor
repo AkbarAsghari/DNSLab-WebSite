@@ -12,18 +12,15 @@
         <label>@localizer["CommentText"] : @deleteRcord.Text </label>
     </Body>
     <Footer>
-        <button type="button" class="btn btn-warning" @onclick=@(()=>DeleteModal.Close())>@localizer["Cancel"]</button>
-        <button type="submit" class="btn btn-danger" @onclick=@(()=>AcceptDelete()) disabled="@isInProgress">
-            @if (isInProgress)
-            {
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <text>@localizer["Progressing"]...</text>
-            }
-            else
-            {
-                <text>@localizer["Delete"]</text>
-            }
-        </button>
+        <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=DeleteModal.Close></BaseButtonComponent>
+        <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=AcceptDelete></BaseButtonComponent>
     </Footer>
 </Modal>
 
@@ -48,7 +45,7 @@
                 {
                     <hr />
                     <div class="row">
-                        <div class="row col-lg-10 col-8">
+                        <div class="row col-lg-9 col-8">
                             <div class="col-lg-6 col-sm-12 align-self-center">
                                 <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
                             </div>
@@ -78,9 +75,19 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
-                            <button type="button" class="btn btn-outline-warning" @onclick=@(()=>EditComment(item))>@localizer["Edit"]</button>
-                            <button type="button" class="btn btn-outline-danger" @onclick=@(()=>DeleteComment(item))>@localizer["Delete"]</button>
+                        <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <BaseButtonComponent Caption=@localizer["Edit"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Warning
+                                         Icon=IconEnum.Pencil
+                                         OnClick=@(()=>EditComment(item))></BaseButtonComponent>
+                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Danger
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
                         </div>
                     </div>
 

@@ -4,22 +4,17 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<CommentForm comment="createComment" IsInProgress="isInProgress" OnValidSubmit="Create" Title="@localizer["CreateNewComment"]"></CommentForm>
+<CommentForm comment="createComment" OnValidSubmit="Create" Title="@localizer["CreateNewComment"]"></CommentForm>
 
 @code {
     private CommentDTO createComment = new CommentDTO { Text = String.Empty };
-    private bool isInProgress = false;
 
     public async Task Create()
     {
-        isInProgress = true;
-
         if (await commentRepository.AddNewComment(createComment))
         {
             _navManager.NavigateTo("Comment/MyComments");
             toastService.ShowToast(localizer["CommentSubmited"], Enums.ToastLevel.Success);
         }
-
-        isInProgress = false;
     }
 }

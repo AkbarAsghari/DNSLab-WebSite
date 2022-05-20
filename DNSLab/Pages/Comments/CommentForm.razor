@@ -1,6 +1,6 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="comment" OnValidSubmit="OnValidSubmit">
+<EditForm Model="comment" Context=CommentContext>
     <div class="card mb-4">
         <div class="card-header">@Title</div>
         <div class="card-body">
@@ -18,17 +18,12 @@
                 </div>
             </div>
             <div class="mb-3 gap-2">
-                <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
-                    @if (IsInProgress)
-                    {
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <text>@localizer["Progressing"]...</text>
-                    }
-                    else
-                    {
-                        <text>@localizer["Send"]</text>
-                    }
-                </button>
+                <BaseButtonComponent Caption=@localizer["Send"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=ColorEnum.Primary
+                                     Icon=IconEnum.Check
+                                     EditContext=CommentContext
+                                     OnClick=OnValidSubmit></BaseButtonComponent>
                 <a class="btn btn-warning" href="Comment/MyComments">انصراف</a>
             </div>
         </div>
@@ -37,7 +32,6 @@
 @code {
     const int MAX_TEXT_COUNT = 500;
     [Parameter] public string Title { get; set; } = String.Empty;
-    [Parameter] public bool IsInProgress { get; set; } = false;
     [Parameter] public CommentDTO comment { get; set; } = new CommentDTO { Text = String.Empty };
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }

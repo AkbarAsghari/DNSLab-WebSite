@@ -4,14 +4,13 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<CommentForm comment="existComment" IsInProgress="isInProgress" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
+<CommentForm comment="existComment" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
 
 @code {
 
     [Parameter] public Guid CommentId { get; set; }
 
     private CommentDTO existComment = new CommentDTO { Text = String.Empty };
-    private bool isInProgress = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -20,14 +19,10 @@
 
     public async Task Update()
     {
-        isInProgress = true;
-
         if (await commentRepository.UpdateComment(existComment))
         {
             _navManager.NavigateTo("Comment/MyComments");
             toastService.ShowToast(localizer["CommentUpdated"], Enums.ToastLevel.Success);
         }
-
-        isInProgress = false;
     }
 }
