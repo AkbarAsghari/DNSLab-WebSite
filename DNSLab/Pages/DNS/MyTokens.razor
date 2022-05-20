@@ -13,18 +13,16 @@
         <label>@localizer["TokenName"] : @deleteRcord.Name </label>
     </Body>
     <Footer>
-        <button type="button" class="btn btn-warning" @onclick=@(()=>DeleteModal.Close())>@localizer["Cancel"]</button>
-        <button type="submit" class="btn btn-danger" @onclick=@(()=>AcceptDelete()) disabled="@isInProgress">
-            @if (isInProgress)
-            {
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <text>@localizer["Progressing"]...</text>
-            }
-            else
-            {
-                <text>@localizer["Delete"]</text>
-            }
-        </button>
+        <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             Icon=IconEnum.Check
+                             OnClick=DeleteModal.Close />
+        <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=AcceptDelete />
     </Footer>
 </Modal>
 
@@ -47,24 +45,30 @@
                 {
                     <p class="m-0 col-xl-5 col-lg-6 col-md-7">توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</p>
                     <div class="col-lg-4 btn-group tools-result">
-                        <button type="button" class="btn btn-sm btn-danger" @onclick=@(()=>ContinueRevokeKey()) disabled="@isInProgress">
-                            @if (isInProgress)
-                            {
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                <text>@localizer["Progressing"]...</text>
-                            }
-                            else
-                            {
-                                <text>@localizer["Continue"]</text>
-                            }
-                        </button>
-                        <button type="button" class="btn btn-sm btn-success" @onclick=@(()=>ChangeRevokeStatus())>@localizer["Cancel"]</button>
+                        <BaseButtonComponent Caption=@localizer["Continue"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     CssClass="btn-sm"
+                                     Color=ColorEnum.Danger
+                                     Icon=IconEnum.Loop
+                                     OnClick=ContinueRevokeKey />
+                        <BaseButtonComponent Caption=@localizer["Cancel"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     CssClass="btn-sm"
+                                     Color=ColorEnum.Success
+                                     Icon=IconEnum.Check
+                                     OnClick=ChangeRevokeStatus />
                     </div>
                 }
                 else
                 {
                     <p class="col-lg-4 col-xl-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
-                    <button class="col-lg-2 btn btn-sm btn-outline-danger" @onclick=@(()=>ChangeRevokeStatus())>@localizer["RevokeKey"]</button>
+                    <BaseButtonComponent Caption=@localizer["RevokeKey"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 IsOutLine=true
+                                 CssClass="btn-sm col-lg-2"
+                                 Color=ColorEnum.Danger
+                                 Icon=IconEnum.Loop
+                                 OnClick=ChangeRevokeStatus />
                 }
 
             </div>
@@ -92,7 +96,11 @@
         }
     </Body>
     <Footer>
-        <button type="button" class="btn btn-warning" @onclick=@(()=>TokenDetailsModal.Close())>@localizer["Close"]</button>
+        <BaseButtonComponent Caption=@localizer["Close"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             Icon=IconEnum.Loop
+                             OnClick=TokenDetailsModal.Close />
     </Footer>
 </Modal>
 
@@ -117,7 +125,7 @@
                 {
                     <hr />
                     <div class="row">
-                        <div class="row col-xxl-10 col-xl-9 col-8 align-self-center">
+                        <div class="row col-xl-8 col-7 align-self-center">
                             <div class="col-lg-3 col-sm-12 align-self-center">
                                 <p class="m-0">@localizer["TokenName"] : @item.Name</p>
                             </div>
@@ -134,10 +142,25 @@
                                 <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
                             </div>
                         </div>
-                        <div class="col-xxl-2 col-xl-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
-                            <button type="button" class="btn btn-outline-primary" @onclick=@(()=>OpenToken(item))>@localizer["Details"]</button>
-                            <button type="button" class="btn btn-outline-warning" @onclick=@(()=>EditToken(item))>@localizer["Edit"]</button>
-                            <button type="button" class="btn btn-outline-danger" @onclick=@(()=>DeleteToken(item))>@localizer["Delete"]</button>
+                        <div class="col-xl-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <BaseButtonComponent Caption=@localizer["Details"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Primary
+                                         IsOutLine=true
+                                         Icon=IconEnum.Cog
+                                         OnClick=@(()=>OpenToken(item)) />
+                            <BaseButtonComponent Caption=@localizer["Edit"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Warning
+                                         IsOutLine=true
+                                         Icon=IconEnum.Pencil
+                                         OnClick=@(()=>EditToken(item)) />
+                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Danger
+                                         IsOutLine=true
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>DeleteToken(item)) />
                         </div>
                     </div>
                 }
@@ -157,7 +180,6 @@
     TokenDTO token { get; set; }
 
     private bool isLoading = false;
-    private bool isInProgress = false;
     private bool isRevoking = false;
 
     protected override async Task OnInitializedAsync()
@@ -174,7 +196,6 @@
 
     private async Task AcceptDelete()
     {
-        isInProgress = true;
         if (deleteRcord != null)
         {
             if (await dnsRepository.DeleteToken(deleteRcord.Id))
@@ -184,14 +205,10 @@
             }
         }
         deleteRcord = new TokenSummaryDTO();
-
-        isInProgress = false;
     }
 
     private async Task ContinueRevokeKey()
     {
-        isInProgress = true;
-
         var newTokenKey = await dnsRepository.RevokeTokenKey(token.Id);
 
         if (!String.IsNullOrEmpty(newTokenKey))
@@ -199,8 +216,6 @@
             token.Key = newTokenKey;
             isRevoking = false;
         }
-
-        isInProgress = false;
     }
 
     private void ChangeRevokeStatus() => isRevoking = !isRevoking;

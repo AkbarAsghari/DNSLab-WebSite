@@ -1,20 +1,16 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="HostName" OnValidSubmit="OnValidSubmit" Context=DNSContext>
+<EditForm Model="HostName" Context=DNSContext>
     <DataAnnotationsValidator />
     <div class="card mb-4">
         <div class="card-header">@Title</div>
         <div class="card-body">
-
-            <!-- Form Row-->
             <div class="row gx-3 mb-3">
-                <!-- Form Group (first name)-->
                 <div class="col-md-6">
                     <label class="small mb-1">@localizer["HostName"]</label>
                     <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
                 </div>
-                <!-- Form Group (last name)-->
                 <div class="col-md-6">
                     @switch (HostName.RecordType)
                     {

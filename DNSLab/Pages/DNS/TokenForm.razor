@@ -2,7 +2,7 @@
 
 @inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="TokenAndDNS" OnValidSubmit="OnValidSubmit">
+<EditForm Model="TokenAndDNS" Context=TokenContext>
     <DataAnnotationsValidator />
     <div class="card mb-4">
         <div class="card-header">@Title</div>
@@ -45,21 +45,15 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" disabled="@IsInProgress">
-        @if (IsInProgress)
-        {
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <text>@localizer["Progressing"]...</text>
-        }
-        else
-        {
-            <text>@localizer["SaveChanges"]</text>
-        }
-    </button>
+    <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=ColorEnum.Primary
+                         Icon=IconEnum.Check
+                         EditContext=TokenContext
+                         OnClick=OnValidSubmit></BaseButtonComponent>
 </EditForm>
 
 @code {
-    [Parameter] public bool IsInProgress { get; set; } = false;
     [Parameter] public string Title { get; set; } = String.Empty;
     [Parameter] public TokenAndDNSDTO TokenAndDNS { get; set; }
     [Parameter] public List<HostSummaryAndCheckedDTO> HostSummariesAndChecked { get; set; }

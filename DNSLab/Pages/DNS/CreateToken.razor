@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Resource> localizer
 
 
-<TokenForm Title="@localizer["CreateToken"]" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
+<TokenForm Title="@localizer["CreateToken"]" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked"/>
 
 @code {
     private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO()
@@ -15,8 +15,6 @@
         };
 
     private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked = new  List<HostSummaryAndCheckedDTO>();
-
-    private bool isProgressing = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,14 +31,10 @@
 
     public async Task Create()
     {
-        isProgressing = true;
-
         if (await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
             toastService.ShowToast(localizer["TokenCreated"], Enums.ToastLevel.Success);
         }
-
-        isProgressing = false;
     }
 }

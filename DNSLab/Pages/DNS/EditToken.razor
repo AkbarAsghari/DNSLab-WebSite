@@ -6,7 +6,7 @@
 @inject IStringLocalizer<Resource> localizer
 
 
-<TokenForm Title="@localizer["EditToken"]" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" IsInProgress="isProgressing" />
+<TokenForm Title="@localizer["EditToken"]" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked"/>
 
 @code {
     [Parameter] public Guid TokenId { get; set; }
@@ -28,18 +28,12 @@
                 });
     }
 
-    private bool isProgressing = false;
-
     public async Task Update()
     {
-        isProgressing = true;
-
         if (await dnsRepository.UpdateTokensDomainNameSystems(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
             toastService.ShowToast(localizer["TokenUpdated"], Enums.ToastLevel.Success);
         }
-
-        isProgressing = false;
     }
 }
