@@ -1,4 +1,4 @@
-﻿<button type="@(EditContext == null ? "button" : "submit")" class="btn btn@(IsOutLine ? "-outline" : String.Empty)-@(Color.ToString().ToLower())" @onclick="ButtonClickedEvent">
+﻿<button type="@(EditContext == null ? "button" : "submit")" class="btn btn@(IsOutLine ? "-outline" : String.Empty)-@(Color.ToString().ToLower()) @(String.IsNullOrEmpty(CssClass) ? String.Empty : CssClass)" @onclick="ButtonClickedEvent">
     @if (IsBussy)
     {
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -10,12 +10,13 @@
         @if (Icon != null)
         {
             <text>@(" ")</text>
-            <span class="oi oi-@(Icon.ToString()!.ToLower().Replace("_","-"))"></span>
+            <span class="oi oi-@(Icon.ToString()!.ToLower().Replace("_","-")) align-middle"></span>
         }
     }
 </button>
 
 @code {
+    [Parameter] public string CssClass{ get; set; }
     [Parameter] public ColorEnum Color { get; set; }
     [Parameter] public IconEnum? Icon { get; set; }
     [Parameter] public string Caption { get; set; }
