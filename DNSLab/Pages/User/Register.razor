@@ -13,7 +13,7 @@
 
 <div class="container-xl mt-5">
     <div class="row">
-        <EditForm class="container-md mt-4 col-lg-4" Model=registerUser OnValidSubmit="CreateUser">
+        <EditForm class="container-md mt-4 col-lg-4" Model=registerUser Context="RegisterContext">
             <DataAnnotationsValidator />
             <div class="card mb-4">
                 <div class="card-header">@localizer["RegisterAccount"]</div>
@@ -31,17 +31,13 @@
                         <InputPassword class="form-control" @bind-Value="@registerUser.Password" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Password)" />
                     </div>
-                    <button type="submit" class="btn btn-primary col-12" disabled="@isSubmited">
-                        @if (isSubmited)
-                        {
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <text>@localizer["Progressing"]...</text>
-                        }
-                        else
-                        {
-                            <text>@localizer["Register"]</text>
-                        }
-                    </button>
+                     <BaseButtonComponent Caption=@localizer["Register"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         CssClass="col-12"
+                                         Color=ColorEnum.Primary
+                                         Icon=IconEnum.Check
+                                         EditContext=RegisterContext
+                                         OnClick=CreateUser></BaseButtonComponent>
                     <div class="mt-3">
                         <a href="user/auth" class="text-center text-decoration-none text-muted">قبلا ثبت نام کرده ام</a>
                     </div>
@@ -53,16 +49,13 @@
 
 @code {
     private RegisterUserDTO registerUser = new RegisterUserDTO();
-    private bool isSubmited = false;
     private async Task CreateUser()
     {
-        isSubmited = true;
         var userToken = await accountReository.Register(registerUser);
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
             navigationManager.NavigateTo("");
         }
-        isSubmited = false;
     }
 }

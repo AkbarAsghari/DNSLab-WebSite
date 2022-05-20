@@ -12,7 +12,7 @@
 <div class="container-xl mt-5">
     <div class="row">
 
-        <EditForm class="container-sm mt-4 col-lg-4" Model=user OnValidSubmit="AuthUser">
+        <EditForm class="container-sm mt-4 col-lg-4" Model=user Context="AuthContext">
             <DataAnnotationsValidator />
             <div class="card mb-4">
                 <div class="card-header">@localizer["Login"]</div>
@@ -30,17 +30,13 @@
                         <InputPassword class="form-control" @bind-Value="@user.Password" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
                     </div>
-                    <button type="submit" class="btn btn-primary col-12" disabled="@isSubmited">
-                        @if (isSubmited)
-                        {
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            <text>@localizer["Loading"]...</text>
-                        }
-                        else
-                        {
-                            <text>@localizer["Login"]</text>
-                        }
-                    </button>
+                    <BaseButtonComponent Caption=@localizer["Login"]
+                                         IsBussyCaption=@localizer["Loading"]
+                                         CssClass="col-12"
+                                         Color=ColorEnum.Primary
+                                         Icon=IconEnum.Account_Login
+                                         EditContext=AuthContext
+                                         OnClick=AuthUser></BaseButtonComponent>
                     <div class="mt-3">
                         <a href="user/ForgetPassword" class="text-center text-decoration-none text-muted">رمز خودتو فراموش کردی؟</a>
                     </div>
@@ -53,16 +49,13 @@
 @code {
 
     private AuthenticateDTO user = new AuthenticateDTO();
-    private bool isSubmited = false;
     private async Task AuthUser()
     {
-        isSubmited = true;
         var userToken = await accountReository.Login(user);
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
             navigationManager.NavigateTo("");
         }
-        isSubmited = false;
     }
 }
