@@ -29,12 +29,12 @@ else
                     <Footer>
                         <BaseButtonComponent Caption=@localizer["Cancel"]
                                          IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.warning
+                                         Color=ColorEnum.Warning
                                          OnClick=@(()=>ChangeEmailModal.Close())></BaseButtonComponent>
 
                         <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                          IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.primary
+                                         Color=ColorEnum.Primary
                                          EditContext=ChangeEmailContext
                                          OnClick=@AcceptChangeEmail></BaseButtonComponent>
                     </Footer>
@@ -86,7 +86,10 @@ else
                                     <div class="col-xl-6">
                                         <div class="input-group tools-result">
                                             <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" disabled />
-                                            <button class="btn btn-primary" type="button" @onclick=@(()=>OpenChangeEmailModal())>@localizer["Edit"] <span class="oi oi-pencil" aria-hidden="true"></span></button>
+                                            <BaseButtonComponent Caption=@localizer["Edit"]
+                                                             IsBussyCaption=@localizer["Loading"]
+                                                             Color=ColorEnum.Primary
+                                                             OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
                                         </div>
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />
                                     </div>
@@ -105,7 +108,7 @@ else
                                             @localizer["YourEmailNotApprovedYet"]
                                             <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
                                                      IsBussyCaption=@localizer["Progressing"]
-                                                     Color=ColorEnum.link
+                                                     Color=ColorEnum.Link
                                                      OnClick="ResendActivationLink"></BaseButtonComponent>
                                         </div>
                                     }
@@ -147,7 +150,7 @@ else
                                 </div>
                                 <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                                  IsBussyCaption=@localizer["Progressing"]
-                                                 Color=ColorEnum.primary
+                                                 Color=ColorEnum.Primary
                                                  EditContext=UserInfoEditContext
                                                  OnClick="SaveChanges"></BaseButtonComponent>
                             </div>

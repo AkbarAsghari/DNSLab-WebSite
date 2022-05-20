@@ -2,12 +2,12 @@
 {
     public enum ColorEnum
     {
-        primary,
-        secondary,
-        success,
-        warning,
-        info,
-        link,
-        danger
+        Primary,
+        Secondary,
+        Success,
+        Warning,
+        Info,
+        Link,
+        Danger
     }
 }

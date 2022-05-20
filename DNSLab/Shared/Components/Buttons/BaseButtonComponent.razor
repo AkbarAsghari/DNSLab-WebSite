@@ -1,6 +1,4 @@
-﻿@using DNSLab.Enums.Components
-
-<button type="@(EditContext == null ? "button" : "submit")" class="btn btn@(IsOutLine ? "-outline" : String.Empty)-@Color" @onclick="ButtonClickedEvent">
+﻿<button type="@(EditContext == null ? "button" : "submit")" class="btn btn@(IsOutLine ? "-outline" : String.Empty)-@(Color.ToString().ToLower())" @onclick="ButtonClickedEvent">
     @if (IsBussy)
     {
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
