@@ -5,10 +5,6 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<PageTitle>@localizer["SEO_DNSEditTitle"]</PageTitle>
-<meta name="description" content="@localizer["SEO_DNSEditDescription"]" />
-<meta name="keywords" content="@localizer["SEO_DNSEditKeyWords"]" />
-
 <DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName"/>
 @code {
     private HostNameDTO hostName { get; set; } = new HostNameDTO();

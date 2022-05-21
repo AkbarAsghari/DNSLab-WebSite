@@ -4,10 +4,6 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<PageTitle>@localizer["SEO_UserInfoTitle"]</PageTitle>
-<meta name="description" content="@localizer["SEO_UserInfoDescription"]" />
-<meta name="keywords" content="@localizer["SEO_UserInfoKeyWords"]" />
-
 @if (userInfo == null)
 {
     <Loading />

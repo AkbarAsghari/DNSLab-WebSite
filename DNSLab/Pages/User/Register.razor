@@ -5,12 +5,6 @@
 @inject IAuthService authService
 @inject IStringLocalizer<Resource> localizer
 
-<PageTitle>@localizer["SEO_UserRegisterTitle"]</PageTitle>
-<meta name="description" content="@localizer["SEO_UserRegisterDescription"]" />
-<meta name="keywords" content="@localizer["SEO_UserRegisterKeyWords"]" />
-
-
-
 <div class="container-xl mt-5">
     <div class="row">
         <EditForm class="container-md mt-4 col-lg-4" Model=registerUser Context="RegisterContext">

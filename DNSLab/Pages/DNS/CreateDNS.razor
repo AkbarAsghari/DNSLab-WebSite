@@ -5,11 +5,6 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-
-<PageTitle>@localizer["SEO_DNSCreateTitle"]</PageTitle>
-<meta name="description" content="@localizer["SEO_DNSCreateDescription"]" />
-<meta name="keywords" content="@localizer["SEO_DNSCreateKeyWords"]" />
-
 <DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName"/>
 @code {
     private HostNameDTO hostName = new HostNameDTO() { RecordType = 1 };
