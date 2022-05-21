@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Components.Web
+﻿@using DNSLab.Shared
+@using Microsoft.AspNetCore.Components.Web
 @namespace DNSLab.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -10,8 +11,8 @@
     <meta name="google-site-verification" content="DrTiWMFW0QRpDGyQB_BSAorUG0a7srfmTxFb_wUoeRA" />
     <meta name="description" content="DNSLab Free Dynamic DNS and Managed DNS Provider , دی ان اس لب داینامیک دی ان اس رایگان برای آی پی های متغییر" />
 
-    <title>DNSLab</title>
     <base href="~/" />
+
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
     <link href="DNSLab.styles.css" rel="stylesheet" />
@@ -43,7 +44,7 @@
             $( ".in" ).remove();
         });
     </script>
-    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <component type="typeof(Metadata)" render-mode="ServerPrerendered" />
 </head>
 <body>
     @RenderBody()

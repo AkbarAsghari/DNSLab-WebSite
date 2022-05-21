@@ -36,6 +36,9 @@ builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.Get
 builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
 
+builder.Services.AddSingleton<MetadataProvider>();
+builder.Services.AddScoped<MetadataTransferService>();
+
 builder.Services.AddLocalization();
 
 builder.Services.AddSingleton<ApplicationExceptions>();
