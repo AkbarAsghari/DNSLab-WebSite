@@ -144,13 +144,18 @@
     int activeDNSCount = 0;
     int last24HoursChangesCount = 0;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var user = (await auth.GetAuthenticationStateAsync()).User;
-        if (user.Identity?.IsAuthenticated == true)
-            await Task.WhenAll(LoadUsersCount(), LoadActiveDNSCount(), LoadLast24HoursChangesCount());
-    }
+        if (firstRender)
+        {
+            var user = (await auth.GetAuthenticationStateAsync()).User;
+            if (user.Identity?.IsAuthenticated == true)
+                await Task.WhenAll(LoadUsersCount(), LoadActiveDNSCount(), LoadLast24HoursChangesCount());
 
+            StateHasChanged();
+        }
+
+    }
 
     private async Task LoadUsersCount()
     {
