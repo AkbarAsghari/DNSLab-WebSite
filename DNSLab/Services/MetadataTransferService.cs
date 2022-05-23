@@ -63,8 +63,8 @@ namespace DNSLab.Services
             {
                 metadataValue = new()
                 {
-                    Title = "Default",
-                    Description = "Default"
+                    Title = "دی‌ان‌اس لب - DNSLab",
+                    Description = "سایت داینامیک دی‌ان‌اس DNSLab"
                 };
             }
 
