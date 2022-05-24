@@ -4,13 +4,20 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<CommentForm comment="existComment" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
+@if (existComment == null)
+{
+    <Loading />
+}
+else
+{
+    <CommentForm comment="existComment" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
+}
 
 @code {
 
     [Parameter] public Guid CommentId { get; set; }
 
-    private CommentDTO existComment = new CommentDTO { Text = String.Empty };
+    private CommentDTO existComment;
 
     protected override async Task OnInitializedAsync()
     {

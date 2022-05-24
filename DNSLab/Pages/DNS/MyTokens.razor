@@ -109,7 +109,7 @@
             <a class="btn btn-primary" href="dns/createtoken">@localizer["CreateToken"]</a>
         </div>
         <div class="mb-3">
-            @if (isLoading)
+            @if (tokenSummaries == null)
             {
                 <Loading />
             }
@@ -175,9 +175,8 @@
     Modal TokenDetailsModal { get; set; }
 
     TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
-    TokenDTO token { get; set; }
+    TokenDTO token;
 
-    private bool isLoading = false;
     private bool isRevoking = false;
 
     protected override async Task OnInitializedAsync()
@@ -187,9 +186,7 @@
 
     private async Task LoadTokensSummary()
     {
-        isLoading = true;
         tokenSummaries = await dnsRepository.GetTokenSummary();
-        isLoading = false;
     }
 
     private async Task AcceptDelete()

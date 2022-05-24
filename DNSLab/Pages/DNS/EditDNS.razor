@@ -5,11 +5,18 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-<DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName"/>
+@if (hostName == null)
+{
+    <Loading />
+}
+else
+{
+    <DNSForm Title="@localizer["EditHostName"]" OnValidSubmit="Update" HostName="hostName" />
+}
 @code {
-    private HostNameDTO hostName { get; set; } = new HostNameDTO();
+    private HostNameDTO hostName;
 
-    [Parameter] public Guid HostNameId{ get; set; }
+    [Parameter] public Guid HostNameId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

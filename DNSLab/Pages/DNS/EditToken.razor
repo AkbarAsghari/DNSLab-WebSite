@@ -5,13 +5,18 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-
-<TokenForm Title="@localizer["EditToken"]" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked"/>
-
+@if (tokenAndDNS == null)
+{
+    <Loading />
+}
+else
+{
+    <TokenForm Title="@localizer["EditToken"]" OnValidSubmit="Update" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" />
+}
 @code {
     [Parameter] public Guid TokenId { get; set; }
 
-    private TokenAndDNSDTO tokenAndDNS = new TokenAndDNSDTO() { HostNameIds = new List<Guid>() };
+    private TokenAndDNSDTO tokenAndDNS;
     private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked = new List<HostSummaryAndCheckedDTO>();
 
     protected override async Task OnInitializedAsync()

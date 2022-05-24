@@ -32,7 +32,7 @@
             <a class="btn btn-primary" href="dns/create">@localizer["CreateHostName"]</a>
         </div>
         <div class="mb-3">
-            @if (isLoading)
+            @if (hostNames == null)
             {
                 <Loading />
             }
@@ -109,8 +109,6 @@
 
     private int totalAmountPages { get; set; }
 
-    private bool isLoading = false;
-
     private int ScreenWidth;
 
     protected override async Task OnInitializedAsync()
@@ -123,11 +121,9 @@
 
     private async Task LoadHostNames()
     {
-        isLoading = true;
         var paginatedResponse = await dnsRepository.GetOwnHosts(paginationDTO);
         hostNames = paginatedResponse.Items.ToList();
         totalAmountPages = paginatedResponse.TotalAmountPages;
-        isLoading = false;
     }
 
     private async Task SelectedPage(int page)
