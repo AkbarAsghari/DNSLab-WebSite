@@ -4,6 +4,7 @@
 
 <title>@MetadataTransferService.Title</title>
 <meta name="description" content="@MetadataTransferService.Description" />
+<meta name="keywords" content="@(String.Join(',',MetadataTransferService.Keywords))" />
 
 @code {
     protected override void OnInitialized() => MetadataTransferService.PropertyChanged += OnMetadataChanged;

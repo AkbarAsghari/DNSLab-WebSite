@@ -9,9 +9,10 @@ namespace DNSLab.Services
     public class MetadataTransferService : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private readonly NavigationManager _navigationManager;
+        private readonly MetadataProvider _metadataProvider;
 
         private string _title;
-
         public string Title
         {
             get => _title;
@@ -22,16 +23,25 @@ namespace DNSLab.Services
             }
         }
 
-        private string _description;
-        private readonly NavigationManager _navigationManager;
-        private readonly MetadataProvider _metadataProvider;
 
+        private string _description;
         public string Description
         {
             get => _description;
             set
             {
                 _description = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string[] _keywords;
+        public string[] Keywords
+        {
+            get => _keywords;
+            set
+            {
+                _keywords = value;
                 OnPropertyChanged();
             }
         }
@@ -64,12 +74,17 @@ namespace DNSLab.Services
                 metadataValue = new()
                 {
                     Title = "دی‌ان‌اس لب - DNSLab",
-                    Description = "سایت داینامیک دی‌ان‌اس DNSLab"
+                    Description = "سایت داینامیک دی‌ان‌اس DNSLab",
                 };
             }
 
             Title = metadataValue.Title;
             Description = metadataValue.Description;
+
+            if (metadataValue.Keywords == null)
+                metadataValue.Keywords = new string[] { "DNSLab", "دی‌ان‌اس لب", "دی‌ان‌اس رایگان", "free dns" };
+
+            Keywords = metadataValue.Keywords;
         }
 
         public void Dispose()
