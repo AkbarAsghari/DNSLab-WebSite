@@ -13,4 +13,8 @@
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.3" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\site\" />
+	</ItemGroup>
+
 </Project>

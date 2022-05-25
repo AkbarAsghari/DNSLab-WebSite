@@ -6,6 +6,11 @@
 <meta name="description" content="@MetadataTransferService.Description" />
 <meta name="keywords" content="@(String.Join(',',MetadataTransferService.Keywords))" />
 
+<meta property="og:title" content="@MetadataTransferService.Title">
+<meta property="og:description" content="@MetadataTransferService.Description">
+<meta property="og:image" content="https://dnslab.ir/images/site/site-social-image.png">
+<meta property="og:url" content="https://dnslab.ir">
+
 @code {
     protected override void OnInitialized() => MetadataTransferService.PropertyChanged += OnMetadataChanged;
 
