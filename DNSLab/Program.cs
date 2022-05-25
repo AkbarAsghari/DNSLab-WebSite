@@ -48,6 +48,8 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddResponseCompression();
+
 var host = builder.Build();
 
 
