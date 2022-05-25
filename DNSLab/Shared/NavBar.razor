@@ -5,7 +5,7 @@
     <NotAuthorized>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3 fixed-top">
             <div class="container mw-100">
-                <a class="navbar-brand text-light" asp-area="" asp-page="/">IP : @IPDTO.IPv4</a>
+                <a class="navbar-brand text-light" asp-area="" href="/" asp-page="/">IP : @IPDTO.IPv4</a>
                 <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,7 @@
                 <div class="@NavMenuCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse" @onclick="CollapseNavMenu">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
                                 <span class="oi oi-home" aria-hidden="true"></span> @localizer["Home"]
                             </NavLink>
                         </li>
