@@ -1,19 +1,23 @@
-﻿.slider {
+﻿.load-sliding {
     position: absolute;
     width: 100%;
     height: 5px;
     overflow-x: hidden;
     z-index: 2;
     background: white;
-    top:0;
-    left:0;
+    left: 0;
+}
+
+.load-sliding-top {
+    top: 0;
 }
 
 .line {
     position: absolute;
     opacity: 0.4;
     background: linear-gradient(90deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-    width: 150%;
+    width: inherit;
+    left: 0;
     height: 5px;
 }
 

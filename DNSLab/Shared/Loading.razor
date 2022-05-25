@@ -1,5 +1,9 @@
-﻿<div class="slider">
-  <div class="line"></div>
-  <div class="subline inc"></div>
-  <div class="subline dec"></div>
+﻿<div class="load-sliding @(IsInTop ? "load-sliding-top" : String.Empty)">
+    <div class="line"></div>
+    <div class="subline inc"></div>
+    <div class="subline dec"></div>
 </div>
+
+@code {
+    [Parameter] public bool IsInTop { get; set; } = true;
+}
