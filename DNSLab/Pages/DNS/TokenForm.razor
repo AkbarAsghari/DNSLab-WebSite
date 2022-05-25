@@ -22,7 +22,11 @@
                     <p>@localizer["SelectDNSTitle"]</p>
                     <p class="alert alert-info">@localizer["SelectDNSDescription"]</p>
                     <div class="row g-2">
-                        @if (HostSummariesAndChecked.Count == 0)
+                        @if (HostSummariesAndChecked == null)
+                        {
+                            <Loading IsInTop="false" />
+                        }
+                        else if (HostSummariesAndChecked.Count == 0)
                         {
                             <p>@localizer["YouHaveNoActiveDNS"] <a href="dns/create">@localizer["Click"]</a></p>
                         }
