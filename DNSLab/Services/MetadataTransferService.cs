@@ -82,9 +82,11 @@ namespace DNSLab.Services
             Description = metadataValue.Description;
 
             if (metadataValue.Keywords == null)
-                metadataValue.Keywords = new string[] { "DNSLab", "دی‌ان‌اس لب", "دی‌ان‌اس رایگان", "free dns" };
+                metadataValue.Keywords = new string[] { "دی‌ان‌اس رایگان", "free dns" };
 
-            Keywords = metadataValue.Keywords;
+            string[] staticKeywords = new string[] { "DNSLab", "دی‌ان‌اس لب" };
+
+            Keywords = staticKeywords.Concat(metadataValue.Keywords).ToArray();
         }
 
         public void Dispose()

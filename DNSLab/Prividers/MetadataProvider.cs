@@ -9,7 +9,8 @@
                 new()
                 {
                     Title = "دی‌ان‌اس لب - DNSLab",
-                    Description = "داینامیک دی ان اس رایگان"
+                    Description = "داینامیک دی ان اس رایگان",
+                    Keywords = new string[] { "دی ان اس رایگان", "home", "خانه" }
                 }
             },
             {
@@ -17,7 +18,8 @@
                 new()
                 {
                     Title = "ورود به سیستم",
-                    Description = "ورود به حساب کاربری سایت دی‌ان‌اس لب"
+                    Description = "ورود به حساب کاربری سایت دی‌ان‌اس لب",
+                    Keywords = new string[] { "ورود به حساب کاربری", "ورود به سیستم" }
                 }
             },
             {
@@ -25,7 +27,8 @@
                 new()
                 {
                     Title = "ثبت نام در سیستم",
-                    Description = "ثبت نام در سایت دی‌ان‌اس لب"
+                    Description = "ثبت نام در سایت دی‌ان‌اس لب",
+                    Keywords = new string[] { "ثبت نام", "ایجاد حساب کاربری" }
                 }
             },
             {
@@ -33,7 +36,8 @@
                 new()
                 {
                     Title = "API های سایت",
-                    Description = "API - برای توسعه دهندگان"
+                    Description = "API - برای توسعه دهندگان",
+                    Keywords = new string[] { "API", "ای‌پی‌آی", "IP" }
                 }
             },
             {
@@ -41,7 +45,8 @@
                 new()
                 {
                     Title = "ارسال دیدگاه",
-                    Description = "ارسال دیدگاه برای سایت dnslab"
+                    Description = "ارسال دیدگاه برای سایت dnslab",
+                    Keywords = new string[] { "ایجاد دیدگاه", "create new comment" }
                 }
             },
             {
@@ -49,7 +54,8 @@
                 new()
                 {
                     Title = "ویرایش دیدگاه ارسال شده",
-                    Description = "ویرایش دیدگاه ارسال شده به سایت dnslab"
+                    Description = "ویرایش دیدگاه ارسال شده به سایت dnslab",
+                    Keywords = new string[] { "ویرایش دیدگاه", "edit comment" }
                 }
             },
             {
@@ -57,7 +63,8 @@
                 new()
                 {
                     Title = "دیدگاه‌های من",
-                    Description = "دیدگاه‌های من"
+                    Description = "دیدگاه‌های من",
+                    Keywords = new string[] { "دیدگاه های من", "my comments" }
                 }
             },
             {
@@ -65,7 +72,8 @@
                 new()
                 {
                     Title = "قوانین و شرایط استفاده",
-                    Description = "قوانین و شرایط استفاده از سایت dnslab"
+                    Description = "قوانین و شرایط استفاده از سایت dnslab",
+                    Keywords = new string[] { "شرایط و ضوابط", "term of service" }
                 }
             },
             {
@@ -73,7 +81,8 @@
                 new()
                 {
                     Title = "ایجاد هاست‌نیم جدید",
-                    Description = "صفحه ایجاد هاست‌نیم یا دی‌ان‌اس جدید"
+                    Description = "صفحه ایجاد هاست‌نیم یا دی‌ان‌اس جدید",
+                    Keywords = new string[] { "ایجاد دی ان اس", "create dns" }
                 }
             },
             {
@@ -81,7 +90,8 @@
                 new()
                 {
                     Title = "ایجاد توکن جدید",
-                    Description = "صفحه ایحاد توکن جدید"
+                    Description = "صفحه ایحاد توکن جدید",
+                    Keywords = new string[] { "ایجاد توکن", "create token" }
                 }
             },
             {
@@ -89,7 +99,8 @@
                 new()
                 {
                     Title = "تاریخچه تغییرات",
-                    Description = "تاریخچه تغییرات آی‌پی و هاست‌نیم های شما"
+                    Description = "تاریخچه تغییرات آی‌پی و هاست‌نیم های شما",
+                    Keywords = new string[] { "تاریخچه تغییرات", "changes histories" }
                 }
             },
             {
@@ -97,7 +108,8 @@
                 new()
                 {
                     Title = "ویرایش هاست‌نیم",
-                    Description = "ویرایش هاست‌نیم ایجاد شده"
+                    Description = "ویرایش هاست‌نیم ایجاد شده",
+                    Keywords = new string[] { "ویرایش دی ان اس", "edit dns" }
                 }
             },
             {
@@ -105,7 +117,8 @@
                 new()
                 {
                     Title = "ویرایش توکن",
-                    Description = "ویرایش توکن ایجاد شده"
+                    Description = "ویرایش توکن ایجاد شده",
+                    Keywords = new string[] { "ویرایش توکن", "edit token" }
                 }
             },
             {
@@ -113,7 +126,8 @@
                 new()
                 {
                     Title = "هاست‌نیم ها",
-                    Description = "دی‌ان‌اس یا هاست نیم های من"
+                    Description = "دی‌ان‌اس یا هاست نیم های من",
+                    Keywords = new string[] { "دی ان اس های من", "my DNSs" }
                 }
             },
             {
@@ -121,7 +135,8 @@
                 new()
                 {
                     Title = "توکن ها",
-                    Description = "توکن های ثبت شما من"
+                    Description = "توکن های ثبت شما من",
+                    Keywords = new string[] { "توکن های من", "my tokens" }
                 }
             },
             {
@@ -129,7 +144,8 @@
                 new()
                 {
                     Title = "صفحه دانلود",
-                    Description = "دانلود برنامه های DNSLab"
+                    Description = "دانلود برنامه های DNSLab",
+                    Keywords = new string[] { "دالنود" , "برنامه ویندوزی", "download win" }
                 }
             },
             {
@@ -137,7 +153,8 @@
                 new()
                 {
                     Title = "صفحه مورد نظر یافت نشد",
-                    Description = "صفحه مورد نظر یافت نشد"
+                    Description = "صفحه مورد نظر یافت نشد",
+                    Keywords = new string[] { "404", "not found" , "صفحه یافت نشد" }
                 }
             },
             {
@@ -145,7 +162,8 @@
                 new()
                 {
                     Title = "خطای داخلی سرور رخ داده",
-                    Description = "خطای داخلی سرور رخ داده"
+                    Description = "خطای داخلی سرور رخ داده",
+                    Keywords = new string[] { "500" , "خطای داخلی سرور" , "internal server error" }
                 }
             },
             {
@@ -153,7 +171,8 @@
                 new()
                 {
                     Title = "سرویس در دسترس نیست",
-                    Description = "سرویس در دسترس نیست"
+                    Description = "سرویس در دسترس نیست",
+                    Keywords = new string[] { "503" , "سرویس در دسترس نیست", "Service is unavailable" }
                 }
             },
             {
@@ -161,7 +180,8 @@
                 new()
                 {
                     Title = "پشتیبانی",
-                    Description = "صفحه پشتیبانی و راهنمای سایت DNSLab"
+                    Description = "صفحه پشتیبانی و راهنمای سایت DNSLab",
+                    Keywords = new string[] { "پشتیبانی", "support" }
                 }
             },
             {
@@ -169,7 +189,8 @@
                 new()
                 {
                     Title = "جستجوی دی‌ان‌اس",
-                    Description = "جستجو و دریافت آی‌پی بر اساس دی‌ان‌اس"
+                    Description = "جستجو و دریافت آی‌پی بر اساس دی‌ان‌اس",
+                    Keywords = new string[] { "جستجوی دی ان اس", "dns lookup" }
                 }
             },
             {
@@ -177,7 +198,8 @@
                 new()
                 {
                     Title = "پینگ",
-                    Description = "بررسی پینگ بر اساس آی‌پی یا ‌آدرس"
+                    Description = "بررسی پینگ بر اساس آی‌پی یا ‌آدرس",
+                    Keywords = new string[] { "بررسی پینگ", "ping" }
                 }
             },
             {
@@ -185,7 +207,8 @@
                 new()
                 {
                     Title = "بررسی پورت",
-                    Description = "بررسی باز بودن پورت آی‌پی یا آدرس"
+                    Description = "بررسی باز بودن پورت آی‌پی یا آدرس",
+                    Keywords = new string[] { "بررسی باز بودن پورت", "port checker" }
                 }
             },
             {
@@ -193,7 +216,8 @@
                 new()
                 {
                     Title = "جستجوی معکوس",
-                    Description = "جستجو بر اساس آی‌پی و بدست آوردن آدرس DNS (دی‌ان‌اس)"
+                    Description = "جستجو بر اساس آی‌پی و بدست آوردن آدرس DNS (دی‌ان‌اس)",
+                    Keywords = new string[] { "جستجوی معکوس ای پی یا آدرس", "reverse lookup" }
                 }
             },
             {
@@ -201,7 +225,8 @@
                 new()
                 {
                     Title = "ابزار",
-                    Description = "ابزار های سایت DNSLab"
+                    Description = "ابزار های سایت DNSLab",
+                    Keywords = new string[] { "ابزار ها", "tools" }
                 }
             },
             {
@@ -209,7 +234,8 @@
                 new()
                 {
                     Title = "تغییر رمز عبور",
-                    Description = "تغییر رمز عبور در سایت"
+                    Description = "تغییر رمز عبور در سایت",
+                    Keywords = new string[] { "تغییر رمز عبور", "change password" }
                 }
             },
             {
@@ -217,7 +243,8 @@
                 new()
                 {
                     Title = "تایید ایمیل",
-                    Description = "تایید ایمیل حساب کاربری در سایت dnslab"
+                    Description = "تایید ایمیل حساب کاربری در سایت dnslab",
+                    Keywords = new string[] { "تایید ایمیل", "confirm email" }
                 }
             },
             {
@@ -225,7 +252,8 @@
                 new()
                 {
                     Title = "فراموشی رمز عبور",
-                    Description = "فراموشی رمز عبور ، رمز عبور خود را فراموش کرده ام"
+                    Description = "فراموشی رمز عبور ، رمز عبور خود را فراموش کرده ام",
+                    Keywords = new string[] { "فراموشی رمز عبور", "forget password" }
                 }
             },
             {
@@ -233,7 +261,8 @@
                 new()
                 {
                     Title = "اطلاعات حساب کاربری",
-                    Description = "اطلاعات حساب کاربری و اطلاعات ورود و نام کاربری و ..."
+                    Description = "اطلاعات حساب کاربری و اطلاعات ورود و نام کاربری و ...",
+                    Keywords = new string[] { "اطلاعات حساب کاربری", "user information" }
                 }
             },
             {
@@ -241,7 +270,8 @@
                 new()
                 {
                     Title = "خروج",
-                    Description = "خروج"
+                    Description = "خروج",
+                    Keywords = new string[] { "خروج", "logout" }
                 }
             },
             {
@@ -249,7 +279,8 @@
                 new()
                 {
                     Title = "بازیابی رمز عبور",
-                    Description = "بازیابی رمز عبور و انتخاب رمز جدید"
+                    Description = "بازیابی رمز عبور و انتخاب رمز جدید",
+                    Keywords = new string[] { "بازیابی رمز عبور", "reset password" }
                 }
             }
         };
