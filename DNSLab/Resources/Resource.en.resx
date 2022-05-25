@@ -129,6 +129,9 @@
   <data name="ActivationLinkSent" xml:space="preserve">
     <value>Activation link sent</value>
   </data>
+  <data name="API" xml:space="preserve">
+    <value>API For Developers</value>
+  </data>
   <data name="Approved" xml:space="preserve">
     <value>Approved</value>
   </data>

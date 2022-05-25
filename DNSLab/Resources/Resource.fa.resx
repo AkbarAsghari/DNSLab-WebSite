@@ -129,6 +129,9 @@
   <data name="ActivationLinkSent" xml:space="preserve">
     <value>لینک فعال سازی ارسال شد</value>
   </data>
+  <data name="API" xml:space="preserve">
+    <value>برای توسعه دهندگان</value>
+  </data>
   <data name="Approved" xml:space="preserve">
     <value>تایید شده</value>
   </data>
