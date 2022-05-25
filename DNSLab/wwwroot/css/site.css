@@ -118,6 +118,10 @@ a, .btn-link {
     direction: ltr
 }
 
+.dir-ltr {
+    direction: ltr
+}
+
 .page[style*="direction:rtl"] .nav-link > svg {
     padding-left: inherit;
 }
