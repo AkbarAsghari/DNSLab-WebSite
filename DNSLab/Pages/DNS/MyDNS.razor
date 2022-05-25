@@ -5,99 +5,98 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
-<Modal @ref="DeleteModal">
-    <Title>
-        <label>@localizer["AreYouSureDel"]</label>
-    </Title>
-    <Body>
-        <label>@localizer["HostName"] : @deleteRcord.Name </label>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
+@if (hostNames == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeleteModal">
+        <Title>
+            <label>@localizer["AreYouSureDel"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["HostName"] : @deleteRcord.Name </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=DeleteModal.Close></BaseButtonComponent>
-        <BaseButtonComponent Caption=@localizer["Delete"]
+            <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash
                              OnClick=AcceptDelete></BaseButtonComponent>
-    </Footer>
-</Modal>
-
-<div class="card mb-4">
-    <div class="card-header">@localizer["HostNames"]</div>
-    <div class="card-body">
-        <div class="mb-3">
-            <a class="btn btn-primary" href="dns/create">@localizer["CreateHostName"]</a>
-        </div>
-        <div class="mb-3">
-            @if (hostNames == null)
-            {
-                <Loading />
-            }
-            else if (hostNames.Count == 0)
-            {
-                <text>@localizer["ThereIsNoHost"]</text>
-            }
-            else
-            {
-                @foreach (var item in hostNames)
+        </Footer>
+    </Modal>
+    <div class="card mb-4">
+        <div class="card-header">@localizer["HostNames"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="dns/create">@localizer["CreateHostName"]</a>
+            </div>
+            <div class="mb-3">
+                @if (hostNames.Count == 0)
                 {
-                    <hr />
-                    <div class="row">
-                        <div class="col-lg-9 col-8">
-                            <div class="row">
-                                <div class="col-md-4 col-xl-4">
-                                    <a class="text-decoration-none" href="@($"http://{@item.Name}.{@item.Domain}")" target="_blank">
-                                        <p><code>@item.Name</code>.@item.Domain</p>
-                                    </a>
+                    <text>@localizer["ThereIsNoHost"]</text>
+                }
+                else
+                {
+                    @foreach (var item in hostNames)
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-9 col-8">
+                                <div class="row">
+                                    <div class="col-md-4 col-xl-4">
+                                        <a class="text-decoration-none" href="@($"http://{@item.Name}.{@item.Domain}")" target="_blank">
+                                            <p><code>@item.Name</code>.@item.Domain</p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5 col-xl-6">
+                                        <p class="d-inline">IP / Target </p>
+                                        <a class="text-decoration-none">
+                                            @switch ((DNSRecordTypeEnum)item.RecordType)
+                                            {
+                                                case DNSRecordTypeEnum.A:
+                                                    @item.IPv4Address
+                                                    break;
+                                                case DNSRecordTypeEnum.AAAA:
+                                                    @item.IPv6Address
+                                                    break;
+                                                case DNSRecordTypeEnum.CNAME:
+                                                    @item.HostNameAlias
+                                                    break;
+                                            }
+                                        </a>
+                                    </div>
+                                    <p class="col-md-3 col-xl-2">@localizer["Type"] <a class="btn btn-sm btn-dark disabled">@((DNSRecordTypeEnum)item.RecordType)</a></p>
                                 </div>
-                                <div class="col-md-5 col-xl-6">
-                                    <p class="d-inline">IP / Target </p>
-                                    <a class="text-decoration-none">
-                                        @switch ((DNSRecordTypeEnum)item.RecordType)
-                                        {
-                                            case DNSRecordTypeEnum.A:
-                                                @item.IPv4Address
-                                                break;
-                                            case DNSRecordTypeEnum.AAAA:
-                                                @item.IPv6Address
-                                                break;
-                                            case DNSRecordTypeEnum.CNAME:
-                                                @item.HostNameAlias
-                                                break;
-                                        }
-                                    </a>
-                                </div>
-                                <p class="col-md-3 col-xl-2">@localizer["Type"] <a class="btn btn-sm btn-dark disabled">@((DNSRecordTypeEnum)item.RecordType)</a></p>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
-                            <BaseButtonComponent Caption=@localizer["Edit"]
+                            <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
                                          IsOutLine=true
                                          Icon=IconEnum.Pencil
                                          OnClick=@(()=>EditHostName(item)) />
-                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Danger
                                          IsOutLine=true
                                          Icon=IconEnum.Trash
                                          OnClick=@(()=>DeleteHostName(item)) />
+                            </div>
                         </div>
-                    </div>
-
+                    }
+                    <hr />
+                    <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
                 }
-
-                <hr />
-                <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
-            }
+            </div>
         </div>
     </div>
-</div>
-
+}
 
 @code {
     List<HostNameDTO> hostNames;

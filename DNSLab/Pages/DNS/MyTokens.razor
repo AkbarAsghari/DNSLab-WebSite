@@ -4,169 +4,170 @@
 @inject IDNSRepository dnsRepository
 @inject NavigationManager NavigationManager
 
-
-<Modal @ref="DeleteModal">
-    <Title>
-        <label>@localizer["AreYouSureDel"]</label>
-    </Title>
-    <Body>
-        <label>@localizer["TokenName"] : @deleteRcord.Name </label>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
+@if (tokenSummaries == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeleteModal">
+        <Title>
+            <label>@localizer["AreYouSureDel"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["TokenName"] : @deleteRcord.Name </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=DeleteModal.Close />
-        <BaseButtonComponent Caption=@localizer["Delete"]
+            <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash
                              OnClick=AcceptDelete />
-    </Footer>
-</Modal>
+        </Footer>
+    </Modal>
 
-<Modal @ref="TokenDetailsModal" ModalSize="ModalSizeEnum.XLarge">
-    <Title>
-        <label>@localizer["Details"]</label>
-    </Title>
-    <Body>
-        @if (token == null)
-        {
-            <Loading />
-        }
-        else
-        {
-            <p>@localizer["TokenName"] : @token.Name </p>
-            <hr />
+    <Modal @ref="TokenDetailsModal" ModalSize="ModalSizeEnum.XLarge">
+        <Title>
+            <label>@localizer["Details"]</label>
+        </Title>
+        <Body>
+            @if (token == null)
+            {
+                <Loading />
+            }
+            else
+            {
+                <p>@localizer["TokenName"] : @token.Name </p>
+                <hr />
 
-            <div class="row">
-                @if (@isRevoking)
-                {
-                    <p class="m-0 col-xl-5 col-lg-6 col-md-7">توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</p>
-                    <div class="col-lg-4 btn-group tools-result">
-                        <BaseButtonComponent Caption=@localizer["Continue"]
+                <div class="row">
+                    @if (@isRevoking)
+                    {
+                        <p class="m-0 col-xl-5 col-lg-6 col-md-7">توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</p>
+                        <div class="col-lg-4 btn-group tools-result">
+                            <BaseButtonComponent Caption=@localizer["Continue"]
                                      IsBussyCaption=@localizer["Progressing"]
                                      CssClass="btn-sm"
                                      Color=ColorEnum.Danger
                                      Icon=IconEnum.Loop
                                      OnClick=ContinueRevokeKey />
-                        <BaseButtonComponent Caption=@localizer["Cancel"]
+                            <BaseButtonComponent Caption=@localizer["Cancel"]
                                      IsBussyCaption=@localizer["Progressing"]
                                      CssClass="btn-sm"
                                      Color=ColorEnum.Success
                                      Icon=IconEnum.Check
                                      OnClick=ChangeRevokeStatus />
-                    </div>
-                }
-                else
-                {
-                    <p class="col-lg-4 col-xl-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
-                    <BaseButtonComponent Caption=@localizer["RevokeKey"]
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="col-lg-4 col-xl-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
+                        <BaseButtonComponent Caption=@localizer["RevokeKey"]
                                  IsBussyCaption=@localizer["Progressing"]
                                  IsOutLine=true
                                  CssClass="btn-sm col-lg-2"
                                  Color=ColorEnum.Danger
                                  Icon=IconEnum.Loop
                                  OnClick=ChangeRevokeStatus />
-                }
+                    }
 
-            </div>
-            <hr />
+                </div>
+                <hr />
 
-            <p>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</p>
-            <hr />
-            <p>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</p>
-            <div class="row m-1 gap-2">
-                <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/wget?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (wget)</a>
-                <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/curl?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (curl)</a>
-            </div>
-            <hr />
-            <p>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</p>
-            <div class="row m-1">
-                <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/powershell/restmethod?tokenId=@token.Id&key=@token.Key">دانلود فایل ps1. (RestMethod)</a>
-            </div>
-            <hr />
+                <p>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</p>
+                <hr />
+                <p>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</p>
+                <div class="row m-1 gap-2">
+                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/wget?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (wget)</a>
+                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/curl?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (curl)</a>
+                </div>
+                <hr />
+                <p>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</p>
+                <div class="row m-1">
+                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/powershell/restmethod?tokenId=@token.Id&key=@token.Key">دانلود فایل ps1. (RestMethod)</a>
+                </div>
+                <hr />
 
-            <p>لینک بروزرسانی آی پی های توکن</p>
-            <div class="row m-1">
-                <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
-            </div>
-            <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
-        }
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Close"]
+                <p>لینک بروزرسانی آی پی های توکن</p>
+                <div class="row m-1">
+                    <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
+                </div>
+                <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
+            }
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Close"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=TokenDetailsModal.Close />
-    </Footer>
-</Modal>
+        </Footer>
+    </Modal>
+    <div class="card mb-4">
+        <div class="card-header">@localizer["Tokens"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="dns/createtoken">@localizer["CreateToken"]</a>
+            </div>
+            <div class="mb-3">
 
-<div class="card mb-4">
-    <div class="card-header">@localizer["Tokens"]</div>
-    <div class="card-body">
-        <div class="mb-3">
-            <a class="btn btn-primary" href="dns/createtoken">@localizer["CreateToken"]</a>
-        </div>
-        <div class="mb-3">
-            @if (tokenSummaries == null)
-            {
-                <Loading />
-            }
-            else if (tokenSummaries.Count() == 0)
-            {
-                <text>@localizer["ThereIsNoTokens"]</text>
-            }
-            else
-            {
-                @foreach (var item in tokenSummaries.OrderByDescending(x => x.CreateDate))
+                @if (tokenSummaries.Count() == 0)
                 {
-                    <hr />
-                    <div class="row">
-                        <div class="row col-xl-8 col-7 align-self-center">
-                            <div class="col-lg-3 col-sm-12 align-self-center">
-                                <p class="m-0">@localizer["TokenName"] : @item.Name</p>
-                            </div>
-                            <div class="col-lg-4 col-sm-12 align-self-center">
-                                <div class="row">
-                                    <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
-                                    @if (@item.UpdateDate != null)
-                                    {
-                                        <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
-                                    }
+                    <text>@localizer["ThereIsNoTokens"]</text>
+                }
+                else
+                {
+                    @foreach (var item in tokenSummaries.OrderByDescending(x => x.CreateDate))
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="row col-xl-8 col-7 align-self-center">
+                                <div class="col-lg-3 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["TokenName"] : @item.Name</p>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                    <div class="row">
+                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        @if (@item.UpdateDate != null)
+                                        {
+                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-sm-12 align-self-center">
-                                <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
-                            <BaseButtonComponent Caption=@localizer["Details"]
+                            <div class="col-xl-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["Details"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Primary
                                          IsOutLine=true
                                          Icon=IconEnum.Cog
                                          OnClick=@(()=>OpenToken(item)) />
-                            <BaseButtonComponent Caption=@localizer["Edit"]
+                                <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
                                          IsOutLine=true
                                          Icon=IconEnum.Pencil
                                          OnClick=@(()=>EditToken(item)) />
-                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Danger
                                          IsOutLine=true
                                          Icon=IconEnum.Trash
                                          OnClick=@(()=>DeleteToken(item)) />
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
-</div>
-
+}
 
 @code {
     IEnumerable<TokenSummaryDTO> tokenSummaries;
