@@ -3,6 +3,7 @@ using DNSLab.Helper.Extensions;
 using DNSLab.Interfaces.Auth;
 using Jdenticon;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.JSInterop;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -12,14 +13,15 @@ namespace DNSLab.Prividers
 {
     public class JWTAuthenticationStateProvider : AuthenticationStateProvider, IAuthService
     {
-        private readonly ILocalStorageService localStorage;
+        private readonly ProtectedLocalStorage localStorage;
+
         private readonly string TokenKey = "TOKENKEY";
         private AuthenticationState Anonymouse =>
             new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
 
         private readonly HttpClient HttpClient;
 
-        public JWTAuthenticationStateProvider(ILocalStorageService localStorage, HttpClient httpClient)
+        public JWTAuthenticationStateProvider(ProtectedLocalStorage localStorage, HttpClient httpClient)
         {
             this.localStorage = localStorage;
             this.HttpClient = httpClient;
@@ -29,16 +31,15 @@ namespace DNSLab.Prividers
         {
             try
             {
-                var token = await localStorage.GetItemAsync<string>(TokenKey);
-                if (String.IsNullOrEmpty(token))
-                    return Anonymouse;
+                var token = await localStorage.GetAsync<string>(TokenKey);
 
-                return BuildAuthenticationState(token);
+                if (token.Success)
+                    if (!String.IsNullOrEmpty(token.Value))
+                        return BuildAuthenticationState(token.Value);
             }
-            catch (Exception ex)
-            {
-                return Anonymouse;
-            }
+            catch { }
+
+            return Anonymouse;
         }
 
         public AuthenticationState BuildAuthenticationState(string token)
@@ -99,7 +100,7 @@ namespace DNSLab.Prividers
         {
             try
             {
-                await localStorage.SetItemAsStringAsync(TokenKey, token);
+                await localStorage.SetAsync(TokenKey, token);
                 var authState = BuildAuthenticationState(token);
                 NotifyAuthenticationStateChanged(Task.FromResult(authState));
             }
@@ -110,7 +111,7 @@ namespace DNSLab.Prividers
         {
             try
             {
-                await localStorage.RemoveItemAsync(TokenKey);
+                await localStorage.DeleteAsync(TokenKey);
                 HttpClient.DefaultRequestHeaders.Authorization = null;
                 NotifyAuthenticationStateChanged(Task.FromResult(Anonymouse));
             }

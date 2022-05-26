@@ -16,19 +16,24 @@
 
     private List<HostSummaryAndCheckedDTO> HostSummariesAndChecked;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var HostSummaries = await dnsRepository.GetHostSummaries();
+        if (firstRender)
+        {
+            var HostSummaries = await dnsRepository.GetHostSummaries();
 
-        HostSummariesAndChecked = new List<HostSummaryAndCheckedDTO>();
+            HostSummariesAndChecked = new List<HostSummaryAndCheckedDTO>();
 
-        foreach (var item in HostSummaries)
-            HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
-                {
-                    Id = item.Id,
-                    Address = item.Address,
-                    IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
-                });
+            foreach (var item in HostSummaries)
+                HostSummariesAndChecked.Add(new HostSummaryAndCheckedDTO
+                    {
+                        Id = item.Id,
+                        Address = item.Address,
+                        IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
+                    });
+
+            StateHasChanged();
+        }
     }
 
     public async Task Create()

@@ -3,99 +3,103 @@
 @inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager NavigationManager
-
-<Modal @ref="DeleteModal">
-    <Title>
-        <label>@localizer["AreYouSureDel"]</label>
-    </Title>
-    <Body>
-        <label>@localizer["CommentText"] : @deleteRcord.Text </label>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
+@if (myComments == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeleteModal">
+        <Title>
+            <label>@localizer["AreYouSureDel"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["CommentText"] : @deleteRcord.Text </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=DeleteModal.Close></BaseButtonComponent>
-        <BaseButtonComponent Caption=@localizer["Delete"]
+            <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash
                              OnClick=AcceptDelete></BaseButtonComponent>
-    </Footer>
-</Modal>
+        </Footer>
+    </Modal>
 
-<div class="card mb-4">
-    <div class="card-header">@localizer["MyComments"]</div>
-    <div class="card-body">
-        <div class="mb-3">
-            <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
-        </div>
-        <div class="mb-3">
-            @if (isLoading)
-            {
-                <Loading />
-            }
-            else if (myComments.Count() == 0)
-            {
-                <text>@localizer["ThereIsNoComment"]</text>
-            }
-            else
-            {
-                @foreach (var item in myComments)
+    <div class="card mb-4">
+        <div class="card-header">@localizer["MyComments"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
+            </div>
+            <div class="mb-3">
+
+                @if (myComments.Count() == 0)
                 {
-                    <hr />
-                    <div class="row">
-                        <div class="row col-lg-9 col-8">
-                            <div class="col-lg-6 col-sm-12 align-self-center">
-                                <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
-                            </div>
-                            <div class="col-lg-4 col-sm-12 align-self-center">
-                                <div class="row">
-                                    <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
-                                    @if (@item.UpdateDate != null)
-                                    {
-                                        <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
-                                    }
+                    <text>@localizer["ThereIsNoComment"]</text>
+                }
+                else
+                {
+                    @foreach (var item in myComments)
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="row col-lg-9 col-8">
+                                <div class="col-lg-6 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                    <div class="row">
+                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        @if (@item.UpdateDate != null)
+                                        {
+                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-12 align-self-center">
+                                    <p class="m-0">
+                                        @switch (@item.IsApproved)
+                                        {
+                                            case null:
+                                                <a class="btn btn-sm btn-secondary disabled">@localizer["NotChecked"]</a>
+                                                break;
+                                            case true:
+                                                <a class="btn btn-sm btn-success disabled">@localizer["Approved"]</a>
+                                                break;
+                                            case false:
+                                                <a class="btn btn-sm btn-danger disabled">@localizer["Disapproval"]</a>
+                                                break;
+                                        }
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-sm-12 align-self-center">
-                                <p class="m-0">
-                                    @switch (@item.IsApproved)
-                                    {
-                                        case null:
-                                            <a class="btn btn-sm btn-secondary disabled">@localizer["NotChecked"]</a>
-                                            break;
-                                        case true:
-                                            <a class="btn btn-sm btn-success disabled">@localizer["Approved"]</a>
-                                            break;
-                                        case false:
-                                            <a class="btn btn-sm btn-danger disabled">@localizer["Disapproval"]</a>
-                                            break;
-                                    }
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
-                            <BaseButtonComponent Caption=@localizer["Edit"]
+                            <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Warning
                                          Icon=IconEnum.Pencil
                                          OnClick=@(()=>EditComment(item))></BaseButtonComponent>
-                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Danger
                                          Icon=IconEnum.Trash
                                          OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
+                            </div>
                         </div>
-                    </div>
 
+                    }
                 }
-            }
+            </div>
         </div>
     </div>
-</div>
+}
+
 
 
 @code {
@@ -105,9 +109,13 @@
     private bool isLoading = false;
     private bool isInProgress = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadComments();
+        if (firstRender)
+        {
+            await LoadComments();
+            StateHasChanged();
+        }
     }
 
     private async Task LoadComments()

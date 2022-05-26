@@ -110,12 +110,16 @@ else
 
     private int ScreenWidth;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadHostNames();
+        if (firstRender)
+        {
+            await LoadHostNames();
 
-        var dimensions = await JS.GetDimensions();
-        ScreenWidth = dimensions.Width;
+            var dimensions = await JS.GetDimensions();
+            ScreenWidth = dimensions.Width;
+            StateHasChanged();
+        }
     }
 
     private async Task LoadHostNames()

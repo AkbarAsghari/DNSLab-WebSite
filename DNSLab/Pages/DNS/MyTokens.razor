@@ -180,9 +180,13 @@ else
 
     private bool isRevoking = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await LoadTokensSummary();
+        if (firstRender)
+        {
+            await LoadTokensSummary();
+            StateHasChanged();
+        }
     }
 
     private async Task LoadTokensSummary()

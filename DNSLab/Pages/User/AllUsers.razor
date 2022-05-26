@@ -40,8 +40,12 @@ else
 @code {
     IEnumerable<UserDTO> allUsers;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        allUsers = await accountReository.GetAll();
+        if (firstRender)
+        {
+            allUsers = await accountReository.GetAll();
+            StateHasChanged();
+        }
     }
 }

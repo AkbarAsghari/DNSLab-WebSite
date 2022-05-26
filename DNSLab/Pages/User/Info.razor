@@ -171,10 +171,14 @@ else
     Modal ChangeEmailModal { get; set; }
 
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        userInfo = await accountRepository.Get();
-        changeEmail = new ChangeEmailDTO { Email = userInfo.Email };
+        if (firstRender)
+        {
+            userInfo = await accountRepository.Get();
+            changeEmail = new ChangeEmailDTO { Email = userInfo.Email };
+            StateHasChanged();
+        }
     }
 
     private async Task SaveChanges()

@@ -6,9 +6,13 @@
 <p>در حال خروج از سامانه لطفا صبر کنید ...</p>
 
 @code {
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await authService.Logout();
-        navigationManager.NavigateTo("");
+        if (firstRender)
+        {
+            await authService.Logout();
+            navigationManager.NavigateTo("");
+            StateHasChanged();
+        }
     }
 }

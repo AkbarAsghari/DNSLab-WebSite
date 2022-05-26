@@ -54,10 +54,13 @@ else
 @code {
     List<DNSChangeHistoryDTO> dNSChangeHistories;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await base.OnInitializedAsync();
-        dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
+        if (firstRender)
+        {
+            dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
+            StateHasChanged();
+        }
     }
 }
 

@@ -19,9 +19,13 @@ else
 
     private CommentDTO existComment;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        existComment = await commentRepository.GetComment(CommentId);
+        if (firstRender)
+        {
+            existComment = await commentRepository.GetComment(CommentId);
+            StateHasChanged();
+        }
     }
 
     public async Task Update()

@@ -18,9 +18,13 @@ else
 
     [Parameter] public Guid HostNameId { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        hostName = await dnsRepository.GetHostName(HostNameId);
+        if (firstRender)
+        {
+            hostName = await dnsRepository.GetHostName(HostNameId);
+            StateHasChanged();
+        }
     }
 
     public async Task Update()
