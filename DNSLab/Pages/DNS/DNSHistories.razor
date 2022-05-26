@@ -59,7 +59,7 @@ else
         if (firstRender)
         {
             dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 }

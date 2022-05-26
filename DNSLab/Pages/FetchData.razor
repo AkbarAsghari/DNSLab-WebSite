@@ -46,7 +46,7 @@ else
         if (firstRender)
         {
             forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 }

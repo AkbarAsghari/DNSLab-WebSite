@@ -177,7 +177,7 @@ else
         {
             userInfo = await accountRepository.Get();
             changeEmail = new ChangeEmailDTO { Email = userInfo.Email };
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 

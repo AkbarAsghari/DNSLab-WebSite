@@ -12,7 +12,7 @@
         {
             await authService.Logout();
             navigationManager.NavigateTo("");
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 }

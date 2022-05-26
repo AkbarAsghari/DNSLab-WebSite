@@ -23,7 +23,7 @@ else
         if (firstRender)
         {
             hostName = await dnsRepository.GetHostName(HostNameId);
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 

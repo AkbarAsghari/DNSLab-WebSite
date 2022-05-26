@@ -73,7 +73,7 @@
         {
             var user = (await auth.GetAuthenticationStateAsync()).User;
             _IsUserAuthorized = user.Identity?.IsAuthenticated;
-            StateHasChanged();
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 }

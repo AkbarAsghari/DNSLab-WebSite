@@ -24,7 +24,7 @@ else
         if (firstRender)
         {
             existComment = await commentRepository.GetComment(CommentId);
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 

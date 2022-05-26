@@ -148,9 +148,10 @@
         {
             var user = (await auth.GetAuthenticationStateAsync()).User;
             if (user.Identity?.IsAuthenticated == true)
+            {
                 await Task.WhenAll(LoadUsersCount(), LoadActiveDNSCount(), LoadLast24HoursChangesCount());
-
-            StateHasChanged();
+                await this.InvokeAsync(()=> StateHasChanged());
+            }
         }
 
     }

@@ -32,7 +32,7 @@
                         IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
                     });
 
-            StateHasChanged();
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 

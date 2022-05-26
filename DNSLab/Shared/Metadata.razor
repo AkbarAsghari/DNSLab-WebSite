@@ -14,7 +14,7 @@
 @code {
     protected override void OnInitialized() => MetadataTransferService.PropertyChanged += OnMetadataChanged;
 
-    private void OnMetadataChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
+    private void OnMetadataChanged(object sender, PropertyChangedEventArgs e) => this.InvokeAsync(()=> StateHasChanged());
 
     public void Dispose() => MetadataTransferService.PropertyChanged -= OnMetadataChanged;
 }

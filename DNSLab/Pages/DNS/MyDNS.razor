@@ -118,7 +118,7 @@ else
 
             var dimensions = await JS.GetDimensions();
             ScreenWidth = dimensions.Width;
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 

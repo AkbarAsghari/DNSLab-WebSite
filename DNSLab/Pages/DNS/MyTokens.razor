@@ -185,7 +185,7 @@ else
         if (firstRender)
         {
             await LoadTokensSummary();
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 

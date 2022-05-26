@@ -106,7 +106,7 @@
 
             await JS.InvokeVoidAsync("StartPrticlesJS");
 
-            StateHasChanged();
+            await this.InvokeAsync(()=> StateHasChanged());
         }
     }
 }
