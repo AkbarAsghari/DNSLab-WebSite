@@ -97,16 +97,24 @@ namespace DNSLab.Prividers
 
         public async Task Login(string token)
         {
-            await localStorage.SetItemAsStringAsync(TokenKey, token);
-            var authState = BuildAuthenticationState(token);
-            NotifyAuthenticationStateChanged(Task.FromResult(authState));
+            try
+            {
+                await localStorage.SetItemAsStringAsync(TokenKey, token);
+                var authState = BuildAuthenticationState(token);
+                NotifyAuthenticationStateChanged(Task.FromResult(authState));
+            }
+            catch { }
         }
 
         public async Task Logout()
         {
-            await localStorage.RemoveItemAsync(TokenKey);
-            HttpClient.DefaultRequestHeaders.Authorization = null;
-            NotifyAuthenticationStateChanged(Task.FromResult(Anonymouse));
+            try
+            {
+                await localStorage.RemoveItemAsync(TokenKey);
+                HttpClient.DefaultRequestHeaders.Authorization = null;
+                NotifyAuthenticationStateChanged(Task.FromResult(Anonymouse));
+            }
+            catch { }
         }
     }
 }

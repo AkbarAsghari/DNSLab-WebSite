@@ -1,5 +1,6 @@
 ﻿@inject IJSRuntime JS
 @inject IStringLocalizer<Resource> localizer
+@inject AuthenticationStateProvider auth
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -15,7 +16,7 @@
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="user/info">
-                        <UserProfileImage /> @localizer["Profile"]
+                        <UserProfileImage /> @(" " + (@_FullName.Length > 17 ? @_FullName.Substring(0,17) + "..." : @_FullName))
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
@@ -83,6 +84,8 @@
 
 @code {
     private bool collapseNavMenu = true;
+    private string _FullName = String.Empty;
+
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -96,7 +99,14 @@
     {
         if (firstRender)
         {
+            var user = (await auth.GetAuthenticationStateAsync()).User;
+
+            if (user.Identities.FirstOrDefault()!.Claims.Any(x => x.Type.ToLower() == "fullname"))
+                _FullName = user.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "fullname")!.Value;
+
             await JS.InvokeVoidAsync("StartPrticlesJS");
+
+            StateHasChanged();
         }
     }
 }
