@@ -27,11 +27,18 @@ namespace DNSLab.Prividers
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await localStorage.GetItemAsync<string>(TokenKey);
-            if (String.IsNullOrEmpty(token))
-                return Anonymouse;
+            try
+            {
+                var token = await localStorage.GetItemAsync<string>(TokenKey);
+                if (String.IsNullOrEmpty(token))
+                    return Anonymouse;
 
-            return BuildAuthenticationState(token);
+                return BuildAuthenticationState(token);
+            }
+            catch (Exception ex)
+            {
+                return Anonymouse;
+            }
         }
 
         public AuthenticationState BuildAuthenticationState(string token)
