@@ -1,10 +1,10 @@
 ﻿@inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
 
-<div class="row">
+<div class="row col-12">
     @if (allComments == null)
     {
-        <Loading />
+        <Loading IsInTop="false" />
     }
     else if (allComments.Count() == 0)
     {
@@ -21,22 +21,12 @@
 
 @code {
     IEnumerable<FullCommentDTO> allComments;
-    private bool isLoading = false;
-
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await LoadComments();
+            allComments = await commentRepository.GetAllComments();
             StateHasChanged();
         }
-    }
-
-    private async Task LoadComments()
-    {
-        isLoading = true;
-        allComments = (await commentRepository.GetAllComments());
-        isLoading = false;
     }
 }
