@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Globalization;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +40,10 @@ builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService
 
 builder.Services.AddSingleton<MetadataProvider>();
 builder.Services.AddScoped<MetadataTransferService>();
+
+builder.Services.AddSingleton<HtmlEncoder>(
+  HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin,
+                                            UnicodeRanges.Arabic }));
 
 builder.Services.AddLocalization();
 
