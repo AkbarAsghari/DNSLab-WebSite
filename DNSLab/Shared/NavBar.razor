@@ -1,28 +1,15 @@
 ﻿@inject IStringLocalizer<Resource> localizer
-@inject IHttpContextAccessor httpContextAccessor
-
-@inject AuthenticationStateProvider auth
 
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom shadow-sm mb-3 fixed-top">
     <div class="container mw-100">
-        @if (_IsUserAuthorized == null)
-        {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                <Loading IsInTop="false" />
-            </div>
-        }
-        else if (_IsUserAuthorized == false)
-        {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 btn-group navbar-brand tools-result">
-                <a class="btn btn-secondary" href="user/register">
-                    <span class="oi oi-pencil" aria-hidden="true"></span> @localizer["Register"]
-                </a>
-                <a class="btn btn-primary" href="user/auth">
-                    <span class="oi oi-person" aria-hidden="true"></span> @localizer["Login"]
-                </a>
-            </div>
-        }
-
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 btn-group navbar-brand tools-result">
+            <a class="btn btn-secondary" href="user/register">
+                <span class="oi oi-pencil" aria-hidden="true"></span> @localizer["Register"]
+            </a>
+            <a class="btn btn-primary" href="user/auth">
+                <span class="oi oi-person" aria-hidden="true"></span> @localizer["Login"]
+            </a>
+        </div>
         <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,17 +50,5 @@
     void CollapseNavMenu()
     {
         collapseNavMenu = true;
-    }
-
-    private bool? _IsUserAuthorized = null;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var user = (await auth.GetAuthenticationStateAsync()).User;
-            _IsUserAuthorized = user.Identity?.IsAuthenticated;
-            await this.InvokeAsync(() => StateHasChanged());
-        }
     }
 }
