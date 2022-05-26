@@ -17,7 +17,7 @@ namespace DNSLab.Prividers
 
         private readonly string TokenKey = "TOKENKEY";
         private AuthenticationState Anonymouse =>
-            new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+            new AuthenticationState(new ClaimsPrincipal());
 
         private readonly HttpClient HttpClient;
 
@@ -37,7 +37,7 @@ namespace DNSLab.Prividers
                     if (!String.IsNullOrEmpty(token.Value))
                         return BuildAuthenticationState(token.Value);
             }
-            catch { }
+            catch (Exception ex){ }
 
             return Anonymouse;
         }
