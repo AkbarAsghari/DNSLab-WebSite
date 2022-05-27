@@ -51,7 +51,7 @@
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
-            navigationManager.NavigateTo("Dashboard");
+            navigationManager.NavigateTo("Dashboard",true);
         }
     }
 }

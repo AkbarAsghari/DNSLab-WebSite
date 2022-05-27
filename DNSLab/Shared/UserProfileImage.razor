@@ -1,13 +1,18 @@
 ﻿@using Jdenticon
 
-<AuthorizeView>
-    <Authorized>
-        @((MarkupString)GenerateProfilePhoto(String.IsNullOrEmpty(UserId) ? @context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value : UserId))
-    </Authorized>
-    <NotAuthorized>
-        @((MarkupString)GenerateProfilePhoto(UserId))
-    </NotAuthorized>
-</AuthorizeView>
+@if (String.IsNullOrEmpty(UserId))
+{
+    <AuthorizeView>
+        <Authorized>
+            @((MarkupString)GenerateProfilePhoto(String.IsNullOrEmpty(UserId) ? @context.User.Claims.FirstOrDefault(x=>x.Type == "nameid")!.Value : UserId))
+        </Authorized>
+    </AuthorizeView>
+}
+else
+{
+    @((MarkupString)GenerateProfilePhoto(UserId))
+}
+
 @code {
     [Parameter] public int Size { get; set; }
     [Parameter] public string UserId { get; set; } = String.Empty;
