@@ -49,7 +49,7 @@
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
-            navigationManager.NavigateTo("Dashboard", true);
+            navigationManager.NavigateTo("Dashboard", true, true);
         }
     }
 }
