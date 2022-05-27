@@ -15,8 +15,10 @@
                 CultureInfo.CurrentUICulture)));
 }
 
-@if (HttpContext.Request.Path.ToString().Contains("api") ||
-HttpContext.Request.Path.ToString() == "/")
+@if (HttpContext.Request.Path.ToString() == "/" ||
+HttpContext.Request.Path.ToString() == "//" ||
+HttpContext.Request.Path.ToString().Contains("api") ||
+HttpContext.Request.Path.ToString().Contains("support"))
 {
     <component type="typeof(AppNoAuth)" render-mode="ServerPrerendered" />
 }
