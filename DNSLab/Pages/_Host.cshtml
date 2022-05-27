@@ -2,6 +2,7 @@
 @namespace DNSLab.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using System.Globalization
+@using DNSLab.Shared
 @using Microsoft.AspNetCore.Localization
 
 @{
@@ -14,9 +15,10 @@
                 CultureInfo.CurrentUICulture)));
 }
 
-@if (HttpContext.Request.Path.ToString().Contains("api"))
+@if (HttpContext.Request.Path.ToString().Contains("api") ||
+HttpContext.Request.Path.ToString() == "/")
 {
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
+    <component type="typeof(AppNoAuth)" render-mode="ServerPrerendered" />
 }
 else
 {
