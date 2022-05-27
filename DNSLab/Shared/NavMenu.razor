@@ -101,12 +101,15 @@
         {
             var user = (await auth.GetAuthenticationStateAsync()).User;
 
-            if (user.Identities.FirstOrDefault()!.Claims.Any(x => x.Type.ToLower() == "fullname"))
-                _FullName = user.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "fullname")!.Value;
+            if (user.Identity.IsAuthenticated == true)
+            {
+                if (user.Identities.FirstOrDefault()!.Claims.Any(x => x.Type.ToLower() == "fullname"))
+                    _FullName = user.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "fullname")!.Value;
+            }
 
             await JS.InvokeVoidAsync("StartPrticlesJS");
 
-            await this.InvokeAsync(()=> StateHasChanged());
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 }
