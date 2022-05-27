@@ -4,76 +4,7 @@
 
 @inject ToastService toast
 @inject IStringLocalizer<Resource> localizer
-@inject IAccountRepository accountReository
-@inject IDNSRepository dnsRepository
-@inject AuthenticationStateProvider auth
 
-<AuthorizeView>
-    <Authorized>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 p-2">
-                <div class="alert alert-info h-100">
-                    <p class="alert-heading text-center">تعداد هاست نِیم ها</p>
-                    <hr>
-                    @if (isLoadingActiveDNSCount)
-                    {
-                        <div class="text-center"><div class="spinner-border text-info" /></div>
-                    }
-                    else
-                    {
-                        <h1 class="text-center">@activeDNSCount</h1>
-                    }
-                    <p class="text-center">هاست نِیم بصورت فعال یافت شد</p>
-                    <a class="btn btn-info position-absolute bottom-0 start-50 translate-middle-x w-100" href="dns/mydns">مدیریت هاست نِیم ها</a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 p-2">
-                <div class="alert alert-warning h-100">
-                    <p class="alert-heading text-center">تعداد بروزرسانی ها</p>
-                    <hr>
-                    @if (isLoadingLast24HoursChangesCount)
-                    {
-                        <div class="text-center"><div class="spinner-border text-warning" /></div>
-                    }
-                    else
-                    {
-                        <h1 class="text-center">@last24HoursChangesCount</h1>
-                    }
-                    <p class="text-center">دفعه در 24 ساعت گذشته هاست نِیم های شما تغییر کرده‌اند</p>
-                    <a class="btn btn-warning position-absolute bottom-0 start-50 translate-middle-x w-100" href="/DNS/Histories">نمایش تاریخچه</a>
-                </div>
-            </div>
-            @*<div class="col-lg-3 col-md-6 p-2">
-                <div class="alert alert-success h-100">
-                <p class="alert-heading text-center">وضعیت آخرین ورود به سایت</p>
-                <div class="list-group-item text-center list-group-item-success">زمان آخرین ورود</div>
-                <div class="list-group-item text-center list-group-item-success">23:59:51 1401/01/01</div>
-                <div class="list-group-item text-center list-group-item-success">آی پی آخرین ورود</div>
-                <div class="list-group-item text-center list-group-item-success">255.255.255.255</div>
-                </div>
-                </div>*@
-            <div class="col-lg-4 col-md-6 p-2">
-                <div class="alert alert-dark h-100">
-                    <p class="alert-heading text-center">تعداد کاربران سایت</p>
-                    <hr>
-                    @if (isLoadingUsersCount)
-                    {
-                        <div class="text-center"><div class="spinner-border text-dark" /></div>
-                    }
-                    else
-                    {
-                        <h1 class="text-center">@usersCount</h1>
-                    }
-                    <p class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</p>
-                    <AuthorizeView Roles="Admin" Context="adminContext">
-                        <a class="btn btn-dark position-absolute bottom-0 start-50 translate-middle-x w-100" href="/User/AllUsers">نمایش کاربران</a>
-                    </AuthorizeView>
-                </div>
-            </div>
-
-        </div>
-    </Authorized>
-    <NotAuthorized>
         <div class="index-page">
 
             <div class="container-xl mt-5">
@@ -130,50 +61,7 @@
             </div>
             <Footer />
         </div>
-    </NotAuthorized>
-</AuthorizeView>
 
 @code {
-    private bool isLoadingUsersCount = true;
-    private bool isLoadingActiveDNSCount = true;
-    private bool isLoadingLast24HoursChangesCount = true;
-
-    int usersCount = 0;
-    int activeDNSCount = 0;
-    int last24HoursChangesCount = 0;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var user = (await auth.GetAuthenticationStateAsync()).User;
-            if (user.Identity?.IsAuthenticated == true)
-            {
-                await Task.WhenAll(LoadUsersCount(), LoadActiveDNSCount(), LoadLast24HoursChangesCount());
-                await this.InvokeAsync(()=> StateHasChanged());
-            }
-        }
-
-    }
-
-    private async Task LoadUsersCount()
-    {
-        isLoadingUsersCount = true;
-        usersCount = await accountReository.UsersCount();
-        isLoadingUsersCount = false;
-    }
-
-    private async Task LoadActiveDNSCount()
-    {
-        isLoadingActiveDNSCount = true;
-        activeDNSCount = await dnsRepository.GetActiveDNSCount();
-        isLoadingActiveDNSCount = false;
-    }
-
-    private async Task LoadLast24HoursChangesCount()
-    {
-        isLoadingLast24HoursChangesCount = true;
-        last24HoursChangesCount = await dnsRepository.GetLast24HoursChangesCount();
-        isLoadingLast24HoursChangesCount = false;
-    }
+   
 }
