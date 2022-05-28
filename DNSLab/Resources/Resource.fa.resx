@@ -274,7 +274,7 @@
     <value>نام</value>
   </data>
   <data name="FontFamily" xml:space="preserve">
-    <value>iran-sans</value>
+    <value>vazir-regular</value>
   </data>
   <data name="GoHome" xml:space="preserve">
     <value>برو خونه</value>
@@ -316,7 +316,7 @@
     <value>نشانی یا آی‌پی</value>
   </data>
   <data name="IndexH1Message" xml:space="preserve">
-    <value>مشکل آی پی داینامیک دارید ؟</value>
+    <value>مشکل آی‌پی داینامیک دارید‌؟</value>
   </data>
   <data name="IndexMessage" xml:space="preserve">
     <value>یک هاست نیم راحت که قابل حفظ کردن هست بساز و برای همیشه متصل بمون</value>

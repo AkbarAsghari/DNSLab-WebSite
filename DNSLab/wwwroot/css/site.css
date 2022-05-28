@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'iran-sans','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'vazir-light','Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: #f8f9fa !important;
 }
 
@@ -167,9 +167,15 @@ a, .btn-link {
     background-repeat: no-repeat;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6 {
-    line-height: 3rem;
-    margin-bottom: 1.5rem;
+
+.dnslab-h {
+    font-family: vazir-bold;
+    margin-bottom: 1rem;
+}
+
+.dnslab-p , .dnslab-a {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 
 .comment-text {
@@ -178,6 +184,19 @@ a, .btn-link {
 
 /*Fonts*/
 @font-face {
-    font-family: 'iran-sans';
-    src: url('../fonts/sans.woff');
+    font-family: vazir-bold;
+    src: url('../fonts/Vazir-Bold.ttf');
+    font-weight:700
 }
+
+@font-face {
+    font-family: vazir-light;
+    src: url('../fonts/Vazir-Light.ttf');
+}
+
+@font-face {
+    font-family: vazir-regular;
+    src: url('../fonts/Vazir-Regular.ttf');
+    font-weight:400
+}
+
