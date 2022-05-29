@@ -1,48 +1,48 @@
 ﻿@page "/api"
 
 <div class="container p-5 bg-body rounded shadow-sm">
-    <h1 class="dnslab-h">راهنمای API های سایت برای توسعه دهندکان</h1>
-    <h3 class="dnslab-h">توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند</h3>
+    <h1>راهنمای API های سایت برای توسعه دهندکان</h1>
+    <h3>توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند</h3>
     <hr />
-    <p class="dnslab-p">برای دریافت آی پی عمومی از این سرویس استفاده نمایند</p>
+    <p>برای دریافت آی پی عمومی از این سرویس استفاده نمایند</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dnslab-a dir-ltr" href="https://api.dnslab.ir/ip" target="_blank">https://api.dnslab.ir/ip</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/ip" target="_blank">https://api.dnslab.ir/ip</a>
     </div>
     <hr />
-    <p class="dnslab-p">بررسی پینگ IP یا یک آدرس اینترنتی</p>
+    <p>بررسی پینگ IP یا یک آدرس اینترنتی</p>
     <p class="dir-ltr"><code>https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress={IP_or_Host}</code></p>
-    <p class="dnslab-p">برای مثال</p>
+    <p>برای مثال</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com</a>
     </div>
-    <p class="dnslab-p">برای مثال آی پی شما (@IPDTO.IPv4)</p>
+    <p>برای مثال آی پی شما (@IPDTO.IPv4)</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4" target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4" target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4</a>
     </div>
     <hr />
-    <p class="dnslab-p">بررسی باز بودن پورت IP یا یک آدرس اینترنتی</p>
+    <p>بررسی باز بودن پورت IP یا یک آدرس اینترنتی</p>
     <p class="dir-ltr"><code>https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></p>
-    <p class="dnslab-p">برای مثال آدرس گوگل و بررسی باز بودن پورت 80</p>
+    <p>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</a>
     </div>
-    <p class="dnslab-p">برای مثال آی پی شما (@IPDTO.IPv4) و پورت 80</p>
+    <p>برای مثال آی پی شما (@IPDTO.IPv4) و پورت 80</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80" target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80" target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</a>
     </div>
     <hr />
-    <p class="dnslab-p">بدست آوردن IP بوسیله دی‌ان‌اس</p>
+    <p>بدست آوردن IP بوسیله دی‌ان‌اس</p>
     <p class="dir-ltr"><code>https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress={{SubDomain}.IP_or_Host}</code></p>
-    <p class="dnslab-p">برای مثال آدرس دولوپر گوگل</p>
+    <p>برای مثال آدرس دولوپر گوگل</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" target="_blank">https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" target="_blank">https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com</a>
     </div>
     <hr />
-    <p class="dnslab-p">جستجوی معکوس IP برای بدست آوردن آدرس DNS</p>
+    <p>جستجوی معکوس IP برای بدست آوردن آدرس DNS</p>
     <p class="dir-ltr"><code>https://api.dnslab.ir/IP/ReverseLookup?IPAddress={IP}</code></p>
-    <p class="dnslab-p">برای مثال آدرس IP دی‌ان‌اس گوگل</p>
+    <p>برای مثال آدرس IP دی‌ان‌اس گوگل</p>
     <div class="dir-ltr">
-        <a class="dnslab-a dir-ltr" href="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" target="_blank">https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8</a>
+        <a class="dir-ltr" href="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" target="_blank">https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8</a>
     </div>
     <hr />
 </div>

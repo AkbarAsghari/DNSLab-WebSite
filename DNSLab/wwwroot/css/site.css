@@ -167,15 +167,23 @@ a, .btn-link {
     background-repeat: no-repeat;
 }
 
+/*Site Fonts Settings*/
 
-.dnslab-h {
+.nav-item, .card-header, .modal-header {
+    font-family: vazir-bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
     font-family: vazir-bold;
     margin-bottom: 1rem;
 }
 
-.dnslab-p , .dnslab-a {
+.page {
     font-size: 1.1rem;
-    margin-bottom: 1rem;
+}
+
+a {
+    font-size: 1rem;
 }
 
 .comment-text {
@@ -186,7 +194,7 @@ a, .btn-link {
 @font-face {
     font-family: vazir-bold;
     src: url('../fonts/Vazir-Bold.ttf');
-    font-weight:700
+    font-weight: 700
 }
 
 @font-face {
@@ -197,6 +205,5 @@ a, .btn-link {
 @font-face {
     font-family: vazir-regular;
     src: url('../fonts/Vazir-Regular.ttf');
-    font-weight:400
+    font-weight: 400
 }
-
