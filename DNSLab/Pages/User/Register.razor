@@ -15,13 +15,13 @@
 
                     <!-- Form Group (email address)-->
                     <div class="mb-3">
-                        <label class="small mb-1">@localizer["Email"]</label>
+                        <label class="mb-1">@localizer["Email"]</label>
                         <InputText class="form-control" placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Email)" />
                     </div>
                     <!-- Form Group (email address)-->
                     <div class="mb-3">
-                        <label class="small mb-1">@localizer["Password"]</label>
+                        <label class="mb-1">@localizer["Password"]</label>
                         <InputPassword class="form-control" @bind-Value="@registerUser.Password" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Password)" />
                     </div>

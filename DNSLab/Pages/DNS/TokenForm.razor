@@ -12,7 +12,7 @@
             <div class="row gx-3 mb-3">
                 <!-- Form Group (first name)-->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label class="small mb-1">@localizer["TokenName"]</label>
+                    <label class="mb-1">@localizer["TokenName"]</label>
                     <InputText class="form-control" placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> TokenAndDNS.Name)" />
                 </div>

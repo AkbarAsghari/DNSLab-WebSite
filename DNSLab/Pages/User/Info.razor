@@ -18,7 +18,7 @@ else
                         <label>@localizer["ChangeEmailAddress"]</label>
                     </Title>
                     <Body>
-                        <label class="small mb-1">@localizer["Email"]</label>
+                        <label class="mb-1">@localizer["Email"]</label>
                         <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@changeEmail.Email" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> changeEmail.Email)" />
                     </Body>
@@ -55,7 +55,7 @@ else
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->
                                     <div class="col-md-6">
-                                            <label class="small mb-1">@localizer["ChangeLanuguage"]</label>
+                                            <label class="mb-1">@localizer["ChangeLanuguage"]</label>
                                             <div><CultureSelector @ref=cultureSelector /></div>
                                         </div>
                                     </div>
@@ -118,29 +118,29 @@ else
                                 <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                     <div class="col-md-4">
-                                        <label class="small mb-1">@localizer["FirstName"]</label>
+                                        <label class="mb-1">@localizer["FirstName"]</label>
                                         <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.FirstName)" />
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="small mb-1">@localizer["LastName"]</label>
+                                        <label class="mb-1">@localizer["LastName"]</label>
                                         <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.LastName)" />
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="small mb-1">@localizer["Company"]</label>
+                                        <label class="mb-1">@localizer["Company"]</label>
                                         <InputText class="form-control" placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Company)" />
                                     </div>
                                 </div>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-4">
-                                        <label class="small mb-1">@localizer["UserName"]</label>
+                                        <label class="mb-1">@localizer["UserName"]</label>
                                         <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Username)" />
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="small mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
+                                        <label class="mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
                                         <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Mobile)" />
                                     </div>

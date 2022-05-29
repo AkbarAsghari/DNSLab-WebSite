@@ -7,7 +7,7 @@
 <ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>
         <div class="col-md-6">
-            <label class="small mb-1">@localizer["HostOrIPAddress"]</label>
+            <label class="mb-1">@localizer["HostOrIPAddress"]</label>
             <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
             <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddress.HostOrIPAddress)" />
         </div>

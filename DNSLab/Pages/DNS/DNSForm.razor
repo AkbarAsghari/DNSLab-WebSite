@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
-                    <label class="small mb-1">@localizer["HostName"]</label>
+                    <label class="mb-1">@localizer["HostName"]</label>
                     <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
                 </div>
@@ -15,15 +15,15 @@
                     @switch (HostName.RecordType)
                     {
                         case 1:
-                            <label class="small mb-1">@localizer["IPv4Address"]</label>
+                            <label class="mb-1">@localizer["IPv4Address"]</label>
                             <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
                             break;
                         case 2:
-                            <label class="small mb-1">@localizer["IPv6Address"]</label>
+                            <label class="mb-1">@localizer["IPv6Address"]</label>
                             <InputText class="form-control" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
                             break;
                         case 3:
-                            <label class="small mb-1">@localizer["Target"]</label>
+                            <label class="mb-1">@localizer["Target"]</label>
                             <InputText class="form-control" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
                             break;
                     }
@@ -60,15 +60,15 @@
                             @switch (HostName.RecordType)
                             {
                                 case 1:
-                                    <h5 class="card-title">DNS Host (A)</h5>
+                                    <h6 class="card-title">DNS Host (A)</h6>
                                     <p class="card-text">@localizer["DNSHostDescription"]</p>
                                     break;
                                 case 2:
-                                    <h5 class="card-title">AAAA (IPv6)</h5>
+                                    <h6 class="card-title">AAAA (IPv6)</h6>
                                     <p class="card-text">@localizer["AAAADescription"]</p>
                                     break;
                                 case 3:
-                                    <h5 class="card-title">DNS Alias (CNAME)</h5>
+                                    <h6 class="card-title">DNS Alias (CNAME)</h6>
                                     <p class="card-text">@localizer["DNSAliasDescription"]</p>
                                     break;
                             }
