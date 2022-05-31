@@ -1,0 +1,10 @@
+﻿<div class="container p-5 bg-body rounded shadow-sm">
+    <h1>@Header</h1>
+    <hr />
+    @Body
+</div>
+
+@code {
+    [Parameter] public string Header { get; set; }
+    [Parameter] public RenderFragment Body { get; set; }
+}
