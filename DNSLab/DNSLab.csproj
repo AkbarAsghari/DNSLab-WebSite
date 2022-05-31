@@ -14,7 +14,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Pages\Articles\Support\" />
 	  <Folder Include="wwwroot\fonts\" />
 	  <Folder Include="wwwroot\images\site\" />
 	</ItemGroup>
