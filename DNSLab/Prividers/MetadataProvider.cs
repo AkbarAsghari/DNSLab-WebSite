@@ -282,6 +282,15 @@
                     Description = "بازیابی رمز عبور و انتخاب رمز جدید",
                     Keywords = new string[] { "بازیابی رمز عبور", "reset password" }
                 }
+            },
+            {
+                "/Article/Use-DNS-Instead-Of-IP",
+                new()
+                {
+                    Title = "استفاده از DNS به جای IP Static",
+                    Description = "در این مقاله یاد  میگیریم چجوری دی ان اس بسازیم و دیگه به آی پی استاتیک نیاز نداشته باشیم و سیستم خونه رو هاست کنیم",
+                    Keywords = new string[] { "آی پی", "آی پی استاتیک" , "IP" , "DNS" , "دی ان اس"}
+                }
             }
         };
     }

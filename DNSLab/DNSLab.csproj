@@ -15,8 +15,10 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\fonts\" />
-	  <Folder Include="wwwroot\images\Supports\" />
-	  <Folder Include="wwwroot\images\site\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\images\site\Supports\CreateHostName.PNG" />
 	</ItemGroup>
 
 </Project>
