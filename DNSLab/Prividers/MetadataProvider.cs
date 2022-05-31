@@ -284,7 +284,7 @@
                 }
             },
             {
-                "/Article/Use-DNS-Instead-Of-IP",
+                "/Article/Use-DDNS-Instead-Of-IP",
                 new()
                 {
                     Title = "استفاده از DNS به جای IP Static",
