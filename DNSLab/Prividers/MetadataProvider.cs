@@ -145,7 +145,7 @@
                 {
                     Title = "صفحه دانلود",
                     Description = "دانلود برنامه های DNSLab",
-                    Keywords = new string[] { "دالنود" , "برنامه ویندوزی", "download win" }
+                    Keywords = new string[] { "دالنود", "برنامه ویندوزی", "download win" }
                 }
             },
             {
@@ -154,7 +154,7 @@
                 {
                     Title = "صفحه مورد نظر یافت نشد",
                     Description = "صفحه مورد نظر یافت نشد",
-                    Keywords = new string[] { "404", "not found" , "صفحه یافت نشد" }
+                    Keywords = new string[] { "404", "not found", "صفحه یافت نشد" }
                 }
             },
             {
@@ -163,7 +163,7 @@
                 {
                     Title = "خطای داخلی سرور رخ داده",
                     Description = "خطای داخلی سرور رخ داده",
-                    Keywords = new string[] { "500" , "خطای داخلی سرور" , "internal server error" }
+                    Keywords = new string[] { "500", "خطای داخلی سرور", "internal server error" }
                 }
             },
             {
@@ -172,7 +172,7 @@
                 {
                     Title = "سرویس در دسترس نیست",
                     Description = "سرویس در دسترس نیست",
-                    Keywords = new string[] { "503" , "سرویس در دسترس نیست", "Service is unavailable" }
+                    Keywords = new string[] { "503", "سرویس در دسترس نیست", "Service is unavailable" }
                 }
             },
             {
@@ -289,7 +289,16 @@
                 {
                     Title = "استفاده از DNS به جای IP Static",
                     Description = "در این مقاله یاد  میگیریم چجوری دی ان اس بسازیم و دیگه به آی پی استاتیک نیاز نداشته باشیم و سیستم خونه رو هاست کنیم",
-                    Keywords = new string[] { "آی پی", "آی پی استاتیک" , "IP" , "DNS" , "دی ان اس"}
+                    Keywords = new string[] { "آی پی", "آی پی استاتیک", "IP", "DNS", "دی ان اس", "آموزش" }
+                }
+            },
+            {
+                "/Article/Create-New-DNS",
+                new()
+                {
+                    Title = "آموزش ساخت دی ان اس (DNS)",
+                    Description = "تو این آموزش روش ساخت دی ان اس یا DNS رو در سایت دی ان اس لب DNSLab توضیح میدیم تا دیگه به آی پی استاتیک نیاز نداشته باشید",
+                    Keywords = new string[] { "آی پی", "آی پی استاتیک", "IP", "DNS", "دی ان اس", "آموزش" }
                 }
             }
         };
