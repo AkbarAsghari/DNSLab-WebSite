@@ -73,8 +73,8 @@ namespace DNSLab.Services
             {
                 metadataValue = new()
                 {
-                    Title = "دی‌ان‌اس لب - DNSLab",
-                    Description = "سایت داینامیک دی‌ان‌اس DNSLab",
+                    Title = "دی ان اس لب - DNSLab",
+                    Description = "سایت داینامیک دی ان اس DNSLab",
                 };
             }
 
@@ -82,9 +82,9 @@ namespace DNSLab.Services
             Description = metadataValue.Description;
 
             if (metadataValue.Keywords == null)
-                metadataValue.Keywords = new string[] { "دی‌ان‌اس رایگان", "free dns" };
+                metadataValue.Keywords = new string[] { "دی ان اس رایگان", "free dns" };
 
-            string[] staticKeywords = new string[] { "DNSLab", "دی‌ان‌اس لب" };
+            string[] staticKeywords = new string[] { "DNSLab", "دی ان اس لب" };
 
             Keywords = staticKeywords.Concat(metadataValue.Keywords).ToArray();
         }
