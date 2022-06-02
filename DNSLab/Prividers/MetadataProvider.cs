@@ -309,6 +309,15 @@
                     Description = "روش ساخت توکن برای بروزرسانی آی پی هاست نِیم ها با استفاده از توکن یا لینک مستقیم",
                     Keywords = new string[] { "توکن", "آی پی استاتیک", "IP", "Token", "دی ان اس", "آموزش" }
                 }
+            },
+            {
+                "/Article/How-To-Port-Forwarding-In-DLink-Model",
+                new()
+                {
+                    Title = "پورت فورواردینگ (Port Forwarding) در مودم D-Link",
+                    Description = "آموزش پورت فوروادینگ در مودم وای فای - dlink",
+                    Keywords = new string[] { "dlink", "آی پی استاتیک", "port", "port forwarding", "پورت فوروادینگ", "هدایت پورت" }
+                }
             }
         };
     }
