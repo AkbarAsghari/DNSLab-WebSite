@@ -318,6 +318,15 @@
                     Description = "آموزش پورت فوروادینگ در مودم وای فای - dlink",
                     Keywords = new string[] { "dlink", "آی پی استاتیک", "port", "port forwarding", "پورت فوروادینگ", "هدایت پورت" }
                 }
+            },
+            {
+                "/Article/Connect-To-Home-System-With-Public-IP",
+                new()
+                {
+                    Title = "اتصال به سیستم خونگی با اینترنت و آی پی عمومی",
+                    Description = "آموزش اتصال به سیستم خونگی با اینترنت یا آی پی عمومی",
+                    Keywords = new string[] { "dynamic ip", "cgnat", "pat", "nat", "ip" }
+                }
             }
         };
     }
