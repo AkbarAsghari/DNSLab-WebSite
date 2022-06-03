@@ -1,0 +1,55 @@
+﻿@page "/Article/How-To-Active-Lets-Encrypt-In-IIS"
+
+
+<ArticleForm Header="روش فعال سازی Let's Encrypt در IIS">
+    <Body>
+        <h6>Let's Encrypt جیست ؟</h6>
+        <p>Let’s Encrypt یک مرجع گواهی رایگان، خودکار و باز (CA) است که برای منافع عمومی اجرا می شود. این یک سرویس ارائه شده توسط گروه تحقیقاتی امنیت اینترنت (ISRG) است.</p>
+        <h6>عملیات نصب</h6>
+        <p>برای نصب در سیستم عامل ویندوز شما به IIS دارید که روی آن وب سایت شما در حال اجرا باشد</p>
+        <p>پس از نصب IIS باید در سایت سایت یک هاست نِیم ایجاد کنید. برای این کار لطفا <a href="Article/Create-New-DNS">این مطلب</a> رو مطالعه فرمایید.</p>
+        <p>پس از سایت یک هاست نِیم باید تنظیمات <strong>Binding</strong> IIS رو بصورت زیر انجام بدید</p>
+        <img src="images/site/Supports/IISIndexPage.PNG" alt="IIS - آی آی اس" />
+        <p>بعد از زدن روی لینک <strong>Bindings</strong> صفحه ای مطابق تصویر زیر براتون باز میشه که</p>
+        <img src="images/site/Supports/BindingsDefaultScreen.PNG" alt="IIS Bindings - بایدینگ آی آی اس" />
+        <a>سپس برروی دکمه <code>Add</code> بزنید و بعد از آن مطابق تصویر زیر اطلاعات هاست نیم ساخته شده خود را وارد نمایید</a>
+        <img src="images/site/Supports/IISAddNewBindings.PNG" alt="IIS Bindings Add - اضافه کردن بایدینگ آی آی اس" />
+        <ul>
+            <li>1.مقدار <strong>Type</strong> را برابر <strong>https</strong> قرار دهید</li>
+            <li>2.مقدار <strong>IP address</strong> را برابر <strong>All Unassigned</strong> قرار دهید</li>
+            <li>3.مقدار <strong>Port</strong> را برابر <strong>443</strong> قرار دهید</li>
+            <li>4.مقدار <strong>Host name</strong> را برابر <strong>یکی از هاست نِیم مد نظر خود</strong> که در سایت ایجاد کرده اید قرار دهید</li>
+            <li>5.از بخش <strong>SSL certificate</strong> مورد <strong>IIS Express Development Certificate</strong> را انتخاب نمایید</li>
+            <li>6.در نهایت گزینه <strong>OK</strong> را بزنید</li>
+        </ul>
+        <p>خب در اینجا اگر ما آدرس سایت رو باز کنیم با خطای زیر رو برو میشیم</p>
+        <img src="images/site/Supports/HttpsError.PNG" alt="Https Error - خطای Https" />
+        <p>در اینجا کار IIS تمونه بریم سراغ win-acme</p>
+        <h6>روش دانلود فایل win-acme.exe</h6>
+        <p>برای دانلود فایل ابتدا باید وارد سایت <a href="https://www.win-acme.com/">Win-Acme.Com</a> بشید و در بالای صفحه از منوی دانلود گزینه <strong>Recommended</strong> رو بزنید تا یه فایل زیپ براتون دانلود بشود.</p>
+        <p>مطابق تصویر زیر</p>
+        <img src="images/site/Supports/WinAcmeDownloadMenu.png" alt="win-acme download menu - منوی دانلود فایل win-acme.exe" />
+        <p>پس از دانلود فایل آن را در درایو C ویندوز خود قرار دهید و سپس از حالت زیپ خارج نمایید</p>
+        <p>محتوای آن باید مشابه تصویر زیر باشد</p>
+        <img src="images/site/Supports/WinAcmeFiles.png" alt="win-acme files - فایل های win-acme.exe" />
+        <p>برای نصب باید بر روی فایل wacs.exe کلیک راست کرده و Run as administrator را بزنید</p>
+        <p>بعد از این نرم افزار بصورت زیر اجرا خواهد شد</p>
+        <img src="images/site/Supports/winacmeExe.PNG" alt="winacme.exe - نرم افزار winacme.exe" />
+        <p>در اینجا باید از منو گزینه <code>N: Create certificate (default settings)</code> را انتخاب کنیم برای این کار باید مقدار <code>N</code> را در قسمت <strong>Please choose from the menu:</strong> وارد نمایید</p>
+        <img src="images/site/Supports/WinAcmeDefaultWebSiteSelect.PNG" alt="winacme.exe default web site - نرم افزار winacme.exe وب سایت پیشفرض" />
+        <p>بغد از انتخاب منوی اول نرم افزار از ما میگه که </p>
+        <p>
+            "لطفاً انتخاب کنید که کدام وب سایت (ها) باید برای نام میزبان اسکن شود. شما ممکن است
+            یک یا چند شناسه سایت (با کاما از هم جدا شده) وارد کنید تا بر اساس آن ها فیلتر شود
+            سایت ها، یا ورودی را خالی بگذارید تا *همه* وب سایت ها را اسکن کنید."
+        </p>
+        <p>در اینجا مقدار <code>1</code> را وارد نمایید تا تمام آدرس های پیش فرض IIS را براتون لود کنه</p>
+        <p>بعد از این مثل تصویر زیر گزینه <code>A: Pick *all* bindings</code> رو انتخاب کنید برای این کار باید حرف <code>A</code> را تایپ کنید</p>
+        <img src="images/site/Supports/WinAcmeSelectPickAllBindings.PNG" alt="winacme.exe pick all bindings - نرم افزار winacme.exe" />
+        <p>بعد از نمایش سایت ها و ساب دامین های آن حرف <code>y</code> را تایپ کرده و اینتر بزنید مطابق تصویر زیر</p>
+        <img src="images/site/Supports/WinAcmeSelectYWhenSiteListed.PNG" alt="winacme.exe pick all bindings select y - نرم افزار winacme.exe" />
+        <p>بعد از این عملیات فعال سازی شروع میشه و به سایت شما Certificate Win-Acme اضافه میشه</p>
+        <p>بعد از این باید وب سایت رو ری استارت کنید و بعد از اجرای سایت سایت بصورت زیر براتون باز میشه</p>
+        <img src="images/site/Supports/ValidHttps.PNG" alt="valid https - https معتبر" />
+    </Body>
+</ArticleForm>

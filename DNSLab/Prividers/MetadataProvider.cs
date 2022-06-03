@@ -327,6 +327,15 @@
                     Description = "آموزش اتصال به سیستم خونگی با اینترنت یا آی پی عمومی",
                     Keywords = new string[] { "dynamic ip", "cgnat", "pat", "nat", "ip" }
                 }
+            },
+            {
+                "/Article/How-To-Active-Lets-Encrypt-In-IIS",
+                new()
+                {
+                    Title = "روش فعال سازی Let's Encrypt در IIS",
+                    Description = "آموزش ساخت Certificate برای https کردن سایت در IIS",
+                    Keywords = new string[] { "IIS", "https", "lets encrypt", "certificate", "ip" }
+                }
             }
         };
     }
