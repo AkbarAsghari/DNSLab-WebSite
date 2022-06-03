@@ -5,22 +5,20 @@
     <div class="container mw-100">
         @if (_IsAuthenticated == null)
         {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 btn-group navbar-brand tools-result">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                 <Loading IsInTop="false" />
             </div>
         }
         else if (_IsAuthenticated == true)
         {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 btn-group navbar-brand tools-result">
-                <a class="text-decoration-none" href="dashboard" target="_parent">
-                    <UserProfileImage Size=37 UserId=@_UserID />
-                    @_FullName
-                </a>
-            </div>
+            <a class="text-decoration-none auth-user-link" href="dashboard" target="_parent">
+                <UserProfileImage Size=37 UserId=@_UserID />
+                @_FullName
+            </a>
         }
         else
         {
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 btn-group navbar-brand tools-result">
+            <div class="btn-group navbar-brand tools-result">
                 <a class="btn btn-secondary" href="user/register">
                     <span class="oi oi-pencil" aria-hidden="true"></span> @localizer["Register"]
                 </a>
