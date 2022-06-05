@@ -97,19 +97,18 @@ else
                     }
                     <hr />
                     <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
+
+                    <div class="note success">
+                        <p>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <a target="_blank" href="Download/Win">دانلود</a> کنید</p>
+                    </div>
+                    <div class="note info">
+                        <p>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <a target="_blank" href="Article/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
+                    </div>
                 }
             </div>
         </div>
     </div>
-    @if (hostNames.Count > 0)
-    {
-        <div class="note success">
-            <p>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <a target="_blank" href="Download/Win">دانلود</a> کنید</p>
-        </div>
-        <div class="note info">
-            <p>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <a target="_blank" href="Article/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
-        </div>
-    }
+
 }
 
 @code {
