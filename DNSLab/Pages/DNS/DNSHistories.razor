@@ -10,7 +10,14 @@ else
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <div class="timeline timeline-line-solid">
+                @if (dNSChangeHistories.Count == 0)
+                {
+                    <p>هیج تغییراتی یافت نشد</p>
+                }
+                else
+                {
+                    <div class="timeline timeline-line-solid">
+
                     @if (dNSChangeHistories != null)
                     {
                         <span class="timeline-label">
@@ -46,6 +53,7 @@ else
                         </span>
                     }
                 </div>
+                }
             </div>
         </div>
     </div>
@@ -59,7 +67,7 @@ else
         if (firstRender)
         {
             dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
-            await this.InvokeAsync(()=> StateHasChanged());
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 }
