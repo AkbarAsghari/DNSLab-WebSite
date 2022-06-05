@@ -66,8 +66,14 @@
             </AuthorizeView>
         </div>
     </div>
-
 </div>
+
+@if (!isLoadingActiveDNSCount && activeDNSCount == 0)
+{
+    <div class="note danger">
+        <p>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <a href="DNS/MyDNS">کلیک</a> کنید.</p>
+    </div>
+}
 
 @code {
     private bool isLoadingUsersCount = true;
@@ -112,4 +118,4 @@
         last24HoursChangesCount = await dnsRepository.GetLast24HoursChangesCount();
         isLoadingLast24HoursChangesCount = false;
     }
-        }
+}
