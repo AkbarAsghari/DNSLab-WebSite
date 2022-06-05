@@ -116,7 +116,9 @@ else
 
                 @if (tokenSummaries.Count() == 0)
                 {
-                    <text>@localizer["ThereIsNoTokens"]</text>
+                    <div class="note warning">
+                        <p>@localizer["ThereIsNoTokens"]</p>
+                    </div>
                 }
                 else
                 {
@@ -164,6 +166,9 @@ else
                         </div>
                     }
                 }
+                <div class="note info">
+                    <p>برای اطلاعات بیشتر لطفا <a target="_blank" href="Article/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
+                </div>
             </div>
         </div>
     </div>
@@ -185,7 +190,7 @@ else
         if (firstRender)
         {
             await LoadTokensSummary();
-            await this.InvokeAsync(()=> StateHasChanged());
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 

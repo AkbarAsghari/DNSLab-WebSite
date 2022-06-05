@@ -39,8 +39,10 @@ else
             <div class="mb-3">
                 @if (hostNames.Count == 0)
                 {
-                    <div class="note info">
+                    <div class="note warning">
                         <p>@localizer["ThereIsNoHost"]</p>
+                    </div>
+                    <div class="note info">
                         <p>برای اطلاعات بیشتر <a target="_blank" href="Article/Create-New-DNS">کلیک</a> کنید</p>
                     </div>
                 }
