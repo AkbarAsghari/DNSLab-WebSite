@@ -565,10 +565,10 @@
     <value>هیچ دیدگاهی یافت نشد</value>
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
-    <value>هنوز هاست نیمی ایجاد نشده است</value>
+    <value>شما هیچ هاست نِیمی ندارید ، برای شروع یکی بسازید</value>
   </data>
   <data name="ThereIsNoTokens" xml:space="preserve">
-    <value>هیچ توکن فعالی یافت نشد</value>
+    <value>شما هیچ توکنی ندارید ، برای شروع یکی بسازید</value>
   </data>
   <data name="TokenCreated" xml:space="preserve">
     <value>توکن ایجاد شد</value>

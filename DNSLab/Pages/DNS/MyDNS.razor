@@ -39,7 +39,10 @@ else
             <div class="mb-3">
                 @if (hostNames.Count == 0)
                 {
-                    <text>@localizer["ThereIsNoHost"]</text>
+                    <div class="note info">
+                        <p>@localizer["ThereIsNoHost"]</p>
+                        <p>برای اطلاعات بیشتر <a target="_blank" href="Article/Create-New-DNS">کلیک</a> کنید</p>
+                    </div>
                 }
                 else
                 {
@@ -96,6 +99,15 @@ else
             </div>
         </div>
     </div>
+    @if (hostNames.Count > 0)
+    {
+        <div class="note success">
+            <p>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <a target="_blank" href="Download/Win">دانلود</a> کنید</p>
+        </div>
+        <div class="note info">
+            <p>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <a target="_blank" href="Article/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
+        </div>
+    }
 }
 
 @code {
@@ -118,7 +130,7 @@ else
 
             var dimensions = await JS.GetDimensions();
             ScreenWidth = dimensions.Width;
-            await this.InvokeAsync(()=> StateHasChanged());
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
