@@ -125,5 +125,14 @@ namespace DNSLab.Repository
             var response = await _httpService.Put<string>($"/DNS/RevokeTokenKey?tokenId={tokenId}");
             return response.Response;
         }
+
+        public async Task<int> GetAllActiveDNSCount()
+        {
+            var response = await _httpService.Get<int>($"/DNS/GetAllActiveDNSCount");
+            if (response.Success)
+                return response.Response;
+
+            return 0;
+        }
     }
 }

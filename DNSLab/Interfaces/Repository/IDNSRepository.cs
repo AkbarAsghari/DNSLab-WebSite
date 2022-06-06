@@ -10,8 +10,11 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> CreateHostName(CreateHostNameDTO createHostName);
         Task<bool> DeleteHostName(Guid hostNameId);
         Task<bool> UpdateHostName(HostNameDTO createHostName);
+
         Task<int> GetActiveDNSCount();
         Task<int> GetLast24HoursChangesCount();
+        Task<int> GetAllActiveDNSCount();
+
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();
         Task<IEnumerable<HostSummaryDTO>> GetHostSummaries();
 
