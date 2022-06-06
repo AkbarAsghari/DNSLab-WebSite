@@ -1,0 +1,66 @@
+﻿@page "/About"
+@inject IAccountRepository accountReository
+@inject IDNSRepository dnsRepository
+
+<div class="container p-5 bg-body rounded shadow-sm article">
+    <h1 class="text-center">تغییر آی‌پی همیشه خوب نیست</h1>
+    <p class="text-center">ما با تمرکز بر مهندسی و پیشرو بودن در فناوری، تلاش می کنیم خدمات قابل اعتمادی ایجاد کنیم که کاربرها رو خوشحال کند.</p>
+    <hr />
+    <h3>درباره دی‌ان‌اس لب</h3>
+    <p><strong>ما DNS شما را کارآمدتر مدیریت می کنیم</strong></p>
+    <p>ماموریت دی‌ان‌اس لب ایجاد راه حل های ایمن، قابل اعتماد است که کاربر ها بتوانند از آنها برای اتصال، مدیریت و تعامل با دستگاه های متصل به اینترنت خود استفاده کنند. ما در تلاش هستیم تا راه حل هایی ساده، شهودی و جذاب به مشتریان ارائه دهیم.</p>
+    <hr />
+    <div class="row">
+        <div class="col">
+            <h3>۱۴۰۰</h3>
+            <p>دی‌ان‌اس لب در سال ۱۴۰۰ از یک ایده برای حل مشکل آی‌پی داینامیک شروع شد.</p>
+        </div>
+        <div class="col">
+            <h3>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers())</h3>
+            <p>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers()) میلیون نفر از دی‌ان‌اس لب برای دسترسی از راه دور به رایانه های خود، اجرای سرور خانگی، نظارت بر دوربین IP و مدیریت DNS وب سایت های خود از جمله موارد دیگر استفاده می کنند.</p>
+        </div>
+        <div class="col">
+            <h3>@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</h3>
+            <p>تا کنون حدود @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</p>
+        </div>
+    </div>
+    <hr />
+    <p>این سایت بصورت متن باز در اختیار برنامه نویسان قرار گرفته است برای حمایت از پروژه میتونید ⭐ بدید.</p>
+
+    <a href="https://github.com/AkbarAsghari/DNSLab-WebSite">
+        <img src="images/site/About/github.png" />
+        <p>پروژه متن باز دی‌ان‌اس لب</p>
+    </a>
+
+</div>
+
+@code {
+    private bool isLoadingUsersCount = true;
+    private bool isLoadingDNSCount = true;
+
+    int usersCount = 0;
+    int dNSCount = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Task.WhenAll(LoadUsersCount(), LoadActiveDNSCount());
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+
+    }
+
+    private async Task LoadUsersCount()
+    {
+        usersCount = await accountReository.UsersCount();
+        isLoadingUsersCount = false;
+    }
+
+    private async Task LoadActiveDNSCount()
+    {
+        dNSCount = await dnsRepository.GetAllUsersDNSCount();
+        isLoadingDNSCount = false;
+    }
+
+}
