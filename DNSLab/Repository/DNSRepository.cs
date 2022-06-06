@@ -126,9 +126,9 @@ namespace DNSLab.Repository
             return response.Response;
         }
 
-        public async Task<int> GetAllActiveDNSCount()
+        public async Task<int> GetAllUsersDNSCount()
         {
-            var response = await _httpService.Get<int>($"/DNS/GetAllActiveDNSCount");
+            var response = await _httpService.Get<int>($"/DNS/GetAllUsersDNSCount");
             if (response.Success)
                 return response.Response;
 

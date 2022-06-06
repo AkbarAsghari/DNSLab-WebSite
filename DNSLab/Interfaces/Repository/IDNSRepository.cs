@@ -13,7 +13,7 @@ namespace DNSLab.Interfaces.Repository
 
         Task<int> GetActiveDNSCount();
         Task<int> GetLast24HoursChangesCount();
-        Task<int> GetAllActiveDNSCount();
+        Task<int> GetAllUsersDNSCount();
 
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();
         Task<IEnumerable<HostSummaryDTO>> GetHostSummaries();
