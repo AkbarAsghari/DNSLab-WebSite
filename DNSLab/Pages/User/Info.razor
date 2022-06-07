@@ -136,7 +136,7 @@ else
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-4">
                                         <label class="mb-1">@localizer["UserName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" />
+                                        <InputText class="form-control dir-ltr" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Username)" />
                                     </div>
                                     <div class="col-md-4">

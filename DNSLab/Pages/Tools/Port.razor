@@ -9,12 +9,12 @@
     <Body>
         <div class="col-md-6">
             <label class="mb-1">@localizer["HostOrIPAddress"]</label>
-            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
+            <InputText class="form-control dir-ltr" placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
             <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.HostOrIPAddress)" />
         </div>
         <div class="col-md-2">
             <label class="mb-1">@localizer["PortNumber"]</label>
-            <InputText class="form-control" placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
+            <InputText class="form-control dir-ltr" placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
             <ValidationMessage class="invalid-feedback" For="@(()=> hostOrIPAddressAndPort.Port)" />
         </div>
     </Body>

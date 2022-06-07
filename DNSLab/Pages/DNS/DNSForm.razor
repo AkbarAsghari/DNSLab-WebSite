@@ -8,7 +8,7 @@
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label class="mb-1">@localizer["HostName"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
+                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
                 </div>
                 <div class="col-md-6">
@@ -16,15 +16,15 @@
                     {
                         case 1:
                             <label class="mb-1">@localizer["IPv4Address"]</label>
-                            <InputText class="form-control" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
+                            <InputText class="form-control dir-ltr" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
                             break;
                         case 2:
                             <label class="mb-1">@localizer["IPv6Address"]</label>
-                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
+                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
                             break;
                         case 3:
                             <label class="mb-1">@localizer["Target"]</label>
-                            <InputText class="form-control" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
+                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
                             break;
                     }
                 </div>
