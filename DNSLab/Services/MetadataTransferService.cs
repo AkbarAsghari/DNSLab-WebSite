@@ -73,8 +73,9 @@ namespace DNSLab.Services
             {
                 metadataValue = new()
                 {
-                    Title = "دی ان اس لب - DNSLab",
-                    Description = "سایت داینامیک دی ان اس DNSLab",
+                    Title = "DNSLab - دی ان اس لب",
+                    Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
+                    Keywords = new string[] { "DDNS", "Dynamic DNS", "DNS", "Free" }
                 };
             }
 
@@ -84,7 +85,7 @@ namespace DNSLab.Services
             if (metadataValue.Keywords == null)
                 metadataValue.Keywords = new string[] { "دی ان اس رایگان", "free dns" };
 
-            string[] staticKeywords = new string[] { "DNSLab", "دی ان اس لب" };
+            string[] staticKeywords = new string[] { "DDNS", "دی دی ان اس" };
 
             Keywords = staticKeywords.Concat(metadataValue.Keywords).ToArray();
         }
