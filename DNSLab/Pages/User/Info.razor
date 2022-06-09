@@ -141,7 +141,7 @@ else
                                     </div>
                                     <div class="col-md-4">
                                         <label class="mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" />
+                                        <InputText class="form-control dir-ltr" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" />
                                         <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Mobile)" />
                                     </div>
                                 </div>
