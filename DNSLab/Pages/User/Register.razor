@@ -25,6 +25,17 @@
                         <InputPassword class="form-control dir-ltr" @bind-Value="@registerUser.Password" required />
                         <ValidationMessage class="invalid-feedback" For="@(()=> registerUser.Password)" />
                     </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="isAcceptLegalsTOS" required>
+                            <label class="form-check-label" for="isAcceptLegalsTOS">
+                                <a class="text-decoration-underline" target="_blank" href="legal/tos">قوانین و مقررات</a> سایت را مطالعه و می پذیرم
+                            </label>
+                            <div class="invalid-feedback">
+                                برای ثبت نام شما باید قوانین و مقررات سایت را تایید نمایید
+                            </div>
+                        </div>
+                    </div>
                     <BaseButtonComponent Caption=@localizer["Register"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          CssClass="col-12"
