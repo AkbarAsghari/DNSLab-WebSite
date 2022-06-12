@@ -2,6 +2,9 @@
 
 <div class="container p-5 bg-body rounded shadow-sm">
     <h4 class="border-bottom pb-2 mb-0">راهنمای سایت</h4>
+    <div class="note warning">
+        <p>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</p>
+    </div>
     <SupportItem Title="دیگه با DNS نیاز به IP Static ندارید" Link="/Article/Use-DDNS-Instead-Of-IP" Description="تو این آموزش روش ثبت DNS و جایگزینی اون با آی پی استاتیک رو آموزش میبینید" />
     <SupportItem Title="ساخت هاست نِیم جدید" Link="/Article/Create-New-DNS" Description="در این آموزش نحوه ثبت دی ان اس و استفاده آن را خواهید دید" />
     <SupportItem Title="ایجاد توکن برای هاست نیم ها" Link="/Article/Create-New-Token-For-DNS" Description="در این مقاله روش ساخت و استفاده از توکنه از توکن گفته میشود" />
@@ -10,5 +13,5 @@
     <SupportItem Title="روش فعال سازی Let's Encrypt در IIS" Link="/Article/How-To-Active-Lets-Encrypt-In-IIS" Description="در این مطلب روش https کردن سایت روی IIS رو توضیح میدم" />
 </div>
 @code {
-
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
 }
