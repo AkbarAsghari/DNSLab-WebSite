@@ -2,6 +2,6 @@
 {
     public interface IStaticsRepository
     {
-        Task<bool> PageVisit(string url);
+        Task<bool> PageVisit(string ip, string url);
     }
 }

@@ -11,9 +11,9 @@ namespace DNSLab.Repository
             this._httpService = httpService;
         }
 
-        public async Task<bool> PageVisit(string url)
+        public async Task<bool> PageVisit(string ip, string url)
         {
-            var response = await _httpService.Post<bool>($"/Statics/PageVisit?pageUrl={url}");
+            var response = await _httpService.Post<bool>($"/Statics/PageVisit?ip={ip}&pageUrl={url}");
             if (!response.Success)
                 return false;
             else

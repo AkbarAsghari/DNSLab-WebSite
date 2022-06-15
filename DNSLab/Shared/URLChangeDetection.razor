@@ -1,23 +1,24 @@
 ﻿@using System.ComponentModel
+
 @inject NavigationManager _NavigationManager
 @inject IStaticsRepository _IStaticsRepository
+@inject IHttpContextAccessor httpContextAccessor
+
 @implements IDisposable
 
 
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        await _IStaticsRepository.PageVisit(_NavigationManager.Uri);
-
-        if (firstRender)
-            _NavigationManager.LocationChanged += _navigationManager_LocationChanged;
+        await _IStaticsRepository.PageVisit(httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString(), _NavigationManager.Uri);
+        _NavigationManager.LocationChanged += _navigationManager_LocationChanged;
     }
 
     private async void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        await _IStaticsRepository.PageVisit(_NavigationManager.Uri);
+        await _IStaticsRepository.PageVisit(httpContextAccessor.HttpContext.Connection?.RemoteIpAddress.ToString(), _NavigationManager.Uri);
     }
-
+  
     public void Dispose()
     {
         _NavigationManager.LocationChanged -= _navigationManager_LocationChanged;
