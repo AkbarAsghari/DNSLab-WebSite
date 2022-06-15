@@ -1,21 +1,21 @@
 ﻿@using System.ComponentModel
 @inject NavigationManager _NavigationManager
+@inject IStaticsRepository _IStaticsRepository
 @implements IDisposable
 
 
 @code {
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await _IStaticsRepository.PageVisit(_NavigationManager.Uri);
 
-        Console.WriteLine(_NavigationManager.Uri);
-        _NavigationManager.LocationChanged += _navigationManager_LocationChanged;
-        return base.OnAfterRenderAsync(firstRender);
+        if (firstRender)
+            _NavigationManager.LocationChanged += _navigationManager_LocationChanged;
     }
 
     private async void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        await Task.Delay(3000);
-        Console.WriteLine(e.Location);
+        await _IStaticsRepository.PageVisit(_NavigationManager.Uri);
     }
 
     public void Dispose()
