@@ -9,7 +9,6 @@
             const int HOUR = 60 * MINUTE;
             const int DAY = 24 * HOUR;
             const int MONTH = 30 * DAY;
-            Console.WriteLine(dateTime.ToString("HH:mm"));
             var ts = new TimeSpan(DateTime.UtcNow.Ticks - dateTime.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 

@@ -1,0 +1,25 @@
+﻿@using System.ComponentModel
+@inject NavigationManager _NavigationManager
+@implements IDisposable
+
+
+@code {
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        Console.WriteLine(_NavigationManager.Uri);
+        _NavigationManager.LocationChanged += _navigationManager_LocationChanged;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+
+    private async void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        await Task.Delay(3000);
+        Console.WriteLine(e.Location);
+    }
+
+    public void Dispose()
+    {
+        _NavigationManager.LocationChanged -= _navigationManager_LocationChanged;
+    }
+}
