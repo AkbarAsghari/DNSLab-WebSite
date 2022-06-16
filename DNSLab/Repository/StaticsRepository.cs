@@ -19,5 +19,14 @@ namespace DNSLab.Repository
             else
                 return response.Response;
         }
+
+        public async Task<int> PageVisitCount(string url)
+        {
+            var response = await _httpService.Get<int>($"/Statics/PageVisitCount?pageUrl={url}");
+            if (!response.Success)
+                return 0;
+            else
+                return response.Response;
+        }
     }
 }
