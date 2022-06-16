@@ -1,0 +1,22 @@
+﻿@inject IStaticsRepository _StaticsRepository
+@inject NavigationManager _NavigationManager
+
+<p class="text-muted">
+    بازدید :
+    @if (visitCount > -1)
+    {
+        <text>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</text>
+    }
+    else
+    {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    }
+</p>
+
+@code {
+    int visitCount = -1;
+    protected override async Task OnInitializedAsync()
+    {
+        visitCount = await _StaticsRepository.PageVisitCount(_NavigationManager.Uri);
+    }
+}
