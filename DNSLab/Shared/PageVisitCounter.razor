@@ -15,8 +15,12 @@
 
 @code {
     int visitCount = -1;
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        visitCount = await _StaticsRepository.PageVisitCount(_NavigationManager.Uri);
+        if (firstRender)
+        {
+            visitCount = await _StaticsRepository.PageVisitCount(_NavigationManager.Uri);
+            await this.InvokeAsync(() => StateHasChanged());
+        }
     }
 }
