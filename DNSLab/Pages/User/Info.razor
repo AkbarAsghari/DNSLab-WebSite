@@ -4,6 +4,8 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
+@attribute [Authorize]
+
 @if (userInfo == null)
 {
     <Loading />

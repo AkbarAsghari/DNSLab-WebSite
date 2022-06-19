@@ -5,6 +5,8 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
+@attribute [Authorize]
+
 @if (hostNames == null)
 {
     <Loading />

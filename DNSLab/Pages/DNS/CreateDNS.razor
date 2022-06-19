@@ -5,6 +5,8 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
+@attribute [Authorize]
+
 <DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName"/>
 @code {
     private HostNameDTO hostName = new HostNameDTO() { RecordType = 1 };

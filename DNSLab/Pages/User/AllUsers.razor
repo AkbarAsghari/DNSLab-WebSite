@@ -1,6 +1,7 @@
 ﻿@page "/user/AllUsers"
-@attribute [Authorize(Roles = "Admin")]
 @inject IAccountRepository accountReository
+
+@attribute [Authorize(Roles = "Admin")]
 
 @if (allUsers == null)
 {

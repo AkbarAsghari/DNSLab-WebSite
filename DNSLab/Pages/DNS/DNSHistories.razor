@@ -1,6 +1,8 @@
 ﻿@page "/DNS/Histories"
 @inject IDNSRepository dnsRepository
 
+@attribute [Authorize]
+
 @if (dNSChangeHistories == null)
 {
     <Loading />

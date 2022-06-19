@@ -4,6 +4,8 @@
 @inject IDNSRepository dnsRepository
 @inject NavigationManager NavigationManager
 
+@attribute [Authorize]
+
 @if (tokenSummaries == null)
 {
     <Loading />

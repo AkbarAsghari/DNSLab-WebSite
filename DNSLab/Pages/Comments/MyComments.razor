@@ -3,6 +3,9 @@
 @inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager NavigationManager
+
+@attribute [Authorize]
+
 @if (myComments == null)
 {
     <Loading />

@@ -5,6 +5,7 @@
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
+@attribute [Authorize]
 
 <TokenForm Title="@localizer["CreateToken"]" OnValidSubmit="Create" TokenAndDNS="tokenAndDNS" HostSummariesAndChecked="HostSummariesAndChecked" />
 
