@@ -1,4 +1,6 @@
 ﻿@using DNSLab.Pages.Errors
+@inject NavigationManager _NavigationManager
+
 <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
@@ -6,9 +8,9 @@
                 <text>Please wait, we are authorizing you...</text>
             </Authorizing>
             <NotAuthorized>
-                @if (context.User.Identity.IsAuthenticated == false)
+                @if (context.User.Identity == null)
                 {
-                    <DNSLab.Pages.User.Logout></DNSLab.Pages.User.Logout>
+                    <DNSLab.Pages.User.Auth RedirectTo="@_NavigationManager.Uri"></DNSLab.Pages.User.Auth>
                 }
                 else if (!context.User.IsInRole("Admin"))
                 {

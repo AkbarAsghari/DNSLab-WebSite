@@ -1,9 +1,11 @@
 ﻿@page "/user/auth"
+@page "/user/auth/{RedirectTo}"
 
 @inject IAccountRepository accountReository
 @inject NavigationManager navigationManager
 @inject IAuthService authService
 @inject IStringLocalizer<Resource> localizer
+@inject ToastService _toastService;
 
 <div class="container-xl mt-5">
     <div class="row">
@@ -43,15 +45,23 @@
 </div>
 
 @code {
+    [Parameter] public string? RedirectTo { get; set; }
 
     private AuthenticateDTO user = new AuthenticateDTO();
+
+    protected override void OnParametersSet()
+    {
+        if (RedirectTo != null)
+            _toastService.ShowToast(localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
+    }
+
     private async Task AuthUser()
     {
         var userToken = await accountReository.Login(user);
         if (!String.IsNullOrEmpty(userToken))
         {
             await authService.Login(userToken);
-            navigationManager.NavigateTo("Dashboard", true, true);
+            navigationManager.NavigateTo(RedirectTo == null ? "dashboard" : RedirectTo, true, true);
         }
     }
 }

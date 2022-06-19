@@ -39,8 +39,7 @@ namespace DNSLab.Helper.Exceptions
                     case HttpStatusCode.Unauthorized:
                         if (!_navManager.Uri.ToLower().EndsWith("/user/auth"))
                         {
-                            _navManager.NavigateTo("/user/auth");
-                            _toastService.ShowToast(_localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
+                            _navManager.NavigateTo($"/user/auth/{_navManager.Uri.Replace(_navManager.BaseUri, String.Empty)}");
                         }
                         break;
                     case HttpStatusCode.Forbidden:
