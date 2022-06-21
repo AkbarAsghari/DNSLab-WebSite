@@ -1,0 +1,22 @@
+﻿<TimeLine Data="Histories" TimeLineHeader="تاریخچه تغییرات سایت">
+    <TimeLineItemRenderFragment>
+        <TimeLineItem DateTime="@context.Item1">
+            <Body>
+                <p class="small">@context.Item2</p>
+            </Body>
+        </TimeLineItem>
+    </TimeLineItemRenderFragment>
+</TimeLine>
+
+@code {
+    List<Tuple<DateTime, string>> Histories = new List<Tuple<DateTime, string>>
+    {
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 1"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 2"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 3"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 4"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 5"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 6"),
+        new Tuple<DateTime, string>(DateTime.Now,"تغییرات 7"),
+    };
+}

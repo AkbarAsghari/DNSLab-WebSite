@@ -1,29 +1,21 @@
 ﻿@typeparam TItem
 
-<div class="timeline timeline-line-solid">
-    @if (!String.IsNullOrEmpty(TimeLineHeader))
-    {
-        <span class="timeline-label">
-            <span class="label bg-info">@TimeLineHeader</span>
-        </span>
-    }
-    @foreach (TItem item in Data ?? Array.Empty<TItem>())
-    {
-        @TimeLineItemRenderFragment(item)
-    }
-
-    @if (!String.IsNullOrEmpty(TimeLineFooter))
-    {
-        <span class="timeline-label">
-            <span class="label bg-warning">TimeLineFooter</span>
-        </span>
-    }
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title">@TimeLineHeader</h6>
+        <div id="content">
+            <ul class="timeline">
+                @foreach (TItem item in Data ?? Array.Empty<TItem>())
+                {
+                    @TimeLineItemRenderFragment(item)
+                }
+            </ul>
+        </div>
+    </div>
 </div>
 
 @code {
+    [Parameter] public string TimeLineHeader { get; set; }
     [Parameter] public IEnumerable<TItem> Data { get; set; }
     [Parameter] public RenderFragment<TItem> TimeLineItemRenderFragment { get; set; }
-
-    [Parameter] public string TimeLineHeader { get; set; }
-    [Parameter] public string TimeLineFooter { get; set; }
 }

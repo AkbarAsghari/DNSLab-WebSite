@@ -18,8 +18,7 @@ else
                 }
                 else
                 {
-                    <TimeLine TimeLineHeader="@(dNSChangeHistories.Max(x=> x.UpdateDate == null ? x.CreateDate : x.UpdateDate)!.Value.CalcRelativeTime())"
-                      TimeLineFooter="به زودی"
+                    <TimeLine TimeLineHeader="تاریخچه تغییرات"
                       Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
                         <TimeLineItemRenderFragment>
                             <TimeLineItem Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")" DateTime="context.CreateDate">
