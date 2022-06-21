@@ -18,48 +18,40 @@ else
                 }
                 else
                 {
-                    <div class="timeline timeline-line-solid">
-
-                    @if (dNSChangeHistories != null)
-                    {
-                        <span class="timeline-label">
-                            <span class="label bg-info">@(dNSChangeHistories.Max(x=> x.UpdateDate == null ? x.CreateDate : x.UpdateDate)!.Value.CalcRelativeTime())</span>
-                        </span>
-                        @foreach (var item in dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
-                        {
-                            <TimeLineItem Header="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" DateTime="item.CreateDate">
+                    <TimeLine TimeLineHeader="@(dNSChangeHistories.Max(x=> x.UpdateDate == null ? x.CreateDate : x.UpdateDate)!.Value.CalcRelativeTime())"
+                      TimeLineFooter="به زودی"
+                      Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
+                        <TimeLineItemRenderFragment>
+                            <TimeLineItem Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")" DateTime="context.CreateDate">
                                 <Body>
-                                    @if (item.ARecordHistories != null)
-                                        @foreach (var x in item.ARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    @if (context.ARecordHistories != null)
+                                @foreach (var x in context.ARecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                            <p class="d-inline"><code>@x.IPv4Address</code></p>
-                                            <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <p class="d-inline"><code>@x.IPv4Address</code></p>
+                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
                                         }
-                                    @if (item.AAAARecordHistories != null)
-                                        @foreach (var x in item.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
+                            @if (context.AAAARecordHistories != null)
+                                @foreach (var x in context.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                            <p class="d-inline"><code>@x.IPv6Address</code></p>
-                                            <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <p class="d-inline"><code>@x.IPv6Address</code></p>
+                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
                                         }
-                                    @if (item.CNameRecordHistories != null)
-                                        @foreach (var x in item.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
+                            @if (context.CNameRecordHistories != null)
+                                @foreach (var x in context.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                            <p class="d-inline"><code>@x.HostNameAlias</code></p>
-                                            <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <p class="d-inline"><code>@x.HostNameAlias</code></p>
+                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
                                         }
-                                </Body>
-                            </TimeLineItem>
-                        }
-                        <span class="timeline-label">
-                            <span class="label bg-warning">بیشتر (به زودی)</span>
-                        </span>
-                    }
-                </div>
+                        </Body>
+                    </TimeLineItem>
+                </TimeLineItemRenderFragment>
+            </TimeLine>
                 }
             </div>
         </div>
     </div>
 }
+
 
 @code {
     List<DNSChangeHistoryDTO> dNSChangeHistories;
@@ -72,5 +64,5 @@ else
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
-}
+            }
 

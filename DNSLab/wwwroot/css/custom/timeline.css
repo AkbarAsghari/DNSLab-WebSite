@@ -257,7 +257,7 @@
     }
 
     .timeline .widget-body {
-        padding: 1rem 1.4rem
+        padding: 0rem 1.4rem
     }
 
     .timeline .widget-footer {
@@ -436,7 +436,7 @@
 
 .widget-header {
     background: #fff;
-    padding: .85rem 1.4rem;
+    padding: .85rem 1.4rem 0rem;
     position: relative;
     width: 100%
 }
@@ -494,7 +494,7 @@
     }
 
 .widget-body {
-    padding: 1.4rem
+    padding: 0rem 1.4rem;
 }
 
 .widget-image-footer {
