@@ -1,22 +1,27 @@
 ﻿@inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
 
-<div class="row col-12">
-    @if (allComments == null)
-    {
-        <Loading IsInTop="false" />
-    }
-    else if (allComments.Count() == 0)
-    {
-        <text>@localizer["ThereIsNoComment"]</text>
-    }
-    else
-    {
-        @foreach (var comment in allComments)
-        {
-            <CommentItem CommentText="@comment.Text" UserId="@comment.UserId" FullName="@comment.FullName" CommentDate="@comment.CreateDate" />
-        }
-    }
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title">@localizer["UserComments"]</h6>
+        <div class="col-12">
+            @if (allComments == null)
+            {
+                <Loading IsInTop="false" />
+            }
+            else if (allComments.Count() == 0)
+            {
+                <text>@localizer["ThereIsNoComment"]</text>
+            }
+            else
+            {
+                @foreach (var comment in allComments)
+                {
+                    <CommentItem CommentText="@comment.Text" UserId="@comment.UserId" FullName="@comment.FullName" CommentDate="@comment.CreateDate" />
+                }
+            }
+        </div>
+    </div>
 </div>
 
 @code {
