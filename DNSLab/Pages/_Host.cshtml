@@ -19,7 +19,8 @@
 HttpContext.Request.Path.ToString() == "//" ||
 HttpContext.Request.Path.ToString().Contains("api") ||
 HttpContext.Request.Path.ToString().Contains("support") ||
-HttpContext.Request.Path.ToString().Contains("Article"))
+HttpContext.Request.Path.ToString().Contains("about") ||
+HttpContext.Request.Path.ToString().Contains("article"))
 {
     <component type="typeof(AppNoAuth)" render-mode="ServerPrerendered" />
 }
