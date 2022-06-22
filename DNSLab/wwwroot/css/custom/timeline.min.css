@@ -13,11 +13,10 @@
     max-width: 50%;
 }
 
-@media (max-width: 767px) {
-    .timeline {
-        max-width: 98%;
-        padding: 25px;
-    }
+[class*="col-md"] .timeline {
+    max-width: 98%;
+    padding: 25px;
+    text-align-last: right;
 }
 
 .timeline h1 {
@@ -39,10 +38,8 @@
     margin-top: 5px;
 }
 
-@media (max-width: 767px) {
-    .timeline .event {
-        padding-top: 30px;
-    }
+[class*="col-md"] .timeline .event {
+    padding-top: 30px;
 }
 
 .timeline .event:last-of-type {
@@ -63,15 +60,14 @@
     content: attr(data-date);
     text-align: left;
     font-weight: 100;
+    font-size:xx-small;
     font-size: 0.9em;
     min-width: 120px;
 }
 
-@media (max-width: 767px) {
-    .timeline .event:before {
-        right: 0;
-        text-align: left;
-    }
+[class*="col-md"] .timeline .event:before {
+    right: 0;
+    text-align: left;
 }
 
 .timeline .event:after {
@@ -86,10 +82,8 @@
     top: 5px;
 }
 
-@media (max-width: 767px) {
-    .timeline .event:after {
-        right: -31.8px;
-    }
+[class*="col-md"] .timeline .event:after {
+    right: -31.8px;
 }
 
 .rtl .timeline {
