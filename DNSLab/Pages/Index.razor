@@ -5,63 +5,67 @@
 @inject ToastService toast
 @inject IStringLocalizer<Resource> localizer
 
-        <div class="index-page">
+<div class="index-page">
 
-            <div class="container-xl mt-5">
-                <div class="px-4 py-5 my-5 text-center">
-                    <h1>@localizer["IndexH1Message"]</h1>
-                    <div class="col-lg-9 mx-auto">
-                        <p class="lead mb-5">@localizer["IndexMessage"]</p>
-                    </div>
-                </div>
-
-                <div class="container px-4" id="hanging-icons">
-                    <h2>@localizer["StayConnected"]</h2>
-                    <p>@localizer["StayConnectedMessage"]</p>
-                    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-                        <div class="feature col">
-                            <div class="feature-icon">
-                                <img alt="remote" src="../images/Icons/Remote.svg" class="index-product-img" />
-                            </div>
-                            <h3>@localizer["RemoteAccessComputerH2"]</h3>
-                            <p>@localizer["RemoteAccessComputerMessage"]</p>
-                            @*<a href="#" class="icon-link">
-                                Call to action
-                                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                                </a>*@
-                        </div>
-                        <div class="feature col">
-                            <div class="feature-icon">
-                                <img alt="remote" src="../images/Icons/Game.svg" class="index-product-img" />
-                            </div>
-                            <h3>@localizer["CreateGameServerH2"]</h3>
-                            <p>@localizer["CreateGameServerMessage"]</p>
-                            @*<a href="#" class="icon-link">
-                                Call to action
-                                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                                </a>*@
-                        </div>
-                        <div class="feature col">
-                            <div class="feature-icon">
-                                <img alt="remote" src="../images/Icons/Project.svg" class="index-product-img" />
-                            </div>
-                            <h3>@localizer["ShareYourLocalProjectH2"]</h3>
-                            <p>@localizer["ShareYourLocalProjectMessage"]</p>
-                            @* <a href="#" class="icon-link">
-                                Call to action
-                                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                                </a>*@
-                        </div>
-                    </div>
-                </div>
-                <h2 class="dnslab-h border-bottom">@localizer["UserComments"]</h2>
-                <div class="p-5">
-                    <Comments />
-                </div>
+    <div class="container-xl mt-5">
+        <div class="px-4 py-5 my-5 text-center">
+            <h1>@localizer["IndexH1Message"]</h1>
+            <div class="col-lg-9 mx-auto">
+                <p class="lead mb-5">@localizer["IndexMessage"]</p>
             </div>
-            <Footer />
         </div>
 
+        <div class="container px-4" id="hanging-icons">
+            <h2>@localizer["StayConnected"]</h2>
+            <p>@localizer["StayConnectedMessage"]</p>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Remote.svg" class="index-product-img" />
+                    </div>
+                    <h3>@localizer["RemoteAccessComputerH2"]</h3>
+                    <p>@localizer["RemoteAccessComputerMessage"]</p>
+                    @*<a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Game.svg" class="index-product-img" />
+                    </div>
+                    <h3>@localizer["CreateGameServerH2"]</h3>
+                    <p>@localizer["CreateGameServerMessage"]</p>
+                    @*<a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+                <div class="feature col">
+                    <div class="feature-icon">
+                        <img alt="remote" src="../images/Icons/Project.svg" class="index-product-img" />
+                    </div>
+                    <h3>@localizer["ShareYourLocalProjectH2"]</h3>
+                    <p>@localizer["ShareYourLocalProjectMessage"]</p>
+                    @* <a href="#" class="icon-link">
+                        Call to action
+                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <Comments />
+            </div>
+            <div class="col-md-4">
+                <SiteChangeHistories />
+            </div>
+        </div>
+    </div>
+    <Footer />
+</div>
+
 @code {
-   
+
 }

@@ -1,4 +1,4 @@
-﻿<li class="event" data-date="@GetRelativeTime">
+﻿<li class="event" data-date="@DateTime.CalcRelativeTime()">
     @if (!String.IsNullOrEmpty(Header))
     {
         <h3>@Header</h3>
@@ -9,12 +9,4 @@
     [Parameter] public string? Header { get; set; }
     [Parameter] public RenderFragment Body { get; set; }
     [Parameter] public DateTime DateTime { get; set; }
-
-    private string GetRelativeTime
-    {
-        get
-        {
-            return DateTime.ToLocalizerString();
-        }
-    }
 }
