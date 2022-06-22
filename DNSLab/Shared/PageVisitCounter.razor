@@ -19,7 +19,7 @@
     {
         if (firstRender)
         {
-            visitCount = await _StaticsRepository.PageVisitCount(_NavigationManager.Uri);
+            visitCount = await _StaticsRepository.PageVisitCount(new Uri(_NavigationManager.Uri).LocalPath);
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
