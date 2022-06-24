@@ -17,10 +17,10 @@
 
 @if (HttpContext.Request.Path.ToString() == "/" ||
 HttpContext.Request.Path.ToString() == "//" ||
-HttpContext.Request.Path.ToString().Contains("api") ||
-HttpContext.Request.Path.ToString().Contains("support") ||
-HttpContext.Request.Path.ToString().Contains("about") ||
-HttpContext.Request.Path.ToString().Contains("article"))
+HttpContext.Request.Path.ToString().ToLower().Contains("api") ||
+HttpContext.Request.Path.ToString().ToLower().Contains("support") ||
+HttpContext.Request.Path.ToString().ToLower().Contains("about") ||
+HttpContext.Request.Path.ToString().ToLower().Contains("article"))
 {
     <component type="typeof(AppNoAuth)" render-mode="ServerPrerendered" />
 }
