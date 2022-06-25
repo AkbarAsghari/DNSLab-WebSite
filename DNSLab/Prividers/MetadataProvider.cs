@@ -10,7 +10,16 @@
                 {
                     Title = "DNSLab - دی ان اس لب",
                     Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
-                    Keywords = new string[] { "Dynamic DNS", "DNS" , "Free" }
+                    Keywords = new string[] { "سرویس DDNS ایرانی", "DDNS ایرانی", "DDNS رایگان" }
+                }
+            },
+            {
+                "/about",
+                new()
+                {
+                    Title = "درباره ما",
+                    Description = "درباره سایت دی ان اس لب و تماس با ما و خدمات",
+                    Keywords = new string[] { "درباره ما", "درباره دی ان اس لب" }
                 }
             },
             {
@@ -19,7 +28,7 @@
                 {
                     Title = "ورود به سیستم",
                     Description = "ورود به حساب کاربری سایت دی‌ان‌اس لب",
-                    Keywords = new string[] { "ورود به حساب کاربری", "ورود به سیستم" }
+                    Keywords = new string[] { "ورود به حساب کاربری", "ورود به سیستم", "ورود به سیستم DNSLab" }
                 }
             },
             {
@@ -28,7 +37,7 @@
                 {
                     Title = "ثبت نام در سیستم",
                     Description = "ثبت نام در سایت دی‌ان‌اس لب",
-                    Keywords = new string[] { "ثبت نام", "ایجاد حساب کاربری" }
+                    Keywords = new string[] { "ثبت نام", "ایجاد حساب کاربری", "ثبت نام سایت دی ان اس لب" }
                 }
             },
             {
@@ -36,8 +45,8 @@
                 new()
                 {
                     Title = "API های سایت",
-                    Description = "API - برای توسعه دهندگان",
-                    Keywords = new string[] { "API", "ای‌پی‌آی", "IP" }
+                    Description = "API - برای توسعه دهندگان شامل API بدست آوردن IP عمومی ، ای پی آی بدست آوردن DNS ، API بدست آوردن IP از روی DNS ، ای پی آی بدست آوردن پینگ سایت یا IP",
+                    Keywords = new string[] { "API", "ای پی آی", "رایگان" }
                 }
             },
             {
