@@ -79,7 +79,7 @@ host.UseStaticFiles();
 
 host.UseRouting();
 
-host.MapGet("/sitemap.xml", async context => {
+host.MapGet("/sitemap.txt", async context => {
     await SiteMapProvider.Generate(context);
 });
 
