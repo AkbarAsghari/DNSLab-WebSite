@@ -1,0 +1,7 @@
+﻿namespace DNSLab.Enums
+{
+    public enum CacheKeyEnum
+    {
+        GetAllComments
+    }
+}

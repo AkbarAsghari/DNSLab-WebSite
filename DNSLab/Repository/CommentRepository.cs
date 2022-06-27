@@ -1,15 +1,20 @@
 ﻿using DNSLab.DTOs.Comments;
+using DNSLab.Enums;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DNSLab.Repository
 {
     public class CommentRepository : ICommentRepository
     {
         private readonly IHttpService _httpService;
-        public CommentRepository(IHttpService httpService)
+        private readonly IMemoryCache _memoryCache;
+
+        public CommentRepository(IHttpService httpService, IMemoryCache memoryCache)
         {
             this._httpService = httpService;
+            this._memoryCache = memoryCache;
         }
 
         public async Task<bool> AddNewComment(CreateCommentDTO comment)
@@ -20,8 +25,18 @@ namespace DNSLab.Repository
 
         public async Task<IEnumerable<FullCommentDTO>> GetAllComments()
         {
-            var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetAllComments");
-            return result.Response;
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetAllComments, out IEnumerable<FullCommentDTO> cacheValue))
+            {
+
+                var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetAllComments");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromHours(1));
+
+                _memoryCache.Set(CacheKeyEnum.GetAllComments, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
         }
 
         public async Task<CommentDTO> GetComment(Guid id)
