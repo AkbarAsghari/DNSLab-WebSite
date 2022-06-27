@@ -26,12 +26,9 @@
 
 @code {
     IEnumerable<FullCommentDTO> allComments;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
-        {
-            allComments = await commentRepository.GetAllComments();
-            await this.InvokeAsync(() => StateHasChanged());
-        }
+        allComments = await commentRepository.GetAllComments();
     }
 }
