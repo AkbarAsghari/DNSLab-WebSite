@@ -1,17 +1,22 @@
 ﻿using DNSLab.DTOs.DNS;
 using DNSLab.DTOs.Pagination;
+using DNSLab.Enums;
 using DNSLab.Helper.Extensions;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DNSLab.Repository
 {
     public class DNSRepository : IDNSRepository
     {
         private readonly IHttpService _httpService;
-        public DNSRepository(IHttpService httpService)
+        private readonly IMemoryCache _memoryCache;
+
+        public DNSRepository(IHttpService httpService , IMemoryCache memoryCache)
         {
             this._httpService = httpService;
+            this._memoryCache = memoryCache;
         }
 
         public async Task<bool> CreateHostName(CreateHostNameDTO createHostName)
@@ -128,11 +133,19 @@ namespace DNSLab.Repository
 
         public async Task<int> GetAllUsersDNSCount()
         {
-            var response = await _httpService.Get<int>($"/DNS/GetAllUsersDNSCount");
-            if (response.Success)
-                return response.Response;
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetAllUsersDNSCount, out int cacheValue))
+            {
+                var result = await _httpService.Get<int>($"/DNS/GetAllUsersDNSCount");
+                if (!result.Success)
+                    cacheValue = 0;
+                else
+                    cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(30));
 
-            return 0;
+                _memoryCache.Set(CacheKeyEnum.GetAllUsersDNSCount, cacheValue, cacheEntryOptions);
+            }
+            return cacheValue;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace DNSLab.Repository
         private readonly IHttpService _httpService;
         private readonly IMemoryCache _memoryCache;
 
-        private readonly string baseUrl = "localhost/auth";
         public AccountRepository(IHttpService httpService, IMemoryCache memoryCache)
         {
             _httpService = httpService;
@@ -78,7 +77,7 @@ namespace DNSLab.Repository
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                         .SetSlidingExpiration(TimeSpan.FromMinutes(30));
 
-                _memoryCache.Set(CacheKeyEnum.GetAllComments, cacheValue, cacheEntryOptions);
+                _memoryCache.Set(CacheKeyEnum.UsersCount, cacheValue, cacheEntryOptions);
             }
 
             return cacheValue;
