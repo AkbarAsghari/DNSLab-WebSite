@@ -1,7 +1,9 @@
 ﻿using DNSLab.DTOs.User;
+using DNSLab.Enums;
 using DNSLab.Helper.HttpService;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
 namespace DNSLab.Repository
@@ -9,10 +11,13 @@ namespace DNSLab.Repository
     public class AccountRepository : IAccountRepository
     {
         private readonly IHttpService _httpService;
+        private readonly IMemoryCache _memoryCache;
+
         private readonly string baseUrl = "localhost/auth";
-        public AccountRepository(IHttpService httpService)
+        public AccountRepository(IHttpService httpService, IMemoryCache memoryCache)
         {
             _httpService = httpService;
+            _memoryCache = memoryCache;
         }
 
         public async Task<string> Register(RegisterUserDTO registerUser)
@@ -63,11 +68,20 @@ namespace DNSLab.Repository
 
         public async Task<int> UsersCount()
         {
-            var response = await _httpService.Get<int>($"/Auth/UsersCount");
-            if (!response.Success)
-                return 0;
-            else
-                return response.Response;
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.UsersCount, out int cacheValue))
+            {
+                var result = await _httpService.Get<int>($"/Auth/UsersCount");
+                if (!result.Success)
+                    cacheValue = 0;
+                else
+                    cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(30));
+
+                _memoryCache.Set(CacheKeyEnum.GetAllComments, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
         }
 
         public async Task<bool> ForgetPassword(ForgetPasswordDTO forgetPassword)

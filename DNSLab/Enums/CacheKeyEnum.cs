@@ -2,6 +2,8 @@
 {
     public enum CacheKeyEnum
     {
-        GetAllComments
+        GetAllComments,
+        UsersCount,
+        GetAllUsersDNSCount
     }
 }
