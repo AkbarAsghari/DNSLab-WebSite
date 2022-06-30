@@ -80,11 +80,6 @@ host.UseStaticFiles();
 
 host.UseRouting();
 
-host.MapGet("/sitemap.txt", async context =>
-{
-    await SiteMapProvider.Generate(context);
-});
-
 host.MapBlazorHub();
 host.MapFallbackToPage("/_Host");
 
