@@ -9,7 +9,7 @@
 }
 else
 {
-    <PageGeneratorForm page=existPage OnValidSubmit=Update Title="ویرایش صفحه"></PageGeneratorForm>
+    <PageGeneratorForm page=existPage TagsInput=Tags OnValidSubmit=Update Title="ویرایش صفحه"></PageGeneratorForm>
 }
 
 @code {
@@ -17,18 +17,22 @@ else
     [Parameter] public Guid PageId { get; set; }
 
     private PageDTO existPage;
+    private TagsInput Tags = new TagsInput();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             existPage = await _PageRepository.GetPage(PageId);
+            Tags.Tags = existPage.Keywords.ToList();
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
     public async Task Update()
     {
+        existPage.Keywords = Tags.Tags.ToArray();
+
         if (await _PageRepository.EditPage(existPage))
         {
             _navManager.NavigateTo("Page/MyPages");

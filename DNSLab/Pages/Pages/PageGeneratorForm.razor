@@ -20,7 +20,11 @@
                     <InputText class="form-control" placeholder="@localizer["EnterDescription"]" @bind-Value="page.Description" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> page.Description)" />
                 </div>
-                 <div class="col-12">
+                <div class="col-12">
+                    <label class="mb-1">@localizer["Tags"]</label>
+                    <TagsInput @ref="TagsInput"></TagsInput>
+                </div>
+                <div class="col-12">
                     <label class="mb-1">@localizer["Header"]</label>
                     <InputText class="form-control" placeholder="@localizer["EnterHeader"]" @bind-Value="page.Header" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> page.Header)" />
@@ -45,14 +49,17 @@
     </div>
 </EditForm>
 @code {
-    [Parameter] public string Title { get; set; } 
-    [Parameter]
-    public PageDTO page { get; set; } = new PageDTO
+    [Parameter] public string Title { get; set; }
+    [Parameter] public TagsInput TagsInput { get; set; }
+
+    [Parameter] public PageDTO page { get; set; } = new PageDTO
         {
             URL = String.Empty,
             Title = String.Empty,
             Description = String.Empty,
+            Keywords = new string[] { },
             Body = String.Empty,
         };
+
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }
