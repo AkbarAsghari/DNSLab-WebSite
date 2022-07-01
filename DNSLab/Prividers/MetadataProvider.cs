@@ -1,8 +1,50 @@
-﻿namespace DNSLab.Prividers
+﻿using DNSLab.Interfaces.Repository;
+
+namespace DNSLab.Prividers
 {
     public class MetadataProvider
     {
-        public Dictionary<string, MetadataValue> RouteDetailMapping { get; set; } = new()
+        private readonly IPageRepository _pageRepository;
+        public MetadataProvider(IPageRepository pageRepository)
+        {
+            _pageRepository = pageRepository;
+        }
+
+        public async Task<MetadataValue> GetMetaData(string route)
+        {
+            var MetadataValue = new MetadataValue
+            {
+                Title = "DNSLab - دی ان اس لب",
+                Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
+                Keywords = new string[] { "Dynamic DNS", "DNS", "Free" }
+            };
+            var existMetadata = RouteDetailMapping.FirstOrDefault(vp => route.EndsWith(vp.Key)).Value;
+            if (existMetadata != null)
+            {
+                MetadataValue = new MetadataValue
+                {
+                    Description = existMetadata.Description,
+                    Keywords = existMetadata.Keywords,
+                    Title = existMetadata.Title
+                };
+            }
+            else
+            {
+                var apiMetadata = await _pageRepository.GetPageMetadata(new Uri(route).LocalPath.Substring(1));
+                if (apiMetadata != null)
+                {
+                    MetadataValue = new MetadataValue
+                    {
+                        Description = apiMetadata.Description,
+                        Keywords = apiMetadata.Keywords,
+                        Title = apiMetadata.Title
+                    };
+                }
+            }
+            return MetadataValue;
+        }
+
+        Dictionary<string, MetadataValue> RouteDetailMapping { get; set; } = new()
         {
             {
                 "/",

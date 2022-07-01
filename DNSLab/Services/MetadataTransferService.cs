@@ -55,29 +55,22 @@ namespace DNSLab.Services
         {
             _navigationManager = navigationManager;
             _metadataProvider = metadataProvider;
+        }
 
+        public async Task Start()
+        {
             _navigationManager.LocationChanged += _navigationManager_LocationChanged;
-            UpdateMetadata(_navigationManager.Uri);
+            await UpdateMetadata(_navigationManager.Uri);
         }
 
-        private void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
+        private async void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
         {
-            UpdateMetadata(e.Location);
+            await UpdateMetadata(e.Location);
         }
 
-        private void UpdateMetadata(string url)
+        private async Task UpdateMetadata(string url)
         {
-            var metadataValue = _metadataProvider.RouteDetailMapping.FirstOrDefault(vp => url.EndsWith(vp.Key)).Value;
-
-            if (metadataValue is null)
-            {
-                metadataValue = new()
-                {
-                    Title = "DNSLab - دی ان اس لب",
-                    Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
-                    Keywords = new string[] { "Dynamic DNS", "DNS", "Free" }
-                };
-            }
+            var metadataValue = await _metadataProvider.GetMetaData(url);
 
             Title = metadataValue.Title;
             Description = metadataValue.Description;
