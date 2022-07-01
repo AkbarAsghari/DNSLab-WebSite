@@ -1,5 +1,6 @@
 ﻿using DNSLab.DTOs.Comments;
 using DNSLab.DTOs.Pages;
+using DNSLab.Enums;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
 using Microsoft.Extensions.Caching.Memory;
@@ -55,8 +56,19 @@ namespace DNSLab.Repository
 
         public async Task<PublishPageDTO> GetPageByURL(string url)
         {
-            var result = await _httpService.Get<PublishPageDTO>($"/Pages/getByURL?url={url}");
-            return result.Response;
+            string key = CacheKeyEnum.PublishPage + url;
+            if (!_memoryCache.TryGetValue(key, out PublishPageDTO cacheValue))
+            {
+
+                var result = await _httpService.Get<PublishPageDTO>($"/Pages/getByURL?url={url}");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(key, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
         }
 
         public async Task<PageMetadataDTO> GetPageMetadata(string url)

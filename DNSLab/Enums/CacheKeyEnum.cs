@@ -4,6 +4,7 @@
     {
         GetAllComments,
         UsersCount,
-        GetAllUsersDNSCount
+        GetAllUsersDNSCount,
+        PublishPage
     }
 }
