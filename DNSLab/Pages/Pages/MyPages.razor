@@ -1,0 +1,135 @@
+﻿@page "/Page/MyPages"
+
+@inject IPageRepository _PageRepository
+@inject IStringLocalizer<Resource> localizer
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+
+@if (pageSummaries == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeleteModal">
+        <Title>
+            <label>@localizer["AreYouSureDel"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["Title"] : @deleteRcord.Title </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=DeleteModal.Close></BaseButtonComponent>
+            <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=AcceptDelete></BaseButtonComponent>
+        </Footer>
+    </Modal>
+    <div class="card mb-4">
+        <div class="card-header">@localizer["HostNames"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="Page/Create">@localizer["Create New Page"]</a>
+            </div>
+            <div class="mb-3">
+                @if (pageSummaries.Count() == 0)
+                {
+                    <div class="note warning">
+                        <p>@localizer["ThereIsNoPages"]</p>
+                    </div>
+                    <div class="note info">
+                        <p>برای اطلاعات بیشتر <a target="_blank" href="Article/Create-New-DNS">کلیک</a> کنید</p>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var item in pageSummaries)
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-9 col-8">
+                                <div class="row">
+                                    <div class="col-md-4 col-xl-4">
+                                        <a class="text-decoration-none" href="@($"http://dnslab.ir/{item.URL}")" target="_blank">
+                                            <p>dnslab.ir/<code>@item.URL</code></p>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-5 col-xl-6">
+                                        <p>@item.Title</p>
+                                    </div>
+                                    <p class="col-md-3 col-xl-2">@item.Description</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["Edit"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Warning
+                                         IsOutLine=true
+                                         Icon=IconEnum.Pencil
+                                         OnClick=@(()=>EditHostName(item)) />
+                                <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Danger
+                                         IsOutLine=true
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>DeleteHostName(item)) />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+}
+
+@code {
+    IEnumerable<PageSummaryDTO> pageSummaries;
+
+    Modal DeleteModal { get; set; }
+    PageSummaryDTO deleteRcord { get; set; } = new PageSummaryDTO();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LoadHostNames();
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    private async Task LoadHostNames()
+    {
+        pageSummaries = await _PageRepository.GetAllPagesSummary();
+    }
+
+    private async Task AcceptDelete()
+    {
+        if (deleteRcord != null)
+        {
+            if (await _PageRepository.DeletePage(deleteRcord.Id))
+            {
+                await DeleteModal.Close();
+                await LoadHostNames();
+            }
+        }
+        deleteRcord = new PageSummaryDTO();
+    }
+
+    private async Task DeleteHostName(PageSummaryDTO record)
+    {
+        deleteRcord = record;
+        await DeleteModal.Open();
+    }
+
+    private async Task EditHostName(PageSummaryDTO record)
+    {
+        NavigationManager.NavigateTo("Page/Edit/" + record.Id);
+    }
+}

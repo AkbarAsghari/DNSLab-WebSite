@@ -1,0 +1,40 @@
+﻿@page "/Page/Edit/{PageId:guid}"
+@inject IPageRepository _PageRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+
+@if (existPage == null)
+{
+    <Loading />
+}
+else
+{
+    <PageGeneratorForm page=existPage OnValidSubmit=Update Title="ویرایش صفحه"></PageGeneratorForm>
+}
+
+@code {
+
+    [Parameter] public Guid PageId { get; set; }
+
+    private PageDTO existPage;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            existPage = await _PageRepository.GetPage(PageId);
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    public async Task Update()
+    {
+        if (await _PageRepository.EditPage(existPage))
+        {
+            _navManager.NavigateTo("Page/MyPages");
+            toastService.ShowToast("PageUpdated", Enums.ToastLevel.Success);
+        }
+    }
+}
+
+

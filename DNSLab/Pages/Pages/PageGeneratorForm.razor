@@ -1,0 +1,58 @@
+﻿@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="page" Context=CommentContext>
+    <div class="card mb-4">
+        <div class="card-header">@Title</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                <div class="col-12">
+                    <label class="mb-1">@localizer["URL"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterURL"]" @bind-Value="page.URL" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> page.URL)" />
+                </div>
+                <div class="col-12">
+                    <label class="mb-1">@localizer["Title"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterTitle"]" @bind-Value="page.Title" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> page.Title)" />
+                </div>
+                <div class="col-12">
+                    <label class="mb-1">@localizer["Description"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterDescription"]" @bind-Value="page.Description" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> page.Description)" />
+                </div>
+                 <div class="col-12">
+                    <label class="mb-1">@localizer["Header"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterHeader"]" @bind-Value="page.Header" required />
+                    <ValidationMessage class="invalid-feedback" For="@(()=> page.Header)" />
+                </div>
+                <div class="col-12">
+                    <label class="mb-1">@localizer["Body"]</label>
+                    <textarea class="form-control" placeholder="@localizer["Body HTML"]..." rows="23"
+                              @bind="page.Body"
+                              @bind:event="oninput" />
+                </div>
+            </div>
+            <div class="mb-3 gap-2">
+                <BaseButtonComponent Caption=@localizer["Save"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=ColorEnum.Primary
+                                     Icon=IconEnum.Check
+                                     EditContext=CommentContext
+                                     OnClick=OnValidSubmit></BaseButtonComponent>
+                <a class="btn btn-warning" href="Comment/MyComments">انصراف</a>
+            </div>
+        </div>
+    </div>
+</EditForm>
+@code {
+    [Parameter] public string Title { get; set; } 
+    [Parameter]
+    public PageDTO page { get; set; } = new PageDTO
+        {
+            URL = String.Empty,
+            Title = String.Empty,
+            Description = String.Empty,
+            Body = String.Empty,
+        };
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}
