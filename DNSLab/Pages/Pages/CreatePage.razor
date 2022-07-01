@@ -3,9 +3,9 @@
 @inject NavigationManager _navManager
 @inject ToastService toastService
 
-<PageGeneratorForm page=page TagsInput=Tags OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
+<PageGeneratorForm page=page Tags=Tags OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
 @code {
-    private TagsInput Tags;
+    private List<string> Tags;
 
     private PageDTO page { get; set; } = new PageDTO
         {
@@ -17,7 +17,7 @@
 
     public async Task Create()
     {
-        page.Keywords = Tags.Tags.ToArray();
+        page.Keywords = Tags.ToArray();
 
         if (await _PageRepository.AddNewPage(page))
         {

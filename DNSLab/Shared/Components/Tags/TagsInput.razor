@@ -3,7 +3,7 @@
 @using System.Linq;
 @using System.Text.RegularExpressions;
 
-<div class="suggestion-container w-75">
+<div class="suggestion-container">
     <div id="@($"{Id}_tagsinput")" class="tagsinput">
 
         @if (Tags != null && Tags.Any())
@@ -46,10 +46,13 @@
     protected string Value { get; set; }
     protected bool MenuVisibility { get; set; }
     protected bool IsContainSpecialCharacter { get; set; }
-    [Parameter] public List<string> Tags { get; set; } = new List<string>();
+    [Parameter] public List<string> Tags { get; set; }
 
     protected void AddTags(KeyboardEventArgs eventArgs)
     {
+        if (Tags == null)
+            Tags = new List<string>();
+
         IsContainSpecialCharacter = false;
 
         if (!String.IsNullOrEmpty(Value))

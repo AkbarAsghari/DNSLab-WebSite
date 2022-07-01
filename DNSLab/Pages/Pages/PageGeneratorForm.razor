@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Tags"]</label>
-                    <TagsInput @ref="TagsInput"></TagsInput>
+                    <TagsInput Tags="Tags"></TagsInput>
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Header"]</label>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Body"]</label>
-                    <textarea class="form-control" placeholder="@localizer["Body HTML"]..." rows="23"
+                    <textarea class="form-control dir-ltr" placeholder="@localizer["Body HTML"]..." rows="23"
                               @bind="page.Body"
                               @bind:event="oninput" />
                 </div>
@@ -43,14 +43,14 @@
                                      Icon=IconEnum.Check
                                      EditContext=CommentContext
                                      OnClick=OnValidSubmit></BaseButtonComponent>
-                <a class="btn btn-warning" href="Comment/MyComments">انصراف</a>
+                <a class="btn btn-warning" href="Page/MyPages">انصراف</a>
             </div>
         </div>
     </div>
 </EditForm>
 @code {
     [Parameter] public string Title { get; set; }
-    [Parameter] public TagsInput TagsInput { get; set; }
+    [Parameter] public List<string> Tags { get; set; }
 
     [Parameter] public PageDTO page { get; set; } = new PageDTO
         {
