@@ -5,7 +5,8 @@
         init(id, dotNetReference) {
             DecoupledEditor
                 .create(document.querySelector('#ckeditor'), {
-                    language : 'fa'
+                    language: 'fa',
+                    ckfinder: { uploadUrl: '/Upload' }
                 })
                 .then(editor => {
                     const toolbarContainer = document.querySelector('#toolbar-container');

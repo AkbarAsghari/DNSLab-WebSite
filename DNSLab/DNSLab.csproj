@@ -15,6 +15,7 @@
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\fonts\" />
+	  <Folder Include="wwwroot\images\CKEditorImages\" />
 	  <Folder Include="wwwroot\js\github\" />
 	</ItemGroup>
 

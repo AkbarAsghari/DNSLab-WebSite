@@ -10,10 +10,10 @@ namespace DNSLab.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("sitemap.txt")]
     [ApiController]
-    public class DNSLabController : ControllerBase
+    public class SiteMapController : ControllerBase
     {
         private readonly IPageRepository _pageRepository;
-        public DNSLabController(IPageRepository pageRepository)
+        public SiteMapController(IPageRepository pageRepository)
         {
             _pageRepository = pageRepository;
         }
