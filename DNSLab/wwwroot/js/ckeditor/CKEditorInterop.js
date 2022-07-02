@@ -3,11 +3,14 @@
 
     return {
         init(id, dotNetReference) {
-            ClassicEditor
-                .create(document.getElementById(id), {
-                    language: 'fa'
+            DecoupledEditor
+                .create(document.querySelector('#ckeditor'), {
+                    language : 'fa'
                 })
                 .then(editor => {
+                    const toolbarContainer = document.querySelector('#toolbar-container');
+
+                    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
                     editors[id] = editor;
                     editor.model.document.on('change:data', () => {
                         let data = editor.getData();
