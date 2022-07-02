@@ -31,9 +31,7 @@
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Body"]</label>
-                    <textarea class="form-control dir-ltr" placeholder="@localizer["Body HTML"]..." rows="23"
-                              @bind="page.Body"
-                              @bind:event="oninput" />
+                    <DNSLab.Shared.Components.TextEditor.TextEditor @bind-Value="page.Body" class="form-control form-control-solid form-control-lg dir-rtl"></DNSLab.Shared.Components.TextEditor.TextEditor>
                 </div>
             </div>
             <div class="mb-3 gap-2">
@@ -51,6 +49,8 @@
 @code {
     [Parameter] public string Title { get; set; }
     [Parameter] public List<string> Tags { get; set; }
+
+    private string Html;
 
     [Parameter] public PageDTO page { get; set; } = new PageDTO
         {

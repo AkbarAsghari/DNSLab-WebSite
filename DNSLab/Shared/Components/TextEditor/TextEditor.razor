@@ -1,0 +1,41 @@
+﻿@inherits InputTextArea
+@inject IJSRuntime JSRuntime
+
+<textarea @attributes="AdditionalAttributes"  
+       id="@Id"
+       class="@CssClass"
+       value="@CurrentValue"></textarea>
+
+@code { 
+    string _id;
+    [Parameter]
+    public string Id
+    {
+        get => _id ?? $"CKEditor_{uid}";
+        set => _id = value;
+    }
+
+    readonly string uid = Guid.NewGuid().ToString().ToLower().Replace("-", "");
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+            await JSRuntime.InvokeVoidAsync("CKEditorInterop.init", Id, DotNetObjectReference.Create(this));
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    [JSInvokable]
+    public Task EditorDataChanged(string data)
+    {
+        CurrentValue = data;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        JSRuntime.InvokeVoidAsync("CKEditorInterop.destroy", Id);
+        base.Dispose(disposing);
+    }
+}
