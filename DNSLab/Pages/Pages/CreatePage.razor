@@ -19,6 +19,7 @@
     {
         page.Keywords = Tags.ToArray();
 
+        return;
         if (await _PageRepository.AddNewPage(page))
         {
             _navManager.NavigateTo("Page/MyPages");

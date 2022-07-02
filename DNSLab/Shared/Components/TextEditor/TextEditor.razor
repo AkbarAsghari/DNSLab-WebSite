@@ -2,12 +2,14 @@
 @inject IJSRuntime JSRuntime
 
 <div id="toolbar-container"></div>
-<div @attributes="AdditionalAttributes"  
-       id="ckeditor"
-       class="@CssClass"
-       value="@CurrentValue"></div>
+<div @attributes="AdditionalAttributes"
+     id="ckeditor"
+     class="@CssClass"
+     value="@CurrentValue">
+    <p>متن خود را در اینجا بنویسید.</p>
+</div>
 
-@code { 
+@code {
     string _id;
     [Parameter]
     public string Id
