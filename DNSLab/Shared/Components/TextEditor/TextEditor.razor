@@ -1,16 +1,16 @@
 ﻿@inherits InputTextArea
+@implements IDisposable
 @inject IJSRuntime JSRuntime
 
 <div id="toolbar-container"></div>
-<div @attributes="AdditionalAttributes"
-     id="ckeditor"
-     class="@CssClass"
-     value="@CurrentValue">
-    <p>متن خود را در اینجا بنویسید.</p>
+<div id="ckeditor">
+    @((MarkupString)_HTML)
 </div>
 
 @code {
     string _id;
+    private string _HTML;
+
     [Parameter]
     public string Id
     {
@@ -20,6 +20,10 @@
 
     readonly string uid = Guid.NewGuid().ToString().ToLower().Replace("-", "");
 
+    protected override void OnInitialized()
+    {
+        _HTML = CurrentValue;
+    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -36,9 +40,8 @@
         return Task.CompletedTask;
     }
 
-    protected override void Dispose(bool disposing)
+    public void Dispose()
     {
         JSRuntime.InvokeVoidAsync("CKEditorInterop.destroy", Id);
-        base.Dispose(disposing);
     }
 }

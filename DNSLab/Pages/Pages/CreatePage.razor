@@ -3,7 +3,7 @@
 @inject NavigationManager _navManager
 @inject ToastService toastService
 
-<PageGeneratorForm page=page Tags=Tags OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
+<PageGeneratorForm Page=page OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
 @code {
     private List<string> Tags;
 
@@ -12,14 +12,12 @@
             URL = String.Empty,
             Title = String.Empty,
             Description = String.Empty,
-            Body = String.Empty,
+            Keywords = new List<string>(),
+            Body = "مطلب خود را در اینجا بنویسید.",
         };
 
     public async Task Create()
     {
-        page.Keywords = Tags.ToArray();
-
-        return;
         if (await _PageRepository.AddNewPage(page))
         {
             _navManager.NavigateTo("Page/MyPages");
