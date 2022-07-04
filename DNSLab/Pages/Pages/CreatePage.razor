@@ -3,6 +3,8 @@
 @inject NavigationManager _navManager
 @inject ToastService toastService
 
+@attribute [Authorize(Roles = "Admin")]
+
 <PageGeneratorForm Page=page OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
 @code {
     private List<string> Tags;

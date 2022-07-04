@@ -3,6 +3,8 @@
 @inject NavigationManager _navManager
 @inject ToastService toastService
 
+@attribute [Authorize(Roles = "Admin")]
+
 @if (existPage == null)
 {
     <Loading />
