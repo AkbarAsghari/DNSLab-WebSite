@@ -30,16 +30,16 @@ namespace DNSLab.Prividers
             }
             else
             {
-                //var apiMetadata = await _pageRepository.GetPageMetadata(new Uri(route).LocalPath.Substring(1));
-                //if (apiMetadata != null)
-                //{
-                //    MetadataValue = new MetadataValue
-                //    {
-                //        Description = apiMetadata.Description,
-                //        Keywords = apiMetadata.Keywords,
-                //        Title = apiMetadata.Title
-                //    };
-                //}
+                var apiMetadata = await _pageRepository.GetPageMetadata(new Uri(route).LocalPath.Substring(1));
+                if (apiMetadata != null)
+                {
+                    MetadataValue = new MetadataValue
+                    {
+                        Description = apiMetadata.Description,
+                        Keywords = apiMetadata.Keywords,
+                        Title = apiMetadata.Title
+                    };
+                }
             }
             return MetadataValue;
         }
