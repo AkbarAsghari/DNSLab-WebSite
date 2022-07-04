@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DNSLab.DTOs.Pages
 {
-    public class PublishPageDTO : CreatePageDTO
+    public class PublishPageDTO
     {
+        public string Header { get; set; }
+        public string Body { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
     }

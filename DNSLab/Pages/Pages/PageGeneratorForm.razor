@@ -5,9 +5,19 @@
         <div class="card-header">@Title</div>
         <div class="card-body">
             <div class="row gx-3 mb-3">
-                <div class="col-12">
+                <div class="col-sm-12 col-md-6">
+                    <label for="body">@localizer["PageType"]</label>
+                    <InputSelect class="form-control dir-ltr mt-1" @bind-Value="@Page.PageType">
+                        @foreach (var country in Enum.GetValues(typeof(PageTypeEnum)))
+                        {
+                            <option value="@country">@country</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => @Page.PageType)" />
+                </div>
+                <div class="col-sm-12 col-md-6">
                     <label class="mb-1">@localizer["URL"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterURL"]" @bind-Value="Page.URL" required />
+                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterURL"]" @bind-Value="Page.URL" required />
                     <ValidationMessage class="invalid-feedback" For="@(()=> Page.URL)" />
                 </div>
                 <div class="col-12">
@@ -48,8 +58,9 @@
 </EditForm>
 @code {
     [Parameter] public string Title { get; set; }
-    
-    [Parameter] public PageDTO Page { get; set; } = new PageDTO
+
+    [Parameter]
+    public PageDTO Page { get; set; } = new PageDTO
         {
             URL = String.Empty,
             Title = String.Empty,
