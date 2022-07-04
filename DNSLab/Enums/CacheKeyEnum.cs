@@ -5,6 +5,7 @@
         GetAllComments,
         UsersCount,
         GetAllUsersDNSCount,
-        PublishPage
+        PublishPage,
+        GetAllPagesSummary
     }
 }

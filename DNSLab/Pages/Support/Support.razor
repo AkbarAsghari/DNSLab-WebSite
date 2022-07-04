@@ -1,17 +1,31 @@
 ﻿@page "/Support"
+@inject IPageRepository _PageRepository
 
 <div class="container p-5 bg-body rounded shadow-sm">
     <h4 class="border-bottom pb-2 mb-0">راهنمای سایت</h4>
     <div class="note info">
         <p>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</p>
     </div>
-    <SupportItem Title="دیگه با DNS نیاز به IP Static ندارید" Link="/Article/Use-DDNS-Instead-Of-IP" Description="تو این آموزش روش ثبت DNS و جایگزینی اون با آی پی استاتیک رو آموزش میبینید" />
-    <SupportItem Title="ساخت هاست نِیم جدید" Link="/Article/Create-New-DNS" Description="در این آموزش نحوه ثبت دی ان اس و استفاده آن را خواهید دید" />
-    <SupportItem Title="ایجاد توکن برای هاست نیم ها" Link="/Article/Create-New-Token-For-DNS" Description="در این مقاله روش ساخت و استفاده از توکنه از توکن گفته میشود" />
-    <SupportItem Title="هدایت پورت روی مودم" Link="/Article/How-To-Port-Forwarding-In-DLink-Model" Description="روش هدایت پورت روی مودم آموزش داده میشه - Port Forwarding" />
-    <SupportItem Title="اتصال به سیستم خونگی با آی‌پی عمومی" Link="/Article/Connect-To-Home-System-With-Public-IP" Description="در اینجا روش اتصال به سیستم خونه با آی‌پی عمومی مشکلات اون بررسی میشه" />
-    <SupportItem Title="روش فعال سازی Let's Encrypt در IIS" Link="/Article/How-To-Active-Lets-Encrypt-In-IIS" Description="در این مطلب روش https کردن سایت روی IIS رو توضیح میدم" />
+    @if (pageSummaries == null)
+    {
+        <Loading />
+    }
+    else
+    {
+        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
+        {
+            <SupportItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+        }
+    }
+
 </div>
 @code {
     [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    IEnumerable<PageSummaryDTO> pageSummaries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pageSummaries = await _PageRepository.GetAllPagesSummary();
+    }
 }

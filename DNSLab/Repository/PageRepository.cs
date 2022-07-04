@@ -38,8 +38,17 @@ namespace DNSLab.Repository
 
         public async Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummary()
         {
-            var result = await _httpService.Get<IEnumerable<PageSummaryDTO>>($"/Pages/GetAllPagesSummary");
-            return result.Response;
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetAllPagesSummary, out IEnumerable<PageSummaryDTO> cacheValue))
+            {
+                var result = await _httpService.Get<IEnumerable<PageSummaryDTO>>($"/Pages/GetAllPagesSummary");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(CacheKeyEnum.GetAllPagesSummary, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
         }
 
         public async Task<IEnumerable<string>> GetAllPagesURL()
