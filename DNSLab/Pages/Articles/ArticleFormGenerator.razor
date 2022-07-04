@@ -1,4 +1,4 @@
-﻿@page "/Article/{URL}"
+﻿@page "/{PageType}/{*URL}"
 @inject IPageRepository _PageRepository
 
 <div class="container p-5 bg-body rounded shadow-sm article ck-content">
@@ -12,11 +12,12 @@
 </div>
 
 @code {
+    [Parameter] public string PageType { get; set; }
     [Parameter] public string URL { get; set; }
 
     PublishPageDTO publishPageDTO;
     protected override async Task OnInitializedAsync()
     {
-        publishPageDTO = await _PageRepository.GetPageByURL(url: URL);
+        publishPageDTO = await _PageRepository.GetPageByURL(url: $"{PageType}/{URL}");
     }
 }
