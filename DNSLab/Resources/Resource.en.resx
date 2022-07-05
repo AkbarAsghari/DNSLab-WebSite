@@ -129,6 +129,9 @@
   <data name="ActivationLinkSent" xml:space="preserve">
     <value>Activation link sent</value>
   </data>
+  <data name="AllPages" xml:space="preserve">
+    <value>All Pages</value>
+  </data>
   <data name="API" xml:space="preserve">
     <value>API For Developers</value>
   </data>
@@ -177,8 +180,14 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
+  </data>
+  <data name="Create New Page" xml:space="preserve">
+    <value>Create New Page</value>
   </data>
   <data name="CreateAHostName" xml:space="preserve">
     <value>Create a Host Name</value>
@@ -258,6 +267,18 @@
   <data name="Email_Is_Not_Valid" xml:space="preserve">
     <value>Email address is not valid</value>
   </data>
+  <data name="EnterDescription" xml:space="preserve">
+    <value>Enter description here ...</value>
+  </data>
+  <data name="EnterHeader" xml:space="preserve">
+    <value>Enter header here ...</value>
+  </data>
+  <data name="EnterTitle" xml:space="preserve">
+    <value>Enter title here ...</value>
+  </data>
+  <data name="EnterURL" xml:space="preserve">
+    <value>Enter URL ...</value>
+  </data>
   <data name="EnterYourHostName" xml:space="preserve">
     <value>enter your host name</value>
   </data>
@@ -278,6 +299,9 @@
   </data>
   <data name="GoHome" xml:space="preserve">
     <value>Go Home</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Header</value>
   </data>
   <data name="HelloWorld" xml:space="preserve">
     <value>Hello World</value>
@@ -384,6 +408,12 @@
   <data name="PageNotFound" xml:space="preserve">
     <value>Page Not Found</value>
   </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
+  </data>
+  <data name="PageType" xml:space="preserve">
+    <value>Page Type</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -461,6 +491,9 @@
   </data>
   <data name="RevokeKey" xml:space="preserve">
     <value>Revoke Key</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
@@ -558,6 +591,9 @@
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
   <data name="Target" xml:space="preserve">
     <value>Target</value>
   </data>
@@ -567,8 +603,14 @@
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>You currently have 0 hostnames, add one to get started</value>
   </data>
+  <data name="ThereIsNoPages" xml:space="preserve">
+    <value>There Is No Pages Here ...</value>
+  </data>
   <data name="ThereIsNoTokens" xml:space="preserve">
     <value>You currently have 0 tokens, add one to get started</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
   </data>
   <data name="TokenCreated" xml:space="preserve">
     <value>Token Created</value>
@@ -605,6 +647,9 @@
   </data>
   <data name="UpdateDate" xml:space="preserve">
     <value>Update Date</value>
+  </data>
+  <data name="URL" xml:space="preserve">
+    <value>URL</value>
   </data>
   <data name="UserComments" xml:space="preserve">
     <value>Comments</value>
