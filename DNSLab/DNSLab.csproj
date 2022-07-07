@@ -18,8 +18,4 @@
 	  <Folder Include="wwwroot\js\github\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Include="wwwroot\images\site\Supports\CreateHostName.PNG" />
-	</ItemGroup>
-
 </Project>
