@@ -50,7 +50,7 @@ else
                     {
                         <hr />
                         <div class="row">
-                            <p class="col-md-9 small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
+                            <p class="col-md-9 text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
                             <div class="col-md-3 d-grid gap-2 d-xl-flex justify-content-md-end">
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
