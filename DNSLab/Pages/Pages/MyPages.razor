@@ -50,33 +50,45 @@ else
                     {
                         <hr />
                         <div class="row">
-                            <div class="col-lg-9 col-8">
+                            <div class="col-12">
                                 <div class="row">
-                                    <div class="col-md-4 col-xl-4">
+                                    <div class="col-md-5">
                                         <a class="text-decoration-none" href="@($"http://dnslab.ir/{item.PageType}/{item.URL}")" target="_blank">
                                             <p>dnslab.ir/<code>@($"{@item.PageType}/{@item.URL}")</code></p>
                                         </a>
                                     </div>
-                                    <div class="col-md-5 col-xl-6">
+                                    <div class="col-md-4">
                                         <p>@item.Title</p>
                                     </div>
-                                    <p class="col-md-3 col-xl-2">@item.Description</p>
+                                    <div class="col-md-3 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                                 IsBussyCaption=@localizer["Progressing"]
+                                                 Color=ColorEnum.Warning
+                                                 IsOutLine=true
+                                                 Icon=IconEnum.Pencil
+                                                 OnClick=@(()=>EditHostName(item)) />
+                                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                                 IsBussyCaption=@localizer["Progressing"]
+                                                 Color=ColorEnum.Danger
+                                                 IsOutLine=true
+                                                 Icon=IconEnum.Trash
+                                                 OnClick=@(()=>DeleteHostName(item)) />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="col-md-9">@item.Description</p>
+                                    <div class="col-md-3 align-self-center">
+                                        <div class="row">
+                                            <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                            @if (@item.UpdateDate != null)
+                                            {
+                                                <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         IsOutLine=true
-                                         Icon=IconEnum.Pencil
-                                         OnClick=@(()=>EditHostName(item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         IsOutLine=true
-                                         Icon=IconEnum.Trash
-                                         OnClick=@(()=>DeleteHostName(item)) />
-                            </div>
+
                         </div>
                     }
                 }
