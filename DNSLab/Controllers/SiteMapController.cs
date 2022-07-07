@@ -22,6 +22,7 @@ namespace DNSLab.Controllers
         {
             "https://dnslab.ir/user/confirmemail/{token}",
             "https://dnslab.ir/user/resetpassword/{token}",
+            "https://dnslab.ir/{pagetype}/{*url}",
             "https://dnslab.ir/404",
             "https://dnslab.ir/500",
             "https://dnslab.ir/503",
