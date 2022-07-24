@@ -1,11 +1,10 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<div class="form-inline">
-    <input class="form-control" readonly type="text" value="@Text" />
-    <button type="button" class="btn btn-primary" @onclick="CopyTextToClipboard">Copy</button>
-</div>
+<button type="button" class="btn btn-primary btn-sm ms-2" @onclick="CopyTextToClipboard">
+    <span class="oi oi-clipboard" aria-hidden="true"></span>
+</button>
 
-@code {    
+@code {
     [Parameter] public string Text { get; set; }
 
     private async Task CopyTextToClipboard()

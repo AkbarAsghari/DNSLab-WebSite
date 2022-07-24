@@ -8,10 +8,16 @@
 <div class="index-page">
 
     <div class="container-xl mt-5">
-        <div class="px-4 py-5 my-5 text-center">
+        <div class="px-4 py-5 text-center">
             <h1>@localizer["IndexH1Message"]</h1>
             <div class="col-lg-9 mx-auto">
                 <p class="lead mb-5">@localizer["IndexMessage"]</p>
+            </div>
+            <div class="form-inline dir-ltr">
+                <div class="input-group mb-3 d-flex justify-content-center">
+                    <label> آی پی عمومی شما @IPDTO.IPv4 </label>
+                    <CopyToClipboard Text="@IPDTO.IPv4" />
+                </div>
             </div>
         </div>
 
@@ -26,9 +32,9 @@
                     <h3>@localizer["RemoteAccessComputerH2"]</h3>
                     <p>@localizer["RemoteAccessComputerMessage"]</p>
                     @*<a href="#" class="icon-link">
-                        Call to action
-                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                        </a>*@
+                    Call to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                    </a>*@
                 </div>
                 <div class="feature col">
                     <div class="feature-icon">
@@ -37,9 +43,9 @@
                     <h3>@localizer["CreateGameServerH2"]</h3>
                     <p>@localizer["CreateGameServerMessage"]</p>
                     @*<a href="#" class="icon-link">
-                        Call to action
-                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                        </a>*@
+                    Call to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                    </a>*@
                 </div>
                 <div class="feature col">
                     <div class="feature-icon">
@@ -48,9 +54,9 @@
                     <h3>@localizer["ShareYourLocalProjectH2"]</h3>
                     <p>@localizer["ShareYourLocalProjectMessage"]</p>
                     @* <a href="#" class="icon-link">
-                        Call to action
-                        <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                        </a>*@
+                    Call to action
+                    <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                    </a>*@
                 </div>
             </div>
         </div>
@@ -67,5 +73,5 @@
 </div>
 
 @code {
-
+    [CascadingParameter] public IPDTO IPDTO { get; set; }
 }
