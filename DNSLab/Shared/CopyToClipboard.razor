@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div class="form-inline">
+    <input class="form-control" readonly type="text" value="@Text" />
+    <button type="button" class="btn btn-primary" @onclick="CopyTextToClipboard">Copy</button>
+</div>
+
+@code {    
+    [Parameter] public string Text { get; set; }
+
+    private async Task CopyTextToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", Text);
+    }
+}

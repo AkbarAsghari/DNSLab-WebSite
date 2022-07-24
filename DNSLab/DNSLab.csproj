@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="wwwroot\js\custom\CopyToClipboard.js" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
 		<PackageReference Include="Jdenticon-net" Version="3.1.2" />
 		<PackageReference Include="MD.PersianDateTime.Standard" Version="2.3.0" />
@@ -16,6 +20,10 @@
 	<ItemGroup>
 	  <Folder Include="wwwroot\fonts\" />
 	  <Folder Include="wwwroot\js\github\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\custom\CopyToClipboard.js" />
 	</ItemGroup>
 
 </Project>
