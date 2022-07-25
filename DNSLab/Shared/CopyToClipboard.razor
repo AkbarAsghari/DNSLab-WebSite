@@ -1,14 +1,21 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<button type="button" class="btn btn-primary btn-sm ms-2" @onclick="CopyTextToClipboard">
-    <span class="oi oi-clipboard" aria-hidden="true"></span>
+<button type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard">
+    @if (isCopied)
+    {
+        <span class="oi oi-check" aria-hidden="true"></span>
+    }
+    else
+    {
+        <span class="oi oi-clipboard" aria-hidden="true"></span>
+    }
 </button>
 
 @code {
     [Parameter] public string Text { get; set; }
-
+    bool isCopied = false;
     private async Task CopyTextToClipboard()
     {
-        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", Text);
+        isCopied = await JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", Text);
     }
 }
