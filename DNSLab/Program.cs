@@ -32,7 +32,7 @@ builder.Services.AddScoped<IStaticsRepository, StaticsRepository>();
 builder.Services.AddScoped<IPageRepository, PageRepository>();
 
 builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddServerSideBlazor().AddCircuitOptions(options => { options.DetailedErrors = true; }); ;
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped<JWTAuthenticationStateProvider>();
