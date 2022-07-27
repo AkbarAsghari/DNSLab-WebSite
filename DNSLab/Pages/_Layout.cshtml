@@ -35,6 +35,30 @@
     <script src="~/js/ckeditor/CKEditorInterop.js"></script>
 
     <script>
+        function addTooltips() {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+
+            $('[data-bs-toggle="tooltip"]').on('click', function() {
+                $(this).tooltip('hide');
+                // initialize
+                const tooltipElement = document.querySelector('[data-bs-toggle="tooltip"]')
+                let bsTooltip = new bootstrap.Tooltip(tooltipElement)
+
+                // update
+                tooltipElement.title = 'کپی شد'
+                bsTooltip = new bootstrap.Tooltip(tooltipElement)
+                tooltipElement.tooltip('show');
+            });
+            //$('[data-bs-toggle="tooltip"]').tooltip({
+            //    trigger: 'click'
+            //});
+
+            //$('[data-bs-toggle="tooltip"]').on('click', function() {
+            //    $(this).Tooltip('show');
+            //});
+        }
+    </script>
+    <script>
         window.blazorCulture = {
             get: () => window.localStorage['BlazorCulture'],
             set: (value) => window.localStorage['BlazorCulture'] = value
