@@ -35,27 +35,19 @@
     <script src="~/js/ckeditor/CKEditorInterop.js"></script>
 
     <script>
-        function addTooltips() {
-            $('[data-bs-toggle="tooltip"]').tooltip();
-
-            $('[data-bs-toggle="tooltip"]').on('click', function() {
-                $(this).tooltip('hide');
-                // initialize
-                const tooltipElement = document.querySelector('[data-bs-toggle="tooltip"]')
-                let bsTooltip = new bootstrap.Tooltip(tooltipElement)
-
-                // update
-                tooltipElement.title = 'کپی شد'
-                bsTooltip = new bootstrap.Tooltip(tooltipElement)
-                tooltipElement.tooltip('show');
+        function addTooltips(toolTipId) {
+            $("#" + toolTipId).tooltip({
+                delay: { show: 0, hide: 1200 },
+                title: 'برای کپی کردن کلیک کنید'
             });
-            //$('[data-bs-toggle="tooltip"]').tooltip({
-            //    trigger: 'click'
-            //});
 
-            //$('[data-bs-toggle="tooltip"]').on('click', function() {
-            //    $(this).Tooltip('show');
-            //});
+            $("#" + toolTipId).on('click', function() {
+                var tt = bootstrap.Tooltip.getInstance(this);
+                tt.dispose();
+                this.setAttribute('title', 'کپی شد')
+                tt = bootstrap.Tooltip.getOrCreateInstance(this);
+                tt.show();
+            });
         }
     </script>
     <script>

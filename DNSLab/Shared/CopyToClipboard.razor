@@ -1,7 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<button type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard"
-        data-bs-toggle="tooltip" data-bs-placement="top" title="برای کپی کردن کلیک کنید">
+<button id="@buttonId" type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard">
     @if (isCopied)
     {
         <span class="oi oi-check" aria-hidden="true"></span>
@@ -13,14 +12,15 @@
 </button>
 
 @code {
-    [Parameter] public string Text { get; set; }
+    string buttonId = "btnCp" + Guid.NewGuid().ToString().Replace("-", String.Empty);
     bool isCopied = false;
+    [Parameter] public string Text { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("addTooltips");
+            await JSRuntime.InvokeVoidAsync("addTooltips",buttonId);
         }
     }
     private async Task CopyTextToClipboard()
