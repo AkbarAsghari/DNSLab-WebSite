@@ -95,8 +95,9 @@ else
                 <hr />
 
                 <p>لینک بروزرسانی آی پی های توکن</p>
-                <div class="row m-1">
+                <div>
                     <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
+                    <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
                 </div>
                 <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
             }
