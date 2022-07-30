@@ -21,7 +21,7 @@
             <div class="@(IsContainSpecialCharacter ? "tag-tooltip" : string.Empty)">
                 <input id="@($"{Id}_tag")"
                        class="tag-input"
-                       placeholder="با ( , ) جدا کنید"
+                       placeholder="با ( ویرگول ) جدا کنید"
                        autocomplete="off"
                        @bind-value="Value"
                        @bind-value:event="oninput"
