@@ -21,7 +21,7 @@
             <div class="@(IsContainSpecialCharacter ? "tag-tooltip" : string.Empty)">
                 <input id="@($"{Id}_tag")"
                        class="tag-input"
-                       placeholder="Add tags"
+                       placeholder="با ( , ) جدا کنید"
                        autocomplete="off"
                        @bind-value="Value"
                        @bind-value:event="oninput"
@@ -57,11 +57,12 @@
 
         if (!String.IsNullOrEmpty(Value))
         {
-            if (eventArgs.Key.Equals(","))
+            if (eventArgs.Key.Equals(",") || Value.EndsWith(","))
             {
-                Value = Value.Replace(",", String.Empty);
+                Value = Value.Replace(",", String.Empty).Trim();
 
-                if (!Tags.Exists(t => t.Equals(Value, StringComparison.CurrentCultureIgnoreCase)))
+                if (!String.IsNullOrEmpty(Value)
+                && !Tags.Exists(t => t.Equals(Value, StringComparison.CurrentCultureIgnoreCase)))
                 {
                     Tags.Add(Value);
                 }
