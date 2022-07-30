@@ -57,9 +57,9 @@
 
         if (!String.IsNullOrEmpty(Value))
         {
-            if (eventArgs.Key.Equals(",") || Value.EndsWith(","))
+            if (eventArgs.Key.Equals(",") || Value.EndsWith(",") || eventArgs.Key.Equals("،") || Value.EndsWith("،"))
             {
-                Value = Value.Replace(",", String.Empty).Trim();
+                Value = Value.Replace(",", String.Empty).Replace("،", String.Empty).Trim();
 
                 if (!String.IsNullOrEmpty(Value)
                 && !Tags.Exists(t => t.Equals(Value, StringComparison.CurrentCultureIgnoreCase)))
