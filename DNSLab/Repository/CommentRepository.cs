@@ -62,5 +62,11 @@ namespace DNSLab.Repository
             var result = await _httpService.Put<CommentDTO, bool>($"/Comment/Update", comment);
             return result.Response;
         }
+
+        public async Task<IEnumerable<CommentDTO>> GetNewComments()
+        {
+            var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetNewComments");
+            return result.Response;
+        }
     }
 }

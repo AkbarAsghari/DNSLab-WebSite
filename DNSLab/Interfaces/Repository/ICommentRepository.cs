@@ -7,6 +7,7 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> AddNewComment(CreateCommentDTO comment);
         Task<CommentDTO> GetComment(Guid id);
         Task<IEnumerable<CommentDTO>> GetMyComments();
+        Task<IEnumerable<CommentDTO>> GetNewComments();
         Task<IEnumerable<FullCommentDTO>> GetAllComments();
         Task<bool> DeleteComment(Guid id);
         Task<bool> UpdateComment(CommentDTO comment);
