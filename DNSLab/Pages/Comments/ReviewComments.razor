@@ -22,7 +22,7 @@ else
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=DeclineModal.Close></BaseButtonComponent>
-            <BaseButtonComponent Caption=@localizer["Delete"]
+            <BaseButtonComponent Caption=@localizer["Decline"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash
@@ -48,13 +48,13 @@ else
         <div class="card-header">@localizer["MyComments"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
+                <a class="btn btn-primary" href="Comment/Create">@localizer["NewComments"]</a>
             </div>
             <div class="mb-3">
 
                 @if (newComments.Count() == 0)
                 {
-                    <text>@localizer["ThereIsNoComment"]</text>
+                    <text>@localizer["ThereIsNoNewComment"]</text>
                 }
                 else
                 {
@@ -121,13 +121,15 @@ else
         if (firstRender)
         {
             await LoadComments();
-            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
     private async Task LoadComments()
     {
         newComments = await commentRepository.GetNewComments();
+        await this.InvokeAsync(() => StateHasChanged());
+        await DeclineModal.Close();
+        await DetailsModal.Close();
     }
 
     private async Task OpenDeclineModal(CommentDTO record)
@@ -148,7 +150,8 @@ else
     }
     private async Task ReviewComment(CommentDTO record, bool isApproved)
     {
-
+        if (await commentRepository.ReviewComment(record.Id, isApproved))
+            await LoadComments();
     }
 }
 

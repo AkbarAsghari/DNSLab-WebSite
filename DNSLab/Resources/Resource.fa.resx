@@ -123,6 +123,9 @@
   <data name="About" xml:space="preserve">
     <value>درباره</value>
   </data>
+  <data name="Accept" xml:space="preserve">
+    <value>پذیرش</value>
+  </data>
   <data name="AccountDetails" xml:space="preserve">
     <value>اطلاعات حساب</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="CreateToken" xml:space="preserve">
     <value>ایجاد توکن</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>عدم پذیرش</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
@@ -395,6 +401,9 @@
   </data>
   <data name="MyComments" xml:space="preserve">
     <value>دیدگاه های من</value>
+  </data>
+  <data name="NewComments" xml:space="preserve">
+    <value>نظرات جدید</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>بعد</value>
@@ -582,6 +591,9 @@
   <data name="ShareYourLocalProjectMessage" xml:space="preserve">
     <value>پروژه رو روی سیستم خانگی اجرا کن و با آدرس دلخواهت با دوستات و همکارات اشتراک بذار</value>
   </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>نمایش جزئیات</value>
+  </data>
   <data name="SiteSettings" xml:space="preserve">
     <value>تنظیمات سایت</value>
   </data>
@@ -605,6 +617,9 @@
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>شما هیچ هاست نِیمی ندارید ، برای شروع یکی بسازید</value>
+  </data>
+  <data name="ThereIsNoNewComment" xml:space="preserve">
+    <value>نظر جدیدی یافت نشد</value>
   </data>
   <data name="ThereIsNoPages" xml:space="preserve">
     <value>هیچ صفحه ای یافت نشد</value>

@@ -71,7 +71,7 @@ namespace DNSLab.Repository
 
         public async Task<bool> ReviewComment(Guid id, bool isApproved)
         {
-            var result = await _httpService.Delete<bool>($"/Comment/ReviewComment?Id={id}&isApprove={isApproved}");
+            var result = await _httpService.Post<bool>($"/Comment/ReviewComment?Id={id}&isApprove={isApproved}");
             return result.Response;
         }
     }

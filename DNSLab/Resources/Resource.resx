@@ -123,6 +123,9 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="AccountDetails" xml:space="preserve">
     <value>Account Details</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="CreateToken" xml:space="preserve">
     <value>Create Token</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Decline</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -395,6 +401,9 @@
   </data>
   <data name="MyComments" xml:space="preserve">
     <value>My comments</value>
+  </data>
+  <data name="NewComments" xml:space="preserve">
+    <value>New Comments</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -582,6 +591,9 @@
   <data name="ShareYourLocalProjectMessage" xml:space="preserve">
     <value>Create your own host in local system and share it over web.</value>
   </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>Show Details</value>
+  </data>
   <data name="SiteSettings" xml:space="preserve">
     <value>Site Settings</value>
   </data>
@@ -605,6 +617,9 @@
   </data>
   <data name="ThereIsNoHost" xml:space="preserve">
     <value>You currently have 0 hostnames, add one to get started</value>
+  </data>
+  <data name="ThereIsNoNewComment" xml:space="preserve">
+    <value>There Is No New Comment</value>
   </data>
   <data name="ThereIsNoPages" xml:space="preserve">
     <value>There Is No Pages Here ...</value>
