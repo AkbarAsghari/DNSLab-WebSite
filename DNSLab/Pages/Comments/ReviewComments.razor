@@ -1,0 +1,154 @@
+﻿@page "/Comment/ReviewComments"
+@inject ICommentRepository commentRepository
+@inject IStringLocalizer<Resource> localizer
+
+@attribute [Authorize(Roles = "Admin")]
+
+@if (newComments == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeclineModal">
+        <Title>
+            <label>@localizer["AreYouSureDecline"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["CommentText"] : @DeclineRcord.Text </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=DeclineModal.Close></BaseButtonComponent>
+            <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=AcceptDecline></BaseButtonComponent>
+        </Footer>
+    </Modal>
+
+    <Modal @ref="DetailsModal">
+        <Title>
+            <label>@localizer["Details"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["CommentText"] : @DetailsRcord.Text </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Close"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=DetailsModal.Close></BaseButtonComponent>
+        </Footer>
+    </Modal>
+    <div class="card mb-4">
+        <div class="card-header">@localizer["MyComments"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
+            </div>
+            <div class="mb-3">
+
+                @if (newComments.Count() == 0)
+                {
+                    <text>@localizer["ThereIsNoComment"]</text>
+                }
+                else
+                {
+                    @foreach (var item in newComments)
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="row col-lg-7 col-6">
+                                <div class="col-lg-6 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
+                                </div>
+                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                    <div class="row">
+                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        @if (@item.UpdateDate != null)
+                                        {
+                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-6 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["ShowDetails"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Info
+                                         Icon=IconEnum.Info
+                                         OnClick=@(()=>ShowCommentDetails(item))></BaseButtonComponent>
+                                <BaseButtonComponent Caption=@localizer["Accept"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Success
+                                         Icon=IconEnum.Check
+                                         OnClick=@(()=>ReviewComment(item,true))></BaseButtonComponent>
+                                <BaseButtonComponent Caption=@localizer["Decline"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Danger
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>OpenDeclineModal(item))></BaseButtonComponent>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@code {
+    IEnumerable<CommentDTO> newComments;
+
+    Modal DeclineModal { get; set; }
+    CommentDTO DeclineRcord { get; set; } = new();
+
+    Modal DetailsModal { get; set; }
+    CommentDTO DetailsRcord { get; set; } = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LoadComments();
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    private async Task LoadComments()
+    {
+        newComments = await commentRepository.GetNewComments();
+    }
+
+    private async Task OpenDeclineModal(CommentDTO record)
+    {
+        DeclineRcord = record;
+        await DeclineModal.Open();
+    }
+
+    private async Task ShowCommentDetails(CommentDTO record)
+    {
+        DetailsRcord = record;
+        await DetailsModal.Open();
+    }
+
+    private async Task AcceptDecline()
+    {
+        await ReviewComment(DeclineRcord, false);
+    }
+    private async Task ReviewComment(CommentDTO record, bool isApproved)
+    {
+
+    }
+}
+
