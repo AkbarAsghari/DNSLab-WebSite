@@ -11,5 +11,6 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<FullCommentDTO>> GetAllComments();
         Task<bool> DeleteComment(Guid id);
         Task<bool> UpdateComment(CommentDTO comment);
+        Task<bool> ReviewComment(Guid id, bool isApproved);
     }
 }

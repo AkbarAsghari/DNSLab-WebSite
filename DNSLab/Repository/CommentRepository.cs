@@ -68,5 +68,11 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetNewComments");
             return result.Response;
         }
+
+        public async Task<bool> ReviewComment(Guid id, bool isApproved)
+        {
+            var result = await _httpService.Delete<bool>($"/Comment/ReviewComment?Id={id}&isApprove={isApproved}");
+            return result.Response;
+        }
     }
 }
