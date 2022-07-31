@@ -138,6 +138,9 @@
   <data name="Approved" xml:space="preserve">
     <value>تایید شده</value>
   </data>
+  <data name="AreYouSureDecline" xml:space="preserve">
+    <value>آیا از عدم تایید این کامنت مطمئن میباشید؟</value>
+  </data>
   <data name="AreYouSureDel" xml:space="preserve">
     <value>آیا از حذف این رکورد مطمئن هستید؟</value>
   </data>

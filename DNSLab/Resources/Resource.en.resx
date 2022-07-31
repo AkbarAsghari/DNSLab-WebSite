@@ -138,6 +138,9 @@
   <data name="Approved" xml:space="preserve">
     <value>Approved</value>
   </data>
+  <data name="AreYouSureDecline" xml:space="preserve">
+    <value>Are you sure want to decline the comment</value>
+  </data>
   <data name="AreYouSureDel" xml:space="preserve">
     <value>Are you sure want to delete record?</value>
   </data>
