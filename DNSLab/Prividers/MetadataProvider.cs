@@ -119,6 +119,15 @@ namespace DNSLab.Prividers
                 }
             },
             {
+                "/Comment/ReviewComments",
+                new()
+                {
+                    Title = "دیدگاه های جدید",
+                    Description = "فرم تایید دیدگاه های جدید",
+                    Keywords = new string[] { "دیدگاه های جدید", "تایید دیدگاه های جدید" }
+                }
+            },
+            {
                 "/legal/tos",
                 new()
                 {
