@@ -18,7 +18,7 @@ namespace DNSLab.Prividers
                 Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
                 Keywords = new string[] { "Dynamic DNS", "DNS", "Free" }
             };
-            var existMetadata = RouteDetailMapping.FirstOrDefault(vp => route.EndsWith(vp.Key)).Value;
+            var existMetadata = RouteDetailMapping.FirstOrDefault(vp => route.ToLower().EndsWith(vp.Key.ToLower())).Value;
             if (existMetadata != null)
             {
                 MetadataValue = new MetadataValue
