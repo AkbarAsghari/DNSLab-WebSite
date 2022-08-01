@@ -26,6 +26,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        pageSummaries = await _PageRepository.GetAllPagesSummary();
+        pageSummaries = await _PageRepository.GetAllPagesSummaryByPageType(PageTypeEnum.Support);
     }
 }
