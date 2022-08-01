@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.Pages;
+using DNSLab.Enums;
 
 namespace DNSLab.Interfaces.Repository
 {
@@ -10,7 +11,8 @@ namespace DNSLab.Interfaces.Repository
         Task<PageDTO> GetPage(Guid id);
         Task<PublishPageDTO> GetPageByURL(string url);
         Task<IEnumerable<string>> GetAllPagesURL();
-        Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummary();
+        Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummary(); 
+        Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummaryByPageType(PageTypeEnum pageTypeEnum);
         Task<PageMetadataDTO> GetPageMetadata(string url);
     }
 }

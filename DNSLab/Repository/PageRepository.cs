@@ -51,6 +51,22 @@ namespace DNSLab.Repository
             return cacheValue;
         }
 
+        public async Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummaryByPageType(PageTypeEnum pageTypeEnum)
+        {
+            string key = $"{CacheKeyEnum.GetAllPagesSummaryByPageType}{pageTypeEnum}";
+            if (!_memoryCache.TryGetValue(key, out IEnumerable<PageSummaryDTO> cacheValue))
+            {
+                var result = await _httpService.Get<IEnumerable<PageSummaryDTO>>($"/Pages/GetAllPagesSummary?pageType={pageTypeEnum}");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(key, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
+        }
+
         public async Task<IEnumerable<string>> GetAllPagesURL()
         {
             var result = await _httpService.Get<IEnumerable<string>>($"/Pages/GetAllPagesURL");

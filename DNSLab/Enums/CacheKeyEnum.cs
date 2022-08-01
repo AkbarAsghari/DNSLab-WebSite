@@ -6,6 +6,7 @@
         UsersCount,
         GetAllUsersDNSCount,
         PublishPage,
-        GetAllPagesSummary
+        GetAllPagesSummary,
+        GetAllPagesSummaryByPageType
     }
 }
