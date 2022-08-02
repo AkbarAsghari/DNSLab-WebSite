@@ -56,7 +56,7 @@ namespace DNSLab.Repository
             string key = $"{CacheKeyEnum.GetAllPagesSummaryByPageType}{pageTypeEnum}";
             if (!_memoryCache.TryGetValue(key, out IEnumerable<PageSummaryDTO> cacheValue))
             {
-                var result = await _httpService.Get<IEnumerable<PageSummaryDTO>>($"/Pages/GetAllPagesSummary?pageType={pageTypeEnum}");
+                var result = await _httpService.Get<IEnumerable<PageSummaryDTO>>($"/Pages/GetAllPagesSummaryByPageType?pageType={pageTypeEnum}");
                 cacheValue = result.Response;
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                         .SetSlidingExpiration(TimeSpan.FromMinutes(3));
