@@ -353,7 +353,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/Article/Create-New-DNS",
+                "/Support/Create-New-DNS",
                 new()
                 {
                     Title = "آموزش ساخت دی ان اس (DNS)",
@@ -362,7 +362,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/Article/Create-New-Token-For-DNS",
+                "/Support/Create-New-Token-For-DNS",
                 new()
                 {
                     Title = "ساخت توکن برای بروزرسانی آی پی هاست نیم ها (Token)",
@@ -371,7 +371,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/Article/How-To-Port-Forwarding-In-DLink-Model",
+                "/Support/How-To-Port-Forwarding-In-DLink-Model",
                 new()
                 {
                     Title = "پورت فورواردینگ (Port Forwarding) در مودم D-Link",
@@ -380,7 +380,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/Article/Connect-To-Home-System-With-Public-IP",
+                "/Support/Connect-To-Home-System-With-Public-IP",
                 new()
                 {
                     Title = "اتصال به سیستم خونگی با اینترنت و آی پی عمومی",
@@ -389,7 +389,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/Article/How-To-Active-Lets-Encrypt-In-IIS",
+                "/Support/How-To-Active-Lets-Encrypt-In-IIS",
                 new()
                 {
                     Title = "روش فعال سازی Let's Encrypt در IIS",
