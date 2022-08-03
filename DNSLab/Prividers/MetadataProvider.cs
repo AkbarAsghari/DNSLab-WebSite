@@ -245,8 +245,18 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/tools/dnslookup",
+
+                "/Article",
                 new()
+                {
+                    Title = "پشتیبانی",
+                    Description = "صفحه پشتیبانی و راهنمای سایت DNSLab",
+                    Keywords = new string[] { "پشتیبانی", "support" }
+                }
+            },
+            {
+                "/tools/dnslookup",
+                new ()
                 {
                     Title = "جستجوی دی‌ان‌اس",
                     Description = "جستجو و دریافت آی‌پی بر اساس دی‌ان‌اس",
