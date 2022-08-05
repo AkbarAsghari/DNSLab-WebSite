@@ -246,12 +246,12 @@ namespace DNSLab.Prividers
             },
             {
 
-                "/Article",
+                "/Articles",
                 new()
                 {
-                    Title = "پشتیبانی",
-                    Description = "صفحه پشتیبانی و راهنمای سایت DNSLab",
-                    Keywords = new string[] { "پشتیبانی", "support" }
+                    Title = "آموزش",
+                    Description = "مرکز آموزش سایت دی ان اس لب DNSLab",
+                    Keywords = new string[] { "آموزش", "دانش" , "knowlege" }
                 }
             },
             {
