@@ -648,13 +648,13 @@
   <data name="TokenUpdated" xml:space="preserve">
     <value>توکن آپدیت شد</value>
   </data>
-  <data name="Token_Expired_Exception" xml:space="preserve">
+  <data name="Token_Expired" xml:space="preserve">
     <value>لینک (توکن) منقضی شده است</value>
   </data>
-  <data name="Token_Not_Found_Exception" xml:space="preserve">
+  <data name="Token_Not_Found" xml:space="preserve">
     <value>لینک (توکن) یافت نشد</value>
   </data>
-  <data name="Token_Used_Before_Exception" xml:space="preserve">
+  <data name="Token_Used_Before" xml:space="preserve">
     <value>لینک (توکن) یک دفعه استفاده شده است</value>
   </data>
   <data name="Tools" xml:space="preserve">
@@ -719,5 +719,8 @@
   </data>
   <data name="YourUsername" xml:space="preserve">
     <value>نام کاربری شما</value>
+  </data>
+  <data name="Only_Letter_And_Dash_Accepted_In_URL" xml:space="preserve">
+    <value>فقط حروف A تا Z و اعداد و (-) در URL مجاز میباشد</value>
   </data>
 </root>

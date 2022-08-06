@@ -648,13 +648,13 @@
   <data name="TokenUpdated" xml:space="preserve">
     <value>Token Updated</value>
   </data>
-  <data name="Token_Expired_Exception" xml:space="preserve">
+  <data name="Token_Expired" xml:space="preserve">
     <value>Token expired</value>
   </data>
-  <data name="Token_Not_Found_Exception" xml:space="preserve">
+  <data name="Token_Not_Found" xml:space="preserve">
     <value>Token not found</value>
   </data>
-  <data name="Token_Used_Before_Exception" xml:space="preserve">
+  <data name="Token_Used_Before" xml:space="preserve">
     <value>Token Used Before</value>
   </data>
   <data name="Tools" xml:space="preserve">
@@ -719,5 +719,8 @@
   </data>
   <data name="YourUsername" xml:space="preserve">
     <value>your username</value>
+  </data>
+  <data name="Only_Letter_And_Dash_Accepted_In_URL" xml:space="preserve">
+    <value>Only letter and dash accepted in URL</value>
   </data>
 </root>

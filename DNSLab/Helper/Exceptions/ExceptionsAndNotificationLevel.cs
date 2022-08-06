@@ -88,19 +88,19 @@ namespace DNSLab.Helper.Exceptions
                          NormalMessage = _localizer["HostNameAlias_Is_Not_Valid"]
                     },new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "Token_Not_Found_Exception",
+                         ExceptionStr = "Token_Not_Found",
                          Level = Enums.ToastLevel.Error,
-                         NormalMessage = _localizer["Token_Not_Found_Exception"]
+                         NormalMessage = _localizer["Token_Not_Found"]
                     },new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "Token_Expired_Exception",
+                         ExceptionStr = "Token_Expired",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["Token_Expired_Exception"]
+                         NormalMessage = _localizer["Token_Expired"]
                     },new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "Token_Used_Before_Exception",
+                         ExceptionStr = "Token_Used_Before",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["Token_Used_Before_Exception"]
+                         NormalMessage = _localizer["Token_Used_Before"]
                     },new ExceptionsAndNotificationLevel()
                     {
                          ExceptionStr = "TokenName_Is_Not_Valid",
@@ -141,6 +141,12 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Can_Not_Use_Private_Network_IP_Addresses",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Can_Not_Use_Private_Network_IP_Addresses"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Only_Letter_And_Dash_Accepted_In_URL",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Only_Letter_And_Dash_Accepted_In_URL"]
                     }
                 };
             }
