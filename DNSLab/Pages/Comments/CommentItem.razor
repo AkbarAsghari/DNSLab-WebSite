@@ -1,22 +1,51 @@
-﻿<div class="card w-100 shadow-1-strong rounded-3">
+﻿@inject ICommentRepository commentRepository
+@inject IStringLocalizer<Resource> localizer
+
+<div class="card w-100 shadow-1-strong rounded-3">
     <div class="row">
         <div class="col-xl-1 col-md-2 col-3 comment-profile">
-            <UserProfileImage Size=70 UserId="@UserId.ToString()" />
-            <p class="text-nowrap"><small class="text-muted">@CommentDate.CalcRelativeTime()</small></p>
+            <UserProfileImage Size=70 UserId="@FullComment.UserId.ToString()" />
+            <p class="text-nowrap"><small class="text-muted">@FullComment.CreateDate.CalcRelativeTime()</small></p>
         </div>
         <div class="col-xl-11 col-md-10 col-9">
             <div class="row g-0">
                 <div class="card-body">
-                    <h6 class="card-title">@FullName</h6>
-                    <p class="comment-text card-text m-0">@CommentText</p>
+                    <h6 class="card-title">@FullComment.FullName</h6>
+                    <p class="comment-text card-text m-0">@FullComment.Text</p>
                 </div>
+                @if (@FullComment.RepliesCount > 0)
+                {
+                    <div class="pe-5">
+                        <BaseButtonComponent Caption=@("پاسخ ها (" + @FullComment.RepliesCount + ")")
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Primary
+                                         IsOutLine=true
+                                         Icon=@(isCollapsed == false ? IconEnum.Arrow_Bottom : IconEnum.Arrow_Top)
+                                         OnClick=@(()=>ShowReplies())></BaseButtonComponent>
+                        @if (isCollapsed && Replies != null)
+                        {
+                            @foreach (var comment in Replies)
+                            {
+                                <CommentItem FullComment="comment" />
+                            }
+                        }
+                    </div>
+                }
             </div>
         </div>
     </div>
+
 </div>
 @code {
-    [Parameter] public Guid UserId { get; set; }
-    [Parameter] public string FullName { get; set; }
-    [Parameter] public string CommentText { get; set; }
-    [Parameter] public DateTime CommentDate { get; set; }
+    [Parameter] public FullCommentDTO FullComment { get; set; }
+    private IEnumerable<FullCommentDTO> Replies { get; set; }
+    private bool isCollapsed = false;
+
+    private async Task ShowReplies()
+    {
+        if (Replies == null)
+            Replies = await commentRepository.GetCommentReplies(FullComment.Id);
+
+        isCollapsed = !isCollapsed;
+    }
 }

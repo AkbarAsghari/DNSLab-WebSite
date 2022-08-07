@@ -7,6 +7,7 @@
         GetAllUsersDNSCount,
         PublishPage,
         GetAllPagesSummary,
-        GetAllPagesSummaryByPageType
+        GetAllPagesSummaryByPageType,
+        GetCommentReplies
     }
 }

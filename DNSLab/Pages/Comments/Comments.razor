@@ -17,7 +17,7 @@
             {
                 @foreach (var comment in allComments)
                 {
-                    <CommentItem CommentText="@comment.Text" UserId="@comment.UserId" FullName="@comment.FullName" CommentDate="@comment.CreateDate" />
+                    <CommentItem FullComment="comment" />
                 }
             }
         </div>
