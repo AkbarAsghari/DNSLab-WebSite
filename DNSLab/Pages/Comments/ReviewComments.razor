@@ -1,6 +1,7 @@
 ﻿@page "/Comment/ReviewComments"
 @inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
+@inject NavigationManager NavigationManager
 
 @attribute [Authorize(Roles = "Admin")]
 
@@ -95,6 +96,12 @@ else
                                          Color=ColorEnum.Danger
                                          Icon=IconEnum.Trash
                                          OnClick=@(()=>OpenDeclineModal(item))></BaseButtonComponent>
+                                <BaseButtonComponent Caption=@localizer["Reply"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Primary
+                                         Icon=IconEnum.Chat
+                                         OnClick=@(()=>ReplyComment(item))></BaseButtonComponent>
                             </div>
                         </div>
 
@@ -144,6 +151,10 @@ else
         await DetailsModal.Open();
     }
 
+    private async Task ReplyComment(CommentDTO record)
+    {
+        NavigationManager.NavigateTo("Comment/Reply/" + record.Id);
+    }
     private async Task AcceptDecline()
     {
         await ReviewComment(DeclineRcord, false);

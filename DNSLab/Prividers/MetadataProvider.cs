@@ -110,6 +110,15 @@ namespace DNSLab.Prividers
                 }
             },
             {
+                "/Comment/Reply/{ReplyTo:guid}",
+                new()
+                {
+                    Title = "پاسخ به دیدگاه",
+                    Description = "پاسخ به دیدگاه",
+                    Keywords = new string[] { "پاسخ به دیدگاه", "reply comment" }
+                }
+            },
+            {
                 "/Comment/MyComments",
                 new()
                 {

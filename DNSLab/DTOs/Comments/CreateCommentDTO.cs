@@ -9,5 +9,6 @@ namespace DNSLab.DTOs.Comments
     public class CreateCommentDTO
     {
         public string Text { get; set; }
+        public Guid? ReplyTo { get; set; }
     }
 }
