@@ -188,6 +188,7 @@ a {
 
 .comment-text {
     text-align: justify;
+    white-space: pre-wrap;
 }
 
 /*Fonts*/

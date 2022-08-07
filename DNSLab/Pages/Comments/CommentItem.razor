@@ -13,26 +13,27 @@
                     <h6 class="card-title">@FullComment.FullName</h6>
                     <p class="comment-text card-text m-0">@FullComment.Text</p>
                 </div>
-                @if (@FullComment.RepliesCount > 0)
-                {
-                    <div class="pe-5">
-                        <BaseButtonComponent Caption=@("پاسخ ها (" + @FullComment.RepliesCount + ")")
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Primary
-                                         IsOutLine=true
-                                         Icon=@(isCollapsed == false ? IconEnum.Arrow_Bottom : IconEnum.Arrow_Top)
-                                         OnClick=@(()=>ShowReplies())></BaseButtonComponent>
-                        @if (isCollapsed && Replies != null)
-                        {
-                            @foreach (var comment in Replies)
-                            {
-                                <CommentItem FullComment="comment" />
-                            }
-                        }
-                    </div>
-                }
+
             </div>
         </div>
+        @if (@FullComment.RepliesCount > 0)
+        {
+            <div class="pe-5">
+                <BaseButtonComponent Caption=@("پاسخ ها (" + @FullComment.RepliesCount + ")")
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 IsOutLine=true
+                                 Icon=@(isCollapsed == false ? IconEnum.Arrow_Bottom : IconEnum.Arrow_Top)
+                                 OnClick=@(()=>ShowReplies())></BaseButtonComponent>
+                @if (isCollapsed && Replies != null)
+                {
+                    @foreach (var comment in Replies)
+                    {
+                        <CommentItem FullComment="comment" />
+                    }
+                }
+            </div>
+        }
     </div>
 
 </div>
