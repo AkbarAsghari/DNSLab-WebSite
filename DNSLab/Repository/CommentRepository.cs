@@ -81,9 +81,9 @@ namespace DNSLab.Repository
             return result.Response;
         }
         
-        public async Task<int> GetCommentNotSeenRepliesCount(Guid id)
+        public async Task<int> GetCommentsNotSeenRepliesCount()
         {
-            var result = await _httpService.Get<int>($"/Comment/GetCommentNotSeenRepliesCount?commentId={id}");
+            var result = await _httpService.Get<int>($"/Comment/GetCommentsNotSeenRepliesCount");
             return result.Response;
         }
     }
