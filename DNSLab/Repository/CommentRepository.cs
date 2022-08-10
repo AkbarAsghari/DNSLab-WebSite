@@ -80,5 +80,11 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetCommentReplies?commentId={id}");
             return result.Response;
         }
+        
+        public async Task<int> GetCommentNotSeenRepliesCount(Guid id)
+        {
+            var result = await _httpService.Get<int>($"/Comment/GetCommentNotSeenRepliesCount?commentId={id}");
+            return result.Response;
+        }
     }
 }
