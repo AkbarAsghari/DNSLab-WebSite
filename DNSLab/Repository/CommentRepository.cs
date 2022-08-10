@@ -45,7 +45,7 @@ namespace DNSLab.Repository
             return result.Response;
         }
 
-        public async Task<IEnumerable<CommentDTO>> GetMyComments()
+        public async Task<IEnumerable<FullCommentDTO>> GetMyComments()
         {
             var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetMyComments");
             return result.Response;

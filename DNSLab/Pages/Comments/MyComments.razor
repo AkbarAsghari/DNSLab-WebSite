@@ -105,12 +105,15 @@ else
                                 </div>
                             </div>
                             <div class="col-lg-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
-                                <BaseButtonComponent Caption=@localizer["Replies"]
+                                @if (item.RepliesCount > 0)
+                                {
+                                    <BaseButtonComponent Caption=@localizer["Replies"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Success
                                          Icon=IconEnum.Chat
                                          OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
+                                }
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
@@ -136,7 +139,7 @@ else
 
 
 @code {
-    IEnumerable<CommentDTO> myComments;
+    IEnumerable<FullCommentDTO> myComments;
     IEnumerable<FullCommentDTO> commentReplies;
 
     Modal DeleteModal { get; set; }
