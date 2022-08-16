@@ -1,4 +1,5 @@
-﻿using DNSLab.Interfaces.Helper;
+﻿using DNSLab.DTOs.Statics;
+using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
 
 namespace DNSLab.Repository
@@ -27,6 +28,42 @@ namespace DNSLab.Repository
                 return 0;
             else
                 return response.Response;
+        }
+
+        public async Task<bool> AddSiteChange(SiteChangesDTO siteChanges)
+        {
+            var response = await _httpService.Post<SiteChangesDTO, bool>($"/Statics/AddSiteChange", siteChanges);
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<bool> UpdateSiteChange(SiteChangesDTO siteChanges)
+        {
+            var response = await _httpService.Put<SiteChangesDTO, bool>($"/Statics/UpdateSiteChange", siteChanges);
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<bool> DeleteSiteChange(Guid id)
+        {
+            var response = await _httpService.Delete<bool>($"/Statics/DeleteSiteChange?id={id}");
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<IEnumerable<SiteChangesDTO>> GetSiteChange()
+        {
+            var response = await _httpService.Get<IEnumerable<SiteChangesDTO>>($"/Statics/GetSiteChange");
+            if (response.Success)
+                return response.Response;
+
+            return null;
         }
     }
 }
