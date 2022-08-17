@@ -1,18 +1,22 @@
-﻿<TimeLine Data="Histories" TimeLineHeader="تاریخچه تغییرات سایت">
+﻿@using DNSLab.DTOs.Statics
+@inject IStaticsRepository staticRepository
+
+<TimeLine Data="siteCHanges" TimeLineHeader="تاریخچه تغییرات سایت">
     <TimeLineItemRenderFragment>
-        <TimeLineItem DateTime="@context.Item1">
+        <TimeLineItem DateTime="@context.ReleaseDate">
             <Body>
-                <p class="small">@context.Item2</p>
+                <p class="small">@context.Title</p>
             </Body>
         </TimeLineItem>
     </TimeLineItemRenderFragment>
 </TimeLine>
 
 @code {
-    List<Tuple<DateTime, string>> Histories = new List<Tuple<DateTime, string>>
+
+    IEnumerable<SiteChangesDTO> siteCHanges;
+
+    protected override async Task OnInitializedAsync()
     {
-        new Tuple<DateTime, string>(new DateTime(2022,06,22),"اضافه کردن تاریخچه تغییرات به سایت"),
-        new Tuple<DateTime, string>(new DateTime(2022,06,20),"اضافه کردن قابلیت نمایش تعداد بازدید از صفحات سایت"),
-        new Tuple<DateTime, string>(new DateTime(2022,06,19),"رفع ایراد عدم هدایت به صفحه مورد نظر بعد از ورود به سایت"),
-    };
+        siteCHanges = await staticRepository.GetLastChanges();
+    }
 }
