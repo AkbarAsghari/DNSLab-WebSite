@@ -57,9 +57,18 @@ namespace DNSLab.Repository
             return false;
         }
 
-        public async Task<IEnumerable<SiteChangesDTO>> GetSiteChange()
+        public async Task<SiteChangesDTO> GetSiteChange(Guid id)
         {
-            var response = await _httpService.Get<IEnumerable<SiteChangesDTO>>($"/Statics/GetSiteChange");
+            var response = await _httpService.Get<SiteChangesDTO>($"/Statics/GetSiteChange?id={id}");
+            if (response.Success)
+                return response.Response;
+
+            return null;
+        }
+
+        public async Task<IEnumerable<SiteChangesDTO>> GetLastChanges()
+        {
+            var response = await _httpService.Get<IEnumerable<SiteChangesDTO>>($"/Statics/GetLastChanges");
             if (response.Success)
                 return response.Response;
 
