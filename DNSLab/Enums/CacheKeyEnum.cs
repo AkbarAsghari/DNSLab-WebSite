@@ -8,6 +8,7 @@
         PublishPage,
         GetAllPagesSummary,
         GetAllPagesSummaryByPageType,
-        GetCommentReplies
+        GetCommentReplies,
+        GetLastChanges
     }
 }
