@@ -1,0 +1,18 @@
+﻿@page "/SiteChange/Create"
+@using DNSLab.DTOs.Statics
+@inject ICommentRepository commentRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+@attribute [Authorize]
+
+<SiteChangeForm SiteChange="SiteChange" OnValidSubmit="Create" Title="@localizer["CreateNewSiteChange"]"></SiteChangeForm>
+
+@code {
+    private SiteChangesDTO SiteChange = new SiteChangesDTO { Title = String.Empty };
+
+    public async Task Create()
+    {
+    }
+}

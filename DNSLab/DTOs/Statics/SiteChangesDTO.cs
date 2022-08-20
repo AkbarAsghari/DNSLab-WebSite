@@ -12,6 +12,6 @@ namespace DNSLab.DTOs.Statics
         public string Title { get; set; }
         public string InformationLink { get; set; }
         public string Description { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; } = DateTime.Now;
     }
 }

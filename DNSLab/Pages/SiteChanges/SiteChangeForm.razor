@@ -6,9 +6,21 @@
         <div class="card-header">@Title</div>
         <div class="card-body">
             <div class="row gx-3 mb-3">
-                <div class="col-12">
+                <div class="col-lg-4">
                     <label class="mb-1">@localizer["ChangeTitle"]</label>
-                    <input type="text" @bind=SiteChange.Title />
+                    <input class="form-control" type="text" @bind=SiteChange.Title />
+                </div>
+                <div class="col-lg-4">
+                    <label class="mb-1">@localizer["ReleaseDate"]</label>
+                    <InputDate class="form-control" @bind-Value=SiteChange.ReleaseDate />
+                </div>
+                <div class="col-lg-4">
+                    <label class="mb-1">@localizer["InformationLink"]</label>
+                    <input class="form-control dir-ltr" type="text" @bind=SiteChange.InformationLink />
+                </div>
+                <div class="col-12">
+                    <label class="mb-1">@localizer["Description"]</label>
+                    <TextEditor @bind-Value=SiteChange.Description></TextEditor>
                 </div>
             </div>
             <div class="mb-3 gap-2">
