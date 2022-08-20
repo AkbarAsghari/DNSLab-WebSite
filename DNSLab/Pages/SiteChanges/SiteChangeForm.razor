@@ -1,0 +1,30 @@
+﻿@using DNSLab.DTOs.Statics
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="SiteChange" Context=SiteChangeContext>
+    <div class="card mb-4">
+        <div class="card-header">@Title</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                <div class="col-12">
+                    <label class="mb-1">@localizer["ChangeTitle"]</label>
+                    <input type="text" @bind=SiteChange.Title />
+                </div>
+            </div>
+            <div class="mb-3 gap-2">
+                <BaseButtonComponent Caption=@localizer["Save"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=ColorEnum.Primary
+                                     Icon=IconEnum.Check
+                                     EditContext=SiteChangeContext
+                                     OnClick=OnValidSubmit></BaseButtonComponent>
+                <a class="btn btn-warning" href="Comment/MyComments">@localizer["Cancel"]</a>
+            </div>
+        </div>
+    </div>
+</EditForm>
+@code {
+    [Parameter] public string Title { get; set; } = String.Empty;
+    [Parameter] public SiteChangesDTO SiteChange { get; set; } = new SiteChangesDTO { Title = String.Empty };
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}
