@@ -723,4 +723,37 @@
   <data name="Only_Letter_And_Dash_Accepted_In_URL" xml:space="preserve">
     <value>Only letter and dash accepted in URL</value>
   </data>
+  <data name="ChangeTitle" xml:space="preserve">
+    <value>Change title</value>
+  </data>
+  <data name="CreateNewSiteChange" xml:space="preserve">
+    <value>Create new site change</value>
+  </data>
+  <data name="InformationLink" xml:space="preserve">
+    <value>Information link</value>
+  </data>
+  <data name="NewSiteChangeAdded" xml:space="preserve">
+    <value>New site change added</value>
+  </data>
+  <data name="ReleaseDate" xml:space="preserve">
+    <value>Release date</value>
+  </data>
+  <data name="SiteChangeUpdated" xml:space="preserve">
+    <value>Site change updated</value>
+  </data>
+  <data name="SiteChange_Must_Have_InformationLink_When_Contain_Description" xml:space="preserve">
+    <value>Site change must have information link when contain description</value>
+  </data>
+  <data name="SiteChange_Not_Found" xml:space="preserve">
+    <value>SiteChange not found</value>
+  </data>
+  <data name="SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow" xml:space="preserve">
+    <value>Site change release date range must be from 7 days ago to now</value>
+  </data>
+  <data name="SiteChange_Title_Is_Not_Valid" xml:space="preserve">
+    <value>Site change title is not valid</value>
+  </data>
+  <data name="ThereIsNoSiteChanges" xml:space="preserve">
+    <value>There is no site changes</value>
+  </data>
 </root>

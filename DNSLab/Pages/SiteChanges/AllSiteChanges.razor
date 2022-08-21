@@ -17,7 +17,7 @@ else
             <label>@localizer["AreYouSureDel"]</label>
         </Title>
         <Body>
-            <label>@localizer["Title"] : @deleteRcord.Title </label>
+            <label>@localizer["ChangeTitle"] : @deleteRcord.Title </label>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
@@ -41,7 +41,7 @@ else
                 @if (siteChanges.Count() == 0)
                 {
                     <div class="note warning">
-                        <p>@localizer["ThereIsNoPages"]</p>
+                        <p>@localizer["ThereIsNotSiteChanges"]</p>
                     </div>
                 }
                 else
