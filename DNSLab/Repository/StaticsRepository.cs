@@ -84,5 +84,11 @@ namespace DNSLab.Repository
 
             return cacheValue;
         }
+
+        public async Task<IEnumerable<SiteChangesDTO>> GetAllSiteChanges()
+        {
+            var result = await _httpService.Get<IEnumerable<SiteChangesDTO>>($"/Statics/GetAllSiteChanges");
+            return result.Response;
+        }
     }
 }

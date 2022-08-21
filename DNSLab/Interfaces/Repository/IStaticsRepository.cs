@@ -11,5 +11,6 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> DeleteSiteChange(Guid id);
         Task<SiteChangesDTO> GetSiteChange(Guid id);
         Task<IEnumerable<SiteChangesDTO>> GetLastChanges();
+        Task<IEnumerable<SiteChangesDTO>> GetAllSiteChanges();
     }
 }
