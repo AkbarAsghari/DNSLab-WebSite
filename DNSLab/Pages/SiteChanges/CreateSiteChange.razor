@@ -1,11 +1,10 @@
 ﻿@page "/SiteChange/Create"
-@using DNSLab.DTOs.Statics
-@inject ICommentRepository commentRepository
+@inject IStaticsRepository staticRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
-@attribute [Authorize]
+@attribute [Authorize(Roles = "Admin")]
 
 <SiteChangeForm SiteChange="SiteChange" OnValidSubmit="Create" Title="@localizer["CreateNewSiteChange"]"></SiteChangeForm>
 
@@ -14,5 +13,10 @@
 
     public async Task Create()
     {
+        if (await staticRepository.AddSiteChange(SiteChange))
+        {
+            _navManager.NavigateTo("SiteChange/All");
+            toastService.ShowToast(localizer["NewSiteChangeAdded"], Enums.ToastLevel.Success);
+        }
     }
 }
