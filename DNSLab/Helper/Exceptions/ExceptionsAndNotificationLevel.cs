@@ -148,6 +148,30 @@ namespace DNSLab.Helper.Exceptions
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Only_Letter_And_Dash_Accepted_In_URL"]
                     }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "SiteChange_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["SiteChange_Not_Found"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "SiteChange_Must_Have_InformationLink_When_Contain_Description",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["SiteChange_Must_Have_InformationLink_When_Contain_Description"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "SiteChange_Title_Is_Not_Valid",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["SiteChange_Title_Is_Not_Valid"]
+                    }
                 };
             }
             return _Exceptions;
