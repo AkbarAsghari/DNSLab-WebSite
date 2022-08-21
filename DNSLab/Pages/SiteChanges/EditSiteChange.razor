@@ -1,0 +1,32 @@
+﻿@page "/SiteChange/Edit/{SiteChangeId:guid}"
+@inject IStaticsRepository staticRepository
+@inject NavigationManager _navManager
+@inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
+
+@attribute [Authorize(Roles = "Admin")]
+
+<SiteChangeForm SiteChange="existSiteChange" OnValidSubmit="Update" Title="@localizer["EditSiteChange"]"></SiteChangeForm>
+
+@code {
+    [Parameter] public Guid SiteChangeId { get; set; }
+    private SiteChangesDTO existSiteChange;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            existSiteChange = await staticRepository.GetSiteChange(SiteChangeId);
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    public async Task Update()
+    {
+        if (await staticRepository.UpdateSiteChange(existSiteChange))
+        {
+            _navManager.NavigateTo("SiteChange/All");
+            toastService.ShowToast(localizer["NewSiteChangeUpdated"], Enums.ToastLevel.Success);
+        }
+    }
+}

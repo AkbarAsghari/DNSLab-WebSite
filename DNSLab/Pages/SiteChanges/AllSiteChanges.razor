@@ -1,0 +1,128 @@
+﻿@page "/SiteChange/All"
+
+@inject IStaticsRepository staticRepository
+@inject IStringLocalizer<Resource> localizer
+@inject NavigationManager NavigationManager
+
+@attribute [Authorize(Roles = "Admin")]
+
+@if (siteChanges == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="DeleteModal">
+        <Title>
+            <label>@localizer["AreYouSureDel"]</label>
+        </Title>
+        <Body>
+            <label>@localizer["Title"] : @deleteRcord.Title </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=DeleteModal.Close></BaseButtonComponent>
+            <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=AcceptDelete></BaseButtonComponent>
+        </Footer>
+    </Modal>
+    <div class="card mb-4">
+        <div class="card-header">@localizer["AllPages"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="SiteChange/Create">@localizer["CreateNewSiteChange"]</a>
+            </div>
+            <div class="mb-3">
+                @if (siteChanges.Count() == 0)
+                {
+                    <div class="note warning">
+                        <p>@localizer["ThereIsNoPages"]</p>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var item in siteChanges.OrderByDescending(x => x.CreateDate))
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p>@item.Title</p>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="text-decoration-none" href="@($"{item.InformationLink}")" target="_blank">
+                                    <p><code>@item.InformationLink</code></p>
+                                </a>
+                            </div>
+                            <p class="col-md-3 text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
+                            <div class="col-md-3 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                <BaseButtonComponent Caption=@localizer["Edit"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Warning
+                                         IsOutLine=true
+                                         Icon=IconEnum.Pencil
+                                         OnClick=@(()=>EditSiteChange(item)) />
+                                <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Danger
+                                         IsOutLine=true
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>DeleteSiteChange(item)) />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+}
+
+@code {
+    IEnumerable<SiteChangesDTO> siteChanges;
+
+    Modal DeleteModal { get; set; }
+    SiteChangesDTO deleteRcord { get; set; } = new SiteChangesDTO();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await LoadSiteChanges();
+            await this.InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+    private async Task LoadSiteChanges()
+    {
+        siteChanges = await staticRepository.GetAllSiteChanges();
+    }
+
+    private async Task AcceptDelete()
+    {
+        if (deleteRcord != null)
+        {
+            if (await staticRepository.DeleteSiteChange(deleteRcord.ID))
+            {
+                await DeleteModal.Close();
+                await LoadSiteChanges();
+            }
+        }
+        deleteRcord = new SiteChangesDTO();
+    }
+
+    private async Task DeleteSiteChange(SiteChangesDTO record)
+    {
+        deleteRcord = record;
+        await DeleteModal.Open();
+    }
+
+    private async Task EditSiteChange(SiteChangesDTO record)
+    {
+        NavigationManager.NavigateTo("SiteChange/Edit/" + record.ID);
+    }
+}

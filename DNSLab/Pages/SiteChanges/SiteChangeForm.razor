@@ -1,42 +1,49 @@
 ﻿@using DNSLab.DTOs.Statics
 @inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="SiteChange" Context=SiteChangeContext>
-    <div class="card mb-4">
-        <div class="card-header">@Title</div>
-        <div class="card-body">
-            <div class="row gx-3 mb-3">
-                <div class="col-lg-4">
-                    <label class="mb-1">@localizer["ChangeTitle"]</label>
-                    <input class="form-control" type="text" @bind=SiteChange.Title />
+@if (SiteChange == null)
+{
+    <Loading />
+}
+else
+{
+    <EditForm Model="SiteChange" Context=SiteChangeContext>
+        <div class="card mb-4">
+            <div class="card-header">@Title</div>
+            <div class="card-body">
+                <div class="row gx-3 mb-3">
+                    <div class="col-lg-4">
+                        <label class="mb-1">@localizer["ChangeTitle"]</label>
+                        <input class="form-control" type="text" @bind=SiteChange.Title />
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="mb-1">@localizer["ReleaseDate"]</label>
+                        <InputDate class="form-control" @bind-Value=SiteChange.ReleaseDate />
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="mb-1">@localizer["InformationLink"]</label>
+                        <input class="form-control dir-ltr" type="text" @bind=SiteChange.InformationLink />
+                    </div>
+                    <div class="col-12">
+                        <label class="mb-1">@localizer["Description"]</label>
+                        <TextEditor @bind-Value=SiteChange.Description></TextEditor>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <label class="mb-1">@localizer["ReleaseDate"]</label>
-                    <InputDate class="form-control" @bind-Value=SiteChange.ReleaseDate />
-                </div>
-                <div class="col-lg-4">
-                    <label class="mb-1">@localizer["InformationLink"]</label>
-                    <input class="form-control dir-ltr" type="text" @bind=SiteChange.InformationLink />
-                </div>
-                <div class="col-12">
-                    <label class="mb-1">@localizer["Description"]</label>
-                    <TextEditor @bind-Value=SiteChange.Description></TextEditor>
-                </div>
-            </div>
-            <div class="mb-3 gap-2">
-                <BaseButtonComponent Caption=@localizer["Save"]
+                <div class="mb-3 gap-2">
+                    <BaseButtonComponent Caption=@localizer["Save"]
                                      IsBussyCaption=@localizer["Progressing"]
                                      Color=ColorEnum.Primary
                                      Icon=IconEnum.Check
                                      EditContext=SiteChangeContext
                                      OnClick=OnValidSubmit></BaseButtonComponent>
-                <a class="btn btn-warning" href="Comment/MyComments">@localizer["Cancel"]</a>
+                    <a class="btn btn-warning" href="SiteChange/All">@localizer["Cancel"]</a>
+                </div>
             </div>
         </div>
-    </div>
-</EditForm>
+    </EditForm>
+}
 @code {
     [Parameter] public string Title { get; set; } = String.Empty;
-    [Parameter] public SiteChangesDTO SiteChange { get; set; } = new SiteChangesDTO { Title = String.Empty };
+    [Parameter] public SiteChangesDTO SiteChange { get; set; } = null;
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }
