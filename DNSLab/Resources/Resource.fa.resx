@@ -756,4 +756,7 @@
   <data name="ThereIsNoSiteChanges" xml:space="preserve">
     <value>تغییر سایتی یافت نشد</value>
   </data>
+  <data name="SiteChanges" xml:space="preserve">
+    <value>تغییرات سایت</value>
+  </data>
 </root>

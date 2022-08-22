@@ -756,4 +756,7 @@
   <data name="ThereIsNoSiteChanges" xml:space="preserve">
     <value>There is no site changes</value>
   </data>
+  <data name="SiteChanges" xml:space="preserve">
+    <value>Site Changes</value>
+  </data>
 </root>
