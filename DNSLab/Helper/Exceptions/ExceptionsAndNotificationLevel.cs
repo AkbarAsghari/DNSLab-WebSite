@@ -150,27 +150,27 @@ namespace DNSLab.Helper.Exceptions
                     }
                     ,new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "SiteChange_Not_Found",
+                         ExceptionStr = "ChangeLog_Not_Found",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["SiteChange_Not_Found"]
+                         NormalMessage = _localizer["ChangeLog_Not_Found"]
                     }
                     ,new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow",
+                         ExceptionStr = "ChangeLog_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow"]
+                         NormalMessage = _localizer["ChangeLog_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow"]
                     }
                     ,new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "SiteChange_Must_Have_InformationLink_When_Contain_Description",
+                         ExceptionStr = "ChangeLog_Must_Have_InformationLink_When_Contain_Description",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["SiteChange_Must_Have_InformationLink_When_Contain_Description"]
+                         NormalMessage = _localizer["ChangeLog_Must_Have_InformationLink_When_Contain_Description"]
                     }
                     ,new ExceptionsAndNotificationLevel()
                     {
-                         ExceptionStr = "SiteChange_Title_Is_Not_Valid",
+                         ExceptionStr = "ChangeLog_Title_Is_Not_Valid",
                          Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["SiteChange_Title_Is_Not_Valid"]
+                         NormalMessage = _localizer["ChangeLog_Title_Is_Not_Valid"]
                     }
                 };
             }

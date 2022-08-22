@@ -1,22 +1,22 @@
-﻿@page "/SiteChange/Create"
-@inject IStaticsRepository staticRepository
+﻿@page "/ChangeLogs/Create"
+@inject IPageRepository pageRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize(Roles = "Admin")]
 
-<SiteChangeForm SiteChange="SiteChange" OnValidSubmit="Create" Title="@localizer["CreateNewSiteChange"]"></SiteChangeForm>
+<SiteChangeForm ChangeLog="ChangeLog" OnValidSubmit="Create" Title="@localizer["CreateNewChangeLog"]"></SiteChangeForm>
 
 @code {
-    private SiteChangesDTO SiteChange = new SiteChangesDTO { Title = String.Empty };
+    private ChangeLogDTO ChangeLog = new ChangeLogDTO { Title = String.Empty };
 
     public async Task Create()
     {
-        if (await staticRepository.AddSiteChange(SiteChange))
+        if (await pageRepository.AddChangeLog(ChangeLog))
         {
-            _navManager.NavigateTo("SiteChange/All");
-            toastService.ShowToast(localizer["NewSiteChangeAdded"], Enums.ToastLevel.Success);
+            _navManager.NavigateTo("ChangeLogs/All");
+            toastService.ShowToast(localizer["NewChangeLogAdded"], Enums.ToastLevel.Success);
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿@page "/SiteChange/All"
+﻿@page "/ChangeLogs/All"
 
-@inject IStaticsRepository staticRepository
+@inject IPageRepository pageRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager NavigationManager
 
 @attribute [Authorize(Roles = "Admin")]
 
-@if (siteChanges == null)
+@if (ChangeLogs == null)
 {
     <Loading />
 }
@@ -32,21 +32,21 @@ else
         </Footer>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["SiteChanges"]</div>
+        <div class="card-header">@localizer["ChangeLogs"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="SiteChange/Create">@localizer["CreateNewSiteChange"]</a>
+                <a class="btn btn-primary" href="ChangeLogs/Create">@localizer["CreateNewChangeLog"]</a>
             </div>
             <div class="mb-3">
-                @if (siteChanges.Count() == 0)
+                @if (ChangeLogs.Count() == 0)
                 {
                     <div class="note warning">
-                        <p>@localizer["ThereIsNotSiteChanges"]</p>
+                        <p>@localizer["ThereIsNotChangeLogs"]</p>
                     </div>
                 }
                 else
                 {
-                    @foreach (var item in siteChanges.OrderByDescending(x => x.CreateDate))
+                    @foreach (var item in ChangeLogs.OrderByDescending(x => x.CreateDate))
                     {
                         <hr />
                         <div class="row">
@@ -83,10 +83,10 @@ else
 }
 
 @code {
-    IEnumerable<SiteChangesDTO> siteChanges;
+    IEnumerable<ChangeLogDTO> ChangeLogs;
 
     Modal DeleteModal { get; set; }
-    SiteChangesDTO deleteRcord { get; set; } = new SiteChangesDTO();
+    ChangeLogDTO deleteRcord { get; set; } = new ChangeLogDTO();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -99,30 +99,30 @@ else
 
     private async Task LoadSiteChanges()
     {
-        siteChanges = await staticRepository.GetAllSiteChanges();
+        ChangeLogs = await pageRepository.GetAllChangeLogs();
     }
 
     private async Task AcceptDelete()
     {
         if (deleteRcord != null)
         {
-            if (await staticRepository.DeleteSiteChange(deleteRcord.ID))
+            if (await pageRepository.DeleteChangeLog(deleteRcord.ID))
             {
                 await DeleteModal.Close();
                 await LoadSiteChanges();
             }
         }
-        deleteRcord = new SiteChangesDTO();
+        deleteRcord = new ChangeLogDTO();
     }
 
-    private async Task DeleteSiteChange(SiteChangesDTO record)
+    private async Task DeleteSiteChange(ChangeLogDTO record)
     {
         deleteRcord = record;
         await DeleteModal.Open();
     }
 
-    private async Task EditSiteChange(SiteChangesDTO record)
+    private async Task EditSiteChange(ChangeLogDTO record)
     {
-        NavigationManager.NavigateTo("SiteChange/Edit/" + record.ID);
+        NavigationManager.NavigateTo("ChangeLogs/Edit/" + record.ID);
     }
 }

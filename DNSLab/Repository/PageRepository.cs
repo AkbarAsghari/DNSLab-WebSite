@@ -101,5 +101,62 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<PageMetadataDTO>($"/Pages/GetPageMetaData?url={url}");
             return result.Response;
         }
+
+        public async Task<bool> AddChangeLog(ChangeLogDTO ChangeLogs)
+        {
+            var response = await _httpService.Post<ChangeLogDTO, bool>($"/Pages/AddChangeLog", ChangeLogs);
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<bool> UpdateChangeLog(ChangeLogDTO ChangeLogs)
+        {
+            var response = await _httpService.Put<ChangeLogDTO, bool>($"/Pages/UpdateChangeLog", ChangeLogs);
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<bool> DeleteChangeLog(Guid id)
+        {
+            var response = await _httpService.Delete<bool>($"/Pages/DeleteChangeLog?id={id}");
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
+        public async Task<ChangeLogDTO> GetChangeLog(Guid id)
+        {
+            var response = await _httpService.Get<ChangeLogDTO>($"/Pages/GetChangeLog?id={id}");
+            if (response.Success)
+                return response.Response;
+
+            return null;
+        }
+
+        public async Task<IEnumerable<ChangeLogDTO>> GetLastChangeLogs()
+        {
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetLastChanges, out IEnumerable<ChangeLogDTO> cacheValue))
+            {
+                var result = await _httpService.Get<IEnumerable<ChangeLogDTO>>($"/Pages/GetLastChangeLogs");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(CacheKeyEnum.GetLastChanges, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
+        }
+
+        public async Task<IEnumerable<ChangeLogDTO>> GetAllChangeLogs()
+        {
+            var result = await _httpService.Get<IEnumerable<ChangeLogDTO>>($"/Pages/GetAllChangeLogs");
+            return result.Response;
+        }
     }
 }

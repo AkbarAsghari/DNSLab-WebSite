@@ -1,32 +1,32 @@
-﻿@page "/SiteChange/Edit/{SiteChangeId:guid}"
-@inject IStaticsRepository staticRepository
+﻿@page "/ChangeLogs/Edit/{ChangeLogId:guid}"
+@inject IPageRepository pageRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
 @inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize(Roles = "Admin")]
 
-<SiteChangeForm SiteChange="existSiteChange" OnValidSubmit="Update" Title="@localizer["EditSiteChange"]"></SiteChangeForm>
+<SiteChangeForm ChangeLog="existChangeLog" OnValidSubmit="Update" Title="@localizer["EditChangeLog"]"></SiteChangeForm>
 
 @code {
-    [Parameter] public Guid SiteChangeId { get; set; }
-    private SiteChangesDTO existSiteChange;
+    [Parameter] public Guid ChangeLogId { get; set; }
+    private ChangeLogDTO existChangeLog;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            existSiteChange = await staticRepository.GetSiteChange(SiteChangeId);
+            existChangeLog = await pageRepository.GetChangeLog(ChangeLogId);
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
     public async Task Update()
     {
-        if (await staticRepository.UpdateSiteChange(existSiteChange))
+        if (await pageRepository.UpdateChangeLog(existChangeLog))
         {
-            _navManager.NavigateTo("SiteChange/All");
-            toastService.ShowToast(localizer["SiteChangeUpdated"], Enums.ToastLevel.Success);
+            _navManager.NavigateTo("ChangeLogs/All");
+            toastService.ShowToast(localizer["ChangeLogUpdated"], Enums.ToastLevel.Success);
         }
     }
 }

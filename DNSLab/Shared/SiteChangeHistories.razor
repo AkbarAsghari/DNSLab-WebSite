@@ -1,7 +1,6 @@
-﻿@using DNSLab.DTOs.Statics
-@inject IStaticsRepository staticRepository
+﻿@inject IPageRepository pageRepository
 
-<TimeLine Data="siteCHanges" TimeLineHeader="تاریخچه تغییرات سایت">
+<TimeLine Data="ChangeLogs" TimeLineHeader="تاریخچه تغییرات سایت">
     <TimeLineItemRenderFragment>
         <TimeLineItem DateTime="@context.ReleaseDate">
             <Body>
@@ -13,10 +12,10 @@
 
 @code {
 
-    IEnumerable<SiteChangesDTO> siteCHanges;
+    IEnumerable<ChangeLogDTO> ChangeLogs;
 
     protected override async Task OnInitializedAsync()
     {
-        siteCHanges = await staticRepository.GetLastChanges();
+        ChangeLogs = await pageRepository.GetLastChangeLogs();
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DNSLab.DTOs.Statics
+namespace DNSLab.DTOs.Pages
 {
-    public class SiteChangesDTO
+    public class ChangeLogDTO
     {
         public Guid ID { get; set; }
         public string Title { get; set; }

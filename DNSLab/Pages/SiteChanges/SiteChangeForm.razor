@@ -1,32 +1,31 @@
-﻿@using DNSLab.DTOs.Statics
-@inject IStringLocalizer<Resource> localizer
+﻿@inject IStringLocalizer<Resource> localizer
 
-@if (SiteChange == null)
+@if (ChangeLog == null)
 {
     <Loading />
 }
 else
 {
-    <EditForm Model="SiteChange" Context=SiteChangeContext>
+    <EditForm Model="ChangeLog" Context=ChangeLogContext>
         <div class="card mb-4">
             <div class="card-header">@Title</div>
             <div class="card-body">
                 <div class="row gx-3 mb-3">
                     <div class="col-lg-4">
                         <label class="mb-1">@localizer["ChangeTitle"]</label>
-                        <input class="form-control" type="text" @bind=SiteChange.Title />
+                        <input class="form-control" type="text" @bind=ChangeLog.Title />
                     </div>
                     <div class="col-lg-4">
                         <label class="mb-1">@localizer["ReleaseDate"]</label>
-                        <InputDate class="form-control" @bind-Value=SiteChange.ReleaseDate />
+                        <InputDate class="form-control" @bind-Value=ChangeLog.ReleaseDate />
                     </div>
                     <div class="col-lg-4">
                         <label class="mb-1">@localizer["InformationLink"]</label>
-                        <input class="form-control dir-ltr" type="text" @bind=SiteChange.InformationLink />
+                        <input class="form-control dir-ltr" type="text" @bind=ChangeLog.InformationLink />
                     </div>
                     <div class="col-12">
                         <label class="mb-1">@localizer["Description"]</label>
-                        <TextEditor @bind-Value=SiteChange.Description></TextEditor>
+                        <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
                     </div>
                 </div>
                 <div class="mb-3 gap-2">
@@ -34,9 +33,9 @@ else
                                      IsBussyCaption=@localizer["Progressing"]
                                      Color=ColorEnum.Primary
                                      Icon=IconEnum.Check
-                                     EditContext=SiteChangeContext
+                                     EditContext=ChangeLogContext
                                      OnClick=OnValidSubmit></BaseButtonComponent>
-                    <a class="btn btn-warning" href="SiteChange/All">@localizer["Cancel"]</a>
+                    <a class="btn btn-warning" href="ChangeLogs/All">@localizer["Cancel"]</a>
                 </div>
             </div>
         </div>
@@ -44,6 +43,6 @@ else
 }
 @code {
     [Parameter] public string Title { get; set; } = String.Empty;
-    [Parameter] public SiteChangesDTO SiteChange { get; set; } = null;
+    [Parameter] public ChangeLogDTO ChangeLog { get; set; } = null;
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 }
