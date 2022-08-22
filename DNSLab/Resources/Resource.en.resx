@@ -726,37 +726,37 @@
   <data name="ChangeTitle" xml:space="preserve">
     <value>Change title</value>
   </data>
-  <data name="CreateNewSiteChange" xml:space="preserve">
-    <value>Create new site change</value>
+  <data name="CreateNewChangeLog" xml:space="preserve">
+    <value>Create new change log</value>
   </data>
   <data name="InformationLink" xml:space="preserve">
     <value>Information link</value>
   </data>
-  <data name="NewSiteChangeAdded" xml:space="preserve">
-    <value>New site change added</value>
+  <data name="NewChangeLogAdded" xml:space="preserve">
+    <value>New change log added</value>
   </data>
   <data name="ReleaseDate" xml:space="preserve">
     <value>Release date</value>
   </data>
-  <data name="SiteChangeUpdated" xml:space="preserve">
-    <value>Site change updated</value>
+  <data name="ChangeLogUpdated" xml:space="preserve">
+    <value>Change log updated</value>
   </data>
-  <data name="SiteChange_Must_Have_InformationLink_When_Contain_Description" xml:space="preserve">
-    <value>Site change must have information link when contain description</value>
+  <data name="ChangeLog_Must_Have_InformationLink_When_Contain_Description" xml:space="preserve">
+    <value>Change log must have information link when contain description</value>
   </data>
-  <data name="SiteChange_Not_Found" xml:space="preserve">
-    <value>SiteChange not found</value>
+  <data name="ChangeLog_Not_Found" xml:space="preserve">
+    <value>Change log not found</value>
   </data>
-  <data name="SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow" xml:space="preserve">
-    <value>Site change release date range must be from 7 days ago to now</value>
+  <data name="ChangeLog_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow" xml:space="preserve">
+    <value>Change log release date range must be from 7 days ago to now</value>
   </data>
-  <data name="SiteChange_Title_Is_Not_Valid" xml:space="preserve">
-    <value>Site change title is not valid</value>
+  <data name="ChangeLog_Title_Is_Not_Valid" xml:space="preserve">
+    <value>Change logs title is not valid</value>
   </data>
-  <data name="ThereIsNoSiteChanges" xml:space="preserve">
-    <value>There is no site changes</value>
+  <data name="ThereIsNoChangeLogs" xml:space="preserve">
+    <value>There is no change logs</value>
   </data>
-  <data name="SiteChanges" xml:space="preserve">
-    <value>Site Changes</value>
+  <data name="ChangeLogs" xml:space="preserve">
+    <value>Change logs</value>
   </data>
 </root>

@@ -726,37 +726,37 @@
   <data name="ChangeTitle" xml:space="preserve">
     <value>عنوان تغییر</value>
   </data>
-  <data name="CreateNewSiteChange" xml:space="preserve">
+  <data name="CreateNewChangeLog" xml:space="preserve">
     <value>ساخت تغییر سایت جدید</value>
   </data>
   <data name="InformationLink" xml:space="preserve">
     <value>لینک جزئیات</value>
   </data>
-  <data name="NewSiteChangeAdded" xml:space="preserve">
+  <data name="NewChangeLogAdded" xml:space="preserve">
     <value>تغییر سایت جدید اضافه شد</value>
   </data>
   <data name="ReleaseDate" xml:space="preserve">
     <value>تاریخ انتشار</value>
   </data>
-  <data name="SiteChangeUpdated" xml:space="preserve">
+  <data name="ChangeLogUpdated" xml:space="preserve">
     <value>تغییر سایت ویرایش شد</value>
   </data>
-  <data name="SiteChange_Must_Have_InformationLink_When_Contain_Description" xml:space="preserve">
+  <data name="ChangeLog_Must_Have_InformationLink_When_Contain_Description" xml:space="preserve">
     <value>در هنگامی که تغییر سایت شامل توضیحات میشود باید یک لینک جزئیات نیز اضافه شود</value>
   </data>
-  <data name="SiteChange_Not_Found" xml:space="preserve">
+  <data name="ChangeLog_Not_Found" xml:space="preserve">
     <value>تغییر سایت یافت نشد</value>
   </data>
-  <data name="SiteChange_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow" xml:space="preserve">
+  <data name="ChangeLog_ReleaseDate_Range_MustBe_From_7Days_Ago_ToNow" xml:space="preserve">
     <value>تاریخ انتشار نمیتواند قبل از هفت روز گذشته باشد</value>
   </data>
-  <data name="SiteChange_Title_Is_Not_Valid" xml:space="preserve">
+  <data name="ChangeLog_Title_Is_Not_Valid" xml:space="preserve">
     <value>عنوان تغییر سایت معتبر نیست</value>
   </data>
-  <data name="ThereIsNoSiteChanges" xml:space="preserve">
+  <data name="ThereIsNoChangeLogs" xml:space="preserve">
     <value>تغییر سایتی یافت نشد</value>
   </data>
-  <data name="SiteChanges" xml:space="preserve">
+  <data name="ChangeLogs" xml:space="preserve">
     <value>تغییرات سایت</value>
   </data>
 </root>
