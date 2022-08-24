@@ -34,22 +34,16 @@
     <script src="~/js/ckeditor/ckeditor.js"></script>
     <script src="~/js/ckeditor/CKEditorInterop.js"></script>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9D712VLVDF"></script>
     <script>
-        function addTooltips(toolTipId) {
-            $("#" + toolTipId).tooltip({
-                delay: { show: 0, hide: 1200 },
-                title: 'برای کپی کردن کلیک کنید'
-            });
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-            $("#" + toolTipId).on('click', function() {
-                var tt = bootstrap.Tooltip.getInstance(this);
-                tt.dispose();
-                this.setAttribute('title', 'کپی شد')
-                tt = bootstrap.Tooltip.getOrCreateInstance(this);
-                tt.show();
-            });
-        }
+        gtag('config', 'G-9D712VLVDF');
     </script>
+
     <script>
         window.blazorCulture = {
             get: () => window.localStorage['BlazorCulture'],
