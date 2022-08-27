@@ -101,12 +101,12 @@ else
     {
         if (firstRender)
         {
-            await LoadHostNames();
+            await LoadPages();
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
-    private async Task LoadHostNames()
+    private async Task LoadPages()
     {
         pageSummaries = await _PageRepository.GetAllPagesSummary();
     }
@@ -118,7 +118,7 @@ else
             if (await _PageRepository.DeletePage(deleteRcord.Id))
             {
                 await DeleteModal.Close();
-                await LoadHostNames();
+                await LoadPages();
             }
         }
         deleteRcord = new PageSummaryDTO();
