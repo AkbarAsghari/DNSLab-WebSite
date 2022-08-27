@@ -12,23 +12,44 @@
 }
 else
 {
-    <Modal @ref="DeleteModal">
+    <Modal @ref="pageModal">
         <Title>
-            <label>@localizer["AreYouSureDel"]</label>
+            <label>
+                @if (modalForDeletePage)
+                {
+                    @localizer["AreYouSureDel"]
+                }
+                else
+                {
+                    @localizer["AreYouWantToPublish"]
+                }
+            </label>
         </Title>
         <Body>
-            <label>@localizer["Title"] : @deleteRcord.Title </label>
+            <label>@localizer["Title"] : @modalRecord.Title </label>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
-                             OnClick=DeleteModal.Close></BaseButtonComponent>
-            <BaseButtonComponent Caption=@localizer["Delete"]
+                             OnClick=pageModal.Close></BaseButtonComponent>
+            @if (modalForDeletePage)
+            {
+                <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash
                              OnClick=AcceptDelete></BaseButtonComponent>
+            }
+            else
+            {
+                <BaseButtonComponent Caption=@localizer["Publish"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Primary
+                             Icon=IconEnum.Data_Transfer_Upload
+                             OnClick=AcceptPublish></BaseButtonComponent>
+            }
+
         </Footer>
     </Modal>
     <div class="card mb-4">
@@ -50,39 +71,54 @@ else
                     {
                         <hr />
                         <div class="row">
-                            <p class="col-md-9 text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
-                            <div class="col-md-3 d-grid gap-2 d-xl-flex justify-content-md-end">
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         IsOutLine=true
-                                         Icon=IconEnum.Pencil
-                                         OnClick=@(()=>EditHostName(item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         IsOutLine=true
-                                         Icon=IconEnum.Trash
-                                         OnClick=@(()=>DeleteHostName(item)) />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-10">
+                                <p class=" text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <a class="text-decoration-none" href="@($"https://dnslab.ir/{item.PageType}/{item.URL}")" target="_blank">
-                                            <p>dnslab.ir/<code><strong>@item.PageType</strong></code><code>@($"/{@item.URL}")</code></p>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>@item.Title</p>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a class="text-decoration-none" href="@($"https://dnslab.ir/{item.PageType}/{item.URL}")" target="_blank">
+                                                    <p>dnslab.ir/<code><strong>@item.PageType</strong></code><code>@($"/{@item.URL}")</code></p>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>@item.Title</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-md-12">@item.Description</p>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-2">
                                 <div class="row">
-                                    <p class="col-md-12">@item.Description</p>
+                                    <BaseButtonComponent Caption=@localizer["Edit"]
+                                             IsBussyCaption=@localizer["Progressing"]
+                                             Color=ColorEnum.Warning
+                                             Icon=IconEnum.Pencil
+                                             OnClick=@(()=>EditPage(item)) />
+                                </div>
+                                <div class="row">
+                                    <BaseButtonComponent Caption=@localizer["Delete"]
+                                             IsBussyCaption=@localizer["Progressing"]
+                                             Color=ColorEnum.Danger
+                                             Icon=IconEnum.Trash
+                                             OnClick=@(()=>DeletePage(item)) />
+                                </div>
+                                <div class="row">
+                                    @if (!item.IsPublieshed)
+                                    {
+                                        <BaseButtonComponent Caption=@localizer["Publish"]
+                                             IsBussyCaption=@localizer["Progressing"]
+                                             Color=ColorEnum.Primary
+                                             Icon=IconEnum.Data_Transfer_Upload
+                                             OnClick=@(()=>PublishPage(item)) />
+                                    }
                                 </div>
                             </div>
                         </div>
+
                     }
                 }
             </div>
@@ -94,8 +130,9 @@ else
 @code {
     IEnumerable<PageSummaryDTO> pageSummaries;
 
-    Modal DeleteModal { get; set; }
-    PageSummaryDTO deleteRcord { get; set; } = new PageSummaryDTO();
+    Modal pageModal { get; set; }
+    bool modalForDeletePage { get; set; }
+    PageSummaryDTO modalRecord { get; set; } = new PageSummaryDTO();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -113,24 +150,45 @@ else
 
     private async Task AcceptDelete()
     {
-        if (deleteRcord != null)
+        if (modalRecord != null)
         {
-            if (await _PageRepository.DeletePage(deleteRcord.Id))
+            if (await _PageRepository.DeletePage(modalRecord.Id))
             {
-                await DeleteModal.Close();
+                await pageModal.Close();
                 await LoadPages();
             }
         }
-        deleteRcord = new PageSummaryDTO();
+        modalRecord = new PageSummaryDTO();
     }
 
-    private async Task DeleteHostName(PageSummaryDTO record)
+    private async Task AcceptPublish()
     {
-        deleteRcord = record;
-        await DeleteModal.Open();
+        if (modalRecord != null)
+        {
+            if (await _PageRepository.PublishPage(modalRecord.Id))
+            {
+                await pageModal.Close();
+                await LoadPages();
+            }
+        }
+        modalRecord = new PageSummaryDTO();
     }
 
-    private async Task EditHostName(PageSummaryDTO record)
+    private async Task DeletePage(PageSummaryDTO record)
+    {
+        modalForDeletePage = true;
+        modalRecord = record;
+        await pageModal.Open();
+    }
+
+    private async Task PublishPage(PageSummaryDTO record)
+    {
+        modalForDeletePage = false;
+        modalRecord = record;
+        await pageModal.Open();
+    }
+
+    private async Task EditPage(PageSummaryDTO record)
     {
         NavigationManager.NavigateTo("Page/Edit/" + record.Id);
     }

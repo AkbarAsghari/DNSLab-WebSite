@@ -13,6 +13,7 @@ namespace DNSLab.DTOs.Pages
         public string URL { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public bool IsPublieshed { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
     }

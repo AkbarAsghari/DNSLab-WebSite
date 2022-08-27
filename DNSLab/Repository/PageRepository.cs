@@ -102,6 +102,15 @@ namespace DNSLab.Repository
             return result.Response;
         }
 
+        public async Task<bool> PublishPage(Guid id)
+        {
+            var response = await _httpService.Put<bool>($"/Pages/PublishPage?id={id}");
+            if (response.Success)
+                return response.Response;
+
+            return false;
+        }
+
         public async Task<bool> AddChangeLog(ChangeLogDTO ChangeLogs)
         {
             var response = await _httpService.Post<ChangeLogDTO, bool>($"/Pages/AddChangeLog", ChangeLogs);
