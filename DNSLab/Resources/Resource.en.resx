@@ -759,4 +759,43 @@
   <data name="ChangeLogs" xml:space="preserve">
     <value>Change logs</value>
   </data>
+  <data name="AreYouWantToPublish" xml:space="preserve">
+    <value>Are you want to publish ?</value>
+  </data>
+  <data name="PageCreated" xml:space="preserve">
+    <value>Page Created</value>
+  </data>
+  <data name="PageUpdated" xml:space="preserve">
+    <value>Page Updated</value>
+  </data>
+  <data name="Page_Body_Can_Not_Be_Empty" xml:space="preserve">
+    <value>Page body can not be empty</value>
+  </data>
+  <data name="Page_Description_Can_Not_Be_Empty" xml:space="preserve">
+    <value>Page description can not be empty</value>
+  </data>
+  <data name="Page_Keywords_Must_Have_At_Least_One_Item" xml:space="preserve">
+    <value>Page keywords must have at keast one item</value>
+  </data>
+  <data name="Page_Not_Found" xml:space="preserve">
+    <value>Page not found</value>
+  </data>
+  <data name="Page_Title_Can_Not_Be_Empty" xml:space="preserve">
+    <value>Page title can not be empty</value>
+  </data>
+  <data name="Page_Type_Not_Found" xml:space="preserve">
+    <value>Page type not found</value>
+  </data>
+  <data name="Page_URL_Can_Not_Be_Empty" xml:space="preserve">
+    <value>Page url can not be empty</value>
+  </data>
+  <data name="Page_URL_Is_Duplicate" xml:space="preserve">
+    <value>Page Url is duplicate</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>Publish</value>
+  </data>
+  <data name="PublishedSuccess" xml:space="preserve">
+    <value>Published Success</value>
+  </data>
 </root>

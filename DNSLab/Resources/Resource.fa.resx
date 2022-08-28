@@ -759,4 +759,43 @@
   <data name="ChangeLogs" xml:space="preserve">
     <value>تغییرات سایت</value>
   </data>
+  <data name="AreYouWantToPublish" xml:space="preserve">
+    <value>آیا از انتشار اطمینان دارید ؟</value>
+  </data>
+  <data name="PageCreated" xml:space="preserve">
+    <value>صفحه ایجاد شد</value>
+  </data>
+  <data name="PageUpdated" xml:space="preserve">
+    <value>صفحه بروزرسانی شد</value>
+  </data>
+  <data name="Page_Body_Can_Not_Be_Empty" xml:space="preserve">
+    <value>مقدار Body نباید خالی باشد</value>
+  </data>
+  <data name="Page_Description_Can_Not_Be_Empty" xml:space="preserve">
+    <value>توضیحات صفحه نباید خالی باشد</value>
+  </data>
+  <data name="Page_Keywords_Must_Have_At_Least_One_Item" xml:space="preserve">
+    <value>حداقل یک تگ باید اضافه شود</value>
+  </data>
+  <data name="Page_Not_Found" xml:space="preserve">
+    <value>صفحه یافت نشد </value>
+  </data>
+  <data name="Page_Title_Can_Not_Be_Empty" xml:space="preserve">
+    <value>عنوان صفحه نباید خالی باشد</value>
+  </data>
+  <data name="Page_Type_Not_Found" xml:space="preserve">
+    <value>نوع صفحه یافت نشد</value>
+  </data>
+  <data name="Page_URL_Can_Not_Be_Empty" xml:space="preserve">
+    <value>مقدار URL صفحه نباید خالی باشد</value>
+  </data>
+  <data name="Page_URL_Is_Duplicate" xml:space="preserve">
+    <value>URL صفحه تکراری میباشد</value>
+  </data>
+  <data name="Publish" xml:space="preserve">
+    <value>انتشار</value>
+  </data>
+  <data name="PublishedSuccess" xml:space="preserve">
+    <value>با موفقیت منتشر شد</value>
+  </data>
 </root>

@@ -220,18 +220,6 @@ namespace DNSLab.Helper.Exceptions
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Page_URL_Can_Not_Be_Empty"]
                     }
-                    ,new ExceptionsAndNotificationLevel()
-                    {
-                         ExceptionStr = "Page_URL_Is_Duplicate",
-                         Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["Page_URL_Is_Duplicate"]
-                    }
-                    ,new ExceptionsAndNotificationLevel()
-                    {
-                         ExceptionStr = "Only_Letter_And_Dash_Accepted_In_URL",
-                         Level = Enums.ToastLevel.Warning,
-                         NormalMessage = _localizer["Only_Letter_And_Dash_Accepted_In_URL"]
-                    }
                 };
             }
             return _Exceptions;

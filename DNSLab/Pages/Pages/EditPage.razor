@@ -2,6 +2,7 @@
 @inject IPageRepository _PageRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
+@inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
@@ -34,7 +35,7 @@ else
         if (await _PageRepository.EditPage(existPage))
         {
             _navManager.NavigateTo("Page/MyPages");
-            toastService.ShowToast("PageUpdated", Enums.ToastLevel.Success);
+            toastService.ShowToast(localizer["PageUpdated"], Enums.ToastLevel.Success);
         }
     }
 }
