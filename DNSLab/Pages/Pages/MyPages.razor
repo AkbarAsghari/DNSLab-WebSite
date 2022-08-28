@@ -3,6 +3,7 @@
 @inject IPageRepository _PageRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager NavigationManager
+@inject ToastService toastService
 
 @attribute [Authorize(Roles = "Admin")]
 
@@ -92,21 +93,21 @@ else
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <div class="row">
+                                <div class="row p-1">
                                     <BaseButtonComponent Caption=@localizer["Edit"]
                                              IsBussyCaption=@localizer["Progressing"]
                                              Color=ColorEnum.Warning
                                              Icon=IconEnum.Pencil
                                              OnClick=@(()=>EditPage(item)) />
                                 </div>
-                                <div class="row">
+                                <div class="row p-1">
                                     <BaseButtonComponent Caption=@localizer["Delete"]
                                              IsBussyCaption=@localizer["Progressing"]
                                              Color=ColorEnum.Danger
                                              Icon=IconEnum.Trash
                                              OnClick=@(()=>DeletePage(item)) />
                                 </div>
-                                <div class="row">
+                                <div class="row p-1">
                                     @if (!item.IsPublieshed)
                                     {
                                         <BaseButtonComponent Caption=@localizer["Publish"]
@@ -168,6 +169,7 @@ else
             if (await _PageRepository.PublishPage(modalRecord.Id))
             {
                 await pageModal.Close();
+                toastService.ShowToast(localizer["PublishedSuccess"],ToastLevel.Success);
                 await LoadPages();
             }
         }
