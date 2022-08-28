@@ -169,8 +169,8 @@ else
             if (await _PageRepository.PublishPage(modalRecord.Id))
             {
                 await pageModal.Close();
+                pageSummaries.First(x => x.Id == modalRecord.Id).IsPublieshed = true;
                 toastService.ShowToast(localizer["PublishedSuccess"],ToastLevel.Success);
-                await LoadPages();
             }
         }
         modalRecord = new PageSummaryDTO();
