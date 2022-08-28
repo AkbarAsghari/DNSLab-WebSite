@@ -5,7 +5,7 @@
 @inject NavigationManager NavigationManager
 @inject ToastService toastService
 
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = "Admin,Writer")]
 
 @if (pageSummaries == null)
 {

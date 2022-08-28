@@ -3,7 +3,7 @@
 @inject NavigationManager _navManager
 @inject ToastService toastService
 
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = "Admin,Writer")]
 
 <PageGeneratorForm Page=page OnValidSubmit=Create Title="ایجاد صفحه جدید"></PageGeneratorForm>
 @code {
