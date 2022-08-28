@@ -172,6 +172,66 @@ namespace DNSLab.Helper.Exceptions
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["ChangeLog_Title_Is_Not_Valid"]
                     }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_URL_Is_Duplicate",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_URL_Is_Duplicate"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Body_Can_Not_Be_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Body_Can_Not_Be_Empty"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Description_Can_Not_Be_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Description_Can_Not_Be_Empty"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Keywords_Must_Have_At_Least_One_Item",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Keywords_Must_Have_At_Least_One_Item"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Not_Found"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Title_Can_Not_Be_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Title_Can_Not_Be_Empty"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_Type_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_Type_Not_Found"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_URL_Can_Not_Be_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_URL_Can_Not_Be_Empty"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Page_URL_Is_Duplicate",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Page_URL_Is_Duplicate"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Only_Letter_And_Dash_Accepted_In_URL",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Only_Letter_And_Dash_Accepted_In_URL"]
+                    }
                 };
             }
             return _Exceptions;
