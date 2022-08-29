@@ -8,9 +8,9 @@
                 <div class="col-sm-12 col-md-6">
                     <label for="body">@localizer["PageType"]</label>
                     <InputSelect class="form-control dir-ltr mt-1" @bind-Value="@Page.PageType">
-                        @foreach (var country in Enum.GetValues(typeof(PageTypeEnum)))
+                        @foreach (var pageType in Enum.GetValues(typeof(PageTypeEnum)))
                         {
-                            <option value="@country">@country</option>
+                            <option value="@pageType">@pageType</option>
                         }
                     </InputSelect>
                     <ValidationMessage For="@(() => @Page.PageType)" />
