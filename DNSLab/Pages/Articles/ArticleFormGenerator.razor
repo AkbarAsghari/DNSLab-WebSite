@@ -5,9 +5,14 @@
     @if (publishPageDTO != null)
     {
         <h1>@publishPageDTO.Header</h1>
-        <PageVisitCounter />
+        <PageSummary 
+            FullName="@publishPageDTO.Author.FullName" 
+            UserId="@publishPageDTO.Author.ID"
+            CreateDate="@publishPageDTO.CreateDate"
+            UpdateDate="@publishPageDTO.UpdateDate"/>
         <hr />
         @((MarkupString)@publishPageDTO.Body)
+        <hr />
         <div class="row col-12">
             <BuyMeACoffee />
         </div>

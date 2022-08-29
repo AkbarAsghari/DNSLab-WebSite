@@ -11,20 +11,32 @@ namespace DNSLab.Helper.Extensions
            return RelativeTimeCalculator.Calc(dateTime);
         }
 
-        public static string ToLocalizerString(this DateTime dateTime)
+        public static string ToLocalizerString(this DateTime dateTime,bool showOnlyDate = false)
         {
             DateTime localDateTime = dateTime.ToLocalTime();
 
-            switch (CultureInfo.CurrentCulture.Name)
+            if (showOnlyDate)
             {
-                case "fa-FA":
-                    return new PersianDateTime(localDateTime).ToString();
-                case "en-EN":
-                default:
-                    return localDateTime.ToString();
+                switch (CultureInfo.CurrentCulture.Name)
+                {
+                    case "fa-FA":
+                        return new PersianDateTime(localDateTime).ToShortDateString();
+                    case "en-EN":
+                    default:
+                        return localDateTime.ToShortDateString();
+                }
             }
-            
-
+            else
+            {
+                switch (CultureInfo.CurrentCulture.Name)
+                {
+                    case "fa-FA":
+                        return new PersianDateTime(localDateTime).ToString();
+                    case "en-EN":
+                    default:
+                        return localDateTime.ToString();
+                }
+            }
         }
     }
 }

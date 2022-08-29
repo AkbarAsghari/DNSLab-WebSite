@@ -1,17 +1,17 @@
 ﻿@inject IStaticsRepository _StaticsRepository
 @inject NavigationManager _NavigationManager
 
-<p class="text-muted small">
-    بازدید :
+<span class="text-muted">
+    تعداد بازدید :
     @if (visitCount > -1)
     {
-        <text>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</text>
+        <text><strong>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</strong></text>
     }
     else
     {
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     }
-</p>
+</span>
 
 @code {
     int visitCount = -1;

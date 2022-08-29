@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="col-xs-12 small">
+        @if (!String.IsNullOrWhiteSpace(FullName))
+        {
+            <span class="overlay-text text-muted">@("نویسنده : ")</span>
+            <UserProfileImage Size=25 UserId="@UserId.ToString()" />
+            <span class="overlay-text text-muted"><strong>@FullName</strong></span>
+            <span class="overlay-text text-muted"> - </span>
+        }
+        <PageVisitCounter />
+        <span class="overlay-text text-muted"> - </span>
+        <span class="overlay-text text-muted">@("انتشار : ")</span>
+        <span class="overlay-text text-muted"><strong>@CreateDate.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+
+        @if (UpdateDate != null)
+        {
+            <span class="overlay-text text-muted"> - </span>
+            <span class="overlay-text text-muted">@("آخرین ویرایش : ")</span>
+            <span class="overlay-text text-muted"><strong>@UpdateDate.Value.Date.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public Guid UserId { get; set; }
+    [Parameter] public string FullName { get; set; } = String.Empty;
+    [Parameter] public DateTime CreateDate { get; set; }
+    [Parameter] public DateTime? UpdateDate { get; set; }
+}

@@ -10,6 +10,7 @@ namespace DNSLab.DTOs.Pages
     {
         public string Header { get; set; }
         public string Body { get; set; }
+        public PageAuthorDTO Author { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
     }
