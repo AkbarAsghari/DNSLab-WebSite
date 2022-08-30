@@ -8,9 +8,12 @@
             <span class="overlay-text text-muted"> - </span>
         }
         <PageVisitCounter />
-        <span class="overlay-text text-muted"> - </span>
-        <span class="overlay-text text-muted">@("انتشار : ")</span>
-        <span class="overlay-text text-muted"><strong>@CreateDate.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+        @if (PublishDate != null)
+        {
+            <span class="overlay-text text-muted"> - </span>
+            <span class="overlay-text text-muted">@("انتشار : ")</span>
+            <span class="overlay-text text-muted"><strong>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+        }
 
         @if (UpdateDate != null)
         {
@@ -24,6 +27,6 @@
 @code {
     [Parameter] public Guid UserId { get; set; }
     [Parameter] public string FullName { get; set; } = String.Empty;
-    [Parameter] public DateTime CreateDate { get; set; }
+    [Parameter] public DateTime? PublishDate { get; set; }
     [Parameter] public DateTime? UpdateDate { get; set; }
 }
