@@ -11,5 +11,6 @@ namespace DNSLab.DTOs.Pages
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
+        public DateTime? PublishDate { get; set; }
     }
 }

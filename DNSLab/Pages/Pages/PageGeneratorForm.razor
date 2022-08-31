@@ -17,7 +17,11 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <label class="mb-1">@localizer["URL"]</label>
-                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterURL"]" @bind-Value="Page.URL" required />
+                    <InputText class="form-control dir-ltr" 
+                    placeholder="@localizer["EnterURL"]" 
+                    @bind-Value="Page.URL" required
+                    disabled="@(Page.PublishDate != null &&  Page.PublishDate.Value.AddHours(3) < DateTime.UtcNow)"
+                    />
                     <ValidationMessage class="invalid-feedback" For="@(()=> Page.URL)" />
                 </div>
                 <div class="col-12">
