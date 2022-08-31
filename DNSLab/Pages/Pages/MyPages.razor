@@ -156,7 +156,7 @@ else
             if (await _PageRepository.DeletePage(modalRecord.Id))
             {
                 await pageModal.Close();
-                await LoadPages();
+                pageSummaries = pageSummaries.Where(x=>x.Id != modalRecord.Id).ToList();
             }
         }
         modalRecord = new PageSummaryDTO();

@@ -20,7 +20,7 @@
                     <InputText class="form-control dir-ltr" 
                     placeholder="@localizer["EnterURL"]" 
                     @bind-Value="Page.URL" required
-                    disabled="@(Page.PublishDate != null &&  Page.PublishDate.Value.AddHours(3) < DateTime.UtcNow)"
+                    disabled="@(Page.PublishDate != null && Page.PublishDate.Value.AddHours(3) < DateTime.UtcNow)"
                     />
                     <ValidationMessage class="invalid-feedback" For="@(()=> Page.URL)" />
                 </div>
