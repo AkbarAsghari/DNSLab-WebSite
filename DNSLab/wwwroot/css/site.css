@@ -179,7 +179,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .buy-me-a-coffee {
-    height: 6rem
+    height: 6rem;
+    padding: 10px;
 }
 
 .page {
