@@ -1,5 +1,48 @@
-﻿<h3>NewTicket</h3>
+﻿@page "/Ticket/New"
+
+@using DNSLab.DTOs.Ticket
+@inject IStringLocalizer<Resource> localizer
+
+<EditForm Model="ticket" Context=newTicketDTO>
+    <div class="card mb-4">
+        <div class="card-header">ارسال تیکت</div>
+        <div class="card-body">
+            <div class="row gx-3 mb-3">
+                <div class="col-12">
+                    <label class="mb-1">@localizer["TicketTitle"]</label>
+                    <InputText class="form-control" placeholder="@localizer["EnterTitle"]" @bind-Value="ticket.Title" required />
+                </div>
+                <div class="col-12">
+                    <label class="mb-1">@localizer["TicketText"]</label>
+                    <textarea class="form-control" placeholder="@localizer["TicketText"]..." rows="7"
+                              @bind="ticket.Text"
+                              @bind:event="oninput"
+                              maxlength="@MAX_TEXT_COUNT" />
+                    @if (MAX_TEXT_COUNT - ticket.Text.Count() < 30)
+                    {
+                        <label>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - ticket.Text.Count())</label>
+                    }
+                </div>
+            </div>
+            <div class="mb-3 gap-2">
+                <BaseButtonComponent Caption=@localizer["Send"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=ColorEnum.Primary
+                                     Icon=IconEnum.Check
+                                     EditContext=newTicketDTO
+                                     OnClick=SendNewTicket></BaseButtonComponent>
+                <a class="btn btn-warning" href="Ticket/MyTickets">انصراف</a>
+            </div>
+        </div>
+    </div>
+</EditForm>
 
 @code {
+    private NewTicketDTO ticket = new() { Title = String.Empty, Text = String.Empty };
+    const int MAX_TEXT_COUNT = 2000;
 
+    void SendNewTicket()
+    {
+
+    }
 }

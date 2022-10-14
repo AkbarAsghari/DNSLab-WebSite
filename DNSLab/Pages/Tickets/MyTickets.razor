@@ -1,4 +1,27 @@
-﻿<h3>MyTickets</h3>
+﻿@inject IStringLocalizer<Resource> localizer
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title">@localizer["Tickets"]</h6>
+        <div class="col-12">
+            @if (allComments == null)
+            {
+                <Loading IsInTop="false" />
+            }
+            else if (allComments.Count() == 0)
+            {
+                <text>@localizer["ThereIsNoComment"]</text>
+            }
+            else
+            {
+                @foreach (var comment in allComments)
+                {
+                    <CommentItem FullComment="comment" />
+                }
+            }
+        </div>
+    </div>
+</div>
 
 @code {
 
