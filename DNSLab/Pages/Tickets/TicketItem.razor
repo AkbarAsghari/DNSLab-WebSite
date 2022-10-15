@@ -1,0 +1,10 @@
+﻿@using DNSLab.DTOs.Ticket
+<div class="card w-100 shadow-1-strong rounded-3">
+    <label>@Ticket.Title</label>
+    <label>@Ticket.CreateDate.ToLocalizerString()</label>
+    <label>@Ticket.IsClosed</label>
+</div>
+
+@code {
+    [Parameter] public TicketDTO Ticket { get; set; }
+}

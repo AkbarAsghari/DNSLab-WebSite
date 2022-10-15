@@ -1,28 +1,179 @@
-﻿@inject IStringLocalizer<Resource> localizer
+﻿@page "/Ticket/MyTickets"
 
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-title">@localizer["Tickets"]</h6>
-        <div class="col-12">
-            @if (allComments == null)
-            {
-                <Loading IsInTop="false" />
-            }
-            else if (allComments.Count() == 0)
-            {
-                <text>@localizer["ThereIsNoComment"]</text>
-            }
-            else
-            {
-                @foreach (var comment in allComments)
+@using DNSLab.DTOs.Ticket
+@inject IStringLocalizer<Resource> localizer
+@inject ITicketRepository ticketRepository
+@inject NavigationManager navigationManager
+
+@if (tickets == null)
+{
+    <Loading />
+}
+else
+{
+    <Modal @ref="Modal">
+        <Title>
+            <label>@modalTitle</label>
+        </Title>
+        <Body>
+            <label>@localizer["Title"] : @deleteRcord.Title </label>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=Modal.Close></BaseButtonComponent>
+            <BaseButtonComponent Caption=@localizer["Delete"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Danger
+                             Icon=IconEnum.Trash
+                             OnClick=ModalAccept></BaseButtonComponent>
+        </Footer>
+    </Modal>
+
+
+    <div class="card mb-4">
+        <div class="card-header">@localizer["MyTickets"]</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <a class="btn btn-primary" href="Ticket/New">@localizer["CreateNewTicket"]</a>
+            </div>
+            <div class="mb-3">
+
+                @if (tickets.Count() == 0)
                 {
-                    <CommentItem FullComment="comment" />
+                    <text>@localizer["ThereIsNoTicket"]</text>
                 }
-            }
+                else
+                {
+                    @foreach (var item in tickets)
+                    {
+                        <hr />
+                        <div class="row">
+                            <div class="row col-lg-8 col-7">
+                                <div class="col-lg-5 col-sm-12 align-self-center">
+                                    <p class="m-0">@localizer["TicketTitle"] : @(item.Title.Length > 25 ? $"{item.Title.Substring(0,25)}..." : item.Title)</p>
+                                </div>
+                                <div class="col-lg-5 col-sm-12 align-self-center">
+                                    <div class="row">
+                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        @if (@item.UpdateDate != null)
+                                        {
+                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-12 align-self-center">
+                                    <p class="m-0">
+                                        @switch (@item.IsClosed)
+                                        {
+                                            case true:
+                                                <a class="btn btn-sm btn-warning disabled">@localizer["Closed"]</a>
+                                                break;
+                                            case false:
+                                                <a class="btn btn-sm btn-success disabled">@localizer["Open"]</a>
+                                                break;
+                                        }
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
+                                @if (!item.IsClosed)
+                                {
+                                    <BaseButtonComponent Caption=@localizer["Close"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Warning
+                                         Icon=IconEnum.Envelope_Closed
+                                         OnClick=@(()=>CloseTicket(item))></BaseButtonComponent>
+                                }
+                                <BaseButtonComponent Caption=@localizer["Open"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Primary
+                                         Icon=IconEnum.Chat
+                                         OnClick=@(()=>OpenTicket(item))></BaseButtonComponent>
+                                <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=ColorEnum.Danger
+                                         Icon=IconEnum.Trash
+                                         OnClick=@(()=>DeleteTicket(item))></BaseButtonComponent>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
         </div>
     </div>
-</div>
+}
 
 @code {
+    IEnumerable<TicketDTO> tickets;
 
+    Modal Modal { get; set; }
+    TicketDTO deleteRcord { get; set; } = new();
+    TicketDTO closeRcord { get; set; } = new();
+    string modalTitle = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tickets = await ticketRepository.GetTickets();
+    }
+
+    async Task DeleteTicket(TicketDTO record)
+    {
+        DeSelectAll();
+        deleteRcord = record;
+        modalTitle = localizer["AreYouSureDel"];
+        await Modal.Open();
+    }
+
+    async Task CloseTicket(TicketDTO record)
+    {
+        DeSelectAll();
+        closeRcord = record;
+        modalTitle = localizer["AreYouSureClose"];
+        await Modal.Open();
+    }
+
+    async Task ModalAccept()
+    {
+        if (deleteRcord.ID != Guid.Empty) await AcceptDelete();
+        if (closeRcord.ID != Guid.Empty) await AcceptClose();
+    }
+
+    void DeSelectAll()
+    {
+        deleteRcord = new();
+        closeRcord = new();
+    }
+
+    async Task AcceptDelete()
+    {
+        if (deleteRcord != null)
+        {
+            if (await ticketRepository.RemoveTicket(deleteRcord.ID))
+            {
+                await Modal.Close();
+                await OnInitializedAsync();
+            }
+        }
+    }
+
+    void OpenTicket(TicketDTO record)
+    {
+        navigationManager.NavigateTo("Ticket/Details/" + record.ID);
+    }
+
+    async Task AcceptClose()
+    {
+        if (closeRcord != null)
+        {
+            if (await ticketRepository.CloseTicket(closeRcord.ID))
+            {
+                await Modal.Close();
+                await OnInitializedAsync();
+            }
+        }
+    }
 }

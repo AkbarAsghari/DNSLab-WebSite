@@ -1,0 +1,105 @@
+﻿@page "/Ticket/Details/{TicketId:guid}"
+@using DNSLab.DTOs.Ticket
+@inject ITicketRepository ticketRepository
+@inject IStringLocalizer<Resource> localizer
+@inject AuthenticationStateProvider auth
+@inject IJSRuntime jsRuntime
+
+@if (messages == null)
+{
+
+}
+else
+{
+    <EditForm Model="Message" Context="TicketDetails">
+
+        <div class="card mb-4">
+            <div class="card-header">@ticket.Title</div>
+            <div class="card-body">
+                <div class="row gx-3 mb-3">
+                    <ul id="chat">
+                        @foreach (var item in messages.OrderBy(x => x.CreateDate))
+                        {
+                            @if (CurrentUserId == item.UserId)
+                            {
+                                <li class="me">
+                                    <div class="small">
+                                        @item.CreateDate.CalcRelativeTime()
+                                    </div>
+                                    <div class="message">
+                                        @item.Text
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="you">
+                                    <div class="small">
+                                        @item.CreateDate.CalcRelativeTime()
+                                    </div>
+                                    <div class="message">
+                                        @item.Text
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <InputTextArea @bind-Value="@Message.Text"></InputTextArea>
+                <div class="mb-3 gap-2">
+                    <BaseButtonComponent Caption=@localizer["Send"]
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=ColorEnum.Primary
+                                     Icon=IconEnum.Check
+                                     EditContext="TicketDetails"
+                                     OnClick=SendTicket></BaseButtonComponent>
+                    <a class="btn btn-warning" href="Ticket/MyTickets">انصراف</a>
+                </div>
+            </div>
+        </div>
+
+    </EditForm>
+}
+
+
+
+@code {
+    [Parameter] public Guid TicketId { get; set; }
+    const int MAX_TEXT_COUNT = 2000;
+    SendMessageDTO Message { get; set; } = new SendMessageDTO { Text = String.Empty };
+
+    ICollection<MessageDTO> messages;
+    TicketDTO ticket;
+
+    Guid CurrentUserId;
+
+    async Task SendTicket()
+    {
+        Message.TicketId = TicketId;
+
+        if (await ticketRepository.SendMessage(Message))
+        {
+            messages.Add(new MessageDTO
+                {
+                    UserId = CurrentUserId,
+                    CreateDate = DateTime.Now,
+                    Text = Message.Text,
+                });
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ticket = await ticketRepository.Get(TicketId);
+        messages = (await ticketRepository.GetTicketMessages(TicketId)).ToList();
+
+        CurrentUserId = Guid.Parse((await auth.GetAuthenticationStateAsync()).User.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "nameid")!.Value);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsRuntime.InvokeVoidAsync("Scroll");
+    }
+
+
+}
