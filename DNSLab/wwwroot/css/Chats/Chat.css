@@ -130,7 +130,7 @@ main header {
 }
 
     #chat li {
-        padding: 10px 30px;
+        padding: 0px 30px;
     }
 
     #chat h2, #chat h3 {
@@ -148,6 +148,7 @@ main header {
     }
 
     #chat .message {
+        word-break: break-word;
         padding: 20px;
         color: #fff;
         line-height: 25px;

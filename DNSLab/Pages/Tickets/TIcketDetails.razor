@@ -82,7 +82,7 @@ else
             messages.Add(new MessageDTO
                 {
                     UserId = CurrentUserId,
-                    CreateDate = DateTime.Now,
+                    CreateDate = DateTime.UtcNow,
                     Text = Message.Text,
                 });
         }
