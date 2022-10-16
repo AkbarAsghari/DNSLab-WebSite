@@ -23,7 +23,7 @@ else
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
                              OnClick=Modal.Close></BaseButtonComponent>
-            <BaseButtonComponent Caption=@localizer["Delete"]
+            <BaseButtonComponent Caption=@((closeRcord.ID != Guid.Empty) ? localizer["Close"] : localizer["Delete"] ) 
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=IconEnum.Trash

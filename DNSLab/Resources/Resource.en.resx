@@ -798,4 +798,46 @@
   <data name="PublishedSuccess" xml:space="preserve">
     <value>Published Success</value>
   </data>
+  <data name="AreYouSureClose" xml:space="preserve">
+    <value>Are you sure to close ?</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="CreateNewTicket" xml:space="preserve">
+    <value>Create new ticket</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="ThereIsNoTicket" xml:space="preserve">
+    <value>ThereIs no ticket</value>
+  </data>
+  <data name="TicketSent" xml:space="preserve">
+    <value>Ticket sent</value>
+  </data>
+  <data name="TicketText" xml:space="preserve">
+    <value>Ticket text</value>
+  </data>
+  <data name="TicketTitle" xml:space="preserve">
+    <value>Ticket title</value>
+  </data>
+  <data name="UnableToSendTicket" xml:space="preserve">
+    <value>Unable to send ticket</value>
+  </data>
+  <data name="MyTickets" xml:space="preserve">
+    <value>My tickets</value>
+  </data>
+  <data name="Ticket_Not_Found" xml:space="preserve">
+    <value>Ticket not found</value>
+  </data>
+  <data name="Ticket_Text_Is_Empty" xml:space="preserve">
+    <value>Ticket text can not be empty</value>
+  </data>
+  <data name="Ticket_Title_Is_Empty" xml:space="preserve">
+    <value>Ticket title can not be empty</value>
+  </data>
+  <data name="SendTicket" xml:space="preserve">
+    <value>Send ticket</value>
+  </data>
 </root>

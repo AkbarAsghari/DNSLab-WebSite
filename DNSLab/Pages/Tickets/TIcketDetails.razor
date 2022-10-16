@@ -7,14 +7,13 @@
 
 @if (messages == null)
 {
-
+    <Loading IsInTop=true />
 }
 else
 {
     <EditForm Model="Message" Context="TicketDetails">
-
         <div class="card mb-4">
-            <div class="card-header">@ticket.Title</div>
+            <div class="card-header">@localizer["TicketTitle"] : @ticket.Title</div>
             <div class="card-body">
                 <div class="row gx-3 mb-3">
                     <ul id="chat">
@@ -45,7 +44,12 @@ else
                         }
                     </ul>
                 </div>
-                <InputTextArea @bind-Value="@Message.Text"></InputTextArea>
+                <hr>
+                <label class="mb-1">@localizer["TicketText"]</label>
+                <textarea class="form-control" placeholder="@localizer["TicketText"]..." rows="7"
+                      @bind="Message.Text"
+                      @bind:event="oninput"
+                      maxlength="@MAX_TEXT_COUNT" />
                 <div class="mb-3 gap-2">
                     <BaseButtonComponent Caption=@localizer["Send"]
                                      IsBussyCaption=@localizer["Progressing"]
@@ -85,6 +89,8 @@ else
                     CreateDate = DateTime.UtcNow,
                     Text = Message.Text,
                 });
+
+            Message.Text = String.Empty;
         }
     }
 

@@ -124,7 +124,7 @@ main header {
     margin: 0;
     list-style-type: none;
     overflow-y: scroll;
-    height: 535px;
+    height: 23rem;
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
 }

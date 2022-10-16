@@ -220,6 +220,24 @@ namespace DNSLab.Helper.Exceptions
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Page_URL_Can_Not_Be_Empty"]
                     }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Ticket_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Ticket_Not_Found"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Ticket_Text_Is_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Ticket_Text_Is_Empty"]
+                    }
+                    ,new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Ticket_Title_Is_Empty",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Ticket_Title_Is_Empty"]
+                    }
                 };
             }
             return _Exceptions;

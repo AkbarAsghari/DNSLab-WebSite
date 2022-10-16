@@ -798,4 +798,46 @@
   <data name="PublishedSuccess" xml:space="preserve">
     <value>با موفقیت منتشر شد</value>
   </data>
+  <data name="AreYouSureClose" xml:space="preserve">
+    <value>آیا از بستن مطمئن میباشید ؟</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>بسته شده</value>
+  </data>
+  <data name="CreateNewTicket" xml:space="preserve">
+    <value>ایجاد تیکت جدید</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>باز کردن</value>
+  </data>
+  <data name="ThereIsNoTicket" xml:space="preserve">
+    <value>هیچ تیکتی یافت نشد</value>
+  </data>
+  <data name="TicketSent" xml:space="preserve">
+    <value>تیکت ارسال شد</value>
+  </data>
+  <data name="TicketText" xml:space="preserve">
+    <value>متن تیکت</value>
+  </data>
+  <data name="TicketTitle" xml:space="preserve">
+    <value>عنوان تیکت</value>
+  </data>
+  <data name="UnableToSendTicket" xml:space="preserve">
+    <value>امکان ارسال تیکت وجود ندارد</value>
+  </data>
+  <data name="MyTickets" xml:space="preserve">
+    <value>تیکت های من</value>
+  </data>
+  <data name="Ticket_Not_Found" xml:space="preserve">
+    <value>تیکت یافت نشد</value>
+  </data>
+  <data name="Ticket_Text_Is_Empty" xml:space="preserve">
+    <value>متن تیکت نمیتواند خالی باشد</value>
+  </data>
+  <data name="Ticket_Title_Is_Empty" xml:space="preserve">
+    <value>عنوان تیکت نمیتواند خالی باشد</value>
+  </data>
+  <data name="SendTicket" xml:space="preserve">
+    <value>ارسال تیکت</value>
+  </data>
 </root>
