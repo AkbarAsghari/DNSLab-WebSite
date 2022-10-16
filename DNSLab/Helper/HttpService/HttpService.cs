@@ -18,9 +18,9 @@ namespace DNSLab.Helper.HttpService
         private HttpResponseMessage _httpResponseMessage;
 
         //#if DEBUG
-        private const string BaseAddress = "http://192.168.1.7";
+        //private const string BaseAddress = "http://192.168.1.7";
         //#else
-        //private const string BaseAddress = "https://api.dnslab.ir";
+        private const string BaseAddress = "https://api.dnslab.ir";
         //#endif
         public HttpService(HttpClient httpClient, HttpResponseExceptionHander httpResponseExceptionHander)
         {
