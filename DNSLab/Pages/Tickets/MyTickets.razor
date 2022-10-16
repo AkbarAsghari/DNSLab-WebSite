@@ -16,7 +16,7 @@ else
             <label>@modalTitle</label>
         </Title>
         <Body>
-            <label>@localizer["TicketTitle"] : @deleteRcord.Title </label>
+            <label>@localizer["TicketTitle"] :@((closeRcord.ID != Guid.Empty) ? @closeRcord.Title : @deleteRcord.Title )</label>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
