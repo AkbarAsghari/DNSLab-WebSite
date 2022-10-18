@@ -840,4 +840,7 @@
   <data name="Ticket_Title_Is_Empty" xml:space="preserve">
     <value>Ticket title can not be empty</value>
   </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+  </data>
 </root>

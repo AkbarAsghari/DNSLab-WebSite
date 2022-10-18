@@ -840,4 +840,7 @@
   <data name="SendTicket" xml:space="preserve">
     <value>ارسال تیکت</value>
   </data>
+  <data name="More" xml:space="preserve">
+    <value>بیشتر</value>
+  </data>
 </root>

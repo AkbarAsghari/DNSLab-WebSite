@@ -840,4 +840,7 @@
   <data name="SendTicket" xml:space="preserve">
     <value>Send ticket</value>
   </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+  </data>
 </root>
