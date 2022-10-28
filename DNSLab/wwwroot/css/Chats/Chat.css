@@ -187,39 +187,3 @@ main header {
         margin-left: 375px;
     }
 
-main footer {
-    height: 155px;
-    padding: 20px 30px 10px 20px;
-}
-
-    main footer textarea {
-        resize: none;
-        border: none;
-        display: block;
-        width: 100%;
-        height: 80px;
-        border-radius: 3px;
-        padding: 20px;
-        font-size: 13px;
-        margin-bottom: 13px;
-    }
-
-        main footer textarea::placeholder {
-            color: #ddd;
-        }
-
-    main footer img {
-        height: 30px;
-        cursor: pointer;
-    }
-
-    main footer a {
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: bold;
-        color: #6fbced;
-        vertical-align: top;
-        margin-left: 333px;
-        margin-top: 5px;
-        display: inline-block;
-    }
