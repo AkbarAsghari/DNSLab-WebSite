@@ -12,6 +12,7 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> UpdateHostName(HostNameDTO createHostName);
 
         Task<int> GetActiveDNSCount();
+        Task<int> GetTodayIPChangesCount();
         Task<int> GetLast24HoursChangesCount();
         Task<int> GetAllUsersDNSCount();
 

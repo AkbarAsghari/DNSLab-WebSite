@@ -9,6 +9,7 @@
         GetAllPagesSummary,
         GetAllPagesSummaryByPageType,
         GetCommentReplies,
-        GetLastChanges
+        GetLastChanges,
+        GetTodayIPChangesCount
     }
 }

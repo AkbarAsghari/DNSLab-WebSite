@@ -147,5 +147,22 @@ namespace DNSLab.Repository
             }
             return cacheValue;
         }
+
+        public async Task<int> GetTodayIPChangesCount()
+        {
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetTodayIPChangesCount, out int cacheValue))
+            {
+                var result = await _httpService.Get<int>($"/DNS/GetTodayIPChangesCount");
+                if (!result.Success)
+                    cacheValue = 0;
+                else
+                    cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+
+                _memoryCache.Set(CacheKeyEnum.GetTodayIPChangesCount, cacheValue, cacheEntryOptions);
+            }
+            return cacheValue;
+        }
     }
 }
