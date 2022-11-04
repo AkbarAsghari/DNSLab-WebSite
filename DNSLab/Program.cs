@@ -57,6 +57,10 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddSignalR(e => {
+    e.MaximumReceiveMessageSize = 3145728; //3MB
+});
+
 var host = builder.Build();
 
 
