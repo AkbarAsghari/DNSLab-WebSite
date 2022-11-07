@@ -5,6 +5,7 @@
 @inject ITicketRepository ticketRepository
 @inject NavigationManager _navManager
 @inject ToastService toastService
+@attribute [Authorize]
 
 <EditForm Model="ticket" Context=newTicketDTO>
     <div class="card mb-4">

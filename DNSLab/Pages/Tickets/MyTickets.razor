@@ -4,6 +4,7 @@
 @inject IStringLocalizer<Resource> localizer
 @inject ITicketRepository ticketRepository
 @inject NavigationManager navigationManager
+@attribute [Authorize]
 
 @if (tickets == null)
 {

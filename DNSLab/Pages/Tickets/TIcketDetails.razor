@@ -4,6 +4,7 @@
 @inject IStringLocalizer<Resource> localizer
 @inject AuthenticationStateProvider auth
 @inject IJSRuntime jsRuntime
+@attribute [Authorize]
 
 @if (messages == null)
 {
