@@ -42,7 +42,7 @@ else
                 <div class="row g-2">
                     <div class="col-xl-3 g-1">
                         <!-- Profile picture card-->
-                    <div class="card mb-4 mb-xl-0">
+                        <div class="card mb-4 mb-xl-0">
                             <div class="card-header">@localizer["ProfilePicture"]</div>
                             <div class="card-body text-center">
                                 <UserProfileImage Size=200></UserProfileImage>
@@ -56,7 +56,7 @@ else
                                 <div class="card-body">
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->
-                                    <div class="col-md-6">
+                                        <div class="col-md-6">
                                             <label class="mb-1">@localizer["ChangeLanuguage"]</label>
                                             <div><CultureSelector @ref=cultureSelector /></div>
                                         </div>
@@ -68,7 +68,7 @@ else
                         <div class="col-xl-12 g-0">
                             <div class="card mb-2">
                                 <div class="card-header">تنظیمات امنیتی</div><!--!-->
-                            <div class="card-body">
+                                <div class="card-body">
                                     <a class="btn btn-primary" href="user/changepassword">تغییر رمز عبور</a>
                                 </div>
                             </div>
@@ -112,13 +112,30 @@ else
                                         </div>
                                     }
                                 }
+                                <hr>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-xl-6">
+                                        <div class="border p-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" id="ChkSendEmailWhenGotTicketReply" type="checkbox" @bind="@userInfo.SendEmailWhenGotTicketReply">
+                                                <label class="form-check-label" for="ChkSendEmailWhenGotTicketReply">ارسال ایمیل در صورت دریافت پاسخ به تیکت</label>
+                                            </div>
+                                        </div>
+                                        <div class="border p-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" id="ChkSendEmailWhenDNSIPChanged" type="checkbox" @bind="@userInfo.SendEmailWhenDNSIPChanged">
+                                                <label class="form-check-label" for="ChkSendEmailWhenDNSIPChanged">ارسال ایمیل در صورت تغییر آی‌پی هاست</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">@localizer["PersonalInfo"]</div>
                             <div class="card-body">
                                 <!-- Form Row-->
-                            <div class="row gx-3 mb-3">
+                                <div class="row gx-3 mb-3">
                                     <div class="col-md-4">
                                         <label class="mb-1">@localizer["FirstName"]</label>
                                         <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName" />
@@ -179,7 +196,7 @@ else
         {
             userInfo = await accountRepository.Get();
             changeEmail = new ChangeEmailDTO { Email = userInfo.Email };
-            await this.InvokeAsync(()=> StateHasChanged());
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 

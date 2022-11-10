@@ -15,5 +15,7 @@ namespace DNSLab.DTOs.User
         public string Mobile { get; set; }
         public string Company { get; set; }
         public bool IsEmailApproved { get; set; }
+        public bool? SendEmailWhenGotTicketReply { get; set; }
+        public bool? SendEmailWhenDNSIPChanged { get; set; }
     }
 }
