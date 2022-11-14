@@ -148,14 +148,11 @@ main header {
     }
 
     #chat .message {
-        word-break: break-word;
         padding: 20px;
         color: #fff;
         line-height: 25px;
-        max-width: 90%;
-        display: inline-block;
-        text-align: left;
         border-radius: 5px;
+        white-space: break-spaces;
     }
 
     #chat .me {
