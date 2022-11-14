@@ -155,10 +155,6 @@ main header {
         white-space: break-spaces;
     }
 
-    #chat .me {
-        text-align: left;
-    }
-
     #chat .you .message {
         background-color: #58b666;
     }
