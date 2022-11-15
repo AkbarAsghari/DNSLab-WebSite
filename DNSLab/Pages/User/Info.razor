@@ -128,6 +128,15 @@ else
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col">
+                                        @if (!@userInfo.IsEmailApproved)
+                                        {
+                                            <div class="note warning">
+                                                <p>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</p>
+                                            </div>
+                                        }
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
