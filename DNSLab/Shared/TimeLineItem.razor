@@ -1,4 +1,4 @@
-﻿<li class="event" data-date="@DateTime.CalcRelativeTime()">
+﻿<li class="event" data-date="@(DateTime==null ? null : DateTime.Value.CalcRelativeTime())">
     @if (!String.IsNullOrEmpty(Header))
     {
         <h3>@Header</h3>
@@ -8,5 +8,5 @@
 @code {
     [Parameter] public string? Header { get; set; }
     [Parameter] public RenderFragment Body { get; set; }
-    [Parameter] public DateTime DateTime { get; set; }
+    [Parameter] public DateTime? DateTime { get; set; }
 }

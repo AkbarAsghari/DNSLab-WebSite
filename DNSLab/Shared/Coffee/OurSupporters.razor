@@ -1,0 +1,32 @@
+﻿@using DNSLab.DTOs.Tips
+@using System.Text
+@inject ITipRepository _TipRepository
+
+<div class="card">
+    <div class="card-body">
+        <h6 class="card-title">حمایت ها</h6>
+        <p>@((MarkupString)result)</p>
+    </div>
+</div>
+
+@code {
+    string result = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var Supporters = await _TipRepository.GetTips();
+
+        if (Supporters.Count() > 0)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var countUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
+
+            sb.Append($"({countUnknownSupportersCoffee.Sum(x => x.Count)} x ☕) از طرف {countUnknownSupportersCoffee.Count()} فرد ناشناس<br>");
+            sb.AppendLine(String.Join("<br>", Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => $"({x.Count} x ☕) از طرف {x.FullName}")));
+
+            result = sb.ToString().EnglishToPersianNumbers();
+        }
+
+    }
+}
