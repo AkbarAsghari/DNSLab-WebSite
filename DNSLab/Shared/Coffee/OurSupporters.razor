@@ -2,15 +2,24 @@
 @using System.Text
 @inject ITipRepository _TipRepository
 
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-title">حمایت ها</h6>
-        <p>@((MarkupString)result)</p>
-    </div>
-</div>
+@if (result.Count > 0)
+{
+    <h6>حمایت کنندگان</h6>
+    @foreach (var rows in result.Chunk(10))
+    {
+        <div class="row">
+            @foreach (var item in @rows)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <CoffeeSupportItem FullName="@item.FullName" Count="@item.Count" />
+                </div>
+            }
+        </div>
+    }
+}
 
 @code {
-    string result = String.Empty;
+    List<TipDTO> result = new List<TipDTO>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -22,11 +31,10 @@
 
             var countUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
 
-            sb.Append($"({countUnknownSupportersCoffee.Sum(x => x.Count)} x ☕) از طرف {countUnknownSupportersCoffee.Count()} فرد ناشناس<br>");
-            sb.AppendLine(String.Join("<br>", Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => $"({x.Count} x ☕) از طرف {x.FullName}")));
-
-            result = sb.ToString().EnglishToPersianNumbers();
+            result.Add(new TipDTO { FullName = $"{countUnknownSupportersCoffee.Count()} فرد ناشناس", Count = countUnknownSupportersCoffee.Sum(x => x.Count) });
+            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => new TipDTO { FullName = x.FullName, Count = x.Count }));
         }
 
     }
 }
+
