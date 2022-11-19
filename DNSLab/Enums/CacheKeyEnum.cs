@@ -12,6 +12,7 @@
         GetLastChanges,
         GetTodayIPChangesCount,
         Tips,
-        GetAllPagesSummaryByTag
+        GetAllPagesSummaryByTag,
+        GetPageMetadata
     }
 }

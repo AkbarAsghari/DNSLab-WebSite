@@ -113,8 +113,17 @@ namespace DNSLab.Repository
 
         public async Task<PageMetadataDTO> GetPageMetadata(string url)
         {
-            var result = await _httpService.Get<PageMetadataDTO>($"/Pages/GetPageMetaData?url={url}");
-            return result.Response;
+            string key = $"{CacheKeyEnum.GetPageMetadata}{url}";
+            if (!_memoryCache.TryGetValue(key, out PageMetadataDTO cacheValue))
+            {
+                var result = await _httpService.Get<PageMetadataDTO>($"/Pages/GetPageMetaData?url={url}");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(key, cacheValue, cacheEntryOptions);
+            }
+            return cacheValue;
         }
 
         public async Task<bool> PublishPage(Guid id)
