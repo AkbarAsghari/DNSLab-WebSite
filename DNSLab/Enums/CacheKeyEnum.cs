@@ -11,6 +11,7 @@
         GetCommentReplies,
         GetLastChanges,
         GetTodayIPChangesCount,
-        Tips
+        Tips,
+        GetAllPagesSummaryByTag
     }
 }

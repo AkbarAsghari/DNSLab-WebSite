@@ -13,6 +13,7 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<string>> GetAllPagesURL();
         Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummary(); 
         Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummaryByPageType(PageTypeEnum pageTypeEnum);
+        Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummaryByTag(string tag);
         Task<PageMetadataDTO> GetPageMetadata(string url);
         Task<bool> PublishPage(Guid id);
 

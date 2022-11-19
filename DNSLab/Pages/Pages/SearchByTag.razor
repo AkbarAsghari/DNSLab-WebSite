@@ -1,0 +1,34 @@
+﻿@page "/Tag/{Tag}"
+@inject IPageRepository _PageRepository
+
+<div class="container p-5 bg-body rounded shadow-sm">
+    <h4 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h4>
+    @if (pageSummaries == null)
+    {
+        <Loading />
+    }
+    else if (pageSummaries.Count() > 0)
+    {
+        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
+        {
+            <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <p class="text-center">موردی یافت نشد</p>
+        </div>
+    }
+
+</div>
+@code {
+    IEnumerable<PageSummaryDTO> pageSummaries;
+
+    [Parameter] public string Tag { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        pageSummaries = await _PageRepository.GetAllPagesSummaryByTag(Tag);
+    }
+}

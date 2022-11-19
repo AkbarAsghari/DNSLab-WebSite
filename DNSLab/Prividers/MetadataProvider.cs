@@ -18,7 +18,29 @@ namespace DNSLab.Prividers
                 Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
                 Keywords = new string[] { "Dynamic DNS", "DNS", "Free" }
             };
-            var existMetadata = RouteDetailMapping.FirstOrDefault(vp => route.ToLower().EndsWith(vp.Key.ToLower())).Value;
+
+            var uri = new Uri(route);
+
+            string key = uri.AbsolutePath;
+
+            if (key == "/")
+            {
+                return new()
+                {
+                    Title = "DNSLab - دی ان اس لب",
+                    Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
+                    Keywords = new string[] { "سرویس DDNS ایرانی", "DDNS ایرانی", "DDNS رایگان" }
+                };
+            }
+
+            var existMetadata = RouteDetailMapping.FirstOrDefault(vp => key.ToLower().EndsWith(vp.Key.ToLower())).Value;
+
+            if (existMetadata == null)
+            {
+                key = "/" + (uri.Segments.Length == 1 ? uri.Segments[0] : uri.Segments[1].Replace("/", String.Empty));
+                existMetadata = RouteDetailMapping.FirstOrDefault(vp => key.ToLower().EndsWith(vp.Key.ToLower())).Value;
+            }
+
             if (existMetadata != null)
             {
                 MetadataValue = new MetadataValue
@@ -47,16 +69,7 @@ namespace DNSLab.Prividers
         Dictionary<string, MetadataValue> RouteDetailMapping { get; set; } = new()
         {
             {
-                "/",
-                new()
-                {
-                    Title = "DNSLab - دی ان اس لب",
-                    Description = "DDNS با بالاترین سرعت و آپتایم 100% . DDNS رایگان ما  IP dynamic شما رو به یه هاست‌نیم نشان میدهد.برای مدیریت DNS خود همین الان با چند کلیک رایگان ثبت نام کن.",
-                    Keywords = new string[] { "سرویس DDNS ایرانی", "DDNS ایرانی", "DDNS رایگان" }
-                }
-            },
-            {
-                "/about",
+                "about",
                 new()
                 {
                     Title = "درباره ما",
@@ -65,7 +78,7 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/user/auth",
+                "user/auth",
                 new()
                 {
                     Title = "ورود به سیستم",
@@ -414,6 +427,15 @@ namespace DNSLab.Prividers
                     Title = "روش فعال سازی Let's Encrypt در IIS",
                     Description = "آموزش ساخت Certificate برای https کردن سایت در IIS",
                     Keywords = new string[] { "IIS", "https", "lets encrypt", "certificate", "ip" }
+                }
+            },
+            {
+                "/Tag",
+                new()
+                {
+                    Title = "جستجو بر اساس کلمات کلیدی",
+                    Description = "بخش جستجوی کلمات کلیدی",
+                    Keywords = new string[] { "Tag", "Search by Tag", "جستجو بر اساس کلمه کلیدی", "تگ", "هشتگ" }
                 }
             }
         };
