@@ -2,7 +2,17 @@
 @inject IPageRepository _PageRepository
 
 <div class="container p-5 bg-body rounded shadow-sm">
-    <h4 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h4>
+    <h1 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h1>
+    <div class="note info">
+        <p>در این صفحه مطالب متناسب با کلید واژه انتخاب شده برای شما نمایش داده میشود و میتوانید به محتوای مورد نیاز ، سریع تر دسترسی پیدا کنید.</p>
+        <p>توجه داشته باشید که مرتب سازی مطالب بر اساس تاریخ انتشار آن میباشد . مطالب جدیدتر در بالای لیست قرار دارند.</p>
+    </div>
+
+    @if (pageSummaries != null)
+    {
+        <p>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </p>
+        <hr />
+    }
     @if (pageSummaries == null)
     {
         <Loading />
