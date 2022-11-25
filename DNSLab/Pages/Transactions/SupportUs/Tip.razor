@@ -1,0 +1,66 @@
+﻿@page "/Transaction/Tip"
+@using DNSLab.DTOs.Transactions
+
+@inject NavigationManager navigationManager
+@inject IStringLocalizer<Resource> localizer
+@inject ToastService _toastService;
+
+<EditForm class="container-sm mt-4 col-lg-4 pt-5" Model=TipTransaction Context="TipCtx">
+    <DataAnnotationsValidator />
+    <div class="card mb-4">
+        <div class="card-header">حمایت از دی‌ان‌اس لب</div>
+        <div class="card-body">
+            <div class="mb-3">
+                <InputText class="form-control" placeholder="نام و نام خانوادگی" @bind-Value="TipTransaction.FullName" />
+            </div>
+            <div class="mb-3">
+                <InputText class="form-control dir-ltr" placeholder="تلفن همراه 09123456789" @bind-Value="TipTransaction.Mobile" />
+            </div>
+            <div class="mb-3">
+                <InputText class="form-control" placeholder="پیام" @bind-Value="TipTransaction.Description" />
+            </div>
+            <div class="mb-3">
+                <InputSelect class="form-control form-select mt-1" @bind-Value="@selectedAmountType">
+                    @foreach (var amountType in AmountTypes)
+                    {
+                        <option value="@amountType.Key">@amountType.Value</option>
+                    }
+                </InputSelect>
+            </div>
+            @if (@selectedAmountType == "4")
+            {
+                <div class="mb-3">
+                    <InputText class="form-control dir-ltr" placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
+                </div>
+            }
+            <BaseButtonComponent Caption=@localizer["Continue"]
+                                 IsBussyCaption=@localizer["Loading"]
+                                 CssClass="col-12"
+                                 Color=ColorEnum.Success
+                                 Icon=IconEnum.Heart
+                                 EditContext=TipCtx
+                                 OnClick=Go></BaseButtonComponent>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    public TipTransactionDTO TipTransaction { get; set; } = new TipTransactionDTO { };
+
+    string Amount{ get; set; }
+
+    public Dictionary<string, string> AmountTypes = new Dictionary<string, string>
+    {
+        { "1", "10,000 تومان" },
+        { "2", "30,000 تومان" },
+        { "3", "50,000 تومان" },
+        { "4",  "مبلغ درخواه"},
+    };
+
+    private string selectedAmountType { get; set; }
+
+    private async Task Go()
+    {
+
+    }
+}
