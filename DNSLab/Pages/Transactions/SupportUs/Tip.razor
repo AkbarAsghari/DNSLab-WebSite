@@ -4,6 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IStringLocalizer<Resource> localizer
 @inject ToastService _toastService;
+@inject ITransactionRepository _TransactionRepository
 
 <EditForm class="container-sm mt-4 col-lg-4 pt-5" Model=TipTransaction Context="TipCtx">
     <DataAnnotationsValidator />
@@ -47,20 +48,29 @@
 @code {
     public TipTransactionDTO TipTransaction { get; set; } = new TipTransactionDTO { };
 
-    string Amount{ get; set; }
+    string Amount { get; set; }
 
     public Dictionary<string, string> AmountTypes = new Dictionary<string, string>
     {
-        { "1", "10,000 تومان" },
-        { "2", "30,000 تومان" },
-        { "3", "50,000 تومان" },
-        { "4",  "مبلغ درخواه"},
+        { "10000", "10,000 تومان" },
+        { "30000", "30,000 تومان" },
+        { "50000", "50,000 تومان" },
+        { "0",  "مبلغ درخواه"},
     };
 
-    private string selectedAmountType { get; set; }
+    private string selectedAmountType { get; set; } = "10000";
 
     private async Task Go()
     {
+        int amount = 0;
+        if (selectedAmountType != "0")
+            amount = Convert.ToInt32(selectedAmountType);
+        else
+            amount = Convert.ToInt32(Amount);
+        TipTransaction.Amount = amount;
 
+        var result = await _TransactionRepository.Tip(TipTransaction);
+        if (!String.IsNullOrEmpty(result))
+            navigationManager.NavigateTo(result);
     }
 }
