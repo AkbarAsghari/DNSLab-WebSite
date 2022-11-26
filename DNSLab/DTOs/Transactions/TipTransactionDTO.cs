@@ -12,7 +12,6 @@ namespace DNSLab.DTOs.Transactions
         public string? FullName { get; set; }
         public string? Mobile { get; set; }
         public int Amount { get; set; }
-        public string? Description { get; set; }
         public string? OrderId { get; set; }
     }
 }

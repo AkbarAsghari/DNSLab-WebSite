@@ -18,9 +18,6 @@
                 <InputText class="form-control dir-ltr" placeholder="تلفن همراه 09123456789" @bind-Value="TipTransaction.Mobile" />
             </div>
             <div class="mb-3">
-                <InputText class="form-control" placeholder="پیام" @bind-Value="TipTransaction.Description" />
-            </div>
-            <div class="mb-3">
                 <InputSelect class="form-control form-select mt-1" @bind-Value="@selectedAmountType">
                     @foreach (var amountType in AmountTypes)
                     {
@@ -28,7 +25,7 @@
                     }
                 </InputSelect>
             </div>
-            @if (@selectedAmountType == "4")
+            @if (@selectedAmountType == "0")
             {
                 <div class="mb-3">
                     <InputText class="form-control dir-ltr" placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />

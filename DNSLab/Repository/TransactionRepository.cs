@@ -21,9 +21,13 @@ namespace DNSLab.Repository
                 return response.Response;
         }
 
-        public Task<bool> Verify(long trackId)
+        public async Task<bool> Verify(long trackId)
         {
-            throw new NotImplementedException();
+            var response = await _httpService.Get<bool>($"/Transaction/Verify?trackid={trackId}");
+            if (!response.Success)
+                return false;
+            else
+                return response.Response;
         }
     }
 }
