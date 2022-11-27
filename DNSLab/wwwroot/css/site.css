@@ -279,13 +279,6 @@ a {
         border-bottom: 1px solid #a4d2fc
     }
 
-.buy-me-a-coffee {
-    padding: 10px;
-    width: auto;
-    display: block;
-    margin: 0 auto;
-}
-
 .note.warning {
     background-color: #ffc;
     background-image: url(../images/Icons/warn_icon.svg);
