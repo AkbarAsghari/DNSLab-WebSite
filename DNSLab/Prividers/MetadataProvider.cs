@@ -78,6 +78,15 @@ namespace DNSLab.Prividers
                 }
             },
             {
+                "transaction/tip",
+                new()
+                {
+                    Title = "حمایت از دی ان اس لب",
+                    Description = "صفحه دریافت اطلاعات اولیه حمایت از دی ان اس لب",
+                    Keywords = new string[] { "حمایت از ما", "حمایت از دی ان اس لب" }
+                }
+            },
+            {
                 "user/auth",
                 new()
                 {

@@ -28,6 +28,8 @@ namespace DNSLab.Controllers
             "https://dnslab.ir/500",
             "https://dnslab.ir/503",
             "https://dnslab.ir/user/logout",
+            "https://dnslab.ir/transaction/callback",
+            "https://dnslab.ir/transaction/tip",
         };
 
         public async Task<IActionResult> Get()
