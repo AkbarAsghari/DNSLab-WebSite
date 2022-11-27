@@ -1,6 +1,6 @@
 ﻿@using DNSLab.DTOs.Tips
 @using System.Text
-@inject ITipRepository _TipRepository
+@inject ITransactionRepository _TransactionRepository
 
 @if (result.Count > 0)
 {
@@ -11,7 +11,7 @@
             @foreach (var item in @rows)
             {
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                    <CoffeeSupportItem FullName="@item.FullName" Count="@item.Count" />
+                    <CoffeeSupportItem FullName="@item.FullName" Amount="@item.Amount" />
                 </div>
             }
         </div>
@@ -23,16 +23,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var Supporters = await _TipRepository.GetTips();
+        var Supporters = await _TransactionRepository.GetTips();
 
         if (Supporters.Count() > 0)
         {
             StringBuilder sb = new StringBuilder();
 
-            var countUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
+            var amountUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
 
-            result.Add(new TipDTO { FullName = $"{countUnknownSupportersCoffee.Count()} فرد ناشناس", Count = countUnknownSupportersCoffee.Sum(x => x.Count) });
-            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => new TipDTO { FullName = x.FullName, Count = x.Count }));
+            result.Add(new TipDTO { FullName = $"{amountUnknownSupportersCoffee.Count()} فرد ناشناس", Amount = amountUnknownSupportersCoffee.Sum(x => x.Amount) });
+            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => new TipDTO { FullName = x.FullName, Amount = x.Amount }));
         }
 
     }

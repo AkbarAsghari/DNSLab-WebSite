@@ -1,4 +1,5 @@
-﻿using DNSLab.DTOs.Transactions;
+﻿using DNSLab.DTOs.Tips;
+using DNSLab.DTOs.Transactions;
 
 namespace DNSLab.Interfaces.Repository
 {
@@ -6,5 +7,6 @@ namespace DNSLab.Interfaces.Repository
     {
         Task<string> Tip(TipTransactionDTO request);
         Task<bool> Verify(long trackId);
+        Task<IEnumerable<TipDTO>> GetTips();
     }
 }

@@ -31,7 +31,6 @@ builder.Services.AddScoped<IIPRepository, IPRepository>();
 builder.Services.AddScoped<IStaticsRepository, StaticsRepository>();
 builder.Services.AddScoped<IPageRepository, PageRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
-builder.Services.AddScoped<ITipRepository, TipRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddRazorPages();

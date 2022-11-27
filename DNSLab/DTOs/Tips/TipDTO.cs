@@ -3,6 +3,7 @@
     public class TipDTO
     {
         public string FullName { get; set; }
-        public int Count { get; set; }
+        public long Amount { get; set; }
+        public DateTime PaidDate { get; set; }
     }
 }
