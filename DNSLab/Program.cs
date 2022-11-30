@@ -41,7 +41,6 @@ builder.Services.AddScoped<JWTAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
-
 builder.Services.AddTransient<MetadataProvider>();
 builder.Services.AddScoped<MetadataTransferService>();
 

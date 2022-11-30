@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject IStringLocalizer<Resource> localizer
 @inject IHttpContextAccessor httpContextAccessor
+@inject NavigationManager navigationManager
 
 <PageTitle>DNSLab</PageTitle>
 
@@ -10,16 +11,26 @@
         <CascadingValue Value="@IPDTO">
             <AuthorizeView>
                 <Authorized>
-
-                    <div class="sidebar">
-                        <NavMenu />
-                    </div>
-                    <main>
-                        <article class="content px-4">
-                            @Body
-                        </article>
-                    </main>
-
+                    @{
+                        if (navigationManager.ShouldRenderAsWithoutAdminMenu())
+                        {
+                            <NavBar />
+                            <main class="content-not-auth">
+                                @Body
+                            </main>
+                        }
+                        else
+                        {
+                            <div class="sidebar">
+                                <NavMenu />
+                            </div>
+                            <main>
+                                <article class="content px-4">
+                                    @Body
+                                </article>
+                            </main>
+                        }
+                    }
                 </Authorized>
                 <NotAuthorized>
                     <NavBar />

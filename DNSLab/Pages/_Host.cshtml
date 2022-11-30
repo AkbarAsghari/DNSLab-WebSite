@@ -17,21 +17,9 @@
 
 @{
     RenderMode renderMode = RenderMode.Server;
-    Type authType = typeof(App);
-
-    if (Request.ShouldRenderAsWithoutAdminMenu())
-    {
-        authType = typeof(AppNoAuth);
-    }
 
     if (Request.ShouldRenderStaticMode())
-    {
         renderMode = RenderMode.Static;
-    }
-    else
-    {
-        renderMode = RenderMode.Server;
-    }
 
-    <component type="@authType" render-mode="@renderMode" />
+    <component type="typeof(App)" render-mode="@renderMode" />
 }
