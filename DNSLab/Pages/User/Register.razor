@@ -63,7 +63,7 @@
             if (!String.IsNullOrEmpty(userToken))
             {
                 await authService.Login(userToken);
-                navigationManager.NavigateTo("Dashboard", true, true);
+                navigationManager.NavigateTo("Dashboard");
             }
         }
         else
