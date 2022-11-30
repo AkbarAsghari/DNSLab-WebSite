@@ -843,4 +843,13 @@
   <data name="More" xml:space="preserve">
     <value>More</value>
   </data>
+  <data name="Paymanet_Exception" xml:space="preserve">
+    <value>Paymanet exception</value>
+  </data>
+  <data name="Transaction_Amount_Must_Be_Gear_Than_5000" xml:space="preserve">
+    <value>Transaction amount must be gear than 5000 tomans</value>
+  </data>
+  <data name="Transaction_Not_Found" xml:space="preserve">
+    <value>Transaction not found</value>
+  </data>
 </root>

@@ -843,4 +843,13 @@
   <data name="More" xml:space="preserve">
     <value>بیشتر</value>
   </data>
+  <data name="Paymanet_Exception" xml:space="preserve">
+    <value>خطای پرداخت</value>
+  </data>
+  <data name="Transaction_Amount_Must_Be_Gear_Than_5000" xml:space="preserve">
+    <value>حداقل مبلغ پرداخت 5000 تومان میباشد</value>
+  </data>
+  <data name="Transaction_Not_Found" xml:space="preserve">
+    <value>تراکنش یافت نشد</value>
+  </data>
 </root>

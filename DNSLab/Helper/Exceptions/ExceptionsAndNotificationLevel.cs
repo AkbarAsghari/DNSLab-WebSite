@@ -237,6 +237,21 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Ticket_Title_Is_Empty",
                          Level = Enums.ToastLevel.Warning,
                          NormalMessage = _localizer["Ticket_Title_Is_Empty"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Transaction_Amount_Must_Be_Gear_Than_5000",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Transaction_Amount_Must_Be_Gear_Than_5000"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Transaction_Not_Found",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Transaction_Not_Found"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Paymanet_Exception",
+                         Level = Enums.ToastLevel.Error,
+                         NormalMessage = _localizer["Paymanet_Exception"]
                     }
                 };
             }
