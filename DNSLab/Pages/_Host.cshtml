@@ -15,16 +15,23 @@
                 CultureInfo.CurrentUICulture)));
 }
 
-@if (HttpContext.Request.Path.ToString() == "/" ||
-HttpContext.Request.Path.ToString() == "//" ||
-HttpContext.Request.Path.ToString().ToLower().Contains("api") ||
-HttpContext.Request.Path.ToString().ToLower().Contains("support") ||
-HttpContext.Request.Path.ToString().ToLower().Contains("about") ||
-HttpContext.Request.Path.ToString().ToLower().Contains("article"))
-{
-    <component type="typeof(AppNoAuth)" render-mode="ServerPrerendered" />
-}
-else
-{
-    <component type="typeof(App)" render-mode="Server" />
+@{
+    RenderMode renderMode = RenderMode.Server;
+    Type authType = typeof(App);
+
+    if (Request.ShouldRenderAsWithoutAdminMenu())
+    {
+        authType = typeof(AppNoAuth);
+    }
+
+    if (Request.ShouldRenderStaticMode())
+    {
+        renderMode = RenderMode.Static;
+    }
+    else
+    {
+        renderMode = RenderMode.Server;
+    }
+
+    <component type="@authType" render-mode="@renderMode" />
 }
