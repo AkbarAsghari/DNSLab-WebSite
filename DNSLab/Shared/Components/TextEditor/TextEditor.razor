@@ -24,10 +24,16 @@
     {
         _HTML = CurrentValue;
     }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync(identifier: "import", "/js/ckeditor/ckeditor.js");
+            await JSRuntime.InvokeVoidAsync(identifier: "import", "/js/ckeditor/CKEditorInterop.js");
+
             await JSRuntime.InvokeVoidAsync("CKEditorInterop.init", Id, DotNetObjectReference.Create(this));
+        }
 
         await base.OnAfterRenderAsync(firstRender);
     }

@@ -1,8 +1,9 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<button id="@buttonId" type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard">
+<button type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard">
     @if (isCopied)
     {
+        <text>کپی شد</text>
         <span class="oi oi-check" aria-hidden="true"></span>
     }
     else
@@ -12,7 +13,6 @@
 </button>
 
 @code {
-    string buttonId = "btnCp" + Guid.NewGuid().ToString().Replace("-", String.Empty);
     bool isCopied = false;
     [Parameter] public string Text { get; set; }
 
@@ -20,7 +20,7 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("addTooltips",buttonId);
+            await JSRuntime.InvokeVoidAsync(identifier: "import", "/js/custom/CopyToClipboard.js");
         }
     }
     private async Task CopyTextToClipboard()
