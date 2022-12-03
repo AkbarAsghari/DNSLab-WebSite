@@ -13,6 +13,8 @@ namespace DNSLab.DTOs.DNS
         public string IPv4Address { get; set; }
         public string IPv6Address { get; set; }
         public string HostNameAlias { get; set; }
+        public string URLOrIp { get; set; }
+        public int? RedirectHttpResponseStatusCode { get; set; }
         public int RecordType { get; set; }
     }
 }

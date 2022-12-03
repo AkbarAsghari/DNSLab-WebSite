@@ -16,15 +16,19 @@
                     {
                         case 1:
                             <label class="mb-1">@localizer["IPv4Address"]</label>
-                            <InputText class="form-control dir-ltr" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" />
+                            <InputText class="form-control dir-ltr" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" required/>
                             break;
                         case 2:
                             <label class="mb-1">@localizer["IPv6Address"]</label>
-                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" />
+                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" required/>
                             break;
                         case 3:
                             <label class="mb-1">@localizer["Target"]</label>
-                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" />
+                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" required/>
+                            break;
+                        case 4:
+                            <label class="mb-1">@localizer["Target"]</label>
+                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" required />
                             break;
                     }
                 </div>
@@ -51,6 +55,12 @@
                             </label>
                             <CustomInputRadio class="form-check-input" name="DNSRecordType" id="CNAMERecord" SelectedValue="3" @bind-Value="HostName.RecordType" />
                         </div>
+                        <div class="form-check">
+                            <label class="form-check-label" for="CNAMERecord">
+                                Web Redirect
+                            </label>
+                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="WebRedirectRecord" SelectedValue="4" @bind-Value="HostName.RecordType" />
+                        </div>
                     </div>
                 }
                 <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)">
@@ -70,6 +80,10 @@
                                 case 3:
                                     <h6 class="card-title">DNS Alias (CNAME)</h6>
                                     <p class="card-text">@localizer["DNSAliasDescription"]</p>
+                                    break;
+                                case 4:
+                                    <h6 class="card-title">Web Redirect</h6>
+                                    <p class="card-text">@localizer["WebRedirectDescription"]</p>
                                     break;
                             }
                         </div>

@@ -852,4 +852,7 @@
   <data name="Transaction_Not_Found" xml:space="preserve">
     <value>Transaction not found</value>
   </data>
+  <data name="WebRedirectDescription" xml:space="preserve">
+    <value>A Web Redirect allows a hostname to redirect to a URL or IPv4 address on a specific port.</value>
+  </data>
 </root>

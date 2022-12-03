@@ -10,6 +10,7 @@ namespace DNSLab.Enums
     {
         A = 1,
         AAAA = 2,
-        CNAME = 3
+        CNAME = 3,
+        WebRedirect = 4,
     }
 }

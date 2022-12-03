@@ -53,5 +53,10 @@
             }
             return persianStr;
         }
+
+        public static string MakeCut(this string text, int length)
+        {
+            return text.Length > 25 ? $"{text.Substring(0, 25)}..." : text;
+        }
     }
 }

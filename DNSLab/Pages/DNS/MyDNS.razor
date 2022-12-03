@@ -61,7 +61,7 @@ else
                                             <p><code>@item.Name</code>.@item.Domain</p>
                                         </a>
                                     </div>
-                                    <div class="col-md-5 col-xl-6">
+                                    <div class="col-md-5 col-xl-5">
                                         <p class="d-inline">IP / Target </p>
                                         <a class="text-decoration-none">
                                             @switch ((DNSRecordTypeEnum)item.RecordType)
@@ -75,10 +75,21 @@ else
                                                 case DNSRecordTypeEnum.CNAME:
                                                     @item.HostNameAlias
                                                     break;
+                                                case DNSRecordTypeEnum.WebRedirect:
+                                                    @item.URLOrIp.MakeCut(20)
+                                                    break;
                                             }
                                         </a>
                                     </div>
-                                    <p class="col-md-3 col-xl-2">@localizer["Type"] <a class="btn btn-sm btn-dark disabled">@((DNSRecordTypeEnum)item.RecordType)</a></p>
+                                    <p class="col-md-3">
+                                        @localizer["Type"]
+                                        <a class="btn btn-sm btn-dark disabled">
+                                            @((DNSRecordTypeEnum)item.RecordType +
+                                ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                                " ("+item.RedirectHttpResponseStatusCode+")" :
+                                String.Empty))
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
