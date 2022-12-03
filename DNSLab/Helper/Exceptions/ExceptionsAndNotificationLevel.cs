@@ -252,6 +252,16 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Paymanet_Exception",
                          Level = Enums.ToastLevel.Error,
                          NormalMessage = _localizer["Paymanet_Exception"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "URLOrIP_Is_Not_Valid",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["URLOrIP_Is_Not_Valid"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Redirect_Http_Response_Status_Code_Is_Not_Valid",
+                         Level = Enums.ToastLevel.Warning,
+                         NormalMessage = _localizer["Redirect_Http_Response_Status_Code_Is_Not_Valid"]
                     }
                 };
             }

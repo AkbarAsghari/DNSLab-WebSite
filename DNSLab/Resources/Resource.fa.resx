@@ -855,4 +855,10 @@
   <data name="WebRedirectDescription" xml:space="preserve">
     <value>قابلیت Web Redirect این امکان را میدهد که هاست نِیم شما به یک آدرس یو‌آر‌ال یا آی‌پی با پورت خاص هدایت شود.</value>
   </data>
+  <data name="Redirect_Http_Response_Status_Code_Is_Not_Valid" xml:space="preserve">
+    <value>کد ریسپانس پاسخ درست نیست</value>
+  </data>
+  <data name="URLOrIP_Is_Not_Valid" xml:space="preserve">
+    <value>آدرس یو‌آر‌ال یا آی‌پی درست نمیباشد</value>
+  </data>
 </root>
