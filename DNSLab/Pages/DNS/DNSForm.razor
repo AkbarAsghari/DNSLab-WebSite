@@ -8,7 +8,7 @@
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
                     <label class="mb-1">@localizer["HostName"]</label>
-                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required />
+                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required disabled="@(IsNewRecord == false)" />
                     <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
                 </div>
                 <div class="col-md-6">
