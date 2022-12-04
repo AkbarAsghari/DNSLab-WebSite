@@ -1,8 +1,16 @@
 @import url(open-iconic/font/css/open-iconic-bootstrap.min.css);
 
 body, html {
-    font-family: vazir-light,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-family: vazir-light,'Helvetica Neue',Helvetica,Arial,sans-serif !important;
     background-color: #f8f9fa !important
+}
+
+.bit-btn.bit-btn-fluent {
+    font-family: vazir-light;
+}
+
+.bit-tglb.bit-tglb-fluent {
+    font-family: vazir-light;
 }
 
 h1:focus {
@@ -279,11 +287,11 @@ a {
         border-bottom: 1px solid #a4d2fc
     }
 
-.note.warning {
-    background-color: #ffc;
-    background-image: url(../images/Icons/warn_icon.svg);
-    border-right: 6px solid #ffeb3b;
-    border-top: 1px solid #ffff80;
-    border-left: 1px solid #ffff80;
-    border-bottom: 1px solid #ffff80
-}
+    .note.warning {
+        background-color: #ffc;
+        background-image: url(../images/Icons/warn_icon.svg);
+        border-right: 6px solid #ffeb3b;
+        border-top: 1px solid #ffff80;
+        border-left: 1px solid #ffff80;
+        border-bottom: 1px solid #ffff80
+    }

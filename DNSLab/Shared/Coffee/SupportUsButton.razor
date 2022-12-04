@@ -1,10 +1,8 @@
 ﻿@inject ITransactionRepository _TransactionRepository
 
-<div class="btn-group dir-ltr col-auto" role="group">
-    <button type="button" class="btn btn-outline-success" style="pointer-events: none;"><strong>@supporterCount.ToString().EnglishToPersianNumbers()</strong>❤️</button>
-    <a type="button" class="btn btn-success text-decoration-none text-white" href="Transaction/Tip">از رایگان ماندن دی‌ان‌اس لب حمایت کنید</a>
-</div>
-
+<BitButton IconName="BitIconName.Heart" ButtonSize="BitButtonSize.Large" Href="Transaction/Tip" Class="text-decoration-none text-white">
+    از رایگان ماندن دی‌ان‌اس لب حمایت کنید <strong>(❤️@supporterCount.ToString().EnglishToPersianNumbers())</strong>
+</BitButton>
 
 @code {
     int supporterCount;

@@ -1,16 +1,11 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<button type="button" class="btn btn-@(isCopied ? "success" : "secondary") btn-sm ms-2" @onclick="CopyTextToClipboard">
-    @if (isCopied)
-    {
-        <text>کپی شد</text>
-        <span class="oi oi-check" aria-hidden="true"></span>
-    }
-    else
-    {
-        <span class="oi oi-file" aria-hidden="true"></span>
-    }
-</button>
+<BitToggleButton OnClick="CopyTextToClipboard"
+                 Class="ms-2 me-2"
+                 Label="@(isCopied ? "کپی شد" : String.Empty)"
+                 IconName=@(isCopied ? BitIconName.CheckMark : BitIconName.Copy)
+                 ButtonStyle="BitButtonStyle.Primary">
+</BitToggleButton>
 
 @code {
     bool isCopied = false;
