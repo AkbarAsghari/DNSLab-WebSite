@@ -5,17 +5,6 @@ body, html {
     background-color: #f8f9fa !important
 }
 
-.bit-btn.bit-btn-fluent, 
-.bit-srch-box-fluent, 
-.bit-tglb.bit-tglb-fluent {
-    font-family: vazir-light;
-}
-
-.composite-link a.selected:after {
-    border-left: none !important;
-    border-right: 0.125rem solid #0078d4;
-}
-
 h1:focus {
     outline: 0
 }
@@ -298,3 +287,24 @@ a {
         border-left: 1px solid #ffff80;
         border-bottom: 1px solid #ffff80
     }
+
+
+/*Bit Platform*/
+
+.bit-btn.bit-btn-fluent,
+.bit-srch-box-fluent,
+.bit-tglb.bit-tglb-fluent {
+    font-family: vazir-light;
+}
+
+.composite-link a.selected:after {
+    border-left: none !important;
+    border-right: 0.125rem solid #0078d4;
+}
+
+.bit-nav .chevron-btn {
+    right: .0625rem;
+    left: auto;
+}
+
+/*End Bit Platform*/

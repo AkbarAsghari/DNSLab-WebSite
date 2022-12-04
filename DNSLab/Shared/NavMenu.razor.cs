@@ -29,13 +29,10 @@ namespace DNSLab.Shared
         {
             new BitNavLinkItem
             {
-                Name = "Home",
-                Url = "/",
-                Title = "",
+                Name = "داشبورد",
+                Url = "Dashboard",
                 Key = "Key1",
-                CollapseAriaLabel = "Collapse Home section",
-                ExpandAriaLabel = "Expand Home section",
-                IconName = BitIconName.Home,
+                IconName = BitIconName.ViewDashboard,
             },
             new BitNavLinkItem
             {
@@ -77,7 +74,7 @@ namespace DNSLab.Shared
             {
                 Name = "ارتباط با ما",
                 Key = "Key8" ,
-                IconName = BitIconName.Contact,
+                IconName = BitIconName.EditMail,
                 Links = new List<BitNavLinkItem>
                 {
                     new BitNavLinkItem
