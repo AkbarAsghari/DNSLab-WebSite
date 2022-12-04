@@ -5,12 +5,15 @@ body, html {
     background-color: #f8f9fa !important
 }
 
-.bit-btn.bit-btn-fluent {
+.bit-btn.bit-btn-fluent, 
+.bit-srch-box-fluent, 
+.bit-tglb.bit-tglb-fluent {
     font-family: vazir-light;
 }
 
-.bit-tglb.bit-tglb-fluent {
-    font-family: vazir-light;
+.composite-link a.selected:after {
+    border-left: none !important;
+    border-right: 0.125rem solid #0078d4;
 }
 
 h1:focus {

@@ -1,9 +1,4 @@
-﻿@inject IJSRuntime JS
-@inject IStringLocalizer<Resource> localizer
-@inject AuthenticationStateProvider auth
-@inject ICommentRepository commentRepository
-
-<div class="top-row ps-3 navbar navbar-dark">
+﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="Dashboard"><p>IP : @IPDTO.IPv4</p> </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -11,139 +6,12 @@
         </button>
     </div>
 </div>
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="user/info">
-                        <UserProfileImage /> @(" " + (@_FullName.Length > 17 ? @_FullName.Substring(0,17) + "..." : @_FullName))
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Dashboard" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> @localizer["Home"]
-                    </NavLink>
-                </div>
-                <AuthorizeView Roles="Admin,Writer" Context="_">
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Page/MyPages">
-                            <span class="oi oi-list" aria-hidden="true"></span> @localizer["Pages"]
-                        </NavLink>
-                    </div>
-                </AuthorizeView>
-                <AuthorizeView Roles="Admin" Context="_">
 
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="ChangeLogs/All">
-                            <span class="oi oi-spreadsheet" aria-hidden="true"></span> @localizer["ChangeLogs"]
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Comment/ReviewComments">
-                            <span class="oi oi-chat" aria-hidden="true"></span> @localizer["NewComments"]
-                        </NavLink>
-                    </div>
-                </AuthorizeView>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="dns/mydns">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> @localizer["HostNames"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="dns/mytokens">
-                        <span class="oi oi-link-intact" aria-hidden="true"></span> @localizer["Tokens"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="tools">
-                        <span class="oi oi-wrench" aria-hidden="true"></span> @localizer["Tools"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="api">
-                        <span class="oi oi-code" aria-hidden="true"></span> @localizer["API"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="download/win">
-                        <span class="oi oi-data-transfer-download" aria-hidden="true"></span> @localizer["Download"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="support">
-                        <span class="oi oi-book" aria-hidden="true"></span> راهنمای سایت
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Comment/MyComments">
-                        <span class="oi oi-comment-square" aria-hidden="true"></span> ارسال دیدگاه
-                        @if (notSeenRepliesCount > 0)
-                        {
-                            <text>( @notSeenRepliesCount پاسخ )</text>
-                        }
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Ticket/MyTickets">
-                        <span class="oi oi-bug" aria-hidden="true"></span> @localizer["SendTicket"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="user/logout">
-                        <span class="oi oi-account-logout" aria-hidden="true"></span> @localizer["Logout"]
-                    </NavLink>
-                </div>
-            </Authorized>
-            <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="user/auth" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> @localizer["Login"]
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="user/register">
-                        <span class="oi oi-pencil" aria-hidden="true"></span> @localizer["Register"]
-                    </NavLink>
-                </div>
-            </NotAuthorized>
-        </AuthorizeView>
-    </nav>
+<div class="@NavMenuCssClass">
+    <BitSearchBox Placeholder="جستجو در منو" IsUnderlined="true" OnChange="onChange"></BitSearchBox>
+    <BitNav
+        AriaLabel="Nav basic example"
+        Mode="BitNavMode.Manual"
+        NavLinkItems="BasicNoToolTipNavLinks">
+    </BitNav>
 </div>
-<div id="particles-js"></div>
-
-@code {
-    private bool collapseNavMenu = true;
-    private string _FullName = String.Empty;
-    private int notSeenRepliesCount = 0;
-
-    [CascadingParameter] public IPDTO IPDTO { get; set; }
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var user = (await auth.GetAuthenticationStateAsync()).User;
-
-            if (user != null)
-                if (user.Identity!.IsAuthenticated == true)
-                {
-                    if (user.Identities.FirstOrDefault()!.Claims.Any(x => x.Type.ToLower() == "fullname"))
-                        _FullName = user.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "fullname")!.Value;
-                }
-
-            await JS.InvokeVoidAsync("StartPrticlesJS");
-
-            notSeenRepliesCount = await commentRepository.GetCommentsNotSeenRepliesCount();
-
-            await this.InvokeAsync(() => StateHasChanged());
-        }
-    }
-}
