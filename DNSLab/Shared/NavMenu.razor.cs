@@ -27,6 +27,27 @@ namespace DNSLab.Shared
 
         private List<BitNavLinkItem> BasicNoToolTipNavLinks = new List<BitNavLinkItem>();
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                var user = (await authenticationStateTask).User;
+
+                if (user != null)
+                {
+                    if (user.IsInRole("Admin"))
+                        AddAdminMenu();
+
+                    if (user.IsInRole("Admin") || user.IsInRole("Writer"))
+                        AddWriterMenu();
+                }
+
+                AddMainMenu();
+                BasicNoToolTipNavLinks = AllNavLinks;
+                await this.InvokeAsync(() => this.StateHasChanged());
+            }
+        }
+
         private readonly List<BitNavLinkItem> AllNavLinks = new()
         {
             new BitNavLinkItem
@@ -37,30 +58,6 @@ namespace DNSLab.Shared
                 IconName = BitIconName.ViewDashboard,
             }
         };
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                var user = (await authenticationStateTask).User;
-                if (user != null)
-                {
-                    if (user.IsInRole("Admin"))
-                    {
-                        AddAdminMenu();
-                    }
-
-                    if (user.IsInRole("Admin") || user.IsInRole("Writer"))
-                    {
-                        AddWriterMenu();
-                    }
-
-                    AddMainMenu();
-                }
-                BasicNoToolTipNavLinks = AllNavLinks;
-                await this.InvokeAsync(() => this.StateHasChanged());
-            }
-        }
 
         private void AddMainMenu()
         {
@@ -142,8 +139,15 @@ namespace DNSLab.Shared
                     },
                     new BitNavLinkItem
                     {
-                        Name = "خروج",
+                        Name = "اطلاعات کاربری",
                         Key = "K401",
+                        IconName = BitIconName.PlayerSettings,
+                        Url = "user/info",
+                    },
+                    new BitNavLinkItem
+                    {
+                        Name = "خروج",
+                        Key = "K402",
                         IconName = BitIconName.PowerButton,
                         Url = "user/logout",
                     }
