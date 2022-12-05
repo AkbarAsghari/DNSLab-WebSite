@@ -39,7 +39,7 @@ else
                 <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
             }
             else
@@ -47,7 +47,7 @@ else
                 <BaseButtonComponent Caption=@localizer["Publish"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Primary
-                             Icon=IconEnum.Data_Transfer_Upload
+                             Icon=BitIconName.PublishContent
                              OnClick=AcceptPublish></BaseButtonComponent>
             }
 
@@ -57,7 +57,9 @@ else
         <div class="card-header">@localizer["AllPages"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="Page/Create">@localizer["Create New Page"]</a>
+                <BaseNavigateButtonComponent Href="Page/Create"
+                                         Text="@(localizer["Create New Page"])">
+                </BaseNavigateButtonComponent>
             </div>
             <div class="mb-3">
                 @if (pageSummaries.Count() == 0)
@@ -97,14 +99,14 @@ else
                                     <BaseButtonComponent Caption=@localizer["Edit"]
                                              IsBussyCaption=@localizer["Progressing"]
                                              Color=ColorEnum.Warning
-                                             Icon=IconEnum.Pencil
+                                             Icon=BitIconName.Edit
                                              OnClick=@(()=>EditPage(item)) />
                                 </div>
                                 <div class="row p-1">
                                     <BaseButtonComponent Caption=@localizer["Delete"]
                                              IsBussyCaption=@localizer["Progressing"]
                                              Color=ColorEnum.Danger
-                                             Icon=IconEnum.Trash
+                                             Icon=BitIconName.Delete
                                              OnClick=@(()=>DeletePage(item)) />
                                 </div>
                                 <div class="row p-1">
@@ -113,7 +115,7 @@ else
                                         <BaseButtonComponent Caption=@localizer["Publish"]
                                              IsBussyCaption=@localizer["Progressing"]
                                              Color=ColorEnum.Primary
-                                             Icon=IconEnum.Data_Transfer_Upload
+                                             Icon=BitIconName.PublishContent
                                              OnClick=@(()=>PublishPage(item)) />
                                     }
                                 </div>

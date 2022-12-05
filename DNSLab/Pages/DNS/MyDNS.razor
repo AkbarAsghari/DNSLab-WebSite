@@ -28,7 +28,7 @@ else
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -36,7 +36,9 @@ else
         <div class="card-header">@localizer["HostNames"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="dns/create">@localizer["CreateHostName"]</a>
+                <BaseNavigateButtonComponent Href="dns/create"
+                                         Text="@(localizer["CreateHostName"])">
+                </BaseNavigateButtonComponent>
             </div>
             <div class="mb-3">
                 @if (hostNames.Count == 0)
@@ -97,13 +99,13 @@ else
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
                                          IsOutLine=true
-                                         Icon=IconEnum.Pencil
+                                         Icon=BitIconName.Edit
                                          OnClick=@(()=>EditHostName(item)) />
                                 <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Danger
                                          IsOutLine=true
-                                         Icon=IconEnum.Trash
+                                         Icon=BitIconName.Delete
                                          OnClick=@(()=>DeleteHostName(item)) />
                             </div>
                         </div>

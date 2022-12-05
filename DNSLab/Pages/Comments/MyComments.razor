@@ -27,7 +27,7 @@ else
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -60,7 +60,9 @@ else
         <div class="card-header">@localizer["MyComments"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="Comment/Create">@localizer["CreateNewComment"]</a>
+                <BaseNavigateButtonComponent Href="Comment/Create"
+                                         Text="@(localizer["CreateNewComment"])">
+                </BaseNavigateButtonComponent>
             </div>
             <div class="mb-3">
 
@@ -111,20 +113,20 @@ else
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Success
-                                         Icon=IconEnum.Chat
+                                         Icon=BitIconName.OfficeChat
                                          OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
                                 }
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Warning
-                                         Icon=IconEnum.Pencil
+                                         Icon=BitIconName.Edit
                                          OnClick=@(()=>EditComment(item))></BaseButtonComponent>
                                 <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Danger
-                                         Icon=IconEnum.Trash
+                                         Icon=BitIconName.Delete
                                          OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
                             </div>
                         </div>

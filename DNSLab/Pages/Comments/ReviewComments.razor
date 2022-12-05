@@ -26,7 +26,7 @@ else
             <BaseButtonComponent Caption=@localizer["Decline"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDecline></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -79,25 +79,25 @@ else
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Info
-                                         Icon=IconEnum.Info
+                                         Icon=BitIconName.More
                                          OnClick=@(()=>ShowCommentDetails(item))></BaseButtonComponent>
                                 <BaseButtonComponent Caption=@localizer["Accept"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Success
-                                         Icon=IconEnum.Check
+                                         Icon=BitIconName.Accept
                                          OnClick=@(()=>ReviewComment(item,true))></BaseButtonComponent>
                                 <BaseButtonComponent Caption=@localizer["Decline"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Danger
-                                         Icon=IconEnum.Trash
+                                         Icon=BitIconName.EntryDecline
                                          OnClick=@(()=>OpenDeclineModal(item))></BaseButtonComponent>
                                 <BaseButtonComponent Caption=@localizer["Reply"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
                                          Color=ColorEnum.Primary
-                                         Icon=IconEnum.Chat
+                                         Icon=BitIconName.MailReply
                                          OnClick=@(()=>ReplyComment(item))></BaseButtonComponent>
                             </div>
                         </div>

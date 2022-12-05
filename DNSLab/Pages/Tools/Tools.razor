@@ -7,10 +7,10 @@
     <div class="card-header">@localizer["Tools"]</div>
     <div class="card-body">
         <div class="d-grid gap-2 d-md-block">
-            <a class="btn btn-primary" href="tools/ping">@localizer["PingChecker"]</a>
-            <a class="btn btn-primary" href="tools/port">@localizer["PortChecker"]</a>
-            <a class="btn btn-primary" href="tools/dnslookup">@localizer["DNSLookup"]</a>
-            <a class="btn btn-primary" href="tools/reverselookup">@localizer["ReverseLookup"]</a>
+            <BaseNavigateButtonComponent Href="tools/ping" Text="@(localizer["PingChecker"])" />
+            <BaseNavigateButtonComponent Href="tools/port" Text="@(localizer["PortChecker"])" />
+            <BaseNavigateButtonComponent Href="tools/dnslookup" Text="@(localizer["DNSLookup"])" />
+            <BaseNavigateButtonComponent Href="tools/reverselookup" Text="@(localizer["ReverseLookup"])" />
         </div>
     </div>
 </div>

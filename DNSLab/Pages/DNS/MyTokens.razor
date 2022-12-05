@@ -27,7 +27,7 @@ else
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDelete />
         </Footer>
     </Modal>
@@ -55,13 +55,13 @@ else
                                      IsBussyCaption=@localizer["Progressing"]
                                      CssClass="btn-sm"
                                      Color=ColorEnum.Danger
-                                     Icon=IconEnum.Loop
+                                     Icon=BitIconName.Refresh
                                      OnClick=ContinueRevokeKey />
                             <BaseButtonComponent Caption=@localizer["Cancel"]
                                      IsBussyCaption=@localizer["Progressing"]
                                      CssClass="btn-sm"
                                      Color=ColorEnum.Success
-                                     Icon=IconEnum.Check
+                                     Icon=BitIconName.Cancel
                                      OnClick=ChangeRevokeStatus />
                         </div>
                     }
@@ -73,7 +73,7 @@ else
                                  IsOutLine=true
                                  CssClass="btn-sm col-lg-2"
                                  Color=ColorEnum.Danger
-                                 Icon=IconEnum.Loop
+                                 Icon=BitIconName.Refresh
                                  OnClick=ChangeRevokeStatus />
                     }
 
@@ -119,7 +119,9 @@ else
         <div class="card-header">@localizer["Tokens"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="dns/createtoken">@localizer["CreateToken"]</a>
+                <BaseNavigateButtonComponent Href="dns/createtoken"
+                                         Text="@(localizer["CreateToken"])">
+                </BaseNavigateButtonComponent>
             </div>
             <div class="mb-3">
 
@@ -157,19 +159,19 @@ else
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Primary
                                          IsOutLine=true
-                                         Icon=IconEnum.Cog
+                                         Icon=BitIconName.More
                                          OnClick=@(()=>OpenToken(item)) />
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
                                          IsOutLine=true
-                                         Icon=IconEnum.Pencil
+                                         Icon=BitIconName.Edit
                                          OnClick=@(()=>EditToken(item)) />
                                 <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Danger
                                          IsOutLine=true
-                                         Icon=IconEnum.Trash
+                                         Icon=BitIconName.Delete
                                          OnClick=@(()=>DeleteToken(item)) />
                             </div>
                         </div>

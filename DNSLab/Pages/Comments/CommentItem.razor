@@ -23,7 +23,7 @@
                                  IsBussyCaption=@localizer["Progressing"]
                                  Color=ColorEnum.Primary
                                  IsOutLine=true
-                                 Icon=@(isCollapsed == false ? IconEnum.Arrow_Bottom : IconEnum.Arrow_Top)
+                                 Icon=@(isCollapsed == false ? BitIconName.ChevronDown : BitIconName.ChevronUp)
                                  OnClick=@(()=>ShowReplies())></BaseButtonComponent>
                 @if (isCollapsed && Replies != null)
                 {

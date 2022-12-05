@@ -27,7 +27,7 @@ else
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
-                             Icon=IconEnum.Trash
+                             Icon=BitIconName.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -35,7 +35,9 @@ else
         <div class="card-header">@localizer["ChangeLogs"]</div>
         <div class="card-body">
             <div class="mb-3">
-                <a class="btn btn-primary" href="ChangeLogs/Create">@localizer["CreateNewChangeLog"]</a>
+                 <BaseNavigateButtonComponent Href="ChangeLogs/Create"
+                                         Text="@(localizer["CreateNewChangeLog"])">
+                </BaseNavigateButtonComponent>
             </div>
             <div class="mb-3">
                 @if (ChangeLogs.Count() == 0)
@@ -64,13 +66,13 @@ else
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
                                          IsOutLine=true
-                                         Icon=IconEnum.Pencil
+                                         Icon=BitIconName.Edit
                                          OnClick=@(()=>EditSiteChange(item)) />
                                 <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Danger
                                          IsOutLine=true
-                                         Icon=IconEnum.Trash
+                                         Icon=BitIconName.Delete
                                          OnClick=@(()=>DeleteSiteChange(item)) />
                             </div>
                         </div>
