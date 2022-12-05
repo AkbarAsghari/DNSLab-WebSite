@@ -1,8 +1,8 @@
 ﻿@inject ITransactionRepository _TransactionRepository
 
-<BitButton IconName="BitIconName.Heart" ButtonSize="BitButtonSize.Large" Href="Transaction/Tip" Class="text-decoration-none text-white">
-    از رایگان ماندن دی‌ان‌اس لب حمایت کنید <strong>(❤️@supporterCount.ToString().EnglishToPersianNumbers())</strong>
-</BitButton>
+<BaseNavigateButtonComponent Href="Transaction/Tip"
+                             Text="@("از رایگان ماندن دی‌ان‌اس لب حمایت کنید " + "(❤️ " + @supporterCount.ToString().EnglishToPersianNumbers() +")")">
+</BaseNavigateButtonComponent>
 
 @code {
     int supporterCount;

@@ -1,22 +1,25 @@
-﻿<button type="@(EditContext == null ? "button" : "submit")" class="btn btn@(IsOutLine ? "-outline" : String.Empty)-@(Color.ToString().ToLower()) @(String.IsNullOrEmpty(CssClass) ? String.Empty : CssClass)" @onclick="ButtonClickedEvent">
-    @if (IsBussy)
-    {
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <text>@IsBussyCaption...</text>
-    }
-    else
-    {
+﻿@if (IsBussy)
+{
+    <BitActionButton Class="dir-ltr" IsEnabled=false>
+        <BitSpinner LabelPosition="BitSpinnerLabelPosition.Right" Size="BitSpinnerSize.Large" Label="در حال پردازش" />
+    </BitActionButton>
+}
+else
+{
+    <BitButton ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
+           OnClick="ButtonClickedEvent">
+
         <text>@Caption</text>
         @if (Icon != null)
         {
             <text>@(" ")</text>
             <span class="oi oi-@(Icon.ToString()!.ToLower().Replace("_","-")) align-middle"></span>
         }
-    }
-</button>
+    </BitButton>
+}
 
 @code {
-    [Parameter] public string CssClass{ get; set; }
+    [Parameter] public string CssClass { get; set; }
     [Parameter] public ColorEnum Color { get; set; }
     [Parameter] public IconEnum? Icon { get; set; }
     [Parameter] public string Caption { get; set; }
@@ -33,7 +36,7 @@
         if (EditContext == null)
             await OnClick.InvokeAsync();
         else
-            if (EditContext.Validate())
+        if (EditContext.Validate())
             await OnClick.InvokeAsync();
 
         IsBussy = false;

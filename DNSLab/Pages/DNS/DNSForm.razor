@@ -55,12 +55,12 @@
                             </label>
                             <CustomInputRadio class="form-check-input" name="DNSRecordType" id="CNAMERecord" SelectedValue="3" @bind-Value="HostName.RecordType" />
                         </div>
-                        <div class="form-check">
+                       @* <div class="form-check">
                             <label class="form-check-label" for="CNAMERecord">
                                 Web Redirect
                             </label>
                             <CustomInputRadio class="form-check-input" name="DNSRecordType" id="WebRedirectRecord" SelectedValue="4" @bind-Value="HostName.RecordType" />
-                        </div>
+                        </div>*@
                     </div>
                 }
                 <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)">

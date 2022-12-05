@@ -293,7 +293,9 @@ a {
 
 .bit-btn.bit-btn-fluent,
 .bit-srch-box-fluent,
-.bit-tglb.bit-tglb-fluent {
+.bit-tglb.bit-tglb-fluent,
+.bit-cmpb.bit-cmpb-fluent,
+.bit-actb.bit-actb-fluent {
     font-family: vazir-light;
 }
 

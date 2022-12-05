@@ -84,13 +84,19 @@ else
                 <hr />
                 <p>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</p>
                 <div class="row m-1 gap-2">
-                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/wget?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (wget)</a>
-                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/shell/curl?tokenId=@token.Id&key=@token.Key">دانلود فایل sh. (curl)</a>
+                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
+                                         Target="_blank"
+                                         Href="@($"https://api.dnslab.ir/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
+                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
+                                         Target="_blank"
+                                         Href="@($"https://api.dnslab.ir/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
                 </div>
                 <hr />
                 <p>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</p>
                 <div class="row m-1">
-                    <a class="col-lg-4 col-md-3 col-sm-12 btn btn-sm btn-primary" target="_blank" href="https://api.dnslab.ir/DNS/powershell/restmethod?tokenId=@token.Id&key=@token.Key">دانلود فایل ps1. (RestMethod)</a>
+                    <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
+                                         Target="_blank"
+                                         Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
                 </div>
                 <hr />
 
