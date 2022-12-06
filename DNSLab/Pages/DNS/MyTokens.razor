@@ -116,9 +116,9 @@ else
 
                 @if (tokenSummaries.Count() == 0)
                 {
-                    <div class="note warning">
-                        <p>@localizer["ThereIsNoTokens"]</p>
-                    </div>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                        <BitLabel>@localizer["ThereIsNoTokens"]</BitLabel>
+                    </BitMessageBar>
                 }
                 else
                 {
@@ -128,19 +128,19 @@ else
                         <div class="row">
                             <div class="row col-lg-9 col-sm-auto align-items-center">
                                 <div class="col-lg-3 col-sm-12 align-self-center">
-                                    <p class="m-0">@localizer["TokenName"] : @item.Name</p>
+                                    <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
                                 </div>
                                 <div class="col align-self-center">
                                     <div class="row">
-                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
                                         @if (@item.UpdateDate != null)
                                         {
-                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                            <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
                                         }
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
+                                    <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
                                 </div>
                             </div>
                             <div class="col">
@@ -167,9 +167,9 @@ else
                     }
                     <hr />
                 }
-                <div class="note info">
-                    <p>برای اطلاعات بیشتر لطفا <a target="_blank" href="Support/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
-                </div>
+                <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                    <BitLabel>برای اطلاعات بیشتر لطفا <BitLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
+                </BitMessageBar>
             </div>
         </div>
     </div>

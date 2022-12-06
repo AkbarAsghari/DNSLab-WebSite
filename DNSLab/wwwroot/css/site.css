@@ -298,7 +298,8 @@ a {
 .bit-actb.bit-actb-fluent,
 .bit-mdl-enabled-fluent,
 .bit-lbl-enabled-fluent,
-.bit-msg-bar-fluent {
+.bit-msg-bar-fluent,
+.bit-lnk-fluent {
     font-family: vazir-light;
 }
 
