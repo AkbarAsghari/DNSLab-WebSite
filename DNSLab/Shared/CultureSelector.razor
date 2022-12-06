@@ -2,43 +2,39 @@
 @using Blazored.LocalStorage
 @inject ILocalStorageService localStorage
 @inject NavigationManager Nav
+@inject IStringLocalizer<Resource> localizer
 
-<select @bind="CultureChange" class="form-select flag-icon-@(CultureChange.TwoLetterISOLanguageName) text-end">
-    @foreach (var cul in Cultures)
-    {
-        <option value="@cul.Name">@($"{cul.Parent.NativeName} ({cul.Parent.Name})")</option>
-    }
-</select>
+<BitDropDown Label="@localizer["ChangeLanuguage"]"
+             Items="GetDropdownItems()"
+             @bind-Value=SelectedCulVal>
+</BitDropDown>
 
 @code
 {
-    private List<CultureInfo> Cultures = new List<CultureInfo>()
+    private List<BitDropDownItem> GetDropdownItems()
     {
-        new CultureInfo("en-EN"),
-        new CultureInfo("fa-FA")
-    };
-
-    private CultureInfo _Culture = CultureInfo.CurrentCulture;
-
-    private CultureInfo CultureChange
-    {
-        get => _Culture == null ? new CultureInfo("fa-FA") : _Culture.Name == "fa-FA" ? new CultureInfo("fa-FA") : new CultureInfo("en-EN");
-        set => _Culture = value;
+        return new List<BitDropDownItem>()
+        {
+            new BitDropDownItem{ Text = "en-EN" ,Value = "en-EN"},
+            new BitDropDownItem{ Text = "فارسی" ,Value = "fa-FA"}
+        };
     }
+
+    private string SelectedCulVal = CultureInfo.CurrentCulture.Name;
 
     public void Save()
     {
-        if ((CultureInfo.CurrentCulture.Name == CultureChange.Name) ||
-            (CultureInfo.CurrentCulture.Name == CultureChange.Name))
+        if ((CultureInfo.CurrentCulture.Name == SelectedCulVal) ||
+        (CultureInfo.CurrentCulture.Name == SelectedCulVal))
             return;
 
         var uri = new Uri(Nav.Uri)
-              .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
-        var cultureEscaped = Uri.EscapeDataString(_Culture.Name);
+          .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+        var cultureEscaped = Uri.EscapeDataString(SelectedCulVal);
         var uriEscaped = Uri.EscapeDataString(uri);
 
         Nav.NavigateTo(
-                   $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
-                   forceLoad: true);
+               $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
+               forceLoad: true);
     }
 }

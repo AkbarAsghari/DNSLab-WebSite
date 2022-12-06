@@ -168,16 +168,6 @@ input::-moz-placeholder {
     cursor: pointer
 }
 
-.flag-icon-en {
-    background: url(../images/flags/us.svg);
-    background-repeat: no-repeat
-}
-
-.flag-icon-fa {
-    background: url(../images/flags/ir.svg);
-    background-repeat: no-repeat
-}
-
 .card-header, .modal-header, .nav-item {
     font-family: vazir-bold
 }
@@ -299,12 +289,20 @@ a {
 .bit-mdl-enabled-fluent,
 .bit-lbl-enabled-fluent,
 .bit-msg-bar-fluent,
-.bit-lnk-fluent {
+.bit-lnk-fluent,
+.bit-txt-fluent,
+.txt-field,
+.bit-drp.bit-drp-fluent,
+.bit-tgl-fluent {
     font-family: vazir-light;
 }
 
-.bit-mdl-container{
-    text-align:right;
+.bit-tgl-inline-fluent > label {
+    margin: 0 0 0 16px;
+}
+
+.bit-mdl-container {
+    text-align: right;
 }
 
 .composite-link a.selected:after {

@@ -17,12 +17,10 @@ else
             <EditForm class="col-xl-12" Model=changeEmail Context="ChangeEmailContext">
                 <Modal @ref="ChangeEmailModal">
                     <Title>
-                        <label>@localizer["ChangeEmailAddress"]</label>
+                        <BitLabel>@localizer["ChangeEmailAddress"]</BitLabel>
                     </Title>
                     <Body>
-                        <label class="mb-1">@localizer["Email"]</label>
-                        <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@changeEmail.Email" required />
-                        <ValidationMessage class="invalid-feedback" For="@(()=> changeEmail.Email)" />
+                        <BitTextField Label="@localizer["Email"]" Class="dir-ltr" Placeholder="@localizer["YourEmail"]" @bind-Value="@changeEmail.Email" IsRequired=true />
                     </Body>
                     <Footer>
                         <BaseButtonComponent Caption=@localizer["Cancel"]
@@ -43,7 +41,7 @@ else
                     <div class="col-xl-3 g-1">
                         <!-- Profile picture card-->
                         <div class="card mb-4 mb-xl-0">
-                            <div class="card-header">@localizer["ProfilePicture"]</div>
+                            <div class="card-header"><BitLabel>@localizer["ProfilePicture"]</BitLabel></div>
                             <div class="card-body text-center">
                                 <UserProfileImage Size=200></UserProfileImage>
                             </div>
@@ -57,8 +55,7 @@ else
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->
                                         <div class="col-md-6">
-                                            <label class="mb-1">@localizer["ChangeLanuguage"]</label>
-                                            <div><CultureSelector @ref=cultureSelector /></div>
+                                            <CultureSelector @ref=cultureSelector />
                                         </div>
                                     </div>
 
@@ -67,7 +64,7 @@ else
                         </div>
                         <div class="col-xl-12 g-0">
                             <div class="card mb-2">
-                                <div class="card-header">تنظیمات امنیتی</div><!--!-->
+                                <div class="card-header"><BitLabel>تنظیمات امنیتی</BitLabel></div><!--!-->
                                 <div class="card-body">
                                     <BaseNavigateButtonComponent Href="user/changepassword"
                                                              Text="تغییر رمز عبور"
@@ -81,19 +78,16 @@ else
                 <div class="row">
                     <EditForm Context="UserInfoEditContext" class="col-xl-12" Model=userInfo>
                         <div class="card mb-4">
-                            <div class="card-header">@localizer["BasicInfo"]</div>
+                            <div class="card-header"><BitLabel>@localizer["BasicInfo"]</BitLabel></div>
                             <div class="card-body">
                                 <div class="row gx-3 mb-3">
                                     <div class="col-xl-6">
-                                        <div class="input-group dir-ltr">
-                                            <InputText class="form-control" placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" disabled />
-                                            <BaseButtonComponent Caption=@localizer["Edit"]
-                                                             IsBussyCaption=@localizer["Loading"]
-                                                             Color=ColorEnum.Primary
-                                                             Icon=BitIconName.Edit
-                                                             OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
-                                        </div>
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Email)" />
+                                        <BitTextField Class="dir-ltr pb-2" Placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" IsReadonly=true />
+                                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                                         IsBussyCaption=@localizer["Loading"]
+                                                         Color=ColorEnum.Primary
+                                                         Icon=BitIconName.Edit
+                                                         OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
                                     </div>
                                 </div>
                                 @if (!@userInfo.IsEmailApproved)
@@ -121,18 +115,8 @@ else
                                 <hr>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-xl-6">
-                                        <div class="border p-3">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" id="ChkSendEmailWhenGotTicketReply" type="checkbox" @bind="@userInfo.SendEmailWhenGotTicketReply">
-                                                <label class="form-check-label" for="ChkSendEmailWhenGotTicketReply">ارسال ایمیل در صورت دریافت پاسخ به تیکت</label>
-                                            </div>
-                                        </div>
-                                        <div class="border p-3">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" id="ChkSendEmailWhenDNSIPChanged" type="checkbox" @bind="@userInfo.SendEmailWhenDNSIPChanged">
-                                                <label class="form-check-label" for="ChkSendEmailWhenDNSIPChanged">ارسال ایمیل در صورت تغییر آی‌پی هاست</label>
-                                            </div>
-                                        </div>
+                                        <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@userInfo.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
+                                        <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@userInfo.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
                                     </div>
                                     <div class="col">
                                         @if (!@userInfo.IsEmailApproved)
@@ -147,36 +131,26 @@ else
                             </div>
                         </div>
                         <div class="card mb-4">
-                            <div class="card-header">@localizer["PersonalInfo"]</div>
+                            <div class="card-header"><BitLabel>@localizer["PersonalInfo"]</BitLabel></div>
                             <div class="card-body">
                                 <!-- Form Row-->
-                                <div class="row gx-3 mb-3">
+                                <div class="row">
                                     <div class="col-md-4">
-                                        <label class="mb-1">@localizer["FirstName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName" />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.FirstName)" />
+                                        <BitTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName"></BitTextField>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="mb-1">@localizer["LastName"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName" />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.LastName)" />
+                                        <BitTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName"></BitTextField>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="mb-1">@localizer["Company"]</label>
-                                        <InputText class="form-control" placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company" />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Company)" />
+                                        <BitTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company"></BitTextField>
                                     </div>
                                 </div>
-                                <div class="row gx-3 mb-3">
+                                <div class="row pb-2">
                                     <div class="col-md-4">
-                                        <label class="mb-1">@localizer["UserName"]</label>
-                                        <InputText class="form-control dir-ltr" placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username" />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Username)" />
+                                        <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username"></BitTextField>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="mb-1" for="inputPhone">@localizer["PhoneNumber"]</label>
-                                        <InputText class="form-control dir-ltr" placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile" />
-                                        <ValidationMessage class="invalid-feedback" For="@(()=> userInfo.Mobile)" />
+                                        <BitTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></BitTextField>
                                     </div>
                                 </div>
                                 <BaseButtonComponent Caption=@localizer["SaveChanges"]
