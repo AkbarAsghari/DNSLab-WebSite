@@ -14,15 +14,16 @@ else
 {
     <Modal @ref="DeleteModal">
         <Title>
-            <label>@localizer["AreYouSureDel"]</label>
+            <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["TokenName"] : @deleteRcord.Name </label>
+            <BitLabel>@localizer["TokenName"] : @deleteRcord.Name </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=DeleteModal.Close />
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
@@ -34,7 +35,7 @@ else
 
     <Modal @ref="TokenDetailsModal" ModalSize="ModalSizeEnum.XLarge">
         <Title>
-            <label>@localizer["Details"]</label>
+            <BitLabel>@localizer["Details"]</BitLabel>
         </Title>
         <Body>
             @if (token == null)
@@ -43,31 +44,29 @@ else
             }
             else
             {
-                <p>@localizer["TokenName"] : @token.Name </p>
+                <BitLabel>@localizer["TokenName"] : @token.Name </BitLabel>
                 <hr />
 
-                <div class="row">
+                <div class="m-1">
                     @if (@isRevoking)
                     {
-                        <p class="m-0 col-xl-5 col-lg-6 col-md-7">توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</p>
-                        <div class="col-lg-4 btn-group dir-ltr">
-                            <BaseButtonComponent Caption=@localizer["Continue"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     CssClass="btn-sm"
-                                     Color=ColorEnum.Danger
-                                     Icon=BitIconName.Refresh
-                                     OnClick=ContinueRevokeKey />
-                            <BaseButtonComponent Caption=@localizer["Cancel"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     CssClass="btn-sm"
-                                     Color=ColorEnum.Success
-                                     Icon=BitIconName.Cancel
-                                     OnClick=ChangeRevokeStatus />
-                        </div>
+                        <BitLabel>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</BitLabel>
+                        <BaseButtonComponent Caption=@localizer["Continue"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 CssClass="btn-sm"
+                                 Color=ColorEnum.Danger
+                                 Icon=BitIconName.Refresh
+                                 OnClick=ContinueRevokeKey />
+                        <BaseButtonComponent Caption=@localizer["Cancel"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 CssClass="btn-sm"
+                                 Color=ColorEnum.Success
+                                 Icon=BitIconName.Cancel
+                                 OnClick=ChangeRevokeStatus />
                     }
                     else
                     {
-                        <p class="col-lg-4 col-xl-3 align-self-center m-0">@localizer["TokenKey"] : <code>@token.Key</code></p>
+                        <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
                         <BaseButtonComponent Caption=@localizer["RevokeKey"]
                                  IsBussyCaption=@localizer["Progressing"]
                                  IsOutLine=true
@@ -80,40 +79,30 @@ else
                 </div>
                 <hr />
 
-                <p>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</p>
+                <BitLabel>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</BitLabel>
                 <hr />
-                <p>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</p>
-                <div class="row m-1 gap-2">
-                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
-                                         Target="_blank"
-                                         Href="@($"https://api.dnslab.ir/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
-                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
-                                         Target="_blank"
-                                         Href="@($"https://api.dnslab.ir/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
-                </div>
+                <BitLabel>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</BitLabel>
+                <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
+                                     Target="_blank"
+                                     Href="@($"https://api.dnslab.ir/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
+                <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
+                                     Target="_blank"
+                                     Href="@($"https://api.dnslab.ir/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
-                <p>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</p>
-                <div class="row m-1">
-                    <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
-                                         Target="_blank"
-                                         Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
-                </div>
+                <BitLabel>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</BitLabel>
+                <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
+                                     Target="_blank"
+                                     Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
 
-                <p>لینک بروزرسانی آی پی های توکن</p>
-                <div>
-                    <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
-                    <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
-                </div>
-                <p>این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد</p>
+                <BitLabel>لینک بروزرسانی آی پی های توکن</BitLabel>
+                <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
+                <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
+                <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                    این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
+                </BitMessageBar>
             }
         </Body>
-        <Footer>
-            <BaseButtonComponent Caption=@localizer["Close"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
-                             OnClick=TokenDetailsModal.Close />
-        </Footer>
     </Modal>
     <div class="card mb-4">
         <div class="card-header">@localizer["Tokens"]</div>
@@ -137,11 +126,11 @@ else
                     {
                         <hr />
                         <div class="row">
-                            <div class="row col-xl-8 col-7 align-self-center">
+                            <div class="row col-lg-9 col-sm-auto align-items-center">
                                 <div class="col-lg-3 col-sm-12 align-self-center">
                                     <p class="m-0">@localizer["TokenName"] : @item.Name</p>
                                 </div>
-                                <div class="col-lg-4 col-sm-12 align-self-center">
+                                <div class="col align-self-center">
                                     <div class="row">
                                         <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
                                         @if (@item.UpdateDate != null)
@@ -150,16 +139,16 @@ else
                                         }
                                     </div>
                                 </div>
-                                <div class="col-lg-5 col-sm-12 align-self-center">
+                                <div class="col">
                                     <p class="m-0">@localizer["HostNamesCount"] <a class="btn btn-sm btn-success disabled">@item.HostNameCount</a></p>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <div class="col">
                                 <BaseButtonComponent Caption=@localizer["Details"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Primary
                                          IsOutLine=true
-                                         Icon=BitIconName.More
+                                         Icon=BitIconName.DataflowsLink
                                          OnClick=@(()=>OpenToken(item)) />
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]

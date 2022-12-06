@@ -2,13 +2,19 @@
 
 <BitButton ButtonSize="BitButtonSize.Medium" Target="@Target" OnClick="GoTo">
     @Text
+
+    @if (Icon is not null)
+    {
+        <text>@(" ")</text>
+        <BitIcon IconName="@Icon.Value" />
+    }
 </BitButton>
 
 @code {
     [Parameter] public string Href { get; set; }
     [Parameter] public string Target { get; set; } = "_self";
     [Parameter] public string Text { get; set; }
-
+    [Parameter] public BitIconName? Icon { get; set; }
     void GoTo()
     {
         _NavigationManager.NavigateTo(Href);

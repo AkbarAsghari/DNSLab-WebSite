@@ -70,7 +70,8 @@ else
                                 <div class="card-header">تنظیمات امنیتی</div><!--!-->
                                 <div class="card-body">
                                     <BaseNavigateButtonComponent Href="user/changepassword"
-                                                             Text="تغییر رمز عبور">
+                                                             Text="تغییر رمز عبور"
+                                    Icon="BitIconName.Lock">
                                     </BaseNavigateButtonComponent>
                                 </div>
                             </div>
@@ -178,6 +179,7 @@ else
                                 <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                                  IsBussyCaption=@localizer["Progressing"]
                                                  Color=ColorEnum.Primary
+                                                 Icon=BitIconName.Save
                                                  EditContext=UserInfoEditContext
                                                  OnClick="SaveChanges"></BaseButtonComponent>
                             </div>

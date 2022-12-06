@@ -10,7 +10,7 @@ else
            OnClick="ButtonClickedEvent">
 
         <text>@Caption</text>
-        @if (Icon != null)
+        @if (Icon is not null)
         {
             <text>@(" ")</text>
             <BitIcon IconName="@Icon.Value"/>

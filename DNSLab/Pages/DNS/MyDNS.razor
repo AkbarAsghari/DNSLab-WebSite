@@ -58,13 +58,13 @@ else
                         <div class="row">
                             <div class="col-lg-9 col-8">
                                 <div class="row">
-                                    <div class="col-md-4 col-xl-4">
+                                    <div class="col">
                                         <a class="text-decoration-none" href="@($"http://{@item.Name}.{@item.Domain}")" target="_blank">
                                             <p><code>@item.Name</code>.@item.Domain</p>
                                         </a>
                                     </div>
-                                    <div class="col-md-5 col-xl-5">
-                                        <p class="d-inline">IP / Target </p>
+                                    <div class="col">
+                                        <p class="d-inline">هدف :</p>
                                         <a class="text-decoration-none">
                                             @switch ((DNSRecordTypeEnum)item.RecordType)
                                             {
@@ -83,7 +83,7 @@ else
                                             }
                                         </a>
                                     </div>
-                                    <p class="col-md-3">
+                                    <p class="col">
                                         @localizer["Type"]
                                         <a class="btn btn-sm btn-dark disabled">
                                             @((DNSRecordTypeEnum)item.RecordType +
@@ -94,7 +94,7 @@ else
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-4 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <div class="col">
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning

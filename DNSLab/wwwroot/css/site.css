@@ -295,8 +295,15 @@ a {
 .bit-srch-box-fluent,
 .bit-tglb.bit-tglb-fluent,
 .bit-cmpb.bit-cmpb-fluent,
-.bit-actb.bit-actb-fluent {
+.bit-actb.bit-actb-fluent,
+.bit-mdl-enabled-fluent,
+.bit-lbl-enabled-fluent,
+.bit-msg-bar-fluent {
     font-family: vazir-light;
+}
+
+.bit-mdl-container{
+    text-align:right;
 }
 
 .composite-link a.selected:after {

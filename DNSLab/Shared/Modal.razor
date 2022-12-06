@@ -1,27 +1,21 @@
-﻿@inject IJSRuntime JS
-
-<!-- Modal -->
-<div class="modal fade" id="@Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-@_ModalSize" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                @Title
-            </div>
-            <div class="modal-body">
-                @Body
-            </div>
-            <div class="modal-footer">
-                @Footer
-            </div>
-        </div>
+﻿<!-- Modal -->
+<BitModal @bind-IsOpen=IsOpen>
+    <div class="modal-header">
+        <span>@Title</span>
+        <BitIconButton OnClick=@(()=>IsOpen=false) IconName="BitIconName.ChromeClose" Title="Close" />
     </div>
-</div>
-
-
+    <div class="modal-body">
+        @Body
+        @if (@Footer is not null)
+        {
+            <hr />
+            @Footer
+        }
+    </div>
+</BitModal>
 
 @code {
-
-    private string Id { get; set; }
+    bool IsOpen = false;
 
     [Parameter]
     public RenderFragment Title { get; set; }
@@ -54,19 +48,14 @@
         }
     }
 
-    protected override void OnInitialized()
-    {
-        if (string.IsNullOrEmpty(Id))
-            Id = "modal_" + Guid.NewGuid().ToString();
-    }
 
     public async Task Open()
     {
-        await JS.InvokeVoidAsync("BootstrapModal.ShowModal", Id);
+        IsOpen = true;
     }
 
     public async Task Close()
     {
-        await JS.InvokeVoidAsync("BootstrapModal.HideModal");
+        IsOpen = false;
     }
 }

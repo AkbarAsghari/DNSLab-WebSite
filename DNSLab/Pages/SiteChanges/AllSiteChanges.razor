@@ -35,7 +35,7 @@ else
         <div class="card-header">@localizer["ChangeLogs"]</div>
         <div class="card-body">
             <div class="mb-3">
-                 <BaseNavigateButtonComponent Href="ChangeLogs/Create"
+                <BaseNavigateButtonComponent Href="ChangeLogs/Create"
                                          Text="@(localizer["CreateNewChangeLog"])">
                 </BaseNavigateButtonComponent>
             </div>
@@ -51,7 +51,7 @@ else
                     @foreach (var item in ChangeLogs.OrderByDescending(x => x.CreateDate))
                     {
                         <hr />
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-md-3">
                                 <p>@item.Title</p>
                             </div>
@@ -61,7 +61,7 @@ else
                                 </a>
                             </div>
                             <p class="col-md-3 text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
-                            <div class="col-md-3 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <div class="col">
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=ColorEnum.Warning
