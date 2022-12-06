@@ -71,7 +71,7 @@ else
                                 <div class="card-body">
                                     <BaseNavigateButtonComponent Href="user/changepassword"
                                                              Text="تغییر رمز عبور"
-                                    Icon="BitIconName.Lock">
+                                                             Icon="BitIconName.Lock">
                                     </BaseNavigateButtonComponent>
                                 </div>
                             </div>
@@ -100,19 +100,22 @@ else
                                 {
                                     @if (ResentButtonClicked)
                                     {
-                                        <div class="alert alert-success" role="alert">
-                                            <text>@localizer["ActivationLinkSent"]</text>
-                                        </div>
+                                        <BitMessageBar MessageBarType="BitMessageBarType.Success">
+                                            <BitLabel>@localizer["ActivationLinkSent"]</BitLabel>
+                                        </BitMessageBar>
                                     }
                                     else
                                     {
-                                        <div class="alert alert-danger" role="alert">
-                                            @localizer["YourEmailNotApprovedYet"]
-                                            <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
-                                                     IsBussyCaption=@localizer["Progressing"]
-                                                     Color=ColorEnum.Link
-                                                     OnClick="ResendActivationLink"></BaseButtonComponent>
-                                        </div>
+                                        <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
+                                            <BitLabel>
+                                                @localizer["YourEmailNotApprovedYet"]
+                                                <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
+                                                         IsBussyCaption=@localizer["Progressing"]
+                                                         Icon=BitIconName.MailCheck
+                                                         Color=ColorEnum.Link
+                                                         OnClick="ResendActivationLink"></BaseButtonComponent>
+                                            </BitLabel>
+                                        </BitMessageBar>
                                     }
                                 }
                                 <hr>
@@ -134,9 +137,9 @@ else
                                     <div class="col">
                                         @if (!@userInfo.IsEmailApproved)
                                         {
-                                            <div class="note warning">
-                                                <p>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</p>
-                                            </div>
+                                            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                                                <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
+                                            </BitMessageBar>
                                         }
                                     </div>
 

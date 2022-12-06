@@ -42,9 +42,9 @@ else
             <div class="mb-3">
                 @if (ChangeLogs.Count() == 0)
                 {
-                    <div class="note warning">
-                        <p>@localizer["ThereIsNoChangeLogs"]</p>
-                    </div>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                        <BitLabel>@localizer["ThereIsNoChangeLogs"]</BitLabel>
+                    </BitMessageBar>
                 }
                 else
                 {

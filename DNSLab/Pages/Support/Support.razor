@@ -3,9 +3,9 @@
 
 <div class="container p-5 bg-body rounded shadow-sm">
     <h4 class="border-bottom pb-2 mb-0">راهنمای سایت</h4>
-    <div class="note info">
-        <p>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</p>
-    </div>
+    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+        <BitLabel>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</BitLabel>
+    </BitMessageBar>
     @if (pageSummaries == null)
     {
         <Loading />

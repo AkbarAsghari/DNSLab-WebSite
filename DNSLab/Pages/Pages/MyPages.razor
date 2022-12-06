@@ -64,9 +64,9 @@ else
             <div class="mb-3">
                 @if (pageSummaries.Count() == 0)
                 {
-                    <div class="note warning">
-                        <p>@localizer["ThereIsNoPages"]</p>
-                    </div>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                        <BitLabel>@localizer["ThereIsNoPages"]</BitLabel>
+                    </BitMessageBar>
                 }
                 else
                 {
