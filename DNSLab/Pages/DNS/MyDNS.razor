@@ -15,10 +15,10 @@ else
 {
     <Modal @ref="DeleteModal">
         <Title>
-            <label>@localizer["AreYouSureDel"]</label>
+            <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["HostName"] : @deleteRcord.Name </label>
+            <BitLabel>@localizer["HostName"] : @deleteRcord.Name </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
@@ -33,7 +33,7 @@ else
         </Footer>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["HostNames"]</div>
+        <div class="card-header"><BitLabel>@localizer["HostNames"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="dns/create"
@@ -44,10 +44,10 @@ else
                 @if (hostNames.Count == 0)
                 {
                     <div class="note warning">
-                        <p>@localizer["ThereIsNoHost"]</p>
+                        <BitLabel>@localizer["ThereIsNoHost"]</BitLabel>
                     </div>
                     <div class="note info">
-                        <p>برای اطلاعات بیشتر <a target="_blank" href="Support/Create-New-DNS">کلیک</a> کنید</p>
+                        <BitLabel>برای اطلاعات بیشتر <BitLink Target="_blank" Href="Support/Create-New-DNS">کلیک</BitLink> کنید</BitLabel>
                     </div>
                 }
                 else
@@ -59,13 +59,13 @@ else
                             <div class="col-lg-9 col-8">
                                 <div class="row">
                                     <div class="col">
-                                        <a class="text-decoration-none" href="@($"http://{@item.Name}.{@item.Domain}")" target="_blank">
-                                            <p><code>@item.Name</code>.@item.Domain</p>
-                                        </a>
+                                        <BitLink Class="text-decoration-none" Href="@($"http://{@item.Name}.{@item.Domain}")" Target="_blank">
+                                            <BitLabel><code>@item.Name</code>.@item.Domain</BitLabel>
+                                        </BitLink>
                                     </div>
                                     <div class="col">
-                                        <p class="d-inline">هدف :</p>
-                                        <a class="text-decoration-none">
+                                        <BitLabel Class="d-inline">هدف :</BitLabel>
+                                        <BitLink Class="text-decoration-none">
                                             @switch ((DNSRecordTypeEnum)item.RecordType)
                                             {
                                                 case DNSRecordTypeEnum.A:
@@ -81,17 +81,15 @@ else
                                                     @item.URLOrIp.MakeCut(20)
                                                     break;
                                             }
-                                        </a>
+                                        </BitLink>
                                     </div>
-                                    <p class="col">
-                                        @localizer["Type"]
-                                        <a class="btn btn-sm btn-dark disabled">
-                                            @((DNSRecordTypeEnum)item.RecordType +
-                                ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                                " ("+item.RedirectHttpResponseStatusCode+")" :
-                                String.Empty))
-                                        </a>
-                                    </p>
+                                    <BitLabel Class="col">
+                                        @localizer["Type"] : 
+                                        @((DNSRecordTypeEnum)item.RecordType +
+                            ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                            " ("+item.RedirectHttpResponseStatusCode+")" :
+                            String.Empty))
+                                    </BitLabel>
                                 </div>
                             </div>
                             <div class="col">
@@ -113,12 +111,12 @@ else
                     <hr />
                     <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
 
-                    <div class="note success">
-                        <p>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <a target="_blank" href="Download/Win">دانلود</a> کنید</p>
-                    </div>
-                    <div class="note info">
-                        <p>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <a target="_blank" href="Support/Create-New-Token-For-DNS">این مطلب</a> را مطالعه فرمایید</p>
-                    </div>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Success">
+                        <BitLabel>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <BitLink Target="_blank" Href="Download/Win">دانلود</BitLink> کنید</BitLabel>
+                    </BitMessageBar>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        <BitLabel>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <BitLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
+                    </BitMessageBar>
                 }
             </div>
         </div>
