@@ -53,14 +53,10 @@ else
                         <BitLabel>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</BitLabel>
                         <BaseButtonComponent Caption=@localizer["Continue"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 CssClass="btn-sm"
-                                 Color=ColorEnum.Danger
                                  Icon=BitIconName.Refresh
                                  OnClick=ContinueRevokeKey />
                         <BaseButtonComponent Caption=@localizer["Cancel"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 CssClass="btn-sm"
-                                 Color=ColorEnum.Success
                                  Icon=BitIconName.Cancel
                                  OnClick=ChangeRevokeStatus />
                     }
@@ -106,7 +102,7 @@ else
         </Body>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["Tokens"]</div>
+        <div class="card-header"><BitLabel>@localizer["Tokens"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="dns/createtoken"
@@ -128,17 +124,15 @@ else
                         <hr />
                         <div class="row">
                             <div class="row col-lg-9 col-sm-auto align-items-center">
-                                <div class="col-lg-3 col-sm-12 align-self-center">
+                                <div class="col-lg-3 col-sm-12">
                                     <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
                                 </div>
-                                <div class="col align-self-center">
-                                    <div class="row">
+                                <div class="col">
                                         <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
                                         @if (@item.UpdateDate != null)
                                         {
                                             <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
                                         }
-                                    </div>
                                 </div>
                                 <div class="col">
                                     <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
