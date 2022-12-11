@@ -15,7 +15,7 @@ else
 {
     <Modal @ref="pageModal">
         <Title>
-            <label>
+            <BitLabel>
                 @if (modalForDeletePage)
                 {
                     @localizer["AreYouSureDel"]
@@ -24,15 +24,15 @@ else
                 {
                     @localizer["AreYouWantToPublish"]
                 }
-            </label>
+            </BitLabel>
         </Title>
         <Body>
-            <label>@localizer["Title"] : @modalRecord.Title </label>
+            <BitLabel>@localizer["Title"] : @modalRecord.Title </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=pageModal.Close></BaseButtonComponent>
             @if (modalForDeletePage)
             {
@@ -54,7 +54,7 @@ else
         </Footer>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["AllPages"]</div>
+        <div class="card-header"><BitLabel>@localizer["AllPages"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="Page/Create"
@@ -75,26 +75,24 @@ else
                         <hr />
                         <div class="row">
                             <div class="col-md-10">
-                                <p class=" text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
+                                <BitLabel Class=" text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <a class="text-decoration-none" href="@($"https://dnslab.ir/{item.PageType}/{item.URL}")" target="_blank">
-                                                    <p>dnslab.ir/<code><strong>@item.PageType</strong></code><code>@($"/{@item.URL}")</code></p>
-                                                </a>
+                                                <BitLink Class="text-decoration-none" Href="@($"https://dnslab.ir/{item.PageType}/{item.URL}")" Target="_blank">
+                                                    <BitLabel>dnslab.ir/<code><strong>@item.PageType</strong></code><code>@($"/{@item.URL}")</code></BitLabel>
+                                                </BitLink>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>@item.Title</p>
+                                                <BitLabel>@item.Title</BitLabel>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <p class="col-md-12">@item.Description</p>
-                                        </div>
+                                        <BitLabel class="col-md-12">@item.Description</BitLabel>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col">
                                 <div class="row p-1">
                                     <BaseButtonComponent Caption=@localizer["Edit"]
                                              IsBussyCaption=@localizer["Progressing"]
@@ -158,7 +156,7 @@ else
             if (await _PageRepository.DeletePage(modalRecord.Id))
             {
                 await pageModal.Close();
-                pageSummaries = pageSummaries.Where(x=>x.Id != modalRecord.Id).ToList();
+                pageSummaries = pageSummaries.Where(x => x.Id != modalRecord.Id).ToList();
             }
         }
         modalRecord = new PageSummaryDTO();
@@ -172,7 +170,7 @@ else
             {
                 await pageModal.Close();
                 pageSummaries.First(x => x.Id == modalRecord.Id).IsPublieshed = true;
-                toastService.ShowToast(localizer["PublishedSuccess"],ToastLevel.Success);
+                toastService.ShowToast(localizer["PublishedSuccess"], ToastLevel.Success);
             }
         }
         modalRecord = new PageSummaryDTO();

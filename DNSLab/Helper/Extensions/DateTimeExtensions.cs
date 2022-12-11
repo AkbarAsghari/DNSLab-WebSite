@@ -20,7 +20,7 @@ namespace DNSLab.Helper.Extensions
                 switch (CultureInfo.CurrentCulture.Name)
                 {
                     case "fa-FA":
-                        return new PersianDateTime(localDateTime).ToShortDateString();
+                        return new PersianDateTime(localDateTime).ToShortDateString().EnglishToPersianNumbers();
                     case "en-EN":
                     default:
                         return localDateTime.ToShortDateString();
@@ -31,7 +31,7 @@ namespace DNSLab.Helper.Extensions
                 switch (CultureInfo.CurrentCulture.Name)
                 {
                     case "fa-FA":
-                        return new PersianDateTime(localDateTime).ToString();
+                        return new PersianDateTime(localDateTime).ToString().EnglishToPersianNumbers();
                     case "en-EN":
                     default:
                         return localDateTime.ToString();

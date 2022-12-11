@@ -5,22 +5,18 @@
 <EditForm Model="TokenAndDNS" Context=TokenContext>
     <DataAnnotationsValidator />
     <div class="card mb-4">
-        <div class="card-header">@Title</div>
+        <div class="card-header"><BitLabel>@Title</BitLabel></div>
         <div class="card-body">
-
-            <!-- Form Row-->
             <div class="row gx-3 mb-3">
-                <!-- Form Group (first name)-->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <label class="mb-1">@localizer["TokenName"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" required />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> TokenAndDNS.Name)" />
+                    <BitTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" IsRequired />
                 </div>
-                <!-- Form Group (last name)-->
                 <hr class="my-2" />
                 <div class="col-12">
-                    <p>@localizer["SelectDNSTitle"]</p>
-                    <p class="alert alert-info">@localizer["SelectDNSDescription"]</p>
+                    <BitLabel>@localizer["SelectDNSTitle"]</BitLabel>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        <BitLabel>@localizer["SelectDNSDescription"]</BitLabel>
+                    </BitMessageBar>
                     <div class="row g-2">
                         @if (HostSummariesAndChecked == null)
                         {
@@ -28,7 +24,9 @@
                         }
                         else if (HostSummariesAndChecked.Count == 0)
                         {
-                            <p>@localizer["YouHaveNoActiveDNS"] <a href="dns/create">@localizer["Click"]</a></p>
+                            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                                <BitLabel>@localizer["YouHaveNoActiveDNS"] <BitLink Href="dns/create">@localizer["Click"]</BitLink></BitLabel>
+                            </BitMessageBar>
                         }
                         else
                         {
@@ -38,7 +36,7 @@
                                     <div class="border p-3">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
-                                            <label class="form-check-label" for="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</label>
+                                            <BitLabel For="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</BitLabel>
                                         </div>
                                     </div>
                                 </div>
