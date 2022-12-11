@@ -14,19 +14,18 @@ else
 {
     <Modal @ref="DeleteModal">
         <Title>
-            <label>@localizer["AreYouSureDel"]</label>
+            <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["CommentText"] : @deleteRcord.Text </label>
+            <BitLabel>@localizer["CommentText"] : @deleteRcord.Text </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=DeleteModal.Close></BaseButtonComponent>
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Danger
                              Icon=BitIconName.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
@@ -35,7 +34,7 @@ else
 
     <Modal @ref="RepliesModal" ModalSize="ModalSizeEnum.Large">
         <Title>
-            <label>پاسخ ها</label>
+            <BitLabel>پاسخ ها</BitLabel>
         </Title>
         <Body>
             @if (commentReplies != null)
@@ -49,7 +48,7 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=RepliesModal.Close></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -57,7 +56,7 @@ else
 
 
     <div class="card mb-4">
-        <div class="card-header">@localizer["MyComments"]</div>
+        <div class="card-header"><BitLabel>@localizer["MyComments"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="Comment/Create"
@@ -68,7 +67,7 @@ else
 
                 @if (myComments.Count() == 0)
                 {
-                    <text>@localizer["ThereIsNoComment"]</text>
+                    <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
                 }
                 else
                 {
@@ -76,46 +75,36 @@ else
                     {
                         <hr />
                         <div class="row">
-                            <div class="row col-lg-8 col-7">
-                                <div class="col-lg-5 col-sm-12 align-self-center">
-                                    <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
+                            <div class="row col-lg-9 col-7 align-items-center">
+                                <div class="col-lg-4 col-sm-12">
+                                    <BitLabel Class="m-0">@localizer["CommentText"] : @item.Text.MakeCut(23)</BitLabel>
                                 </div>
-                                <div class="col-lg-5 col-sm-12 align-self-center">
-                                    <div class="row">
-                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
-                                        @if (@item.UpdateDate != null)
-                                        {
-                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
-                                        }
-                                    </div>
+                                <div class="col-lg-5 col-sm-12">
+                                    <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
+                                    @if (@item.UpdateDate != null)
+                                    {
+                                        <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
+                                    }
                                 </div>
-                                <div class="col-lg-2 col-sm-12 align-self-center">
-                                    <p class="m-0">
+                                <div class="col-lg-3 col-sm-12">
+                                    <BitLabel>
+                                        وضعیت :
                                         @switch (@item.IsApproved)
                                         {
                                             case null:
-                                                <a class="btn btn-sm btn-secondary disabled">@localizer["NotChecked"]</a>
+                                                @localizer["NotChecked"]
                                                 break;
                                             case true:
-                                                <a class="btn btn-sm btn-success disabled">@localizer["Approved"]</a>
+                                                @localizer["Approved"]
                                                 break;
                                             case false:
-                                                <a class="btn btn-sm btn-danger disabled">@localizer["Disapproval"]</a>
+                                                @localizer["Disapproval"]
                                                 break;
                                         }
-                                    </p>
+                                    </BitLabel>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
-                                @if (item.RepliesCount > 0)
-                                {
-                                    <BaseButtonComponent Caption=@localizer["Replies"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         IsOutLine=true
-                                         Color=ColorEnum.Success
-                                         Icon=BitIconName.OfficeChat
-                                         OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
-                                }
+                            <div class="col">
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          IsOutLine=true
@@ -128,6 +117,15 @@ else
                                          Color=ColorEnum.Danger
                                          Icon=BitIconName.Delete
                                          OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
+                                @if (item.RepliesCount > 0)
+                                {
+                                    <BaseButtonComponent Caption=@localizer["Replies"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         IsOutLine=true
+                                         Color=ColorEnum.Success
+                                         Icon=BitIconName.OfficeChat
+                                         OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
+                                }
                             </div>
                         </div>
 

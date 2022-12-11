@@ -1,12 +1,12 @@
 ﻿@if (IsBussy)
 {
-    <BitActionButton Class="dir-ltr" IsEnabled=false>
+    <BitActionButton Class="dir-ltr mt-1" IsEnabled=false>
         <BitSpinner LabelPosition="BitSpinnerLabelPosition.Right" Size="BitSpinnerSize.Large" Label="در حال پردازش" />
     </BitActionButton>
 }
 else
 {
-    <BitButton ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
+    <BitButton Class="mt-1" ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
            OnClick="ButtonClickedEvent">
 
         <text>@Caption</text>

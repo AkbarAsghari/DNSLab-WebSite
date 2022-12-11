@@ -5,15 +5,14 @@
     <div class="row">
         <div class="col-xl-1 col-md-2 col-3 comment-profile">
             <UserProfileImage Size=70 UserId="@FullComment.UserId.ToString()" />
-            <p class="text-nowrap"><small class="text-muted">@FullComment.CreateDate.CalcRelativeTime()</small></p>
+            <BitLabel Class="text-nowrap"><small class="text-muted">@FullComment.CreateDate.CalcRelativeTime()</small></BitLabel>
         </div>
         <div class="col-xl-11 col-md-10 col-9">
             <div class="row g-0">
                 <div class="card-body">
-                    <h6 class="card-title">@FullComment.FullName</h6>
-                    <p class="comment-text card-text m-0">@FullComment.Text</p>
+                    <h6>@FullComment.FullName</h6>
+                    <BitLabel Class="comment-text card-text m-0">@FullComment.Text</BitLabel>
                 </div>
-
             </div>
         </div>
         @if (@FullComment.RepliesCount > 0)

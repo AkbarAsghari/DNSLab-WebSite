@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h6 class="card-title">@localizer["UserComments"]</h6>
+        <div class="card-title"><BitLabel>@localizer["UserComments"]</BitLabel></div>
         <div class="col-12">
             @if (allComments == null)
             {
@@ -11,7 +11,7 @@
             }
             else if (allComments.Count() == 0)
             {
-                <text>@localizer["ThereIsNoComment"]</text>
+                <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
             }
             else
             {

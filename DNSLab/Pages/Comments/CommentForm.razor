@@ -2,30 +2,26 @@
 
 <EditForm Model="comment" Context=CommentContext>
     <div class="card mb-4">
-        <div class="card-header">@Title</div>
+        <div class="card-header"><BitLabel>@Title</BitLabel></div>
         <div class="card-body">
-            <div class="row gx-3 mb-3">
-                <div class="col-12">
-                    <label class="mb-1">@localizer["PleaseWriteYourComment"] :)</label>
-                    <textarea class="form-control" placeholder="@localizer["CommentText"]..." rows="7"
-                              @bind="comment.Text"
-                              @bind:event="oninput"
-                              maxlength="@MAX_TEXT_COUNT" />
-                    @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
-                    {
-                        <label>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - comment.Text.Count())</label>
-                    }
-                </div>
-            </div>
-            <div class="mb-3 gap-2">
-                <BaseButtonComponent Caption=@localizer["Send"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=ColorEnum.Primary
-                                     Icon=BitIconName.Save
-                                     EditContext=CommentContext
-                                     OnClick=OnValidSubmit></BaseButtonComponent>
-                <a class="btn btn-warning" href="Comment/MyComments">انصراف</a>
-            </div>
+            <BitTextField Label="@(localizer["PleaseWriteYourComment"] +":)")"
+                          IsMultiline=true
+                          Placeholder="@(localizer["CommentText"] + "...")" Rows="7"
+                          @bind-Value=comment.Text
+                          MaxLength="MAX_TEXT_COUNT" />
+            @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
+            {
+                <BitLabel>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - comment.Text.Count())</BitLabel>
+            }
+            <BaseButtonComponent Caption=@localizer["Send"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 Icon=BitIconName.Send
+                                 EditContext=CommentContext
+                                 OnClick=OnValidSubmit></BaseButtonComponent>
+            <BaseNavigateButtonComponent Href="Comment/MyComments"
+                                         Icon="BitIconName.Cancel"
+                                         Text="انصراف"></BaseNavigateButtonComponent>
         </div>
     </div>
 </EditForm>
