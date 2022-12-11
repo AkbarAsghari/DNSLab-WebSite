@@ -24,6 +24,7 @@ else
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=DeleteModal.Close></BaseButtonComponent>
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
@@ -43,12 +44,12 @@ else
             <div class="mb-3">
                 @if (hostNames.Count == 0)
                 {
-                    <div class="note warning">
+                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
                         <BitLabel>@localizer["ThereIsNoHost"]</BitLabel>
-                    </div>
-                    <div class="note info">
+                    </BitMessageBar>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
                         <BitLabel>برای اطلاعات بیشتر <BitLink Target="_blank" Href="Support/Create-New-DNS">کلیک</BitLink> کنید</BitLabel>
-                    </div>
+                    </BitMessageBar>
                 }
                 else
                 {
@@ -64,27 +65,29 @@ else
                                         </BitLink>
                                     </div>
                                     <div class="col">
-                                        <BitLabel Class="d-inline">هدف :</BitLabel>
-                                        <BitLink Class="text-decoration-none">
-                                            @switch ((DNSRecordTypeEnum)item.RecordType)
-                                            {
-                                                case DNSRecordTypeEnum.A:
-                                                    @item.IPv4Address
-                                                    break;
-                                                case DNSRecordTypeEnum.AAAA:
-                                                    @item.IPv6Address
-                                                    break;
-                                                case DNSRecordTypeEnum.CNAME:
-                                                    @item.HostNameAlias
-                                                    break;
-                                                case DNSRecordTypeEnum.WebRedirect:
-                                                    @item.URLOrIp.MakeCut(20)
-                                                    break;
-                                            }
-                                        </BitLink>
+                                        <BitLabel Class="d-inline">
+                                            هدف :
+                                            <BitLink Class="text-decoration-none">
+                                                @switch ((DNSRecordTypeEnum)item.RecordType)
+                                                {
+                                                    case DNSRecordTypeEnum.A:
+                                                        @item.IPv4Address
+                                                        break;
+                                                    case DNSRecordTypeEnum.AAAA:
+                                                        @item.IPv6Address
+                                                        break;
+                                                    case DNSRecordTypeEnum.CNAME:
+                                                        @item.HostNameAlias
+                                                        break;
+                                                    case DNSRecordTypeEnum.WebRedirect:
+                                                        @item.URLOrIp.MakeCut(20)
+                                                        break;
+                                                }
+                                            </BitLink>
+                                        </BitLabel>
                                     </div>
                                     <BitLabel Class="col">
-                                        @localizer["Type"] : 
+                                        @localizer["Type"] :
                                         @((DNSRecordTypeEnum)item.RecordType +
                             ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
                             " ("+item.RedirectHttpResponseStatusCode+")" :
