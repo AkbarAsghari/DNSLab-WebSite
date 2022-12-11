@@ -14,7 +14,7 @@ else
             <div class="col-12">
                 @if (dNSChangeHistories.Count == 0)
                 {
-                    <p>هیج تغییراتی یافت نشد</p>
+                    <BitLabel>هیج تغییراتی یافت نشد</BitLabel>
                 }
                 else
                 {
@@ -26,20 +26,20 @@ else
                                     @if (context.ARecordHistories != null)
                                 @foreach (var x in context.ARecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                    <p class="d-inline"><code>@x.IPv4Address</code></p>
-                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <BitLabel Class="d-inline"><code>@x.IPv4Address</code></BitLabel>
+                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
                                         }
                             @if (context.AAAARecordHistories != null)
                                 @foreach (var x in context.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                    <p class="d-inline"><code>@x.IPv6Address</code></p>
-                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <BitLabel Class="d-inline"><code>@x.IPv6Address</code></BitLabel>
+                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
                                         }
                             @if (context.CNameRecordHistories != null)
                                 @foreach (var x in context.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
                                         {
-                                    <p class="d-inline"><code>@x.HostNameAlias</code></p>
-                                    <p class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></p>
+                                    <BitLabel Class="d-inline"><code>@x.HostNameAlias</code></BitLabel>
+                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
                                         }
                         </Body>
                     </TimeLineItem>
