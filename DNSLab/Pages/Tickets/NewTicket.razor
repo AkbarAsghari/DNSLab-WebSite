@@ -9,22 +9,21 @@
 
 <EditForm Model="ticket" Context=newTicketDTO>
     <div class="card mb-4">
-        <div class="card-header">ارسال تیکت</div>
+        <div class="card-header"><BitLabel>ارسال تیکت</BitLabel></div>
         <div class="card-body">
             <div class="row gx-3 mb-3">
                 <div class="col-12">
-                    <label class="mb-1">@localizer["TicketTitle"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterTitle"]" @bind-Value="ticket.Title" required />
+                    <BitTextField Label="@localizer["TicketTitle"]" Placeholder="@localizer["EnterTitle"]" @bind-Value="ticket.Title" IsRequired />
                 </div>
                 <div class="col-12">
-                    <label class="mb-1">@localizer["TicketText"]</label>
-                    <textarea class="form-control" placeholder="@localizer["TicketText"]..." rows="7"
-                              @bind="ticket.Text"
-                              @bind:event="oninput"
-                              maxlength="@MAX_TEXT_COUNT" />
+                    <BitTextField Label="@localizer["TicketText"]"
+                                  IsMultiline=true
+                                  Placeholder="@(localizer["TicketText"] + "...")" Rows="7"
+                                  @bind-Value="ticket.Text"
+                                  MaxLength="@MAX_TEXT_COUNT" />
                     @if (MAX_TEXT_COUNT - ticket.Text.Count() < 30)
                     {
-                        <label>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - ticket.Text.Count())</label>
+                        <BitLabel>@localizer["RemainingCharactersCount"] : @((MAX_TEXT_COUNT - ticket.Text.Count()).ToString().EnglishToPersianNumbers())</BitLabel>
                     }
                 </div>
             </div>
@@ -35,7 +34,10 @@
                                      Icon=BitIconName.Send
                                      EditContext=newTicketDTO
                                      OnClick=SendNewTicket></BaseButtonComponent>
-                <a class="btn btn-warning" href="Ticket/MyTickets">انصراف</a>
+                <BaseNavigateButtonComponent Text="انصراف"
+                                             Href="Ticket/MyTickets"
+                                             Icon="BitIconName.Cancel">
+                </BaseNavigateButtonComponent>
             </div>
         </div>
     </div>

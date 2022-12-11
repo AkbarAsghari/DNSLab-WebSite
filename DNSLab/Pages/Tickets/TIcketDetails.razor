@@ -14,7 +14,7 @@ else
 {
     <EditForm Model="Message" Context="TicketDetails">
         <div class="card mb-4">
-            <div class="card-header">@localizer["TicketTitle"] : @ticket.Title</div>
+            <div class="card-header"><BitLabel>@localizer["TicketTitle"] : @ticket.Title</BitLabel></div>
             <div class="card-body">
                 <div class="row gx-3 mb-3">
                     <ul id="chat">
@@ -46,11 +46,12 @@ else
                     </ul>
                 </div>
                 <hr>
-                <label class="mb-1">@localizer["TicketText"]</label>
-                <textarea class="form-control" placeholder="@localizer["TicketText"]..." rows="7"
-                      @bind="Message.Text"
-                      @bind:event="oninput"
-                      maxlength="@MAX_TEXT_COUNT" />
+                <BitTextField Label="@localizer["TicketText"]"
+                          IsMultiline=true class="form-control"
+                          Placeholder="@(localizer["TicketText"] + "...")"
+                          Rows="7"
+                          @bind-Value="Message.Text"
+                          MaxLength="@MAX_TEXT_COUNT" />
                 <div class="mb-3 gap-2">
                     <BaseButtonComponent Caption=@localizer["Send"]
                                      IsBussyCaption=@localizer["Progressing"]
@@ -58,11 +59,13 @@ else
                                      Icon=BitIconName.Send
                                      EditContext="TicketDetails"
                                      OnClick=SendTicket></BaseButtonComponent>
-                    <a class="btn btn-warning" href="Ticket/MyTickets">انصراف</a>
+                    <BaseNavigateButtonComponent Text="انصراف"
+                                             Href="Ticket/MyTickets"
+                                             Icon=BitIconName.Cancel>
+                    </BaseNavigateButtonComponent>
                 </div>
             </div>
         </div>
-
     </EditForm>
 }
 

@@ -14,17 +14,18 @@ else
 {
     <Modal @ref="Modal">
         <Title>
-            <label>@modalTitle</label>
+            <BitLabel>@modalTitle</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["TicketTitle"] :@((closeRcord.ID != Guid.Empty) ? @closeRcord.Title : @deleteRcord.Title )</label>
+            <BitLabel>@localizer["TicketTitle"] :@((closeRcord.ID != Guid.Empty) ? @closeRcord.Title : @deleteRcord.Title )</BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=Modal.Close></BaseButtonComponent>
-            <BaseButtonComponent Caption=@((closeRcord.ID != Guid.Empty) ? localizer["Close"] : localizer["Delete"] ) 
+            <BaseButtonComponent Caption=@((closeRcord.ID != Guid.Empty) ? localizer["Close"] : localizer["Delete"] )
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Danger
                              Icon=BitIconName.Delete
@@ -34,7 +35,7 @@ else
 
 
     <div class="card mb-4">
-        <div class="card-header">@localizer["MyTickets"]</div>
+        <div class="card-header"><BitLabel>@localizer["MyTickets"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="Ticket/New"
@@ -45,7 +46,9 @@ else
 
                 @if (tickets.Count() == 0)
                 {
-                    <text>@localizer["ThereIsNoTicket"]</text>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        <BitLabel>@localizer["ThereIsNoTicket"]</BitLabel>
+                    </BitMessageBar>
                 }
                 else
                 {
@@ -55,33 +58,31 @@ else
                         <div class="row">
                             <div class="row col-lg-8 col-7">
                                 <div class="col-lg-5 col-sm-12 align-self-center">
-                                    <p class="m-0">@localizer["TicketTitle"] : @(item.Title.Length > 25 ? $"{item.Title.Substring(0,25)}..." : item.Title)</p>
+                                    <BitLabel>@localizer["TicketTitle"] : @(item.Title.MakeCut(23))</BitLabel>
                                 </div>
                                 <div class="col-lg-5 col-sm-12 align-self-center">
                                     <div class="row">
-                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        <BitLabel>@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
                                         @if (@item.UpdateDate != null)
                                         {
-                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                            <BitLabel>@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
                                         }
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-12 align-self-center">
-                                    <p class="m-0">
-                                        @switch (@item.IsClosed)
-                                        {
-                                            case true:
-                                                <a class="btn btn-sm btn-warning disabled">@localizer["Closed"]</a>
-                                                break;
-                                            case false:
-                                                <a class="btn btn-sm btn-success disabled">@localizer["Open"]</a>
-                                                break;
-                                        }
-                                    </p>
+                                    @switch (@item.IsClosed)
+                                    {
+                                        case true:
+                                            <BitLabel>@localizer["Closed"]</BitLabel>
+                                            break;
+                                        case false:
+                                            <BitLabel>@localizer["Open"]</BitLabel>
+                                            break;
+                                    }
                                 </div>
 
                             </div>
-                            <div class="col-lg-4 col-5 d-grid gap-2 d-xl-flex justify-content-md-end">
+                            <div class="col">
                                 @if (!item.IsClosed)
                                 {
                                     <BaseButtonComponent Caption=@localizer["Close"]
