@@ -94,10 +94,11 @@ else
                                      Target="_blank"
                                      Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
-
                 <BitLabel>لینک بروزرسانی آی پی های توکن</BitLabel>
-                <code type="text" class="text-center link-primary">https://api.dnslab.ir/DNS/UDIBT?k=@token.Key</code>
-                <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
+                <BitLabel>
+                    https://api.dnslab.ir/DNS/UDIBT?k=@token.Key
+                    <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
+                </BitLabel>
                 <BitMessageBar MessageBarType="BitMessageBarType.Warning">
                     این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
                 </BitMessageBar>
