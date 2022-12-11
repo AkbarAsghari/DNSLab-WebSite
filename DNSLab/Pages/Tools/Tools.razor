@@ -4,7 +4,7 @@
 @inject IStringLocalizer<Resource> localizer
 
 <div class="card mb-4">
-    <div class="card-header">@localizer["Tools"]</div>
+    <div class="card-header"><BitLabel>@localizer["Tools"]</BitLabel></div>
     <div class="card-body">
         <div class="d-grid gap-2 d-md-block">
             <BaseNavigateButtonComponent Href="tools/ping" Text="@(localizer["PingChecker"])" />
