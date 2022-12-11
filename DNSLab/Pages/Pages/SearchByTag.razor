@@ -10,7 +10,7 @@
 
     @if (pageSummaries != null)
     {
-        <p>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </p>
+        <BitLabel>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </BitLabel>
         <hr />
     }
     @if (pageSummaries == null)
@@ -26,9 +26,9 @@
     }
     else
     {
-        <div class="alert alert-warning">
-            <p class="text-center">موردی یافت نشد</p>
-        </div>
+        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+            <BitLabel class="text-center">موردی یافت نشد</BitLabel>
+        </BitMessageBar>
     }
 
 </div>

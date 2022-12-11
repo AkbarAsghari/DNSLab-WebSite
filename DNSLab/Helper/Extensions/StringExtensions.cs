@@ -48,6 +48,8 @@ namespace DNSLab.Helper.Extensions
 
         public static string MakeCut(this string text, int length)
         {
+            if (String.IsNullOrWhiteSpace(text))
+                return text;
             return text.Length > 25 ? $"{text.Substring(0, 25)}..." : text;
         }
     }

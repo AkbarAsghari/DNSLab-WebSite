@@ -8,20 +8,17 @@ else
 {
     <EditForm Model="ChangeLog" Context=ChangeLogContext>
         <div class="card mb-4">
-            <div class="card-header">@Title</div>
+            <div class="card-header"><BitLabel>@Title</BitLabel></div>
             <div class="card-body">
                 <div class="row gx-3 mb-3">
                     <div class="col-lg-4">
-                        <label class="mb-1">@localizer["ChangeTitle"]</label>
-                        <input class="form-control" type="text" @bind=ChangeLog.Title />
+                        <BitTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
                     </div>
                     <div class="col-lg-4">
-                        <label class="mb-1">@localizer["ReleaseDate"]</label>
-                        <InputDate class="form-control" @bind-Value=ChangeLog.ReleaseDate />
+                        <BitDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
                     </div>
                     <div class="col-lg-4">
-                        <label class="mb-1">@localizer["InformationLink"]</label>
-                        <input class="form-control dir-ltr" type="text" @bind=ChangeLog.InformationLink />
+                        <BitTextField Label="@localizer["InformationLink"]" Class="dir-ltr" @bind-Value=ChangeLog.InformationLink />
                     </div>
                     <div class="col-12">
                         <label class="mb-1">@localizer["Description"]</label>
@@ -35,13 +32,31 @@ else
                                      Icon=BitIconName.Save
                                      EditContext=ChangeLogContext
                                      OnClick=OnValidSubmit></BaseButtonComponent>
-                    <a class="btn btn-warning" href="ChangeLogs/All">@localizer["Cancel"]</a>
+                    <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
+                                             Href="ChangeLogs/All">
+                    </BaseNavigateButtonComponent>
                 </div>
             </div>
         </div>
     </EditForm>
 }
 @code {
+
+    DateTimeOffset? selectedDate
+    {
+        get
+        {
+            if (ChangeLog.ReleaseDate == default)
+                return DateTime.UtcNow;
+            return DateTimeOffset.Parse(ChangeLog.ReleaseDate.ToString());
+        }
+        set
+        {
+            if (value.HasValue)
+                ChangeLog.ReleaseDate = value.Value.LocalDateTime;
+        }
+    }
+
     [Parameter] public string Title { get; set; } = String.Empty;
     [Parameter] public ChangeLogDTO ChangeLog { get; set; } = null;
     [Parameter] public EventCallback OnValidSubmit { get; set; }

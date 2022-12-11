@@ -14,15 +14,16 @@ else
 {
     <Modal @ref="DeleteModal">
         <Title>
-            <label>@localizer["AreYouSureDel"]</label>
+            <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["ChangeTitle"] : @deleteRcord.Title </label>
+            <BitLabel>@localizer["ChangeTitle"] : @deleteRcord.Title </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
+                             Icon=BitIconName.Cancel
                              OnClick=DeleteModal.Close></BaseButtonComponent>
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
@@ -32,7 +33,7 @@ else
         </Footer>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["ChangeLogs"]</div>
+        <div class="card-header"><BitLabel>@localizer["ChangeLogs"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
                 <BaseNavigateButtonComponent Href="ChangeLogs/Create"
@@ -53,14 +54,17 @@ else
                         <hr />
                         <div class="row align-items-center">
                             <div class="col-md-3">
-                                <p>@item.Title</p>
+                                <BitLabel>@item.Title.MakeCut(23)</BitLabel>
                             </div>
                             <div class="col-md-3">
-                                <a class="text-decoration-none" href="@($"{item.InformationLink}")" target="_blank">
-                                    <p><code>@item.InformationLink</code></p>
-                                </a>
+                                <BitLink Href="@($"{item.InformationLink}")" Target="_blank">
+                                    <BitLabel><code>@item.InformationLink.MakeCut(23)</code></BitLabel>
+                                </BitLink>
                             </div>
-                            <p class="col-md-3 text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</p>
+                            <div class="col-md-3">
+                                <BitLabel>@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) </BitLabel>
+                                <BitLabel> @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
+                            </div>
                             <div class="col">
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
