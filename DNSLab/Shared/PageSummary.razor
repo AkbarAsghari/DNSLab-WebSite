@@ -1,32 +1,46 @@
-﻿<div class="row">
-    <div class="col-xs-12 small">
+﻿@inject IStaticsRepository _StaticsRepository
+@inject NavigationManager _NavigationManager
+
+<div class="d-inline">
+    <BitLabel>
         @if (!String.IsNullOrWhiteSpace(FullName))
         {
-            <span class="overlay-text text-muted">@("نویسنده : ")</span>
+            <text>نویسنده :</text>
             <UserProfileImage Size=25 UserId="@UserId.ToString()" />
-            <span class="overlay-text text-muted"><strong>@FullName</strong></span>
-            <span class="overlay-text text-muted"> - </span>
+            <strong>@FullName</strong>
         }
-        <PageVisitCounter />
         @if (PublishDate != null)
         {
-            <span class="overlay-text text-muted"> - </span>
-            <span class="overlay-text text-muted">@("انتشار : ")</span>
-            <span class="overlay-text text-muted"><strong>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+            <text>انتشار : </text>
+            <strong>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong>
+            @if (UpdateDate != null)
+            {
+                <text> - آخرین ویرایش : </text>
+                <strong>@UpdateDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong>
+            }
         }
-
-        @if (UpdateDate != null)
+        - تعداد بازدید :
+        @if (visitCount > -1)
         {
-            <span class="overlay-text text-muted"> - </span>
-            <span class="overlay-text text-muted">@("آخرین ویرایش : ")</span>
-            <span class="overlay-text text-muted"><strong>@UpdateDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong></span>
+            <strong>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</strong>
         }
-    </div>
+        else
+        {
+            <BitSpinner Size="BitSpinnerSize.Small" Class="d-inline-block" />
+        }
+    </BitLabel>
 </div>
 
 @code {
+    int visitCount = -1;
+
     [Parameter] public Guid UserId { get; set; }
     [Parameter] public string FullName { get; set; } = String.Empty;
     [Parameter] public DateTime? PublishDate { get; set; }
     [Parameter] public DateTime? UpdateDate { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        visitCount = await _StaticsRepository.PageVisitCount(new Uri(_NavigationManager.Uri).LocalPath);
+    }
 }

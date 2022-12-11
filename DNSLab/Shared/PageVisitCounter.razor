@@ -1,26 +1,23 @@
 ﻿@inject IStaticsRepository _StaticsRepository
 @inject NavigationManager _NavigationManager
 
-<span class="text-muted">
-    تعداد بازدید :
+<BitLabel>
+    تعداد بازدید : 
     @if (visitCount > -1)
     {
-        <text><strong>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</strong></text>
+        <strong>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</strong>
     }
     else
     {
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <BitSpinner Size="BitSpinnerSize.Small" Class="d-inline-block"/>
     }
-</span>
+</BitLabel>
 
 @code {
     int visitCount = -1;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
-        {
-            visitCount = await _StaticsRepository.PageVisitCount(new Uri(_NavigationManager.Uri).LocalPath);
-            await this.InvokeAsync(() => StateHasChanged());
-        }
+        visitCount = await _StaticsRepository.PageVisitCount(new Uri(_NavigationManager.Uri).LocalPath);
+        await this.InvokeAsync(() => StateHasChanged());
     }
 }
