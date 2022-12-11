@@ -1,47 +1,44 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-<EditForm Model="Page" Context=CommentContext>
+<EditForm Model="Page" Context=PageContext>
     <div class="card mb-4">
-        <div class="card-header">@Title</div>
+        <div class="card-header"><BitLabel>@Title</BitLabel></div>
         <div class="card-body">
             <div class="row gx-3 mb-3">
                 <div class="col-sm-12 col-md-6">
-                    <label for="body">@localizer["PageType"]</label>
-                    <InputSelect class="form-control dir-ltr mt-1" @bind-Value="@Page.PageType">
-                        @foreach (var pageType in Enum.GetValues(typeof(PageTypeEnum)))
-                        {
-                            <option value="@pageType">@pageType</option>
-                        }
-                    </InputSelect>
-                    <ValidationMessage For="@(() => @Page.PageType)" />
+                    <BitDropDown Label="@localizer["PageType"]"
+                                 @bind-Value=selectedPageType
+                                 IsEnabled=@(Page.PublishDate == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow)
+                                 Items="GetPageTypeItems()">
+                    </BitDropDown>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <label class="mb-1">@localizer["URL"]</label>
-                    <InputText class="form-control dir-ltr" 
-                    placeholder="@localizer["EnterURL"]" 
-                    @bind-Value="Page.URL" required
-                    disabled="@(Page.PublishDate != null && Page.PublishDate.Value.AddHours(3) < DateTime.UtcNow)"
-                    />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> Page.URL)" />
+                    <BitTextField Class="dir-ltr"
+                                  Label="@localizer["URL"]"
+                                  Placeholder="@localizer["EnterURL"]"
+                                  @bind-Value="Page.URL"
+                                  IsRequired
+                                  IsEnabled=@(Page.PublishDate == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow) />
                 </div>
                 <div class="col-12">
-                    <label class="mb-1">@localizer["Title"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterTitle"]" @bind-Value="Page.Title" required />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> Page.Title)" />
+                    <BitTextField Label="@localizer["Title"]"
+                                  Placeholder="@localizer["EnterTitle"]"
+                                  @bind-Value="Page.Title" IsRequired />
                 </div>
                 <div class="col-12">
-                    <label class="mb-1">@localizer["Description"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterDescription"]" @bind-Value="Page.Description" required />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> Page.Description)" />
+                    <BitTextField Label="@localizer["Description"]"
+                                  Placeholder="@localizer["EnterDescription"]"
+                                  @bind-Value="Page.Description" IsRequired />
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Tags"]</label>
                     <TagsInput Tags="@Page.Keywords"></TagsInput>
                 </div>
                 <div class="col-12">
-                    <label class="mb-1">@localizer["Header"]</label>
-                    <InputText class="form-control" placeholder="@localizer["EnterHeader"]" @bind-Value="Page.Header" required />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> Page.Header)" />
+                    <label class="mb-1"></label>
+                    <BitTextField Label="@localizer["Header"]"
+                                  Placeholder="@localizer["EnterHeader"]"
+                                  @bind-Value="Page.Header" IsRequired />
                 </div>
                 <div class="col-12">
                     <label class="mb-1">@localizer["Content"]</label>
@@ -53,15 +50,39 @@
                                      IsBussyCaption=@localizer["Progressing"]
                                      Color=ColorEnum.Primary
                                      Icon=BitIconName.Save
-                                     EditContext=CommentContext
+                                     EditContext=PageContext
                                      OnClick=OnValidSubmit></BaseButtonComponent>
-                <a class="btn btn-warning" href="Page/MyPages">انصراف</a>
+                <BaseNavigateButtonComponent Href="Page/MyPages"
+                                             Text="انصراف"
+                                             Icon=BitIconName.Cancel></BaseNavigateButtonComponent>
             </div>
         </div>
     </div>
 </EditForm>
 @code {
     [Parameter] public string Title { get; set; }
+
+    string selectedPageType
+    {
+        get
+        {
+            return Page.PageType.ToString();
+        }
+        set
+        {
+            if (value == null)
+                value = PageTypeEnum.Article.ToString();
+            Page.PageType = (PageTypeEnum)System.Enum.Parse(typeof(PageTypeEnum), value);
+        }
+    }
+
+    private List<BitDropDownItem> GetPageTypeItems()
+    {
+        List<BitDropDownItem> result = new List<BitDropDownItem>();
+        foreach (var item in Enum.GetValues(typeof(PageTypeEnum)))
+            result.Add(new BitDropDownItem { Text = item.ToString()!, Value = item.ToString()! });
+        return result;
+    }
 
     [Parameter]
     public PageDTO Page { get; set; } = new PageDTO
@@ -70,6 +91,7 @@
             Title = String.Empty,
             Description = String.Empty,
             Keywords = new List<string>(),
+            PageType = PageTypeEnum.Article,
             Body = "مطلب خود را در اینجا بنویسید.",
         };
 
