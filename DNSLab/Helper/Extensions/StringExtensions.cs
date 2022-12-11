@@ -1,4 +1,6 @@
-﻿namespace DNSLab.Helper.Extensions
+﻿using System.Text;
+
+namespace DNSLab.Helper.Extensions
 {
     public static class StringExtensions
     {
@@ -30,28 +32,18 @@
 
         public static string PersianToEnglishNumbers(this string persianStr)
         {
-            if (persianStr.Any(x => LettersDictionaryFaToEn.Keys.Contains(x)))
-            {
-                foreach (var item in persianStr)
-                {
-                    try { persianStr = persianStr.Replace(item, LettersDictionaryFaToEn[item]); }
-                    catch { }
-                }
-            }
-            return persianStr;
+            StringBuilder sb = new StringBuilder(persianStr);
+            foreach (var item in persianStr.Where(x => LettersDictionaryFaToEn.Keys.Contains(x)))
+                sb.Replace(item, LettersDictionaryFaToEn[item]);
+            return sb.ToString();
         }
 
         public static string EnglishToPersianNumbers(this string persianStr)
         {
-            if (persianStr.Any(x => LettersDictionaryEnToFa.Keys.Contains(x)))
-            {
-                foreach (var item in persianStr)
-                {
-                    try { persianStr = persianStr.Replace(item, LettersDictionaryEnToFa[item]); }
-                    catch { }
-                }
-            }
-            return persianStr;
+            StringBuilder sb = new StringBuilder(persianStr);
+            foreach (var item in persianStr.Where(x => LettersDictionaryEnToFa.Keys.Contains(x)))
+                sb.Replace(item, LettersDictionaryEnToFa[item]);
+            return sb.ToString();
         }
 
         public static string MakeCut(this string text, int length)
