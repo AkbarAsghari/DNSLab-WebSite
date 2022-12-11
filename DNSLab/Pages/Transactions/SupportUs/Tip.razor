@@ -9,27 +9,17 @@
 <EditForm class="container-sm mt-4 col-lg-4 pt-5" Model=TipTransaction Context="TipCtx">
     <DataAnnotationsValidator />
     <div class="card mb-4">
-        <div class="card-header">حمایت از دی‌ان‌اس لب</div>
+        <div class="card-header"><BitLabel>حمایت از دی‌ان‌اس لب</BitLabel></div>
         <div class="card-body">
-            <div class="mb-3">
-                <InputText class="form-control" placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
-            </div>
-            <div class="mb-3">
-                <InputText class="form-control dir-ltr" placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
-            </div>
-            <div class="mb-3">
-                <InputSelect class="form-control form-select mt-1" @bind-Value="@selectedAmountType">
-                    @foreach (var amountType in AmountTypes)
-                    {
-                        <option value="@amountType.Key">@amountType.Value</option>
-                    }
-                </InputSelect>
-            </div>
+            <BitTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
+            <BitTextField Label="تلفن همراه" Class="dir-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
+            <BitDropDown Label="مقدار حمایت" IsRtl=true
+                         @bind-Value="@selectedAmountType"
+                         Items="AmountTypes()">
+            </BitDropDown>
             @if (@selectedAmountType == "0")
             {
-                <div class="mb-3">
-                    <InputText class="form-control dir-ltr" placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
-                </div>
+                <BitTextField Label="مبلغ" Class="dir-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
             }
             <BaseButtonComponent Caption=@localizer["Continue"]
                                  IsBussyCaption=@localizer["Loading"]
@@ -38,6 +28,10 @@
                                  Icon=BitIconName.HeartFill
                                  EditContext=TipCtx
                                  OnClick=Go></BaseButtonComponent>
+            <BaseNavigateButtonComponent Href="/"
+                                         Text="@localizer["Cancel"]"
+                                         Icon=BitIconName.Cancel>
+            </BaseNavigateButtonComponent>
         </div>
     </div>
 </EditForm>
@@ -47,13 +41,15 @@
 
     string Amount { get; set; }
 
-    public Dictionary<string, string> AmountTypes = new Dictionary<string, string>
+    public List<BitDropDownItem> AmountTypes()
     {
-        { "10000", "10,000 تومان" },
-        { "30000", "30,000 تومان" },
-        { "50000", "50,000 تومان" },
-        { "0",  "مبلغ درخواه"},
-    };
+        return new List<BitDropDownItem>{
+            new BitDropDownItem{ Value = "10000",Text = "10,000 تومان" },
+            new BitDropDownItem{ Value = "30000",Text = "30,000 تومان" },
+            new BitDropDownItem{ Value = "50000",Text = "50,000 تومان" },
+            new BitDropDownItem{ Value = "0",Text = "مبلغ درخواه"},
+        };
+    }
 
     private string selectedAmountType { get; set; } = "10000";
 

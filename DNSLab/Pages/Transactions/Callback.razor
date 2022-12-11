@@ -2,34 +2,26 @@
 @using ApplicationCore.Enums
 @inject ITransactionRepository _TransactionRepository
 
-<div class="pt-5 text-center">
+<div class="pt-5 col-md-6 container text-center">
     @if (Success == 1)
     {
-        <div class="alert alert-success" role="alert">
-            <p><strong>پرداخت با موفقیت انجام شد</strong></p>
-            <p>شناسه پرداخت : @TrackId</p>
-        </div>
+        <BitMessageBar MessageBarType="BitMessageBarType.Success">
+            <BitLabel>پرداخت با موفقیت انجام شد</BitLabel>
+            <BitLabel>شناسه پرداخت : @TrackId</BitLabel>
+        </BitMessageBar>
     }
     else
     {
-        <div class="alert alert-danger" role="alert">
-            <p><strong>پرداخت با شکست مواجه شد</strong></p>
-            <p>شناسه : @TrackId</p>
-            <p>علت : @Result</p>
-        </div>
+        <BitMessageBar MessageBarType="BitMessageBarType.Blocked" role="alert">
+            <BitLabel>پرداخت با شکست مواجه شد</BitLabel>
+            <BitLabel>شناسه : @TrackId</BitLabel>
+            <BitLabel>علت : @Result</BitLabel>
+        </BitMessageBar>
     }
-
-    <a class="btn btn-success col-md-3 col-sm-12" href="/">
-        @if (IsVerified == null)
-        {
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <text>در حال بررسی تراکنش...</text>
-        }
-        else
-        {
-            <text>بازگشت</text>
-        }
-    </a>
+    <BaseNavigateButtonComponent Href="/"
+                                 Text="@(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")"
+                                 Icon=BitIconName.Home>
+    </BaseNavigateButtonComponent>
 </div>
 
 @code {
