@@ -294,7 +294,8 @@ a {
 .txt-field,
 .bit-drp.bit-drp-fluent,
 .bit-tgl-fluent,
-.bit-lnk-fluent > a {
+.bit-lnk-fluent > a,
+.bit-rbg.bit-rbg-fluent {
     font-family: vazir-light;
 }
 

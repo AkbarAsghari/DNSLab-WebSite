@@ -3,32 +3,26 @@
 <EditForm Model="HostName" Context=DNSContext>
     <DataAnnotationsValidator />
     <div class="card mb-4">
-        <div class="card-header">@Title</div>
+        <div class="card-header"><BitLabel>@Title</BitLabel></div>
         <div class="card-body">
             <div class="row gx-3 mb-3">
                 <div class="col-md-6">
-                    <label class="mb-1">@localizer["HostName"]</label>
-                    <InputText class="form-control dir-ltr" placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" required disabled="@(IsNewRecord == false)" />
-                    <ValidationMessage class="invalid-feedback" For="@(()=> HostName.Name)" />
+                    <BitTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" IsRequired IsEnabled="@IsNewRecord" />
                 </div>
                 <div class="col-md-6">
                     @switch (HostName.RecordType)
                     {
                         case 1:
-                            <label class="mb-1">@localizer["IPv4Address"]</label>
-                            <InputText class="form-control dir-ltr" placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" required/>
+                            <BitTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" IsRequired />
                             break;
                         case 2:
-                            <label class="mb-1">@localizer["IPv6Address"]</label>
-                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" required/>
+                            <BitTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" IsRequired />
                             break;
                         case 3:
-                            <label class="mb-1">@localizer["Target"]</label>
-                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" required/>
+                            <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" IsRequired />
                             break;
                         case 4:
-                            <label class="mb-1">@localizer["Target"]</label>
-                            <InputText class="form-control dir-ltr" placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" required />
+                            <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" IsRequired />
                             break;
                     }
                 </div>
@@ -37,69 +31,49 @@
                 @if (IsNewRecord)
                 {
                     <div class="col-md-4 col-xl-3">
-                        <div class="form-check">
-                            <label class="form-check-label" for="ARecord">
-                                DNS Host (A)
-                            </label>
-                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="ARecord" SelectedValue="1" @bind-Value="HostName.RecordType" />
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label" for="AAAARecord">
-                                AAAA (IPv6)
-                            </label>
-                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="AAAARecord" SelectedValue="2" @bind-Value="HostName.RecordType" />
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label" for="CNAMERecord">
-                                DNS Alias (CNAME)
-                            </label>
-                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="CNAMERecord" SelectedValue="3" @bind-Value="HostName.RecordType" />
-                        </div>
-                       @* <div class="form-check">
-                            <label class="form-check-label" for="CNAMERecord">
-                                Web Redirect
-                            </label>
-                            <CustomInputRadio class="form-check-input" name="DNSRecordType" id="WebRedirectRecord" SelectedValue="4" @bind-Value="HostName.RecordType" />
-                        </div>*@
+                        <BitRadioButtonList IsRtl=true
+                                        Label="نوع رکورد"
+                                        @bind-Value="@HostName.RecordType"
+                                        Items="RecordTypes"
+                                        TextField="@nameof(RecordType.Text)"
+                                        ValueField="@nameof(RecordType.Value)">
+
+                        </BitRadioButtonList>
                     </div>
                 }
                 <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)">
-                    <div class="card border-info">
-                        <div class="card-header">@localizer["Description"]</div>
-                        <div class="card-body">
-                            @switch (HostName.RecordType)
-                            {
-                                case 1:
-                                    <h6 class="card-title">DNS Host (A)</h6>
-                                    <p class="card-text">@localizer["DNSHostDescription"]</p>
-                                    break;
-                                case 2:
-                                    <h6 class="card-title">AAAA (IPv6)</h6>
-                                    <p class="card-text">@localizer["AAAADescription"]</p>
-                                    break;
-                                case 3:
-                                    <h6 class="card-title">DNS Alias (CNAME)</h6>
-                                    <p class="card-text">@localizer["DNSAliasDescription"]</p>
-                                    break;
-                                case 4:
-                                    <h6 class="card-title">Web Redirect</h6>
-                                    <p class="card-text">@localizer["WebRedirectDescription"]</p>
-                                    break;
-                            }
-                        </div>
-                    </div>
-
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        @switch (HostName.RecordType)
+                        {
+                            case 1:
+                                <BitLabel class="card-text">@localizer["DNSHostDescription"]</BitLabel>
+                                break;
+                            case 2:
+                                <BitLabel class="card-text">@localizer["AAAADescription"]</BitLabel>
+                                break;
+                            case 3:
+                                <BitLabel class="card-text">@localizer["DNSAliasDescription"]</BitLabel>
+                                break;
+                            case 4:
+                                <BitLabel class="card-text">@localizer["WebRedirectDescription"]</BitLabel>
+                                break;
+                        }
+                    </BitMessageBar>
                 </div>
             </div>
-
+            <hr />
+            <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 Icon=BitIconName.Save
+                                 EditContext=DNSContext
+                                 OnClick=OnValidSubmit></BaseButtonComponent>
+            <BaseNavigateButtonComponent Text=@localizer["Cancel"]
+                                         Icon=BitIconName.Cancel
+                                         Href="DNS/MyDNS"></BaseNavigateButtonComponent>
         </div>
     </div>
-    <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                         IsBussyCaption=@localizer["Progressing"]
-                         Color=ColorEnum.Primary
-                         Icon=BitIconName.Save
-                         EditContext=DNSContext
-                         OnClick=OnValidSubmit></BaseButtonComponent>
+
 </EditForm>
 
 @code {
@@ -108,6 +82,20 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     [Parameter] public bool IsNewRecord { get; set; } = false;
     [CascadingParameter] public IPDTO IPDTO { get; set; }
+
+    public class RecordType
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
+    }
+
+    public List<RecordType> RecordTypes = new List<RecordType>
+    {
+        new RecordType {Text= "DNS Host (A)" ,Value = "1"},
+        new RecordType {Text= "AAAA (IPv6)" ,Value = "2"},
+        new RecordType {Text= "DNS Alias (CNAME)" ,Value = "3"},
+        new RecordType {Text= "Web Redirect" ,Value = "4"},
+    };
 
     protected override void OnAfterRender(bool firstRender)
     {
