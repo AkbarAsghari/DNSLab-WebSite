@@ -7,40 +7,23 @@
 @inject ToastService _toastService;
 
 <div class="container-xl mt-5">
-    <div class="row">
-
-        <EditForm class="container-sm mt-4 col-lg-4" Model=user Context="AuthContext">
-            <DataAnnotationsValidator />
-            <div class="card mb-4">
-                <div class="card-header">@localizer["Login"]</div>
-                <div class="card-body">
-
-                    <!-- Form Group (email address)-->
-                    <div class="mb-3">
-                        <label class="mb-1">@localizer["UsernameOrEmail"]</label>
-                        <InputText class="form-control dir-ltr" placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" required />
-                        <ValidationMessage class="invalid-feedback" For="@(()=> user.UsernameOrEmail)" />
-                    </div>
-                    <!-- Form Group (email address)-->
-                    <div class="mb-3">
-                        <label class="mb-1">@localizer["Password"]</label>
-                        <InputPassword class="form-control dir-ltr" @bind-Value="@user.Password" required />
-                        <ValidationMessage class="invalid-feedback" For="@(()=> user.Password)" />
-                    </div>
-                    <BaseButtonComponent Caption=@localizer["Login"]
-                                         IsBussyCaption=@localizer["Loading"]
-                                         CssClass="col-12"
-                                         Color=ColorEnum.Primary
-                                         Icon=BitIconName.Signin
-                                         EditContext=AuthContext
-                                         OnClick=AuthUser></BaseButtonComponent>
-                    <div class="mt-3">
-                        <a href="user/ForgetPassword" class="text-center text-decoration-none text-muted">رمز خودتو فراموش کردی؟</a>
-                    </div>
-                </div>
+    <EditForm class="container-sm mt-4 col-lg-4" Model=user Context="AuthContext">
+        <div class="card mb-4">
+            <div class="card-header"><BitLabel>@localizer["Login"]</BitLabel></div>
+            <div class="card-body">
+                <BitTextField Label="@localizer["UsernameOrEmail"]" Class="dir-ltr" Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" IsRequired />
+                <BitTextField Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="dir-ltr" @bind-Value="@user.Password" IsRequired />
             </div>
-        </EditForm>
-    </div>
+            <BaseButtonComponent Caption=@localizer["Login"]
+                                 IsBussyCaption=@localizer["Loading"]
+                                 CssClass="col-12"
+                                 Color=ColorEnum.Primary
+                                 Icon=BitIconName.Signin
+                                 EditContext=AuthContext
+                                 OnClick=AuthUser></BaseButtonComponent>
+            <BitLink Class="text-center mt-2" Href="user/ForgetPassword">رمز خودتو فراموش کردی؟</BitLink>
+        </div>
+    </EditForm>
 </div>
 
 @code {
