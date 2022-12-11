@@ -8,63 +8,64 @@
 
 <div class="row">
     <div class="col-lg-4 col-md-6 p-2">
-        <div class="alert alert-info h-100">
-            <BitLabel class="alert-heading text-center">تعداد هاست نِیم ها</BitLabel>
-            <hr>
-            @if (isLoadingActiveDNSCount)
-            {
-                <div class="text-center"><div class="spinner-border text-info" /></div>
-            }
-            else
-            {
+        @if (isLoadingActiveDNSCount)
+        {
+            <BitProgressIndicator BarHeight="20" />
+        }
+        else
+        {
+            <div class="alert alert-info h-100">
+                <BitLabel Class="alert-heading text-center">تعداد هاست نِیم ها</BitLabel>
+                <hr>
                 <h2 class="text-center">@activeDNSCount.ToString().EnglishToPersianNumbers()</h2>
-            }
-            <p class="text-center">هاست نِیم بصورت فعال یافت شد</p>
-            <a class="btn btn-info position-absolute bottom-0 start-50 translate-middle-x w-100" href="dns/mydns">مدیریت هاست نِیم ها</a>
-        </div>
+                <BitLabel Class="text-center">
+                    هاست نِیم بصورت فعال یافت شد
+                </BitLabel>
+                <BitLabel Class="text-center">
+                    <BitLink Href="dns/mydns">برای مدیریت کلیک کنید</BitLink>
+                </BitLabel>
+            </div>
+        }
     </div>
     <div class="col-lg-4 col-md-6 p-2">
-        <div class="alert alert-warning h-100">
-            <p class="alert-heading text-center">تعداد بروزرسانی ها</p>
-            <hr>
-            @if (isLoadingLast24HoursChangesCount)
-            {
-                <div class="text-center"><div class="spinner-border text-warning" /></div>
-            }
-            else
-            {
+        @if (isLoadingLast24HoursChangesCount)
+        {
+            <BitProgressIndicator BarHeight="20" />
+        }
+        else
+        {
+            <div class="alert alert-warning h-100">
+                <BitLabel Class="alert-heading text-center">تعداد بروزرسانی ها</BitLabel>
+                <hr>
                 <h2 class="text-center">@last24HoursChangesCount.ToString().EnglishToPersianNumbers()</h2>
-            }
-            <p class="text-center">دفعه در ۲۴ ساعت گذشته هاست نِیم های شما تغییر کرده‌اند</p>
-            <a class="btn btn-warning position-absolute bottom-0 start-50 translate-middle-x w-100" href="/DNS/Histories">نمایش تاریخچه</a>
-        </div>
+                <BitLabel Class="text-center">
+                    دفعه در ۲۴ ساعت گذشته هاست نِیم های شما تغییر کرده‌اند
+                </BitLabel>
+                <BitLabel Class="text-center">
+                    <BitLink Href="/DNS/Histories">برای نمایش تاریخچه کلیک کنید</BitLink>
+                </BitLabel>
+            </div>
+        }
     </div>
-    @*<div class="col-lg-3 col-md-6 p-2">
-        <div class="alert alert-success h-100">
-        <p class="alert-heading text-center">وضعیت آخرین ورود به سایت</p>
-        <div class="list-group-item text-center list-group-item-success">زمان آخرین ورود</div>
-        <div class="list-group-item text-center list-group-item-success">23:59:51 1401/01/01</div>
-        <div class="list-group-item text-center list-group-item-success">آی پی آخرین ورود</div>
-        <div class="list-group-item text-center list-group-item-success">255.255.255.255</div>
-        </div>
-        </div>*@
     <div class="col-lg-4 col-md-6 p-2">
-        <div class="alert alert-dark h-100">
-            <p class="alert-heading text-center">تعداد کاربران سایت</p>
-            <hr>
-            @if (isLoadingUsersCount)
-            {
-                <div class="text-center"><div class="spinner-border text-dark" /></div>
-            }
-            else
-            {
+        @if (isLoadingLast24HoursChangesCount)
+        {
+            <BitProgressIndicator BarHeight="20" />
+        }
+        else
+        {
+            <div class="alert alert-dark h-100">
+                <BitLabel Class="alert-heading text-center">تعداد کاربران سایت</BitLabel>
+                <hr>
                 <h2 class="text-center">@usersCount.ToString().EnglishToPersianNumbers()</h2>
-            }
-            <p class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</p>
-            <AuthorizeView Roles="Admin" Context="adminContext">
-                <a class="btn btn-dark position-absolute bottom-0 start-50 translate-middle-x w-100" href="/User/AllUsers">نمایش کاربران</a>
-            </AuthorizeView>
-        </div>
+                <BitLabel Class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</BitLabel>
+                <AuthorizeView Roles="Admin" Context="adminContext">
+                    <BitLabel Class="text-center">
+                        <BitLink Href="/User/AllUsers">برای نمایش کاربران کلیک کنید</BitLink>
+                    </BitLabel>
+                </AuthorizeView>
+            </div>
+        }
     </div>
 </div>
 

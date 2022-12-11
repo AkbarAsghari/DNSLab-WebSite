@@ -293,7 +293,8 @@ a {
 .bit-txt-fluent,
 .txt-field,
 .bit-drp.bit-drp-fluent,
-.bit-tgl-fluent {
+.bit-tgl-fluent,
+.bit-lnk-fluent > a {
     font-family: vazir-light;
 }
 
