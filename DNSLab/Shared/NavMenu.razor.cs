@@ -43,7 +43,10 @@ namespace DNSLab.Shared
                 }
 
                 AddMainMenu();
+
                 AllNavLinks.ForEach(x => x.Links.ToList().ForEach(i => i.OnClick += ToggleNavMenu));
+                AllNavLinks.Where(x => x.Links.Count() == 0).ToList().ForEach(x => x.OnClick += ToggleNavMenu);
+
                 BasicNoToolTipNavLinks = AllNavLinks;
                 await this.InvokeAsync(() => this.StateHasChanged());
             }
