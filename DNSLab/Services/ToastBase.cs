@@ -1,4 +1,5 @@
-﻿using DNSLab.Enums;
+﻿using Bit.BlazorUI;
+using DNSLab.Enums;
 using DNSLab.Resources;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
@@ -7,14 +8,11 @@ namespace DNSLab.Services
 {
     public class ToastBase : ComponentBase, IDisposable
     {
-        [Inject] IStringLocalizer<Resource> _localizer { get; set; }
         [Inject] ToastService ToastService { get; set; }
 
-        protected string Heading { get; set; }
         protected string Message { get; set; }
-        protected bool IsVisible { get; set; }
-        protected string BackgroundCssClass { get; set; }
-        protected string IconImgSrc { get; set; }
+        protected BitMessageBarType MessageType { get; set; }
+        protected bool IsVisible { get; set; } = false;
 
         protected override void OnInitialized()
         {
@@ -40,24 +38,16 @@ namespace DNSLab.Services
             switch (level)
             {
                 case ToastLevel.Info:
-                    BackgroundCssClass = "bg-info";
-                    IconImgSrc = "../images/Icons/letter_icon.svg";
-                    Heading = _localizer["Info"];
+                    MessageType = BitMessageBarType.Info;
                     break;
                 case ToastLevel.Success:
-                    BackgroundCssClass = "bg-success";
-                    IconImgSrc = "../images/Icons/confirm_icon.svg";
-                    Heading = _localizer["Success"];
+                    MessageType = BitMessageBarType.Success;
                     break;
                 case ToastLevel.Warning:
-                    BackgroundCssClass = "bg-warning";
-                    IconImgSrc = "../images/Icons/warn_icon.svg";
-                    Heading = _localizer["Warning"];
+                    MessageType = BitMessageBarType.Warning;
                     break;
                 case ToastLevel.Error:
-                    BackgroundCssClass = "bg-danger";
-                    IconImgSrc = "../images/Icons/error_icon.svg";
-                    Heading = _localizer["Error"];
+                    MessageType = BitMessageBarType.SevereWarning;
                     break;
             }
 
@@ -67,6 +57,12 @@ namespace DNSLab.Services
         public void Dispose()
         {
             ToastService.OnShow -= ShowToast;
+        }
+
+
+        public void Close()
+        {
+            IsVisible = false;
         }
     }
 }

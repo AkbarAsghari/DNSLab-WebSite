@@ -1,5 +1,4 @@
-﻿<BitProgressIndicator Class="@(IsInTop ? "load-sliding-top" : String.Empty)">
-</BitProgressIndicator>
+﻿<BitProgressIndicator Class="@(IsInTop ? "load-sliding-top" : String.Empty)" BarHeight="20"/>
 
 @code {
     [Parameter] public bool IsInTop { get; set; } = true;

@@ -194,7 +194,7 @@ else
     {
         if (await accountRepository.Update(userInfo))
         {
-            toastService.ShowToast("Changes saved", Enums.ToastLevel.Success);
+            toastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
         }
 
         cultureSelector.Save();
@@ -217,7 +217,7 @@ else
     {
         if (await accountRepository.ChangeEmail(changeEmail))
         {
-            toastService.ShowToast("New Email Saved", Enums.ToastLevel.Success);
+            toastService.ShowToast("ایمیل جدید ذخیره شد و ایمیل تایید ارسال گردید", Enums.ToastLevel.Success);
 
             if (userInfo.Email.Trim().ToLower() != changeEmail.Email.Trim().ToLower())
                 userInfo.IsEmailApproved = false;
