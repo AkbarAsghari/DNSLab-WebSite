@@ -45,14 +45,15 @@
                     </div>
                 </div>
             </div>
+            <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 Icon=BitIconName.Save
+                                 EditContext=TokenContext
+                                 OnClick=OnValidSubmit></BaseButtonComponent>
         </div>
     </div>
-    <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                         IsBussyCaption=@localizer["Progressing"]
-                         Color=ColorEnum.Primary
-                         Icon=BitIconName.Save
-                         EditContext=TokenContext
-                         OnClick=OnValidSubmit></BaseButtonComponent>
+
 </EditForm>
 
 @code {

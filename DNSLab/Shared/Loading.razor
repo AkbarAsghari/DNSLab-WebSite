@@ -1,8 +1,5 @@
-﻿<div class="load-sliding @(IsInTop ? "load-sliding-top" : String.Empty)">
-    <div class="line"></div>
-    <div class="subline inc"></div>
-    <div class="subline dec"></div>
-</div>
+﻿<BitProgressIndicator Class="@(IsInTop ? "load-sliding-top" : String.Empty)">
+</BitProgressIndicator>
 
 @code {
     [Parameter] public bool IsInTop { get; set; } = true;

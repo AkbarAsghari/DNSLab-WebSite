@@ -20,18 +20,16 @@
                     </div>
                 }
             </div>
+            <BaseButtonComponent Caption="@localizer["Check"]"
+                                 Icon=BitIconName.Search
+                                 OnClick=OnValidSubmit
+                                 EditContext="editCtx">
+            </BaseButtonComponent>
+            <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
+                                         Href="tools"
+                                         Icon=BitIconName.Cancel>
+            </BaseNavigateButtonComponent>
         </div>
-    </div>
-    <div class="d-grid gap-2 d-md-block">
-        <BaseButtonComponent Caption="@localizer["Check"]"
-                             Icon=BitIconName.Search
-                             OnClick=OnValidSubmit
-                             EditContext="editCtx">
-        </BaseButtonComponent>
-        <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
-                                     Href="tools"
-                                     Icon=BitIconName.Cancel>
-        </BaseNavigateButtonComponent>
     </div>
 
 </EditForm>
