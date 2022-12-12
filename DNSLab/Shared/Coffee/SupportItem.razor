@@ -1,7 +1,7 @@
 ﻿<div class="card h-100 shadow border border-warning rounded-pill">
     <div class="card-body">
-        <p class="card-title text-center mb-0"><strong>@((FullName.Length > 20 ? (FullName.Substring(0,20)+ " ...") :  FullName).EnglishToPersianNumbers())</strong></p>
-        <p class="text-center mb-0">@(Amount.ToString("N0").EnglishToPersianNumbers())<small> تومان</small></p>
+        <BitLabel Class="card-title text-center mb-0"><strong>@((FullName.Length > 20 ? (FullName.Substring(0,20)+ " ...") :  FullName).EnglishToPersianNumbers())</strong></BitLabel>
+        <BitLabel Class="text-center mb-0">@(Amount.ToString("N0").EnglishToPersianNumbers())<small> تومان</small></BitLabel>
     </div>
 </div>
 

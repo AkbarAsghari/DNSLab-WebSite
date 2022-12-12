@@ -3,9 +3,27 @@
 @using System.Linq;
 @using System.Text.RegularExpressions;
 
+<div class="bit-txt bit-txt-fluent bit-txt-enabled-fluent bit-txt-required-fluent">
+    <div class="bit-txt-wrapper">
+        <BitLabel>تگ ها</BitLabel>
+        <div class="bit-txt-field-grp">
+            <input class="txt-field"
+                   placeholder="با ( ویرگول ) جدا کنید"
+                   autocomplete="off"
+                   @bind-value="Value"
+                   @bind-value:event="oninput"
+                   @onkeyup="AddTags" />
+        </div>
+    </div>
+</div>
+@if (IsContainSpecialCharacter)
+{
+    <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
+        <BitLabel Class="text-left m-0 p-1">امکان درج کاراکتر های خاص وجود ندارد</BitLabel>
+    </BitMessageBar>
+}
 <div class="suggestion-container">
-    <div id="@($"{Id}_tagsinput")" class="tagsinput">
-
+    <div class="tagsinput">
         @if (Tags != null && Tags.Any())
         {
             @foreach (var tag in Tags)
@@ -16,33 +34,10 @@
                 </span>
             }
         }
-
-        <div id="@($"{Id}_addTag")">
-            <div class="@(IsContainSpecialCharacter ? "tag-tooltip" : string.Empty)">
-                <input id="@($"{Id}_tag")"
-                       class="tag-input"
-                       placeholder="با ( ویرگول ) جدا کنید"
-                       autocomplete="off"
-                       @bind-value="Value"
-                       @bind-value:event="oninput"
-                       @onkeyup="AddTags" />
-
-                @if (IsContainSpecialCharacter)
-                {
-                    <div class="error-right d-inline-flex p-2">
-                        <i class="oi oi-warning text-warning p-1"></i>
-                        <p class="text-left m-0 p-1">Special characters not allowed.</p>
-                        <i></i>
-                    </div>
-                }
-            </div>
-        </div>
     </div>
 </div>
-
 @code {
 
-    private Guid Id => Guid.NewGuid();
     protected string Value { get; set; }
     protected bool MenuVisibility { get; set; }
     protected bool IsContainSpecialCharacter { get; set; }
@@ -81,4 +76,4 @@
 
         Tags.Remove(tag);
     }
-}
+    }

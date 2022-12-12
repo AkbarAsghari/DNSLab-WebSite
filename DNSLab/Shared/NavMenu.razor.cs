@@ -43,9 +43,15 @@ namespace DNSLab.Shared
                 }
 
                 AddMainMenu();
+                AllNavLinks.ForEach(x => x.Links.ToList().ForEach(i => i.OnClick += ToggleNavMenu));
                 BasicNoToolTipNavLinks = AllNavLinks;
                 await this.InvokeAsync(() => this.StateHasChanged());
             }
+        }
+
+        void ToggleNavMenu(BitNavLinkItem item)
+        {
+            ToggleNavMenu();
         }
 
         private readonly List<BitNavLinkItem> AllNavLinks = new()

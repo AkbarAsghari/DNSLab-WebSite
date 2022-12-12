@@ -33,26 +33,30 @@ else
 
     <Modal @ref="DetailsModal">
         <Title>
-            <label>@localizer["Details"]</label>
+            <BitLabel>@localizer["Details"]</BitLabel>
         </Title>
         <Body>
-            <label>@localizer["CommentText"] : @DetailsRcord.Text </label>
+            <BitLabel>@localizer["CommentText"] : @DetailsRcord.Text </BitLabel>
         </Body>
         <Footer>
             <BaseButtonComponent Caption=@localizer["Close"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=ColorEnum.Warning
+                             Icon="BitIconName.ChromeClose"
                              OnClick=DetailsModal.Close></BaseButtonComponent>
         </Footer>
     </Modal>
     <div class="card mb-4">
-        <div class="card-header">@localizer["MyComments"]</div>
+        <div class="card-header"><BitLabel>@localizer["MyComments"]</BitLabel></div>
         <div class="card-body">
             <div class="mb-3">
 
                 @if (newComments.Count() == 0)
                 {
-                    <text>@localizer["ThereIsNoNewComment"]</text>
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        <BitLabel>@localizer["ThereIsNoNewComment"]</BitLabel>
+                    </BitMessageBar>
+
                 }
                 else
                 {
@@ -62,14 +66,14 @@ else
                         <div class="row">
                             <div class="row col-lg-7 col-6">
                                 <div class="col-lg-7 col-sm-12 align-self-center">
-                                    <p class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</p>
+                                    <BitLabel Class="m-0">@localizer["CommentText"] : @(item.Text.Length > 25 ? $"{item.Text.Substring(0,25)}..." : item.Text)</BitLabel>
                                 </div>
                                 <div class="col-lg-5 col-sm-12 align-self-center">
                                     <div class="row">
-                                        <p class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</p>
+                                        <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
                                         @if (@item.UpdateDate != null)
                                         {
-                                            <p class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</p>
+                                            <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
                                         }
                                     </div>
                                 </div>
@@ -101,7 +105,6 @@ else
                                          OnClick=@(()=>ReplyComment(item))></BaseButtonComponent>
                             </div>
                         </div>
-
                     }
                 }
             </div>
