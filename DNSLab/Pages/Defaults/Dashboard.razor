@@ -7,63 +7,78 @@
 @attribute [Authorize]
 
 <div class="row">
-    <div class="col-lg-4 col-md-6 p-2">
+    <div class="col-lg-4 col-md-6">
         @if (isLoadingActiveDNSCount)
         {
             <BitProgressIndicator BarHeight="20" />
         }
         else
         {
-            <div class="alert alert-info h-100">
-                <BitLabel Class="alert-heading text-center">تعداد هاست نِیم ها</BitLabel>
-                <hr>
-                <h2 class="text-center">@activeDNSCount.ToString().EnglishToPersianNumbers()</h2>
-                <BitLabel Class="text-center">
-                    هاست نِیم بصورت فعال یافت شد
-                </BitLabel>
-                <BitLabel Class="text-center">
-                    <BitLink Href="dns/mydns">برای مدیریت کلیک کنید</BitLink>
-                </BitLabel>
-            </div>
-        }
-    </div>
-    <div class="col-lg-4 col-md-6 p-2">
-        @if (isLoadingLast24HoursChangesCount)
-        {
-            <BitProgressIndicator BarHeight="20" />
-        }
-        else
-        {
-            <div class="alert alert-warning h-100">
-                <BitLabel Class="alert-heading text-center">تعداد بروزرسانی ها</BitLabel>
-                <hr>
-                <h2 class="text-center">@last24HoursChangesCount.ToString().EnglishToPersianNumbers()</h2>
-                <BitLabel Class="text-center">
-                    دفعه در ۲۴ ساعت گذشته هاست نِیم های شما تغییر کرده‌اند
-                </BitLabel>
-                <BitLabel Class="text-center">
-                    <BitLink Href="/DNS/Histories">برای نمایش تاریخچه کلیک کنید</BitLink>
-                </BitLabel>
-            </div>
-        }
-    </div>
-    <div class="col-lg-4 col-md-6 p-2">
-        @if (isLoadingLast24HoursChangesCount)
-        {
-            <BitProgressIndicator BarHeight="20" />
-        }
-        else
-        {
-            <div class="alert alert-dark h-100">
-                <BitLabel Class="alert-heading text-center">تعداد کاربران سایت</BitLabel>
-                <hr>
-                <h2 class="text-center">@usersCount.ToString().EnglishToPersianNumbers()</h2>
-                <BitLabel Class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</BitLabel>
-                <AuthorizeView Roles="Admin" Context="adminContext">
+            <div class="card bg-light h-100">
+                <div class="card-header">
+                    <BitLabel Class="alert-heading text-center">تعداد هاست نِیم ها</BitLabel>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-center">@activeDNSCount.ToString().EnglishToPersianNumbers()</h2>
                     <BitLabel Class="text-center">
-                        <BitLink Href="/User/AllUsers">برای نمایش کاربران کلیک کنید</BitLink>
+                        هاست نِیم بصورت فعال یافت شد
                     </BitLabel>
-                </AuthorizeView>
+                </div>
+                <div class="card-footer">
+                    <BitLabel Class="text-center">
+                        <BitLink Href="dns/mydns">برای مدیریت کلیک کنید</BitLink>
+                    </BitLabel>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-4 col-md-6">
+        @if (isLoadingLast24HoursChangesCount)
+        {
+            <BitProgressIndicator BarHeight="20" />
+        }
+        else
+        {
+            <div class="card bg-light h-100">
+                <div class="card-header">
+                    <BitLabel Class="alert-heading text-center">تعداد بروزرسانی ها</BitLabel>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-center">@last24HoursChangesCount.ToString().EnglishToPersianNumbers()</h2>
+                    <BitLabel Class="text-center">
+                        دفعه در ۲۴ ساعت گذشته هاست نِیم های شما تغییر کرده‌اند
+                    </BitLabel>
+                </div>
+                <div class="card-footer">
+                    <BitLabel Class="text-center">
+                        <BitLink Href="/DNS/Histories">برای نمایش تاریخچه کلیک کنید</BitLink>
+                    </BitLabel>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-4 col-md-6">
+        @if (isLoadingLast24HoursChangesCount)
+        {
+            <BitProgressIndicator BarHeight="20" />
+        }
+        else
+        {
+            <div class="card bg-light h-100">
+                <div class="card-header">
+                    <BitLabel Class="alert-heading text-center">تعداد کاربران سایت</BitLabel>
+                </div>
+                <div class="card-body">
+                    <h2 class="text-center">@usersCount.ToString().EnglishToPersianNumbers()</h2>
+                    <BitLabel Class="text-center">نفر تاکنون در سایت ثبت نام کرده‌اند</BitLabel>
+                </div>
+                <div class="card-footer">
+                    <AuthorizeView Roles="Admin" Context="adminContext">
+                        <BitLabel Class="text-center">
+                            <BitLink Href="/User/AllUsers">برای نمایش کاربران کلیک کنید</BitLink>
+                        </BitLabel>
+                    </AuthorizeView>
+                </div>
             </div>
         }
     </div>
