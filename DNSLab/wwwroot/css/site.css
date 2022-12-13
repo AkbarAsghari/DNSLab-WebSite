@@ -24,7 +24,7 @@ h1:focus {
 }
 
 .content-not-auth {
-    padding-top: 2rem
+    padding-top: 4rem;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -318,3 +318,15 @@ a {
 }
 
 /*End Bit Platform*/
+
+.auth-card {
+    top: 2rem;
+}
+
+.illustrations {
+    height: auto;
+    width: auto;
+    min-height: 50vh;
+    max-height: inherit;
+    max-width: inherit;
+}
