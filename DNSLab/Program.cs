@@ -12,8 +12,10 @@ using DNSLab.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.JSInterop;
 using System.Globalization;
+using System.IO.Compression;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -57,8 +59,14 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSignalR(e => {
+builder.Services.AddSignalR(e =>
+{
     e.MaximumReceiveMessageSize = 3145728; //3MB
+});
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.Providers.Add<GzipCompressionProvider>();
 });
 
 var host = builder.Build();
