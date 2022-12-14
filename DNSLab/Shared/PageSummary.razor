@@ -11,7 +11,7 @@
         }
         @if (PublishDate != null)
         {
-            <text>انتشار : </text>
+            <text> - انتشار : </text>
             <strong>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong>
             @if (UpdateDate != null)
             {
