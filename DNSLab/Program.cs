@@ -66,8 +66,21 @@ builder.Services.AddSignalR(e =>
 
 builder.Services.AddResponseCompression(options =>
 {
+    options.EnableForHttps = true;
     options.Providers.Add<GzipCompressionProvider>();
 });
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.SmallestSize;
+});
+
+
 
 var host = builder.Build();
 
@@ -95,5 +108,7 @@ host.UseRouting();
 
 host.MapBlazorHub();
 host.MapFallbackToPage("/_Host");
+
+host.UseResponseCompression();
 
 await host.RunAsync();
