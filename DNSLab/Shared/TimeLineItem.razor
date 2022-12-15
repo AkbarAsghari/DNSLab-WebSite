@@ -1,13 +1,25 @@
 ﻿<li class="event" data-date="@(DateTime==null ? null : DateTime.Value.CalcRelativeTime())">
-    <BitAccordion Title="@(String.IsNullOrEmpty(Header) ? String.Empty : Header)"
+    @if (ShowBodyWithAccordion)
+    {
+        <BitAccordion Title="@(String.IsNullOrEmpty(Header) ? String.Empty : Header)"
                   Description="برای نمایش تغییرات کلیک کنید">
-        <ContentTemplate>
-            @Body
-        </ContentTemplate>
-    </BitAccordion>
+            <ContentTemplate>
+                @Body
+            </ContentTemplate>
+        </BitAccordion>
+    }
+    else
+    {
+        @if (!String.IsNullOrEmpty(Header))
+        {
+            <h3>@Header</h3>
+        }
+        @Body
+    }
 </li>
 @code {
     [Parameter] public string? Header { get; set; }
     [Parameter] public RenderFragment Body { get; set; }
+    [Parameter] public bool ShowBodyWithAccordion { get; set; } = false;
     [Parameter] public DateTime? DateTime { get; set; }
 }

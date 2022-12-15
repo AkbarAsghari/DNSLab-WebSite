@@ -21,7 +21,9 @@ else
                     <TimeLine TimeLineHeader="تاریخچه تغییرات"
                       Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
                         <TimeLineItemRenderFragment>
-                            <TimeLineItem Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")" DateTime="context.CreateDate">
+                            <TimeLineItem ShowBodyWithAccordion=true
+                                  Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")" 
+                                  DateTime="context.CreateDate">
                                 <Body>
                                     @if (context.ARecordHistories != null)
                                 @foreach (var x in context.ARecordHistories.OrderByDescending(x => x.CreateDate))
