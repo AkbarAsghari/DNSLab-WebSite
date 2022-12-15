@@ -1,6 +1,6 @@
 ﻿@inherits ToastBase
 
-<BitModal IsAlert=true IsOpen="@IsVisible">
+<BitModal IsAlert=true IsOpen="@IsVisible" Class="ToastAlert">
     <BitMessageBar MessageBarType="MessageType" OnDismiss="Close" DismissIconName="BitIconName.ChromeClose" />
     <div class="modal-body">
         <BitLabel>@Message</BitLabel>

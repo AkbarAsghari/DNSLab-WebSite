@@ -313,6 +313,10 @@ a {
     left: auto;
 }
 
+.ToastAlert .bit-mdl-container {
+    min-height: auto;
+}
+
 /*End Bit Platform*/
 
 .auth-card {
@@ -328,9 +332,9 @@ a {
 }
 
 
-.navbar{
-    padding-top:0;
-    padding-bottom:0;
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .content-not-auth {
