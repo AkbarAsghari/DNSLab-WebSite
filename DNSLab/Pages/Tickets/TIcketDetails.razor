@@ -13,6 +13,7 @@
 else
 {
     <EditForm Model="Message" Context="TicketDetails">
+        <DataAnnotationsValidator />
         <div class="card mb-4">
             <div class="card-header"><BitLabel>@localizer["TicketTitle"] : @ticket.Title</BitLabel></div>
             <div class="card-body">
