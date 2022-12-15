@@ -23,10 +23,6 @@ h1:focus {
     padding-top: 1.1rem
 }
 
-.content-not-auth {
-    padding-top: 4rem;
-}
-
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050
 }
@@ -178,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page {
-    font-size: 1.1rem
+    font-size: 1.1rem;
 }
 
 a {
@@ -329,4 +325,14 @@ a {
     min-height: 50vh;
     max-height: inherit;
     max-width: inherit;
+}
+
+
+.navbar{
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.content-not-auth {
+    padding-top: 3.2rem;
 }
