@@ -1,5 +1,5 @@
 ﻿<!-- Modal -->
-<BitModal @bind-IsOpen=IsOpen>
+<BitModal @bind-IsOpen=IsOpen IsBlocking=true>
     <div class="modal-header">
         <span>@Title</span>
         <BitIconButton OnClick=@(()=>IsOpen=false) IconName="BitIconName.ChromeClose" Title="Close" />
