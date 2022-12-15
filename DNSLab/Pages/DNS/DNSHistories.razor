@@ -41,6 +41,12 @@ else
                                     <BitLabel Class="d-inline"><code>@x.HostNameAlias</code></BitLabel>
                                     <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
                                         }
+                            @if (context.WebRedirectRecordHistories != null)
+                                @foreach (var x in context.WebRedirectRecordHistories.OrderByDescending(x => x.CreateDate))
+                                        {
+                                    <BitLabel Class="d-inline"><code>@x.URLOrIp (@x.RedirectHttpResponseStatusCode)</code></BitLabel>
+                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
+                                        }
                         </Body>
                     </TimeLineItem>
                 </TimeLineItemRenderFragment>

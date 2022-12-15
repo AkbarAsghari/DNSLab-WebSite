@@ -15,6 +15,7 @@
         public List<ARecordHistoryDTO> ARecordHistories { get; set; }
         public List<AAAARecordHistoryDTO> AAAARecordHistories { get; set; }
         public List<CNameRecordHistoryDTO> CNameRecordHistories { get; set; }
+        public List<WebRedirectRecordHistoryDTO> WebRedirectRecordHistories { get; set; }
     }
 
     public class ARecordHistoryDTO : SameHistoryDTO
@@ -30,5 +31,10 @@
     public class CNameRecordHistoryDTO : SameHistoryDTO
     {
         public string HostNameAlias { get; set; }
+    }
+    public class WebRedirectRecordHistoryDTO : SameHistoryDTO
+    {
+        public string URLOrIp { get; set; }
+        public int RedirectHttpResponseStatusCode { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿<li class="event" data-date="@(DateTime==null ? null : DateTime.Value.CalcRelativeTime())">
-    @if (!String.IsNullOrEmpty(Header))
-    {
-        <h3>@Header</h3>
-    }
-    @Body
+    <BitAccordion Title="@(String.IsNullOrEmpty(Header) ? String.Empty : Header)"
+                  Description="برای نمایش تغییرات کلیک کنید">
+        <ContentTemplate>
+            @Body
+        </ContentTemplate>
+    </BitAccordion>
 </li>
 @code {
     [Parameter] public string? Header { get; set; }
