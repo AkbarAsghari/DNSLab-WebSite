@@ -15,7 +15,6 @@ else
     <AuthorizeView Context="authViewContext">
         <Authorized>
             <EditForm class="col-xl-12" Model=changeEmail Context="ChangeEmailContext">
-                <DataAnnotationsValidator />
                 <Modal @ref="ChangeEmailModal">
                     <Title>
                         <BitLabel>@localizer["ChangeEmailAddress"]</BitLabel>
@@ -78,7 +77,6 @@ else
                 </div>
                 <div class="row">
                     <EditForm Context="UserInfoEditContext" class="col-xl-12" Model=userInfo>
-                        <DataAnnotationsValidator />
                         <div class="card mb-4">
                             <div class="card-header"><BitLabel>@localizer["BasicInfo"]</BitLabel></div>
                             <div class="card-body">
