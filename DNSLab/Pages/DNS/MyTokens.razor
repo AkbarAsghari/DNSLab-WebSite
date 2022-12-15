@@ -91,10 +91,12 @@ else
                                      Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
                 <BitLabel>لینک بروزرسانی آی پی های توکن</BitLabel>
-                <BitLabel>
-                    https://api.dnslab.ir/DNS/UDIBT?k=@token.Key
+                <div class="d-flex align-items-center">
+                    <BitLabel>
+                        https://api.dnslab.ir/DNS/UDIBT?k=@token.Key
+                    </BitLabel>
                     <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
-                </BitLabel>
+                </div>
                 <BitMessageBar MessageBarType="BitMessageBarType.Warning">
                     این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
                 </BitMessageBar>
@@ -128,11 +130,11 @@ else
                                     <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
                                 </div>
                                 <div class="col">
-                                        <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
-                                        @if (@item.UpdateDate != null)
-                                        {
-                                            <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
-                                        }
+                                    <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
+                                    @if (@item.UpdateDate != null)
+                                    {
+                                        <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
+                                    }
                                 </div>
                                 <div class="col">
                                     <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
