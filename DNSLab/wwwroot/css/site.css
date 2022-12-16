@@ -292,7 +292,8 @@ a {
 .bit-tgl-fluent,
 .bit-lnk-fluent > a,
 .bit-rbg.bit-rbg-fluent,
-.bit-acd.bit-acd-fluent {
+.bit-acd.bit-acd-fluent,
+.bit-rbl.bit-rbl-fluent {
     font-family: vazir-light;
 }
 
