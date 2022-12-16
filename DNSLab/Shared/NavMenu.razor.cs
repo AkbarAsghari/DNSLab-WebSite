@@ -16,6 +16,11 @@ namespace DNSLab.Shared
             BasicNoToolTipNavLinks = AllNavLinks.Where(x => x.Name.ToLower().Contains(value.ToLower())).ToList();
         }
 
+        private void onClearSearch()
+        {
+            BasicNoToolTipNavLinks = AllNavLinks;
+        }
+
         private bool collapseNavMenu = true;
 
         private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
