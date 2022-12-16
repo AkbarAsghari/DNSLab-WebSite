@@ -43,7 +43,6 @@ namespace DNSLab.Helper.Exceptions
                     case HttpStatusCode.Forbidden:
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.Conflict:
-                    case HttpStatusCode.NoContent:
                         break;
                     case HttpStatusCode.NotFound:
                         _navManager.NavigateTo("/404", true);
