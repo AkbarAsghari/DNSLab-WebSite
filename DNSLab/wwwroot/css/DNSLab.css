@@ -1,5 +1,3 @@
-/*Loading*/
-
 .load-sliding {
     position: absolute;
     width: inherit;
@@ -62,8 +60,6 @@
     }
 }
 
-/*Particles*/
-
 #particles-js {
     width: inherit;
     height: 100%;
@@ -76,8 +72,6 @@
     z-index: -1;
     bottom: 0
 }
-
-/*TimeLine*/
 
 .timeline {
     border-right: 3px solid #727cf5;
@@ -212,8 +206,6 @@
         right: -55.8px
     }
 
-/*Tags*/
-
 .suggestion-container {
     position: relative;
 }
@@ -299,8 +291,6 @@
         -ms-flex-positive: 1;
         flex-grow: 1
     }
-
-/*ErrorPages*/
 
 .particle-error, .permission_denied, #particles-js-error-pages {
     width: 100%;
@@ -465,8 +455,6 @@
         transform: translateY(-3px)
     }
 }
-
-/*Chat*/
 
 aside input {
     width: 100%;
@@ -649,8 +637,6 @@ main header {
         border-color: transparent transparent #6fbced transparent;
         margin-left: 375px;
     }
-
-/*CKEditor*/
 
 :root {
     --ck-color-image-caption-background: hsl(0,0%,97%);
@@ -1093,9 +1079,6 @@ main header {
         }
 }
 
-
-/*DNSLab*/
-
 @import url(open-iconic/font/css/open-iconic-bootstrap.min.css);
 
 body, html {
@@ -1372,26 +1355,7 @@ a {
         border-bottom: 1px solid #ffff80
     }
 
-
-/*Bit Platform*/
-
-.bit-btn.bit-btn-fluent,
-.bit-srch-box-fluent,
-.bit-tglb.bit-tglb-fluent,
-.bit-cmpb.bit-cmpb-fluent,
-.bit-actb.bit-actb-fluent,
-.bit-mdl-enabled-fluent,
-.bit-lbl-enabled-fluent,
-.bit-msg-bar-fluent,
-.bit-lnk-fluent,
-.bit-txt-fluent,
-.txt-field,
-.bit-drp.bit-drp-fluent,
-.bit-tgl-fluent,
-.bit-lnk-fluent > a,
-.bit-rbg.bit-rbg-fluent,
-.bit-acd.bit-acd-fluent,
-.bit-rbl.bit-rbl-fluent {
+.bit-btn.bit-btn-fluent, .bit-srch-box-fluent, .bit-tglb.bit-tglb-fluent, .bit-cmpb.bit-cmpb-fluent, .bit-actb.bit-actb-fluent, .bit-mdl-enabled-fluent, .bit-lbl-enabled-fluent, .bit-msg-bar-fluent, .bit-lnk-fluent, .bit-txt-fluent, .txt-field, .bit-drp.bit-drp-fluent, .bit-tgl-fluent, .bit-lnk-fluent > a, .bit-rbg.bit-rbg-fluent, .bit-acd.bit-acd-fluent, .bit-rbl.bit-rbl-fluent {
     font-family: vazir-light;
 }
 
@@ -1417,8 +1381,6 @@ a {
     min-height: auto;
 }
 
-/*End Bit Platform*/
-
 .auth-card {
     top: 2rem;
 }
@@ -1431,11 +1393,16 @@ a {
     max-width: inherit;
 }
 
-
 .navbar {
     padding-top: 0;
     padding-bottom: 0;
 }
+
+    .navbar button {
+        margin-top: 0 !important;
+        margin-right: 0.2rem;
+        padding: 0.2rem 1rem !important;
+    }
 
 .content-not-auth {
     padding-top: 3.2rem;
