@@ -1,5 +1,4 @@
 using Blazored.LocalStorage;
-using DNSLab.Data;
 using DNSLab.Helper.Exceptions;
 using DNSLab.Helper.Extensions;
 using DNSLab.Helper.HttpService;
@@ -54,8 +53,6 @@ builder.Services.AddLocalization();
 
 builder.Services.AddSingleton<ApplicationExceptions>();
 builder.Services.AddTransient<HttpResponseExceptionHander>();
-// Add services to the container.
-builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddHttpContextAccessor();
 
