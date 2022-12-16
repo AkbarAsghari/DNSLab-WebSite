@@ -10,13 +10,6 @@
     bool isCopied = false;
     [Parameter] public string Text { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync(identifier: "import", "/js/custom/CopyToClipboard.js");
-        }
-    }
     private async Task CopyTextToClipboard()
     {
         isCopied = await JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", Text);

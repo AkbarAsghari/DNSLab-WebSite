@@ -2,7 +2,6 @@
 
 @inject IDNSRepository dnsRepository
 @inject IStringLocalizer<Resource> localizer
-@inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
 @attribute [Authorize]
@@ -137,16 +136,11 @@ else
 
     private int totalAmountPages { get; set; }
 
-    private int ScreenWidth;
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await LoadHostNames();
-
-            var dimensions = await JS.GetDimensions();
-            ScreenWidth = dimensions.Width;
             await this.InvokeAsync(() => StateHasChanged());
         }
     }

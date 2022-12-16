@@ -29,9 +29,6 @@
 	  <Content Update="Pages\Articles\Articles.razor">
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	  </Content>
-	  <Content Update="wwwroot\js\custom\CopyToClipboard.js">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Content>
 	</ItemGroup>
 
 </Project>
