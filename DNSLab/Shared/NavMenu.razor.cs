@@ -13,7 +13,9 @@ namespace DNSLab.Shared
 
         private void onChange(string value)
         {
-            BasicNoToolTipNavLinks = AllNavLinks.Where(x => x.Name.ToLower().Contains(value.ToLower())).ToList();
+            BasicNoToolTipNavLinks = AllNavLinks.Where(x =>
+            x.Name.ToLower().Contains(value.ToLower()) ||
+            x.Links.Any(l => l.Name.ToLower().Contains(value.ToLower()))).ToList();
         }
 
         private void onClearSearch()
