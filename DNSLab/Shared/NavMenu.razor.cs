@@ -66,6 +66,13 @@ namespace DNSLab.Shared
         {
             new BitNavLinkItem
             {
+                Name = "خانه",
+                Url = "/",
+                Key = "K000",
+                IconName = BitIconName.Home
+            },
+            new BitNavLinkItem
+            {
                 Name = "داشبورد",
                 Url = "Dashboard",
                 Key = "K001",
@@ -94,6 +101,26 @@ namespace DNSLab.Shared
                                 Name = "توکن ها",
                                 Url = "dns/mytokens",
                                 Key = "K302" ,
+                            }
+                        }
+                    },
+                    new BitNavLinkItem
+                    {
+                        Name = "مرکز آموزش",
+                        IconName= BitIconName.Source,
+                        Links = new List<BitNavLinkItem>
+                        {
+                            new BitNavLinkItem
+                            {
+                                Name = "راهنمای سایت",
+                                Url = "support",
+                                Key = "K308" ,
+                            },
+                            new BitNavLinkItem
+                            {
+                                Name = "آموزش ها",
+                                Url = "articles",
+                                Key = "K309" ,
                             }
                         }
                     },
