@@ -11,12 +11,7 @@ namespace DNSLab.Helper.Extensions
             return
                  path == "/" ||
                  path == "//" ||
-                 path.ToLower().Contains("api") ||
-                 path.ToLower().Contains("support") ||
-                 path.ToLower().Contains("about") ||
-                 path.ToLower().Contains("article") ||
-                 path.ToLower().Contains("transaction/tip") ||
-                 path.ToLower().Contains("transaction/callback");
+                 path.ToLower().Contains("about");
         }
     }
 }
