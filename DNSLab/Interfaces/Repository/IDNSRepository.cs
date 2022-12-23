@@ -14,6 +14,7 @@ namespace DNSLab.Interfaces.Repository
         Task<int> GetActiveDNSCount();
         Task<int> GetTodayIPChangesCount();
         Task<int> GetLast24HoursChangesCount();
+        Task<IEnumerable<GetLast30DayIPChangesCountDTO>> GetLast30DayIPChangesCount();
         Task<int> GetAllUsersDNSCount();
 
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();

@@ -108,6 +108,26 @@ namespace DNSLab.Shared
                     },
                     new BitNavLinkItem
                     {
+                        Name = "گزارش ها",
+                        IconName = BitIconName.BarChartVertical,
+                        Links = new List<BitNavLinkItem>
+                        {
+                            new BitNavLinkItem
+                            {
+                                Name = "گزارش تغییرات هاست نِیم ها",
+                                Url = "Report/DNSHistories",
+                                Key = "K301" ,
+                            },
+                            new BitNavLinkItem
+                            {
+                                Name = "جدول تغییرات آی پی",
+                                Url = "Report/IPChangesChart",
+                                Key = "K302" ,
+                            }
+                        }
+                    },
+                    new BitNavLinkItem
+                    {
                         Name = "مرکز آموزش",
                         IconName= BitIconName.Source,
                         Links = new List<BitNavLinkItem>

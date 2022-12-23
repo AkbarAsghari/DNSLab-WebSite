@@ -164,5 +164,14 @@ namespace DNSLab.Repository
             }
             return cacheValue;
         }
+
+        public async Task<IEnumerable<GetLast30DayIPChangesCountDTO>> GetLast30DayIPChangesCount()
+        {
+            var response = await _httpService.Get<IEnumerable<GetLast30DayIPChangesCountDTO>>($"/DNS/GetLast30DayIPChangesCount");
+            if (response.Success)
+                return response.Response;
+
+            return null;
+        }
     }
 }
