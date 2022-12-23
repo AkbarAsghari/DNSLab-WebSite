@@ -64,7 +64,7 @@
         if (selectedAmountType != "0")
             amount = Convert.ToInt32(selectedAmountType);
         else
-            amount = Convert.ToInt32(Amount);
+            amount = Convert.ToInt32(Amount.PersianToEnglishNumbers());
         TipTransaction.Amount = amount;
 
         var result = await _TransactionRepository.Tip(TipTransaction);
