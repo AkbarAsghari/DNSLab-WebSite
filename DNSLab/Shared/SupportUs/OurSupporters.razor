@@ -32,7 +32,7 @@
             var amountUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
 
             result.Add(new TipDTO { FullName = $"{amountUnknownSupportersCoffee.Count()} فرد ناشناس", Amount = amountUnknownSupportersCoffee.Sum(x => x.Amount) });
-            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).Select(x => new TipDTO { FullName = x.FullName, Amount = x.Amount }));
+            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).OrderByDescending(x => x.PaidDate).Select(x => new TipDTO { FullName = x.FullName, Amount = x.Amount }));
         }
 
     }
