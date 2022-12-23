@@ -116,13 +116,13 @@ namespace DNSLab.Shared
                             {
                                 Name = "گزارش تغییرات هاست نِیم ها",
                                 Url = "Report/DNSHistories",
-                                Key = "K301" ,
+                                Key = "K310" ,
                             },
                             new BitNavLinkItem
                             {
                                 Name = "جدول تغییرات آی پی",
                                 Url = "Report/IPChangesChart",
-                                Key = "K302" ,
+                                Key = "K311" ,
                             }
                         }
                     },
