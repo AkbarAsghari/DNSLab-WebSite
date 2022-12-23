@@ -14,13 +14,14 @@
     }
     else
     {
-        <BitChart Config="_stackedBarChartConfigExample" @ref="_lineChartExample" />
+        <div>
+            <BitChart Config="_stackedBarChartConfigExample" />
+        </div>
     }
 </div>
 
 @code {
     private BitChartBarConfig _stackedBarChartConfigExample;
-    private BitChart _lineChartExample;
 
     protected override async Task OnInitializedAsync()
     {
@@ -36,11 +37,13 @@
                 Options = new BitChartBarOptions
                 {
                     Responsive = true,
+                    MaintainAspectRatio = false,
+                    AspectRatio = 0.8,
                     Title = new BitChartOptionsTitle
                     {
                         Display = true,
                         Text = "نمودار تعداد دفعات تغییرات آی پی به تفکیک روز",
-                        FontFamily = "vazir-regular"
+                        FontFamily = "vazir-regular",
                     },
                     Tooltips = new BitChartTooltips
                     {
