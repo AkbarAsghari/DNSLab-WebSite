@@ -8,6 +8,7 @@ namespace DNSLab.DTOs.Pages
 {
     public class PublishPageDTO
     {
+        public Guid Id { get; set; }
         public string Header { get; set; }
         public string Body { get; set; }
         public PageAuthorDTO Author { get; set; }
