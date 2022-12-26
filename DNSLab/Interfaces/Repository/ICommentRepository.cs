@@ -14,5 +14,11 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> DeleteComment(Guid id);
         Task<bool> UpdateComment(CommentDTO comment);
         Task<bool> ReviewComment(Guid id, bool isApproved);
+        //Page
+        Task<bool> DeletePageComment(Guid commentId);
+        Task<bool> CreatePageComment(CreatePageCommentDTO pageComment);
+        Task<IEnumerable<PageCommentAndRepliesDTO>> GetPageComments(Guid pageId);
+        Task<bool> UpdatePageComment(PageCommentDTO comment);
+        Task<PageCommentDTO> GetPageComment(Guid commentId);
     }
 }

@@ -80,10 +80,40 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<IEnumerable<FullCommentDTO>>($"/Comment/GetCommentReplies?commentId={id}");
             return result.Response;
         }
-        
+
         public async Task<int> GetCommentsNotSeenRepliesCount()
         {
             var result = await _httpService.Get<int>($"/Comment/GetCommentsNotSeenRepliesCount");
+            return result.Response;
+        }
+
+        public async Task<bool> DeletePageComment(Guid commentId)
+        {
+            var result = await _httpService.Delete<bool>($"/Comment/DeletePageComment?Id={commentId}");
+            return result.Response;
+        }
+
+        public async Task<bool> CreatePageComment(CreatePageCommentDTO pageComment)
+        {
+            var result = await _httpService.Post<CreatePageCommentDTO, bool>($"/Comment/CreatePageComment", pageComment);
+            return result.Response;
+        }
+
+        public async Task<IEnumerable<PageCommentAndRepliesDTO>> GetPageComments(Guid pageId)
+        {
+            var result = await _httpService.Get<IEnumerable<PageCommentAndRepliesDTO>>($"/Comment/GetPageComments?pageId={pageId}");
+            return result.Response;
+        }
+
+        public async Task<bool> UpdatePageComment(PageCommentDTO comment)
+        {
+            var result = await _httpService.Put<PageCommentDTO, bool>($"/Comment/UpdatePageComment", comment);
+            return result.Response;
+        }
+
+        public async Task<PageCommentDTO> GetPageComment(Guid commentId)
+        {
+            var result = await _httpService.Get<PageCommentDTO>($"/Comment/GetPageComment?commentId={commentId}");
             return result.Response;
         }
     }
