@@ -10,6 +10,17 @@
         <BitLabel>@PageComment.FullName</BitLabel>
         <BitLabel>@PageComment.CreateDate.ToLocalizerString()</BitLabel>
     </div>
+    @if (PageComment.UserId == AuthUserId)
+    {
+        <div class="col-auto">
+            <BitActionButton IconName="BitIconName.Delete" Class="bit-icon-Delete-red">
+                حذف
+            </BitActionButton>
+            <BitActionButton IconName="BitIconName.Edit">
+                ویرایش
+            </BitActionButton>
+        </div>
+    }
 </div>
 <div class="row">
     @if (IsReply)
@@ -23,5 +34,7 @@
 
 @code {
     [Parameter] public bool IsReply { get; set; } = false;
+    [Parameter] public Guid AuthUserId { get; set; } = Guid.Empty;
     [Parameter] public PageCommentDTO PageComment { get; set; }
+
 }

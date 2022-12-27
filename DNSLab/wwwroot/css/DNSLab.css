@@ -1332,6 +1332,14 @@ a {
     margin: 0.5rem 0.5rem 0.5rem 0.75rem !important;
 }
 
+.bit-icon-Delete-red > span {
+    color: red !important;
+}
+
+    .bit-icon-Delete-red > span > .bit-icon--Delete {
+        color: red !important;
+    }
+
 /*End-Bit*/
 .ToastAlert .bit-mdl-container {
     min-height: auto;
