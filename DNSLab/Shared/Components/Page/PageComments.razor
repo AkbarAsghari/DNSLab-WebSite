@@ -37,16 +37,20 @@
 </div>
 
 <Modal @ref="AddNewPageCommentModal">
-    <Title><BitLabel>ثبت دیدگاه جدید</BitLabel></Title>
+    <Title><BitLabel>@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</BitLabel></Title>
     <Body>
-        <BitLabel>اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید.</BitLabel>
+        <BitLabel>
+            @(ReplyToId == Guid.Empty ?
+            "اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید."
+            : "متن پاسخ خود را وارد نمایید")
+        </BitLabel>
         <BitTextField IsMultiline=true
                       Rows="7"
                       @bind-Value="NewPageComment.Text">
         </BitTextField>
     </Body>
     <Footer>
-        <BaseButtonComponent Caption="ثبت دیدگاه"
+        <BaseButtonComponent Caption="@(ReplyToId == Guid.Empty ? "ثبت دیدگاه": "ثبت پاسخ")"
                              Icon="BitIconName.CommentAdd"
                              OnClick="SubmitComment"></BaseButtonComponent>
     </Footer>
