@@ -18,11 +18,14 @@ else
                 }
                 else
                 {
+                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                        <BitLabel>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</BitLabel>
+                    </BitMessageBar>
                     <TimeLine TimeLineHeader="تاریخچه تغییرات"
                       Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
                         <TimeLineItemRenderFragment>
                             <TimeLineItem ShowBodyWithAccordion=true
-                                  Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")" 
+                                  Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")"
                                   DateTime="context.CreateDate">
                                 <Body>
                                     @if (context.ARecordHistories != null)
