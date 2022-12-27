@@ -22,18 +22,13 @@
         <div class="col-10">
             @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
             {
-                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
-                <BitActionButton IconName="BitIconName.Reply" OnClick="async() => await AddNewPageComment(item.Comment)">
-                    پاسخ
-                </BitActionButton>
+                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)"></PageCommentItem>
+
                 if (item.Replies.Count() > 0)
                 {
                     foreach (var reply in item.Replies)
                     {
-                        <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
-                        <BitActionButton IconName="BitIconName.Reply" OnClick="async() => await AddNewPageComment(reply)">
-                            پاسخ
-                        </BitActionButton>
+                        <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
                     }
                 }
             }

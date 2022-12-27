@@ -17,17 +17,20 @@
             <BitLabel>@PageComment.CreateDate.ToLocalizerString()</BitLabel>
         </div>
 
-        @if (PageComment.UserId == AuthUserId)
-        {
-            <div class="col-auto">
+        <div class="col-auto">
+            <BitActionButton IconName="BitIconName.Reply" OnClick="ReplyButtonClick">
+                پاسخ
+            </BitActionButton>
+            @if (PageComment.UserId == AuthUserId)
+            {
                 <BitActionButton IconName="BitIconName.Edit" OnClick="()=> IsEditing = true">
                     ویرایش
                 </BitActionButton>
                 <BitActionButton IconName="BitIconName.Delete" Class="bit-icon-Delete-red" OnClick="DeleteComment">
                     حذف
                 </BitActionButton>
-            </div>
-        }
+            }
+        </div>
     </div>
     <div class="row">
         @if (PageComment.ReplyTo != null)
@@ -78,7 +81,7 @@
 @code {
     [Parameter] public Guid AuthUserId { get; set; } = Guid.Empty;
     [Parameter] public PageCommentDTO PageComment { get; set; }
-    [Parameter] public Guid PageId { get; set; }
+    [Parameter] public EventCallback ReplyButtonClick { get; set; }
 
     bool IsEditing = false;
     bool IsDeleted = false;
