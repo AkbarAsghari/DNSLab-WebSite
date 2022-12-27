@@ -43,7 +43,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (!String.IsNullOrWhiteSpace(RedirectTo))
+        if (!String.IsNullOrWhiteSpace(RedirectTo) && !RedirectTo.ToLower().EndsWith("dashboard"))
             _toastService.ShowToast(localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
     }
 
