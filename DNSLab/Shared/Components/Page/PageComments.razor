@@ -1,0 +1,29 @@
+﻿@inject ICommentRepository _CommentRepository
+
+@if (PageCommentAndReplies != null)
+{
+    <h6>نظرات کاربران</h6>
+
+    foreach (var item in PageCommentAndReplies)
+    {
+        <PageCommentItem PageComment="item.Comment"></PageCommentItem>
+        if (item.Replies.Count() > 0)
+        {
+            foreach (var reply in item.Replies)
+            {
+                <PageCommentItem PageComment="reply" IsReply=true></PageCommentItem>
+            }
+        }
+    }
+}
+
+@code {
+    [Parameter] public Guid PageId { get; set; }
+
+    IEnumerable<PageCommentAndRepliesDTO> PageCommentAndReplies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        PageCommentAndReplies = await _CommentRepository.GetPageComments(PageId);
+    }
+}

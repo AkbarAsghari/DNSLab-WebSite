@@ -1,0 +1,27 @@
+﻿<div class="row">
+    @if (IsReply)
+    {
+        <div class="col-1" />
+    }
+    <div class="col-auto">
+        <UserProfileImage UserId="@PageComment.UserId.ToString()" Size="50"></UserProfileImage>
+    </div>
+    <div class="col-auto">
+        <BitLabel>@PageComment.FullName</BitLabel>
+        <BitLabel>@PageComment.CreateDate.ToLocalizerString()</BitLabel>
+    </div>
+</div>
+<div class="row">
+    @if (IsReply)
+    {
+        <div class="col-1" />
+    }
+    <div class="@(IsReply ? "col-11" : "col-auto")">
+        <BitLabel>@PageComment.Text</BitLabel>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool IsReply { get; set; } = false;
+    [Parameter] public PageCommentDTO PageComment { get; set; }
+}
