@@ -14,7 +14,7 @@
     <div class="col-auto">
         <BaseButtonComponent Caption="ثبت دیدگاه"
                              Icon="BitIconName.CommentAdd"
-                             OnClick="AddNewPageComment">
+                             OnClick="async() => await AddNewPageComment()">
         </BaseButtonComponent>
     </div>
     @if (PageCommentAndReplies != null)
@@ -23,11 +23,17 @@
             @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
             {
                 <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
+                <BitActionButton IconName="BitIconName.Reply" OnClick="async() => await AddNewPageComment(item.Comment)">
+                    پاسخ
+                </BitActionButton>
                 if (item.Replies.Count() > 0)
                 {
                     foreach (var reply in item.Replies)
                     {
-                        <PageCommentItem PageComment="reply" IsReply=true AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
+                        <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
+                        <BitActionButton IconName="BitIconName.Reply" OnClick="async() => await AddNewPageComment(reply)">
+                            پاسخ
+                        </BitActionButton>
                     }
                 }
             }
@@ -56,6 +62,7 @@
     [Parameter] public Guid PageId { get; set; }
 
     Guid CurrentUserId = Guid.Empty;
+    Guid ReplyToId = Guid.Empty;
 
     Modal AddNewPageCommentModal;
     CreatePageCommentDTO NewPageComment = new CreatePageCommentDTO { Text = String.Empty };
@@ -72,8 +79,13 @@
             CurrentUserId = Guid.Parse(user.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "nameid")!.Value);
     }
 
-    async Task AddNewPageComment()
+    async Task AddNewPageComment(PageCommentDTO replyTo = null)
     {
+        if (replyTo == null)
+            ReplyToId = Guid.Empty;
+        else
+            ReplyToId = replyTo.ReplyTo == null ? replyTo.Id : replyTo.ReplyTo.Value;
+
         if (CurrentUserId == Guid.Empty)
             _NavigationManager.NavigateTo($"/user/auth?RedirectTo={new Uri(_NavigationManager.Uri).AbsolutePath}");
         else
@@ -83,6 +95,9 @@
     async Task SubmitComment()
     {
         NewPageComment.PageId = PageId;
+
+        if (ReplyToId != Guid.Empty)
+            NewPageComment.ReplyTo = ReplyToId;
 
         if (await _CommentRepository.CreatePageComment(NewPageComment))
         {
