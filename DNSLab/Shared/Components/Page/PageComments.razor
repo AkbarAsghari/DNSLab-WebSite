@@ -22,12 +22,12 @@
         <div class="col-10">
             @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
             {
-                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"></PageCommentItem>
+                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
                 if (item.Replies.Count() > 0)
                 {
                     foreach (var reply in item.Replies)
                     {
-                        <PageCommentItem PageComment="reply" IsReply=true AuthUserId="CurrentUserId"></PageCommentItem>
+                        <PageCommentItem PageComment="reply" IsReply=true AuthUserId="CurrentUserId" PageId="PageId"></PageCommentItem>
                     }
                 }
             }

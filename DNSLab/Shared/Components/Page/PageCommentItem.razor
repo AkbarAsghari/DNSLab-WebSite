@@ -1,5 +1,6 @@
 ﻿@inject ICommentRepository _CommentRepository
 @inject IStringLocalizer<Resource> localizer
+@inject NavigationManager _NavigationManager
 
 @if (!IsDeleted)
 {
@@ -15,17 +16,20 @@
             <BitLabel>@PageComment.FullName</BitLabel>
             <BitLabel>@PageComment.CreateDate.ToLocalizerString()</BitLabel>
         </div>
-        @if (PageComment.UserId == AuthUserId)
-        {
-            <div class="col-auto">
+        <div class="col-auto">
+            <BitActionButton IconName="BitIconName.Reply" OnClick="AddNewPageComment">
+                پاسخ
+            </BitActionButton>
+            @if (PageComment.UserId == AuthUserId)
+            {
                 <BitActionButton IconName="BitIconName.Edit" OnClick="()=> IsEditing = true">
                     ویرایش
                 </BitActionButton>
                 <BitActionButton IconName="BitIconName.Delete" Class="bit-icon-Delete-red" OnClick="DeleteComment">
                     حذف
                 </BitActionButton>
-            </div>
-        }
+            }
+        </div>
     </div>
     <div class="row">
         @if (IsReply)
@@ -55,6 +59,22 @@
     </div>
 }
 
+<Modal @ref="AddNewPageReplyCommentModal">
+    <Title><BitLabel>پاسخ به دیدگاه</BitLabel></Title>
+    <Body>
+        <BitLabel>متن پاسخ را در کادر پایین وارد نمایید.</BitLabel>
+        <BitTextField IsMultiline=true
+                      Rows="7"
+                      @bind-Value="ReplyPageComment.Text">
+        </BitTextField>
+    </Body>
+    <Footer>
+        <BaseButtonComponent Caption="ثبت پاسخ"
+                             Icon="BitIconName.CommentAdd"
+                             OnClick="SubmitReplyComment"></BaseButtonComponent>
+    </Footer>
+</Modal>
+
 <Modal @ref=DeleteModal>
     <Title><BitLabel>آیا از حذف دیدگاه مطمئن میباشید؟</BitLabel></Title>
     <Body>
@@ -77,17 +97,38 @@
     [Parameter] public bool IsReply { get; set; } = false;
     [Parameter] public Guid AuthUserId { get; set; } = Guid.Empty;
     [Parameter] public PageCommentDTO PageComment { get; set; }
+    [Parameter] public Guid PageId { get; set; }
 
     bool IsEditing = false;
     bool IsDeleted = false;
 
+    Modal AddNewPageReplyCommentModal;
     Modal DeleteModal;
+
+    CreatePageCommentDTO ReplyPageComment = new CreatePageCommentDTO { Text = String.Empty };
+
     async Task DeleteComment() => await DeleteModal.Open();
+    async Task AddNewPageComment()
+    {
+        if (AuthUserId == Guid.Empty)
+            _NavigationManager.NavigateTo($"/user/auth?RedirectTo={new Uri(_NavigationManager.Uri).AbsolutePath}");
+        else
+            await AddNewPageReplyCommentModal.Open();
+    }
 
     async Task SubmitEditComment()
     {
         if (await _CommentRepository.UpdatePageComment(PageComment))
             IsEditing = false;
+    }
+
+    async Task SubmitReplyComment()
+    {
+        ReplyPageComment.PageId = PageId;
+        ReplyPageComment.ReplyTo = PageComment.ReplyTo == null ? PageComment.Id : PageComment.ReplyTo;
+
+        if (await _CommentRepository.CreatePageComment(ReplyPageComment))
+            await AddNewPageReplyCommentModal.Close();
     }
 
     async Task SubmitDeleteComment()
