@@ -74,7 +74,10 @@
 
     async Task AddNewPageComment()
     {
-        await AddNewPageCommentModal.Open();
+        if (CurrentUserId == Guid.Empty)
+            _NavigationManager.NavigateTo($"/user/auth?RedirectTo={new Uri(_NavigationManager.Uri).AbsolutePath}");
+        else
+            await AddNewPageCommentModal.Open();
     }
 
     async Task SubmitComment()
