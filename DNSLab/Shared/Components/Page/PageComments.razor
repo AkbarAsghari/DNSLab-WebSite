@@ -1,6 +1,5 @@
 ﻿@inject ICommentRepository _CommentRepository
 
-
 <h3>نظرات کاربران</h3>
 <div class="row">
     <BitMessageBar MessageBarType="BitMessageBarType.Info">
@@ -12,7 +11,8 @@
     </BitMessageBar>
     <div class="col-auto">
         <BaseButtonComponent Caption="ثبت دیدگاه"
-                             Icon="BitIconName.CommentAdd">
+                             Icon="BitIconName.CommentAdd"
+                             OnClick="AddNewPageComment">
         </BaseButtonComponent>
     </div>
     @if (PageCommentAndReplies != null)
@@ -33,14 +33,50 @@
     }
 </div>
 
+<Modal @ref="AddNewPageCommentModal">
+    <Title><BitLabel>ثبت دیدگاه جدید</BitLabel></Title>
+    <Body>
+        <BitLabel>اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید.</BitLabel>
+        <BitTextField IsMultiline=true
+                      Rows="7"
+                      @bind-Value="NewPageComment.Text">
+        </BitTextField>
+    </Body>
+    <Footer>
+        <BaseButtonComponent Caption="ثبت دیدگاه"
+                             Icon="BitIconName.CommentAdd"
+                             OnClick="SubmitComment"></BaseButtonComponent>
+    </Footer>
+</Modal>
+
 
 @code {
     [Parameter] public Guid PageId { get; set; }
+
+    Modal AddNewPageCommentModal;
+    CreatePageCommentDTO NewPageComment = new CreatePageCommentDTO { Text = String.Empty };
 
     IEnumerable<PageCommentAndRepliesDTO> PageCommentAndReplies;
 
     protected override async Task OnInitializedAsync()
     {
         PageCommentAndReplies = await _CommentRepository.GetPageComments(PageId);
+    }
+
+    async Task AddNewPageComment()
+    {
+        await AddNewPageCommentModal.Open();
+    }
+
+    async Task SubmitComment()
+    {
+        NewPageComment.PageId = PageId;
+
+        if (await _CommentRepository.CreatePageComment(NewPageComment))
+        {
+            NewPageComment.Text = String.Empty;
+            await AddNewPageCommentModal.Close();
+            await OnInitializedAsync();
+        }
     }
 }
