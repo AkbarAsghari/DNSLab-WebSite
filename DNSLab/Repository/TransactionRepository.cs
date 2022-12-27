@@ -25,7 +25,7 @@ namespace DNSLab.Repository
                 var result = await _httpService.Get<IEnumerable<TipDTO>>($"/Transaction/GetTips");
                 cacheValue = result.Response;
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(5));
 
                 _memoryCache.Set(CacheKeyEnum.Tips, cacheValue, cacheEntryOptions);
             }
