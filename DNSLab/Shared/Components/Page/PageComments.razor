@@ -1,21 +1,38 @@
 ﻿@inject ICommentRepository _CommentRepository
 
-@if (PageCommentAndReplies != null)
-{
-    <h6>نظرات کاربران</h6>
 
-    foreach (var item in PageCommentAndReplies)
-    {
-        <PageCommentItem PageComment="item.Comment"></PageCommentItem>
-        if (item.Replies.Count() > 0)
+<h3>نظرات کاربران</h3>
+<div class="row">
+    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+        @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
         {
-            foreach (var reply in item.Replies)
-            {
-                <PageCommentItem PageComment="reply" IsReply=true></PageCommentItem>
-            }
+            <BitLabel>تا کنون هیچ دیدگاهی ثبت نشده است ، شما میتونید اولین نفر باشید.</BitLabel>
         }
+        <BitLabel>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</BitLabel>
+    </BitMessageBar>
+    <div class="col-auto">
+        <BaseButtonComponent Caption="ثبت دیدگاه"
+                             Icon="BitIconName.CommentAdd">
+        </BaseButtonComponent>
+    </div>
+    @if (PageCommentAndReplies != null)
+    {
+        <div class="col-10">
+            @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+            {
+                <PageCommentItem PageComment="item.Comment"></PageCommentItem>
+                if (item.Replies.Count() > 0)
+                {
+                    foreach (var reply in item.Replies)
+                    {
+                        <PageCommentItem PageComment="reply" IsReply=true></PageCommentItem>
+                    }
+                }
+            }
+        </div>
     }
-}
+</div>
+
 
 @code {
     [Parameter] public Guid PageId { get; set; }
