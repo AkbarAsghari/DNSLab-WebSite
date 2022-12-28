@@ -62,6 +62,7 @@
 
     Guid CurrentUserId = Guid.Empty;
     Guid ReplyToId = Guid.Empty;
+    Guid BaseCommentId = Guid.Empty;
 
     Modal AddNewPageCommentModal;
     CreatePageCommentDTO NewPageComment = new CreatePageCommentDTO { Text = String.Empty };
@@ -83,7 +84,11 @@
         if (replyTo == null)
             ReplyToId = Guid.Empty;
         else
-            ReplyToId = replyTo.ReplyTo == null ? replyTo.Id : replyTo.ReplyTo.Value;
+        {
+            ReplyToId = replyTo.Id;
+            BaseCommentId = replyTo.ReplyTo == null ? replyTo.Id : replyTo.BaseCommentId!.Value;
+        }
+
 
         if (CurrentUserId == Guid.Empty)
             _NavigationManager.NavigateTo($"/user/auth?RedirectTo={new Uri(_NavigationManager.Uri).AbsolutePath}");
@@ -96,7 +101,10 @@
         NewPageComment.PageId = PageId;
 
         if (ReplyToId != Guid.Empty)
+        {
             NewPageComment.ReplyTo = ReplyToId;
+            NewPageComment.BaseCommentId = BaseCommentId;
+        }
 
         if (await _CommentRepository.AddNewPageComment(NewPageComment))
         {

@@ -9,5 +9,6 @@ namespace DNSLab.DTOs.Comments
     public class CreatePageCommentDTO : CreateCommentDTO
     {
         public Guid PageId { get; set; }
+        public Guid? BaseCommentId { get; set; }
     }
 }
