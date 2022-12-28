@@ -98,7 +98,7 @@
         if (ReplyToId != Guid.Empty)
             NewPageComment.ReplyTo = ReplyToId;
 
-        if (await _CommentRepository.CreatePageComment(NewPageComment))
+        if (await _CommentRepository.AddNewPageComment(NewPageComment))
         {
             NewPageComment.Text = String.Empty;
             await AddNewPageCommentModal.Close();

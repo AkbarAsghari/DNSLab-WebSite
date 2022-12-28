@@ -87,15 +87,15 @@ namespace DNSLab.Repository
             return result.Response;
         }
 
-        public async Task<bool> DeletePageComment(Guid commentId)
+        public async Task<bool> RemovePageComment(Guid commentId)
         {
-            var result = await _httpService.Delete<bool>($"/Comment/DeletePageComment?Id={commentId}");
+            var result = await _httpService.Delete<bool>($"/Comment/RemovePageComment?Id={commentId}");
             return result.Response;
         }
 
-        public async Task<bool> CreatePageComment(CreatePageCommentDTO pageComment)
+        public async Task<bool> AddNewPageComment(CreatePageCommentDTO pageComment)
         {
-            var result = await _httpService.Post<CreatePageCommentDTO, bool>($"/Comment/CreatePageComment", pageComment);
+            var result = await _httpService.Post<CreatePageCommentDTO, bool>($"/Comment/AddNewPageComment", pageComment);
             return result.Response;
         }
 

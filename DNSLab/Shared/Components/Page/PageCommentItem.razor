@@ -100,7 +100,7 @@
 
     async Task SubmitDeleteComment()
     {
-        if (await _CommentRepository.DeletePageComment(PageComment.Id))
+        if (await _CommentRepository.RemovePageComment(PageComment.Id))
         {
             await DeleteModal.Close();
             IsDeleted = true;

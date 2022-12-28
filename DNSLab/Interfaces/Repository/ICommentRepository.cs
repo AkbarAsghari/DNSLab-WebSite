@@ -15,8 +15,8 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> UpdateComment(CommentDTO comment);
         Task<bool> ReviewComment(Guid id, bool isApproved);
         //Page
-        Task<bool> DeletePageComment(Guid commentId);
-        Task<bool> CreatePageComment(CreatePageCommentDTO pageComment);
+        Task<bool> AddNewPageComment(CreatePageCommentDTO pageComment);
+        Task<bool> RemovePageComment(Guid commentId);
         Task<IEnumerable<PageCommentAndRepliesDTO>> GetPageComments(Guid pageId);
         Task<bool> UpdatePageComment(PageCommentDTO comment);
         Task<PageCommentDTO> GetPageComment(Guid commentId);
