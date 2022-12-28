@@ -1,6 +1,7 @@
 ﻿@inject ICommentRepository _CommentRepository
 @inject AuthenticationStateProvider auth
 @inject NavigationManager _NavigationManager
+@inject ToastService _ToastService;
 
 <h3>نظرات کاربران</h3>
 <div class="row">
@@ -110,7 +111,7 @@
         {
             NewPageComment.Text = String.Empty;
             await AddNewPageCommentModal.Close();
-            await OnInitializedAsync();
+            _ToastService.ShowToast("دیدگاه شما در سیستم با موفقیت ثبت شد و پس از بررسی در این صفحه نمایش داده خواهد شد.", ToastLevel.Success);
         }
     }
 }

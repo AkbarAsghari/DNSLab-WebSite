@@ -1,7 +1,7 @@
 ﻿@inject ICommentRepository _CommentRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager _NavigationManager
-
+@inject ToastService _ToastService
 @if (!IsDeleted)
 {
     <div class="row">
@@ -95,7 +95,11 @@
     async Task SubmitEditComment()
     {
         if (await _CommentRepository.UpdatePageComment(PageComment))
+        {
+            _ToastService.ShowToast("دیدگاه شما در سیستم با موفقیت ویرایش شد و پس از بررسی در این صفحه نمایش داده خواهد شد.", ToastLevel.Success);
             IsEditing = false;
+            IsDeleted = true;
+        }
     }
 
     async Task SubmitDeleteComment()
