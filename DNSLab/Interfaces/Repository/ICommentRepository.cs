@@ -20,5 +20,7 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<PageCommentAndRepliesDTO>> GetPageComments(Guid pageId);
         Task<bool> UpdatePageComment(PageCommentDTO comment);
         Task<PageCommentDTO> GetPageComment(Guid commentId);
+        Task<bool> ReviewPageComment(Guid commentId, bool isApproved);
+        Task<IEnumerable<PageCommentWithInformationDTO>> GetAllPageCommentsWithInformation(bool? isApproved = null);
     }
 }

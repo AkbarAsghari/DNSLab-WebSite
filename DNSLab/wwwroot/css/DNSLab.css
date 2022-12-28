@@ -1332,11 +1332,11 @@ a {
     margin: 0.5rem 0.5rem 0.5rem 0.75rem !important;
 }
 
-.bit-icon-Delete-red > span {
+.bit-icon-red > span {
     color: red !important;
 }
 
-    .bit-icon-Delete-red > span > .bit-icon--Delete {
+    .bit-icon-red > span > .bit-icon {
         color: red !important;
     }
 

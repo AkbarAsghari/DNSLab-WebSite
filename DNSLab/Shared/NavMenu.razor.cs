@@ -230,6 +230,12 @@ namespace DNSLab.Shared
                         Name= "مدیریت مطالب",
                         Url = "Page/MyPages",
                         Key= "K201"
+                    },
+                    new BitNavLinkItem
+                    {
+                        Name= "دیدگاه‌ها",
+                        Url = "Comment/Pages",
+                        Key= "K202"
                     }
                 }
             });

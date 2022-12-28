@@ -1,0 +1,58 @@
+﻿<div class="p-2">
+    @if (PageCommentWithInformation.ReplyOf != null)
+    {
+        <div class="row">
+
+            <div class="col-auto">
+                <UserProfileImage UserId="@PageCommentWithInformation.ReplyOf.UserId.ToString()" Size="50"></UserProfileImage>
+            </div>
+            <div class="col-auto">
+                <BitLabel>@PageCommentWithInformation.ReplyOf.FullName</BitLabel>
+                <BitLabel>@PageCommentWithInformation.ReplyOf.CreateDate.ToLocalizerString()</BitLabel>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <BitLabel Class="comment-text">@PageCommentWithInformation.ReplyOf.Text</BitLabel>
+            </div>
+        </div>
+    }
+    <div class="row">
+        @if (PageCommentWithInformation.ReplyOf != null)
+        {
+            <div class="col-1" />
+        }
+
+        <div class="col-auto">
+            <UserProfileImage UserId="@PageCommentWithInformation.Comment.UserId.ToString()" Size="50"></UserProfileImage>
+        </div>
+        <div class="col-auto">
+            <BitLabel>@PageCommentWithInformation.Comment.FullName</BitLabel>
+            <BitLabel>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</BitLabel>
+        </div>
+        <div class="col-auto">
+            <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
+                تایید
+            </BitActionButton>
+            <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
+                عدم تایید
+            </BitActionButton>
+        </div>
+    </div>
+    <div class="row">
+        @if (PageCommentWithInformation.ReplyOf != null)
+        {
+            <div class="col-1" />
+        }
+        <div class="col">
+            <BitLabel Class="comment-text">@PageCommentWithInformation.Comment.Text</BitLabel>
+        </div>
+    </div>
+</div>
+<hr />
+
+@code {
+    [Parameter] public PageCommentWithInformationDTO PageCommentWithInformation { get; set; }
+    [Parameter] public EventCallback AcceptButtonClick { get; set; }
+    [Parameter] public EventCallback RejectButtonClick { get; set; }
+}

@@ -116,5 +116,17 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<PageCommentDTO>($"/Comment/GetPageComment?commentId={commentId}");
             return result.Response;
         }
+
+        public async Task<IEnumerable<PageCommentWithInformationDTO>> GetAllPageCommentsWithInformation(bool? isApproved = null)
+        {
+            var result = await _httpService.Get<IEnumerable<PageCommentWithInformationDTO>>($"/Comment/GetAllPageCommentsWithInformation{(isApproved == null ? String.Empty : "?isApproved=" + isApproved)}");
+            return result.Response;
+        }
+
+        public async Task<bool> ReviewPageComment(Guid commentId, bool isApproved)
+        {
+            var result = await _httpService.Put<bool>($"/Comment/ReviewPageComment?commentId={commentId}&isApprove={isApproved}");
+            return result.Response;
+        }
     }
 }

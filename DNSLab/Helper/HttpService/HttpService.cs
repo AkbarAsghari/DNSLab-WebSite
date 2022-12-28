@@ -17,11 +17,11 @@ namespace DNSLab.Helper.HttpService
             = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
         private HttpResponseMessage _httpResponseMessage;
 
-        //#if DEBUG
+#if DEBUG
         private const string BaseAddress = "http://192.168.1.7";
-        //#else
-        //private const string BaseAddress = "https://api.dnslab.ir";
-        //#endif
+#else
+        private const string BaseAddress = "https://api.dnslab.ir";
+#endif
         public HttpService(HttpClient httpClient, HttpResponseExceptionHander httpResponseExceptionHander)
         {
             _httpClient = httpClient;
@@ -157,7 +157,7 @@ namespace DNSLab.Helper.HttpService
         {
             url = BaseAddress + url;
 
-            _httpResponseMessage = await _httpClient.PostAsync(url,null);
+            _httpResponseMessage = await _httpClient.PostAsync(url, null);
             await httpResponseExceptionHander.HandlerExceptionAsync(_httpResponseMessage);
             if (_httpResponseMessage.IsSuccessStatusCode)
             {

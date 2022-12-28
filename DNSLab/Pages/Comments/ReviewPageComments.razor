@@ -1,0 +1,60 @@
+﻿@page "/Comment/Pages"
+@inject ICommentRepository _CommentRepository
+
+<BitPivot OnLinkClick="PivotOnLinkClick" DefaultSelectedKey="NotReviewComments">
+    <BitPivotItem HeaderText="دیدگاه‌های بررسی نشده" Key="NotReviewComments">
+    </BitPivotItem>
+    <BitPivotItem HeaderText="دیدگاه‌های تایید شده" Key="AllApprovedComments">
+    </BitPivotItem>
+    <BitPivotItem HeaderText="دیدگاه‌های تایید نشده" Key="AllNotApprovedComments">
+    </BitPivotItem>
+</BitPivot>
+
+@if (comments != null)
+{
+    @foreach (var item in comments)
+    {
+        <CommentWithInformationItem PageCommentWithInformation="item"
+                            AcceptButtonClick="()=> ReviewComment(item.Comment.Id,true)"
+                            RejectButtonClick="()=> ReviewComment(item.Comment.Id,false)">
+        </CommentWithInformationItem>
+    }
+}
+
+@code {
+    List<PageCommentWithInformationDTO> comments = new();
+
+    private bool? IsApprovedKey = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    async Task FillCommentsList()
+    {
+        comments = (await _CommentRepository.GetAllPageCommentsWithInformation(IsApprovedKey)).ToList();
+    }
+
+    async Task PivotOnLinkClick(BitPivotItem item)
+    {
+        switch (item.Key)
+        {
+            case "NotReviewComments":
+                IsApprovedKey = null;
+                break;
+            case "AllApprovedComments":
+                IsApprovedKey = true;
+                break;
+            case "AllNotApprovedComments":
+                IsApprovedKey = false;
+                break;
+        }
+        await FillCommentsList();
+    }
+
+    async Task ReviewComment(Guid commentId, bool isApproved)
+    {
+        if (await _CommentRepository.ReviewPageComment(commentId, isApproved))
+            comments.Remove(comments.First(x => x.Comment.Id == commentId));
+    }
+}
