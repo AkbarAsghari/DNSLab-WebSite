@@ -31,12 +31,18 @@
             <BitLabel>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</BitLabel>
         </div>
         <div class="col-auto">
-            <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
-                تایید
-            </BitActionButton>
-            <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
-                عدم تایید
-            </BitActionButton>
+            @if (IsApproved == null || IsApproved == false)
+            {
+                <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
+                    تایید
+                </BitActionButton>
+            }
+            @if (IsApproved == null || IsApproved == true)
+            {
+                <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
+                    عدم تایید
+                </BitActionButton>
+            }
         </div>
     </div>
     <div class="row">
@@ -55,4 +61,5 @@
     [Parameter] public PageCommentWithInformationDTO PageCommentWithInformation { get; set; }
     [Parameter] public EventCallback AcceptButtonClick { get; set; }
     [Parameter] public EventCallback RejectButtonClick { get; set; }
+    [Parameter] public bool? IsApproved { get; set; }
 }

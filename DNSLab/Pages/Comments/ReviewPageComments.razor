@@ -15,10 +15,16 @@
     @foreach (var item in comments)
     {
         <CommentWithInformationItem PageCommentWithInformation="item"
+                            IsApproved="IsApprovedKey"
                             AcceptButtonClick="()=> ReviewComment(item.Comment.Id,true)"
                             RejectButtonClick="()=> ReviewComment(item.Comment.Id,false)">
         </CommentWithInformationItem>
     }
+
+}
+else
+{
+    <Loading />
 }
 
 @code {
@@ -28,6 +34,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await FillCommentsList();
     }
 
     async Task FillCommentsList()
