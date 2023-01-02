@@ -50,7 +50,7 @@ namespace DNSLab.Helper.Extensions
         {
             if (String.IsNullOrWhiteSpace(text))
                 return text;
-            return text.Length > 25 ? $"{text.Substring(0, 25)}..." : text;
+            return text.Length > length ? $"{text.Substring(0, length)}..." : text;
         }
     }
 }
