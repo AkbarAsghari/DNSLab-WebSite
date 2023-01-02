@@ -1,17 +1,16 @@
-﻿<div class="d-flex text-muted pt-3">
-    <svg class="bd-placeholder-img flex-shrink-0 m-1 rounded-3" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false">
-        <rect width="100%" height="100%" fill="#3a0647"></rect>
-        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff">@Title.Substring(0,1)</text>
-    </svg>
-
-    <div class="pb-2 mb-0 small lh-sm border-bottom w-100">
-        <div class="d-flex justify-content-between">
-            <a class="text-decoration-none" href=@Link><strong>@Title</strong></a>
-        </div>
-        <span class="d-block m-1">@Description</span>
+﻿<div class="row">
+    <div class="col-auto mt-2 p-0">
+        <svg class="bd-placeholder-img flex-shrink-0 m-1 rounded-3" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false">
+            <rect width="100%" height="100%" fill="#3a0647"></rect>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff">@Title.Substring(0,1)</text>
+        </svg>
+    </div>
+    <div class="col-10">
+        <BitLabel><BitLink Href=@Link>@Title</BitLink></BitLabel>
+        <BitLabel Class="text-truncate">@Description</BitLabel>
     </div>
 </div>
-
+<hr class="m-0" />
 @code {
     [Parameter] public string Title { get; set; }
     [Parameter] public string Description { get; set; }
