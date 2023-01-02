@@ -1,59 +1,66 @@
 ﻿<div class="p-2">
-    @if (PageCommentWithInformation.ReplyOf != null)
-    {
+    <div class="row">
+        <PageLinkItem Title="@PageCommentWithInformation.Page.Title"
+                      Link="@($"{PageCommentWithInformation.Page.PageType}/{PageCommentWithInformation.Page.URL}")"
+                      Description="@PageCommentWithInformation.Page.Description.MakeCut(150)">
+        </PageLinkItem>
+        @if (PageCommentWithInformation.ReplyOf != null)
+        {
+            <div class="row">
+
+                <div class="col-auto">
+                    <UserProfileImage UserId="@PageCommentWithInformation.ReplyOf.UserId.ToString()" Size="50"></UserProfileImage>
+                </div>
+                <div class="col-auto">
+                    <BitLabel>@PageCommentWithInformation.ReplyOf.FullName</BitLabel>
+                    <BitLabel>@PageCommentWithInformation.ReplyOf.CreateDate.ToLocalizerString()</BitLabel>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <BitLabel Class="comment-text">@PageCommentWithInformation.ReplyOf.Text</BitLabel>
+                </div>
+            </div>
+        }
         <div class="row">
+            @if (PageCommentWithInformation.ReplyOf != null)
+            {
+                <div class="col-1" />
+            }
 
             <div class="col-auto">
-                <UserProfileImage UserId="@PageCommentWithInformation.ReplyOf.UserId.ToString()" Size="50"></UserProfileImage>
+                <UserProfileImage UserId="@PageCommentWithInformation.Comment.UserId.ToString()" Size="50"></UserProfileImage>
             </div>
             <div class="col-auto">
-                <BitLabel>@PageCommentWithInformation.ReplyOf.FullName</BitLabel>
-                <BitLabel>@PageCommentWithInformation.ReplyOf.CreateDate.ToLocalizerString()</BitLabel>
+                <BitLabel>@PageCommentWithInformation.Comment.FullName</BitLabel>
+                <BitLabel>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</BitLabel>
+            </div>
+            <div class="col-auto">
+                @if (IsApproved == null || IsApproved == false)
+                {
+                    <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
+                        تایید
+                    </BitActionButton>
+                }
+                @if (IsApproved == null || IsApproved == true)
+                {
+                    <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
+                        عدم تایید
+                    </BitActionButton>
+                }
             </div>
         </div>
         <div class="row">
+            @if (PageCommentWithInformation.ReplyOf != null)
+            {
+                <div class="col-1" />
+            }
             <div class="col">
-                <BitLabel Class="comment-text">@PageCommentWithInformation.ReplyOf.Text</BitLabel>
+                <BitLabel Class="comment-text">@PageCommentWithInformation.Comment.Text</BitLabel>
             </div>
         </div>
-    }
-    <div class="row">
-        @if (PageCommentWithInformation.ReplyOf != null)
-        {
-            <div class="col-1" />
-        }
+    </div>
 
-        <div class="col-auto">
-            <UserProfileImage UserId="@PageCommentWithInformation.Comment.UserId.ToString()" Size="50"></UserProfileImage>
-        </div>
-        <div class="col-auto">
-            <BitLabel>@PageCommentWithInformation.Comment.FullName</BitLabel>
-            <BitLabel>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</BitLabel>
-        </div>
-        <div class="col-auto">
-            @if (IsApproved == null || IsApproved == false)
-            {
-                <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
-                    تایید
-                </BitActionButton>
-            }
-            @if (IsApproved == null || IsApproved == true)
-            {
-                <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
-                    عدم تایید
-                </BitActionButton>
-            }
-        </div>
-    </div>
-    <div class="row">
-        @if (PageCommentWithInformation.ReplyOf != null)
-        {
-            <div class="col-1" />
-        }
-        <div class="col">
-            <BitLabel Class="comment-text">@PageCommentWithInformation.Comment.Text</BitLabel>
-        </div>
-    </div>
 </div>
 <hr />
 
