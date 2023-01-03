@@ -1284,25 +1284,30 @@ a {
     font-weight: 400
 }
 
-.article > img {
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: auto;
-    margin-bottom: 10px;
-    border-style: dotted;
-    border-width: .1px
+.article {
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
-.article a {
-    color: #0071c1;
-    text-decoration: none
-}
-
-    .article a:hover {
-        text-decoration: underline
+    .article > img {
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+        margin: auto;
+        margin-bottom: 10px;
+        border-style: dotted;
+        border-width: .1px
     }
+
+    .article a {
+        color: #0071c1;
+        text-decoration: none
+    }
+
+        .article a:hover {
+            text-decoration: underline
+        }
 
 /*Bit*/
 
