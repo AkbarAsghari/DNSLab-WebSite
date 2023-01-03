@@ -32,98 +32,93 @@ else
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@localizer["HostNames"]</BitLabel></div>
-        <div class="card-body">
-            <div class="mb-3">
-                <BaseNavigateButtonComponent Href="dns/create"
-                                         Text="@(localizer["CreateHostName"])">
-                </BaseNavigateButtonComponent>
-            </div>
-            <div class="mb-3">
-                @if (hostNames.Count == 0)
-                {
-                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                        <BitLabel>@localizer["ThereIsNoHost"]</BitLabel>
-                    </BitMessageBar>
-                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                        <BitLabel>برای اطلاعات بیشتر <BitLink Target="_blank" Href="Support/Create-New-DNS">کلیک</BitLink> کنید</BitLabel>
-                    </BitMessageBar>
-                }
-                else
-                {
-                    @foreach (var item in hostNames)
-                    {
-                        <hr />
+    <h4>@localizer["HostNames"]</h4>
+    <div class="mb-3">
+        <BaseNavigateButtonComponent Href="dns/create"
+                                 Text="@(localizer["CreateHostName"])">
+        </BaseNavigateButtonComponent>
+    </div>
+    <div class="mb-3">
+        @if (hostNames.Count == 0)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>@localizer["ThereIsNoHost"]</BitLabel>
+            </BitMessageBar>
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>برای اطلاعات بیشتر <BitLink Target="_blank" Href="Support/Create-New-DNS">کلیک</BitLink> کنید</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            @foreach (var item in hostNames)
+            {
+                <hr class="m-1" />
+                <div class="row">
+                    <div class="col-lg-9 col-8">
                         <div class="row">
-                            <div class="col-lg-9 col-8">
-                                <div class="row">
-                                    <div class="col">
-                                        <BitLink Class="text-decoration-none" Href="@($"http://{@item.Name}.{@item.Domain}")" Target="_blank">
-                                            <BitLabel><code>@item.Name</code>.@item.Domain</BitLabel>
-                                        </BitLink>
-                                    </div>
-                                    <div class="col">
-                                        <BitLabel Class="d-inline">
-                                            هدف :
-                                            <BitLink Class="text-decoration-none">
-                                                @switch ((DNSRecordTypeEnum)item.RecordType)
-                                                {
-                                                    case DNSRecordTypeEnum.A:
-                                                        @item.IPv4Address
-                                                        break;
-                                                    case DNSRecordTypeEnum.AAAA:
-                                                        @item.IPv6Address
-                                                        break;
-                                                    case DNSRecordTypeEnum.CNAME:
-                                                        @item.HostNameAlias
-                                                        break;
-                                                    case DNSRecordTypeEnum.WebRedirect:
-                                                        @item.URLOrIp.MakeCut(20)
-                                                        break;
-                                                }
-                                            </BitLink>
-                                        </BitLabel>
-                                    </div>
-                                    <BitLabel Class="col">
-                                        @localizer["Type"] :
-                                        @((DNSRecordTypeEnum)item.RecordType +
-                            ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                            " ("+item.RedirectHttpResponseStatusCode+")" :
-                            String.Empty))
-                                    </BitLabel>
-                                </div>
+                            <div class="col">
+                                <BitLink Class="text-decoration-none" Href="@($"http://{@item.Name}.{@item.Domain}")" Target="_blank">
+                                    <BitLabel><code>@item.Name</code>.@item.Domain</BitLabel>
+                                </BitLink>
                             </div>
                             <div class="col">
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         IsOutLine=true
-                                         Icon=BitIconName.Edit
-                                         OnClick=@(()=>EditHostName(item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         IsOutLine=true
-                                         Icon=BitIconName.Delete
-                                         OnClick=@(()=>DeleteHostName(item)) />
+                                <BitLabel Class="d-inline">
+                                    هدف :
+                                    <BitLink Class="text-decoration-none">
+                                        @switch ((DNSRecordTypeEnum)item.RecordType)
+                                        {
+                                            case DNSRecordTypeEnum.A:
+                                                @item.IPv4Address
+                                                break;
+                                            case DNSRecordTypeEnum.AAAA:
+                                                @item.IPv6Address
+                                                break;
+                                            case DNSRecordTypeEnum.CNAME:
+                                                @item.HostNameAlias
+                                                break;
+                                            case DNSRecordTypeEnum.WebRedirect:
+                                                @item.URLOrIp.MakeCut(20)
+                                                break;
+                                        }
+                                    </BitLink>
+                                </BitLabel>
                             </div>
+                            <BitLabel Class="col">
+                                @localizer["Type"] :
+                                @((DNSRecordTypeEnum)item.RecordType +
+                    ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                    " ("+item.RedirectHttpResponseStatusCode+")" :
+                    String.Empty))
+                            </BitLabel>
                         </div>
-                    }
-                    <hr />
-                    <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
+                    </div>
+                    <div class="col">
+                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Warning
+                                 IsOutLine=true
+                                 Icon=BitIconName.Edit
+                                 OnClick=@(()=>EditHostName(item)) />
+                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Danger
+                                 IsOutLine=true
+                                 Icon=BitIconName.Delete
+                                 OnClick=@(()=>DeleteHostName(item)) />
+                    </div>
+                </div>
+            }
+            <hr />
+            <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
 
-                    <BitMessageBar MessageBarType="BitMessageBarType.Success">
-                        <BitLabel>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <BitLink Target="_blank" Href="Download/Win">دانلود</BitLink> کنید</BitLabel>
-                    </BitMessageBar>
-                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                        <BitLabel>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <BitLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
-                    </BitMessageBar>
-                }
-            </div>
-        </div>
+            <BitMessageBar MessageBarType="BitMessageBarType.Success">
+                <BitLabel>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <BitLink Target="_blank" Href="Download/Win">دانلود</BitLink> کنید</BitLabel>
+            </BitMessageBar>
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <BitLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
+            </BitMessageBar>
+        }
     </div>
-
 }
 
 @code {

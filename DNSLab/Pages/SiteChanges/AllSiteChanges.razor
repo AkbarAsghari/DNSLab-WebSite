@@ -32,60 +32,55 @@ else
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@localizer["ChangeLogs"]</BitLabel></div>
-        <div class="card-body">
-            <div class="mb-3">
-                <BaseNavigateButtonComponent Href="ChangeLogs/Create"
-                                         Text="@(localizer["CreateNewChangeLog"])">
-                </BaseNavigateButtonComponent>
-            </div>
-            <div class="mb-3">
-                @if (ChangeLogs.Count() == 0)
-                {
-                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                        <BitLabel>@localizer["ThereIsNoChangeLogs"]</BitLabel>
-                    </BitMessageBar>
-                }
-                else
-                {
-                    @foreach (var item in ChangeLogs.OrderByDescending(x => x.CreateDate))
-                    {
-                        <hr />
-                        <div class="row align-items-center">
-                            <div class="col-md-3">
-                                <BitLabel>@item.Title.MakeCut(23)</BitLabel>
-                            </div>
-                            <div class="col-md-3">
-                                <BitLink Href="@($"{item.InformationLink}")" Target="_blank">
-                                    <BitLabel><code>@item.InformationLink.MakeCut(23)</code></BitLabel>
-                                </BitLink>
-                            </div>
-                            <div class="col-md-3">
-                                <BitLabel>@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) </BitLabel>
-                                <BitLabel> @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
-                            </div>
-                            <div class="col">
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         IsOutLine=true
-                                         Icon=BitIconName.Edit
-                                         OnClick=@(()=>EditSiteChange(item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         IsOutLine=true
-                                         Icon=BitIconName.Delete
-                                         OnClick=@(()=>DeleteSiteChange(item)) />
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </div>
+    <h4>@localizer["ChangeLogs"]</h4>
+    <div class="mb-3">
+        <BaseNavigateButtonComponent Href="ChangeLogs/Create"
+                                 Text="@(localizer["CreateNewChangeLog"])">
+        </BaseNavigateButtonComponent>
     </div>
-
+    <div class="mb-3">
+        @if (ChangeLogs.Count() == 0)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>@localizer["ThereIsNoChangeLogs"]</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            @foreach (var item in ChangeLogs.OrderByDescending(x => x.CreateDate))
+            {
+                <hr />
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <BitLabel>@item.Title.MakeCut(23)</BitLabel>
+                    </div>
+                    <div class="col-md-3">
+                        <BitLink Href="@($"{item.InformationLink}")" Target="_blank">
+                            <BitLabel><code>@item.InformationLink.MakeCut(23)</code></BitLabel>
+                        </BitLink>
+                    </div>
+                    <div class="col-md-3">
+                        <BitLabel>@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) </BitLabel>
+                        <BitLabel> @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
+                    </div>
+                    <div class="col">
+                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Warning
+                                 IsOutLine=true
+                                 Icon=BitIconName.Edit
+                                 OnClick=@(()=>EditSiteChange(item)) />
+                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Danger
+                                 IsOutLine=true
+                                 Icon=BitIconName.Delete
+                                 OnClick=@(()=>DeleteSiteChange(item)) />
+                    </div>
+                </div>
+            }
+        }
+    </div>
 }
 
 @code {

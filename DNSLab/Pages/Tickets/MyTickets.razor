@@ -33,81 +33,75 @@ else
         </Footer>
     </Modal>
 
-
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@localizer["MyTickets"]</BitLabel></div>
-        <div class="card-body">
-            <div class="mb-3">
-                <BaseNavigateButtonComponent Href="Ticket/New"
-                                         Text="@(localizer["CreateNewTicket"])">
-                </BaseNavigateButtonComponent>
-            </div>
-            <div class="mb-3">
-
-                @if (tickets.Count() == 0)
-                {
-                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                        <BitLabel>@localizer["ThereIsNoTicket"]</BitLabel>
-                    </BitMessageBar>
-                }
-                else
-                {
-                    @foreach (var item in tickets)
-                    {
-                        <hr />
-                        <div class="row">
-                            <div class="row col-lg-8 col-7">
-                                <div class="col-lg-5 col-sm-12 align-self-center">
-                                    <BitLabel>@localizer["TicketTitle"] : @(item.Title.MakeCut(23))</BitLabel>
-                                </div>
-                                <div class="col-lg-5 col-sm-12 align-self-center">
-                                    <div class="row">
-                                        <BitLabel>@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
-                                        @if (@item.UpdateDate != null)
-                                        {
-                                            <BitLabel>@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
-                                        }
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-sm-12 align-self-center">
-                                    @switch (@item.IsClosed)
-                                    {
-                                        case true:
-                                            <BitLabel>@localizer["Closed"]</BitLabel>
-                                            break;
-                                        case false:
-                                            <BitLabel>@localizer["Open"]</BitLabel>
-                                            break;
-                                    }
-                                </div>
-
-                            </div>
-                            <div class="col">
-                                @if (!item.IsClosed)
+    <h4>@localizer["MyTickets"]</h4>
+    <div class="mb-3">
+        <BaseNavigateButtonComponent Href="Ticket/New"
+                                 Text="@(localizer["CreateNewTicket"])">
+        </BaseNavigateButtonComponent>
+    </div>
+    <div class="mb-3">
+        @if (tickets.Count() == 0)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>@localizer["ThereIsNoTicket"]</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            @foreach (var item in tickets)
+            {
+                <hr class="m-1" />
+                <div class="row">
+                    <div class="row col-lg-8 col-7">
+                        <div class="col-lg-5 col-sm-12 align-self-center">
+                            <BitLabel>@localizer["TicketTitle"] : @(item.Title.MakeCut(23))</BitLabel>
+                        </div>
+                        <div class="col-lg-5 col-sm-12 align-self-center">
+                            <div class="row">
+                                <BitLabel>@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
+                                @if (@item.UpdateDate != null)
                                 {
-                                    <BaseButtonComponent Caption=@localizer["Close"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         Icon=BitIconName.MailCheck
-                                         OnClick=@(()=>CloseTicket(item))></BaseButtonComponent>
+                                    <BitLabel>@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
                                 }
-                                <BaseButtonComponent Caption=@localizer["Open"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Primary
-                                         Icon=BitIconName.Mail
-                                         OnClick=@(()=>OpenTicket(item))></BaseButtonComponent>
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         Icon=BitIconName.MailUndelivered
-                                         OnClick=@(()=>DeleteTicket(item))></BaseButtonComponent>
                             </div>
                         </div>
+                        <div class="col-lg-2 col-sm-12 align-self-center">
+                            @switch (@item.IsClosed)
+                            {
+                                case true:
+                                    <BitLabel>@localizer["Closed"]</BitLabel>
+                                    break;
+                                case false:
+                                    <BitLabel>@localizer["Open"]</BitLabel>
+                                    break;
+                            }
+                        </div>
 
-                    }
-                }
-            </div>
-        </div>
+                    </div>
+                    <div class="col">
+                        @if (!item.IsClosed)
+                        {
+                            <BaseButtonComponent Caption=@localizer["Close"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Warning
+                                 Icon=BitIconName.MailCheck
+                                 OnClick=@(()=>CloseTicket(item))></BaseButtonComponent>
+                        }
+                        <BaseButtonComponent Caption=@localizer["Open"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 Icon=BitIconName.Mail
+                                 OnClick=@(()=>OpenTicket(item))></BaseButtonComponent>
+                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Danger
+                                 Icon=BitIconName.MailUndelivered
+                                 OnClick=@(()=>DeleteTicket(item))></BaseButtonComponent>
+                    </div>
+                </div>
+
+            }
+        }
     </div>
 }
 

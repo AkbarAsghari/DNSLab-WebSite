@@ -3,18 +3,10 @@
 
 @inject IStringLocalizer<Resource> localizer
 
-<div class="card mb-4">
-    <div class="card-header"><BitLabel>@localizer["Tools"]</BitLabel></div>
-    <div class="card-body">
-        <div class="d-grid gap-2 d-md-block">
-            <BaseNavigateButtonComponent Href="tools/ping" Text="@(localizer["PingChecker"])" />
-            <BaseNavigateButtonComponent Href="tools/port" Text="@(localizer["PortChecker"])" />
-            <BaseNavigateButtonComponent Href="tools/dnslookup" Text="@(localizer["DNSLookup"])" />
-            <BaseNavigateButtonComponent Href="tools/reverselookup" Text="@(localizer["ReverseLookup"])" />
-        </div>
-    </div>
+<h4>@localizer["Tools"]</h4>
+<div class="d-grid gap-2 d-md-block">
+    <BaseNavigateButtonComponent Href="tools/ping" Text="@(localizer["PingChecker"])" />
+    <BaseNavigateButtonComponent Href="tools/port" Text="@(localizer["PortChecker"])" />
+    <BaseNavigateButtonComponent Href="tools/dnslookup" Text="@(localizer["DNSLookup"])" />
+    <BaseNavigateButtonComponent Href="tools/reverselookup" Text="@(localizer["ReverseLookup"])" />
 </div>
-
-@code {
-
-}

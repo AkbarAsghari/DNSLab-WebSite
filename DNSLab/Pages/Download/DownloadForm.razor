@@ -1,37 +1,30 @@
 ﻿@page "/download/win"
 @inject IStringLocalizer<Resource> localizer
 
-<div class="card mb-4">
-    <div class="card-header"><BitLabel>@localizer["DynamicDNSUpdateClient"]</BitLabel></div>
-    <div class="card-body">
-
-        <!-- Form Row-->
-        <div class="row gx-3 mb-3">
-            <!-- Form Group (first name)-->
-            <div class="col-md-6">
-                <BaseNavigateButtonComponent Target="_blank"
-                                             Href="https://api.dnslab.ir/Files/setup/win/dnslab.msi"
-                                             Text="@(localizer["DownloadNow"] + "(v1.6.4)")">
-                </BaseNavigateButtonComponent>
-            </div>
-        </div>
-        <div class="row gx-3 mb-3">
-            <BitLabel>@localizer["WinClientMessage"]</BitLabel>
-             <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                <BitLabel>
-                    <BitIcon IconName="BitIconName.OpenSource" />
-                    این اپلیکیشن بصورت متن باز در 
-                    <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WinApplication">این مخزن</BitLink>
-                    قرار گرفته است تا برنامه نویسان با خیال راحت از آن استفاده نمایند. 
-                </BitLabel>
-            </BitMessageBar>
-            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                <BitLabel>
-                    در صورتی که شما سیستم عامل ویندوز ندارید و یا نمیخواهید از اپلیکیشن استفاده نمایید لطفا این 
-                    <BitLink Href="Support/Create-New-Token-For-DNS">مطلب</BitLink>
-                    را مطالعه بفرمایید.
-                </BitLabel>
-            </BitMessageBar>
-        </div>
+<h4>@localizer["DynamicDNSUpdateClient"]</h4>
+<div class="row gx-3 mb-3">
+    <div class="col-md-6">
+        <BaseNavigateButtonComponent Target="_blank"
+                                     Href="https://api.dnslab.ir/Files/setup/win/dnslab.msi"
+                                     Text="@(localizer["DownloadNow"] + "(v1.6.4)")">
+        </BaseNavigateButtonComponent>
     </div>
+</div>
+<div class="row gx-3 mb-3">
+    <BitLabel>@localizer["WinClientMessage"]</BitLabel>
+    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+        <BitLabel>
+            <BitIcon IconName="BitIconName.OpenSource" />
+            این اپلیکیشن بصورت متن باز در
+            <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WinApplication">این مخزن</BitLink>
+            قرار گرفته است تا برنامه نویسان با خیال راحت از آن استفاده نمایند.
+        </BitLabel>
+    </BitMessageBar>
+    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+        <BitLabel>
+            در صورتی که شما سیستم عامل ویندوز ندارید و یا نمیخواهید از اپلیکیشن استفاده نمایید لطفا این
+            <BitLink Href="Support/Create-New-Token-For-DNS">مطلب</BitLink>
+            را مطالعه بفرمایید.
+        </BitLabel>
+    </BitMessageBar>
 </div>

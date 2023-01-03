@@ -7,31 +7,26 @@
 
 <EditForm Model="Model" Context="editCtx">
     <DataAnnotationsValidator />
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@Header</BitLabel></div>
-        <div class="card-body">
-            <div class="row gx-3 mb-3">
-                @Body
-                @if (!String.IsNullOrEmpty(Result))
-                {
-                    <div class="col-md-12">
-                        <hr>
-                        <BitLabel Class="dir-ltr">@Result</BitLabel>
-                    </div>
-                }
+    <h4>@Header</h4>
+    <div class="row gx-3 mb-3">
+        @Body
+        @if (!String.IsNullOrEmpty(Result))
+        {
+            <div class="col-md-12">
+                <hr>
+                <BitLabel Class="dir-ltr">@Result</BitLabel>
             </div>
-            <BaseButtonComponent Caption="@localizer["Check"]"
-                                 Icon=BitIconName.Search
-                                 OnClick=OnValidSubmit
-                                 EditContext="editCtx">
-            </BaseButtonComponent>
-            <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
-                                         Href="tools"
-                                         Icon=BitIconName.Cancel>
-            </BaseNavigateButtonComponent>
-        </div>
+        }
     </div>
-
+    <BaseButtonComponent Caption="@localizer["Check"]"
+                         Icon=BitIconName.Search
+                         OnClick=OnValidSubmit
+                         EditContext="editCtx">
+    </BaseButtonComponent>
+    <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
+                                 Href="tools"
+                                 Icon=BitIconName.Cancel>
+    </BaseNavigateButtonComponent>
 </EditForm>
 
 @code {

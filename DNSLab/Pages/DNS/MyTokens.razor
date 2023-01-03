@@ -103,72 +103,68 @@ else
             }
         </Body>
     </Modal>
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@localizer["Tokens"]</BitLabel></div>
-        <div class="card-body">
-            <div class="mb-3">
-                <BaseNavigateButtonComponent Href="dns/createtoken"
-                                         Text="@(localizer["CreateToken"])">
-                </BaseNavigateButtonComponent>
-            </div>
-            <div class="mb-3">
+    <h4>@localizer["Tokens"]</h4>
+    <div class="mb-3">
+        <BaseNavigateButtonComponent Href="dns/createtoken"
+                                 Text="@(localizer["CreateToken"])">
+        </BaseNavigateButtonComponent>
+    </div>
+    <div class="mb-3">
 
-                @if (tokenSummaries.Count() == 0)
-                {
-                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                        <BitLabel>@localizer["ThereIsNoTokens"]</BitLabel>
-                    </BitMessageBar>
-                }
-                else
-                {
-                    @foreach (var item in tokenSummaries.OrderByDescending(x => x.CreateDate))
-                    {
-                        <hr />
-                        <div class="row">
-                            <div class="row col-lg-9 col-sm-auto align-items-center">
-                                <div class="col-lg-3 col-sm-12">
-                                    <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
-                                </div>
-                                <div class="col">
-                                    <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
-                                    @if (@item.UpdateDate != null)
-                                    {
-                                        <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
-                                    }
-                                </div>
-                                <div class="col">
-                                    <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <BaseButtonComponent Caption=@localizer["Details"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Primary
-                                         IsOutLine=true
-                                         Icon=BitIconName.DataflowsLink
-                                         OnClick=@(()=>OpenToken(item)) />
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Warning
-                                         IsOutLine=true
-                                         Icon=BitIconName.Edit
-                                         OnClick=@(()=>EditToken(item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=ColorEnum.Danger
-                                         IsOutLine=true
-                                         Icon=BitIconName.Delete
-                                         OnClick=@(()=>DeleteToken(item)) />
-                            </div>
+        @if (tokenSummaries.Count() == 0)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>@localizer["ThereIsNoTokens"]</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            @foreach (var item in tokenSummaries.OrderByDescending(x => x.CreateDate))
+            {
+                <hr />
+                <div class="row">
+                    <div class="row col-lg-9 col-sm-auto align-items-center">
+                        <div class="col-lg-3 col-sm-12">
+                            <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
                         </div>
-                    }
-                    <hr />
-                }
-                <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                    <BitLabel>برای اطلاعات بیشتر لطفا <BitLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
-                </BitMessageBar>
-            </div>
-        </div>
+                        <div class="col">
+                            <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
+                            @if (@item.UpdateDate != null)
+                            {
+                                <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
+                            }
+                        </div>
+                        <div class="col">
+                            <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <BaseButtonComponent Caption=@localizer["Details"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Primary
+                                 IsOutLine=true
+                                 Icon=BitIconName.DataflowsLink
+                                 OnClick=@(()=>OpenToken(item)) />
+                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Warning
+                                 IsOutLine=true
+                                 Icon=BitIconName.Edit
+                                 OnClick=@(()=>EditToken(item)) />
+                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=ColorEnum.Danger
+                                 IsOutLine=true
+                                 Icon=BitIconName.Delete
+                                 OnClick=@(()=>DeleteToken(item)) />
+                    </div>
+                </div>
+            }
+            <hr />
+        }
+        <BitMessageBar MessageBarType="BitMessageBarType.Info">
+            <BitLabel>برای اطلاعات بیشتر لطفا <BitLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
+        </BitMessageBar>
     </div>
 }
 

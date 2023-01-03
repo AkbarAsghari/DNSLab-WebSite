@@ -1,30 +1,27 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="comment" Context=CommentContext>
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@Title</BitLabel></div>
-        <div class="card-body">
-            <BitTextField Label="@(localizer["PleaseWriteYourComment"] +":)")"
-                          IsMultiline=true
-                          Placeholder="@(localizer["CommentText"] + "...")" Rows="7"
-                          @bind-Value=comment.Text
-                          MaxLength="MAX_TEXT_COUNT" />
-            @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
-            {
-                <BitLabel>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - comment.Text.Count())</BitLabel>
-            }
-            <BaseButtonComponent Caption=@localizer["Send"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Primary
-                                 Icon=BitIconName.Send
-                                 EditContext=CommentContext
-                                 OnClick=OnValidSubmit></BaseButtonComponent>
-            <BaseNavigateButtonComponent Href="Comment/MyComments"
-                                         Icon="BitIconName.Cancel"
-                                         Text="انصراف"></BaseNavigateButtonComponent>
-        </div>
-    </div>
+    <h4>@Title</h4>
+    <BitTextField Label="@(localizer["PleaseWriteYourComment"] +":)")"
+                  IsMultiline=true
+                  Placeholder="@(localizer["CommentText"] + "...")" Rows="7"
+                  @bind-Value=comment.Text
+                  MaxLength="MAX_TEXT_COUNT" />
+    @if (MAX_TEXT_COUNT - comment.Text.Count() < 30)
+    {
+        <BitLabel>@localizer["RemainingCharactersCount"] : @(MAX_TEXT_COUNT - comment.Text.Count())</BitLabel>
+    }
+    <BaseButtonComponent Caption=@localizer["Send"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=ColorEnum.Primary
+                         Icon=BitIconName.Send
+                         EditContext=CommentContext
+                         OnClick=OnValidSubmit></BaseButtonComponent>
+    <BaseNavigateButtonComponent Href="Comment/MyComments"
+                                 Icon="BitIconName.Cancel"
+                                 Text="انصراف"></BaseNavigateButtonComponent>
 </EditForm>
+
 @code {
     const int MAX_TEXT_COUNT = 500;
     [Parameter] public string Title { get; set; } = String.Empty;

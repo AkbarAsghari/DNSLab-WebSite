@@ -1,17 +1,13 @@
 ﻿@typeparam TItem
 
-<div class="card">
-    <div class="card-body">
-        <h6 class="card-title">@TimeLineHeader</h6>
-        <div id="content">
-            <ul class="timeline">
-                @foreach (TItem item in Data ?? Array.Empty<TItem>())
-                {
-                    @TimeLineItemRenderFragment(item)
-                }
-            </ul>
-        </div>
-    </div>
+<h4>@TimeLineHeader</h4>
+<div id="content">
+    <ul class="timeline">
+        @foreach (TItem item in Data ?? Array.Empty<TItem>())
+        {
+            @TimeLineItemRenderFragment(item)
+        }
+    </ul>
 </div>
 
 @code {

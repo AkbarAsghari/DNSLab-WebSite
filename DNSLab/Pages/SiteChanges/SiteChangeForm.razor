@@ -7,36 +7,32 @@
 else
 {
     <EditForm Model="ChangeLog" Context=ChangeLogContext>
-        <div class="card mb-4">
-            <div class="card-header"><BitLabel>@Title</BitLabel></div>
-            <div class="card-body">
-                <div class="row gx-3 mb-3">
-                    <div class="col-lg-4">
-                        <BitTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
-                    </div>
-                    <div class="col-lg-4">
-                        <BitDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
-                    </div>
-                    <div class="col-lg-4">
-                        <BitTextField Label="@localizer["InformationLink"]" Class="dir-ltr" @bind-Value=ChangeLog.InformationLink />
-                    </div>
-                    <div class="col-12">
-                        <label class="mb-1">@localizer["Description"]</label>
-                        <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
-                    </div>
-                </div>
-                <BaseButtonComponent Caption=@localizer["Save"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Primary
-                                 Icon=BitIconName.Save
-                                 EditContext=ChangeLogContext
-                                 OnClick=OnValidSubmit></BaseButtonComponent>
-                <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
-                                         Href="ChangeLogs/All"
-                                         Icon="BitIconName.Cancel">
-                </BaseNavigateButtonComponent>
+        <h4>@Title</h4>
+        <div class="row gx-3 mb-3">
+            <div class="col-lg-4">
+                <BitTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
+            </div>
+            <div class="col-lg-4">
+                <BitDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
+            </div>
+            <div class="col-lg-4">
+                <BitTextField Label="@localizer["InformationLink"]" Class="dir-ltr" @bind-Value=ChangeLog.InformationLink />
+            </div>
+            <div class="col-12">
+                <label class="mb-1">@localizer["Description"]</label>
+                <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
             </div>
         </div>
+        <BaseButtonComponent Caption=@localizer["Save"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=ColorEnum.Primary
+                         Icon=BitIconName.Save
+                         EditContext=ChangeLogContext
+                         OnClick=OnValidSubmit></BaseButtonComponent>
+        <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
+                                 Href="ChangeLogs/All"
+                                 Icon="BitIconName.Cancel">
+        </BaseNavigateButtonComponent>
     </EditForm>
 }
 @code {

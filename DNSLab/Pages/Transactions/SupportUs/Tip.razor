@@ -9,32 +9,28 @@
 <div class="container-md">
     <EditForm class="container-sm col-lg-4 mt-3" Model=TipTransaction Context="TipCtx">
         <DataAnnotationsValidator />
-        <div class="card mb-4">
-            <div class="card-header"><BitLabel>حمایت از دی‌ان‌اس لب</BitLabel></div>
-            <div class="card-body">
-                <BitTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
-                <BitTextField Label="تلفن همراه" Class="dir-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
-                <BitDropDown Label="مقدار حمایت" IsRtl=true
-                             @bind-Value="@selectedAmountType"
-                             Items="AmountTypes()">
-                </BitDropDown>
-                @if (@selectedAmountType == "0")
-                {
-                    <BitTextField Label="مبلغ" Class="dir-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
-                }
-                <BaseButtonComponent Caption=@localizer["Continue"]
-                                     IsBussyCaption=@localizer["Loading"]
-                                     CssClass="col-12"
-                                     Color=ColorEnum.Success
-                                     Icon=BitIconName.HeartFill
-                                     EditContext=TipCtx
-                                     OnClick=Go></BaseButtonComponent>
-                <BaseNavigateButtonComponent Href="/"
-                                             Text="@localizer["Cancel"]"
-                                             Icon=BitIconName.Cancel>
-                </BaseNavigateButtonComponent>
-            </div>
-        </div>
+        <h4>حمایت از دی‌ان‌اس لب</h4>
+        <BitTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
+        <BitTextField Label="تلفن همراه" Class="dir-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
+        <BitDropDown Label="مقدار حمایت" IsRtl=true
+                     @bind-Value="@selectedAmountType"
+                     Items="AmountTypes()">
+        </BitDropDown>
+        @if (@selectedAmountType == "0")
+        {
+            <BitTextField Label="مبلغ" Class="dir-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
+        }
+        <BaseButtonComponent Caption=@localizer["Continue"]
+                             IsBussyCaption=@localizer["Loading"]
+                             CssClass="col-12"
+                             Color=ColorEnum.Success
+                             Icon=BitIconName.HeartFill
+                             EditContext=TipCtx
+                             OnClick=Go></BaseButtonComponent>
+        <BaseNavigateButtonComponent Href="/"
+                                     Text="@localizer["Cancel"]"
+                                     Icon=BitIconName.Cancel>
+        </BaseNavigateButtonComponent>
     </EditForm>
     <hr />
     <div class="row">

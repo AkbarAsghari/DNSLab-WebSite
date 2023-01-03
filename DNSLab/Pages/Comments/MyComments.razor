@@ -55,84 +55,79 @@ else
 
 
 
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@localizer["MyComments"]</BitLabel></div>
-        <div class="card-body">
-            <div class="mb-3">
-                <BaseNavigateButtonComponent Href="Comment/Create"
-                                         Text="@(localizer["CreateNewComment"])">
-                </BaseNavigateButtonComponent>
-            </div>
-            <div class="mb-3">
-
-                @if (myComments.Count() == 0)
-                {
-                    <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
-                }
-                else
-                {
-                    @foreach (var item in myComments)
-                    {
-                        <hr />
-                        <div class="row">
-                            <div class="row col-lg-9 col-7 align-items-center">
-                                <div class="col-lg-4 col-sm-12">
-                                    <BitLabel Class="m-0">@localizer["CommentText"] : @item.Text.MakeCut(23)</BitLabel>
-                                </div>
-                                <div class="col-lg-5 col-sm-12">
-                                    <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
-                                    @if (@item.UpdateDate != null)
-                                    {
-                                        <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
-                                    }
-                                </div>
-                                <div class="col-lg-3 col-sm-12">
-                                    <BitLabel>
-                                        وضعیت :
-                                        @switch (@item.IsApproved)
-                                        {
-                                            case null:
-                                                @localizer["NotChecked"]
-                                                break;
-                                            case true:
-                                                @localizer["Approved"]
-                                                break;
-                                            case false:
-                                                @localizer["Disapproval"]
-                                                break;
-                                        }
-                                    </BitLabel>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         IsOutLine=true
-                                         Color=ColorEnum.Warning
-                                         Icon=BitIconName.Edit
-                                         OnClick=@(()=>EditComment(item))></BaseButtonComponent>
-                                <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         IsOutLine=true
-                                         Color=ColorEnum.Danger
-                                         Icon=BitIconName.Delete
-                                         OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
-                                @if (item.RepliesCount > 0)
-                                {
-                                    <BaseButtonComponent Caption=@localizer["Replies"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         IsOutLine=true
-                                         Color=ColorEnum.Success
-                                         Icon=BitIconName.OfficeChat
-                                         OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
-                                }
-                            </div>
+    <h4>@localizer["MyComments"]</h4>
+    <div class="mb-3">
+        <BaseNavigateButtonComponent Href="Comment/Create"
+                                 Text="@(localizer["CreateNewComment"])">
+        </BaseNavigateButtonComponent>
+    </div>
+    <div class="mb-3">
+        @if (myComments.Count() == 0)
+        {
+            <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
+        }
+        else
+        {
+            @foreach (var item in myComments)
+            {
+                <hr />
+                <div class="row">
+                    <div class="row col-lg-9 col-7 align-items-center">
+                        <div class="col-lg-4 col-sm-12">
+                            <BitLabel Class="m-0">@localizer["CommentText"] : @item.Text.MakeCut(23)</BitLabel>
                         </div>
+                        <div class="col-lg-5 col-sm-12">
+                            <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
+                            @if (@item.UpdateDate != null)
+                            {
+                                <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString().EnglishToPersianNumbers()</BitLabel>
+                            }
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <BitLabel>
+                                وضعیت :
+                                @switch (@item.IsApproved)
+                                {
+                                    case null:
+                                        @localizer["NotChecked"]
+                                        break;
+                                    case true:
+                                        @localizer["Approved"]
+                                        break;
+                                    case false:
+                                        @localizer["Disapproval"]
+                                        break;
+                                }
+                            </BitLabel>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <BaseButtonComponent Caption=@localizer["Edit"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 IsOutLine=true
+                                 Color=ColorEnum.Warning
+                                 Icon=BitIconName.Edit
+                                 OnClick=@(()=>EditComment(item))></BaseButtonComponent>
+                        <BaseButtonComponent Caption=@localizer["Delete"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 IsOutLine=true
+                                 Color=ColorEnum.Danger
+                                 Icon=BitIconName.Delete
+                                 OnClick=@(()=>DeleteComment(item))></BaseButtonComponent>
+                        @if (item.RepliesCount > 0)
+                        {
+                            <BaseButtonComponent Caption=@localizer["Replies"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 IsOutLine=true
+                                 Color=ColorEnum.Success
+                                 Icon=BitIconName.OfficeChat
+                                 OnClick=@(()=>GetRepliesModal(item))></BaseButtonComponent>
+                        }
+                    </div>
+                </div>
 
-                    }
-                }
-            </div>
-        </div>
+            }
+        }
     </div>
 }
 

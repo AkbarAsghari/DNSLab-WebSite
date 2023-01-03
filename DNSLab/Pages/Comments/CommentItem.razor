@@ -1,18 +1,17 @@
 ﻿@inject ICommentRepository commentRepository
 @inject IStringLocalizer<Resource> localizer
 
-<div class="card w-100 shadow-1-strong rounded-3">
+<hr class="m-1" />
+<div class="w-100">
     <div class="row">
-        <div class="col-xl-1 col-md-2 col-3 comment-profile">
+        <div class="col-auto comment-profile">
             <UserProfileImage Size=70 UserId="@FullComment.UserId.ToString()" />
             <BitLabel Class="text-nowrap"><small class="text-muted">@FullComment.CreateDate.CalcRelativeTime()</small></BitLabel>
         </div>
-        <div class="col-xl-11 col-md-10 col-9">
+        <div class="col-10">
             <div class="row g-0">
-                <div class="card-body">
-                    <h6>@FullComment.FullName</h6>
-                    <BitLabel Class="comment-text card-text m-0">@FullComment.Text</BitLabel>
-                </div>
+                <h6>@FullComment.FullName</h6>
+                <BitLabel Class="comment-text m-0">@FullComment.Text</BitLabel>
             </div>
         </div>
         @if (@FullComment.RepliesCount > 0)
@@ -34,7 +33,6 @@
             </div>
         }
     </div>
-
 </div>
 @code {
     [Parameter] public FullCommentDTO FullComment { get; set; }

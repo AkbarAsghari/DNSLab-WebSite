@@ -4,56 +4,51 @@
 
 <EditForm Model="TokenAndDNS" Context=TokenContext>
     <DataAnnotationsValidator />
-    <div class="card mb-4">
-        <div class="card-header"><BitLabel>@Title</BitLabel></div>
-        <div class="card-body">
-            <div class="row gx-3 mb-3">
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <BitTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" IsRequired />
-                </div>
-                <hr class="my-2" />
-                <div class="col-12">
-                    <BitLabel>@localizer["SelectDNSTitle"]</BitLabel>
-                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                        <BitLabel>@localizer["SelectDNSDescription"]</BitLabel>
+    <h4>@Title</h4>
+    <div class="row gx-3 mb-3">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <BitTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" @bind-Value="@TokenAndDNS.Name" IsRequired />
+        </div>
+        <hr class="m-1" />
+        <div class="col-12">
+            <BitLabel>@localizer["SelectDNSTitle"]</BitLabel>
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>@localizer["SelectDNSDescription"]</BitLabel>
+            </BitMessageBar>
+            <div class="row g-2">
+                @if (HostSummariesAndChecked == null)
+                {
+                    <Loading IsInTop="false" />
+                }
+                else if (HostSummariesAndChecked.Count == 0)
+                {
+                    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                        <BitLabel>@localizer["YouHaveNoActiveDNS"] <BitLink Href="dns/create">@localizer["Click"]</BitLink></BitLabel>
                     </BitMessageBar>
-                    <div class="row g-2">
-                        @if (HostSummariesAndChecked == null)
-                        {
-                            <Loading IsInTop="false" />
-                        }
-                        else if (HostSummariesAndChecked.Count == 0)
-                        {
-                            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                                <BitLabel>@localizer["YouHaveNoActiveDNS"] <BitLink Href="dns/create">@localizer["Click"]</BitLink></BitLabel>
-                            </BitMessageBar>
-                        }
-                        else
-                        {
-                            @foreach (var item in HostSummariesAndChecked)
-                            {
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="border p-3">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
-                                            <BitLabel For="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</BitLabel>
-                                        </div>
-                                    </div>
+                }
+                else
+                {
+                    @foreach (var item in HostSummariesAndChecked)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="border p-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="@item.Id.ToString().Replace("-",String.Empty)" checked="@item.IsChecked" @onchange="(e) => FilterChangedBrand(item, e)">
+                                    <BitLabel For="@item.Id.ToString().Replace("-",String.Empty)">@item.Address</BitLabel>
                                 </div>
-                            }
-                        }
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
-            <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Primary
-                                 Icon=BitIconName.Save
-                                 EditContext=TokenContext
-                                 OnClick=OnValidSubmit></BaseButtonComponent>
         </div>
     </div>
-
+    <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=ColorEnum.Primary
+                         Icon=BitIconName.Save
+                         EditContext=TokenContext
+                         OnClick=OnValidSubmit></BaseButtonComponent>
 </EditForm>
 
 @code {
