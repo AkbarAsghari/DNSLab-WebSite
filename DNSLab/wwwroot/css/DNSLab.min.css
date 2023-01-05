@@ -1436,3 +1436,7 @@ footer {
     right: 0;
     left: 0;
 }
+
+.bit-btn.primary.active {
+    background-color: #005a9e;
+}

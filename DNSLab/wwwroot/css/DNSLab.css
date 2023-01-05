@@ -1345,6 +1345,10 @@ a {
         color: red !important;
     }
 
+.bit-btn.primary.active {
+    background-color: #005a9e;
+}
+
 /*End-Bit*/
 .ToastAlert .bit-mdl-container {
     min-height: auto;
