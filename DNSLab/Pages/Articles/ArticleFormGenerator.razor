@@ -1,7 +1,7 @@
 ﻿@page "/{PageType}/{*URL}"
 @inject IPageRepository _PageRepository
 
-<div class="article ck-content">
+<div class="ck-content">
     @if (publishPageDTO != null)
     {
         <h1>@publishPageDTO.Header</h1>

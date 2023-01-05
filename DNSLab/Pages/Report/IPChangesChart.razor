@@ -4,21 +4,19 @@
 
 @attribute [Authorize]
 
-<div class="container p-5 bg-body rounded shadow-sm article">
-    <h1>نمودار تعداد دفعات تغییر IP در ۳۰ روز اخیر</h1>
-    <BitLabel>در این فرم شما تعداد دفعات تغییرات آی‌پی رکورد های DNS Host (A) به تفکیک روز را در قالب نمودار مشاهده خواهید نمود.</BitLabel>
-    <hr />
-    @if (_stackedBarChartConfigExample == null)
-    {
-        <Loading />
-    }
-    else
-    {
-        <div>
-            <BitChart Config="_stackedBarChartConfigExample" />
-        </div>
-    }
-</div>
+<h1>نمودار تعداد دفعات تغییر IP در ۳۰ روز اخیر</h1>
+<BitLabel>در این فرم شما تعداد دفعات تغییرات آی‌پی رکورد های DNS Host (A) به تفکیک روز را در قالب نمودار مشاهده خواهید نمود.</BitLabel>
+<hr />
+@if (_stackedBarChartConfigExample == null)
+{
+    <Loading />
+}
+else
+{
+    <div>
+        <BitChart Config="_stackedBarChartConfigExample" />
+    </div>
+}
 
 @code {
     private BitChartBarConfig _stackedBarChartConfigExample;

@@ -1,78 +1,76 @@
 ﻿@page "/api"
 
-<div class="container p-5 bg-body rounded shadow-sm">
-    <PageVisitCounter />
-    <h1>توسعه وب سایت DNSLab</h1>
-    <BitLabel>
-        <BitIcon IconName="BitIconName.OpenSource"></BitIcon>
-        وب سایت بصورت متن باز (Open Source) در مخزن
-        <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Target="_blank">DNSLab</BitLink>
-        در اختیار برنامه نویسان قرار گرفته است برای حمایت از پروژه میتونید ⭐ بدید.
-    </BitLabel>
-    <hr />
-    <h1>DNSLab CLI's</h1>
-    <BitLabel>
-        <BitIcon IconName="BitIconName.CommandPrompt"></BitIcon>
-        توسعه دهندگان و کاربران همچنین میتوانند برای استفاده از API های این صفحه از این
-        <BitLink Href="https://github.com/NoobforAl/DnsLab-CLI">CLI</BitLink>
-        که با زبان Go توسط دوست عزیزمون
-        <BitLink Href="https://github.com/NoobforAl">F . Sarmaly</BitLink>
-        نوشته شده است استفاده نمایند.
-    </BitLabel>
-    <hr />
-    <h1>راهنمای API های سایت برای توسعه دهندگان</h1>
-    <BitLabel>
-        <BitIcon IconName="BitIconName.AzureServiceEndpoint" />
-        توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند
-    </BitLabel>
-    <hr />
-    <BitLabel>برای دریافت آی پی عمومی از این سرویس استفاده نمایند</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text="https://api.dnslab.ir/ip" />
-        <BitLink Href="https://api.dnslab.ir/ip" Target="_blank">https://api.dnslab.ir/ip</BitLink>
-    </div>
-    <hr />
-    <BitLabel>بررسی پینگ IP یا یک آدرس اینترنتی</BitLabel>
-    <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress={IP_or_Host}</code></BitLabel>
-    <BitLabel>برای مثال</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" />
-        <BitLink href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" Target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com</BitLink>
-    </div>
-    <BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> )</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text=@("https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=" + @IPDTO.IPv4) />
-        <BitLink Href="@("https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=" + IPDTO.IPv4)" Target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4</BitLink>
-    </div>
-    <hr />
-    <BitLabel>بررسی باز بودن پورت IP یا یک آدرس اینترنتی</BitLabel>
-    <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></BitLabel>
-    <BitLabel>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" />
-        <BitLink Href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" Target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</BitLink>
-    </div>
-    <BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> ) و پورت 80</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text=@("https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress="+ @IPDTO.IPv4+"&port=80") />
-        <BitLink Href="@("https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=" + IPDTO.IPv4 + "&port=80")" Target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</BitLink>
-    </div>
-    <hr />
-    <BitLabel>بدست آوردن IP بوسیله دی‌ان‌اس</BitLabel>
-    <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress={{SubDomain}.IP_or_Host}</code></BitLabel>
-    <BitLabel>برای مثال آدرس دولوپر گوگل</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" />
-        <BitLink Href="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" Target="_blank">https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com</BitLink>
-    </div>
-    <hr />
-    <BitLabel>جستجوی معکوس IP برای بدست آوردن آدرس DNS</BitLabel>
-    <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/ReverseLookup?IPAddress={IP}</code></BitLabel>
-    <BitLabel>برای مثال آدرس IP دی‌ان‌اس گوگل</BitLabel>
-    <div class="dir-ltr">
-        <CopyToClipboard Text="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" />
-        <BitLink Href="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" Target="_blank">https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8</BitLink>
-    </div>
+<PageVisitCounter />
+<h1>توسعه وب سایت DNSLab</h1>
+<BitLabel>
+    <BitIcon IconName="BitIconName.OpenSource"></BitIcon>
+    وب سایت بصورت متن باز (Open Source) در مخزن
+    <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Target="_blank">DNSLab</BitLink>
+    در اختیار برنامه نویسان قرار گرفته است برای حمایت از پروژه میتونید ⭐ بدید.
+</BitLabel>
+<hr />
+<h1>DNSLab CLI's</h1>
+<BitLabel>
+    <BitIcon IconName="BitIconName.CommandPrompt"></BitIcon>
+    توسعه دهندگان و کاربران همچنین میتوانند برای استفاده از API های این صفحه از این
+    <BitLink Href="https://github.com/NoobforAl/DnsLab-CLI">CLI</BitLink>
+    که با زبان Go توسط دوست عزیزمون
+    <BitLink Href="https://github.com/NoobforAl">F . Sarmaly</BitLink>
+    نوشته شده است استفاده نمایند.
+</BitLabel>
+<hr />
+<h1>راهنمای API های سایت برای توسعه دهندگان</h1>
+<BitLabel>
+    <BitIcon IconName="BitIconName.AzureServiceEndpoint" />
+    توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند
+</BitLabel>
+<hr />
+<BitLabel>برای دریافت آی پی عمومی از این سرویس استفاده نمایند</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text="https://api.dnslab.ir/ip" />
+    <BitLink Href="https://api.dnslab.ir/ip" Target="_blank">https://api.dnslab.ir/ip</BitLink>
+</div>
+<hr />
+<BitLabel>بررسی پینگ IP یا یک آدرس اینترنتی</BitLabel>
+<BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress={IP_or_Host}</code></BitLabel>
+<BitLabel>برای مثال</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" />
+    <BitLink href="https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com" Target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=google.com</BitLink>
+</div>
+<BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> )</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text=@("https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=" + @IPDTO.IPv4) />
+    <BitLink Href="@("https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=" + IPDTO.IPv4)" Target="_blank">https://api.dnslab.ir/IP/IPHavePing?hostOrIPAddress=@IPDTO.IPv4</BitLink>
+</div>
+<hr />
+<BitLabel>بررسی باز بودن پورت IP یا یک آدرس اینترنتی</BitLabel>
+<BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></BitLabel>
+<BitLabel>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" />
+    <BitLink Href="https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" Target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</BitLink>
+</div>
+<BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> ) و پورت 80</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text=@("https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress="+ @IPDTO.IPv4+"&port=80") />
+    <BitLink Href="@("https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=" + IPDTO.IPv4 + "&port=80")" Target="_blank">https://api.dnslab.ir/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</BitLink>
+</div>
+<hr />
+<BitLabel>بدست آوردن IP بوسیله دی‌ان‌اس</BitLabel>
+<BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress={{SubDomain}.IP_or_Host}</code></BitLabel>
+<BitLabel>برای مثال آدرس دولوپر گوگل</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" />
+    <BitLink Href="https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com" Target="_blank">https://api.dnslab.ir/IP/DNSLookup?hostOrIPAddress=developer.google.com</BitLink>
+</div>
+<hr />
+<BitLabel>جستجوی معکوس IP برای بدست آوردن آدرس DNS</BitLabel>
+<BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/ReverseLookup?IPAddress={IP}</code></BitLabel>
+<BitLabel>برای مثال آدرس IP دی‌ان‌اس گوگل</BitLabel>
+<div class="dir-ltr">
+    <CopyToClipboard Text="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" />
+    <BitLink Href="https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8" Target="_blank">https://api.dnslab.ir/IP/ReverseLookup?IPAddress=8.8.8.8</BitLink>
 </div>
 
 @code {

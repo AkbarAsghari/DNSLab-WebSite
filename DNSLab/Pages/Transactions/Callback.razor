@@ -2,27 +2,25 @@
 @using ApplicationCore.Enums
 @inject ITransactionRepository _TransactionRepository
 
-<div class="pt-5 col-md-6 container text-center">
-    @if (Success == 1)
-    {
-        <BitMessageBar MessageBarType="BitMessageBarType.Success">
-            <BitLabel>پرداخت با موفقیت انجام شد</BitLabel>
-            <BitLabel>شناسه پرداخت : @TrackId</BitLabel>
-        </BitMessageBar>
-    }
-    else
-    {
-        <BitMessageBar MessageBarType="BitMessageBarType.Blocked" role="alert">
-            <BitLabel>پرداخت با شکست مواجه شد</BitLabel>
-            <BitLabel>شناسه : @TrackId</BitLabel>
-            <BitLabel>علت : @Result</BitLabel>
-        </BitMessageBar>
-    }
-    <BaseNavigateButtonComponent Href="/"
-                                 Text="@(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")"
-                                 Icon=BitIconName.Home>
-    </BaseNavigateButtonComponent>
-</div>
+@if (Success == 1)
+{
+    <BitMessageBar MessageBarType="BitMessageBarType.Success">
+        <BitLabel>پرداخت با موفقیت انجام شد</BitLabel>
+        <BitLabel>شناسه پرداخت : @TrackId</BitLabel>
+    </BitMessageBar>
+}
+else
+{
+    <BitMessageBar MessageBarType="BitMessageBarType.Blocked" role="alert">
+        <BitLabel>پرداخت با شکست مواجه شد</BitLabel>
+        <BitLabel>شناسه : @TrackId</BitLabel>
+        <BitLabel>علت : @Result</BitLabel>
+    </BitMessageBar>
+}
+<BaseNavigateButtonComponent Href="/"
+                             Text="@(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")"
+                             Icon=BitIconName.Home>
+</BaseNavigateButtonComponent>
 
 @code {
     [Parameter]

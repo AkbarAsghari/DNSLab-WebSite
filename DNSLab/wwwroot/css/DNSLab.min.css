@@ -5,3 +5,8 @@
     .bit-icon-red > span > .bit-icon {
         color: red !important;
     }
+
+
+.container {
+    padding: 3rem !important;
+}

@@ -1376,3 +1376,7 @@ a {
 .content-not-auth {
     padding-top: 3.2rem;
 }
+
+.container {
+    padding: 3rem !important;
+}

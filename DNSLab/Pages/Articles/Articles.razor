@@ -1,21 +1,19 @@
 ﻿@page "/Articles"
 @inject IPageRepository _PageRepository
 
-<div class="container p-5 bg-body rounded shadow-sm">
-    <h4 class="border-bottom pb-2 mb-0">آموزش</h4>
-    @if (pageSummaries == null)
+<h4 class="border-bottom pb-2 mb-0">آموزش</h4>
+@if (pageSummaries == null)
+{
+    <Loading />
+}
+else
+{
+    @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
     {
-        <Loading />
+        <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
     }
-    else
-    {
-        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
-        {
-            <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
-        }
-    }
+}
 
-</div>
 @code {
     IEnumerable<PageSummaryDTO> pageSummaries;
 

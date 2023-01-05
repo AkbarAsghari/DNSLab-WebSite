@@ -9,55 +9,53 @@
 }
 else
 {
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                @if (dNSChangeHistories.Count == 0)
-                {
-                    <BitLabel>هیج تغییراتی یافت نشد</BitLabel>
-                }
-                else
-                {
-                    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                        <BitLabel>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</BitLabel>
-                    </BitMessageBar>
-                    <TimeLine TimeLineHeader="تاریخچه تغییرات"
-                      Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
-                        <TimeLineItemRenderFragment>
-                            <TimeLineItem ShowBodyWithAccordion=true
-                                  Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")"
-                                  DateTime="context.CreateDate">
-                                <Body>
-                                    @if (context.ARecordHistories != null)
-                                @foreach (var x in context.ARecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                    <BitLabel Class="d-inline"><code>@x.IPv4Address</code></BitLabel>
-                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
-                                        }
-                            @if (context.AAAARecordHistories != null)
-                                @foreach (var x in context.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                    <BitLabel Class="d-inline"><code>@x.IPv6Address</code></BitLabel>
-                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
-                                        }
-                            @if (context.CNameRecordHistories != null)
-                                @foreach (var x in context.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                    <BitLabel Class="d-inline"><code>@x.HostNameAlias</code></BitLabel>
-                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
-                                        }
-                            @if (context.WebRedirectRecordHistories != null)
-                                @foreach (var x in context.WebRedirectRecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                    <BitLabel Class="d-inline"><code>@x.URLOrIp (@x.RedirectHttpResponseStatusCode)</code></BitLabel>
-                                    <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
-                                        }
-                        </Body>
-                    </TimeLineItem>
-                </TimeLineItemRenderFragment>
-            </TimeLine>
-                }
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            @if (dNSChangeHistories.Count == 0)
+            {
+                <BitLabel>هیج تغییراتی یافت نشد</BitLabel>
+            }
+            else
+            {
+                <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                    <BitLabel>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</BitLabel>
+                </BitMessageBar>
+                <TimeLine TimeLineHeader="تاریخچه تغییرات"
+                  Data="@dNSChangeHistories.OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate)">
+                    <TimeLineItemRenderFragment>
+                        <TimeLineItem ShowBodyWithAccordion=true
+                              Header="@($"{context.Name} ({(DNSRecordTypeEnum)context.RecordType})")"
+                              DateTime="context.CreateDate">
+                            <Body>
+                                @if (context.ARecordHistories != null)
+                            @foreach (var x in context.ARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                <BitLabel Class="d-inline"><code>@x.IPv4Address</code></BitLabel>
+                                <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
+                                    }
+                        @if (context.AAAARecordHistories != null)
+                            @foreach (var x in context.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                <BitLabel Class="d-inline"><code>@x.IPv6Address</code></BitLabel>
+                                <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
+                                    }
+                        @if (context.CNameRecordHistories != null)
+                            @foreach (var x in context.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                <BitLabel Class="d-inline"><code>@x.HostNameAlias</code></BitLabel>
+                                <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
+                                    }
+                        @if (context.WebRedirectRecordHistories != null)
+                            @foreach (var x in context.WebRedirectRecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                <BitLabel Class="d-inline"><code>@x.URLOrIp (@x.RedirectHttpResponseStatusCode)</code></BitLabel>
+                                <BitLabel Class="mb-0"><small>@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</small></BitLabel>
+                                    }
+                    </Body>
+                </TimeLineItem>
+            </TimeLineItemRenderFragment>
+        </TimeLine>
+            }
         </div>
     </div>
 }

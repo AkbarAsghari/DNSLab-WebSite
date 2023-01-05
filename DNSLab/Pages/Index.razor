@@ -5,69 +5,62 @@
 @inject ToastService toast
 @inject IStringLocalizer<Resource> localizer
 
-<div class="index-page">
-
-    <div class="container-xl">
-        <div class="px-4 py-5 text-center">
-            <h1>@localizer["IndexH1Message"]</h1>
-            <div class="col-lg-9 mx-auto">
-                <BitLabel Class="lead mb-5">@localizer["IndexMessage"]</BitLabel>
-            </div>
-            <div class="form-inline dir-ltr">
-                <div class="input-group mb-3 d-flex justify-content-center">
-                    <BitLabel> آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong> </BitLabel>
-                    <CopyToClipboard Text="@IPDTO.IPv4" />
-                </div>
-            </div>
-        </div>
-
-        <div class="container px-4" id="hanging-icons">
-            <h2>@localizer["StayConnected"]</h2>
-            <BitLabel>@localizer["StayConnectedMessage"]</BitLabel>
-            <div class="row pb-3 row-cols-1 row-cols-lg-3">
-                <div class="feature col">
-                    <div class="feature-icon">
-                        <img alt="remote" src="../images/Icons/Remote.svg" class="index-product-img" />
-                    </div>
-                    <h3>@localizer["RemoteAccessComputerH2"]</h3>
-                    <BitLabel>@localizer["RemoteAccessComputerMessage"]</BitLabel>
-                    @*  <a href="#" class="btn btn-outline-primary w-100">
-                    @localizer["More"]
-                    </a>*@
-                </div>
-                <div class="feature col">
-                    <div class="feature-icon">
-                        <img alt="remote" src="../images/Icons/Game.svg" class="index-product-img" />
-                    </div>
-                    <h3>@localizer["CreateGameServerH2"]</h3>
-                    <BitLabel>@localizer["CreateGameServerMessage"]</BitLabel>
-                </div>
-                <div class="feature col">
-                    <div class="feature-icon">
-                        <img alt="remote" src="../images/Icons/Project.svg" class="index-product-img" />
-                    </div>
-                    <h3>@localizer["ShareYourLocalProjectH2"]</h3>
-                    <BitLabel>@localizer["ShareYourLocalProjectMessage"]</BitLabel>
-                    <BaseNavigateButtonComponent Text="@localizer["More"]"
-                                                 Href="/Support/how-to-use-dnslab">
-                    </BaseNavigateButtonComponent>
-                </div>
-            </div>
-            <div class="px-4 py-5 text-center">
-                <SupportUsButton />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <Comments />
-            </div>
-            <div class="col-md-4">
-                <SiteChangeHistories />
-            </div>
+<div class="py-5 text-center">
+    <h1>@localizer["IndexH1Message"]</h1>
+    <div class="col-lg-9 mx-auto">
+        <BitLabel Class="lead mb-5">@localizer["IndexMessage"]</BitLabel>
+    </div>
+    <div class="form-inline dir-ltr">
+        <div class="input-group mb-3 d-flex justify-content-center">
+            <BitLabel> آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong> </BitLabel>
+            <CopyToClipboard Text="@IPDTO.IPv4" />
         </div>
     </div>
-    <Footer />
 </div>
+
+<h2>@localizer["StayConnected"]</h2>
+<BitLabel>@localizer["StayConnectedMessage"]</BitLabel>
+<div class="row pb-3 row-cols-1 row-cols-lg-3">
+    <div class="feature col">
+        <div class="feature-icon">
+            <img alt="remote" src="../images/Icons/Remote.svg" class="index-product-img" />
+        </div>
+        <h3>@localizer["RemoteAccessComputerH2"]</h3>
+        <BitLabel>@localizer["RemoteAccessComputerMessage"]</BitLabel>
+        @*  <a href="#" class="btn btn-outline-primary w-100">
+        @localizer["More"]
+        </a>*@
+    </div>
+    <div class="feature col">
+        <div class="feature-icon">
+            <img alt="remote" src="../images/Icons/Game.svg" class="index-product-img" />
+        </div>
+        <h3>@localizer["CreateGameServerH2"]</h3>
+        <BitLabel>@localizer["CreateGameServerMessage"]</BitLabel>
+    </div>
+    <div class="feature col">
+        <div class="feature-icon">
+            <img alt="remote" src="../images/Icons/Project.svg" class="index-product-img" />
+        </div>
+        <h3>@localizer["ShareYourLocalProjectH2"]</h3>
+        <BitLabel>@localizer["ShareYourLocalProjectMessage"]</BitLabel>
+        <BaseNavigateButtonComponent Text="@localizer["More"]"
+                                     Href="/Support/how-to-use-dnslab">
+        </BaseNavigateButtonComponent>
+    </div>
+</div>
+<div class="px-4 py-5 text-center">
+    <SupportUsButton />
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <Comments />
+    </div>
+    <div class="col-md-4">
+        <SiteChangeHistories />
+    </div>
+</div>
+<Footer />
 
 @code {
     [CascadingParameter] public IPDTO IPDTO { get; set; }

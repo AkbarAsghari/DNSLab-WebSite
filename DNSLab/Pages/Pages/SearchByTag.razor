@@ -1,37 +1,35 @@
 ﻿@page "/Tag/{Tag}"
 @inject IPageRepository _PageRepository
 
-<div class="container p-5 bg-body rounded shadow-sm">
-    <h1 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h1>
-    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-        <BitLabel>در این صفحه مطالب متناسب با کلید واژه انتخاب شده برای شما نمایش داده میشود و میتوانید به محتوای مورد نیاز ، سریع تر دسترسی پیدا کنید.</BitLabel>
-        <BitLabel>توجه داشته باشید که مرتب سازی مطالب بر اساس تاریخ انتشار آن میباشد . مطالب جدیدتر در بالای لیست قرار دارند.</BitLabel>
+<h1 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h1>
+<BitMessageBar MessageBarType="BitMessageBarType.Info">
+    <BitLabel>در این صفحه مطالب متناسب با کلید واژه انتخاب شده برای شما نمایش داده میشود و میتوانید به محتوای مورد نیاز ، سریع تر دسترسی پیدا کنید.</BitLabel>
+    <BitLabel>توجه داشته باشید که مرتب سازی مطالب بر اساس تاریخ انتشار آن میباشد . مطالب جدیدتر در بالای لیست قرار دارند.</BitLabel>
+</BitMessageBar>
+
+@if (pageSummaries != null)
+{
+    <BitLabel>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </BitLabel>
+    <hr />
+}
+@if (pageSummaries == null)
+{
+    <Loading />
+}
+else if (pageSummaries.Count() > 0)
+{
+    @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
+    {
+        <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+    }
+}
+else
+{
+    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+        <BitLabel class="text-center">موردی یافت نشد</BitLabel>
     </BitMessageBar>
+}
 
-    @if (pageSummaries != null)
-    {
-        <BitLabel>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </BitLabel>
-        <hr />
-    }
-    @if (pageSummaries == null)
-    {
-        <Loading />
-    }
-    else if (pageSummaries.Count() > 0)
-    {
-        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
-        {
-            <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
-        }
-    }
-    else
-    {
-        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-            <BitLabel class="text-center">موردی یافت نشد</BitLabel>
-        </BitMessageBar>
-    }
-
-</div>
 @code {
     IEnumerable<PageSummaryDTO> pageSummaries;
 

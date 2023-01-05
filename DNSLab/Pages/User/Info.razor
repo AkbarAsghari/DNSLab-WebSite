@@ -36,133 +36,131 @@ else
                     </Footer>
                 </Modal>
             </EditForm>
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-xl-3 g-1">
-                        <!-- Profile picture card-->
-                        <div class="card mb-4 mb-xl-0">
-                            <div class="card-header"><BitLabel>@localizer["ProfilePicture"]</BitLabel></div>
-                            <div class="card-body text-center">
-                                <UserProfileImage Size=200></UserProfileImage>
+            <div class="row g-2">
+                <div class="col-xl-3 g-1">
+                    <!-- Profile picture card-->
+                    <div class="card mb-4 mb-xl-0">
+                        <div class="card-header"><BitLabel>@localizer["ProfilePicture"]</BitLabel></div>
+                        <div class="card-body text-center">
+                            <UserProfileImage Size=200></UserProfileImage>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-xl-9 g-1">
+                    <div class="col-xl-12 g-0">
+                        <div class="card mb-2">
+                            <div class="card-header"><BitLabel>@localizer["SiteSettings"]</BitLabel></div>
+                            <div class="card-body">
+                                <div class="row gx-3 mb-3">
+                                    <!-- Form Group (first name)-->
+                                    <div class="col-md-6">
+                                        <CultureSelector @ref=cultureSelector />
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="row col-xl-9 g-1">
-                        <div class="col-xl-12 g-0">
-                            <div class="card mb-2">
-                                <div class="card-header"><BitLabel>@localizer["SiteSettings"]</BitLabel></div>
-                                <div class="card-body">
-                                    <div class="row gx-3 mb-3">
-                                        <!-- Form Group (first name)-->
-                                        <div class="col-md-6">
-                                            <CultureSelector @ref=cultureSelector />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12 g-0">
-                            <div class="card mb-2">
-                                <div class="card-header"><BitLabel>تنظیمات امنیتی</BitLabel></div><!--!-->
-                                <div class="card-body">
-                                    <BaseNavigateButtonComponent Href="user/changepassword"
-                                                             Text="تغییر رمز عبور"
-                                                             Icon="BitIconName.Lock">
-                                    </BaseNavigateButtonComponent>
-                                </div>
+                    <div class="col-xl-12 g-0">
+                        <div class="card mb-2">
+                            <div class="card-header"><BitLabel>تنظیمات امنیتی</BitLabel></div><!--!-->
+                            <div class="card-body">
+                                <BaseNavigateButtonComponent Href="user/changepassword"
+                                                         Text="تغییر رمز عبور"
+                                                         Icon="BitIconName.Lock">
+                                </BaseNavigateButtonComponent>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <EditForm Context="UserInfoEditContext" class="col-xl-12" Model=userInfo>
-                        <div class="card mb-4">
-                            <div class="card-header"><BitLabel>@localizer["BasicInfo"]</BitLabel></div>
-                            <div class="card-body">
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-xl-6">
-                                        <BitTextField Class="dir-ltr pb-2" Placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" IsReadonly=true />
-                                        <BaseButtonComponent Caption=@localizer["Edit"]
-                                                         IsBussyCaption=@localizer["Loading"]
-                                                         Color=ColorEnum.Primary
-                                                         Icon=BitIconName.Edit
-                                                         OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
-                                    </div>
+            </div>
+            <div class="row">
+                <EditForm Context="UserInfoEditContext" class="col-xl-12" Model=userInfo>
+                    <div class="card mb-4">
+                        <div class="card-header"><BitLabel>@localizer["BasicInfo"]</BitLabel></div>
+                        <div class="card-body">
+                            <div class="row gx-3 mb-3">
+                                <div class="col-xl-6">
+                                    <BitTextField Class="dir-ltr pb-2" Placeholder="@localizer["YourEmail"]" @bind-Value="@userInfo.Email" IsReadonly=true />
+                                    <BaseButtonComponent Caption=@localizer["Edit"]
+                                                     IsBussyCaption=@localizer["Loading"]
+                                                     Color=ColorEnum.Primary
+                                                     Icon=BitIconName.Edit
+                                                     OnClick=@(()=>OpenChangeEmailModal())></BaseButtonComponent>
                                 </div>
-                                @if (!@userInfo.IsEmailApproved)
+                            </div>
+                            @if (!@userInfo.IsEmailApproved)
+                            {
+                                @if (ResentButtonClicked)
                                 {
-                                    @if (ResentButtonClicked)
-                                    {
-                                        <BitMessageBar MessageBarType="BitMessageBarType.Success">
-                                            <BitLabel>@localizer["ActivationLinkSent"]</BitLabel>
-                                        </BitMessageBar>
-                                    }
-                                    else
-                                    {
-                                        <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
-                                            <BitLabel>
-                                                @localizer["YourEmailNotApprovedYet"]
-                                                <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
-                                                         IsBussyCaption=@localizer["Progressing"]
-                                                         Icon=BitIconName.MailCheck
-                                                         Color=ColorEnum.Link
-                                                         OnClick="ResendActivationLink"></BaseButtonComponent>
-                                            </BitLabel>
-                                        </BitMessageBar>
-                                    }
+                                    <BitMessageBar MessageBarType="BitMessageBarType.Success">
+                                        <BitLabel>@localizer["ActivationLinkSent"]</BitLabel>
+                                    </BitMessageBar>
                                 }
-                                <hr>
-                                <div class="row gx-3 mb-3">
-                                    <div class="col-xl-6">
-                                        <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@userInfo.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
-                                        <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@userInfo.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
-                                    </div>
-                                    <div class="col">
-                                        @if (!@userInfo.IsEmailApproved)
-                                        {
-                                            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                                                <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
-                                            </BitMessageBar>
-                                        }
-                                    </div>
+                                else
+                                {
+                                    <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
+                                        <BitLabel>
+                                            @localizer["YourEmailNotApprovedYet"]
+                                            <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
+                                                     IsBussyCaption=@localizer["Progressing"]
+                                                     Icon=BitIconName.MailCheck
+                                                     Color=ColorEnum.Link
+                                                     OnClick="ResendActivationLink"></BaseButtonComponent>
+                                        </BitLabel>
+                                    </BitMessageBar>
+                                }
+                            }
+                            <hr>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-xl-6">
+                                    <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@userInfo.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
+                                    <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@userInfo.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
+                                </div>
+                                <div class="col">
+                                    @if (!@userInfo.IsEmailApproved)
+                                    {
+                                        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                                            <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
+                                        </BitMessageBar>
+                                    }
+                                </div>
 
-                                </div>
                             </div>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header"><BitLabel>@localizer["PersonalInfo"]</BitLabel></div>
-                            <div class="card-body">
-                                <!-- Form Row-->
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <BitTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName"></BitTextField>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <BitTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName"></BitTextField>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <BitTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company"></BitTextField>
-                                    </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header"><BitLabel>@localizer["PersonalInfo"]</BitLabel></div>
+                        <div class="card-body">
+                            <!-- Form Row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <BitTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName"></BitTextField>
                                 </div>
-                                <div class="row pb-2">
-                                    <div class="col-md-4">
-                                        <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username"></BitTextField>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <BitTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></BitTextField>
-                                    </div>
+                                <div class="col-md-4">
+                                    <BitTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName"></BitTextField>
                                 </div>
-                                <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                                                 IsBussyCaption=@localizer["Progressing"]
-                                                 Color=ColorEnum.Primary
-                                                 Icon=BitIconName.Save
-                                                 EditContext=UserInfoEditContext
-                                                 OnClick="SaveChanges"></BaseButtonComponent>
+                                <div class="col-md-4">
+                                    <BitTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company"></BitTextField>
+                                </div>
                             </div>
+                            <div class="row pb-2">
+                                <div class="col-md-4">
+                                    <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username"></BitTextField>
+                                </div>
+                                <div class="col-md-4">
+                                    <BitTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></BitTextField>
+                                </div>
+                            </div>
+                            <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                                             IsBussyCaption=@localizer["Progressing"]
+                                             Color=ColorEnum.Primary
+                                             Icon=BitIconName.Save
+                                             EditContext=UserInfoEditContext
+                                             OnClick="SaveChanges"></BaseButtonComponent>
                         </div>
-                    </EditForm>
-                </div>
+                    </div>
+                </EditForm>
             </div>
         </Authorized>
         <NotAuthorized>
