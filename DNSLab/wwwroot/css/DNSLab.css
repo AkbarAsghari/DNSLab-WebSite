@@ -1377,6 +1377,13 @@ a {
     padding-top: 3.2rem;
 }
 
+
 .container {
     padding: 3rem !important;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    left: 0;
 }
