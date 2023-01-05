@@ -1,5 +1,6 @@
 ﻿namespace DNSLab.Pages.Tools;
-partial class ToolsForm<TItem> : ComponentBase
+
+partial class ToolsForm<TItem>
 {
     [Parameter] public TItem Model { get; set; }
     [Parameter] public string Header { get; set; }

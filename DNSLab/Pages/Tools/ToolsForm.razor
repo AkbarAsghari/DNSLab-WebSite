@@ -3,6 +3,8 @@
 @inject IIPRepository iPRepository
 @inject IStringLocalizer<Resource> localizer
 
+@typeparam TItem
+
 <EditForm Model="Model" Context="editCtx">
     <DataAnnotationsValidator />
     <h4>@Header</h4>
