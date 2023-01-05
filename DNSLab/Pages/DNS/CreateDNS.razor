@@ -8,17 +8,3 @@
 @attribute [Authorize]
 
 <DNSForm IsNewRecord=true Title="@localizer["CreateHostName"]" OnValidSubmit="Create" HostName="hostName"/>
-@code {
-    private HostNameDTO hostName = new HostNameDTO() { RecordType = 1 };
-
-    public async Task Create()
-    {
-        hostName.Domain = "dnslab.ir";
-
-        if (await dnsRepository.CreateHostName(hostName))
-        {
-            _navManager.NavigateTo("dns/mydns");
-            toastService.ShowToast(localizer["HostNameCreated"], Enums.ToastLevel.Success);
-        }
-    }
-}

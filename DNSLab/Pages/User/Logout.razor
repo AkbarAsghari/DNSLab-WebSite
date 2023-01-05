@@ -4,15 +4,3 @@
 @inject NavigationManager navigationManager
 
 <BitLabel>در حال خروج از سامانه لطفا صبر کنید ...</BitLabel>
-
-@code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await authService.Logout();
-            navigationManager.NavigateTo("");
-            await this.InvokeAsync(()=> StateHasChanged());
-        }
-    }
-}

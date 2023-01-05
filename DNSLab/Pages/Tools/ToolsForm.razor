@@ -3,8 +3,6 @@
 @inject IIPRepository iPRepository
 @inject IStringLocalizer<Resource> localizer
 
-@typeparam TItem
-
 <EditForm Model="Model" Context="editCtx">
     <DataAnnotationsValidator />
     <h4>@Header</h4>
@@ -28,12 +26,3 @@
                                  Icon=BitIconName.Cancel>
     </BaseNavigateButtonComponent>
 </EditForm>
-
-@code {
-    [Parameter] public TItem Model { get; set; }
-    [Parameter] public string Header { get; set; }
-    [Parameter] public RenderFragment Body { get; set; }
-    [Parameter] public EventCallback OnValidSubmit { get; set; }
-    [Parameter] public string Result { get; set; }
-    [Parameter] public bool IsProgressing { get; set; }
-}

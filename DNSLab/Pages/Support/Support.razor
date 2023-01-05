@@ -16,14 +16,3 @@ else
         <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
     }
 }
-
-@code {
-    [CascadingParameter] public IPDTO IPDTO { get; set; }
-
-    IEnumerable<PageSummaryDTO> pageSummaries;
-
-    protected override async Task OnInitializedAsync()
-    {
-        pageSummaries = await _PageRepository.GetAllPagesSummaryByPageType(PageTypeEnum.Support);
-    }
-}

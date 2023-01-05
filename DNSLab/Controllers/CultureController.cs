@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DNSLab.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Microsoft.AspNetCore.Mvc.Route("[controller]/[action]")]
     public class CultureController : Controller
     {
         public IActionResult Set(string culture, string redirectUri)

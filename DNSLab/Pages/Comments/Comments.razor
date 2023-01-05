@@ -17,12 +17,3 @@ else
         <CommentItem FullComment="comment" />
     }
 }
-
-@code {
-    IEnumerable<FullCommentDTO> allComments;
-
-    protected override async Task OnInitializedAsync()
-    {
-        allComments = await commentRepository.GetAllComments();
-    }
-}

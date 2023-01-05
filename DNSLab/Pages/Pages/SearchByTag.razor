@@ -29,14 +29,3 @@ else
         <BitLabel class="text-center">موردی یافت نشد</BitLabel>
     </BitMessageBar>
 }
-
-@code {
-    IEnumerable<PageSummaryDTO> pageSummaries;
-
-    [Parameter] public string Tag { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        pageSummaries = await _PageRepository.GetAllPagesSummaryByTag(Tag);
-    }
-}

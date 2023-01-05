@@ -7,16 +7,3 @@
 @attribute [Authorize(Roles = "Admin")]
 
 <SiteChangeForm ChangeLog="ChangeLog" OnValidSubmit="Create" Title="@localizer["CreateNewChangeLog"]"></SiteChangeForm>
-
-@code {
-    private ChangeLogDTO ChangeLog = new ChangeLogDTO { Title = String.Empty };
-
-    public async Task Create()
-    {
-        if (await pageRepository.AddChangeLog(ChangeLog))
-        {
-            _navManager.NavigateTo("ChangeLogs/All");
-            toastService.ShowToast(localizer["NewChangeLogAdded"], Enums.ToastLevel.Success);
-        }
-    }
-}

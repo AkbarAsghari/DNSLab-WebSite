@@ -59,18 +59,3 @@ else
         </div>
     </div>
 }
-
-
-@code {
-    List<DNSChangeHistoryDTO> dNSChangeHistories;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            dNSChangeHistories = (await dnsRepository.GetDNSChangeHistories()).ToList();
-            await this.InvokeAsync(() => StateHasChanged());
-        }
-    }
-            }
-

@@ -14,28 +14,3 @@ else
 {
     <CommentForm comment="existComment" OnValidSubmit="Update" Title="@localizer["EditComment"]"></CommentForm>
 }
-
-@code {
-
-    [Parameter] public Guid CommentId { get; set; }
-
-    private CommentDTO existComment;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            existComment = await commentRepository.GetComment(CommentId);
-            await this.InvokeAsync(()=> StateHasChanged());
-        }
-    }
-
-    public async Task Update()
-    {
-        if (await commentRepository.UpdateComment(existComment))
-        {
-            _navManager.NavigateTo("Comment/MyComments");
-            toastService.ShowToast(localizer["CommentUpdated"], Enums.ToastLevel.Success);
-        }
-    }
-}
