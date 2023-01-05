@@ -2,8 +2,3 @@
     <h6 class="text-center mb-0"><strong>@((FullName.Length > 20 ? (FullName.Substring(0,20)+ " ...") :  FullName).EnglishToPersianNumbers())</strong></h6>
     <BitLabel Class="text-center mb-0">@(Amount.ToString("N0").EnglishToPersianNumbers())<small> تومان</small></BitLabel>
 </div>
-
-@code {
-    [Parameter] public string FullName { get; set; }
-    [Parameter] public long Amount { get; set; }
-}

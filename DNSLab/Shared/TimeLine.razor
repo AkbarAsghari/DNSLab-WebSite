@@ -9,9 +9,3 @@
         }
     </ul>
 </div>
-
-@code {
-    [Parameter] public string TimeLineHeader { get; set; }
-    [Parameter] public IEnumerable<TItem> Data { get; set; }
-    [Parameter] public RenderFragment<TItem> TimeLineItemRenderFragment { get; set; }
-}

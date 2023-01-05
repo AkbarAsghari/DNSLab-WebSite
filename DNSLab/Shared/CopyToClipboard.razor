@@ -5,13 +5,3 @@
                  IconName=@(isCopied ? BitIconName.CheckMark : BitIconName.Copy)
                  ButtonStyle="BitButtonStyle.Primary">
 </BitToggleButton>
-
-@code {
-    bool isCopied = false;
-    [Parameter] public string Text { get; set; }
-
-    private async Task CopyTextToClipboard()
-    {
-        isCopied = await JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", Text);
-    }
-}

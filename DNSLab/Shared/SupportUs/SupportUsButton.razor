@@ -3,12 +3,3 @@
 <BaseNavigateButtonComponent Href="Transaction/Tip"
                              Text="@("از رایگان ماندن دی‌ان‌اس لب حمایت کنید " + "(❤️ " + @supporterCount.ToString().EnglishToPersianNumbers() +")")">
 </BaseNavigateButtonComponent>
-
-@code {
-    int supporterCount;
-
-    protected override async Task OnInitializedAsync()
-    {
-        supporterCount = (await _TransactionRepository.GetTips()).Count();
-    }
-}

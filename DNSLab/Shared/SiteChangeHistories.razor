@@ -9,13 +9,3 @@
         </TimeLineItem>
     </TimeLineItemRenderFragment>
 </TimeLine>
-
-@code {
-
-    IEnumerable<ChangeLogDTO> ChangeLogs;
-
-    protected override async Task OnInitializedAsync()
-    {
-        ChangeLogs = await pageRepository.GetLastChangeLogs();
-    }
-}

@@ -13,17 +13,3 @@
     <meta property="og:image" content="https://dnslab.ir/images/site/site-social-image.png">
     <meta property="og:url" content="https://dnslab.ir">
 }
-
-@code {
-    bool isComplate = false;
-    protected override async Task OnInitializedAsync()
-    {
-        await MetadataTransferService.Start();
-        MetadataTransferService.PropertyChanged += OnMetadataChanged!;
-        isComplate = true;
-    }
-
-    private void OnMetadataChanged(object sender, PropertyChangedEventArgs e) => this.InvokeAsync(() => StateHasChanged());
-
-    public void Dispose() => MetadataTransferService.PropertyChanged -= OnMetadataChanged!;
-}
