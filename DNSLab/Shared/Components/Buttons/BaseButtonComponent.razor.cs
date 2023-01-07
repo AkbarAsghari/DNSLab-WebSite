@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Forms;
 namespace DNSLab.Shared.Components.Buttons;
 partial class BaseButtonComponent
 {
-    [Parameter] public string CssClass { get; set; }
+    [Parameter] public string Class { get; set; }
     [Parameter] public ColorEnum Color { get; set; }
     [Parameter] public BitIconName? Icon { get; set; }
     [Parameter] public string Caption { get; set; }

@@ -58,4 +58,9 @@ partial class Info
             await ChangeEmailModal.Close();
         }
     }
+
+    async Task DeleteAccount()
+    {
+
+    }
 }

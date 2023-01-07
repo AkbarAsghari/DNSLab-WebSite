@@ -6,14 +6,14 @@
 }
 else
 {
-    <BitButton Class="mt-1" ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
+    <BitButton Class="@((String.IsNullOrEmpty(Class) ? String.Empty : Class + " ") + "mt-1")" ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
            OnClick="ButtonClickedEvent">
 
         <text>@Caption</text>
         @if (Icon is not null)
         {
             <text>@(" ")</text>
-            <BitIcon IconName="@Icon.Value"/>
+            <BitIcon IconName="@Icon.Value" />
         }
     </BitButton>
 }

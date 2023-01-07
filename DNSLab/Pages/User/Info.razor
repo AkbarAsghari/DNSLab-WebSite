@@ -160,6 +160,17 @@ else
                                              OnClick="SaveChanges"></BaseButtonComponent>
                         </div>
                     </div>
+                    <div class="card mb-4">
+                        <div class="card-header"><BitLabel>حذف حساب کاربری</BitLabel></div>
+                        <div class="card-body">
+                            <BitLabel>هنگامی که حساب خود را حذف کنید، دیگر راه بازگشتی وجود ندارد. لطفا مطمئن باشید.</BitLabel>
+                            <BaseButtonComponent Caption=@localizer["Delete"]
+                                             IsBussyCaption=@localizer["Progressing"]
+                                             Color=ColorEnum.Primary
+                                             Icon=BitIconName.Save
+                                             OnClick="DeleteAccount"></BaseButtonComponent>
+                        </div>
+                    </div>
                 </EditForm>
             </div>
         </Authorized>
