@@ -1,0 +1,42 @@
+﻿@page "/settings/admin"
+
+@inject IAccountRepository _AccountRepository
+@inject IAuthService _AuthService
+@inject NavigationManager _NavigationManager
+@inject ToastService _ToastService
+@inject IStringLocalizer<Resource> localizer
+
+<h4>تغییر نام کاربری</h4>
+<BitLabel>شما در این بخش میتوانید نام کاربری خود را تغییر دهید.</BitLabel>
+<BitMessageBar MessageBarType="BitMessageBarType.Warning">
+    <BitLabel>
+        به این نکته توجه کنید که در صورت حذف نام کاربری از این پس شما باید با آدرس Email خود وارد سیستم شوید.
+    </BitLabel>
+</BitMessageBar>
+<BaseButtonComponent Caption="تغییر نام کاربری"></BaseButtonComponent>
+<hr />
+<h4>حذف حساب کاربری</h4>
+<BitLabel>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</BitLabel>
+<BaseButtonComponent Class="delete"
+                     Caption="حذف حساب کاربری"
+                     OnClick="()=> DeleteAccountModal.Open()">
+</BaseButtonComponent>
+
+
+<Modal @ref="DeleteAccountModal">
+    <Title><BitLabel>تایید حدف حساب کاربری</BitLabel></Title>
+    <Body>
+        <BitMessageBar MessageBarType="BitMessageBarType.Blocked">
+            <BitLabel>هنگامی که حساب خود را حذف کنید، دیگر راه بازگشتی وجود ندارد. لطفا مطمئن باشید.</BitLabel>
+        </BitMessageBar>
+    </Body>
+    <Footer>
+        <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             OnClick=DeleteAccountModal.Close></BaseButtonComponent>
+        <BaseButtonComponent Class="delete"
+                             Caption="حذف حساب کاربری"
+                             IsBussyCaption=@localizer["Progressing"]
+                             OnClick=AcceptDeactivateAccount></BaseButtonComponent>
+    </Footer>
+</Modal>

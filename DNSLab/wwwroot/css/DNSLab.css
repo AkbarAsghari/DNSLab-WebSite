@@ -1349,6 +1349,21 @@ a {
     background-color: #005a9e;
 }
 
+.bit-btn.primary.delete {
+    background: #d40000;
+    border: .0625rem solid #d40000;
+}
+
+    .bit-btn.primary.delete:hover {
+        background: #bc0000;
+        border: .0625rem solid #bc0000;
+    }
+
+    .bit-btn.primary.delete:active {
+        background: #bc0000;
+        border: .0625rem solid #bc0000;
+    }
+
 /*End-Bit*/
 .ToastAlert .bit-mdl-container {
     min-height: auto;

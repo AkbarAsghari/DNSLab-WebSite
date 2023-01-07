@@ -131,5 +131,11 @@ namespace DNSLab.Repository
             var response = await _httpService.Post<bool>($"/Auth/ConfirmEmailWithToken?token={Token}");
             return response.Response;
         }
+
+        public async Task<bool> DeactivateAccount()
+        {
+            var response = await _httpService.Delete<bool>($"/Auth/DeactivateAccount");
+            return response.Response;
+        }
     }
 }
