@@ -54,10 +54,15 @@ else
 
     <h4>حذف حساب کاربری</h4>
     <BitLabel>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</BitLabel>
-    <BaseButtonComponent Class="delete"
+    <BitMessageBar MessageBarType="BitMessageBarType.Blocked">
+        <BitLabel>
+            این بخش در حال توسعه میباشد و بزودی فعال میشود.
+        </BitLabel>
+    </BitMessageBar>
+    @*<BaseButtonComponent Class="delete"
                      Caption="حذف حساب کاربری"
                      OnClick="()=> DeleteAccountModal.Open()">
-    </BaseButtonComponent>
+    </BaseButtonComponent>*@
 
     <Modal @ref="ChangeAccountUsernameModal">
         <Title><BitLabel>تغییر نام کاربری</BitLabel></Title>
