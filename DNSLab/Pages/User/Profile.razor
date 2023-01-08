@@ -1,4 +1,4 @@
-﻿@page "/user/info"
+﻿@page "/settings/profile"
 
 @inject IAccountRepository accountRepository
 @inject ToastService toastService
@@ -58,17 +58,6 @@ else
                                     </div>
                                 </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12 g-0">
-                        <div class="card mb-2">
-                            <div class="card-header"><BitLabel>تنظیمات امنیتی</BitLabel></div><!--!-->
-                            <div class="card-body">
-                                <BaseNavigateButtonComponent Href="user/changepassword"
-                                                         Text="تغییر رمز عبور"
-                                                         Icon="BitIconName.Lock">
-                                </BaseNavigateButtonComponent>
                             </div>
                         </div>
                     </div>
@@ -146,9 +135,6 @@ else
                             </div>
                             <div class="row pb-2">
                                 <div class="col-md-4">
-                                    <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@userInfo.Username"></BitTextField>
-                                </div>
-                                <div class="col-md-4">
                                     <BitTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></BitTextField>
                                 </div>
                             </div>
@@ -158,17 +144,6 @@ else
                                              Icon=BitIconName.Save
                                              EditContext=UserInfoEditContext
                                              OnClick="SaveChanges"></BaseButtonComponent>
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header"><BitLabel>حذف حساب کاربری</BitLabel></div>
-                        <div class="card-body">
-                            <BitLabel>هنگامی که حساب خود را حذف کنید، دیگر راه بازگشتی وجود ندارد. لطفا مطمئن باشید.</BitLabel>
-                            <BaseButtonComponent Caption=@localizer["Delete"]
-                                             IsBussyCaption=@localizer["Progressing"]
-                                             Color=ColorEnum.Primary
-                                             Icon=BitIconName.Save
-                                             OnClick="DeleteAccount"></BaseButtonComponent>
                         </div>
                     </div>
                 </EditForm>

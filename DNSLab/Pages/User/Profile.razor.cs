@@ -1,7 +1,7 @@
 ﻿using DNSLab.DTOs.User;
 
 namespace DNSLab.Pages.User;
-partial class Info
+partial class Profile
 {
     UserInfo userInfo;
     ChangeEmailDTO changeEmail;

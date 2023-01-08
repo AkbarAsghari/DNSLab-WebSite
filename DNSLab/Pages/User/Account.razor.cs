@@ -1,7 +1,30 @@
-﻿namespace DNSLab.Pages.User;
+﻿using DNSLab.DTOs.User;
+
+namespace DNSLab.Pages.User;
 partial class Account
 {
-    Modal DeleteAccountModal;
+    Modal DeleteAccountModal, ChangeAccountUsernameModal;
+
+    private UserInfo userInfo;
+    string? Username;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            userInfo = await _AccountRepository.Get();
+            Username = userInfo!.Username;
+        }
+    }
+
+    async Task AcceptChangeAccountUsername()
+    {
+        if (await _AccountRepository.UpdateUsername(Username))
+        {
+            await ChangeAccountUsernameModal.Close();
+            _ToastService.ShowToast($"نام کاربری شما با موفقیت {(String.IsNullOrWhiteSpace(Username) ? $"حذف گردید و از این پس با نام کاربری {userInfo.Email} میتوانید وارد سیستم شوید" : "تغییر یافت")}.", ToastLevel.Info);
+        }
+    }
 
     async Task AcceptDeactivateAccount()
     {
