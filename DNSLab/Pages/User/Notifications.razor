@@ -1,7 +1,33 @@
 ﻿@page "/settings/notifications"
+@inject IAccountRepository _AccountRepository
+@inject IStringLocalizer<Resource> _Localizer
+@inject ToastService _ToastService
 
-<h3>Notifications</h3>
+<h4>آگاهسازی ها</h4>
 
-@code {
-
+@if (userInfo == null)
+{
+    <Loading />
+}
+else
+{
+    <div class="row gx-3 mb-3">
+        <div class="col-xl-6">
+            <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@userInfo.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
+            <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@userInfo.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
+        </div>
+        <div class="col">
+            @if (!@userInfo.IsEmailApproved)
+            {
+                <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                    <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
+                </BitMessageBar>
+            }
+        </div>
+    </div>
+    <BaseButtonComponent Caption=@_Localizer["SaveChanges"]
+                     IsBussyCaption=@_Localizer["Progressing"]
+                     Color=ColorEnum.Primary
+                     Icon=BitIconName.Save
+                     OnClick="SaveChanges"></BaseButtonComponent>
 }
