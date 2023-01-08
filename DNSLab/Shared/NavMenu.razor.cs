@@ -202,10 +202,32 @@ namespace DNSLab.Shared
                     },
                     new BitNavLinkItem
                     {
-                        Name = "اطلاعات کاربری",
-                        Key = "K401",
-                        IconName = BitIconName.PlayerSettings,
-                        Url = "user/info",
+                        Name = "تنظیمات",
+                        IconName = BitIconName.Settings,
+                        Links = new List<BitNavLinkItem>
+                        {
+                            new BitNavLinkItem
+                            {
+                                Name = "پروفایل عمومی",
+                                Url = "settings/profile",
+                                Key = "K410" ,
+                            },
+                            new BitNavLinkItem {
+                                Name = "حساب کاربری",
+                                Url = "settings/admin",
+                                Key = "K411" ,
+                            },
+                            new BitNavLinkItem {
+                                Name = "رمز عبور و احراز هویت",
+                                Url = "settings/security",
+                                Key = "K411" ,
+                            },
+                            new BitNavLinkItem {
+                                Name = "آگاهسازی ها",
+                                Url = "settings/notifications",
+                                Key = "K411" ,
+                            }
+                        }
                     },
                     new BitNavLinkItem
                     {
