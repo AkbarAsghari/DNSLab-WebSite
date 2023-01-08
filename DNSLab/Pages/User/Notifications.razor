@@ -3,6 +3,8 @@
 @inject IStringLocalizer<Resource> _Localizer
 @inject ToastService _ToastService
 
+@attribute [Authorize]
+
 <h4>آگاهسازی ها</h4>
 
 @if (userInfo == null)
