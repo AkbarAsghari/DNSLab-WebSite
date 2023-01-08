@@ -220,12 +220,12 @@ namespace DNSLab.Shared
                             new BitNavLinkItem {
                                 Name = "رمز عبور و احراز هویت",
                                 Url = "settings/security",
-                                Key = "K411" ,
+                                Key = "K412" ,
                             },
                             new BitNavLinkItem {
                                 Name = "آگاهسازی ها",
                                 Url = "settings/notifications",
-                                Key = "K411" ,
+                                Key = "K413" ,
                             }
                         }
                     },
