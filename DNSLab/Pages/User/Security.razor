@@ -9,8 +9,8 @@
 
 <div class="container-sm mt-4 col-lg-4">
     <h4>تغییر رمز عبور</h4>
-    <BitTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" Class="dir-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" IsRequired />
-    <BitTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" Class="dir-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" IsRequired />
+    <BitTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" IsRequired />
+    <BitTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" IsRequired />
     <div class="row align-items-center">
         <div class="col-auto">
             <BaseButtonComponent Caption=@localizer["SaveChanges"]
