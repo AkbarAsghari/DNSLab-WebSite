@@ -15,6 +15,7 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> ResendConfirmEmailToken();
         Task<bool> ConfirmEmailWithToken(string Token);
         Task<bool> Update(UserInfo userInfo);
+        Task<bool> UpdateUsername(string? Username);
         Task<int> UsersCount();
         Task<bool> DeactivateAccount();
     }

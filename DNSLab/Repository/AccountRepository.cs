@@ -137,5 +137,11 @@ namespace DNSLab.Repository
             var response = await _httpService.Delete<bool>($"/Auth/DeactivateAccount");
             return response.Response;
         }
+
+        public async Task<bool> UpdateUsername(string? Username)
+        {
+            var response = await _httpService.Put<bool>($"/Auth/UpdateUsername?Username={(String.IsNullOrWhiteSpace(Username) ? null : Username)}");
+            return response.Response;
+        }
     }
 }
