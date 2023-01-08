@@ -3,17 +3,21 @@
 namespace DNSLab.Pages.User;
 partial class Account
 {
-    Modal DeleteAccountModal, ChangeAccountUsernameModal;
+    Modal DeleteAccountModal, ChangeAccountUsernameModal, ChangeAccountEmailModal;
 
     private UserInfo userInfo;
+    ChangeEmailDTO changeEmail;
     string? Username;
+    private bool ResentButtonClicked = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             userInfo = await _AccountRepository.Get();
+            changeEmail = new ChangeEmailDTO { Email = userInfo.Email };
             Username = userInfo!.Username;
+            await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
@@ -34,6 +38,28 @@ partial class Account
             _NavigationManager.NavigateTo("");
             await this.InvokeAsync(() => StateHasChanged());
             _ToastService.ShowToast("حساب کاربری شما با موفقیت از سیستم حذف گردید. امیدواریم بازم برگدید :)", ToastLevel.Info);
+        }
+    }
+
+    private async Task AcceptChangeEmail()
+    {
+        if (await _AccountRepository.ChangeEmail(changeEmail))
+        {
+            _ToastService.ShowToast("ایمیل جدید ذخیره شد و ایمیل تایید ارسال گردید", Enums.ToastLevel.Success);
+
+            if (userInfo.Email.Trim().ToLower() != changeEmail.Email.Trim().ToLower())
+                userInfo.IsEmailApproved = false;
+
+            userInfo.Email = changeEmail.Email;
+            await ChangeAccountEmailModal.Close();
+        }
+    }
+
+    private async Task ResendActivationLink()
+    {
+        if (await _AccountRepository.ResendConfirmEmailToken())
+        {
+            ResentButtonClicked = true;
         }
     }
 }

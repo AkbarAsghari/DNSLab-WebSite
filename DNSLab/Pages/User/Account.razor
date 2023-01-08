@@ -8,59 +8,123 @@
 @inject ToastService _ToastService
 @inject IStringLocalizer<Resource> localizer
 
-<h4>تغییر نام کاربری</h4>
-<BitLabel>شما در این بخش میتوانید نام کاربری خود را تغییر دهید.</BitLabel>
-<BaseButtonComponent Caption="تغییر نام کاربری" OnClick="()=> ChangeAccountUsernameModal.Open()"></BaseButtonComponent>
+@if (userInfo == null)
+{
+    <Loading />
+}
+else
+{
+    <h4>تغییر نام کاربری</h4>
+    <BitLabel>شما در این بخش میتوانید نام کاربری خود را تغییر دهید.</BitLabel>
+    <BitLabel>نام کاربری : @(String.IsNullOrWhiteSpace(Username) ? changeEmail.Email : Username)</BitLabel>
+    <BaseButtonComponent Caption="تغییر نام کاربری" OnClick="()=> ChangeAccountUsernameModal.Open()"></BaseButtonComponent>
 
-<hr />
+    <hr />
 
-<h4>حذف حساب کاربری</h4>
-<BitLabel>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</BitLabel>
-<BaseButtonComponent Class="delete"
+    <h4>ایمیل</h4>
+    <BitLabel>در این بخش میتوانید آدرس ایمیل خود را تغییر دهید و یا اقدام به تایید ایمیل نمایید.</BitLabel>
+    <BitLabel>آدرس ایمیل : @changeEmail.Email</BitLabel>
+    @if (!@userInfo.IsEmailApproved)
+    {
+        @if (ResentButtonClicked)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Success">
+                <BitLabel>@localizer["ActivationLinkSent"]</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
+                <BitLabel>
+                    @localizer["YourEmailNotApprovedYet"]
+                    <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Link
+                             OnClick="ResendActivationLink"></BaseButtonComponent>
+                </BitLabel>
+            </BitMessageBar>
+        }
+        <BaseButtonComponent Caption="تغییر ایمیل"
+                     IsBussyCaption=@localizer["Loading"]
+                     Color=ColorEnum.Primary
+                     OnClick=@(()=> ChangeAccountEmailModal.Open())></BaseButtonComponent>
+    }
+
+    <hr />
+
+    <h4>حذف حساب کاربری</h4>
+    <BitLabel>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</BitLabel>
+    <BaseButtonComponent Class="delete"
                      Caption="حذف حساب کاربری"
                      OnClick="()=> DeleteAccountModal.Open()">
-</BaseButtonComponent>
+    </BaseButtonComponent>
 
-<Modal @ref="ChangeAccountUsernameModal">
-    <Title><BitLabel>تغییر نام کاربری</BitLabel></Title>
-    <Body>
-        <BitMessageBar MessageBarType="BitMessageBarType.Info">
-            <BitLabel>
-                در صورتی که میخواهید نام کاربری (Username)
-                شما حذف گردد نام کاربری را بصورت خالی تایید نمایید.
-            </BitLabel>
-        </BitMessageBar>
-        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-            <BitLabel>
-                به این نکته توجه کنید که در صورت حذف نام کاربری از این پس شما باید با آدرس Email خود وارد سیستم شوید.
-            </BitLabel>
-        </BitMessageBar>
-        <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@Username"></BitTextField>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
+    <Modal @ref="ChangeAccountUsernameModal">
+        <Title><BitLabel>تغییر نام کاربری</BitLabel></Title>
+        <Body>
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>
+                    در صورتی که میخواهید نام کاربری (Username)
+                    شما حذف گردد نام کاربری را بصورت خالی تایید نمایید.
+                </BitLabel>
+            </BitMessageBar>
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>
+                    به این نکته توجه کنید که در صورت حذف نام کاربری از این پس شما باید با آدرس Email خود وارد سیستم شوید.
+                </BitLabel>
+            </BitMessageBar>
+            <BitTextField Label="@localizer["UserName"]" Placeholder="@localizer["YourUsername"]" @bind-Value="@Username"></BitTextField>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              OnClick=ChangeAccountUsernameModal.Close></BaseButtonComponent>
-        <BaseButtonComponent Caption="تغییر نام کاربری"
+            <BaseButtonComponent Caption="تغییر نام کاربری"
                              IsBussyCaption=@localizer["Progressing"]
                              OnClick=AcceptChangeAccountUsername></BaseButtonComponent>
-    </Footer>
-</Modal>
+        </Footer>
+    </Modal>
 
-<Modal @ref="DeleteAccountModal">
-    <Title><BitLabel>تایید حدف حساب کاربری</BitLabel></Title>
-    <Body>
-        <BitMessageBar MessageBarType="BitMessageBarType.Blocked">
-            <BitLabel>هنگامی که حساب خود را حذف کنید، دیگر راه بازگشتی وجود ندارد. لطفا مطمئن باشید.</BitLabel>
-        </BitMessageBar>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
+    <Modal @ref="ChangeAccountEmailModal">
+        <Title>
+            <BitLabel>@localizer["ChangeEmailAddress"]</BitLabel>
+        </Title>
+        <Body>
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>
+                    توجه داشته باشید در صورت تغییر آدرس ایمیل ، لینک فعال سازی برای ایمیل جدید ارسال خواهد شد.
+                </BitLabel>
+            </BitMessageBar>
+            <BitTextField Label="@localizer["Email"]" Class="dir-ltr" Placeholder="@localizer["YourEmail"]" @bind-Value="@changeEmail.Email" IsRequired=true />
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Warning
+                             OnClick=ChangeAccountEmailModal.Close></BaseButtonComponent>
+
+            <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=ColorEnum.Primary
+                             OnClick=AcceptChangeEmail></BaseButtonComponent>
+        </Footer>
+    </Modal>
+
+    <Modal @ref="DeleteAccountModal">
+        <Title><BitLabel>تایید حدف حساب کاربری</BitLabel></Title>
+        <Body>
+            <BitMessageBar MessageBarType="BitMessageBarType.Blocked">
+                <BitLabel>هنگامی که حساب خود را حذف کنید، دیگر راه بازگشتی وجود ندارد. لطفا مطمئن باشید.</BitLabel>
+            </BitMessageBar>
+        </Body>
+        <Footer>
+            <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              OnClick=DeleteAccountModal.Close></BaseButtonComponent>
-        <BaseButtonComponent Class="delete"
+            <BaseButtonComponent Class="delete"
                              Caption="حذف حساب کاربری"
                              IsBussyCaption=@localizer["Progressing"]
                              OnClick=AcceptDeactivateAccount></BaseButtonComponent>
-    </Footer>
-</Modal>
+        </Footer>
+    </Modal>
+}
