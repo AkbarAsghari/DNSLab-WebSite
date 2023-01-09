@@ -53,11 +53,11 @@ else
                 <hr />
                 <div class="row align-items-center">
                     <div class="col-md-3">
-                        <BitLabel>@item.Title.MakeCut(23)</BitLabel>
+                        <BitLabel Class="text-truncate">@item.Title</BitLabel>
                     </div>
                     <div class="col-md-3">
                         <BitLink Href="@($"{item.InformationLink}")" Target="_blank">
-                            <BitLabel><code>@item.InformationLink.MakeCut(23)</code></BitLabel>
+                            <BitLabel Class="text-truncate"><code>@item.InformationLink</code></BitLabel>
                         </BitLink>
                     </div>
                     <div class="col-md-3">
