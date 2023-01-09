@@ -26,7 +26,7 @@ partial class TIcketDetails
                 Text = Message.Text,
             });
 
-            Message.Text = String.Empty;
+            Message = new SendMessageDTO { Text = String.Empty };
         }
     }
 
