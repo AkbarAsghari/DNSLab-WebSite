@@ -1287,7 +1287,6 @@ a {
 .article {
     padding-left: 2rem;
     padding-right: 2rem;
-    padding-bottom: 2rem;
 }
 
     .article > img {
@@ -1310,56 +1309,7 @@ a {
             text-decoration: underline
         }
 
-.note {
-    padding: .5rem;
-    padding-right: 3rem;
-    padding-left: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    background-position: right .3rem top .3rem;
-    background-repeat: no-repeat;
-    background-size: 2rem
-}
-
-    .note > p {
-        margin: 0
-    }
-
-    .note.danger {
-        background-color: #fdd;
-        background-image: url(../images/Icons/error_icon.svg);
-        border-right: 6px solid #f44336;
-        border-top: 1px solid #ff8787;
-        border-left: 1px solid #ff8787;
-        border-bottom: 1px solid #ff8787
-    }
-
-    .note.success {
-        background-color: #dfd;
-        background-image: url(../images/Icons/confirm_icon.svg);
-        border-right: 6px solid #04AA6D;
-        border-top: 1px solid #90fc90;
-        border-left: 1px solid #90fc90;
-        border-bottom: 1px solid #90fc90
-    }
-
-    .note.info {
-        background-color: #e7f3fe;
-        background-image: url(../images/Icons/info-icon.svg);
-        border-right: 6px solid #2196F3;
-        border-top: 1px solid #a4d2fc;
-        border-left: 1px solid #a4d2fc;
-        border-bottom: 1px solid #a4d2fc
-    }
-
-    .note.warning {
-        background-color: #ffc;
-        background-image: url(../images/Icons/warn_icon.svg);
-        border-right: 6px solid #ffeb3b;
-        border-top: 1px solid #ffff80;
-        border-left: 1px solid #ffff80;
-        border-bottom: 1px solid #ffff80
-    }
+/*Bit*/
 
 .bit-btn.bit-btn-fluent, .bit-srch-box-fluent, .bit-tglb.bit-tglb-fluent, .bit-cmpb.bit-cmpb-fluent, .bit-actb.bit-actb-fluent, .bit-mdl-enabled-fluent, .bit-lbl-enabled-fluent, .bit-msg-bar-fluent, .bit-lnk-fluent, .bit-txt-fluent, .txt-field, .bit-drp.bit-drp-fluent, .bit-tgl-fluent, .bit-lnk-fluent > a, .bit-rbg.bit-rbg-fluent, .bit-acd.bit-acd-fluent, .bit-rbl.bit-rbl-fluent {
     font-family: vazir-light;
@@ -1383,6 +1333,43 @@ a {
     left: auto;
 }
 
+.bit-msg-bar-icon {
+    margin: 0.5rem 0.5rem 0.5rem 0.75rem !important;
+}
+
+.bit-icon-red > span {
+    color: red !important;
+}
+
+    .bit-icon-red > span > .bit-icon {
+        color: red !important;
+    }
+
+.bit-btn.primary.active {
+    background-color: #005a9e;
+}
+
+.bit-btn.primary.delete {
+    background: #d40000;
+    border: .0625rem solid #d40000;
+}
+
+    .bit-btn.primary.delete:hover {
+        background: #bc0000;
+        border: .0625rem solid #bc0000;
+    }
+
+    .bit-btn.primary.delete:active {
+        background: #bc0000;
+        border: .0625rem solid #bc0000;
+    }
+
+.bit-btn.small {
+    min-width: 2rem;
+    padding: 0;
+}
+
+/*End-Bit*/
 .ToastAlert .bit-mdl-container {
     min-height: auto;
 }
@@ -1404,27 +1391,15 @@ a {
     padding-bottom: 0;
 }
 
+    .navbar button {
+        margin-top: 0 !important;
+        margin-right: 0.2rem;
+        padding: 0.2rem 1rem !important;
+    }
+
 .content-not-auth {
     padding-top: 3.2rem;
 }
-
-.navbar button {
-    margin-top: 0 !important;
-    margin-right: 0.2rem;
-    padding: 0.2rem 1rem !important;
-}
-
-.bit-msg-bar-icon {
-    margin: 0.5rem 0.5rem 0.5rem 0.75rem !important;
-}
-
-.bit-icon-red > span {
-    color: red !important;
-}
-
-    .bit-icon-red > span > .bit-icon {
-        color: red !important;
-    }
 
 
 .container {
@@ -1436,22 +1411,3 @@ footer {
     right: 0;
     left: 0;
 }
-
-.bit-btn.primary.active {
-    background-color: #005a9e;
-}
-
-.bit-btn.primary.delete {
-    background: #d40000;
-    border: .0625rem solid #d40000;
-}
-
-    .bit-btn.primary.delete:hover {
-        background: #bc0000;
-        border: .0625rem solid #bc0000;
-    }
-
-    .bit-btn.primary.delete:active {
-        background: #bc0000;
-        border: .0625rem solid #bc0000;
-    }

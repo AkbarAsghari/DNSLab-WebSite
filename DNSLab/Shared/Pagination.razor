@@ -5,7 +5,7 @@
         {
             <BitButton ButtonSize="BitButtonSize.Small"
                OnClick="()=> SelectedPageInternal(link)" IsEnabled="link.Enabled"
-               Class="@(link.Active ? "active" : String.Empty)">
+               Class="@("small" + (link.Active ? " active" : String.Empty))">
                 @link.Text
             </BitButton>
         }

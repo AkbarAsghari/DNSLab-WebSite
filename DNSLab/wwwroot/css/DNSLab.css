@@ -1364,6 +1364,11 @@ a {
         border: .0625rem solid #bc0000;
     }
 
+.bit-btn.small {
+    min-width: 2rem;
+    padding: 0;
+}
+
 /*End-Bit*/
 .ToastAlert .bit-mdl-container {
     min-height: auto;
