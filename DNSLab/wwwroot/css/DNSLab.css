@@ -1370,9 +1370,13 @@ a {
 }
 
 /*End-Bit*/
-.ToastAlert .bit-mdl-container {
-    min-height: auto;
+.ToastAlert {
+    z-index: 1000001;
 }
+
+    .ToastAlert .bit-mdl-container {
+        min-height: auto;
+    }
 
 .auth-card {
     top: 2rem;
