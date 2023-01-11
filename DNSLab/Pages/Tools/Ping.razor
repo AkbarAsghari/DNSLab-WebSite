@@ -11,7 +11,11 @@
             <BitLabel>توجه داشته باشید که پینگ از طرف سرور DNSLab ارسال میشود و ممکن است آی پی برای سرور مسدود باشد.</BitLabel>
         </BitMessageBar>
         <div class="col-md-6">
-            <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+            <BitTextField Label="@localizer["HostOrIPAddress"]"
+                          Class="dir-ltr"
+                          IsEnabled=!isProgressing
+                          Placeholder="@IPDTO.IPv4"
+                          @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
         </div>
     </Body>
 </ToolsForm>
