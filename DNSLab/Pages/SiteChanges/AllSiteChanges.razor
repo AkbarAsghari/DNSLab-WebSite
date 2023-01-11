@@ -50,7 +50,7 @@ else
         {
             @foreach (var item in ChangeLogs.OrderByDescending(x => x.CreateDate))
             {
-                <hr />
+                <hr class="m-1" />
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <BitLabel Class="text-truncate">@item.Title</BitLabel>
@@ -64,7 +64,7 @@ else
                         <BitLabel>@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) </BitLabel>
                         <BitLabel> @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
                     </div>
-                    <div class="col">
+                    <div class="col-auto">
                         <BaseButtonComponent Caption=@localizer["Edit"]
                                  IsBussyCaption=@localizer["Progressing"]
                                  Color=ColorEnum.Warning
