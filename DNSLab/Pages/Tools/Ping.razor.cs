@@ -1,7 +1,7 @@
 ﻿using DNSLab.DTOs.IP;
 
-namespace DNSLab.Pages.Tools; 
-partial class Ping 
+namespace DNSLab.Pages.Tools;
+partial class Ping
 {
     private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();
     private bool isProgressing = false;
@@ -13,18 +13,30 @@ partial class Ping
     {
         isProgressing = true;
 
-        var response = await iPRepository.IPHavePing(hostOrIPAddress.HostOrIPAddress);
-        if (response != null)
+        result = String.Empty;
+
+        List<PingDTO> pings = new List<PingDTO>();
+
+        int attemptTimes = 4;
+        for (int i = 1; i <= attemptTimes; i++)
         {
-            if (response == true)
-                result = localizer["PingIsOK"];
+            var ping = await iPRepository.IPHavePing(hostOrIPAddress.HostOrIPAddress);
+            if (ping == null)
+                result += $"error<br>";
             else
-                result = localizer["PingIsNotOK"];
+                result += $"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>";
+            await this.InvokeAsync(() => StateHasChanged());
+            pings.Add(ping);
+            await Task.Delay(1000);
         }
-        else
-        {
-            result = String.Empty;
-        }
+
+        int successCount = pings.Where(x => x.Success).Count();
+        int unsuccessCount = attemptTimes - successCount;
+
+        result += "------------ statics ------------<br>";
+        result += $"packets transmitted : {attemptTimes}<br>";
+        result += $"recived : {successCount}<br>";
+        result += $"packet loss : {(successCount == 0 ? 100 : unsuccessCount * 100 / successCount)}%<br>";
 
         isProgressing = false;
     }

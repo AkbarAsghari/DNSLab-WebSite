@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.DNS;
+using DNSLab.DTOs.IP;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
 
@@ -21,13 +22,13 @@ namespace DNSLab.Repository
                 return String.Empty;
         }
 
-        public async Task<bool?> IPHavePing(string hostOrIPAddress)
+        public async Task<PingDTO> IPHavePing(string hostOrIPAddress)
         {
-            var response = await _httpService.Get<bool>($"/IP/IPHavePing?hostOrIPAddress={hostOrIPAddress}");
+            var response = await _httpService.Get<PingDTO>($"/IP/IPHavePing?hostOrIPAddress={hostOrIPAddress}");
             if (response.Success)
                 return response.Response;
             else
-                return null;
+                return new PingDTO { Success = false };
         }
 
         public async Task<bool?> IsIPAndPortOpen(string hostOrIPAddress, string port)
