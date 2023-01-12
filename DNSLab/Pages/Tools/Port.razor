@@ -7,6 +7,9 @@
 
 <ToolsForm Header="@localizer["PortChecker"]" Model="@hostOrIPAddressAndPort" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>
+        <BitMessageBar MessageBarType="BitMessageBarType.Info">
+            <BitLabel>آزمایش می کند که آیا پورت TCP در IP مشخص باز شده است یا خیر</BitLabel>
+        </BitMessageBar>
         <div class="col-md-6">
             <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
         </div>

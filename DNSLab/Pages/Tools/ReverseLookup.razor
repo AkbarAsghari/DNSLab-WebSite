@@ -7,6 +7,9 @@
 
 <ToolsForm Header="@localizer["ReverseLookup"]" Model="@iP" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>
+        <BitMessageBar MessageBarType="BitMessageBarType.Info">
+            <BitLabel>نام میزبان را با آدرس IP دریافت می کند</BitLabel>
+        </BitMessageBar>
         <div class="col-md-6">
             <BitTextField Label="@localizer["IPAddress"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@iP.IPv4" />
         </div>

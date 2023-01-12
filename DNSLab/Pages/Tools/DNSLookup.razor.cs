@@ -7,8 +7,6 @@ partial class DNSLookup
     private bool isProgressing = false;
     private string result { get; set; }
 
-    [CascadingParameter] public IPDTO IPDTO { get; set; }
-
     public async Task OnValidSubmit()
     {
         isProgressing = true;
@@ -25,6 +23,6 @@ partial class DNSLookup
     protected override void OnAfterRender(bool firstRender)
     {
         if (String.IsNullOrEmpty(hostOrIPAddress.HostOrIPAddress))
-            hostOrIPAddress.HostOrIPAddress = IPDTO.IPv4;
+            hostOrIPAddress.HostOrIPAddress = "dnslab.ir";
     }
 }

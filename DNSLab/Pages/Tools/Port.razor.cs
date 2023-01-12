@@ -17,9 +17,9 @@ partial class Port
         if (response != null)
         {
             if (response == true)
-                result = localizer["PortIsOK"];
+                result = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: green;'>open</b>";
             else
-                result = localizer["PortIsNotOK"];
+                result = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: red;'>closed</b>";
         }
         else
         {
