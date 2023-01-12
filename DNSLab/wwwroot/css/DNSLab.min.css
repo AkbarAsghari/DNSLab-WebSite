@@ -1198,6 +1198,10 @@ h1:focus {
     direction: ltr
 }
 
+    .dir-ltr > div > label {
+        direction: rtl;
+    }
+
 input:-ms-input-placeholder {
     text-align: right
 }
