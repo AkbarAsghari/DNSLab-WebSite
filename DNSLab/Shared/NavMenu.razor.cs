@@ -171,12 +171,38 @@ namespace DNSLab.Shared
                                 Name = "API ها",
                                 Url = "api",
                                 Key = "K304" ,
+                            }
+                        }
+                    },
+                    new BitNavLinkItem
+                    {
+                        Name = "ابزار ها",
+                        IconName = BitIconName.DeveloperTools,
+                        Links = new List<BitNavLinkItem>
+                        {
+                            new BitNavLinkItem
+                            {
+                                Name = "Ping",
+                                Url = "tools/ping",
+                                Key = "K501"
                             },
                             new BitNavLinkItem
                             {
-                                Name = "ابزار ها",
-                                Url = "tools",
-                                Key = "K305" ,
+                                Name = "Port Checker",
+                                Url = "tools/port",
+                                Key = "K502"
+                            },
+                            new BitNavLinkItem
+                            {
+                                Name = "DNS Lookup",
+                                Url = "tools/dnslookup",
+                                Key = "K503"
+                            },
+                            new BitNavLinkItem
+                            {
+                                Name = "DNS Lookup",
+                                Url = "tools/reverselookup",
+                                Key = "K504"
                             }
                         }
                     },
