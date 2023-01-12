@@ -28,7 +28,7 @@ namespace DNSLab.Repository
             if (response.Success)
                 return response.Response;
             else
-                return new PingDTO { Success = false };
+                return null;
         }
 
         public async Task<bool?> IsIPAndPortOpen(string hostOrIPAddress, string port)
