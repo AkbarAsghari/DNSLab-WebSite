@@ -35,7 +35,7 @@ partial class Ping
 
             await this.InvokeAsync(() => StateHasChanged());
             pings.Add(ping!);
-            await Task.Delay(1000);
+            await Task.Delay(750);
         }
 
         int successCount = pings.Where(x => x.Success).Count();
