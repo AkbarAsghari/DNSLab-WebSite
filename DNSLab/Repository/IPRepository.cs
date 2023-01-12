@@ -22,9 +22,9 @@ namespace DNSLab.Repository
                 return String.Empty;
         }
 
-        public async Task<PingDTO> IPHavePing(string hostOrIPAddress)
+        public async Task<PingDTO> Ping(string hostOrIPAddress)
         {
-            var response = await _httpService.Get<PingDTO>($"/IP/IPHavePing?hostOrIPAddress={hostOrIPAddress}");
+            var response = await _httpService.Get<PingDTO>($"/IP/Ping?hostOrIPAddress={hostOrIPAddress}");
             if (response.Success)
                 return response.Response;
             else

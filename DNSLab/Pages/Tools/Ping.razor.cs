@@ -20,8 +20,8 @@ partial class Ping
         int attemptTimes = 4;
         for (int i = 1; i <= attemptTimes; i++)
         {
-            var ping = await iPRepository.IPHavePing(hostOrIPAddress.HostOrIPAddress);
-            if (ping == null)
+            var ping = await iPRepository.Ping(hostOrIPAddress.HostOrIPAddress);
+            if (ping == null || !ping.Success)
                 result += $"error<br>";
             else
                 result += $"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>";
