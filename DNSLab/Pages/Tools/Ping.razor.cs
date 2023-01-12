@@ -26,7 +26,7 @@ partial class Ping
             else
                 result += $"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>";
             await this.InvokeAsync(() => StateHasChanged());
-            pings.Add(ping);
+            pings.Add(ping!);
             await Task.Delay(1000);
         }
 
