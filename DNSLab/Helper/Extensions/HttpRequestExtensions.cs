@@ -17,6 +17,12 @@ public static class HttpRequestExtensions
         if (agent.Contains("lighthouse"))
             return true;
 
+        if (agent.Contains("slurp"))
+            return true;
+
+        if (agent.Contains("duckduck"))
+            return true;
+
         return false;
     }
 
