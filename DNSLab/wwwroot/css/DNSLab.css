@@ -950,7 +950,8 @@ main header {
 }
 
 .ck-content .table table {
-    overflow: hidden
+    overflow: hidden;
+    direction: ltr
 }
 
 .ck-content .table td, .ck-content .table th {
