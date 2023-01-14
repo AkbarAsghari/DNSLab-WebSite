@@ -29,7 +29,7 @@ partial class Ping
             }
 
             if (!ping.Success)
-                result += $"error<br>";
+                result += $"<b style='color: red;'>error</b><br>";
             else
                 result += $"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>";
 
