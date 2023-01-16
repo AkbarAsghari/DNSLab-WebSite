@@ -29,6 +29,7 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IDNSRepository, DNSRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IIPRepository, IPRepository>();
+builder.Services.AddScoped<IDNSLookUpRepository, DNSLookUpRepository>();
 builder.Services.AddScoped<IStaticsRepository, StaticsRepository>();
 builder.Services.AddScoped<IPageRepository, PageRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
