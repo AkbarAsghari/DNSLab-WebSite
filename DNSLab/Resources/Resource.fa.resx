@@ -349,10 +349,10 @@
     <value>نشانی یا آی‌پی</value>
   </data>
   <data name="IndexH1Message" xml:space="preserve">
-    <value>مشکل آی‌پی داینامیک دارید‌؟</value>
+    <value>آدرس IP رو فراموش کن و یک هاست نِیم راحت حفظ کن.</value>
   </data>
   <data name="IndexMessage" xml:space="preserve">
-    <value>یک هاست نیم راحت که قابل حفظ کردن هست بساز و برای همیشه متصل بمون</value>
+    <value>اگه میخوای یه سرور درست کنی ، بصورت راه دور کار کنی و غیره ما اینجا هستیم تا IP متغییر رو ردیابی کنیم تا دیگه نگران تغییر IP پویا نباشی.</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>پیغام</value>

@@ -349,10 +349,10 @@
     <value>Host or IP address</value>
   </data>
   <data name="IndexH1Message" xml:space="preserve">
-    <value>Dynamic IP address got you down?</value>
+    <value>Forget your IP address and an easy to remember hostname</value>
   </data>
   <data name="IndexMessage" xml:space="preserve">
-    <value>Create an easy to remember hostname and never lose your connection again.</value>
+    <value>If you want to create a server, work remotely, etc., we are here to track changing IP so you don't have to worry about changing dynamic IP anymore.</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Info</value>
