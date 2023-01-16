@@ -13,7 +13,7 @@ partial class ReverseLookup
     {
         isProgressing = true;
 
-        var response = await iPRepository.ReverseLoopUp(iP.IPv4);
+        var response = await _DNSLookUpRepository.QueryReverse(iP.IPv4);
         if (!String.IsNullOrEmpty(response))
             result = response;
         else

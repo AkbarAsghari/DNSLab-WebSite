@@ -2,7 +2,7 @@
 
 @attribute [Authorize]
 
-@inject IIPRepository iPRepository
+@inject IDNSLookUpRepository _DNSLookUpRepository
 @inject IStringLocalizer<Resource> localizer
 <ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>
@@ -11,6 +11,13 @@
         </BitMessageBar>
         <div class="col-md-6">
             <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="dnslab.ir" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+        </div>
+        <div class="col-md-3">
+            <BitDropDown Label="نوع رکورد"
+                         Items="DNSQueryTypes"
+                         @bind-Value="queryType"
+                         Placeholder="نوع رکورد را انتخاب نمایید">
+            </BitDropDown>
         </div>
     </Body>
 </ToolsForm>

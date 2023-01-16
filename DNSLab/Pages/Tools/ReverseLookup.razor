@@ -2,7 +2,7 @@
 
 @attribute [Authorize]
 
-@inject IIPRepository iPRepository
+@inject IDNSLookUpRepository _DNSLookUpRepository
 @inject IStringLocalizer<Resource> localizer
 
 <ToolsForm Header="@localizer["ReverseLookup"]" Model="@iP" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
