@@ -32,7 +32,20 @@
 </div>
 <hr />
 <h2>بررسی پینگ IP یا یک آدرس اینترنتی</h2>
+<BitLabel>ساختار کلی بصورت زیر میباشد</BitLabel>
 <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/IP/Ping?hostOrIPAddress={IP_or_Host}</code></BitLabel>
+<BitLabel>خروجی بصورت زیر میباشد</BitLabel>
+<code>
+<pre>
+{
+    "bufferSize": 32,
+    "ip": "216.239.38.120",
+    "ttl": 104,
+    "time": 108,
+    "success": true
+}
+</pre>
+</code>
 <BitLabel>برای مثال</BitLabel>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://api.dnslab.ir/IP/Ping?hostOrIPAddress=google.com" />
@@ -69,44 +82,122 @@
 <BitLabel>ساختار کلی بصورت زیر میباشد</BitLabel>
 <BitLabel Class="dir-ltr"><code>https://api.dnslab.ir/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></BitLabel>
 <BitLabel>در اینجا <code>query</code> برابر است با آدرس مورد نظر که میخواید DNS های آن را پرس و چو کنید (مانند google.com).</BitLabel>
-<BitLabel>و <code>queryType</code> برابر است با نوع پرس و جو که در جدول زیر توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</BitLabel>
-<table class="table table-sm">
-    <thead>
-        <tr>
-            <td>queryType</td>
-            <td>نوع رکورد</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>NS</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>CNAME</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>SOA</td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>MX</td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>TXT</td>
-        </tr>
-    </tbody>
-</table>
-
-<BitLabel>برای مثال اگر میخواهید NS های گوگل را پرس و جو کنید باید مانند آدرس زیر بنویسید.</BitLabel>
-<div class="dir-ltr">
-    <CopyToClipboard Text="https://api.dnslab.ir/DNSLookUp/Query?Query=google.com&queryType=2" />
-    <BitLink Href="https://api.dnslab.ir/DNSLookUp/Query?Query=google.com&queryType=2" Target="_blank">https://api.dnslab.ir/DNSLookUp/Query?Query=google.com&queryType=2</BitLink>
-</div>
+<BitLabel>و <code>queryType</code> برابر است با نوع پرس و جو که در ادامه توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</BitLabel>
+<hr />
+<BitLabel>برای نوع رکورد A (queryType = 1)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "A",
+        "domainName": "dnslab.ir.",
+        "ttl": 41,
+        "address": "194.147.142.136"
+    }
+]
+</pre>
+</code>
+<hr />
+<BitLabel>برای نوع رکورد NS (queryType = 2)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "NS",
+        "domainName": "dnslab.ir.",
+        "ttl": 20862,
+        "nsdName": "ns1.dnslab.ir."
+    },
+    {
+        "recordType": "NS",
+        "domainName": "dnslab.ir.",
+        "ttl": 20862,
+        "nsdName": "ns2.dnslab.ir."
+    }
+]
+</pre>
+</code>
+<hr />
+<BitLabel>برای نوع رکورد CNAME (queryType = 5)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "CNAME",
+        "domainName": "home.dnslab.ir.",
+        "ttl": 60,
+        "canonicalName": "local.dnslab.ir."
+    }
+]
+</pre>
+</code>
+<hr />
+<BitLabel>برای نوع رکورد SOA (queryType = 6)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "SOA",
+        "domainName": "dnslab.ir.",
+        "ttl": 60,
+        "expire": 86400,
+        "minimum": 60,
+        "mName": "ns1.dnslab.ir.",
+        "refresh": 15,
+        "retry": 10,
+        "rName": "hostmaster.",
+        "serial": 9828
+    }
+]
+</pre>
+</code>
+<hr />
+<BitLabel>برای نوع رکورد MX (queryType = 15)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "MX",
+        "domainName": "yahoo.com.",
+        "ttl": 625,
+        "exchange": "mta7.am0.yahoodns.net.",
+        "preference": 1
+    },
+    {
+        "recordType": "MX",
+        "domainName": "yahoo.com.",
+        "ttl": 625,
+        "exchange": "mta5.am0.yahoodns.net.",
+        "preference": 1
+    },
+    {
+        "recordType": "MX",
+        "domainName": "yahoo.com.",
+        "ttl": 625,
+        "exchange": "mta6.am0.yahoodns.net.",
+        "preference": 1
+    }
+]
+</pre>
+</code>
+<hr />
+<BitLabel>برای نوع رکورد TXT (queryType = 16)</BitLabel>
+<BitLabel>خروجی :</BitLabel>
+<code>
+<pre>
+[
+    {
+        "recordType": "TXT",
+        "domainName": "dnslab.ir.",
+        "ttl": 60,
+        "escapedText": "google-site-verification=KAI1-4asUW3fXYa1JVxMh9w66s3-7ccKzT4sgJFysqc",
+        "text": "google-site-verification=KAI1-4asUW3fXYa1JVxMh9w66s3-7ccKzT4sgJFysqc"
+    }
+]
+</pre>
+</code>
