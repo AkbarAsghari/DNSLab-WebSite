@@ -49,16 +49,16 @@ partial class DNSLookup
         isProgressing = true;
         result = String.Empty;
 
-        result += "<div class='table-responsive-sm'>";
+        result += "<div class='table-responsive'>";
         result += "<table class='table'>";
 
         if (queryType == "A")
         {
             result += "<thead><tr>" +
-                    "<th scope='col'>RecordType</th>" +
-                    "<th scope='col'>DomainName</th>" +
-                    "<th scope='col'>TTL</th>" +
-                    "<th scope='col'>Address</th>" +
+                    "<th>RecordType</th>" +
+                    "<th>DomainName</th>" +
+                    "<th>TTL</th>" +
+                    "<th>Address</th>" +
                 "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<ARecordDTO>(hostOrIPAddress.HostOrIPAddress);
@@ -69,10 +69,10 @@ partial class DNSLookup
         else if (queryType == "NS")
         {
             result += "<thead><tr>" +
-                    "<th scope='col'>RecordType</th>" +
-                    "<th scope='col'>DomainName</th>" +
-                    "<th scope='col'>TTL</th>" +
-                    "<th scope='col'>NSDName</th>" +
+                    "<th>RecordType</th>" +
+                    "<th>DomainName</th>" +
+                    "<th>TTL</th>" +
+                    "<th>NSDName</th>" +
                 "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<NsRecordDTO>(hostOrIPAddress.HostOrIPAddress);
@@ -83,10 +83,10 @@ partial class DNSLookup
         else if (queryType == "CNAME")
         {
             result += "<thead><tr>" +
-                   "<th scope='col'>RecordType</th>" +
-                   "<th scope='col'>DomainName</th>" +
-                   "<th scope='col'>TTL</th>" +
-                   "<th scope='col'>CanonicalName</th>" +
+                   "<th>RecordType</th>" +
+                   "<th>DomainName</th>" +
+                   "<th>TTL</th>" +
+                   "<th>CanonicalName</th>" +
                "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<CNAMERecordDTO>(hostOrIPAddress.HostOrIPAddress);
@@ -97,11 +97,11 @@ partial class DNSLookup
         else if (queryType == "MX")
         {
             result += "<thead><tr>" +
-                   "<th scope='col'>RecordType</th>" +
-                   "<th scope='col'>DomainName</th>" +
-                   "<th scope='col'>TTL</th>" +
-                   "<th scope='col'>Exchange</th>" +
-                   "<th scope='col'>Preference</th>" +
+                   "<th>RecordType</th>" +
+                   "<th>DomainName</th>" +
+                   "<th>TTL</th>" +
+                   "<th>Exchange</th>" +
+                   "<th>Preference</th>" +
                "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<MXRecordDTO>(hostOrIPAddress.HostOrIPAddress);
@@ -112,11 +112,11 @@ partial class DNSLookup
         else if (queryType == "TXT")
         {
             result += "<thead><tr>" +
-                  "<th scope='col'>RecordType</th>" +
-                  "<th scope='col'>DomainName</th>" +
-                  "<th scope='col'>TTL</th>" +
-                  "<th scope='col'>EscapedText</th>" +
-                  "<th scope='col'>Text</th>" +
+                  "<th>RecordType</th>" +
+                  "<th>DomainName</th>" +
+                  "<th>TTL</th>" +
+                  "<th>EscapedText</th>" +
+                  "<th>Text</th>" +
               "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<TXTRecordDTO>(hostOrIPAddress.HostOrIPAddress);
@@ -127,16 +127,16 @@ partial class DNSLookup
         else if (queryType == "SOA")
         {
             result += "<thead><tr>" +
-                 "<th scope='col'>RecordType</th>" +
-                 "<th scope='col'>DomainName</th>" +
-                 "<th scope='col'>TTL</th>" +
-                 "<th scope='col'>Expire</th>" +
-                 "<th scope='col'>Minimum</th>" +
-                 "<th scope='col'>MName</th>" +
-                 "<th scope='col'>Refresh</th>" +
-                 "<th scope='col'>Retry</th>" +
-                 "<th scope='col'>RName</th>" +
-                 "<th scope='col'>Serial</th>" +
+                 "<th>RecordType</th>" +
+                 "<th>DomainName</th>" +
+                 "<th>TTL</th>" +
+                 "<th>Expire</th>" +
+                 "<th>Minimum</th>" +
+                 "<th>MName</th>" +
+                 "<th>Refresh</th>" +
+                 "<th>Retry</th>" +
+                 "<th>RName</th>" +
+                 "<th>Serial</th>" +
              "</tr></thead>";
             result += "<tbody>";
             var response = await _DNSLookUpRepository.Query<SOARecordDTO>(hostOrIPAddress.HostOrIPAddress);
