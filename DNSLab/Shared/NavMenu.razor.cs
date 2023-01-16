@@ -200,7 +200,7 @@ namespace DNSLab.Shared
                             },
                             new BitNavLinkItem
                             {
-                                Name = "DNS Lookup",
+                                Name = "Reverse Lookup",
                                 Url = "tools/reverselookup",
                                 Key = "K504"
                             }
