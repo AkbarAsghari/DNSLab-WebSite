@@ -13,15 +13,6 @@ namespace DNSLab.Repository
             this._httpService = httpService;
         }
 
-        public async Task<string> DNSLookup(string hostOrIPAddress)
-        {
-            var response = await _httpService.Get<string>($"/IP/DNSLookup?hostOrIPAddress={hostOrIPAddress}");
-            if (response.Success)
-                return response.Response;
-            else
-                return String.Empty;
-        }
-
         public async Task<PingDTO> Ping(string hostOrIPAddress)
         {
             var response = await _httpService.Get<PingDTO>($"/IP/Ping?hostOrIPAddress={hostOrIPAddress}");
@@ -38,15 +29,6 @@ namespace DNSLab.Repository
                 return response.Response;
             else
                 return null;
-        }
-
-        public async Task<string> ReverseLoopUp(string iPAddress)
-        {
-            var response = await _httpService.Get<string>($"/IP/ReverseLookup?IPAddress={iPAddress}");
-            if (response.Success)
-                return response.Response;
-            else
-                return String.Empty;
         }
     }
 }
