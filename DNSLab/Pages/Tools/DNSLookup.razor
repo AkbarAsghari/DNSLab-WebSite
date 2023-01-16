@@ -9,10 +9,10 @@
         <BitMessageBar MessageBarType="BitMessageBarType.Info">
             <BitLabel>رکورد DNS را جستجو کنید</BitLabel>
         </BitMessageBar>
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="dnslab.ir" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2">
             <BitDropDown Label="نوع رکورد"
                          Items="DNSQueryTypes"
                          @bind-Value="queryType"

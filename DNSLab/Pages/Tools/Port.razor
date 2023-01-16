@@ -10,10 +10,10 @@
         <BitMessageBar MessageBarType="BitMessageBarType.Info">
             <BitLabel>آزمایش می کند که آیا پورت TCP در IP مشخص باز شده است یا خیر</BitLabel>
         </BitMessageBar>
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
         </div>
-        <div class="col-md-2">
+        <div class="col-lg-2">
             <BitTextField Label="@localizer["PortNumber"]" Class="dir-ltr" Placeholder="80" @bind-Value="@hostOrIPAddressAndPort.Port" />
         </div>
     </Body>
