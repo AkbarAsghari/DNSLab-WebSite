@@ -3,6 +3,6 @@
     public class MXRecordDTO : RecordInfoDTO
     {
         public string Exchange { get; set; }
-        public string Preference { get; set; }
+        public ushort Preference { get; set; }
     }
 }
