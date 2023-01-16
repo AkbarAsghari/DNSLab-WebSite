@@ -1,6 +1,8 @@
 ﻿@page "/Comment/Pages"
 @inject ICommentRepository _CommentRepository
 
+@attribute [Authorize(Roles = "Admin,Writer")]
+
 <BitPivot OnLinkClick="PivotOnLinkClick" DefaultSelectedKey="NotReviewComments">
     <BitPivotItem HeaderText="دیدگاه‌های بررسی نشده" Key="NotReviewComments">
     </BitPivotItem>
