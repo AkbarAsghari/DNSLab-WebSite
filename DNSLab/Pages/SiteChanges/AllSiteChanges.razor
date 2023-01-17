@@ -56,7 +56,9 @@ else
                         <BitLabel Class="text-truncate">@item.Title</BitLabel>
                     </div>
                     <div class="col-md-3">
-                        <BitLink Href="@($"{item.InformationLink}")" Target="_blank">
+                        <BitLink Href="@(String.IsNullOrEmpty(item.InformationLink) ? null :
+                ((item.InformationLink.ToLower().StartsWith("https") || item.InformationLink.ToLower().StartsWith("http")) ?
+                item.InformationLink : $"changelog/{item.InformationLink}"))" Target="_blank">
                             <BitLabel Class="text-truncate"><code>@item.InformationLink</code></BitLabel>
                         </BitLink>
                     </div>
