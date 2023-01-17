@@ -191,5 +191,14 @@ namespace DNSLab.Repository
             var result = await _httpService.Get<IEnumerable<ChangeLogDTO>>($"/Pages/GetAllChangeLogs");
             return result.Response;
         }
+
+        public async Task<ChangeLogDTO> GetChangeLogByURL(string url)
+        {
+            var response = await _httpService.Get<ChangeLogDTO>($"/Pages/GetChangeLogByURL?url={url}");
+            if (response.Success)
+                return response.Response;
+
+            return null;
+        }
     }
 }

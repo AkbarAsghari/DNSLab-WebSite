@@ -1,0 +1,16 @@
+﻿@page "/changelog/{*URL}"
+
+<div class="ck-content">
+    @if (_ChangeLog != null)
+    {
+        <h1>@_ChangeLog.Title</h1>
+        <PageVisitCounter />
+
+        <hr />
+        @((MarkupString)@_ChangeLog.Description)
+        <hr />
+        <div class="text-center">
+            <SupportUsButton />
+        </div>
+    }
+</div>

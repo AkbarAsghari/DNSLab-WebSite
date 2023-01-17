@@ -21,6 +21,7 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> UpdateChangeLog(ChangeLogDTO changeLog);
         Task<bool> DeleteChangeLog(Guid id);
         Task<ChangeLogDTO> GetChangeLog(Guid id);
+        Task<ChangeLogDTO> GetChangeLogByURL(string url );
         Task<IEnumerable<ChangeLogDTO>> GetLastChangeLogs();
         Task<IEnumerable<ChangeLogDTO>> GetAllChangeLogs();
     }
