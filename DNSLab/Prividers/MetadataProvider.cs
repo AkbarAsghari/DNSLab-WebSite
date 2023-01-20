@@ -322,10 +322,10 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "/tools",
+                "/tools/all",
                 new()
                 {
-                    Title = "ابزار",
+                    Title = "ابزار های سایت",
                     Description = "ابزار های سایت DNSLab",
                     Keywords = new string[] { "ابزار ها", "tools" }
                 }
