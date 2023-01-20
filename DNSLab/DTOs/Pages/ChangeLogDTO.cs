@@ -12,7 +12,7 @@ namespace DNSLab.DTOs.Pages
         public string Title { get; set; }
         public string? InformationLink { get; set; }
         public string? Description { get; set; }
-        public DateTime ReleaseDate { get; set; } = DateTime.Now;
+        public DateTime ReleaseDate { get; set; } = DateTime.UtcNow;
         public DateTime CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
 
