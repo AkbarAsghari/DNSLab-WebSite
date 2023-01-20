@@ -1421,3 +1421,11 @@ footer {
     right: 0;
     left: 0;
 }
+
+/*DNSLab*/
+
+.tools-item-msg-bar {
+    min-height: 4rem
+}
+
+/*END-DNSLab*/

@@ -1,7 +1,7 @@
 ﻿using DNSLab.DTOs.DNSLookUp;
 using DNSLab.DTOs.IP;
 
-namespace DNSLab.Pages.Tools;
+namespace DNSLab.Pages.Tools.MainTools;
 partial class DNSLookup
 {
     private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();

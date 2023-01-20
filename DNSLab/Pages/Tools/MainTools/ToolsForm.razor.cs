@@ -1,4 +1,4 @@
-﻿namespace DNSLab.Pages.Tools;
+﻿namespace DNSLab.Pages.Tools.MainTools;
 
 partial class ToolsForm<TItem>
 {

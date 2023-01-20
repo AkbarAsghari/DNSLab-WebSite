@@ -1,7 +1,5 @@
 ﻿@page "/tools/dnslookup"
 
-@attribute [Authorize]
-
 @inject IDNSLookUpRepository _DNSLookUpRepository
 @inject IStringLocalizer<Resource> localizer
 <ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">

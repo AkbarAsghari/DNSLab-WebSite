@@ -1,6 +1,6 @@
 ﻿using DNSLab.DTOs.IP;
 
-namespace DNSLab.Pages.Tools;
+namespace DNSLab.Pages.Tools.MainTools;
 partial class Port
 {
     private HostOrIPAddressAndPortDTO hostOrIPAddressAndPort = new HostOrIPAddressAndPortDTO();

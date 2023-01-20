@@ -1420,3 +1420,7 @@ footer {
     right: 0;
     left: 0;
 }
+
+.tools-item-msg-bar {
+    min-height: 4rem
+}

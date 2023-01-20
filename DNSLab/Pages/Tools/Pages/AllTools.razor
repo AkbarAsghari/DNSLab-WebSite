@@ -1,0 +1,27 @@
+﻿@page "/tools/all"
+@using DNSLab.Shared.Components.Tools
+
+<h1>ابزار های DNSLab</h1>
+<BitMessageBar MessageBarType="BitMessageBarType.Info">
+    <BitLabel>
+        در این بخش شما میتوانید از ابزار های زیر بصورت رایگان استفاده نمایید.
+        ابزار ها شامل Ping ، PortChecker , DNS Lookup و Reverse lookup میبشاد.
+        و همچنین ابزار DNS lookup شامل چندین نوع پرس و جو از قبیل A ، NS ، CNAME ، MX ، SOA و TXT میباشد.
+        همچنین در این بخش این امکان فراهم شده تا تمام ابزار ها در یک محل جمع آری شده باشد تا دسترسی به آن راحت تر باشد.
+    </BitLabel>
+</BitMessageBar>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <ToolButtonWithSummary ButtonText="Ping" Href="tools/ping" Summary="نشان می دهد که چقدر طول می کشد تا بسته ها به میزبان برسند" />
+    </div>
+    <div class="col-md-4">
+        <ToolButtonWithSummary ButtonText="Port Checker" Href="tools/port" Summary="آزمایش می کند که آیا پورت TCP در IP مشخص باز شده است یا خیر" />
+    </div>
+    <div class="col-md-4">
+        <ToolButtonWithSummary ButtonText="DNS Lookup" Href="tools/dnslookup" Summary="رکورد های DNS را میتوان از این بخش پرس  و جو کرد" />
+    </div>
+    <div class="col-md-4">
+        <ToolButtonWithSummary ButtonText="Reverse Lookup" Href="tools/reverselookup" Summary="رکورد هاینام هاست را بر اساس آدرس IP پیدا می کند" />
+    </div>
+</div>
