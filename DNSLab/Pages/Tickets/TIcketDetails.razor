@@ -25,7 +25,7 @@ else
                                 @item.CreateDate.CalcRelativeTime()
                             </div>
                             <div class="message">
-                                @item.Text.ChangeUrlsToLink()
+                                @((MarkupString)item.Text.ChangeUrlsToLink())
                             </div>
                         </li>
                     }
@@ -36,7 +36,7 @@ else
                                 @item.CreateDate.CalcRelativeTime()
                             </div>
                             <div class="message">
-                                @item.Text.ChangeUrlsToLink()
+                                @((MarkupString)item.Text.ChangeUrlsToLink())
                             </div>
                         </li>
                     }
