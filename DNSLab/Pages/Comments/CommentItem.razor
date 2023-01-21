@@ -11,7 +11,7 @@
         <div class="col">
             <div class="row g-0">
                 <h6>@FullComment.FullName</h6>
-                <BitLabel Class="comment-text m-0">@FullComment.Text</BitLabel>
+                <BitLabel Class="comment-text m-0">@((MarkupString)FullComment.Text)</BitLabel>
             </div>
         </div>
         @if (@FullComment.RepliesCount > 0)

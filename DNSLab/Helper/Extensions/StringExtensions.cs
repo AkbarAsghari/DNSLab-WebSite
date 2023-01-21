@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using DNSLab.Helper.Utilities;
+using System.Text;
 
 namespace DNSLab.Helper.Extensions
 {
@@ -51,6 +52,18 @@ namespace DNSLab.Helper.Extensions
             if (String.IsNullOrWhiteSpace(text))
                 return text;
             return text.Length > length ? $"{text.Substring(0, length)}..." : text;
+        }
+
+        public static string ChangeUrlsToLink(this string text)
+        {
+            StringBuilder sb = new StringBuilder(text);
+
+            var links = RegexTools.ExtractUrlsFromString(text);
+
+            foreach (var link in links)
+                sb.Replace(link, $"<a href=\"{link}\">{link}</a>");
+
+            return sb.ToString();
         }
     }
 }
