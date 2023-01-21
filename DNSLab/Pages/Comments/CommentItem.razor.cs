@@ -11,7 +11,6 @@ partial class CommentItem
     {
         if (Replies == null)
             Replies = await commentRepository.GetCommentReplies(FullComment.Id);
-        Replies.ToList().ForEach(x => x.Text = x.Text.ChangeUrlsToLink());
         isCollapsed = !isCollapsed;
     }
 }

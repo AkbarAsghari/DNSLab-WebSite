@@ -7,6 +7,5 @@ partial class Comments
     protected override async Task OnInitializedAsync()
     {
         allComments = await commentRepository.GetAllComments();
-        allComments.ToList().ForEach(x => x.Text = x.Text.ChangeUrlsToLink());
     }
 }
