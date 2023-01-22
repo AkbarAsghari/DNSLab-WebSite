@@ -2,7 +2,7 @@
 
 namespace DNSLab.Pages.User;
 
-partial class Notifications
+partial class Settings
 {
     private SettingsDTO settings;
 
