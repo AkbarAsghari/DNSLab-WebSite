@@ -228,7 +228,7 @@ namespace DNSLab.Shared
                     },
                     new BitNavLinkItem
                     {
-                        Name = "تنظیمات",
+                        Name = "ناحیه کاربری",
                         IconName = BitIconName.Settings,
                         Links = new List<BitNavLinkItem>
                         {
@@ -249,8 +249,8 @@ namespace DNSLab.Shared
                                 Key = "K412" ,
                             },
                             new BitNavLinkItem {
-                                Name = "آگاهسازی ها",
-                                Url = "settings/notifications",
+                                Name = "تنظیمات",
+                                Url = "settings/you",
                                 Key = "K413" ,
                             }
                         }

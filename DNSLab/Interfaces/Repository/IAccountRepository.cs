@@ -5,6 +5,7 @@ namespace DNSLab.Interfaces.Repository
     public interface IAccountRepository
     {
         Task<UserInfo> Get();
+        Task<SettingsDTO> GetSettings();
         Task<IEnumerable<UserDTO>> GetAll();
         Task<string> Login(AuthenticateDTO userInfo);
         Task<bool> ForgetPassword(ForgetPasswordDTO forgetPassword);
@@ -15,6 +16,7 @@ namespace DNSLab.Interfaces.Repository
         Task<bool> ResendConfirmEmailToken();
         Task<bool> ConfirmEmailWithToken(string Token);
         Task<bool> Update(UserInfo userInfo);
+        Task<bool> UpdateSettings(SettingsDTO updateNotifications);
         Task<bool> UpdateUsername(string? Username);
         Task<int> UsersCount();
         Task<bool> DeactivateAccount();

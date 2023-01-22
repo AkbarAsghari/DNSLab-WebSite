@@ -4,20 +4,20 @@ namespace DNSLab.Pages.User;
 
 partial class Notifications
 {
-    private UserInfo userInfo;
+    private SettingsDTO settings;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            userInfo = await _AccountRepository.Get();
+            settings = await _AccountRepository.GetSettings();
             await this.InvokeAsync(() => StateHasChanged());
         }
     }
 
     private async Task SaveChanges()
     {
-        if (await _AccountRepository.Update(userInfo))
+        if (await _AccountRepository.UpdateSettings(settings))
             _ToastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
     }
 }

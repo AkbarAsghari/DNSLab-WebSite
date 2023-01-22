@@ -64,6 +64,18 @@ namespace DNSLab.Repository
             }
         }
 
+        public async Task<SettingsDTO> GetSettings()
+        {
+            var response = await _httpService.Get<SettingsDTO>($"/Auth/GetSettings");
+            if (!response.Success)
+            {
+                return null;
+            }
+            else
+            {
+                return response.Response;
+            }
+        }
 
         public async Task<int> UsersCount()
         {
@@ -141,6 +153,12 @@ namespace DNSLab.Repository
         public async Task<bool> UpdateUsername(string? Username)
         {
             var response = await _httpService.Put<bool>($"/Auth/UpdateUsername?Username={(String.IsNullOrWhiteSpace(Username) ? null : Username)}");
+            return response.Response;
+        }
+
+        public async Task<bool> UpdateSettings(SettingsDTO updateSettings)
+        {
+            var response = await _httpService.Put<SettingsDTO, bool>($"/Auth/UpdateSettings", updateSettings);
             return response.Response;
         }
     }

@@ -1,32 +1,25 @@
-﻿@page "/settings/notifications"
+﻿@page "/settings/account"
 @inject IAccountRepository _AccountRepository
 @inject IStringLocalizer<Resource> _Localizer
 @inject ToastService _ToastService
 
 @attribute [Authorize]
 
-<h4>آگاهسازی ها</h4>
+<h4>تنظیمات</h4>
 
-@if (userInfo == null)
+@if (settings == null)
 {
     <Loading />
 }
 else
 {
-    <div class="row gx-3 mb-3">
-        <div class="col-xl-6">
-            <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@userInfo.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
-            <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@userInfo.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
-        </div>
-        <div class="col">
-            @if (!@userInfo.IsEmailApproved)
-            {
-                <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                    <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
-                </BitMessageBar>
-            }
-        </div>
-    </div>
+    <h5>ایمیل</h5>
+    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+        <BitLabel>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</BitLabel>
+    </BitMessageBar>
+    <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@settings.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
+    <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@settings.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
+    <hr />
     <BaseButtonComponent Caption=@_Localizer["SaveChanges"]
                      IsBussyCaption=@_Localizer["Progressing"]
                      Color=ColorEnum.Primary
