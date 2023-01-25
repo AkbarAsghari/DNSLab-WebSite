@@ -19,7 +19,7 @@ namespace DNSLab.Helper.HttpService
 
 #if DEBUG
         //private const string BaseAddress = "https://api.dnslab.ir";
-        private const string BaseAddress = "http://192.168.1.7";
+        private const string BaseAddress = "http://localhost";
 #else
         private const string BaseAddress = "https://api.dnslab.ir";
 #endif
