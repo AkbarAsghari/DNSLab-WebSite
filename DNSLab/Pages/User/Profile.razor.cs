@@ -4,9 +4,6 @@ namespace DNSLab.Pages.User;
 partial class Profile
 {
     UserInfo userInfo;
-
-    CultureSelector cultureSelector;
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -22,7 +19,5 @@ partial class Profile
         {
             toastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
         }
-
-        cultureSelector.Save();
     }
 }

@@ -20,6 +20,10 @@ else
     <BitToggle Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Value="@settings.SendEmailWhenGotTicketReply" IsInlineLabel="true" />
     <BitToggle Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Value="@settings.SendEmailWhenDNSIPChanged" IsInlineLabel="true" />
     <hr />
+    <div class="col-md-4">
+        <CultureSelector @ref=cultureSelector />
+    </div>
+    <hr />
     <BaseButtonComponent Caption=@_Localizer["SaveChanges"]
                      IsBussyCaption=@_Localizer["Progressing"]
                      Color=ColorEnum.Primary
