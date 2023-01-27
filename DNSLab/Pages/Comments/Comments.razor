@@ -8,7 +8,9 @@
 }
 else if (allComments.Count() == 0)
 {
-    <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
+    <BitMessageBar MessageBarType="BitMessageBarType.Info">
+        <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
+    </BitMessageBar>
 }
 else
 {

@@ -62,7 +62,9 @@ else
     <div class="mb-3">
         @if (myComments.Count() == 0)
         {
-            <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
+            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+                <BitLabel>@localizer["ThereIsNoComment"]</BitLabel>
+            </BitMessageBar>
         }
         else
         {
