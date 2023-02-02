@@ -5,15 +5,12 @@
 @if (result.Count > 0)
 {
     <h6>حمایت کنندگان</h6>
-    @foreach (var rows in result.Chunk(10))
-    {
-        <div class="row">
-            @foreach (var item in @rows)
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                    <SupportItem FullName="@item.FullName" Amount="@item.Amount" />
-                </div>
-            }
-        </div>
-    }
+    <div class="row">
+        @foreach (var item in result)
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                <SupportItem FullName="@item.FullName" Amount="@item.Amount" />
+            </div>
+        }
+    </div>
 }
