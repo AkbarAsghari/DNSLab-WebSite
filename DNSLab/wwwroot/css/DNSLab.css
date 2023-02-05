@@ -1430,9 +1430,9 @@ footer {
 
 /*navbar*/
 .blur-navbar {
-    min-height: 3.5rem;
+    padding: 0.5rem;
     backdrop-filter: blur(10px);
-    background-color: transparent!important;
+    background-color: transparent !important;
 }
 
 /*END-DNSLab*/
