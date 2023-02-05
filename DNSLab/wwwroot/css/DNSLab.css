@@ -1430,7 +1430,7 @@ footer {
 
 /*navbar*/
 .blur-navbar {
-    height: 3.5rem;
+    min-height: 3.5rem;
     backdrop-filter: blur(10px);
     background-color: transparent!important;
 }
