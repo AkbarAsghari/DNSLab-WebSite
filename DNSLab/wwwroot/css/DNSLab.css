@@ -1414,6 +1414,9 @@ a {
 
 .container {
     padding: 3rem !important;
+}
+
+.no-auth.container {
     padding-top: 4.3rem !important;
 }
 

@@ -15,7 +15,7 @@
                         if (navigationManager.ShouldRenderAsWithoutAdminMenu())
                         {
                             <NavBar />
-                            <main class="container">
+                            <main class="no-auth container">
                                 @Body
                             </main>
                         }
@@ -32,7 +32,7 @@
                 </Authorized>
                 <NotAuthorized>
                     <NavBar />
-                    <main class="container">
+                    <main class="no-auth container">
                         @Body
                     </main>
                 </NotAuthorized>
