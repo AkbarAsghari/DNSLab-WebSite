@@ -1435,6 +1435,7 @@ footer {
 /*navbar*/
 .blur-navbar {
     padding: 0.5rem;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     background-color: transparent !important;
 }
