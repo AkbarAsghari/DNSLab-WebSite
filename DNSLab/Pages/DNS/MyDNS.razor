@@ -51,7 +51,7 @@ else
         }
         else
         {
-            @foreach (var item in hostNames)
+            @foreach (var item in hostNames.OrderByDescending(x => x.CreateDate))
             {
                 <hr class="m-1" />
                 <div class="row">
@@ -87,9 +87,9 @@ else
                             <BitLabel Class="col">
                                 @localizer["Type"] :
                                 @((DNSRecordTypeEnum)item.RecordType +
-                    ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                    " ("+item.RedirectHttpResponseStatusCode+")" :
-                    String.Empty))
+                                    ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                                    " (" + item.RedirectHttpResponseStatusCode + ")" :
+                                    String.Empty))
                             </BitLabel>
                         </div>
                     </div>
