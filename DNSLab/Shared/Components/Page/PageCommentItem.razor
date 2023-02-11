@@ -54,7 +54,9 @@
             }
             else
             {
-                <BitLabel Class="comment-text">@PageComment.Text</BitLabel>
+                <BitLabel Class="comment-text">
+                    @((MarkupString)PageComment.Text.ChangeUrlsToLink())
+                </BitLabel>
             }
         </div>
     </div>
