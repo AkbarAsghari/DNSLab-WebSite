@@ -61,7 +61,7 @@ namespace DNSLab.Helper.Extensions
             var links = RegexTools.ExtractUrlsFromString(text);
 
             foreach (var link in links)
-                sb.Replace(link, $"<a href=\"{link}\">{link}</a>");
+                sb.Replace(link, $"<a href=\"{link}\">{link.MakeCut(50)}</a>");
 
             return sb.ToString();
         }
