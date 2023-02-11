@@ -214,12 +214,6 @@ namespace DNSLab.Shared
                         {
                             new BitNavLinkItem
                             {
-                                Name = "ارسال پیام",
-                                Url = "Comment/MyComments",
-                                Key = "K306" ,
-                            },
-                            new BitNavLinkItem
-                            {
                                 Name = "ارسال تیکت",
                                 Url = "Ticket/MyTickets",
                                 Key = "K307" ,
@@ -302,12 +296,6 @@ namespace DNSLab.Shared
                         Name = "تغییرات سایت",
                         Url = "ChangeLogs/All",
                         Key= "K101"
-                    },
-                    new BitNavLinkItem
-                    {
-                        Name = "بررسی نظرات",
-                        Url = "Comment/ReviewComments",
-                        Key= "K102"
                     }
                 }
             });
