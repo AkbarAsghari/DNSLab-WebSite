@@ -16,6 +16,7 @@ namespace DNSLab.Repository
             this._httpService = httpService;
             this._memoryCache = memoryCache;
         }
+
         public async Task<bool> RemovePageComment(Guid commentId)
         {
             var result = await _httpService.Delete<bool>($"/Comment/RemovePageComment?Id={commentId}");
