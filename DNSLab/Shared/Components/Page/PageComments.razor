@@ -3,46 +3,41 @@
 @inject NavigationManager _NavigationManager
 
 <h3>نظرات کاربران</h3>
-<div class="row">
-    <BitMessageBar MessageBarType="BitMessageBarType.Info">
-        @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
-        {
-            <BitLabel>تا کنون هیچ دیدگاهی ثبت نشده است ، شما میتونید اولین نفر باشید.</BitLabel>
-        }
-        <BitLabel>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</BitLabel>
-    </BitMessageBar>
-    <div class="col-auto">
-        <BaseButtonComponent Caption="ثبت دیدگاه"
-                             Icon="BitIconName.CommentAdd"
-                             OnClick="async() => await AddNewPageComment()">
-        </BaseButtonComponent>
-    </div>
-    @if (PageCommentAndReplies != null)
+<BitMessageBar MessageBarType="BitMessageBarType.Info">
+    @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
     {
-        <div class="col-10">
-            @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
-            {
-                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
-                    @if (item.Replies.Count() > 0)
-                    {
-                        foreach (var reply in item.Replies)
-                        {
-                            <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
-                        }
-                    }
-                </PageCommentItem>
-            }
-        </div>
+        <BitLabel>تا کنون هیچ دیدگاهی ثبت نشده است ، شما میتونید اولین نفر باشید.</BitLabel>
     }
-</div>
+    <BitLabel>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</BitLabel>
+</BitMessageBar>
+<BaseButtonComponent Caption="ثبت دیدگاه"
+                     Icon="BitIconName.CommentAdd"
+                     OnClick="async() => await AddNewPageComment()">
+</BaseButtonComponent>
+<hr class="m-1" />
+@if (PageCommentAndReplies != null)
+{
+    @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+    {
+        <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
+            @if (item.Replies.Count() > 0)
+            {
+                foreach (var reply in item.Replies)
+                {
+                    <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId" ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
+                }
+            }
+        </PageCommentItem>
+    }
+}
 
 <Modal @ref="AddNewPageCommentModal">
     <Title><BitLabel>@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</BitLabel></Title>
-    <Body>
-        <BitLabel>
-            @(ReplyToId == Guid.Empty ?
-            "اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید."
-            : "متن پاسخ خود را وارد نمایید")
+        <Body>
+            <BitLabel>
+                @(ReplyToId == Guid.Empty ?
+                "اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید."
+                : "متن پاسخ خود را وارد نمایید")
         </BitLabel>
         <BitTextField IsMultiline=true
                       Rows="7"
