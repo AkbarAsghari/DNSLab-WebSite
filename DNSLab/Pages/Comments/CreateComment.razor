@@ -1,9 +1,0 @@
-﻿@page "/Comment/Create"
-@inject ICommentRepository commentRepository
-@inject NavigationManager _navManager
-@inject ToastService toastService
-@inject IStringLocalizer<Resource> localizer
-
-@attribute [Authorize]
-
-<CommentForm comment="createComment" OnValidSubmit="Create" Title="@localizer["CreateNewComment"]"></CommentForm>

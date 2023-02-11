@@ -1,9 +1,0 @@
-﻿@page "/Comment/Reply/{ReplyTo:guid}"
-@inject ICommentRepository commentRepository
-@inject NavigationManager _navManager
-@inject ToastService toastService
-@inject IStringLocalizer<Resource> localizer
-
-@attribute [Authorize]
-
-<CommentForm comment="comment" OnValidSubmit="Reply" Title="@localizer["ReplyComment"]"></CommentForm>
