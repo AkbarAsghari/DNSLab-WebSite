@@ -11,17 +11,24 @@ namespace DNSLab.Shared
         [CascadingParameter] public IPDTO IPDTO { get; set; }
         [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
 
-        private void onChange(string value)
+        public class DNSLabMenuItem
         {
-            BasicNoToolTipNavLinks = AllNavLinks.Where(x =>
-            x.Name.ToLower().Contains(value.ToLower()) ||
-            x.Links.Any(l => l.Name.ToLower().Contains(value.ToLower()))).ToList();
+            public string Text { get; set; } = string.Empty;
+            public string Url { get; set; } = string.Empty;
+            public BitIconName Icon { get; set; }
+            public List<DNSLabMenuItem> Links { get; set; } = new();
         }
 
         private void onClearSearch()
         {
-            BasicNoToolTipNavLinks = AllNavLinks;
+            searchedText = String.Empty;
         }
+
+        private void onChange(string value)
+        {
+            searchedText = value;
+        }
+        private string searchedText = String.Empty;
 
         private bool collapseNavMenu = true;
 
@@ -31,253 +38,224 @@ namespace DNSLab.Shared
         {
             collapseNavMenu = !collapseNavMenu;
         }
-
-        private List<BitNavLinkItem> BasicNoToolTipNavLinks = new List<BitNavLinkItem>();
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
+        private void ToggleNavMenu(bool toggle)
         {
-            if (firstRender)
+            if (toggle)
             {
-                var user = (await authenticationStateTask).User;
-
-                if (user != null)
-                {
-                    if (user.IsInRole("Admin"))
-                        AddAdminMenu();
-
-                    if (user.IsInRole("Admin") || user.IsInRole("Writer"))
-                        AddWriterMenu();
-                }
-
-                AddMainMenu();
-
-                AllNavLinks.ForEach(x => x.Links.ToList().ForEach(i => i.OnClick += ToggleNavMenu));
-                AllNavLinks.Where(x => x.Links.Count() == 0).ToList().ForEach(x => x.OnClick += ToggleNavMenu);
-
-                BasicNoToolTipNavLinks = AllNavLinks;
-                await this.InvokeAsync(() => this.StateHasChanged());
+                ToggleNavMenu();
             }
         }
 
-        void ToggleNavMenu(BitNavLinkItem item)
+
+        protected override async Task OnInitializedAsync()
         {
-            ToggleNavMenu();
+            var user = (await authenticationStateTask).User;
+
+            if (user != null)
+            {
+                if (user.IsInRole("Admin"))
+                    AddAdminMenu();
+
+                if (user.IsInRole("Admin") || user.IsInRole("Writer"))
+                    AddWriterMenu();
+            }
+
+            AddMainMenu();
+
         }
 
-        private readonly List<BitNavLinkItem> AllNavLinks = new()
+        List<DNSLabMenuItem> AllNavLinks = new()
         {
-            new BitNavLinkItem
+            new DNSLabMenuItem
             {
-                Name = "خانه",
+                Text = "خانه",
                 Url = "/",
-                Key = "K000",
-                IconName = BitIconName.Home
+                Icon = BitIconName.Home
             },
-            new BitNavLinkItem
+            new DNSLabMenuItem
             {
-                Name = "داشبورد",
+                Text = "داشبورد",
                 Url = "Dashboard",
-                Key = "K001",
-                IconName = BitIconName.ViewDashboard,
+                Icon = BitIconName.ViewDashboard,
             }
         };
 
         private void AddMainMenu()
         {
             AllNavLinks.AddRange(
-                new List<BitNavLinkItem> {
-                    new BitNavLinkItem
+                new List<DNSLabMenuItem> {
+                    new DNSLabMenuItem
                     {
-                        Name = "داینامیک دی‌ان‌اس",
-                        IconName = BitIconName.Dataflows,
-                        Links = new List<BitNavLinkItem>
+                        Text = "داینامیک دی‌ان‌اس",
+                        Icon = BitIconName.Dataflows,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "هاست نِیم ها",
-                                Url = "dns/mydns",
-                                Key = "K301" ,
+                                Text = "هاست نِیم ها",
+                                Url = "dns/mydns"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "توکن ها",
-                                Url = "dns/mytokens",
-                                Key = "K302" ,
+                                Text = "توکن ها",
+                                Url = "dns/mytokens"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "گزارش ها",
-                        IconName = BitIconName.BarChartVertical,
-                        Links = new List<BitNavLinkItem>
+                        Text = "گزارش ها",
+                        Icon = BitIconName.BarChartVertical,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "گزارش تغییرات هاست نِیم ها",
-                                Url = "Report/DNSHistories",
-                                Key = "K310" ,
+                                Text = "گزارش تغییرات هاست نِیم ها",
+                                Url = "Report/DNSHistories"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "جدول تغییرات آی پی",
-                                Url = "Report/IPChangesChart",
-                                Key = "K311" ,
+                                Text = "جدول تغییرات آی پی",
+                                Url = "Report/IPChangesChart"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "مرکز آموزش",
-                        IconName= BitIconName.Source,
-                        Links = new List<BitNavLinkItem>
+                        Text = "مرکز آموزش",
+                        Icon= BitIconName.Source,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "راهنمای سایت",
-                                Url = "support",
-                                Key = "K308" ,
+                                Text = "راهنمای سایت",
+                                Url = "support"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "آموزش ها",
-                                Url = "articles",
-                                Key = "K309" ,
+                                Text = "آموزش ها",
+                                Url = "articles"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "دانلود",
-                        IconName = BitIconName.Download,
-                        Links = new List<BitNavLinkItem>
+                        Text = "دانلود",
+                        Icon = BitIconName.Download,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "اپلیکیشن ویندوزی",
-                                Url = "download/win",
-                                Key = "K303" ,
+                                Text = "اپلیکیشن ویندوزی",
+                                Url = "download/win"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "برای توسعه دهندگان",
-                        IconName = BitIconName.AzureAPIManagement,
-                        Links = new List<BitNavLinkItem>
+                        Text = "برای توسعه دهندگان",
+                        Icon = BitIconName.AzureAPIManagement,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "API ها",
-                                Url = "api",
-                                Key = "K304" ,
+                                Text = "API ها",
+                                Url = "api"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "ابزار ها",
-                        IconName = BitIconName.DeveloperTools,
-                        Links = new List<BitNavLinkItem>
+                        Text = "ابزار ها",
+                        Icon = BitIconName.DeveloperTools,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "Ping",
-                                Url = "tools/ping",
-                                Key = "K501"
+                                Text = "Ping",
+                                Url = "tools/ping"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "Port Checker",
-                                Url = "tools/port",
-                                Key = "K502"
+                                Text = "Port Checker",
+                                Url = "tools/port"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "DNS Lookup",
-                                Url = "tools/dnslookup",
-                                Key = "K503"
+                                Text = "DNS Lookup",
+                                Url = "tools/dnslookup"
                             },
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "Reverse Lookup",
-                                Url = "tools/reverselookup",
-                                Key = "K504"
+                                Text = "Reverse Lookup",
+                                Url = "tools/reverselookup"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "ارتباط با ما",
-                        IconName = BitIconName.EditMail,
-                        Links = new List<BitNavLinkItem>
+                        Text = "ارتباط با ما",
+                        Icon = BitIconName.EditMail,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "ارسال تیکت",
-                                Url = "Ticket/MyTickets",
-                                Key = "K307" ,
+                                Text = "ارسال تیکت",
+                                Url = "Ticket/MyTickets"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "ناحیه کاربری",
-                        IconName = BitIconName.Settings,
-                        Links = new List<BitNavLinkItem>
+                        Text = "ناحیه کاربری",
+                        Icon = BitIconName.Settings,
+                        Links = new List<DNSLabMenuItem>
                         {
-                            new BitNavLinkItem
+                            new DNSLabMenuItem
                             {
-                                Name = "پروفایل عمومی",
-                                Url = "settings/profile",
-                                Key = "K410" ,
+                                Text = "پروفایل عمومی",
+                                Url = "settings/profile"
                             },
-                            new BitNavLinkItem {
-                                Name = "حساب کاربری",
-                                Url = "settings/admin",
-                                Key = "K411" ,
+                            new DNSLabMenuItem {
+                                Text = "حساب کاربری",
+                                Url = "settings/admin"
                             },
-                            new BitNavLinkItem {
-                                Name = "رمز عبور و احراز هویت",
-                                Url = "settings/security",
-                                Key = "K412" ,
+                            new DNSLabMenuItem {
+                                Text = "رمز عبور و احراز هویت",
+                                Url = "settings/security"
                             },
-                            new BitNavLinkItem {
-                                Name = "تنظیمات",
-                                Url = "settings/you",
-                                Key = "K413" ,
+                            new DNSLabMenuItem {
+                                Text = "تنظیمات",
+                                Url = "settings/you"
                             }
                         }
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "خروج",
-                        Key = "K402",
-                        IconName = BitIconName.PowerButton,
-                        Url = "user/logout",
+                        Text = "خروج",
+                        Icon = BitIconName.PowerButton,
+                        Url = "user/logout"
                     }
                 });
         }
 
         private void AddWriterMenu()
         {
-            AllNavLinks.Add(new BitNavLinkItem
+            AllNavLinks.Add(new DNSLabMenuItem
             {
-                Name = "پنل نویسندگان",
-                IconName = BitIconName.PageEdit,
-                Links = new List<BitNavLinkItem>
+                Text = "پنل نویسندگان",
+                Icon = BitIconName.PageEdit,
+                Links = new List<DNSLabMenuItem>
                 {
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name= "مدیریت مطالب",
-                        Url = "Page/MyPages",
-                        Key= "K201"
+                        Text= "مدیریت مطالب",
+                        Url = "Page/MyPages"
                     },
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name= "دیدگاه‌ها",
-                        Url = "Comment/Pages",
-                        Key= "K202"
+                        Text= "دیدگاه‌ها",
+                        Url = "Comment/Pages"
                     }
                 }
             });
@@ -285,17 +263,16 @@ namespace DNSLab.Shared
 
         private void AddAdminMenu()
         {
-            AllNavLinks.Add(new BitNavLinkItem
+            AllNavLinks.Add(new DNSLabMenuItem
             {
-                Name = "پنل ادمین",
-                IconName = BitIconName.Admin,
-                Links = new List<BitNavLinkItem>
+                Text = "پنل ادمین",
+                Icon = BitIconName.Admin,
+                Links = new List<DNSLabMenuItem>
                 {
-                    new BitNavLinkItem
+                    new DNSLabMenuItem
                     {
-                        Name = "تغییرات سایت",
-                        Url = "ChangeLogs/All",
-                        Key= "K101"
+                        Text = "تغییرات سایت",
+                        Url = "ChangeLogs/All"
                     }
                 }
             });

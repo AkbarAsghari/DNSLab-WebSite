@@ -9,9 +9,12 @@
 
 <div class="@NavMenuCssClass">
     <BitSearchBox Placeholder="جستجو در منو" IsUnderlined="true" OnChange="onChange" OnClear="onClearSearch"></BitSearchBox>
-    <BitNav
-        AriaLabel="Nav basic example"
-        Mode="BitNavMode.Manual"
-        NavLinkItems="BasicNoToolTipNavLinks">
-    </BitNav>
+    <BitNavList TextFieldSelector="x=>x.Text"
+                UrlFieldSelector="x=>x.Url"
+                ItemsFieldSelector="x=>x.Links"
+                IconNameFieldSelector="x=>x.Icon"
+                Mode="BitNavMode.Manual"
+                OnItemClick="(DNSLabMenuItem x)=> ToggleNavMenu(x.Links.Count == 0)"
+                Items="AllNavLinks.Where(x =>x.Text.ToLower().Contains(searchedText.ToLower()) || x.Links.Any(l => l.Text.ToLower().Contains(searchedText.ToLower()))).ToList()">
+    </BitNavList>
 </div>
