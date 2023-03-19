@@ -718,7 +718,7 @@ namespace DNSLab.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download Windows Client For Update EndPoint IP with DNSLab.ir.
+        ///   Looks up a localized string similar to Download Windows Client For Update EndPoint IP with dnslab.link.
         /// </summary>
         public static string SEO_DownloadClientDescription {
             get {

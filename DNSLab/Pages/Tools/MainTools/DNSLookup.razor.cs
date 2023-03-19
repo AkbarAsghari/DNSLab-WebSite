@@ -154,6 +154,6 @@ partial class DNSLookup
     protected override void OnAfterRender(bool firstRender)
     {
         if (String.IsNullOrEmpty(hostOrIPAddress.HostOrIPAddress))
-            hostOrIPAddress.HostOrIPAddress = "dnslab.ir";
+            hostOrIPAddress.HostOrIPAddress = "dnslab.link";
     }
 }

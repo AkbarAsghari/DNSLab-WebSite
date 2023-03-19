@@ -7,7 +7,7 @@ partial class CreateDNS
 
     public async Task Create()
     {
-        hostName.Domain = "dnslab.ir";
+        hostName.Domain = "dnslab.link";
 
         if (await dnsRepository.CreateHostName(hostName))
         {

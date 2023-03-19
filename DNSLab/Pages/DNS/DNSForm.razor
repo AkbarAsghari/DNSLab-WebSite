@@ -17,7 +17,7 @@
                     <BitTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" IsRequired />
                     break;
                 case 3:
-                    <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.ir") @bind-Value="@HostName.HostNameAlias" IsRequired />
+                    <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" IsRequired />
                     break;
                 case 4:
                     <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" IsRequired />

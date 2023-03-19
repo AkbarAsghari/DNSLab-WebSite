@@ -18,7 +18,7 @@ partial class EditDNS
 
     public async Task Update()
     {
-        hostName.Domain = "dnslab.ir";
+        hostName.Domain = "dnslab.link";
 
         if (await dnsRepository.UpdateHostName(hostName))
         {

@@ -79,22 +79,22 @@ else
                 <BitLabel>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</BitLabel>
                 <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
                                      Target="_blank"
-                                     Href="@($"https://api.dnslab.ir/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
+                                     Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
                 <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
                                      Target="_blank"
-                                     Href="@($"https://api.dnslab.ir/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
+                                     Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
                 <BitLabel>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</BitLabel>
                 <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
                                      Target="_blank"
-                                     Href="@($"https://api.dnslab.ir/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
+                                     Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
                 <hr />
                 <BitLabel>لینک بروزرسانی آی پی های توکن</BitLabel>
                 <div class="d-flex align-items-center">
                     <BitLabel>
-                        https://api.dnslab.ir/DNS/UDIBT?k=@token.Key
+                        https://api.dnslab.link/DNS/UDIBT?k=@token.Key
                     </BitLabel>
-                    <CopyToClipboard Text=@("https://api.dnslab.ir/DNS/UDIBT?k=" + @token.Key) />
+                    <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @token.Key) />
                 </div>
                 <BitMessageBar MessageBarType="BitMessageBarType.Warning">
                     این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد

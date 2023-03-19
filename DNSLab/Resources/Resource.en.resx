@@ -538,7 +538,7 @@
     <value>Edit DNS HostName</value>
   </data>
   <data name="SEO_DownloadClientDescription" xml:space="preserve">
-    <value>Download Windows Client For Update EndPoint IP with DNSLab.ir</value>
+    <value>Download Windows Client For Update EndPoint IP with dnslab.link</value>
   </data>
   <data name="SEO_DownloadClientKeyWords" xml:space="preserve">
     <value>Client,dns,app,windows,win</value>

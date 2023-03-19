@@ -20,17 +20,17 @@ namespace DNSLab.Controllers
 
         private static string[] _ExceptedPages = new string[]
         {
-            "https://dnslab.ir/user/confirmemail/{token}",
-            "https://dnslab.ir/user/resetpassword/{token}",
-            "https://dnslab.ir/{pagetype}/{*url}",
-            "https://dnslab.ir/changelog/{*url}",
-            "https://dnslab.ir/tag/{tag}",
-            "https://dnslab.ir/404",
-            "https://dnslab.ir/500",
-            "https://dnslab.ir/503",
-            "https://dnslab.ir/user/logout",
-            "https://dnslab.ir/transaction/callback",
-            "https://dnslab.ir/transaction/tip",
+            "https://dnslab.link/user/confirmemail/{token}",
+            "https://dnslab.link/user/resetpassword/{token}",
+            "https://dnslab.link/{pagetype}/{*url}",
+            "https://dnslab.link/changelog/{*url}",
+            "https://dnslab.link/tag/{tag}",
+            "https://dnslab.link/404",
+            "https://dnslab.link/500",
+            "https://dnslab.link/503",
+            "https://dnslab.link/user/logout",
+            "https://dnslab.link/transaction/callback",
+            "https://dnslab.link/transaction/tip",
         };
 
         public async Task<IActionResult> Get()
@@ -49,7 +49,7 @@ namespace DNSLab.Controllers
 
             foreach (var assemblyroute in assemblyRoutes)
             {
-                string routeWithDomain = $"https://dnslab.ir{assemblyroute}";
+                string routeWithDomain = $"https://dnslab.link{assemblyroute}";
                 if (!_ExceptedPages.Contains(routeWithDomain.ToLower()))
                     routes += routeWithDomain + Environment.NewLine;
             }
