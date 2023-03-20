@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-![لوگو ‌دی‌ان‌اس لب.](https://www.dnslab.ir/images/Icons/Logo.png "لوگو ‌دی‌ان‌اس لب.")
+![لوگو ‌دی‌ان‌اس لب.](https://www.dnslab.link/images/Icons/Logo.png "لوگو ‌دی‌ان‌اس لب.")
 
 # DNSLab
 
