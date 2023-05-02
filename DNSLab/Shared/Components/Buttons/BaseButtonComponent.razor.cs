@@ -17,7 +17,7 @@ partial class BaseButtonComponent
     private async Task ButtonClickedEvent()
     {
         IsBussy = true;
-        await Task.Delay(120000);
+
         if (EditContext == null)
             await OnClick.InvokeAsync();
         else
