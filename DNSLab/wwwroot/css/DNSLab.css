@@ -1317,7 +1317,7 @@ a {
 
 /*Bit*/
 
-.bit-btn.bit-btn-fluent, .bit-srch-box-fluent, .bit-tglb.bit-tglb-fluent, .bit-cmpb.bit-cmpb-fluent, .bit-actb.bit-actb-fluent, .bit-mdl-enabled-fluent, .bit-lbl-enabled-fluent, .bit-msg-bar-fluent, .bit-lnk-fluent, .bit-txt-fluent, .txt-field, .bit-drp.bit-drp-fluent, .bit-tgl-fluent, .bit-lnk-fluent > a, .bit-rbg.bit-rbg-fluent, .bit-acd.bit-acd-fluent, .bit-rbl.bit-rbl-fluent, .bit-btn {
+.bit-acb, .bit-btn.bit-btn-fluent, .bit-srch-box-fluent, .bit-tglb.bit-tglb-fluent, .bit-cmpb.bit-cmpb-fluent, .bit-actb.bit-actb-fluent, .bit-mdl-enabled-fluent, .bit-lbl-enabled-fluent, .bit-msg-bar-fluent, .bit-lnk-fluent, .bit-txt-fluent, .txt-field, .bit-drp.bit-drp-fluent, .bit-tgl-fluent, .bit-lnk-fluent > a, .bit-rbg.bit-rbg-fluent, .bit-acd.bit-acd-fluent, .bit-rbl.bit-rbl-fluent, .bit-btn {
     font-family: vazir-light !important;
 }
 
@@ -1385,6 +1385,10 @@ li > div > a {
 
 .bit-tgl > .container {
     padding: inherit
+}
+
+.icon-container >span{
+    padding-top:0;
 }
 
 /*End-Bit*/
