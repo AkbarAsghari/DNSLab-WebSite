@@ -13,7 +13,7 @@ namespace DNSLab.Repository
         private readonly IHttpService _httpService;
         private readonly IMemoryCache _memoryCache;
 
-        public DNSRepository(IHttpService httpService , IMemoryCache memoryCache)
+        public DNSRepository(IHttpService httpService, IMemoryCache memoryCache)
         {
             this._httpService = httpService;
             this._memoryCache = memoryCache;
@@ -67,11 +67,16 @@ namespace DNSLab.Repository
         public async Task<PagedListDTO<HostNameDTO>> GetOwnHosts(PaginationDTO pagination)
         {
             return await _httpService.GetHelper<HostNameDTO>($"/DNS/Getallpaging", pagination);
-        } 
-        
+        }
+
+        public async Task<PagedListDTO<HostNameAndUserDTO>> GetHostNames(PaginationDTO pagination)
+        {
+            return await _httpService.GetHelper<HostNameAndUserDTO>($"/DNS/GetHostNames", pagination);
+        }
+
         public async Task<IEnumerable<HostSummaryDTO>> GetHostSummaries()
         {
-            var response =  await _httpService.Get<IEnumerable<HostSummaryDTO>>($"/DNS/GetOwnHostsSummary");
+            var response = await _httpService.Get<IEnumerable<HostSummaryDTO>>($"/DNS/GetOwnHostsSummary");
             if (response.Success)
                 return response.Response;
 
@@ -96,8 +101,8 @@ namespace DNSLab.Repository
         {
             var response = await _httpService.Put<TokenAndDNSDTO, bool>($"/DNS/UpdateTokensDomainNameSystems", tokenAndDNS);
             return response.Response;
-        } 
-        
+        }
+
         public async Task<bool> UpdateTokenName(TokenDTO tokenAndName)
         {
             var response = await _httpService.Put<TokenDTO, bool>($"/DNS/UpdateTokenName", tokenAndName);

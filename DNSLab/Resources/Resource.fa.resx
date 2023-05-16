@@ -861,4 +861,7 @@
   <data name="URLOrIP_Is_Not_Valid" xml:space="preserve">
     <value>آدرس یو‌آر‌ال یا آی‌پی درست نمیباشد</value>
   </data>
+  <data name="AllHostNames" xml:space="preserve">
+    <value>همه هاست نِیم ها</value>
+  </data>
 </root>

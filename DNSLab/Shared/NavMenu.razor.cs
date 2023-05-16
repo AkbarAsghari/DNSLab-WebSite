@@ -273,6 +273,11 @@ namespace DNSLab.Shared
                     {
                         Text = "تغییرات سایت",
                         Url = "ChangeLogs/All"
+                    },
+                    new DNSLabMenuItem
+                    {
+                        Text = "همه هاست نِیم ها",
+                        Url = "DNS/AllHostNames"
                     }
                 }
             });

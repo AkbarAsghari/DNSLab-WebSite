@@ -6,6 +6,7 @@ namespace DNSLab.Interfaces.Repository
     public interface IDNSRepository
     {
         Task<PagedListDTO<HostNameDTO>> GetOwnHosts(PaginationDTO pagination);
+        Task<PagedListDTO<HostNameAndUserDTO>> GetHostNames(PaginationDTO pagination);
         Task<HostNameDTO> GetHostName(Guid hostNameId);
         Task<bool> CreateHostName(CreateHostNameDTO createHostName);
         Task<bool> DeleteHostName(Guid hostNameId);

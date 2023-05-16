@@ -861,4 +861,7 @@
   <data name="URLOrIP_Is_Not_Valid" xml:space="preserve">
     <value>Url or IP address is not valid</value>
   </data>
+  <data name="AllHostNames" xml:space="preserve">
+    <value>All HostNames</value>
+  </data>
 </root>
