@@ -1384,7 +1384,7 @@ li > div > a {
 }
 
 .bit-tgl > .container {
-    padding: inherit
+    padding: inherit !important
 }
 
 .icon-container >span{
