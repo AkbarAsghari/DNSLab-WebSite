@@ -48,11 +48,14 @@ partial class Ping
         result += $"recived : {successCount}<br>";
         result += $"packet loss : {(successCount == 0 ? 100 : unsuccessCount * 100 / successCount)}%<br>";
 
-        var avgRTT = successPings.Average(x => x.Time);
-        result += "<br><br>--- Round Trip Time (rtt) ---<br>";
-        result += $"min {successPings.Min(x => x.Time)} ms<br>";
-        result += $"avg {avgRTT} ms<br>";
-        result += $"max {successPings.Max(x => x.Time)} ms<br>";
+        if (successCount > 0)
+        {
+            var avgRTT = successPings.Average(x => x.Time);
+            result += "<br><br>--- Round Trip Time (rtt) ---<br>";
+            result += $"min {successPings.Min(x => x.Time)} ms<br>";
+            result += $"avg {avgRTT} ms<br>";
+            result += $"max {successPings.Max(x => x.Time)} ms<br>";
+        }
 
         isProgressing = false;
     }
