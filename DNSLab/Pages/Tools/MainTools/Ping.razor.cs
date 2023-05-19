@@ -38,7 +38,9 @@ partial class Ping
             await Task.Delay(750);
         }
 
-        int successCount = pings.Where(x => x.Success).Count();
+        IEnumerable<PingDTO> successPings = pings.Where(x => x.Success);
+
+        int successCount = successPings.Count();
         int unsuccessCount = attemptTimes - successCount;
 
         result += $"<br><br>--- {hostOrIPAddress.HostOrIPAddress} statics ---<br>";
@@ -46,11 +48,11 @@ partial class Ping
         result += $"recived : {successCount}<br>";
         result += $"packet loss : {(successCount == 0 ? 100 : unsuccessCount * 100 / successCount)}%<br>";
 
-        var avgRTT = pings.Average(x => x.Time);
+        var avgRTT = successPings.Average(x => x.Time);
         result += "<br><br>--- Round Trip Time (rtt) ---<br>";
-        result += $"min {pings.Min(x => x.Time)} ms<br>";
+        result += $"min {successPings.Min(x => x.Time)} ms<br>";
         result += $"avg {avgRTT} ms<br>";
-        result += $"max {pings.Max(x => x.Time)} ms<br>";
+        result += $"max {successPings.Max(x => x.Time)} ms<br>";
 
         isProgressing = false;
     }
