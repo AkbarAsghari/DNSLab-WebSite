@@ -16,6 +16,7 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<PageSummaryDTO>> GetAllPagesSummaryByTag(string tag);
         Task<PageMetadataDTO> GetPageMetadata(string url);
         Task<bool> PublishPage(Guid id);
+        Task<IEnumerable<LastContentsDTO>> GetLastContents();
 
         Task<bool> AddChangeLog(ChangeLogDTO changeLog);
         Task<bool> UpdateChangeLog(ChangeLogDTO changeLog);

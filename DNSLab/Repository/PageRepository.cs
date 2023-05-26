@@ -135,6 +135,21 @@ namespace DNSLab.Repository
             return false;
         }
 
+        public async Task<IEnumerable<LastContentsDTO>> GetLastContents()
+        {
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetLastChanges, out IEnumerable<LastContentsDTO> cacheValue))
+            {
+                var result = await _httpService.Get<IEnumerable<LastContentsDTO>>($"/Pages/GetLastContents");
+                cacheValue = result.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(3));
+
+                _memoryCache.Set(CacheKeyEnum.GetLastChanges, cacheValue, cacheEntryOptions);
+            }
+
+            return cacheValue;
+        }
+
         public async Task<bool> AddChangeLog(ChangeLogDTO ChangeLogs)
         {
             var response = await _httpService.Post<ChangeLogDTO, bool>($"/Pages/AddChangeLog", ChangeLogs);
@@ -200,5 +215,6 @@ namespace DNSLab.Repository
 
             return null;
         }
+
     }
 }
