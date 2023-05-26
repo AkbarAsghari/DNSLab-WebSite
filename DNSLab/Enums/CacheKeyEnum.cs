@@ -13,6 +13,7 @@
         GetTodayIPChangesCount,
         Tips,
         GetAllPagesSummaryByTag,
-        GetPageMetadata
+        GetPageMetadata,
+        GetLastContents
     }
 }

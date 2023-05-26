@@ -137,7 +137,7 @@ namespace DNSLab.Repository
 
         public async Task<IEnumerable<LastContentsDTO>> GetLastContents()
         {
-            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetLastChanges, out IEnumerable<LastContentsDTO> cacheValue))
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetLastContents, out IEnumerable<LastContentsDTO> cacheValue))
             {
                 var result = await _httpService.Get<IEnumerable<LastContentsDTO>>($"/Pages/GetLastContents");
                 cacheValue = result.Response;
