@@ -194,8 +194,8 @@ namespace DNSLab.Shared
                     },
                     new DNSLabMenuItem
                     {
-                        Text = "ارتباط با ما",
-                        Icon = BitIconName.EditMail,
+                        Text = "پشتیبانی",
+                        Icon = BitIconName.HeadsetSolid,
                         Links = new List<DNSLabMenuItem>
                         {
                             new DNSLabMenuItem
