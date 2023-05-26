@@ -31,6 +31,7 @@ namespace DNSLab.Controllers
             "https://dnslab.link/user/logout",
             "https://dnslab.link/transaction/callback",
             "https://dnslab.link/transaction/tip",
+            "https://dnslab.link/comment/all/{pageid:guid}",
         };
 
         public async Task<IActionResult> Get()

@@ -4,10 +4,13 @@ namespace DNSLab.Shared.Components.Page;
 partial class PageComments
 {
     [Parameter] public Guid PageId { get; set; }
+    [Parameter] public bool ShowAll { get; set; } = false;
 
     Guid CurrentUserId = Guid.Empty;
     Guid ReplyToId = Guid.Empty;
     Guid BaseCommentId = Guid.Empty;
+    
+    int totalCommentsCount = 0;
 
     Modal AddNewPageCommentModal;
     CreatePageCommentDTO NewPageComment = new CreatePageCommentDTO { Text = String.Empty };
@@ -17,6 +20,11 @@ partial class PageComments
     protected override async Task OnInitializedAsync()
     {
         PageCommentAndReplies = await _CommentRepository.GetPageComments(PageId);
+
+        totalCommentsCount = PageCommentAndReplies.Count();
+
+        if (!ShowAll)
+            PageCommentAndReplies = PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate).Take(3);
 
         var user = (await auth.GetAuthenticationStateAsync()).User;
 

@@ -29,6 +29,12 @@
             }
         </PageCommentItem>
     }
+
+    if (totalCommentsCount - 3 > 0 && !ShowAll)
+    {
+        <hr />
+        <BitLabel Class="text-center"><BitLink Href="@($"Comment/All/{PageId}")">... برای نمایش  @(totalCommentsCount - 3) نظر دیگر در این صفحه کلیک کنید ...</BitLink></BitLabel>
+    }
 }
 
 <Modal @ref="AddNewPageCommentModal">
