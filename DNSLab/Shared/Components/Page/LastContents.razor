@@ -1,0 +1,12 @@
+﻿@inject IPageRepository _PageRepository
+<h3>آخرین مطالب سایت</h3>
+
+@if (lastContents != null)
+    @foreach (var item in lastContents)
+    {
+        <BitLabel Class="text-truncate">
+            <BitLink Href="@item.URL">
+                @item.Title
+            </BitLink>
+        </BitLabel>
+    }
