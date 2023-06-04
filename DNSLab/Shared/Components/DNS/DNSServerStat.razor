@@ -10,68 +10,79 @@
 }
 else
 {
-    <BitDropDown Label="گزارش بصورت"
-             DefaultValue="@StatType.ToString()"
-             Items="GetStatTypeItems()"
-             ValueChanged="StatTypeOnChange">
-    </BitDropDown>
+    <div class="row">
+        <BitDropDown Class="col-auto" Style="width:200px" Label="بازه"
+                 DefaultValue="@StatType.ToString()"
+                 Items="GetStatTypeItems()"
+                 ValueChanged="StatTypeOnChange">
+        </BitDropDown>
+        @if (StatType == StatTypeEnum.Custom)
+        {
+            <BitDateRangePicker Class="col-auto" Label="بازه زمانی مورد نظر خود را انتخاب کنید"
+                        @ref=rangeDatePicker
+                        ValueChanged="GenerateReport">
+            </BitDateRangePicker>
+        }
+    </div>
+
+
     <div class="stats-panel">
         <div class="stats-item total-queries">
-            <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)</div>
             <div class="title">Total Queries</div>
         </div>
 
         <div class="stats-item no-error">
-            <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)</div>
             <div class="title">No Error</div>
         </div>
 
         <div class="stats-item server-failure">
-            <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)</div>
             <div class="title">Server Failure</div>
         </div>
 
         <div class="stats-item name-error">
-            <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)</div>
             <div class="title">NX Domain</div>
         </div>
 
         <div class="stats-item refused">
-            <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)</div>
             <div class="title">Refused</div>
         </div>
 
         <div class="stats-item auth-hit">
-            <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)</div>
             <div class="title">Authoritative</div>
         </div>
 
         <div class="stats-item recursions">
-            <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)</div>
             <div class="title">Recursive</div>
         </div>
 
         <div class="stats-item cache-hit">
-            <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)</div>
             <div class="title">Cached</div>
         </div>
 
         <div class="stats-item blocked">
-            <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)</div>
             <div class="title">Blocked</div>
         </div>
 
         <div class="stats-item clients">
-            <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString().EnglishToPersianNumbers()</div>
+            <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString("N0").EnglishToPersianNumbers()</div>
             <div class="percentage">&nbsp;</div>
             <div class="title">Clients</div>
         </div>
@@ -80,7 +91,7 @@ else
         <BitChart Config="_lineChartConfig" @ref="_lineChart" />
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12">
             <div>
                 <BitChart Config="_pieChartConfigQueryResponse" @ref="_pieChartQueryResponse" />
             </div>
@@ -88,7 +99,7 @@ else
                 <BitChart Config="_pieChartConfigQueryType" @ref="_pieChartQueryType" />
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-12">
             <h4>Top Domains</h4>
             @foreach (var domain in _StatResponse.Response.Topdomains)
             {
@@ -123,6 +134,7 @@ else
 @code {
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
+    private BitDateRangePicker rangeDatePicker;
 
     protected override async Task OnInitializedAsync()
     {
@@ -139,7 +151,18 @@ else
             value = StatTypeEnum.LastHour.ToString();
         StatType = (StatTypeEnum)System.Enum.Parse(typeof(StatTypeEnum), value);
 
-        _StatResponse = await _StaticRepository.GetStat(StatType);
+        await GenerateReport();
+    }
+
+    async Task GenerateReport()
+    {
+        if (StatType == StatTypeEnum.Custom && (rangeDatePicker == null || rangeDatePicker.Value!.StartDate == null || rangeDatePicker.Value.EndDate == null))
+            return;
+        else if (StatType == StatTypeEnum.Custom && rangeDatePicker != null)
+            _StatResponse = await _StaticRepository.GetStat(StatType, rangeDatePicker.Value!.StartDate!.Value.DateTime, rangeDatePicker.Value.EndDate!.Value.DateTime);
+        else
+            _StatResponse = await _StaticRepository.GetStat(StatType);
+
 
         BindLineChartData();
         BindPieChartDataQueryResponse();
@@ -209,29 +232,9 @@ else
                 });
         }
 
+        foreach (var label in _StatResponse.Response.MainChartData.Labels)
+            _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD","dd")));
 
-        switch (StatType)
-        {
-            case StatTypeEnum.LastHour:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToShortTimeString().ToString());
-                break;
-            case StatTypeEnum.LastDay:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd HH:mm"));
-                break;
-            case StatTypeEnum.LastWeek:
-            case StatTypeEnum.LastMonth:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd"));
-                break;
-            case StatTypeEnum.LastYear:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("yyyy/MM"));
-                break;
-            default:
-                break;
-        }
     }
     #endregion
 
@@ -256,10 +259,12 @@ else
         _pieChartConfigQueryResponse.Data.Labels.Clear();
         _pieChartConfigQueryResponse.Data.Datasets.Clear();
 
-        BitChartPieDataset<int> dataset = new BitChartPieDataset<int>(_StatResponse.Response.QueryResponseChartData.Datasets[0].Data)
-            {
-                BackgroundColor = _StatResponse.Response.QueryResponseChartData.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
-            };
+        BitChartPieDataset<int>
+    dataset = new BitChartPieDataset<int>
+        (_StatResponse.Response.QueryResponseChartData.Datasets[0].Data)
+        {
+            BackgroundColor = _StatResponse.Response.QueryResponseChartData.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
+        };
 
         foreach (var label in _StatResponse.Response.QueryResponseChartData.Labels)
         {
@@ -292,10 +297,12 @@ else
         _pieChartConfigQueryType.Data.Labels.Clear();
         _pieChartConfigQueryType.Data.Datasets.Clear();
 
-        BitChartPieDataset<int> dataset = new BitChartPieDataset<int>(_StatResponse.Response.Querytypechartdata.Datasets[0].Data)
-            {
-                BackgroundColor = _StatResponse.Response.Querytypechartdata.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
-            };
+        BitChartPieDataset<int>
+            dataset = new BitChartPieDataset<int>
+                (_StatResponse.Response.Querytypechartdata.Datasets[0].Data)
+                {
+                    BackgroundColor = _StatResponse.Response.Querytypechartdata.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
+                };
 
         foreach (var label in _StatResponse.Response.Querytypechartdata.Labels)
         {
@@ -305,6 +312,4 @@ else
     }
 
     #endregion
-
-
 }
