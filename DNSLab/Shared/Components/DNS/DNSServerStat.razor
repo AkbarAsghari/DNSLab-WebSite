@@ -77,19 +77,26 @@ else
         </div>
     </div>
     <div>
-        <BitChart Config="_lineChartConfigExample" @ref="_lineChartExample" />
+        <BitChart Config="_lineChartConfig" @ref="_lineChart" />
     </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <BitChart Config="_pieChartConfigQueryResponse" @ref="_pieChartQueryResponse" />
+            </div>
+        </div>
+    </div>
+    
 }
 
 @code {
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
 
-    private BitChart _lineChartExample;
-    private BitChartLineConfig _lineChartConfigExample;
     protected override async Task OnInitializedAsync()
     {
         InitlineChartExample();
+        InitPieChartExample();
         await StatTypeOnChange(String.Empty);
     }
 
@@ -102,52 +109,12 @@ else
         _StatResponse = await _StaticRepository.GetStat(StatType);
 
         BindLineChartData();
+        BindPieChartData();
 
-        if (_lineChartExample != null)
-            await _lineChartExample.Update();
-    }
-
-    void BindLineChartData()
-    {
-
-        _lineChartConfigExample.Data.Labels.Clear();
-        _lineChartConfigExample.Data.Datasets.Clear();
-
-        foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
-        {
-            _lineChartConfigExample.Data.Datasets.Add(new BitChartLineDataset<int>(dataset.Data)
-                {
-                    Label = dataset.Label,
-                    BackgroundColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BackgroundColor)),
-                    BorderColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BorderColor)),
-                    Fill = dataset.Fill,
-                    BorderWidth = 1
-                });
-        }
-
-
-        switch (StatType)
-        {
-            case StatTypeEnum.LastHour:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToShortTimeString().ToString());
-                break;
-            case StatTypeEnum.LastDay:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd HH:mm"));
-                break;
-            case StatTypeEnum.LastWeek:
-            case StatTypeEnum.LastMonth:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd"));
-                break;
-            case StatTypeEnum.LastYear:
-                foreach (var label in _StatResponse.Response.MainChartData.Labels)
-                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("yyyy/MM"));
-                break;
-            default:
-                break;
-        }
+        if (_lineChart != null)
+            await _lineChart.Update();
+        if (_pieChartQueryResponse != null)
+            await _pieChartQueryResponse.Update();
     }
 
     private List<BitDropDownItem> GetStatTypeItems()
@@ -158,9 +125,15 @@ else
         return result;
     }
 
+    string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
+
+    #region LineChart
+    private BitChart _lineChart;
+    private BitChartLineConfig _lineChartConfig;
+
     void InitlineChartExample()
     {
-        _lineChartConfigExample = new BitChartLineConfig
+        _lineChartConfig = new BitChartLineConfig
             {
                 Options = new BitChartLineOptions
                 {
@@ -182,6 +155,83 @@ else
                 }
             };
     }
+    void BindLineChartData()
+    {
 
-    string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
+        _lineChartConfig.Data.Labels.Clear();
+        _lineChartConfig.Data.Datasets.Clear();
+
+        foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
+        {
+            _lineChartConfig.Data.Datasets.Add(new BitChartLineDataset<int>(dataset.Data)
+                {
+                    Label = dataset.Label,
+                    BackgroundColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BackgroundColor)),
+                    BorderColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BorderColor)),
+                    Fill = dataset.Fill,
+                    BorderWidth = 1
+                });
+        }
+
+
+        switch (StatType)
+        {
+            case StatTypeEnum.LastHour:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToShortTimeString().ToString());
+                break;
+            case StatTypeEnum.LastDay:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd HH:mm"));
+                break;
+            case StatTypeEnum.LastWeek:
+            case StatTypeEnum.LastMonth:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd"));
+                break;
+            case StatTypeEnum.LastYear:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString("yyyy/MM"));
+                break;
+            default:
+                break;
+        }
+    }
+    #endregion
+
+    #region PieChar
+    private BitChartPieConfig _pieChartConfigQueryResponse;
+    private BitChart _pieChartQueryResponse;
+
+    private void InitPieChartExample()
+    {
+        _pieChartConfigQueryResponse = new BitChartPieConfig
+            {
+                Options = new BitChartPieOptions
+                {
+                    Responsive = true,
+                }
+            };
+    }
+
+    void BindPieChartData()
+    {
+
+        _pieChartConfigQueryResponse.Data.Labels.Clear();
+        _pieChartConfigQueryResponse.Data.Datasets.Clear();
+
+        BitChartPieDataset<int> dataset = new BitChartPieDataset<int>(_StatResponse.Response.QueryResponseChartData.Datasets[0].Data)
+            {
+                BackgroundColor = _StatResponse.Response.QueryResponseChartData.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
+            };
+
+        foreach (var label in _StatResponse.Response.QueryResponseChartData.Labels)
+        {
+            _pieChartConfigQueryResponse.Data.Labels.Add(label);
+        }
+        _pieChartConfigQueryResponse.Data.Datasets.Add(dataset);
+    }
+
+    #endregion
+
 }
