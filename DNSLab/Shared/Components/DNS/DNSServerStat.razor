@@ -87,54 +87,23 @@ else
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
 
-    void StatTypeOnChange(string value)
+    async Task StatTypeOnChange(string value)
     {
         if (String.IsNullOrEmpty(value))
             value = StatTypeEnum.LastHour.ToString();
         StatType = (StatTypeEnum)System.Enum.Parse(typeof(StatTypeEnum), value);
 
-        InitlineChartExample();
+        await BindChartData();
+
         await _lineChartExample.Update();
     }
 
-    protected override void OnInitialized()
-    {
-        InitlineChartExample();
-    }
-
-    private List<BitDropDownItem> GetStatTypeItems()
-    {
-        List<BitDropDownItem> result = new List<BitDropDownItem>();
-        foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
-            result.Add(new BitDropDownItem { Text = item.ToString()!, Value = item.ToString()! });
-        return result;
-    }
-
-    private async void InitlineChartExample()
+    async Task BindChartData()
     {
         _StatResponse = await _StaticRepository.GetStat(StatType);
 
-        _lineChartConfigExample = new BitChartLineConfig
-            {
-                Options = new BitChartLineOptions
-                {
-                    Responsive = true,
-                    Animation = new BitChartAnimation
-                    {
-                        Duration = 1200,
-                    },
-                    Tooltips = new BitChartTooltips
-                    {
-                        Mode = BitChartInteractionMode.Nearest,
-                        Intersect = true
-                    },
-                    Hover = new BitChartHover
-                    {
-                        Mode = BitChartInteractionMode.Nearest,
-                        Intersect = true
-                    },
-                }
-            };
+        _lineChartConfigExample.Data.Labels.Clear();
+        _lineChartConfigExample.Data.Datasets.Clear();
 
         foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
         {
@@ -171,10 +140,52 @@ else
             default:
                 break;
         }
-
-
-        //await this.InvokeAsync(() => StateHasChanged());
     }
 
-    string GetPrecentage(int total, int current) => (current * 100 / total).ToString().EnglishToPersianNumbers() + "%";
+    protected override void OnInitialized()
+    {
+        InitlineChartExample();
+    }
+
+    private List<BitDropDownItem> GetStatTypeItems()
+    {
+        List<BitDropDownItem> result = new List<BitDropDownItem>();
+        foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
+            result.Add(new BitDropDownItem { Text = item.ToString()!, Value = item.ToString()! });
+        return result;
+    }
+
+    private async void InitlineChartExample()
+    {
+        _StatResponse = await _StaticRepository.GetStat(StatType);
+
+
+        _lineChartConfigExample = new BitChartLineConfig
+            {
+                Options = new BitChartLineOptions
+                {
+                    Responsive = true,
+                    Animation = new BitChartAnimation
+                    {
+                        Duration = 1200,
+                    },
+                    Tooltips = new BitChartTooltips
+                    {
+                        Mode = BitChartInteractionMode.Nearest,
+                        Intersect = true
+                    },
+                    Hover = new BitChartHover
+                    {
+                        Mode = BitChartInteractionMode.Nearest,
+                        Intersect = true
+                    },
+                }
+            };
+
+        await BindChartData();
+
+        await this.InvokeAsync(() => StateHasChanged());
+    }
+
+    string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
 }
