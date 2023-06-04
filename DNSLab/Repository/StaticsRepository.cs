@@ -1,8 +1,10 @@
 ﻿using DNSLab.DTOs.Pages;
+using DNSLab.DTOs.Statics;
 using DNSLab.Enums;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
 using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace DNSLab.Repository
 {
@@ -14,6 +16,16 @@ namespace DNSLab.Repository
         {
             this._httpService = httpService;
             this._memoryCache = memoryCache;
+        }
+
+        public async Task<StatResponse> GetStat(StatTypeEnum type, DateTime? start = null, DateTime? end = null)
+        {
+            var response = await _httpService.Get<StatResponse>($"/Statics/DNSStat?type={type}" +
+                (start != null && end != null ? $"&start={start}&end={end}" : String.Empty));
+            if (!response.Success)
+                return null;
+            else
+                return response.Response;
         }
 
         public async Task<bool> PageVisit(string ip, string url)

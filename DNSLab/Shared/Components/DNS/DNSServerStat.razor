@@ -1,0 +1,180 @@
+﻿@using System.Drawing;
+@using DNSLab.DTOs.Statics;
+@using DNSLab.Helper.Utilities;
+@attribute [Authorize(Roles = "Admin")]
+@inject IStaticsRepository _StaticRepository
+
+@if (_StatResponse == null)
+{
+    <Loading />
+}
+else
+{
+    <BitDropDown Label="گزارش بصورت"
+             DefaultValue="@StatType.ToString()"
+             Items="GetStatTypeItems()"
+             ValueChanged="StatTypeOnChange">
+    </BitDropDown>
+    <div class="stats-panel">
+        <div class="stats-item total-queries">
+            <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)</div>
+            <div class="title">Total Queries</div>
+        </div>
+
+        <div class="stats-item no-error">
+            <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)</div>
+            <div class="title">No Error</div>
+        </div>
+
+        <div class="stats-item server-failure">
+            <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)</div>
+            <div class="title">Server Failure</div>
+        </div>
+
+        <div class="stats-item name-error">
+            <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)</div>
+            <div class="title">NX Domain</div>
+        </div>
+
+        <div class="stats-item refused">
+            <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)</div>
+            <div class="title">Refused</div>
+        </div>
+
+        <div class="stats-item auth-hit">
+            <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)</div>
+            <div class="title">Authoritative</div>
+        </div>
+
+        <div class="stats-item recursions">
+            <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)</div>
+            <div class="title">Recursive</div>
+        </div>
+
+        <div class="stats-item cache-hit">
+            <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)</div>
+            <div class="title">Cached</div>
+        </div>
+
+        <div class="stats-item blocked">
+            <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)</div>
+            <div class="title">Blocked</div>
+        </div>
+
+        <div class="stats-item clients">
+            <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString().EnglishToPersianNumbers()</div>
+            <div class="percentage">&nbsp;</div>
+            <div class="title">Clients</div>
+        </div>
+    </div>
+    <div>
+        <BitChart Config="_lineChartConfigExample" @ref="_lineChartExample" />
+    </div>
+}
+
+@code {
+    private BitChartLineConfig _lineChartConfigExample;
+    private BitChart _lineChartExample;
+    private StatResponse _StatResponse = null;
+    private StatTypeEnum StatType = StatTypeEnum.LastHour;
+
+    void StatTypeOnChange(string value)
+    {
+        if (String.IsNullOrEmpty(value))
+            value = StatTypeEnum.LastHour.ToString();
+        StatType = (StatTypeEnum)System.Enum.Parse(typeof(StatTypeEnum), value);
+
+        InitlineChartExample();
+        await _lineChartExample.Update();
+    }
+
+    protected override void OnInitialized()
+    {
+        InitlineChartExample();
+    }
+
+    private List<BitDropDownItem> GetStatTypeItems()
+    {
+        List<BitDropDownItem> result = new List<BitDropDownItem>();
+        foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
+            result.Add(new BitDropDownItem { Text = item.ToString()!, Value = item.ToString()! });
+        return result;
+    }
+
+    private async void InitlineChartExample()
+    {
+        _StatResponse = await _StaticRepository.GetStat(StatType);
+
+        _lineChartConfigExample = new BitChartLineConfig
+            {
+                Options = new BitChartLineOptions
+                {
+                    Responsive = true,
+                    Animation = new BitChartAnimation
+                    {
+                        Duration = 1200,
+                    },
+                    Tooltips = new BitChartTooltips
+                    {
+                        Mode = BitChartInteractionMode.Nearest,
+                        Intersect = true
+                    },
+                    Hover = new BitChartHover
+                    {
+                        Mode = BitChartInteractionMode.Nearest,
+                        Intersect = true
+                    },
+                }
+            };
+
+        foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
+        {
+            _lineChartConfigExample.Data.Datasets.Add(new BitChartLineDataset<int>(dataset.Data)
+                {
+                    Label = dataset.Label,
+                    BackgroundColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BackgroundColor)),
+                    BorderColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BorderColor)),
+                    Fill = dataset.Fill,
+                    BorderWidth = 1
+                });
+        }
+
+
+        switch (StatType)
+        {
+            case StatTypeEnum.LastHour:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToShortTimeString().ToString());
+                break;
+            case StatTypeEnum.LastDay:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd HH:mm"));
+                break;
+            case StatTypeEnum.LastWeek:
+            case StatTypeEnum.LastMonth:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("MM/dd"));
+                break;
+            case StatTypeEnum.LastYear:
+                foreach (var label in _StatResponse.Response.MainChartData.Labels)
+                    _lineChartConfigExample.Data.Labels.Add(label.ToLocalTime().ToString("yyyy/MM"));
+                break;
+            default:
+                break;
+        }
+
+
+        //await this.InvokeAsync(() => StateHasChanged());
+    }
+
+    string GetPrecentage(int total, int current) => (current * 100 / total).ToString().EnglishToPersianNumbers() + "%";
+}

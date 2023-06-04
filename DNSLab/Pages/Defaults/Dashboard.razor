@@ -6,6 +6,10 @@
 
 @attribute [Authorize]
 
+<AuthorizeView Roles="Admin" Context="adminContext">
+    <DNSLab.Shared.Components.DNS.DNSServerStat />
+</AuthorizeView>
+
 <div class="row">
     <div class="col-lg-4 col-md-6 pt-2">
         @if (isLoadingActiveDNSCount)
@@ -83,6 +87,7 @@
         }
     </div>
 </div>
+
 
 @if (!isLoadingActiveDNSCount && activeDNSCount == 0)
 {
