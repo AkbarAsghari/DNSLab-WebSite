@@ -7,6 +7,8 @@ partial class DNSServerStat
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
     private BitDateRangePicker rangeDatePicker;
+    private Timer _timer;
+    private bool _autoRefresh = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -14,14 +16,31 @@ partial class DNSServerStat
         InitPieChartQueryResponse();
         InitPieChartQueryType();
 
-        new Timer(new TimerCallback(async _ =>
+        await GenerateReport();
+    }
+
+    void AutoRefresher(bool value)
+    {
+        _autoRefresh = value;
+        if (value)
         {
-            await GenerateReport();
-            await InvokeAsync(() =>
+            _timer = new Timer(new TimerCallback(async _ =>
             {
-                StateHasChanged();
-            });
-        }), null, 0, 60 * 1000);
+                await GenerateReport();
+                await InvokeAsync(() =>
+                {
+                    StateHasChanged();
+                });
+            }), null, 0, 60 * 1000);
+        }
+        else
+        {
+            if (_timer != null)
+            {
+                _timer.Dispose();
+            }
+        }
+
     }
 
     async Task StatTypeOnChange(string value)
@@ -53,6 +72,9 @@ partial class DNSServerStat
             await _pieChartQueryResponse.Update();
         if (_pieChartQueryType != null)
             await _pieChartQueryType.Update();
+
+        if (StatType != StatTypeEnum.LastHour)
+            AutoRefresher(false);
     }
 
     private List<BitDropDownItem> GetStatTypeItems()

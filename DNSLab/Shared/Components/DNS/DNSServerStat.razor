@@ -23,6 +23,13 @@ else
                         ValueChanged="GenerateReport">
             </BitDateRangePicker>
         }
+        @if (StatType == StatTypeEnum.LastHour)
+        {
+            <div class="col-auto">
+                <BitLabel>بروزرسانی خودکار</BitLabel>
+                <BitToggleButton OnChange="AutoRefresher" ButtonStyle=@(_autoRefresh ? BitButtonStyle.Standard : BitButtonStyle.Primary) Label="@(_autoRefresh ? "غیرفعال سازی" : "فعالسازی")" />
+            </div>
+        }
     </div>
 
 
