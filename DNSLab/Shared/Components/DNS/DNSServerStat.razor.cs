@@ -2,7 +2,7 @@
 using DNSLab.Helper.Utilities;
 
 namespace DNSLab.Shared.Components.DNS;
-partial class DNSServerStat
+partial class DNSServerStat : IDisposable
 {
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
@@ -213,4 +213,10 @@ partial class DNSServerStat
     }
 
     #endregion
+
+    public void Dispose()
+    {
+        if (_timer != null)
+            _timer.Dispose();
+    }
 }
