@@ -14,7 +14,14 @@ partial class DNSServerStat
         InitPieChartQueryResponse();
         InitPieChartQueryType();
 
-        await StatTypeOnChange(String.Empty);
+        new Timer(new TimerCallback(async _ =>
+        {
+            await GenerateReport();
+            await InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+        }), null, 0, 60 * 1000);
     }
 
     async Task StatTypeOnChange(string value)
