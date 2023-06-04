@@ -82,10 +82,16 @@ else
 }
 
 @code {
-    private BitChartLineConfig _lineChartConfigExample;
-    private BitChart _lineChartExample;
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
+
+    private BitChart _lineChartExample;
+    private BitChartLineConfig _lineChartConfigExample;
+    protected override async Task OnInitializedAsync()
+    {
+        InitlineChartExample();
+        await StatTypeOnChange(String.Empty);
+    }
 
     async Task StatTypeOnChange(string value)
     {
@@ -93,14 +99,16 @@ else
             value = StatTypeEnum.LastHour.ToString();
         StatType = (StatTypeEnum)System.Enum.Parse(typeof(StatTypeEnum), value);
 
-        await BindChartData();
+        _StatResponse = await _StaticRepository.GetStat(StatType);
 
-        await _lineChartExample.Update();
+        BindLineChartData();
+
+        if (_lineChartExample != null)
+            await _lineChartExample.Update();
     }
 
-    async Task BindChartData()
+    void BindLineChartData()
     {
-        _StatResponse = await _StaticRepository.GetStat(StatType);
 
         _lineChartConfigExample.Data.Labels.Clear();
         _lineChartConfigExample.Data.Datasets.Clear();
@@ -142,11 +150,6 @@ else
         }
     }
 
-    protected override void OnInitialized()
-    {
-        InitlineChartExample();
-    }
-
     private List<BitDropDownItem> GetStatTypeItems()
     {
         List<BitDropDownItem> result = new List<BitDropDownItem>();
@@ -155,11 +158,8 @@ else
         return result;
     }
 
-    private async void InitlineChartExample()
+    void InitlineChartExample()
     {
-        _StatResponse = await _StaticRepository.GetStat(StatType);
-
-
         _lineChartConfigExample = new BitChartLineConfig
             {
                 Options = new BitChartLineOptions
@@ -181,10 +181,6 @@ else
                     },
                 }
             };
-
-        await BindChartData();
-
-        await this.InvokeAsync(() => StateHasChanged());
     }
 
     string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
