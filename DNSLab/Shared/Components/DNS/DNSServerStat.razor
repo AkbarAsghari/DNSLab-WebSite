@@ -80,17 +80,43 @@ else
         <BitChart Config="_lineChartConfig" @ref="_lineChart" />
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-8">
             <div>
                 <BitChart Config="_pieChartConfigQueryResponse" @ref="_pieChartQueryResponse" />
             </div>
-        </div>
-        <div class="col-6">
             <div>
                 <BitChart Config="_pieChartConfigQueryType" @ref="_pieChartQueryType" />
             </div>
         </div>
+        <div class="col-4">
+            <h4>Top Domains</h4>
+            @foreach (var domain in _StatResponse.Response.Topdomains)
+            {
+                <div class="row">
+                    <div class="col-9">
+                        <BitLabel>@domain.Name</BitLabel>
+                    </div>
+                    <div class="col-3">
+                        <BitLabel>@domain.Hits</BitLabel>
+                    </div>
+                </div>
+            }
+            <hr>
+            <h4>Top Clients</h4>
+            @foreach (var client in _StatResponse.Response.Topclients)
+            {
+                <div class="row">
+                    <div class="col-9">
+                        <BitLabel>@client.Name</BitLabel>
+                    </div>
+                    <div class="col-3">
+                        <BitLabel>@client.Hits</BitLabel>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
+
 
 }
 
