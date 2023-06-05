@@ -2,6 +2,7 @@
 
 @inject IIPRepository iPRepository
 @inject IStringLocalizer<Resource> localizer
+@inject NavigationManager Navigation
 
 <ToolsForm Header="@localizer["PingChecker"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>

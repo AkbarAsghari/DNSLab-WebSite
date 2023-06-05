@@ -9,9 +9,27 @@ partial class Ping
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
+    [Parameter, SupplyParameterFromQuery]
+    public string? host { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!String.IsNullOrEmpty(host))
+        {
+            hostOrIPAddress.HostOrIPAddress = host;
+            await OnValidSubmit();
+        }
+    }
+
     public async Task OnValidSubmit()
     {
+        if (isProgressing) return;
+
         isProgressing = true;
+
+        host = hostOrIPAddress.HostOrIPAddress;
+
+        Navigation.NavigateTo($"tools/ping?host={hostOrIPAddress.HostOrIPAddress}");
 
         result = String.Empty;
 
@@ -20,7 +38,7 @@ partial class Ping
         int attemptTimes = 4;
         for (int i = 1; i <= attemptTimes; i++)
         {
-            var ping = await iPRepository.Ping(hostOrIPAddress.HostOrIPAddress);
+            PingDTO ping = await iPRepository.Ping(hostOrIPAddress.HostOrIPAddress);
 
             if (ping == null)
             {
