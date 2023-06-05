@@ -2,6 +2,7 @@
 
 @inject IDNSLookUpRepository _DNSLookUpRepository
 @inject IStringLocalizer<Resource> localizer
+@inject NavigationManager Navigation
 
 <ToolsForm Header="@localizer["ReverseLookup"]" Model="@iP" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
     <Body>

@@ -9,9 +9,27 @@ partial class ReverseLookup
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
+    [Parameter, SupplyParameterFromQuery]
+    public string? ip { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!String.IsNullOrEmpty(ip))
+        {
+            iP.IPv4 = ip;
+            await OnValidSubmit();
+        }
+    }
+
     public async Task OnValidSubmit()
     {
+        if (isProgressing) return;
+
         isProgressing = true;
+
+        ip = iP.IPv4;
+
+        Navigation.NavigateTo($"tools/reverselookup?ip={iP.IPv4}");
 
         var response = await _DNSLookUpRepository.QueryReverse(iP.IPv4);
         if (!String.IsNullOrEmpty(response))

@@ -9,9 +9,29 @@ partial class Port
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
+    [Parameter, SupplyParameterFromQuery]
+    public string? host { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!String.IsNullOrEmpty(host) && host.Contains(":"))
+        {
+            var splitedHost = host.Split(':');
+            hostOrIPAddressAndPort.HostOrIPAddress = splitedHost[0];
+            hostOrIPAddressAndPort.Port = splitedHost[1];
+            await OnValidSubmit();
+        }
+    }
+
     public async Task OnValidSubmit()
     {
+        if (isProgressing) return;
+
         isProgressing = true;
+
+        host = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}";
+
+        Navigation.NavigateTo($"tools/port?host={hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}");
 
         var response = await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port);
         if (response != null)

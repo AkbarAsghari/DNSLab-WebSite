@@ -1,6 +1,7 @@
 ﻿using DNSLab.DTOs.DNSLookUp;
 using DNSLab.DTOs.IP;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using System.Net;
 
 namespace DNSLab.Pages.Tools.MainTools;
 partial class DNSLookup
@@ -68,8 +69,13 @@ partial class DNSLookup
 
     public async Task OnValidSubmit()
     {
+        if (isProgressing) return;
+
         isProgressing = true;
         result = String.Empty;
+
+        host = hostOrIPAddress.HostOrIPAddress;
+        type = queryType;
 
         Navigation.NavigateTo($"tools/dnslookup?type={queryType}&host={hostOrIPAddress.HostOrIPAddress}");
 
