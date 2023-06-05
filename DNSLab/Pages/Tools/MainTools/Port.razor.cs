@@ -12,7 +12,7 @@ partial class Port
     [Parameter, SupplyParameterFromQuery]
     public string? host { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         if (!String.IsNullOrEmpty(host) && host.Contains(":"))
         {
@@ -28,8 +28,6 @@ partial class Port
         if (isProgressing) return;
 
         isProgressing = true;
-
-        host = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}";
 
         Navigation.NavigateTo($"tools/port?host={hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}");
 

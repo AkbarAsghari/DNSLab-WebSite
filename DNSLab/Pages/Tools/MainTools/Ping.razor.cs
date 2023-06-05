@@ -12,7 +12,7 @@ partial class Ping
     [Parameter, SupplyParameterFromQuery]
     public string? host { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         if (!String.IsNullOrEmpty(host))
         {
@@ -26,8 +26,6 @@ partial class Ping
         if (isProgressing) return;
 
         isProgressing = true;
-
-        host = hostOrIPAddress.HostOrIPAddress;
 
         Navigation.NavigateTo($"tools/ping?host={hostOrIPAddress.HostOrIPAddress}");
 

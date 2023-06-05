@@ -12,7 +12,7 @@ partial class ReverseLookup
     [Parameter, SupplyParameterFromQuery]
     public string? ip { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         if (!String.IsNullOrEmpty(ip))
         {
@@ -26,8 +26,6 @@ partial class ReverseLookup
         if (isProgressing) return;
 
         isProgressing = true;
-
-        ip = iP.IPv4;
 
         Navigation.NavigateTo($"tools/reverselookup?ip={iP.IPv4}");
 

@@ -51,7 +51,7 @@ partial class DNSLookup
     [Parameter, SupplyParameterFromQuery]
     public string? host { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         if (!String.IsNullOrEmpty(type))
         {
@@ -73,9 +73,6 @@ partial class DNSLookup
 
         isProgressing = true;
         result = String.Empty;
-
-        host = hostOrIPAddress.HostOrIPAddress;
-        type = queryType;
 
         Navigation.NavigateTo($"tools/dnslookup?type={queryType}&host={hostOrIPAddress.HostOrIPAddress}");
 
