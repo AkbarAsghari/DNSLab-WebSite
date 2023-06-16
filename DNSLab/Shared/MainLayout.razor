@@ -5,7 +5,7 @@
 
 <PageTitle>DNSLab</PageTitle>
 <MudRTLProvider RightToLeft=true>
-    <MudThemeProvider />
+    <MudThemeProvider Theme="MyCustomTheme" />
     <MudDialogProvider />
     <MudSnackbarProvider />
 
@@ -44,4 +44,29 @@
         _drawerOpen = !_drawerOpen;
     }
 
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "vazir-light" }
+                },
+                H1 = new H1
+                {
+                    FontFamily = new[] { "vazir-bold" },
+                    FontSize = "xxx-large"
+                },
+                H2 = new H2
+                {
+                    FontFamily = new[] { "vazir-bold" },
+                    FontSize = "xx-large"
+                },
+                Subtitle1 = new Subtitle1
+                {
+                    FontSize = "large",
+                    FontWeight = 900
+                }
+            }
+        };
 }
