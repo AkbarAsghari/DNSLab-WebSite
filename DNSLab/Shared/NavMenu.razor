@@ -6,7 +6,6 @@
         </MudText>
     </MudLink>
     <MudText Typo="Typo.body2" Align="Align.Center" Class="px-4 mud-text-secondary">Your Public IP : @IPDTO.IPv4 </MudText>
-    <MudDivider Class="my-0" />
     <AuthorizeView>
         <NotAuthorized>
             <MudNavLink Href="/user/auth" Icon="@Icons.Material.Filled.Login">ورود به سیستم</MudNavLink>
@@ -68,7 +67,10 @@
                 <MudNavLink Href="/settings/security">رمز عبور و احراز هویت</MudNavLink>
                 <MudNavLink Href="/settings/you">تنظیمات</MudNavLink>
             </MudNavGroup>
-            <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout">خروج</MudNavLink>
+            <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
         </Authorized>
     </AuthorizeView>
+    <MudDivider Class="my-1" />
+    <MudNavLink Href="/About" Icon="@Icons.Material.Filled.Info" IconColor="Color.Primary">درباره ما</MudNavLink>
+
 </MudNavMenu>
