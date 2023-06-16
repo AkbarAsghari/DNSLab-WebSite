@@ -14,9 +14,6 @@
             <MudLayout>
                 <MudAppBar>
                     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                    <MudSpacer />
-                    <MudText>Public IP : @IPDTO.IPv4</MudText>
-                    <MudImage Src="favicon.ico" ObjectFit="ObjectFit.None"></MudImage>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_drawerOpen">
                     <NavMenu />

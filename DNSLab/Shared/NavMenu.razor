@@ -1,9 +1,13 @@
 ﻿<MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0">
     <MudNavMenu Class="mud-width-full">
-        <MudText Typo="Typo.h6" Class="px-4">DNSLab</MudText>
-        <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Your Public IP : @IPDTO.IPv4 </MudText>
-        <MudDivider Class="my-2" />
-        <MudNavLink Href="/" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
+        <MudLink Href="/" Underline="Underline.None">
+            <MudText Align="Align.Center" Typo="Typo.h6">
+                DNSLab
+                <MudImage Src="favicon.ico" ObjectFit="ObjectFit.Cover"></MudImage>
+            </MudText>
+        </MudLink>
+        <MudText Typo="Typo.body2" Align="Align.Center" Class="px-4 mud-text-secondary">Your Public IP : @IPDTO.IPv4 </MudText>
+        <MudDivider Class="my-0" />
         <AuthorizeView>
             <NotAuthorized>
                 <MudNavLink Href="/user/auth" Icon="@Icons.Material.Filled.Login">ورود به سیستم</MudNavLink>
