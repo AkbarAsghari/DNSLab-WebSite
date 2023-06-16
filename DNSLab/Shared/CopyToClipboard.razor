@@ -1,7 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<BitToggleButton OnClick="CopyTextToClipboard"
-                 Class="ms-2 me-2"
-                 IconName=@(isCopied ? BitIconName.CheckMark : BitIconName.Copy)
-                 ButtonStyle="BitButtonStyle.Primary">
-</BitToggleButton>
+<MudToggleIconButton ToggledChanged="CopyTextToClipboard"
+                     Icon="@Icons.Material.Filled.ContentCopy" Color="@Color.Primary" Title="کپی"
+                     ToggledIcon="@Icons.Material.Filled.Check" ToggledColor="@Color.Success" ToggledTitle="انجام شد" />
+
