@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.JSInterop;
+using MudBlazor.Services;
 using System.Globalization;
 using System.IO.Compression;
 using System.Text.Encodings.Web;
@@ -78,7 +79,7 @@ builder.Services.Configure<GzipCompressionProviderOptions>(options =>
     options.Level = CompressionLevel.SmallestSize;
 });
 
-
+builder.Services.AddMudServices();
 
 var host = builder.Build();
 

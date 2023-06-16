@@ -1,20 +1,72 @@
-﻿<div class="top-row navbar navbar-dark">
-    <div class="container-fluid">
-        <BitLink Class="navbar-brand" Href="Dashboard"><BitLabel Class="text-white">IP : @IPDTO.IPv4</BitLabel> </BitLink>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿<MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0">
+    <MudNavMenu Class="mud-width-full">
+        <MudText Typo="Typo.h6" Class="px-4">DNSLab</MudText>
+        <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Your Public IP : @IPDTO.IPv4 </MudText>
+        <MudDivider Class="my-2" />
+        <MudNavLink Href="/" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
+        <AuthorizeView>
+            <NotAuthorized>
+                <MudNavLink Href="/user/auth" Icon="@Icons.Material.Filled.Login">ورود به سیستم</MudNavLink>
+                <MudNavLink Href="/user/register" Icon="@Icons.Material.Filled.PersonAdd">ثبت نام</MudNavLink>
+            </NotAuthorized>
+            <Authorized>
+                <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+                @if (IsInRoleAsync("Admin").Result)
+                {
+                    <MudNavGroup Title="پنل ادمین" Icon="@Icons.Material.Filled.AdminPanelSettings">
+                        <MudNavLink Href="/ChangeLogs/All">تغییرات سایت</MudNavLink>
+                        <MudNavLink Href="/DNS/AllHostNames">همه هاست نِیم ها</MudNavLink>
+                    </MudNavGroup>
+                }
+                @if (IsInRoleAsync("Writer").Result || IsInRoleAsync("Admin").Result)
+                {
+                    <MudNavGroup Title="پنل نویسندگان" Icon="@Icons.Material.Filled.EditNote">
+                        <MudNavLink Href="/Page/MyPages">مدیریت مطالب</MudNavLink>
+                        <MudNavLink Href="/Comment/Pages">دیدگاه‌ها</MudNavLink>
+                    </MudNavGroup>
+                }
+                <MudNavGroup Title="داینامیک دی‌ان‌اس" Icon="@Icons.Material.Filled.Dns">
+                    <MudNavLink Href="/dns/mydns">هاست نِیم ها</MudNavLink>
+                    <MudNavLink Href="/dns/mytokens">توکن ها</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="گزارش ها" Icon="@Icons.Material.Filled.BarChart">
+                    <MudNavLink Href="/Report/DNSHistories">گزارش تغییرات هاست نِیم ها</MudNavLink>
+                    <MudNavLink Href="/Report/IPChangesChart">جدول تغییرات آی پی</MudNavLink>
+                </MudNavGroup>
+            </Authorized>
+        </AuthorizeView>
 
-<div class="@NavMenuCssClass">
-    <BitSearchBox Placeholder="جستجو در منو" IsUnderlined="true" OnChange="onChange" OnClear="onClearSearch"></BitSearchBox>
-    <BitNavList TextFieldSelector="x=>x.Text"
-                UrlFieldSelector="x=>x.Url"
-                ItemsFieldSelector="x=>x.Links"
-                IconNameFieldSelector="x=>x.Icon"
-                Mode="BitNavMode.Manual"
-                OnItemClick="(DNSLabMenuItem x)=> ToggleNavMenu(x.Links.Count == 0)"
-                Items="AllNavLinks.Where(x =>x.Text.ToLower().Contains(searchedText.ToLower()) || x.Links.Any(l => l.Text.ToLower().Contains(searchedText.ToLower()))).ToList()">
-    </BitNavList>
-</div>
+        <MudNavGroup Title="مرکز آموزش" Icon="@Icons.Material.Filled.MenuBook">
+            <MudNavLink Href="/Support">راهنمای سایت</MudNavLink>
+            <MudNavLink Href="/Articles">آموزش ها</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="دانلود" Icon="@Icons.Material.Filled.Download">
+            <MudNavLink Href="/download/win">اپلیکیشن ویندوزی</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="برای توسعه دهندگان" Icon="@Icons.Material.Filled.LogoDev">
+            <MudNavLink Href="/API">API ها</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="ابزار ها" Icon="@Icons.Material.Filled.Construction">
+            <MudNavLink Href="/tools/ping">Ping</MudNavLink>
+            <MudNavLink Href="/tools/port">Port Checker</MudNavLink>
+            <MudNavLink Href="/tools/dnslookup">DNS Lookup</MudNavLink>
+            <MudNavLink Href="/tools/reverselookup">Reverse Lookup</MudNavLink>
+        </MudNavGroup>
+
+        <AuthorizeView>
+            <Authorized>
+
+                <MudNavGroup Title="پشتیبانی" Icon="@Icons.Material.Filled.HelpCenter">
+                    <MudNavLink Href="/Ticket/MyTickets">ارسال تیکت</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="ناحیه کاربری" Icon="@Icons.Material.Filled.Settings">
+                    <MudNavLink Href="/settings/profile">پروفایل عمومی</MudNavLink>
+                    <MudNavLink Href="/settings/admin">حساب کاربری</MudNavLink>
+                    <MudNavLink Href="/settings/security">رمز عبور و احراز هویت</MudNavLink>
+                    <MudNavLink Href="/settings/you">تنظیمات</MudNavLink>
+                </MudNavGroup>
+                <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout">خروج</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+    </MudNavMenu>
+</MudPaper>

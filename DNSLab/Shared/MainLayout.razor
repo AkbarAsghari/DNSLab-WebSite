@@ -4,39 +4,47 @@
 @inject NavigationManager navigationManager
 
 <PageTitle>DNSLab</PageTitle>
+<MudRTLProvider RightToLeft=true>
+    <MudThemeProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
 
-<div class="page" style="direction:@localizer["Direction"];font-family:@localizer["FontFamily"]">
-    <Toast />
     <CascadingAuthenticationState>
         <CascadingValue Value="@IPDTO">
-            <AuthorizeView>
-                <Authorized>
-                    @{
-                        if (navigationManager.ShouldRenderAsWithoutAdminMenu())
-                        {
-                            <NavBar />
-                            <main class="no-auth container">
+            <MudLayout>
+                <MudAppBar>
+                    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                    <MudSpacer />
+                    <MudText>Public IP : @IPDTO.IPv4</MudText>
+                    <MudImage Src="favicon.ico" ObjectFit="ObjectFit.None"></MudImage>
+                </MudAppBar>
+                <MudDrawer @bind-Open="@_drawerOpen">
+                    <NavMenu />
+                </MudDrawer>
+                <MudMainContent>
+                    <MudContainer MaxWidth="MaxWidth.Large">
+                        <AuthorizeView>
+                            <Authorized>
                                 @Body
-                            </main>
-                        }
-                        else
-                        {
-                            <div class="sidebar">
-                                <NavMenu />
-                            </div>
-                            <main class="container">
+                            </Authorized>
+                            <NotAuthorized>
                                 @Body
-                            </main>
-                        }
-                    }
-                </Authorized>
-                <NotAuthorized>
-                    <NavBar />
-                    <main class="no-auth container">
-                        @Body
-                    </main>
-                </NotAuthorized>
-            </AuthorizeView>
+                            </NotAuthorized>
+                        </AuthorizeView>
+                    </MudContainer>
+                </MudMainContent>
+            </MudLayout>
         </CascadingValue>
     </CascadingAuthenticationState>
-</div>
+</MudRTLProvider>
+
+@code {
+
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+}
