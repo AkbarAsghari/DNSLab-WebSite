@@ -1,6 +1,6 @@
 ﻿<MudNavMenu Class="mud-width-full">
     <MudLink Href="/" Underline="Underline.None">
-        <MudText Align="Align.Center" Typo="Typo.h6">
+        <MudText Align="Align.Center" Typo="Typo.h3">
             DNSLab
             <MudImage Src="favicon.ico" ObjectFit="ObjectFit.Cover"></MudImage>
         </MudText>
@@ -57,7 +57,6 @@
 
     <AuthorizeView>
         <Authorized>
-
             <MudNavGroup Title="پشتیبانی" Icon="@Icons.Material.Filled.HelpCenter">
                 <MudNavLink Href="/Ticket/MyTickets">ارسال تیکت</MudNavLink>
             </MudNavGroup>
@@ -67,10 +66,15 @@
                 <MudNavLink Href="/settings/security">رمز عبور و احراز هویت</MudNavLink>
                 <MudNavLink Href="/settings/you">تنظیمات</MudNavLink>
             </MudNavGroup>
+        </Authorized>
+    </AuthorizeView>
+
+    <MudNavLink Href="/About" Icon="@Icons.Material.Filled.Info">درباره ما</MudNavLink>
+
+    <AuthorizeView>
+        <Authorized>
+            <MudDivider Class="my-1" />
             <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
         </Authorized>
     </AuthorizeView>
-    <MudDivider Class="my-1" />
-    <MudNavLink Href="/About" Icon="@Icons.Material.Filled.Info" IconColor="Color.Primary">درباره ما</MudNavLink>
-
 </MudNavMenu>
