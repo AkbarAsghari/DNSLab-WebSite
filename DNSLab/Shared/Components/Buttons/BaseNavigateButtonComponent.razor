@@ -1,11 +1,6 @@
-﻿@inject NavigationManager _NavigationManager
-
-<BitButton Class="mt-1" ButtonSize="BitButtonSize.Medium" Target="@Target" OnClick="GoTo">
+﻿<MudButton Color="@Color"
+           StartIcon="@Icon"
+           Variant="Variant.Filled"
+           Target="@Target" Href="@Href">
     @Text
-
-    @if (Icon is not null)
-    {
-        <text>@(" ")</text>
-        <BitIcon IconName="@Icon.Value" />
-    }
-</BitButton>
+</MudButton>

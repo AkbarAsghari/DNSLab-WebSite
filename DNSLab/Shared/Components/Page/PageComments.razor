@@ -11,7 +11,7 @@
     <BitLabel>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</BitLabel>
 </BitMessageBar>
 <BaseButtonComponent Caption="ثبت دیدگاه"
-                     Icon="BitIconName.CommentAdd"
+                     Icon="@Icons.Material.Filled.AddComment"
                      OnClick="async() => await AddNewPageComment()">
 </BaseButtonComponent>
 <hr class="m-1" />
@@ -52,7 +52,7 @@
     </Body>
     <Footer>
         <BaseButtonComponent Caption="@(ReplyToId == Guid.Empty ? "ثبت دیدگاه": "ثبت پاسخ")"
-                             Icon="BitIconName.CommentAdd"
+                             Icon="@Icons.Material.Filled.AddComment"
                              OnClick="SubmitComment"></BaseButtonComponent>
     </Footer>
 </Modal>

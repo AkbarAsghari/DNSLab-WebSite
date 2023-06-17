@@ -22,13 +22,13 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
-                             Icon=BitIconName.Cancel
+                             Color=Color.Warning
+                             Icon=@Icons.Material.Filled.Cancel
                              OnClick=DeleteModal.Close></BaseButtonComponent>
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Danger
-                             Icon=BitIconName.Delete
+                             Color=Color.Error
+                             Icon=@Icons.Material.Filled.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -96,15 +96,15 @@ else
                     <div class="col">
                         <BaseButtonComponent Caption=@localizer["Edit"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Warning
+                                 Color=Color.Warning
                                  IsOutLine=true
-                                 Icon=BitIconName.Edit
+                                 Icon=@Icons.Material.Filled.Edit
                                  OnClick=@(()=>EditHostName(item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Danger
+                                 Color=Color.Error
                                  IsOutLine=true
-                                 Icon=BitIconName.Delete
+                                 Icon=@Icons.Material.Filled.Delete
                                  OnClick=@(()=>DeleteHostName(item)) />
                     </div>
                 </div>

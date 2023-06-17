@@ -22,13 +22,13 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
-                             Icon=BitIconName.Cancel
+                             Color=Color.Warning
+                             Icon=@Icons.Material.Filled.Cancel
                              OnClick=Modal.Close></BaseButtonComponent>
             <BaseButtonComponent Caption=@((closeRcord.ID != Guid.Empty) ? localizer["Close"] : localizer["Delete"] )
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Danger
-                             Icon=BitIconName.Delete
+                             Color=Color.Error
+                             Icon=@Icons.Material.Filled.Delete
                              OnClick=ModalAccept></BaseButtonComponent>
         </Footer>
     </Modal>
@@ -83,19 +83,19 @@ else
                         {
                             <BaseButtonComponent Caption=@localizer["Close"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Warning
-                                 Icon=BitIconName.MailCheck
+                                 Color=Color.Warning
+                                 Icon=@Icons.Material.Filled.MarkEmailRead
                                  OnClick=@(()=>CloseTicket(item))></BaseButtonComponent>
                         }
                         <BaseButtonComponent Caption=@localizer["Open"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Primary
-                                 Icon=BitIconName.Mail
+                                 Color=Color.Primary
+                                 Icon=@Icons.Material.Filled.MarkAsUnread
                                  OnClick=@(()=>OpenTicket(item))></BaseButtonComponent>
                         <BaseButtonComponent Caption=@localizer["Delete"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Danger
-                                 Icon=BitIconName.MailUndelivered
+                                 Color=Color.Error
+                                 Icon=@Icons.Material.Filled.Delete
                                  OnClick=@(()=>DeleteTicket(item))></BaseButtonComponent>
                     </div>
                 </div>

@@ -22,13 +22,13 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
-                             Icon=BitIconName.Cancel
+                             Color=Color.Warning
+                             Icon=@Icons.Material.Filled.Cancel
                              OnClick=DeleteModal.Close />
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Danger
-                             Icon=BitIconName.Delete
+                             Color=Color.Error
+                             Icon=@Icons.Material.Filled.Delete
                              OnClick=AcceptDelete />
         </Footer>
     </Modal>
@@ -53,11 +53,12 @@ else
                         <BitLabel>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</BitLabel>
                         <BaseButtonComponent Caption=@localizer["Continue"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Icon=BitIconName.Refresh
+                                 Icon=@Icons.Material.Filled.Refresh
+                                 Color="Color.Warning"
                                  OnClick=ContinueRevokeKey />
                         <BaseButtonComponent Caption=@localizer["Cancel"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Icon=BitIconName.Cancel
+                                 Icon=@Icons.Material.Filled.Cancel
                                  OnClick=ChangeRevokeStatus />
                     }
                     else
@@ -66,8 +67,8 @@ else
                         <BaseButtonComponent Caption=@localizer["RevokeKey"]
                                  IsBussyCaption=@localizer["Progressing"]
                                  IsOutLine=true
-                                 Color=ColorEnum.Danger
-                                 Icon=BitIconName.Refresh
+                                 Color=Color.Error
+                                 Icon=@Icons.Material.Filled.Refresh
                                  OnClick=ChangeRevokeStatus />
                     }
 
@@ -140,21 +141,21 @@ else
                     <div class="col">
                         <BaseButtonComponent Caption=@localizer["Details"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Primary
+                                 Color=Color.Primary
                                  IsOutLine=true
-                                 Icon=BitIconName.DataflowsLink
+                                 Icon=@Icons.Material.Filled.MoreHoriz
                                  OnClick=@(()=>OpenToken(item)) />
                         <BaseButtonComponent Caption=@localizer["Edit"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Warning
+                                 Color=Color.Warning
                                  IsOutLine=true
-                                 Icon=BitIconName.Edit
+                                 Icon=@Icons.Material.Filled.Edit
                                  OnClick=@(()=>EditToken(item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"]
                                  IsBussyCaption=@localizer["Progressing"]
-                                 Color=ColorEnum.Danger
+                                 Color=Color.Error
                                  IsOutLine=true
-                                 Icon=BitIconName.Delete
+                                 Icon=@Icons.Material.Filled.Delete
                                  OnClick=@(()=>DeleteToken(item)) />
                     </div>
                 </div>

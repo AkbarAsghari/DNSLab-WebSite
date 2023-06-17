@@ -21,13 +21,13 @@
     }
     <BaseButtonComponent Caption=@localizer["Continue"]
                          IsBussyCaption=@localizer["Loading"]
-                         Color=ColorEnum.Success
-                         Icon=BitIconName.HeartFill
+                         Color=Color.Success
+                         Icon=@Icons.Material.Filled.Favorite
                          EditContext=TipCtx
                          OnClick=Go></BaseButtonComponent>
     <BaseNavigateButtonComponent Href="/"
                                  Text="@localizer["Cancel"]"
-                                 Icon=BitIconName.Cancel>
+                                 Icon=@Icons.Material.Filled.Cancel>
     </BaseNavigateButtonComponent>
 </EditForm>
 <hr />

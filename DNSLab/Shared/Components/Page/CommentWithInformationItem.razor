@@ -38,15 +38,15 @@
             <div class="col-auto">
                 @if (IsApproved == null || IsApproved == false)
                 {
-                    <BitActionButton IconName="BitIconName.Accept" OnClick="AcceptButtonClick">
+                    <MudButton StartIcon="@Icons.Material.Filled.Check" OnClick="AcceptButtonClick">
                         تایید
-                    </BitActionButton>
+                    </MudButton>
                 }
                 @if (IsApproved == null || IsApproved == true)
                 {
-                    <BitActionButton IconName="BitIconName.Cancel" Class="bit-icon-red" OnClick="RejectButtonClick">
+                    <MudButton IconName="@Icons.Material.Filled.Cancel" IconColor="Color.Error" OnClick="RejectButtonClick">
                         عدم تایید
-                    </BitActionButton>
+                    </MudButton>
                 }
             </div>
         </div>

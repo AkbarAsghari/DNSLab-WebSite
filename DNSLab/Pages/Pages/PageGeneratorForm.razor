@@ -45,12 +45,12 @@
     <div class="mb-3 gap-2">
         <BaseButtonComponent Caption=@localizer["Save"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Primary
-                             Icon=BitIconName.Save
+                             Color=Color.Primary
+                             Icon=@Icons.Material.Filled.Save
                              EditContext=PageContext
                              OnClick=OnValidSubmit></BaseButtonComponent>
         <BaseNavigateButtonComponent Href="Page/MyPages"
                                      Text="@localizer["Cancel"]"
-                                     Icon=BitIconName.Cancel></BaseNavigateButtonComponent>
+                                     Icon=@Icons.Material.Filled.Cancel></BaseNavigateButtonComponent>
     </div>
 </EditForm>

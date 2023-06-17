@@ -53,13 +53,13 @@ else
         <div class="mb-3 gap-2">
             <BaseButtonComponent Caption=@localizer["Send"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Primary
-                             Icon=BitIconName.Send
+                             Color=Color.Primary
+                             Icon=@Icons.Material.Filled.Send
                              EditContext="TicketDetails"
                              OnClick=SendTicket></BaseButtonComponent>
             <BaseNavigateButtonComponent Text="انصراف"
                                      Href="Ticket/MyTickets"
-                                     Icon=BitIconName.Cancel>
+                                     Icon=@Icons.Material.Filled.Cancel>
             </BaseNavigateButtonComponent>
         </div>
     </EditForm>

@@ -18,17 +18,17 @@
         </div>
 
         <div class="col-auto">
-            <BitActionButton IconName="BitIconName.Reply" OnClick="ReplyButtonClick">
+            <MudButton StartIcon="@Icons.Material.Filled.Reply" OnClick="ReplyButtonClick">
                 پاسخ
-            </BitActionButton>
+            </MudButton>
             @if (PageComment.UserId == AuthUserId)
             {
-                <BitActionButton IconName="BitIconName.Edit" OnClick="()=> IsEditing = true">
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="()=> IsEditing = true">
                     ویرایش
-                </BitActionButton>
-                <BitActionButton IconName="BitIconName.Delete" Class="bit-icon-red" OnClick="DeleteComment">
+                </MudIconButton>
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="DeleteComment">
                     حذف
-                </BitActionButton>
+                </MudIconButton>
             }
         </div>
     </div>
@@ -44,11 +44,11 @@
                       Rows="3"
                       @bind-Value=@PageComment.Text></BitTextField>
                 <BaseButtonComponent Caption="ذخیره"
-                             Icon="BitIconName.Save"
+                             Icon="@Icons.Material.Filled.Save"
                              OnClick="SubmitEditComment">
                 </BaseButtonComponent>
                 <BaseButtonComponent Caption="انصراف"
-                             Icon="BitIconName.Cancel"
+                             Icon="@Icons.Material.Filled.Cancel"
                              OnClick="()=> IsEditing = false">
                 </BaseButtonComponent>
             }
@@ -75,11 +75,11 @@
     <Footer>
         <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Icon=BitIconName.Cancel
+                             Icon=@Icons.Material.Filled.Cancel
                              OnClick=DeleteModal.Close></BaseButtonComponent>
         <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Icon=BitIconName.Delete
+                             Icon=@Icons.Material.Filled.Delete
                              OnClick=SubmitDeleteComment></BaseButtonComponent>
     </Footer>
 </Modal>

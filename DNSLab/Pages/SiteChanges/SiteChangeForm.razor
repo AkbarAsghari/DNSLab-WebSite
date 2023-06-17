@@ -25,13 +25,13 @@ else
         </div>
         <BaseButtonComponent Caption=@localizer["Save"]
                          IsBussyCaption=@localizer["Progressing"]
-                         Color=ColorEnum.Primary
-                         Icon=BitIconName.Save
+                         Color=Color.Primary
+                         Icon=@Icons.Material.Filled.Save
                          EditContext=ChangeLogContext
                          OnClick=OnValidSubmit></BaseButtonComponent>
         <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
                                  Href="ChangeLogs/All"
-                                 Icon="BitIconName.Cancel">
+                                 Icon="@Icons.Material.Filled.Cancel">
         </BaseNavigateButtonComponent>
     </EditForm>
 }

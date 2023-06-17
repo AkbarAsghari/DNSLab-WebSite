@@ -32,22 +32,22 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Icon=BitIconName.Cancel
+                             Icon=@Icons.Material.Filled.Cancel
                              OnClick=pageModal.Close></BaseButtonComponent>
             @if (modalForDeletePage)
             {
                 <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Danger
-                             Icon=BitIconName.Delete
+                             Color=Color.Error
+                             Icon=@Icons.Material.Filled.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
             }
             else
             {
                 <BaseButtonComponent Caption=@localizer["Publish"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Primary
-                             Icon=BitIconName.PublishContent
+                             Color=Color.Primary
+                             Icon=@Icons.Material.Filled.Publish
                              OnClick=AcceptPublish></BaseButtonComponent>
             }
 
@@ -95,15 +95,15 @@ else
                         <div class="row p-1">
                             <BaseButtonComponent Caption=@localizer["Edit"]
                                      IsBussyCaption=@localizer["Progressing"]
-                                     Color=ColorEnum.Warning
-                                     Icon=BitIconName.Edit
+                                     Color=Color.Warning
+                                     Icon=@Icons.Material.Filled.Edit
                                      OnClick=@(()=>EditPage(item)) />
                         </div>
                         <div class="row p-1">
                             <BaseButtonComponent Caption=@localizer["Delete"]
                                      IsBussyCaption=@localizer["Progressing"]
-                                     Color=ColorEnum.Danger
-                                     Icon=BitIconName.Delete
+                                     Color=Color.Error
+                                     Icon=@Icons.Material.Filled.Delete
                                      OnClick=@(()=>DeletePage(item)) />
                         </div>
                         <div class="row p-1">
@@ -111,8 +111,8 @@ else
                             {
                                 <BaseButtonComponent Caption=@localizer["Publish"]
                                      IsBussyCaption=@localizer["Progressing"]
-                                     Color=ColorEnum.Primary
-                                     Icon=BitIconName.PublishContent
+                                     Color=Color.Primary
+                                     Icon=@Icons.Material.Filled.Publish
                                      OnClick=@(()=>PublishPage(item)) />
                             }
                         </div>

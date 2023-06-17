@@ -39,7 +39,7 @@ else
                     @localizer["YourEmailNotApprovedYet"]
                     <BaseButtonComponent Caption=@localizer["ResendActivationLink"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Link
+                             Color=Color.Success
                              OnClick="ResendActivationLink"></BaseButtonComponent>
                 </BitLabel>
             </BitMessageBar>
@@ -47,7 +47,7 @@ else
     }
     <BaseButtonComponent Caption="تغییر ایمیل"
                      IsBussyCaption=@localizer["Loading"]
-                     Color=ColorEnum.Primary
+                     Color=Color.Primary
                      OnClick=@(()=> ChangeAccountEmailModal.Open())></BaseButtonComponent>
 
     <hr />
@@ -105,12 +105,12 @@ else
         <Footer>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Warning
+                             Color=Color.Warning
                              OnClick=ChangeAccountEmailModal.Close></BaseButtonComponent>
 
             <BaseButtonComponent Caption=@localizer["SaveChanges"]
                              IsBussyCaption=@localizer["Progressing"]
-                             Color=ColorEnum.Primary
+                             Color=Color.Primary
                              OnClick=AcceptChangeEmail></BaseButtonComponent>
         </Footer>
     </Modal>

@@ -1,12 +1,11 @@
-﻿using DNSLab.Enums.Components;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using MudBlazor;
 
 namespace DNSLab.Shared.Components.Buttons;
 partial class BaseButtonComponent
 {
-    [Parameter] public string Class { get; set; }
-    [Parameter] public ColorEnum Color { get; set; }
-    [Parameter] public BitIconName? Icon { get; set; }
+    [Parameter] public Color Color { get; set; } = Color.Primary;
+    [Parameter] public string? Icon { get; set; } = String.Empty;
     [Parameter] public string Caption { get; set; }
     [Parameter] public bool IsOutLine { get; set; }
     [Parameter] public bool IsBussy { get; set; }

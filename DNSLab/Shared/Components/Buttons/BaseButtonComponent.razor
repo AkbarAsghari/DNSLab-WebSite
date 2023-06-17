@@ -1,19 +1,15 @@
 ﻿@if (IsBussy)
 {
-    <BitActionButton Class="dir-ltr" IsEnabled=false>
-        <BitSpinner LabelPosition="BitLabelPosition.Right" Size="BitSpinnerSize.Large" Label="در حال پردازش" />
-    </BitActionButton>
+    <MudProgressCircular Color="Color" Indeterminate="true">
+        <MudText>در حال پردازش</MudText>
+    </MudProgressCircular>
 }
 else
 {
-    <BitButton Class="@((String.IsNullOrEmpty(Class) ? String.Empty : Class + " ") + "mt-1")" ButtonType="(EditContext == null ? BitButtonType.Button : BitButtonType.Submit)"
+    <MudButton Color=@Color ButtonType="(EditContext == null ? ButtonType.Button : ButtonType.Submit)"
+           StartIcon="@Icon"
+           Variant="@(IsOutLine  ? Variant.Outlined : Variant.Filled)"
            OnClick="ButtonClickedEvent">
-
-        <text>@Caption</text>
-        @if (Icon is not null)
-        {
-            <text>@(" ")</text>
-            <BitIcon IconName="@Icon.Value" />
-        }
-    </BitButton>
+        @Caption
+    </MudButton>
 }
