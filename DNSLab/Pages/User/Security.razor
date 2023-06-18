@@ -7,24 +7,20 @@
 
 @attribute [Authorize]
 
-<div class="container-sm mt-4 col-lg-4">
-    <h4>تغییر رمز عبور</h4>
-    <BitTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" IsRequired />
-    <BitTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" IsRequired />
-    <div class="row align-items-center">
-        <div class="col-auto">
-            <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                                 IsBussyCaption=@localizer["Loading"]
-                                 Color=Color.Primary
-                                 Icon=@Icons.Material.Filled.Save
-                                 OnClick=SubmitChangePassword></BaseButtonComponent>
-        </div>
-        <div class="col-auto">
-            <BitLink Href="user/ForgetPassword">
-                <BitLabel>
-                    رمز عبورمو فراموش کردم
-                </BitLabel>
-            </BitLink>
-        </div>
-    </div>
-</div>
+<MudContainer MaxWidth="MaxWidth.ExtraSmall">
+    <MudText Typo="Typo.h3">تغییر رمز عبور</MudText>
+    <MudTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" />
+    <MudTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password" Class="dir-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" />
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
+    <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                         IsBussyCaption=@localizer["Loading"]
+                         Color=Color.Primary
+                         Icon=@Icons.Material.Filled.Save
+                         OnClick=SubmitChangePassword></BaseButtonComponent>
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
+    <MudLink Href="user/ForgetPassword">
+        <MudText>
+            رمز عبورمو فراموش کردم
+        </MudText>
+    </MudLink>
+</MudContainer>
