@@ -34,6 +34,7 @@ partial class MyDNS
         paginationDTO.Page = page;
         await LoadHostNames();
     }
+
     private async Task DeleteHostNameAsync(HostNameDTO record)
     {
         bool? result = await DialogService.ShowMessageBox(

@@ -130,24 +130,3 @@ else
         </MudAlert>
     </DialogContent>
 </MudDialog>
-
-<MudDialog @bind-IsVisible=showDeleteToken>
-    <TitleContent>
-        <MudText Typo="Typo.h4">@localizer["AreYouSureDel"]</MudText>
-    </TitleContent>
-    <DialogContent>
-        <MudText>@localizer["TokenName"] : @deleteRcord.Name </MudText>
-    </DialogContent>
-    <DialogActions>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Warning
-                             Icon=@Icons.Material.Filled.Cancel
-                             OnClick=@(() =>showDeleteToken=false) />
-        <BaseButtonComponent Caption=@localizer["Delete"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Error
-                             Icon=@Icons.Material.Filled.Delete
-                             OnClick=AcceptDelete />
-    </DialogActions>
-</MudDialog>

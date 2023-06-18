@@ -5,13 +5,11 @@ using Newtonsoft.Json.Linq;
 namespace DNSLab.Pages.DNS;
 partial class MyTokens
 {
+    [Inject] private IDialogService DialogService { get; set; }
     IEnumerable<TokenSummaryDTO> tokenSummaries;
-
-    TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
 
     private bool isRevoking = false;
     bool showTokenDetails = false;
-    bool showDeleteToken = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -27,18 +25,6 @@ partial class MyTokens
         tokenSummaries = await dnsRepository.GetTokenSummary();
     }
 
-    private async Task AcceptDelete()
-    {
-        if (deleteRcord != null)
-        {
-            if (await dnsRepository.DeleteToken(deleteRcord.Id))
-            {
-                showDeleteToken = false;
-                await LoadTokensSummary();
-            }
-        }
-        deleteRcord = new TokenSummaryDTO();
-    }
     private TokenDTO token;
 
     private void ChangeRevokeStatus() => isRevoking = !isRevoking;
@@ -67,8 +53,18 @@ partial class MyTokens
     }
     private async Task DeleteToken(TokenSummaryDTO record)
     {
-        deleteRcord = record;
-        showDeleteToken = true;
+        bool? result = await DialogService.ShowMessageBox(
+            "هشدار",
+            $"آیا از حذف توکن {record.Name} مطمئن هستید؟",
+            yesText: "حذف", cancelText: "انصراف");
+
+        if (result == true)
+        {
+            if (await dnsRepository.DeleteToken(record.Id))
+            {
+                await LoadTokensSummary();
+            }
+        }
     }
 
     private void EditToken(TokenSummaryDTO record)
