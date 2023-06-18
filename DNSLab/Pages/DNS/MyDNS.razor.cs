@@ -1,15 +1,15 @@
 ﻿using DNSLab.DTOs.DNS;
 using DNSLab.DTOs.Pagination;
+using MudBlazor;
 
 namespace DNSLab.Pages.DNS;
 partial class MyDNS
 {
+    [Inject] private IDialogService DialogService { get; set; }
+
     List<HostNameDTO> hostNames;
 
     PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 5 };
-
-    bool deleteModalVisible;
-    HostNameDTO deleteRcord { get; set; } = new HostNameDTO();
 
     private int totalAmountPages { get; set; }
 
@@ -34,24 +34,20 @@ partial class MyDNS
         paginationDTO.Page = page;
         await LoadHostNames();
     }
-
-    private async Task AcceptDelete()
+    private async Task DeleteHostNameAsync(HostNameDTO record)
     {
-        if (deleteRcord != null)
+        bool? result = await DialogService.ShowMessageBox(
+            "هشدار",
+            $"آیا از حذف رکورد {record.Name} مطمئن هستید؟",
+            yesText: "حذف", cancelText: "انصراف");
+
+        if (result == true)
         {
-            if (await dnsRepository.DeleteHostName(deleteRcord.ID))
+            if (await dnsRepository.DeleteHostName(record.ID))
             {
-                deleteModalVisible = false;
                 await LoadHostNames();
             }
         }
-        deleteRcord = new HostNameDTO();
-    }
-
-    private void DeleteHostName(HostNameDTO record)
-    {
-        deleteRcord = record;
-        deleteModalVisible = true;
     }
 
     private async Task EditHostName(HostNameDTO record)

@@ -12,27 +12,6 @@
 }
 else
 {
-    <MudDialog @bind-IsVisible=deleteModalVisible>
-        <TitleContent>
-            <MudText Typo="Typo.h4">@localizer["AreYouSureDel"]</MudText>
-        </TitleContent>
-        <DialogContent>
-            <MudText>@localizer["HostName"] : @deleteRcord.Name </MudText>
-        </DialogContent>
-        <DialogActions>
-            <BaseButtonComponent Caption=@localizer["Cancel"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Warning
-                             Icon=@Icons.Material.Filled.Cancel
-                             OnClick="()=> deleteModalVisible = false"></BaseButtonComponent>
-            <BaseButtonComponent Caption=@localizer["Delete"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Error
-                             Icon=@Icons.Material.Filled.Delete
-                             OnClick=AcceptDelete></BaseButtonComponent>
-        </DialogActions>
-    </MudDialog>
-
     <MudText Typo="Typo.h3">@localizer["HostNames"]</MudText>
     <BaseNavigateButtonComponent Href="dns/create"
                              Text="@(localizer["CreateHostName"])">
@@ -103,7 +82,7 @@ else
                                      Color=Color.Error
                                      IsOutLine=true
                                      Icon=@Icons.Material.Filled.Delete
-                                     OnClick=@(()=>DeleteHostName(context.Item)) />
+                                     OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
                     </CellTemplate>
                 </TemplateColumn>
                 @*<PropertyColumn Property="x=>x." />*@
