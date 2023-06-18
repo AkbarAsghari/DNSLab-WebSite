@@ -4,20 +4,19 @@
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager Navigation
 
-<ToolsForm Header="@localizer["PingChecker"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
+<ToolsForm Header="@localizer["PingChecker"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Results="@result">
     <Body>
-        <BitMessageBar MessageBarType="BitMessageBarType.Info">
-            <BitLabel>نشان می دهد که چقدر طول می کشد تا بسته ها به میزبان برسند</BitLabel>
-        </BitMessageBar>
-        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-            <BitLabel>توجه داشته باشید که پینگ از طرف سرور DNSLab ارسال میشود و ممکن است آی پی برای سرور مسدود باشد</BitLabel>
-        </BitMessageBar>
-        <div class="col-md-6">
-            <BitTextField Label="@localizer["HostOrIPAddress"]"
-                          Class="dir-ltr"
-                          IsEnabled=!isProgressing
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>نشان می دهد که چقدر طول می کشد تا بسته ها به میزبان برسند</MudText>
+        </MudAlert>
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>توجه داشته باشید که پینگ از طرف سرور DNSLab ارسال میشود و ممکن است آی پی برای سرور مسدود باشد</MudText>
+        </MudAlert>
+        <MudItem md=6>
+            <MudTextField Label="@localizer["HostOrIPAddress"]"
+                          ReadOnly=isProgressing
                           Placeholder="@IPDTO.IPv4"
                           @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
-        </div>
+        </MudItem>
     </Body>
 </ToolsForm>

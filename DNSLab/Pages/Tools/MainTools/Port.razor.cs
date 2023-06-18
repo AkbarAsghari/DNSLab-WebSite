@@ -5,7 +5,7 @@ partial class Port
 {
     private HostOrIPAddressAndPortDTO hostOrIPAddressAndPort = new HostOrIPAddressAndPortDTO();
     private bool isProgressing = false;
-    private string result = String.Empty;
+    private List<string> result  = new List<string>();
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
@@ -29,19 +29,21 @@ partial class Port
 
         isProgressing = true;
 
+        result.Clear();
+
         Navigation.NavigateTo($"tools/port?host={hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}");
 
         var response = await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port);
         if (response != null)
         {
             if (response == true)
-                result = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: green;'>open</b>";
+                result.Add($"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: green;'>open</b>");
             else
-                result = $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: red;'>closed</b>";
+                result.Add($"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port} port is <b style='color: red;'>closed</b>");
         }
         else
         {
-            result = String.Empty;
+            result.Clear();
         }
 
         isProgressing = false;

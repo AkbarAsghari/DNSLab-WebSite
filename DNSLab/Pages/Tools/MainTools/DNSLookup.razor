@@ -4,21 +4,27 @@
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager Navigation
 
-<ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit" IsProgressing="@isProgressing" Result="@result">
+<ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit"
+    IsProgressing="@isProgressing" Results="@result">
+
     <Body>
-        <BitMessageBar MessageBarType="BitMessageBarType.Info">
-            <BitLabel>رکورد DNS را جستجو کنید</BitLabel>
-            <BitLabel>دی‌ان‌اس ها از سرور عمومی گوگل به آدرس 8.8.8.8 پرس و جو میشوند</BitLabel>
-        </BitMessageBar>
-        <div class="col-lg-6">
-            <BitTextField Label="@localizer["HostOrIPAddress"]" Class="dir-ltr" Placeholder="dnslab.link" @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
-        </div>
-        <div class="col-lg-2">
-            <BitDropDown Label="نوع رکورد"
-                         Items="DNSQueryTypes"
-                         @bind-Value="queryType"
-                         Placeholder="نوع رکورد را انتخاب نمایید">
-            </BitDropDown>
-        </div>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>رکورد DNS را جستجو کنید</MudText>
+            <MudText>دی‌ان‌اس ها از سرور عمومی گوگل به آدرس 8.8.8.8 پرس و جو میشوند</MudText>
+        </MudAlert>
+        <MudGrid>
+            <MudItem lg="6">
+                <MudTextField Label="@localizer["HostOrIPAddress"]" Placeholder="dnslab.link"
+                @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+            </MudItem>
+            <MudItem lg="2">
+                <MudSelect T="string" Label="نوع رکورد" Variant="Variant.Text" @bind-Value="queryType">
+                    @foreach (var item in DNSQueryTypes)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
     </Body>
 </ToolsForm>

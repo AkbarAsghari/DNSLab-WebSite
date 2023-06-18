@@ -1,9 +1,6 @@
-﻿<BitMessageBar Class="tools-item-msg-bar" MessageBarType="BitMessageBarType.Success">
-    <BitLabel>@Summary</BitLabel>
-</BitMessageBar>
-<BitLink Href="@Href">
-    <BitButton Class="w-100 mb-2">
-        @ButtonText
-        <BitIcon IconName="BitIconName.NavigateExternalInline" />
-    </BitButton>
-</BitLink>
+﻿<MudAlert Severity="Severity.Success">
+    <MudText>@Summary</MudText>
+</MudAlert>
+<MudButton Href="@Href" Color="Color.Primary" Variant="Variant.Outlined" FullWidth=true StartIcon="@Icons.Material.Filled.OpenInNew">
+    @ButtonText
+</MudButton>

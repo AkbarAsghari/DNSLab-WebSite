@@ -8,42 +8,13 @@ partial class DNSLookup
 {
     private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();
     private bool isProgressing = false;
-    private string result { get; set; }
+    private List<string> result { get; set; } = new List<string>();
 
     string queryType { get; set; } = "A";
 
-    private List<BitDropDownItem> DNSQueryTypes = new()
+    private List<string> DNSQueryTypes = new()
     {
-        new BitDropDownItem()
-        {
-            Text = "A",
-            Value = "A",
-        },
-        new BitDropDownItem()
-        {
-            Text = "NS",
-            Value = "NS",
-        },
-        new BitDropDownItem()
-        {
-            Text = "CNAME",
-            Value = "CNAME",
-        },
-        new BitDropDownItem()
-        {
-            Text = "SOA",
-            Value = "SOA",
-        },
-        new BitDropDownItem()
-        {
-            Text = "MX",
-            Value = "MX",
-        },
-        new BitDropDownItem()
-        {
-            Text = "TXT",
-            Value = "TXT",
-        }
+        "A","NS","CNAME","SOA","MX","TXT",
     };
 
     [Parameter, SupplyParameterFromQuery]
@@ -72,107 +43,84 @@ partial class DNSLookup
         if (isProgressing) return;
 
         isProgressing = true;
-        result = String.Empty;
+
+        result.Clear();
 
         Navigation.NavigateTo($"tools/dnslookup?type={queryType}&host={hostOrIPAddress.HostOrIPAddress}");
-
-        result += "<div class='table-responsive'>";
-        result += "<table class='table'>";
 
         switch (queryType.ToUpper())
         {
             case "A":
-                result += "<thead><tr>" +
-                    "<th>RecordType</th>" +
-                    "<th>DomainName</th>" +
-                    "<th>TTL</th>" +
-                    "<th>Address</th>" +
-                "</tr></thead>";
-                result += "<tbody>";
-                var aResponse = await _DNSLookUpRepository.Query<ARecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in aResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.Address}</td></tr>";
-                result += "</tbody>";
+                {
+                    var response = await _DNSLookUpRepository.Query<ARecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"Address : {item.Address}");
+                }
                 break;
             case "NS":
-                result += "<thead><tr>" +
-                    "<th>RecordType</th>" +
-                    "<th>DomainName</th>" +
-                    "<th>TTL</th>" +
-                    "<th>NSDName</th>" +
-                "</tr></thead>";
-                result += "<tbody>";
-                var nsResponse = await _DNSLookUpRepository.Query<NsRecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in nsResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.NSDName}</td></tr>";
-                result += "</tbody>";
+                {
+                    var response = await _DNSLookUpRepository.Query<NsRecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"NSDName : {item.NSDName}");
+                }
                 break;
             case "CNAME":
-                result += "<thead><tr>" +
-                   "<th>RecordType</th>" +
-                   "<th>DomainName</th>" +
-                   "<th>TTL</th>" +
-                   "<th>CanonicalName</th>" +
-               "</tr></thead>";
-                result += "<tbody>";
-                var cnameResponse = await _DNSLookUpRepository.Query<CNAMERecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in cnameResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.CanonicalName}</td></tr>";
-                result += "</tbody>";
+                {
+                    var response = await _DNSLookUpRepository.Query<CNAMERecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"CanonicalName : {item.CanonicalName}");
+                }
                 break;
             case "MX":
-                result += "<thead><tr>" +
-                  "<th>RecordType</th>" +
-                  "<th>DomainName</th>" +
-                  "<th>TTL</th>" +
-                  "<th>Exchange</th>" +
-                  "<th>Preference</th>" +
-              "</tr></thead>";
-                result += "<tbody>";
-                var mxResponse = await _DNSLookUpRepository.Query<MXRecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in mxResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.Exchange}</td><td>{item.Preference}</td></tr>";
-                result += "</tbody>";
+                {
+                    var response = await _DNSLookUpRepository.Query<MXRecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"Exchange : {item.Exchange}<br>" +
+                            $"Preference : {item.Preference}");
+                }
                 break;
             case "TXT":
-                result += "<thead><tr>" +
-                 "<th>RecordType</th>" +
-                 "<th>DomainName</th>" +
-                 "<th>TTL</th>" +
-                 "<th>EscapedText</th>" +
-                 "<th>Text</th>" +
-             "</tr></thead>";
-                result += "<tbody>";
-                var txtResponse = await _DNSLookUpRepository.Query<TXTRecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in txtResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.EscapedText}</td><td>{item.Text}</td></tr>";
-                result += "</tbody>";
+                {
+                    var response = await _DNSLookUpRepository.Query<TXTRecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"EscapedText : {item.EscapedText}<br>" +
+                            $"Text : {item.Text}");
+                }
                 break;
             case "SOA":
-                result += "<thead><tr>" +
-                 "<th>RecordType</th>" +
-                 "<th>DomainName</th>" +
-                 "<th>TTL</th>" +
-                 "<th>Expire</th>" +
-                 "<th>Minimum</th>" +
-                 "<th>MName</th>" +
-                 "<th>Refresh</th>" +
-                 "<th>Retry</th>" +
-                 "<th>RName</th>" +
-                 "<th>Serial</th>" +
-             "</tr></thead>";
-                result += "<tbody>";
-                var soaResponse = await _DNSLookUpRepository.Query<SOARecordDTO>(hostOrIPAddress.HostOrIPAddress);
-                foreach (var item in soaResponse)
-                    result += $"<tr><td>{item.RecordType}</td><td>{item.DomainName}</td><td>{item.TTL}</td><td>{item.Expire}</td><td>{item.Minimum}</td><td>{item.MName}</td><td>{item.Refresh}</td><td>{item.Retry}</td><td>{item.RName}</td><td>{item.Serial}</td></tr>";
-                result += "</tbody>";
+            {
+                    var response = await _DNSLookUpRepository.Query<SOARecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"Expire : {item.Expire}<br>" +
+                            $"Minimum : {item.Minimum}<br>" +
+                            $"MName : {item.MName}<br>" +
+                            $"Refresh : {item.Refresh}<br>" +
+                            $"Retry : {item.Retry}<br>" +
+                            $"RName : {item.RName}<br>" +
+                            $"Serial : {item.Serial}");
+                }
                 break;
             default:
                 break;
         }
-
-        result += "</table>";
-        result += "</div>";
 
         isProgressing = false;
     }

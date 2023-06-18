@@ -5,7 +5,7 @@ partial class ReverseLookup
 {
     private IPDTO iP = new IPDTO();
     private bool isProgressing = false;
-    private string result { get; set; }
+    private List<string> result { get; set; } = new List<string>();
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
@@ -27,13 +27,13 @@ partial class ReverseLookup
 
         isProgressing = true;
 
+        result.Clear();
+
         Navigation.NavigateTo($"tools/reverselookup?ip={iP.IPv4}");
 
         var response = await _DNSLookUpRepository.QueryReverse(iP.IPv4);
         if (!String.IsNullOrEmpty(response))
-            result = response;
-        else
-            result = String.Empty;
+            result.Add(response);
 
         isProgressing = false;
     }

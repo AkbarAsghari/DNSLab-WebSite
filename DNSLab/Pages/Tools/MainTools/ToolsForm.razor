@@ -5,20 +5,25 @@
 
 <EditForm Model="Model" Context="editCtx">
     <DataAnnotationsValidator />
-    <h4>@Header</h4>
+    <MudText Typo="Typo.h3">@Header</MudText>
     <div class="row gx-3 mb-3">
         @Body
     </div>
-    <BaseButtonComponent Caption="@localizer["Check"]"
-                         Icon=@Icons.Material.Filled.Search
-                         OnClick=OnValidSubmit
-                         EditContext="editCtx">
+    <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
+        EditContext="editCtx">
     </BaseButtonComponent>
-    @if (!String.IsNullOrEmpty(Result))
+    @if (Results != null && Results.Count > 0)
     {
-        <div class="col-md-12">
-            <hr>
-            <div class="dir-ltr">@((MarkupString)Result)</div>
-        </div>
+        <MudDivider />
+        <MudList>
+            @foreach (var item in Results)
+            {
+                <MudListItem>
+                    <MudText Class="dir-ltr">
+                        @((MarkupString)item)
+                    </MudText>
+                </MudListItem>
+            }
+        </MudList>
     }
-</EditForm>
+    </EditForm>
