@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.DNS;
+using static MudBlazor.CategoryTypes;
 
 namespace DNSLab.Pages.DNS;
 partial class EditToken
@@ -31,6 +32,9 @@ partial class EditToken
 
     public async Task Update()
     {
+        tokenAndDNS.HostNameIds.Clear();
+        HostSummariesAndChecked.Where(x => x.IsChecked == true).ToList().ForEach(x => tokenAndDNS.HostNameIds.Add(x.Id));
+
         if (await dnsRepository.UpdateTokensDomainNameSystems(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");

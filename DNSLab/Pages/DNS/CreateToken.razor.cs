@@ -23,7 +23,7 @@ partial class CreateToken
                 {
                     Id = item.Id,
                     Address = item.Address,
-                    IsChecked = tokenAndDNS.HostNameIds.Contains(item.Id)
+                    IsChecked = false
                 });
 
             await this.InvokeAsync(() => StateHasChanged());
@@ -32,6 +32,9 @@ partial class CreateToken
 
     public async Task Create()
     {
+        tokenAndDNS.HostNameIds.Clear();
+        HostSummariesAndChecked.Where(x => x.IsChecked == true).ToList().ForEach(x => tokenAndDNS.HostNameIds.Add(x.Id));
+
         if (await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
