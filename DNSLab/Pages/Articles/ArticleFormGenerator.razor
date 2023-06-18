@@ -5,13 +5,10 @@
     @if (publishPageDTO != null)
     {
         <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
-        <PageSummary FullName="@publishPageDTO.Author.FullName"
-                 UserId="@publishPageDTO.Author.ID"
-                 PublishDate="@publishPageDTO.PublishDate"
-                 UpdateDate="@publishPageDTO.UpdateDate" />
+        <PageSummary FullName="@publishPageDTO.Author.FullName" UserId="@publishPageDTO.Author.ID"
+            PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
         <MudDivider />
         @((MarkupString)@publishPageDTO.Body)
-        <MudDivider />
 
         <MudText Typo="Typo.h3">کلمات کلیدی</MudText>
         <MudGrid>
@@ -22,10 +19,8 @@
                 </MudItem>
             }
         </MudGrid>
-        <MudDivider />
 
         <PageComments PageId="@publishPageDTO.Id"></PageComments>
-        <MudDivider />
         <SupportUsButton />
     }
-</MudContainer> 
+    </MudContainer>
