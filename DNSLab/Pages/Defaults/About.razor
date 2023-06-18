@@ -8,15 +8,19 @@
 <MudText Typo="Typo.h3">DNS شما را کارآمدتر مدیریت می کنیم</MudText>
 <MudText>ماموریت دی‌ان‌اس لب ایجاد راه حل های ایمن، قابل اعتماد است که کاربر ها بتوانند از آنها برای اتصال، مدیریت و تعامل با دستگاه های متصل به اینترنت خود استفاده کنند. ما در تلاش هستیم تا راه حل هایی ساده، شهودی و جذاب به مشتریان ارائه دهیم.</MudText>
 <MudGrid>
-    <MudItem md="4">
+    <MudItem md="3">
         <MudText Typo="Typo.h4">۱۴۰۰</MudText>
         <MudText>دی‌ان‌اس لب در سال ۱۴۰۰ از یک ایده برای حل مشکل آی‌پی داینامیک شروع شد.</MudText>
     </MudItem>
-    <MudItem md="4">
+    <MudItem md="3">
+        <MudText Typo="Typo.h4">@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers())</MudText>
+        <MudText>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers()) نفر از دی‌ان‌اس لب برای دسترسی از راه دور به رایانه های خود، اجرای سرور خانگی، نظارت بر دوربین IP و مدیریت DNS وب سایت های خود از جمله موارد دیگر استفاده می کنند.</MudText>
+    </MudItem>
+    <MudItem md="3">
         <MudText Typo="Typo.h4">@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</MudText>
         <MudText>تا کنون حدود @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</MudText>
     </MudItem>
-    <MudItem md="4">
+    <MudItem md="3">
         <MudText Typo="Typo.h4">@(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</MudText>
         <MudText>امروز حدود @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
     </MudItem>
