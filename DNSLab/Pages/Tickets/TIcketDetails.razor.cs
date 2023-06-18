@@ -1,5 +1,4 @@
 ﻿using DNSLab.DTOs.Ticket;
-using Microsoft.JSInterop;
 
 namespace DNSLab.Pages.Tickets;
 partial class TIcketDetails
@@ -36,10 +35,5 @@ partial class TIcketDetails
         messages = (await ticketRepository.GetTicketMessages(TicketId)).ToList();
 
         CurrentUserId = Guid.Parse((await auth.GetAuthenticationStateAsync()).User.Identities.FirstOrDefault()!.Claims.FirstOrDefault(x => x.Type.ToLower() == "nameid")!.Value);
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await jsRuntime.InvokeVoidAsync("Scroll");
     }
 }

@@ -13,54 +13,51 @@
 else
 {
     <EditForm Model="Message" Context="TicketDetails">
-        <h4>@localizer["TicketTitle"] : @ticket.Title</h4>
-        <div class="row gx-3 mb-3">
-            <ul id="chat">
-                @foreach (var item in messages.OrderBy(x => x.CreateDate))
+        <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
+        <ul id="chat">
+            @foreach (var item in messages.OrderBy(x => x.CreateDate))
+            {
+                @if (CurrentUserId == item.UserId)
                 {
-                    @if (CurrentUserId == item.UserId)
-                    {
-                        <li class="me">
-                            <div class="small">
-                                @item.CreateDate.CalcRelativeTime()
-                            </div>
-                            <div class="message">
-                                @((MarkupString)item.Text.ChangeUrlsToLink())
-                            </div>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="you">
-                            <div class="small">
-                                @item.CreateDate.CalcRelativeTime()
-                            </div>
-                            <div class="message">
-                                @((MarkupString)item.Text.ChangeUrlsToLink())
-                            </div>
-                        </li>
-                    }
+                    <li class="me">
+                        <div class="small">
+                            @item.CreateDate.CalcRelativeTime()
+                        </div>
+                        <div class="message">
+                            @((MarkupString)item.Text.ChangeUrlsToLink())
+                        </div>
+                    </li>
                 }
-            </ul>
-        </div>
-        <hr>
-        <BitTextField Label="@localizer["TicketText"]"
-                  IsMultiline=true class="form-control"
+                else
+                {
+                    <li class="you">
+                        <div class="small">
+                            @item.CreateDate.CalcRelativeTime()
+                        </div>
+                        <div class="message">
+                            @((MarkupString)item.Text.ChangeUrlsToLink())
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+        <MudDivider Class="m-2" DividerType="DividerType.Inset" />
+        <MudTextField Label="@localizer["TicketText"]"
+                  Lines="7"
+                  Variant="Variant.Outlined"
                   Placeholder="@(localizer["TicketText"] + "...")"
-                  Rows="7"
                   @bind-Value="Message.Text"
                   MaxLength="@MAX_TEXT_COUNT" />
-        <div class="mb-3 gap-2">
-            <BaseButtonComponent Caption=@localizer["Send"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Primary
-                             Icon=@Icons.Material.Filled.Send
-                             EditContext="TicketDetails"
-                             OnClick=SendTicket></BaseButtonComponent>
-            <BaseNavigateButtonComponent Text="انصراف"
-                                     Href="Ticket/MyTickets"
-                                     Icon=@Icons.Material.Filled.Cancel>
-            </BaseNavigateButtonComponent>
-        </div>
+        <MudDivider Class="m-2" DividerType="DividerType.Inset" />
+        <BaseButtonComponent Caption=@localizer["Send"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=Color.Primary
+                         Icon=@Icons.Material.Filled.Send
+                         EditContext="TicketDetails"
+                         OnClick=SendTicket></BaseButtonComponent>
+        <BaseNavigateButtonComponent Text="انصراف"
+                                 Href="Ticket/MyTickets"
+                                 Icon=@Icons.Material.Filled.Cancel>
+        </BaseNavigateButtonComponent>
     </EditForm>
 }
