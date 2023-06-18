@@ -68,16 +68,14 @@
         </MudCard>
     </MudItem>
 </MudGrid>
-<div class="px-4 py-5 text-center">
-    <SupportUsButton />
-</div>
-<div class="row">
-    <div class="col-md-4">
+<SupportUsButton />
+<MudGrid Justify="Justify.SpaceBetween">
+    <MudItem md="4">
         <LastContents />
-    </div>
-    <div class="col-md-8">
+    </MudItem>
+    <MudItem md="8">
         <SiteChangeHistories />
-    </div>
-</div>
+    </MudItem>
+</MudGrid>
 <PageComments PageId="PageId"></PageComments>
 <Footer />

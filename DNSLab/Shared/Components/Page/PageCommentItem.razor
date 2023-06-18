@@ -4,20 +4,20 @@
 
 @if (!IsDeleted)
 {
-    <div class="row">
+    <MudGrid>
         @if (PageComment.ReplyTo != null)
         {
-            <div class="col-1" />
+            <MudItem />
         }
-        <div class="col-auto">
+        <MudItem>
             <UserProfileImage UserId="@PageComment.UserId.ToString()" Size="50"></UserProfileImage>
-        </div>
-        <div class="col-auto">
-            <BitLabel>@PageComment.FullName</BitLabel>
-            <BitLabel>@PageComment.CreateDate.ToLocalizerString()</BitLabel>
-        </div>
+        </MudItem>
+        <MudItem>
+            <MudText>@PageComment.FullName</MudText>
+            <MudText>@PageComment.CreateDate.ToLocalizerString()</MudText>
+        </MudItem>
 
-        <div class="col-auto">
+        <MudItem>
             <MudButton StartIcon="@Icons.Material.Filled.Reply" OnClick="ReplyButtonClick">
                 پاسخ
             </MudButton>
@@ -30,19 +30,18 @@
                     حذف
                 </MudIconButton>
             }
-        </div>
-    </div>
-    <div class="row">
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
         @if (PageComment.ReplyTo != null)
         {
-            <div class="col-1" />
+            <MudItem xs="1" />
         }
-        <div class="@(PageComment.ReplyTo != null ? "col-11" : "col-12")">
+        <MudItem xs="@(PageComment.ReplyTo != null ? 11 : 12)">
             @if (IsEditing)
             {
-                <BitTextField IsMultiline=true
-                      Rows="3"
-                      @bind-Value=@PageComment.Text></BitTextField>
+                <MudTextField Lines=5
+                      @bind-Value=@PageComment.Text></MudTextField>
                 <BaseButtonComponent Caption="ذخیره"
                              Icon="@Icons.Material.Filled.Save"
                              OnClick="SubmitEditComment">
@@ -54,12 +53,12 @@
             }
             else
             {
-                <BitLabel Class="comment-text">
+                <MudText Class="comment-text">
                     @((MarkupString)PageComment.Text.ChangeUrlsToLink())
-                </BitLabel>
+                </MudText>
             }
-        </div>
-    </div>
+        </MudItem>
+    </MudGrid>
     @if (ChildContent != null)
     {
         @ChildContent
