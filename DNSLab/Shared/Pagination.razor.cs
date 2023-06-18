@@ -14,16 +14,10 @@ partial class Pagination
 
     bool isMultiPage = true;
 
-    private async Task SelectedPageInternal(LinkModel link)
+    private async Task SelectedPageInternal(int selected)
     {
-        if (link.Page == CurrentPage)
-            return;
-
-        if (!link.Enabled)
-            return;
-
-        CurrentPage = link.Page;
-        await SelectedPage.InvokeAsync(link.Page);
+        CurrentPage = selected;
+        await SelectedPage.InvokeAsync(selected);
     }
 
     protected override void OnParametersSet()

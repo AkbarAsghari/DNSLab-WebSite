@@ -1,13 +1,6 @@
 ﻿@if (isMultiPage)
 {
-    <div class="text-center mb-2">
-        @foreach (var link in links)
-        {
-            <BitButton ButtonSize="BitButtonSize.Small"
-               OnClick="()=> SelectedPageInternal(link)" IsEnabled="link.Enabled"
-               Class="@("small" + (link.Active ? " active" : String.Empty))">
-                @link.Text
-            </BitButton>
-        }
+    <div class="d-flex flex-column align-center">
+        <MudPagination Rectangular="true" Variant="Variant.Filled" Count="TotalAmountPages" SelectedChanged="SelectedPageInternal" />
     </div>
 }

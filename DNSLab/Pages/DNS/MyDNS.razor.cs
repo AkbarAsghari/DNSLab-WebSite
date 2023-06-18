@@ -8,7 +8,7 @@ partial class MyDNS
 
     PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 5 };
 
-    Modal DeleteModal { get; set; }
+    bool deleteModalVisible;
     HostNameDTO deleteRcord { get; set; } = new HostNameDTO();
 
     private int totalAmountPages { get; set; }
@@ -41,17 +41,17 @@ partial class MyDNS
         {
             if (await dnsRepository.DeleteHostName(deleteRcord.ID))
             {
-                await DeleteModal.Close();
+                deleteModalVisible = false;
                 await LoadHostNames();
             }
         }
         deleteRcord = new HostNameDTO();
     }
 
-    private async Task DeleteHostName(HostNameDTO record)
+    private void DeleteHostName(HostNameDTO record)
     {
         deleteRcord = record;
-        await DeleteModal.Open();
+        deleteModalVisible = true;
     }
 
     private async Task EditHostName(HostNameDTO record)

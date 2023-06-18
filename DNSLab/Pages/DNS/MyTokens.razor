@@ -133,10 +133,10 @@ else
 
 <MudDialog @bind-IsVisible=showDeleteToken>
     <TitleContent>
-        <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
+        <MudText Typo="Typo.h4">@localizer["AreYouSureDel"]</MudText>
     </TitleContent>
     <DialogContent>
-        <BitLabel>@localizer["TokenName"] : @deleteRcord.Name </BitLabel>
+        <MudText>@localizer["TokenName"] : @deleteRcord.Name </MudText>
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption=@localizer["Cancel"]

@@ -12,112 +12,109 @@
 }
 else
 {
-    <Modal @ref="DeleteModal">
-        <Title>
-            <BitLabel>@localizer["AreYouSureDel"]</BitLabel>
-        </Title>
-        <Body>
-            <BitLabel>@localizer["HostName"] : @deleteRcord.Name </BitLabel>
-        </Body>
-        <Footer>
+    <MudDialog @bind-IsVisible=deleteModalVisible>
+        <TitleContent>
+            <MudText Typo="Typo.h4">@localizer["AreYouSureDel"]</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudText>@localizer["HostName"] : @deleteRcord.Name </MudText>
+        </DialogContent>
+        <DialogActions>
             <BaseButtonComponent Caption=@localizer["Cancel"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=Color.Warning
                              Icon=@Icons.Material.Filled.Cancel
-                             OnClick=DeleteModal.Close></BaseButtonComponent>
+                             OnClick="()=> deleteModalVisible = false"></BaseButtonComponent>
             <BaseButtonComponent Caption=@localizer["Delete"]
                              IsBussyCaption=@localizer["Progressing"]
                              Color=Color.Error
                              Icon=@Icons.Material.Filled.Delete
                              OnClick=AcceptDelete></BaseButtonComponent>
-        </Footer>
-    </Modal>
+        </DialogActions>
+    </MudDialog>
 
-    <h4>@localizer["HostNames"]</h4>
-    <div class="mb-3">
-        <BaseNavigateButtonComponent Href="dns/create"
-                                 Text="@(localizer["CreateHostName"])">
-        </BaseNavigateButtonComponent>
-    </div>
-    <div class="mb-3">
-        @if (hostNames.Count == 0)
-        {
-            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                <BitLabel>@localizer["ThereIsNoHost"]</BitLabel>
-            </BitMessageBar>
-            <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                <BitLabel>برای اطلاعات بیشتر <BitLink Target="_blank" Href="Support/Create-New-DNS">کلیک</BitLink> کنید</BitLabel>
-            </BitMessageBar>
-        }
-        else
-        {
-            @foreach (var item in hostNames.OrderByDescending(x => x.CreateDate))
-            {
-                <hr class="m-1" />
-                <div class="row">
-                    <div class="col-lg-9 col-8">
-                        <div class="row">
-                            <div class="col">
-                                <BitLink Class="text-decoration-none" Href="@($"http://{@item.Name}.{@item.Domain}")" Target="_blank">
-                                    <BitLabel><code>@item.Name</code>.@item.Domain</BitLabel>
-                                </BitLink>
-                            </div>
-                            <div class="col">
-                                <BitLabel Class="d-inline">
-                                    هدف :
-                                    <BitLink Class="text-decoration-none">
-                                        @switch ((DNSRecordTypeEnum)item.RecordType)
-                                        {
-                                            case DNSRecordTypeEnum.A:
-                                                @item.IPv4Address
-                                                break;
-                                            case DNSRecordTypeEnum.AAAA:
-                                                @item.IPv6Address
-                                                break;
-                                            case DNSRecordTypeEnum.CNAME:
-                                                @item.HostNameAlias
-                                                break;
-                                            case DNSRecordTypeEnum.WebRedirect:
-                                                @item.URLOrIp.MakeCut(20)
-                                                break;
-                                        }
-                                    </BitLink>
-                                </BitLabel>
-                            </div>
-                            <BitLabel Class="col">
-                                @localizer["Type"] :
-                                @((DNSRecordTypeEnum)item.RecordType +
-                                    ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                                    " (" + item.RedirectHttpResponseStatusCode + ")" :
-                                    String.Empty))
-                            </BitLabel>
-                        </div>
-                    </div>
-                    <div class="col">
+    <MudText Typo="Typo.h3">@localizer["HostNames"]</MudText>
+    <BaseNavigateButtonComponent Href="dns/create"
+                             Text="@(localizer["CreateHostName"])">
+    </BaseNavigateButtonComponent>
+    @if (hostNames.Count == 0)
+    {
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>@localizer["ThereIsNoHost"]</MudText>
+        </MudAlert>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>برای اطلاعات بیشتر <MudLink Target="_blank" Href="Support/Create-New-DNS">کلیک</MudLink> کنید</MudText>
+        </MudAlert>
+    }
+    else
+    {
+        <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+            <Columns>
+                <TemplateColumn Title="@localizer["HostName"]">
+                    <CellTemplate>
+                        <MudLink Href="@($"http://{context.Item.Name}.{context.Item.Domain}")" Target="_blank">
+                            <MudText><code>@context.Item.Name</code>.@context.Item.Domain</MudText>
+                        </MudLink>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="@localizer["Target"]">
+                    <CellTemplate>
+                        <MudText>
+                            <MudLink>
+                                @switch ((DNSRecordTypeEnum)context.Item.RecordType)
+                                {
+                                    case DNSRecordTypeEnum.A:
+                                        @context.Item.IPv4Address
+                                        break;
+                                    case DNSRecordTypeEnum.AAAA:
+                                        @context.Item.IPv6Address
+                                        break;
+                                    case DNSRecordTypeEnum.CNAME:
+                                        @context.Item.HostNameAlias
+                                        break;
+                                    case DNSRecordTypeEnum.WebRedirect:
+                                        @context.Item.URLOrIp.MakeCut(20)
+                                        break;
+                                }
+                            </MudLink>
+                        </MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="@localizer["Type"]">
+                    <CellTemplate>
+                        <MudText>
+                            @((DNSRecordTypeEnum)context.Item.RecordType +
+                        ((DNSRecordTypeEnum)context.Item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                        " (" + context.Item.RedirectHttpResponseStatusCode + ")" :
+                        String.Empty))
+                        </MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn CellClass="d-flex justify-end">
+                    <CellTemplate>
                         <BaseButtonComponent Caption=@localizer["Edit"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Warning
-                                 IsOutLine=true
-                                 Icon=@Icons.Material.Filled.Edit
-                                 OnClick=@(()=>EditHostName(item)) />
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Warning
+                                     IsOutLine=true
+                                     Icon=@Icons.Material.Filled.Edit
+                                     OnClick=@(()=>EditHostName(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Error
-                                 IsOutLine=true
-                                 Icon=@Icons.Material.Filled.Delete
-                                 OnClick=@(()=>DeleteHostName(item)) />
-                    </div>
-                </div>
-            }
-            <hr />
-            <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
+                                     IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Error
+                                     IsOutLine=true
+                                     Icon=@Icons.Material.Filled.Delete
+                                     OnClick=@(()=>DeleteHostName(context.Item)) />
+                    </CellTemplate>
+                </TemplateColumn>
+                @*<PropertyColumn Property="x=>x." />*@
+            </Columns>
+        </MudDataGrid>
+        <MudDivider />
+        <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
 
-            <BitMessageBar MessageBarType="BitMessageBarType.Success">
-                <BitLabel>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <BitLink Target="_blank" Href="Download/Win">دانلود</BitLink> کنید</BitLabel>
-            </BitMessageBar>
-            <BitMessageBar MessageBarType="BitMessageBarType.Info">
-                <BitLabel>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <BitLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
-            </BitMessageBar>
-        }
-    </div>
+        <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
+            <MudText>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <MudLink Target="_blank" Href="Download/Win">دانلود</MudLink> کنید</MudText>
+            <MudText>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <MudLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</MudLink> را مطالعه فرمایید</MudText>
+        </MudAlert>
+    }
 }
