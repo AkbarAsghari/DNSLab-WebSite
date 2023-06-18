@@ -2,64 +2,61 @@
 
 <EditForm Model="HostName" Context=DNSContext>
     <DataAnnotationsValidator />
-    <h4>@Title</h4>
-    <div class="row gx-3 mb-3">
-        <div class="col-md-6">
-            <BitTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" IsRequired IsEnabled="@IsNewRecord" />
-        </div>
-        <div class="col-md-6">
+    <MudText Typo="Typo.h3">@Title</MudText>
+    <MudGrid>
+        <MudItem md="6">
+            <MudTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" IsRequired IsEnabled="@IsNewRecord" />
+        </MudItem>
+        <MudItem md="6">
             @switch (HostName.RecordType)
             {
                 case 1:
-                    <BitTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" IsRequired />
+                    <MudTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" IsRequired />
                     break;
                 case 2:
-                    <BitTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" IsRequired />
+                    <MudTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" IsRequired />
                     break;
                 case 3:
-                    <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" IsRequired />
+                    <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" IsRequired />
                     break;
                 case 4:
-                    <BitTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" IsRequired />
+                    <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" IsRequired />
                     break;
             }
-        </div>
-    </div>
-    <div class="row">
+        </MudItem>
         @if (IsNewRecord)
         {
-            <div class="col-md-4 col-xl-3">
-                <BitRadioButtonList IsRtl=true
-                                Label="نوع رکورد"
-                                @bind-Value="@HostName.RecordType"
-                                Items="RecordTypes"
-                                TextField="@nameof(RecordType.Text)"
-                                ValueField="@nameof(RecordType.Value)">
-
-                </BitRadioButtonList>
-            </div>
+            <MudItem sm="12">
+                <MudText>نوع رکورد</MudText>
+                <MudRadioGroup @bind-SelectedOption="@HostName.RecordType">
+                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.A)">@DNSRecordTypeEnum.A</MudRadio>
+                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.AAAA)">@DNSRecordTypeEnum.AAAA</MudRadio>
+                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.CNAME)">@DNSRecordTypeEnum.CNAME</MudRadio>
+                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.WebRedirect)">@DNSRecordTypeEnum.WebRedirect</MudRadio>
+                </MudRadioGroup>
+            </MudItem>
         }
-        <div class="@(IsNewRecord == true ? "col-md-8 col-xl-9" : String.Empty)">
-            <BitMessageBar MessageBarType="BitMessageBarType.Info">
+        <MudItem sm="12">
+            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
                 @switch (HostName.RecordType)
                 {
                     case 1:
-                        <BitLabel>@localizer["DNSHostDescription"]</BitLabel>
+                        <MudText>@localizer["DNSHostDescription"]</MudText>
                         break;
                     case 2:
-                        <BitLabel>@localizer["AAAADescription"]</BitLabel>
+                        <MudText>@localizer["AAAADescription"]</MudText>
                         break;
                     case 3:
-                        <BitLabel>@localizer["DNSAliasDescription"]</BitLabel>
+                        <MudText>@localizer["DNSAliasDescription"]</MudText>
                         break;
                     case 4:
-                        <BitLabel>@localizer["WebRedirectDescription"]</BitLabel>
+                        <MudText>@localizer["WebRedirectDescription"]</MudText>
                         break;
                 }
-            </BitMessageBar>
-        </div>
-    </div>
-    <hr />
+            </MudAlert>
+        </MudItem>
+    </MudGrid>
+    <MudDivider />
     <BaseButtonComponent Caption=@localizer["SaveChanges"]
                          IsBussyCaption=@localizer["Progressing"]
                          Color=Color.Primary
