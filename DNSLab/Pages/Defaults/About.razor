@@ -2,30 +2,26 @@
 @inject IAccountRepository accountReository
 @inject IDNSRepository dnsRepository
 
-<h1 class="text-center">تغییر آی‌پی همیشه خوب نیست</h1>
-<BitLabel Class="text-center">ما با تمرکز بر مهندسی و پیشرو بودن در فناوری، تلاش می کنیم خدمات قابل اعتمادی ایجاد کنیم که کاربرها رو خوشحال کند.</BitLabel>
-<hr />
-<h3>درباره DNSLab</h3>
-<BitLabel>DNS شما را کارآمدتر مدیریت می کنیم</BitLabel>
-<BitLabel>ماموریت دی‌ان‌اس لب ایجاد راه حل های ایمن، قابل اعتماد است که کاربر ها بتوانند از آنها برای اتصال، مدیریت و تعامل با دستگاه های متصل به اینترنت خود استفاده کنند. ما در تلاش هستیم تا راه حل هایی ساده، شهودی و جذاب به مشتریان ارائه دهیم.</BitLabel>
-<hr />
-<div class="row">
-    <div class="col-sm-12 col-md-3">
-        <h3>۱۴۰۰</h3>
-        <BitLabel>دی‌ان‌اس لب در سال ۱۴۰۰ از یک ایده برای حل مشکل آی‌پی داینامیک شروع شد.</BitLabel>
-    </div>
-    <div class="col-sm-12 col-md-3">
-        <h3>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers())</h3>
-        <BitLabel>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers()) نفر از دی‌ان‌اس لب برای دسترسی از راه دور به رایانه های خود، اجرای سرور خانگی، نظارت بر دوربین IP و مدیریت DNS وب سایت های خود از جمله موارد دیگر استفاده می کنند.</BitLabel>
-    </div>
-    <div class="col-sm-12 col-md-3">
-        <h3>@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</h3>
-        <BitLabel>تا کنون حدود @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</BitLabel>
-    </div>
-    <div class="col-sm-12 col-md-3">
-        <h3>@(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</h3>
-        <BitLabel>امروز حدود @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</BitLabel>
-    </div>
-</div>
-<hr />
-<div class="text-center"><SupportUsButton /></div>
+<MudText Typo="Typo.h1" Align="Align.Center">تغییر آی‌پی همیشه خوب نیست</MudText>
+<MudText Align="Align.Center">ما با تمرکز بر مهندسی و پیشرو بودن در فناوری، تلاش می کنیم خدمات قابل اعتمادی ایجاد کنیم که کاربرها رو خوشحال کند.</MudText>
+<MudDivider />
+<MudText Typo="Typo.h2">درباره DNSLab</MudText>
+<MudText Typo="Typo.h3">DNS شما را کارآمدتر مدیریت می کنیم</MudText>
+<MudText>ماموریت دی‌ان‌اس لب ایجاد راه حل های ایمن، قابل اعتماد است که کاربر ها بتوانند از آنها برای اتصال، مدیریت و تعامل با دستگاه های متصل به اینترنت خود استفاده کنند. ما در تلاش هستیم تا راه حل هایی ساده، شهودی و جذاب به مشتریان ارائه دهیم.</MudText>
+<MudDivider />
+<MudGrid>
+    <MudItem md="4">
+        <MudText Typo="Typo.h4">۱۴۰۰</MudText>
+        <MudText>دی‌ان‌اس لب در سال ۱۴۰۰ از یک ایده برای حل مشکل آی‌پی داینامیک شروع شد.</MudText>
+    </MudItem>
+    <MudItem md="4">
+        <MudText Typo="Typo.h4">@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</MudText>
+        <MudText>تا کنون حدود @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</MudText>
+    </MudItem>
+    <MudItem md="4">
+        <MudText Typo="Typo.h4">@(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</MudText>
+        <MudText>امروز حدود @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
+    </MudItem>
+</MudGrid>
+<MudDivider/>
+<SupportUsButton />
