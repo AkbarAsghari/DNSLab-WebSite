@@ -8,33 +8,27 @@
 @attribute [Authorize]
 
 <EditForm Model="ticket" Context=newTicketDTO>
-    <h4>ارسال تیکت</h4>
-    <div class="row gx-3 mb-3">
-        <div class="col-12">
-            <BitTextField Label="@localizer["TicketTitle"]" Placeholder="@localizer["EnterTitle"]" @bind-Value="ticket.Title" IsRequired />
-        </div>
-        <div class="col-12">
-            <BitTextField Label="@localizer["TicketText"]"
-                          IsMultiline=true
-                          Placeholder="@(localizer["TicketText"] + "...")" Rows="7"
-                          @bind-Value="ticket.Text"
-                          MaxLength="@MAX_TEXT_COUNT" />
-            @if (MAX_TEXT_COUNT - ticket.Text.Count() < 30)
-            {
-                <BitLabel>@localizer["RemainingCharactersCount"] : @((MAX_TEXT_COUNT - ticket.Text.Count()).ToString().EnglishToPersianNumbers())</BitLabel>
-            }
-        </div>
-    </div>
-    <div class="mb-3 gap-2">
-        <BaseButtonComponent Caption=@localizer["Send"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Primary
-                             Icon=@Icons.Material.Filled.Send
-                             EditContext=newTicketDTO
-                             OnClick=SendNewTicket></BaseButtonComponent>
-        <BaseNavigateButtonComponent Text="انصراف"
-                                     Href="Ticket/MyTickets"
-                                     Icon="@Icons.Material.Filled.Cancel">
-        </BaseNavigateButtonComponent>
-    </div>
+    <MudText Typo="Typo.h3">ارسال تیکت</MudText>
+    <MudTextField Variant="Variant.Text"  Label="@localizer["TicketTitle"]" Placeholder="@localizer["EnterTitle"]" @bind-Value="ticket.Title" />
+    <MudTextField Label="@localizer["TicketText"]"
+                  Lines="23"
+                  Variant="Variant.Outlined"
+                  Placeholder="@(localizer["TicketText"] + "...")" Rows="7"
+                  @bind-Value="ticket.Text"
+                  MaxLength="@MAX_TEXT_COUNT" />
+    @if (MAX_TEXT_COUNT - ticket.Text.Count() < 30)
+    {
+        <MudText>@localizer["RemainingCharactersCount"] : @((MAX_TEXT_COUNT - ticket.Text.Count()).ToString().EnglishToPersianNumbers())</MudText>
+    }
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset"/>
+    <BaseButtonComponent Caption=@localizer["Send"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Color=Color.Primary
+                         Icon=@Icons.Material.Filled.Send
+                         EditContext=newTicketDTO
+                         OnClick=SendNewTicket></BaseButtonComponent>
+    <BaseNavigateButtonComponent Text="انصراف"
+                                 Href="Ticket/MyTickets"
+                                 Icon="@Icons.Material.Filled.Cancel">
+    </BaseNavigateButtonComponent>
 </EditForm>
