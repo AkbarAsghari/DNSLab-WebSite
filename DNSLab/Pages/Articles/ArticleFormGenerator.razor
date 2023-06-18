@@ -1,27 +1,31 @@
 ﻿@page "/{PageType}/{*URL}"
 @inject IPageRepository _PageRepository
 
-<div class="ck-content">
+<MudContainer MaxWidth="MaxWidth.Large">
     @if (publishPageDTO != null)
     {
-        <h1>@publishPageDTO.Header</h1>
+        <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
         <PageSummary FullName="@publishPageDTO.Author.FullName"
                  UserId="@publishPageDTO.Author.ID"
                  PublishDate="@publishPageDTO.PublishDate"
                  UpdateDate="@publishPageDTO.UpdateDate" />
-        <hr />
+        <MudDivider />
         @((MarkupString)@publishPageDTO.Body)
-        <hr />
-        <h3>کلمات کلیدی</h3>
-        @foreach (var item in keywords)
-        {
-            <a href="/Tag/@item" rel="tag" class="text-decoration-none text-white btn m-1 btn-sm btn-secondary">@item</a>
-        }
-        <hr />
+        <MudDivider />
+
+        <MudText Typo="Typo.h3">کلمات کلیدی</MudText>
+        <MudGrid>
+            @foreach (var item in keywords)
+            {
+                <MudItem>
+                    <MudLink Href="@("/Tag/"+item)">@item</MudLink>
+                </MudItem>
+            }
+        </MudGrid>
+        <MudDivider />
+
         <PageComments PageId="@publishPageDTO.Id"></PageComments>
-        <hr />
-        <div class="text-center">
-            <SupportUsButton />
-        </div>
+        <MudDivider />
+        <SupportUsButton />
     }
-</div>
+</MudContainer> 
