@@ -1,0 +1,74 @@
+﻿@inject IStringLocalizer<Resource> localizer
+@inject IDNSRepository dnsRepository
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <MudText>@localizer["TokenName"] : @token.Name </MudText>
+    <MudDivider />
+    @if (@isRevoking)
+    {
+        <MudText>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</MudText>
+        <BaseButtonComponent Caption=@localizer["Continue"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Icon=@Icons.Material.Filled.Refresh
+                         Color="Color.Warning"
+                         OnClick=ContinueRevokeKey />
+        <BaseButtonComponent Caption=@localizer["Cancel"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         Icon=@Icons.Material.Filled.Cancel
+                         OnClick=ChangeRevokeStatus />
+    }
+    else
+    {
+        <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
+        <BaseButtonComponent Caption=@localizer["RevokeKey"]
+                         IsBussyCaption=@localizer["Progressing"]
+                         IsOutLine=true
+                         Color=Color.Error
+                         Icon=@Icons.Material.Filled.Refresh
+                         OnClick=ChangeRevokeStatus />
+    }
+
+    <MudDivider />
+
+    <MudText>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</MudText>
+    <MudDivider />
+    <MudText>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</MudText>
+    <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
+                                 Target="_blank"
+                                 Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
+    <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
+                                 Target="_blank"
+                                 Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
+    <MudDivider />
+    <MudText>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</MudText>
+    <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
+                                 Target="_blank"
+                                 Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
+    <MudDivider />
+    <MudText>لینک بروزرسانی آی پی های توکن</MudText>
+    <MudText>
+        https://api.dnslab.link/DNS/UDIBT?k=@token.Key
+        <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @token.Key) />
+    </MudText>
+    <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
+        این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
+    </MudAlert>
+</MudContainer>
+@code {
+    [Parameter] public TokenDTO token { get; set; }
+
+    private bool isRevoking = false;
+    private void ChangeRevokeStatus() => isRevoking = !isRevoking;
+
+    private async Task ContinueRevokeKey()
+    {
+        var newTokenKey = await dnsRepository.RevokeTokenKey(token.Id);
+
+        if (!String.IsNullOrEmpty(newTokenKey))
+        {
+            token.Key = newTokenKey;
+            isRevoking = false;
+        }
+    }
+}

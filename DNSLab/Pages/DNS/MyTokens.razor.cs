@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.DNS;
+using Newtonsoft.Json.Linq;
 
 namespace DNSLab.Pages.DNS;
 partial class MyTokens
@@ -6,10 +7,8 @@ partial class MyTokens
     IEnumerable<TokenSummaryDTO> tokenSummaries;
 
     Modal DeleteModal { get; set; }
-    Modal TokenDetailsModal { get; set; }
 
     TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
-    TokenDTO token;
 
     private bool isRevoking = false;
 
@@ -40,24 +39,18 @@ partial class MyTokens
         deleteRcord = new TokenSummaryDTO();
     }
 
-    private async Task ContinueRevokeKey()
-    {
-        var newTokenKey = await dnsRepository.RevokeTokenKey(token.Id);
-
-        if (!String.IsNullOrEmpty(newTokenKey))
-        {
-            token.Key = newTokenKey;
-            isRevoking = false;
-        }
-    }
-
-    private void ChangeRevokeStatus() => isRevoking = !isRevoking;
-
     private async Task OpenToken(TokenSummaryDTO record)
     {
-        await TokenDetailsModal.Open();
+        Dialog.Show<TokenDetails>(title: "جزئیات", parameters: new MudBlazor.DialogParameters
+        {
+            { "token", await dnsRepository.GetToken(record.Id)  }
+        }, new MudBlazor.DialogOptions
+        {
+            CloseButton = true,
+            DisableBackdropClick = true,
+            MaxWidth = MudBlazor.MaxWidth.Large,
+        });
 
-        token = await dnsRepository.GetToken(record.Id);
     }
     private async Task DeleteToken(TokenSummaryDTO record)
     {

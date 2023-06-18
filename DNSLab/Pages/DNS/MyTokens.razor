@@ -3,6 +3,8 @@
 @inject IStringLocalizer<Resource> localizer
 @inject IDNSRepository dnsRepository
 @inject NavigationManager NavigationManager
+@inject IDialogService Dialog
+
 
 @attribute [Authorize]
 
@@ -31,77 +33,6 @@ else
                              Icon=@Icons.Material.Filled.Delete
                              OnClick=AcceptDelete />
         </Footer>
-    </Modal>
-
-    <Modal @ref="TokenDetailsModal" ModalSize="ModalSizeEnum.XLarge">
-        <Title>
-            <BitLabel>@localizer["Details"]</BitLabel>
-        </Title>
-        <Body>
-            @if (token == null)
-            {
-                <Loading />
-            }
-            else
-            {
-                <BitLabel>@localizer["TokenName"] : @token.Name </BitLabel>
-                <hr />
-
-                <div class="m-1">
-                    @if (@isRevoking)
-                    {
-                        <BitLabel>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</BitLabel>
-                        <BaseButtonComponent Caption=@localizer["Continue"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Icon=@Icons.Material.Filled.Refresh
-                                 Color="Color.Warning"
-                                 OnClick=ContinueRevokeKey />
-                        <BaseButtonComponent Caption=@localizer["Cancel"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Icon=@Icons.Material.Filled.Cancel
-                                 OnClick=ChangeRevokeStatus />
-                    }
-                    else
-                    {
-                        <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
-                        <BaseButtonComponent Caption=@localizer["RevokeKey"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 IsOutLine=true
-                                 Color=Color.Error
-                                 Icon=@Icons.Material.Filled.Refresh
-                                 OnClick=ChangeRevokeStatus />
-                    }
-
-                </div>
-                <hr />
-
-                <BitLabel>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</BitLabel>
-                <hr />
-                <BitLabel>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</BitLabel>
-                <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
-                                     Target="_blank"
-                                     Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
-                <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
-                                     Target="_blank"
-                                     Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
-                <hr />
-                <BitLabel>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</BitLabel>
-                <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
-                                     Target="_blank"
-                                     Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
-                <hr />
-                <BitLabel>لینک بروزرسانی آی پی های توکن</BitLabel>
-                <div class="d-flex align-items-center">
-                    <BitLabel>
-                        https://api.dnslab.link/DNS/UDIBT?k=@token.Key
-                    </BitLabel>
-                    <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @token.Key) />
-                </div>
-                <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                    این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
-                </BitMessageBar>
-            }
-        </Body>
     </Modal>
     <h4>@localizer["Tokens"]</h4>
     <div class="mb-3">
