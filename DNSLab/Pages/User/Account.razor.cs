@@ -3,7 +3,7 @@
 namespace DNSLab.Pages.User;
 partial class Account
 {
-    Modal DeleteAccountModal, ChangeAccountUsernameModal, ChangeAccountEmailModal;
+    bool ChangeAccountUsernameModalVisible, ChangeAccountEmailModalVisible = false;
 
     private UserInfo userInfo;
     ChangeEmailDTO changeEmail;
@@ -25,7 +25,7 @@ partial class Account
     {
         if (await _AccountRepository.UpdateUsername(Username))
         {
-            await ChangeAccountUsernameModal.Close();
+            ChangeAccountUsernameModalVisible = false;
             _ToastService.ShowToast($"نام کاربری شما با موفقیت {(String.IsNullOrWhiteSpace(Username) ? $"حذف گردید و از این پس با نام کاربری {userInfo.Email} میتوانید وارد سیستم شوید" : "تغییر یافت")}.", ToastLevel.Info);
         }
     }
@@ -51,7 +51,7 @@ partial class Account
                 userInfo.IsEmailApproved = false;
 
             userInfo.Email = changeEmail.Email;
-            await ChangeAccountEmailModal.Close();
+            ChangeAccountEmailModalVisible = false;
         }
     }
 
