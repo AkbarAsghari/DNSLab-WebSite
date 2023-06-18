@@ -1,18 +1,23 @@
 ﻿@page "/Support"
 @inject IPageRepository _PageRepository
 
-<h4 class="border-bottom pb-2 mb-0">راهنمای سایت</h4>
-<BitMessageBar MessageBarType="BitMessageBarType.Info">
-    <BitLabel>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</BitLabel>
-</BitMessageBar>
+<MudText Typo="Typo.h3">راهنمای سایت</MudText>
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+    <MudText>توجه فرمایید در برخی آموزش ها آی‌پی عمومی شما بصورت ( <code><strong>@IPDTO.IPv4</strong></code> ) مشخص شده است و این آی‌پی فقط به شما نمایش داده میشود و شخص دیگری قادر به مشاهده آن نمیباشد و این آدرس منحصر به فرد میباشد.</MudText>
+</MudAlert>
 @if (pageSummaries == null)
 {
     <Loading />
 }
 else
 {
-    @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
-    {
-        <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
-    }
+    <MudList>
+        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
+        {
+            <MudListItem>
+                <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+            </MudListItem>
+            <MudDivider />
+        }
+    </MudList>
 }

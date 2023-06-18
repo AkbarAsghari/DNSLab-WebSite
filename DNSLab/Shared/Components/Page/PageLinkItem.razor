@@ -1,13 +1,13 @@
-﻿<div class="row">
-    <div class="col-auto mt-2 p-0">
+﻿<MudGrid>
+    <MudItem>
         <svg class="bd-placeholder-img flex-shrink-0 m-1 rounded-3" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" focusable="false">
             <rect width="100%" height="100%" fill="#3a0647"></rect>
             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff">@Title.Substring(0,1)</text>
         </svg>
-    </div>
-    <div class="col-md-11 col-10">
-        <BitLabel><BitLink Href=@Link>@Title</BitLink></BitLabel>
-        <BitLabel Class="text-truncate">@Description</BitLabel>
-    </div>
-</div>
-<hr class="m-0" />
+    </MudItem>
+    <MudItem md="11">
+        <MudText><MudLink Href=@Link>@Title</MudLink></MudText>
+        <MudText Class="text-truncate">@Description</MudText>
+    </MudItem>
+</MudGrid>
+

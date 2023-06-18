@@ -65,8 +65,8 @@
     </MudGrid>
     @if (!isLoadingActiveDNSCount && activeDNSCount == 0)
     {
-        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-            <BitLabel>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <BitLink Href="DNS/MyDNS">کلیک</BitLink> کنید.</BitLabel>
-        </BitMessageBar>
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <MudLink Href="DNS/MyDNS">کلیک</MudLink> کنید.</MudText>
+        </MudAlert>
     }
 </AuthorizeView>
