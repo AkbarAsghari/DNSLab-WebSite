@@ -11,24 +11,24 @@
     <MudText>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</MudText>
 </MudAlert>
 <BaseButtonComponent Caption="ثبت دیدگاه" Icon="@Icons.Material.Filled.AddComment"
-    OnClick="async() => await AddNewPageComment()">
+                     OnClick="async() => await AddNewPageComment()">
 </BaseButtonComponent>
-@if (PageCommentAndReplies != null)
+@if (PageCommentAndReplies != null && PageCommentAndReplies.Count() > 0)
 {
     <MudDivider />
     @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
     {
         <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
-    ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
-    @if (item.Replies.Count() > 0)
+                 ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
+            @if (item.Replies.Count() > 0)
             {
                 foreach (var reply in item.Replies)
                 {
                     <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
-                        ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
+                     ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
                 }
             }
-            </PageCommentItem>
+        </PageCommentItem>
     }
 
     if (totalCommentsCount - 3 > 0 && !ShowAll)
@@ -55,6 +55,6 @@
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption="@(ReplyToId == Guid.Empty ? "ثبت دیدگاه": "ثبت پاسخ")"
-            Icon="@Icons.Material.Filled.AddComment" OnClick="SubmitComment"></BaseButtonComponent>
+                             Icon="@Icons.Material.Filled.AddComment" OnClick="SubmitComment"></BaseButtonComponent>
     </DialogActions>
 </MudDialog>

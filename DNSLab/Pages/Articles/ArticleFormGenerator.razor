@@ -11,11 +11,11 @@
         @((MarkupString)@publishPageDTO.Body)
 
         <MudText Typo="Typo.h3">کلمات کلیدی</MudText>
-        <MudGrid>
+        <MudGrid Class="mx-2 mb-2 mt-2">
             @foreach (var item in keywords)
             {
                 <MudItem>
-                    <MudLink Href="@("/Tag/"+item)">@item</MudLink>
+                    <MudButton Href="@("/Tag/"+item)" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">@item</MudButton>
                 </MudItem>
             }
         </MudGrid>
