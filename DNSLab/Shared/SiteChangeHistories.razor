@@ -7,13 +7,13 @@
                 @if (!String.IsNullOrWhiteSpace(ctx.InformationLink))
                 {
                       //Change Dnslab Links Routes for navigate to ChangeLog Page;
-                    <BitLabel><BitLink Href="@(String.IsNullOrEmpty(ctx.InformationLink) ? null :
+                    <MudText><MudLink Href="@(String.IsNullOrEmpty(ctx.InformationLink) ? null :
                 ((ctx.InformationLink.ToLower().StartsWith("https") || ctx.InformationLink.ToLower().StartsWith("http")) ?
-                ctx.InformationLink : $"changelog/{ctx.InformationLink}"))">@ctx.Title</BitLink></BitLabel>
+                ctx.InformationLink : $"changelog/{ctx.InformationLink}"))">@ctx.Title</MudLink></MudText>
                 }
                 else
                 {
-                    <BitLabel>@ctx.Title</BitLabel>
+                    <MudText>@ctx.Title</MudText>
                 }
             </Body>
         </TimeLineItem>

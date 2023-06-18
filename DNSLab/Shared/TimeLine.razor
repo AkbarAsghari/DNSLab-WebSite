@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<h4>@TimeLineHeader</h4>
+<MudText Typo="Typo.h3">@TimeLineHeader</MudText>
 <div id="content">
     <ul class="timeline">
         @foreach (TItem item in Data ?? Array.Empty<TItem>())
