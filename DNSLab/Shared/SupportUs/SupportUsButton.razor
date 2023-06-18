@@ -1,5 +1,8 @@
 ﻿@inject ITransactionRepository _TransactionRepository
 
-<BaseNavigateButtonComponent Href="Transaction/Tip"
-                             Text="@("از رایگان ماندن دی‌ان‌اس لب حمایت کنید " + "(❤️ " + @supporterCount.ToString().EnglishToPersianNumbers() +")")">
-</BaseNavigateButtonComponent>
+<div class="d-flex flex-column align-center">
+    <BaseNavigateButtonComponent Href="Transaction/Tip"
+                                 Color="Color.Primary"
+                                 Text="@("از رایگان ماندن دی‌ان‌اس لب حمایت کنید " + "(❤️ " + @supporterCount.ToString().EnglishToPersianNumbers() +")")">
+    </BaseNavigateButtonComponent>
+</div>
