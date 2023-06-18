@@ -14,71 +14,63 @@
 }
 else
 {
+    <MudText Typo="Typo.h3">@localizer["Tokens"]</MudText>
+    <BaseNavigateButtonComponent Href="dns/createtoken"
+                             Text="@(localizer["CreateToken"])">
+    </BaseNavigateButtonComponent>
+    <MudDivider />
+    @if (tokenSummaries.Count() == 0)
+    {
+        <MudAlert Severity=Severity.Warning ContentAlignment=HorizontalAlignment.Start>
+            <MudText>@localizer["ThereIsNoTokens"]</MudText>
+        </MudAlert>
+    }
+    else
+    {
+        <MudDataGrid Items="@tokenSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+            <Columns>
+                <PropertyColumn Property="x => x.Name" Title="@localizer["TokenName"]" />
+                <TemplateColumn CellClass="d-flex justify-start" Title="تاریخ">
+                    <CellTemplate>
+                        <MudText>@localizer["CreateDate"]" : @context.Item.CreateDate.ToLocalizerString()</MudText>
+                        @if (context.Item.UpdateDate is not null)
+                        {
+                            <MudText>@localizer["UpdateDate"]" : @context.Item.UpdateDate.Value.ToLocalizerString()</MudText>
+                        }
+                    </CellTemplate>
+                </TemplateColumn>
 
-
-    <h4>@localizer["Tokens"]</h4>
-    <div class="mb-3">
-        <BaseNavigateButtonComponent Href="dns/createtoken"
-                                 Text="@(localizer["CreateToken"])">
-        </BaseNavigateButtonComponent>
-    </div>
-    <div class="mb-3">
-
-        @if (tokenSummaries.Count() == 0)
-        {
-            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                <BitLabel>@localizer["ThereIsNoTokens"]</BitLabel>
-            </BitMessageBar>
-        }
-        else
-        {
-            @foreach (var item in tokenSummaries.OrderByDescending(x => x.CreateDate))
-            {
-                <hr class="m-1" />
-                <div class="row">
-                    <div class="row col-lg-9 col-sm-auto align-items-center">
-                        <div class="col-lg-3 col-sm-12">
-                            <BitLabel>@localizer["TokenName"] : @item.Name</BitLabel>
-                        </div>
-                        <div class="col">
-                            <BitLabel Class="small m-0">@localizer["CreateDate"] : @item.CreateDate.ToLocalizerString()</BitLabel>
-                            @if (@item.UpdateDate != null)
-                            {
-                                <BitLabel Class="small m-0">@localizer["UpdateDate"] : @item.UpdateDate.Value.ToLocalizerString()</BitLabel>
-                            }
-                        </div>
-                        <div class="col">
-                            <BitLabel>@localizer["HostNamesCount"] : @item.HostNameCount</BitLabel>
-                        </div>
-                    </div>
-                    <div class="col">
+                <PropertyColumn Property="x => x.HostNameCount" Title="@localizer["HostNamesCount"]" />
+                <TemplateColumn CellClass="d-flex justify-end">
+                    <CellTemplate>
+                        <MudStack Row>
                         <BaseButtonComponent Caption=@localizer["Details"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Primary
-                                 IsOutLine=true
-                                 Icon=@Icons.Material.Filled.MoreHoriz
-                                 OnClick=@(()=>OpenToken(item)) />
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Primary
+                                         IsOutLine=true
+                                         Icon=@Icons.Material.Filled.MoreHoriz
+                                         OnClick=@(()=>OpenToken(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Edit"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Warning
-                                 IsOutLine=true
-                                 Icon=@Icons.Material.Filled.Edit
-                                 OnClick=@(()=>EditToken(item)) />
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Warning
+                                         IsOutLine=true
+                                         Icon=@Icons.Material.Filled.Edit
+                                         OnClick=@(()=>EditToken(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Error
-                                 IsOutLine=true
-                                 Icon=@Icons.Material.Filled.Delete
-                                 OnClick=@(()=>DeleteToken(item)) />
-                    </div>
-                </div>
-            }
-            <hr class="m-1" />
-        }
-        <BitMessageBar MessageBarType="BitMessageBarType.Info">
-            <BitLabel>برای اطلاعات بیشتر لطفا <BitLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</BitLink> را مطالعه فرمایید</BitLabel>
-        </BitMessageBar>
-    </div>
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Error
+                                         IsOutLine=true
+                                         Icon=@Icons.Material.Filled.Delete
+                                         OnClick=@(()=>DeleteToken(context.Item)) />
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+    }
+    <MudAlert Severity=Severity.Info ContentAlignment=HorizontalAlignment.Start>
+        <MudText>برای اطلاعات بیشتر لطفا <MudLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</MudLink> را مطالعه فرمایید</MudText>
+    </MudAlert>
 }
 
 <MudDialog Options="dialogOptions" @bind-IsVisible="showTokenDetails">
