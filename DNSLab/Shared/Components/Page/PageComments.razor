@@ -37,22 +37,23 @@
     }
 }
 
-<Modal @ref="AddNewPageCommentModal">
-    <Title><BitLabel>@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</BitLabel></Title>
-        <Body>
-            <BitLabel>
+<MudDialog @bind-IsVisible="@showDialog">
+    <TitleContent>
+        <MudText Typo="Typo.h3">@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</MudText>
+    </TitleContent>
+    <DialogContent>
+            <MudText>
                 @(ReplyToId == Guid.Empty ?
                 "اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید."
                 : "متن پاسخ خود را وارد نمایید")
-        </BitLabel>
-        <BitTextField IsMultiline=true
-                      Rows="7"
+        </MudText>
+        <MudTextField Lines="5"
                       @bind-Value="NewPageComment.Text">
-        </BitTextField>
-    </Body>
-    <Footer>
+        </MudTextField>
+    </DialogContent>
+    <DialogActions>
         <BaseButtonComponent Caption="@(ReplyToId == Guid.Empty ? "ثبت دیدگاه": "ثبت پاسخ")"
                              Icon="@Icons.Material.Filled.AddComment"
                              OnClick="SubmitComment"></BaseButtonComponent>
-    </Footer>
-</Modal>
+    </DialogActions>
+</MudDialog>

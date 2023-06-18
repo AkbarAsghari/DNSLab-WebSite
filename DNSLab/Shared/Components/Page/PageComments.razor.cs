@@ -9,13 +9,14 @@ partial class PageComments
     Guid CurrentUserId = Guid.Empty;
     Guid ReplyToId = Guid.Empty;
     Guid BaseCommentId = Guid.Empty;
-    
+
     int totalCommentsCount = 0;
 
-    Modal AddNewPageCommentModal;
     CreatePageCommentDTO NewPageComment = new CreatePageCommentDTO { Text = String.Empty };
 
     IEnumerable<PageCommentAndRepliesDTO> PageCommentAndReplies;
+
+    bool showDialog = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -46,7 +47,7 @@ partial class PageComments
         if (CurrentUserId == Guid.Empty)
             _NavigationManager.NavigateTo($"/user/auth?RedirectTo={new Uri(_NavigationManager.Uri).AbsolutePath}");
         else
-            await AddNewPageCommentModal.Open();
+            showDialog = true;
     }
 
     async Task SubmitComment()
@@ -65,7 +66,7 @@ partial class PageComments
             NewPageComment.ReplyTo = Guid.Empty;
             NewPageComment.BaseCommentId = Guid.Empty;
 
-            await AddNewPageCommentModal.Close();
+            showDialog = false;
             await OnInitializedAsync();
         }
     }

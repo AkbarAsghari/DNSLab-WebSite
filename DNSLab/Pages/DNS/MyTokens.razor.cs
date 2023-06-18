@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.DNS;
+using MudBlazor;
 using Newtonsoft.Json.Linq;
 
 namespace DNSLab.Pages.DNS;
@@ -6,11 +7,11 @@ partial class MyTokens
 {
     IEnumerable<TokenSummaryDTO> tokenSummaries;
 
-    Modal DeleteModal { get; set; }
-
     TokenSummaryDTO deleteRcord { get; set; } = new TokenSummaryDTO();
 
     private bool isRevoking = false;
+    bool showTokenDetails = false;
+    bool showDeleteToken = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -32,30 +33,42 @@ partial class MyTokens
         {
             if (await dnsRepository.DeleteToken(deleteRcord.Id))
             {
-                await DeleteModal.Close();
+                showDeleteToken = false;
                 await LoadTokensSummary();
             }
         }
         deleteRcord = new TokenSummaryDTO();
     }
+    private TokenDTO token;
 
+    private void ChangeRevokeStatus() => isRevoking = !isRevoking;
+
+    private async Task ContinueRevokeKey()
+    {
+        var newTokenKey = await dnsRepository.RevokeTokenKey(token.Id);
+
+        if (!String.IsNullOrEmpty(newTokenKey))
+        {
+            token.Key = newTokenKey;
+            isRevoking = false;
+        }
+    }
+
+    DialogOptions dialogOptions = new DialogOptions
+    {
+        CloseButton = true,
+        DisableBackdropClick = true,
+        MaxWidth = MaxWidth.Medium,
+    };
     private async Task OpenToken(TokenSummaryDTO record)
     {
-        Dialog.Show<TokenDetails>(title: "جزئیات", parameters: new MudBlazor.DialogParameters
-        {
-            { "token", await dnsRepository.GetToken(record.Id)  }
-        }, new MudBlazor.DialogOptions
-        {
-            CloseButton = true,
-            DisableBackdropClick = true,
-            MaxWidth = MudBlazor.MaxWidth.Large,
-        });
-
+        token = await dnsRepository.GetToken(record.Id);
+        showTokenDetails = true;
     }
     private async Task DeleteToken(TokenSummaryDTO record)
     {
         deleteRcord = record;
-        await DeleteModal.Open();
+        showDeleteToken = true;
     }
 
     private void EditToken(TokenSummaryDTO record)
