@@ -41,14 +41,14 @@ else
                 }
             }
         </ul>
-        <MudDivider Class="m-2" DividerType="DividerType.Inset" />
+        <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
         <MudTextField Label="@localizer["TicketText"]"
                   Lines="7"
                   Variant="Variant.Outlined"
                   Placeholder="@(localizer["TicketText"] + "...")"
                   @bind-Value="Message.Text"
                   MaxLength="@MAX_TEXT_COUNT" />
-        <MudDivider Class="m-2" DividerType="DividerType.Inset" />
+        <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
         <BaseButtonComponent Caption=@localizer["Send"]
                          IsBussyCaption=@localizer["Progressing"]
                          Color=Color.Primary

@@ -12,42 +12,19 @@
 }
 else
 {
-    <h4>اطلاعات پروفایل</h4>
-    <div class="row g-2">
-        <div class="col-xl-3 g-1">
-            <!-- Profile picture card-->
-            <div class="mb-4 mb-xl-0">
-                <div class="text-center">
-                    <UserProfileImage Size=200></UserProfileImage>
-                </div>
-            </div>
-        </div>
-        <div class="row col-xl-9 g-1">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="mb-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <BitTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName"></BitTextField>
-                            </div>
-                            <div class="col-md-4">
-                                <BitTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName"></BitTextField>
-                            </div>
-                            <div class="col-md-4">
-                                <BitTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company"></BitTextField>
-                            </div>
-                        </div>
-                        <div class="row pb-2">
-                            <div class="col-md-4">
-                                <BitTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></BitTextField>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
+    <MudText Typo="Typo.h3">اطلاعات پروفایل</MudText>
+    <MudGrid>
+        <MudItem md="3">
+            <UserProfileImage Size=200></UserProfileImage>
+        </MudItem>
+        <MudItem md="9">
+            <MudTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]" @bind-Value="@userInfo.FirstName"></MudTextField>
+            <MudTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]" @bind-Value="@userInfo.LastName"></MudTextField>
+            <MudTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company"></MudTextField>
+            <MudTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]" @bind-Value="@userInfo.Mobile"></MudTextField>
+        </MudItem>
+    </MudGrid>
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
     <BaseButtonComponent Caption=@localizer["SaveChanges"]
                      IsBussyCaption=@localizer["Progressing"]
                      Color=Color.Primary
