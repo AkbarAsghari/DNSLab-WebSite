@@ -1,14 +1,13 @@
 ﻿using DNSLab.DTOs.Ticket;
+using MudBlazor;
 
 namespace DNSLab.Pages.Tickets;
 partial class MyTickets
 {
+    [Inject] private IDialogService DialogService { get; set; }
+
     IEnumerable<TicketDTO> tickets;
 
-    Modal Modal { get; set; }
-    TicketDTO deleteRcord { get; set; } = new();
-    TicketDTO closeRcord { get; set; } = new();
-    string modalTitle = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
@@ -17,39 +16,31 @@ partial class MyTickets
 
     async Task DeleteTicket(TicketDTO record)
     {
-        DeSelectAll();
-        deleteRcord = record;
-        modalTitle = localizer["AreYouSureDel"];
-        await Modal.Open();
+        bool? result = await DialogService.ShowMessageBox(
+           "هشدار",
+           $"آیا از حذف کامنت {record.Title} مطمئن هستید؟",
+           yesText: "حذف", cancelText: "انصراف");
+
+        if (result == true)
+        {
+            if (await ticketRepository.RemoveTicket(record.ID))
+            {
+                await OnInitializedAsync();
+            }
+        }
     }
 
     async Task CloseTicket(TicketDTO record)
     {
-        DeSelectAll();
-        closeRcord = record;
-        modalTitle = localizer["AreYouSureClose"];
-        await Modal.Open();
-    }
+        bool? result = await DialogService.ShowMessageBox(
+           "هشدار",
+           $"آیا از بست کامنت {record.Title} مطمئن هستید؟",
+           yesText: "بستن", cancelText: "انصراف");
 
-    async Task ModalAccept()
-    {
-        if (deleteRcord.ID != Guid.Empty) await AcceptDelete();
-        if (closeRcord.ID != Guid.Empty) await AcceptClose();
-    }
-
-    void DeSelectAll()
-    {
-        deleteRcord = new();
-        closeRcord = new();
-    }
-
-    async Task AcceptDelete()
-    {
-        if (deleteRcord != null)
+        if (result == true)
         {
-            if (await ticketRepository.RemoveTicket(deleteRcord.ID))
+            if (await ticketRepository.CloseTicket(record.ID))
             {
-                await Modal.Close();
                 await OnInitializedAsync();
             }
         }
@@ -58,17 +49,5 @@ partial class MyTickets
     void OpenTicket(TicketDTO record)
     {
         navigationManager.NavigateTo("Ticket/Details/" + record.ID);
-    }
-
-    async Task AcceptClose()
-    {
-        if (closeRcord != null)
-        {
-            if (await ticketRepository.CloseTicket(closeRcord.ID))
-            {
-                await Modal.Close();
-                await OnInitializedAsync();
-            }
-        }
     }
 }
