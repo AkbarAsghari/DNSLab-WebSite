@@ -1,40 +1,40 @@
 ﻿@page "/api"
 
 <PageVisitCounter />
-<h1>توسعه وب سایت DNSLab</h1>
-<BitLabel>
+<MudText Typo="Typo.h1">توسعه وب سایت DNSLab</MudText>
+<MudText>
     <BitIcon IconName="BitIconName.OpenSource"></BitIcon>
     وب سایت بصورت متن باز (Open Source) در مخزن
     <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Target="_blank">DNSLab</BitLink>
     در اختیار برنامه نویسان قرار گرفته است برای حمایت از پروژه میتونید ⭐ بدید.
-</BitLabel>
-<hr />
-<h1>DNSLab CLI's</h1>
-<BitLabel>
+</MudText>
+<MudDivider/>
+<MudText Typo="Typo.h1">DNSLab CLI's</MudText>
+<MudText>
     <BitIcon IconName="BitIconName.CommandPrompt"></BitIcon>
     توسعه دهندگان و کاربران همچنین میتوانند برای استفاده از API های این صفحه از این
     <BitLink Href="https://github.com/NoobforAl/DnsLab-CLI">CLI</BitLink>
     که با زبان Go توسط دوست عزیزمون
     <BitLink Href="https://github.com/NoobforAl">F . Sarmaly</BitLink>
     نوشته شده است استفاده نمایند.
-</BitLabel>
-<hr />
-<h1>راهنمای API های سایت برای توسعه دهندگان</h1>
-<BitLabel>
+</MudText>
+<MudDivider />
+<MudText Typo="Typo.h1">راهنمای API های سایت برای توسعه دهندگان</MudText>
+<MudText>
     <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" />
     توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند
-</BitLabel>
-<hr />
+</MudText>
+<MudDivider />
 <h2>برای دریافت آی پی عمومی از این سرویس استفاده نمایند</h2>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://ip.dnslab.link" />
     <BitLink Href="https://ip.dnslab.link" Target="_blank">https://ip.dnslab.link</BitLink>
 </div>
 <hr />
-<h2>بررسی پینگ IP یا یک آدرس اینترنتی</h2>
-<BitLabel>ساختار کلی بصورت زیر میباشد</BitLabel>
-<BitLabel Class="dir-ltr"><code>https://api.dnslab.link/IP/Ping?hostOrIPAddress={IP_or_Host}</code></BitLabel>
-<BitLabel>خروجی بصورت زیر میباشد</BitLabel>
+<MudText Typo="Typo.h2">بررسی پینگ IP یا یک آدرس اینترنتی</MudText>
+<MudText>ساختار کلی بصورت زیر میباشد</MudText>
+<MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/Ping?hostOrIPAddress={IP_or_Host}</code></MudText>
+<MudText>خروجی بصورت زیر میباشد</MudText>
 <code>
 <pre>
 {
@@ -46,46 +46,46 @@
 }
 </pre>
 </code>
-<BitLabel>برای مثال</BitLabel>
+<MudText>برای مثال</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com" />
     <BitLink Href="https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com" Target="_blank">https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com</BitLink>
 </div>
-<BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> )</BitLabel>
+<MudText>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> )</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text=@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + @IPDTO.IPv4) />
     <BitLink Href="@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + IPDTO.IPv4)" Target="_blank">https://api.dnslab.link/IP/Ping?hostOrIPAddress=@IPDTO.IPv4</BitLink>
 </div>
-<hr />
-<h2>بررسی باز بودن پورت IP یا یک آدرس اینترنتی</h2>
-<BitLabel Class="dir-ltr"><code>https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></BitLabel>
-<BitLabel>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</BitLabel>
+<MudDivider/>
+<MudText Typo="Typo.h2">بررسی باز بودن پورت IP یا یک آدرس اینترنتی</MudText>
+<MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></MudText>
+<MudText>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" />
     <BitLink Href="https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" Target="_blank">https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</BitLink>
 </div>
-<BitLabel>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> ) و پورت 80</BitLabel>
+<MudText>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> ) و پورت 80</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text=@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress="+ @IPDTO.IPv4+"&port=80") />
     <BitLink Href="@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=" + IPDTO.IPv4 + "&port=80")" Target="_blank">https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</BitLink>
 </div>
-<hr />
-<h2>جستجوی معکوس IP برای بدست آوردن آدرس DNS</h2>
-<BitLabel Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress={IP}</code></BitLabel>
-<BitLabel>برای مثال آدرس IP دی‌ان‌اس گوگل</BitLabel>
+<MudDivider />
+<MudText Typo="Typo.h2">جستجوی معکوس IP برای بدست آوردن آدرس DNS</MudText>
+<MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress={IP}</code></MudText>
+<MudText>برای مثال آدرس IP دی‌ان‌اس گوگل</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" />
     <BitLink Href="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" Target="_blank">https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8</BitLink>
 </div>
-<hr />
-<h2>پرس و جو دی‌ان‌اس</h2>
-<BitLabel>ساختار کلی بصورت زیر میباشد</BitLabel>
-<BitLabel Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></BitLabel>
-<BitLabel>در اینجا <code>query</code> برابر است با آدرس مورد نظر که میخواید DNS های آن را پرس و چو کنید (مانند google.com).</BitLabel>
-<BitLabel>و <code>queryType</code> برابر است با نوع پرس و جو که در ادامه توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</BitLabel>
-<hr />
-<BitLabel>برای نوع رکورد A (queryType = 1)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText Typo="Typo.h2">پرس و جو دی‌ان‌اس</MudText>
+<MudText>ساختار کلی بصورت زیر میباشد</MudText>
+<MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></MudText>
+<MudText>در اینجا <code>query</code> برابر است با آدرس مورد نظر که میخواید DNS های آن را پرس و چو کنید (مانند google.com).</MudText>
+<MudText>و <code>queryType</code> برابر است با نوع پرس و جو که در ادامه توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</MudText>
+<MudDivider />
+<MudText>برای نوع رکورد A (queryType = 1)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
@@ -98,9 +98,9 @@
 ]
 </pre>
 </code>
-<hr />
-<BitLabel>برای نوع رکورد NS (queryType = 2)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText>برای نوع رکورد NS (queryType = 2)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
@@ -119,9 +119,9 @@
 ]
 </pre>
 </code>
-<hr />
-<BitLabel>برای نوع رکورد CNAME (queryType = 5)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText>برای نوع رکورد CNAME (queryType = 5)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
@@ -134,9 +134,9 @@
 ]
 </pre>
 </code>
-<hr />
-<BitLabel>برای نوع رکورد SOA (queryType = 6)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText>برای نوع رکورد SOA (queryType = 6)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
@@ -155,9 +155,9 @@
 ]
 </pre>
 </code>
-<hr />
-<BitLabel>برای نوع رکورد MX (queryType = 15)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText>برای نوع رکورد MX (queryType = 15)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
@@ -185,9 +185,9 @@
 ]
 </pre>
 </code>
-<hr />
-<BitLabel>برای نوع رکورد TXT (queryType = 16)</BitLabel>
-<BitLabel>خروجی :</BitLabel>
+<MudDivider />
+<MudText>برای نوع رکورد TXT (queryType = 16)</MudText>
+<MudText>خروجی :</MudText>
 <code>
 <pre>
 [
