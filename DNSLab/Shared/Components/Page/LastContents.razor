@@ -1,12 +1,11 @@
 ﻿@inject IPageRepository _PageRepository
-<h3>آخرین مطالب سایت</h3>
+<MudText Typo="Typo.h3">آخرین مطالب سایت</MudText>
 
 @if (lastContents != null)
     @foreach (var item in lastContents)
     {
-        <BitLabel Class="text-truncate">
-            <BitLink Href="@item.URL">
-                @item.Title
-            </BitLink>
-        </BitLabel>
+        <MudLink Href="@item.URL">
+            @item.Title
+        </MudLink>
+        <MudDivider />
     }
