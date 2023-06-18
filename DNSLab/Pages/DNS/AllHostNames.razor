@@ -12,58 +12,58 @@
 }
 else
 {
-    <h4>@localizer["AllHostNames"]</h4>
-    <div class="mb-3">
-        @foreach (var item in hostNames.OrderByDescending(x => x.CreateDate))
-        {
-            <hr class="m-1" />
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-1">
-                            <UserProfileImage Size=30 UserId="@item.UserId.ToString()"></UserProfileImage>
-                        </div> <div class="col">
-                            <BitLabel>@item.FullName</BitLabel>
-                        </div>
-                        <div class="col">
-                            <BitLink Class="text-decoration-none" Href="@($"http://{@item.Name}.{@item.Domain}")" Target="_blank">
-                                <BitLabel><code>@item.Name</code>.@item.Domain</BitLabel>
-                            </BitLink>
-                        </div>
-                        <div class="col">
-                            <BitLabel Class="d-inline">
-                                هدف :
-                                <BitLink Class="text-decoration-none">
-                                    @switch ((DNSRecordTypeEnum)item.RecordType)
-                                    {
-                                        case DNSRecordTypeEnum.A:
-                                            @item.IPv4Address
-                                            break;
-                                        case DNSRecordTypeEnum.AAAA:
-                                            @item.IPv6Address
-                                            break;
-                                        case DNSRecordTypeEnum.CNAME:
-                                            @item.HostNameAlias
-                                            break;
-                                        case DNSRecordTypeEnum.WebRedirect:
-                                            @item.URLOrIp.MakeCut(20)
-                                            break;
-                                    }
-                                </BitLink>
-                            </BitLabel>
-                        </div>
-                        <BitLabel Class="col">
-                            @localizer["Type"] :
-                            @((DNSRecordTypeEnum)item.RecordType +
-                                ((DNSRecordTypeEnum)item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                                " (" + item.RedirectHttpResponseStatusCode + ")" :
-                                String.Empty))
-                        </BitLabel>
-                    </div>
-                </div>
-            </div>
-        }
-        <hr />
-        <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
-    </div>
+    <MudText Typo="Typo.h3">@localizer["AllHostNames"]</MudText>
+    <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
+        Groupable="false">
+        <Columns>
+            <TemplateColumn>
+                <CellTemplate>
+                    <UserProfileImage Size=30 UserId="@context.Item.UserId.ToString()"></UserProfileImage>
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x=>x.FullName" Title="نام کاربر" />
+            <TemplateColumn Title="@localizer["HostName"]">
+                <CellTemplate>
+                    <MudLink Href="@($"http://{context.Item.Name}.{context.Item.Domain}")" Target="_blank">
+                        <MudText><code>@context.Item.Name</code>.@context.Item.Domain</MudText>
+                    </MudLink>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="@localizer["Target"]">
+                <CellTemplate>
+                    <MudText>
+                        <MudLink>
+                            @switch ((DNSRecordTypeEnum)context.Item.RecordType)
+                            {
+                                case DNSRecordTypeEnum.A:
+                                    @context.Item.IPv4Address
+                                    break;
+                                case DNSRecordTypeEnum.AAAA:
+                                    @context.Item.IPv6Address
+                                    break;
+                                case DNSRecordTypeEnum.CNAME:
+                                    @context.Item.HostNameAlias
+                                    break;
+                                case DNSRecordTypeEnum.WebRedirect:
+                                    @context.Item.URLOrIp.MakeCut(20)
+                                    break;
+                            }
+                        </MudLink>
+                    </MudText>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="@localizer["Type"]">
+                <CellTemplate>
+                    <MudText>
+                        @((DNSRecordTypeEnum)context.Item.RecordType +
+                        ((DNSRecordTypeEnum)context.Item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                        " (" + context.Item.RedirectHttpResponseStatusCode + ")" :
+                        String.Empty))
+                    </MudText>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+    <MudDivider />
+    <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
 }
