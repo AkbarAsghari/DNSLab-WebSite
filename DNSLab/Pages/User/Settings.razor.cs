@@ -5,7 +5,6 @@ namespace DNSLab.Pages.User;
 partial class Settings
 {
     SettingsDTO settings;
-    CultureSelector cultureSelector;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -20,6 +19,5 @@ partial class Settings
     {
         if (await _AccountRepository.UpdateSettings(settings))
             _ToastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
-        cultureSelector.Save();
     }
 }
