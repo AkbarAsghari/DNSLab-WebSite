@@ -117,8 +117,18 @@ else
     <MudGrid>
         <MudItem md="8">
             <MudPaper Class="pa-4">
-                <MudChart ChartType="ChartType.Pie" InputData="@data" InputLabels="@labels"
-                    Width="300px" Height="300px" />
+                <MudChart ChartType="ChartType.Donut" InputData="@QuerytypechartData" InputLabels="@QuerytypechartLabels"
+                    Width="300px" Height="300px" @bind-SelectedIndex="QuerytypeSelectedIndex" >
+                    <CustomGraphics>
+                        <text class="donut-inner-text" x="50%" y="35%" dominant-baseline="middle" text-anchor="middle"
+                            fill="black" font-family="vazir-bold" font-size="2">@QuerytypechartLabels[QuerytypeSelectedIndex]</text>
+                        <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+                            fill="black" font-family="vazir-bold" font-size="5">@QuerytypechartData[QuerytypeSelectedIndex].ToString().EnglishToPersianNumbers()</text>
+                    </CustomGraphics>
+                </MudChart>
+                <MudDivider Class="mt-2" />
+                <MudChart ChartType="ChartType.Pie" InputData="@QueryResponsechartData"
+                    InputLabels="@QueryResponsechartLabels" Width="300px" Height="300px" />
             </MudPaper>
         </MudItem>
         <MudItem md="4">
