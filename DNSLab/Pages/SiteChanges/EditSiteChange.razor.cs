@@ -20,7 +20,7 @@ partial class EditSiteChange
         if (await pageRepository.UpdateChangeLog(existChangeLog))
         {
             _navManager.NavigateTo("ChangeLogs/All");
-            toastService.ShowToast(localizer["ChangeLogUpdated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["ChangeLogUpdated"], MudBlazor.Severity.Success);
         }
     }
 }

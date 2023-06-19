@@ -5,7 +5,7 @@
 @inject IAccountRepository _AccountRepository
 @inject IAuthService _AuthService
 @inject NavigationManager _NavigationManager
-@inject ToastService _ToastService
+@inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> localizer
 
 @if (userInfo == null)

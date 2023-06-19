@@ -1,7 +1,7 @@
 ﻿@page "/Page/Edit/{PageId:guid}"
 @inject IPageRepository _PageRepository
 @inject NavigationManager _navManager
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize(Roles = "Admin,Writer")]

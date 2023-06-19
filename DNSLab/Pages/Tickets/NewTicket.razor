@@ -4,7 +4,7 @@
 @inject IStringLocalizer<Resource> localizer
 @inject ITicketRepository ticketRepository
 @inject NavigationManager _navManager
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 @attribute [Authorize]
 
 <EditForm Model="ticket" Context=newTicketDTO>

@@ -3,7 +3,7 @@
 @inject IPageRepository _PageRepository
 @inject IStringLocalizer<Resource> localizer
 @inject NavigationManager NavigationManager
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 

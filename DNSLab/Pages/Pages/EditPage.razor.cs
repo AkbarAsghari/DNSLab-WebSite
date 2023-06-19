@@ -21,7 +21,7 @@ partial class EditPage
         if (await _PageRepository.EditPage(existPage))
         {
             _navManager.NavigateTo("Page/MyPages");
-            toastService.ShowToast(localizer["PageUpdated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["PageUpdated"], MudBlazor.Severity.Success);
         }
     }
 }

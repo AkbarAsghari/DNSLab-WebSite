@@ -19,7 +19,7 @@ partial class CreatePage
         if (await _PageRepository.AddNewPage(page))
         {
             _navManager.NavigateTo("Page/MyPages");
-            toastService.ShowToast(localizer["PageCreated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["PageCreated"], MudBlazor.Severity.Success);
         }
     }
 }

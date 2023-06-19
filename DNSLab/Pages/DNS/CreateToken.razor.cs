@@ -38,7 +38,7 @@ partial class CreateToken
         if (await dnsRepository.GenerateTokenForAccessToUpdateHostNameSystem(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
-            toastService.ShowToast(localizer["TokenCreated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["TokenCreated"], MudBlazor.Severity.Success);
         }
     }
 }

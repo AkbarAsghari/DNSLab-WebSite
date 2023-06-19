@@ -9,7 +9,7 @@ partial class Security
     {
         if (await accountReository.ChangePassword(changePassword))
         {
-            toastService.ShowToast("رمز عبور شما با موفقیت تغییر یافت", ToastLevel.Success);
+            Snackbar.Add("رمز عبور شما با موفقیت تغییر یافت", MudBlazor.Severity.Success);
             navigationManager.NavigateTo("user/info");
         }
     }

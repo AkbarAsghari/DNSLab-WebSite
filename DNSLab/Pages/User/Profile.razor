@@ -1,7 +1,7 @@
 ﻿@page "/settings/profile"
 
 @inject IAccountRepository accountRepository
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize]

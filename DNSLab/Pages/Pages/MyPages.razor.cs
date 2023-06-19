@@ -44,7 +44,7 @@ partial class MyPages
             {
                 await pageModal.Close();
                 pageSummaries.First(x => x.Id == modalRecord.Id).IsPublieshed = true;
-                toastService.ShowToast(localizer["PublishedSuccess"], ToastLevel.Success);
+                Snackbar.Add(localizer["PublishedSuccess"], MudBlazor.Severity.Success);
             }
         }
         modalRecord = new PageSummaryDTO();

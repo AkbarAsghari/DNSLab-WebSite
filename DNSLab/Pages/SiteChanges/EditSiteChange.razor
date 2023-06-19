@@ -1,7 +1,7 @@
 ﻿@page "/ChangeLogs/Edit/{ChangeLogId:guid}"
 @inject IPageRepository pageRepository
 @inject NavigationManager _navManager
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> localizer
 
 @attribute [Authorize(Roles = "Admin")]

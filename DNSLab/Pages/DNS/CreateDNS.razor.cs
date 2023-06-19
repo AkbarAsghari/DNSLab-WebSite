@@ -12,7 +12,7 @@ partial class CreateDNS
         if (await dnsRepository.CreateHostName(hostName))
         {
             _navManager.NavigateTo("dns/mydns");
-            toastService.ShowToast(localizer["HostNameCreated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["HostNameCreated"], MudBlazor.Severity.Success);
         }
     }
 }

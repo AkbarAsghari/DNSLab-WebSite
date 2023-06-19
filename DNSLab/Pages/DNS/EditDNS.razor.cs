@@ -23,7 +23,7 @@ partial class EditDNS
         if (await dnsRepository.UpdateHostName(hostName))
         {
             _navManager.NavigateTo("dns/mydns");
-            toastService.ShowToast(localizer["HostNameUpdated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["HostNameUpdated"], MudBlazor.Severity.Success);
         }
     }
 }

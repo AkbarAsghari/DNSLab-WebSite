@@ -38,7 +38,7 @@ partial class EditToken
         if (await dnsRepository.UpdateTokensDomainNameSystems(tokenAndDNS))
         {
             _navManager.NavigateTo("dns/mytokens");
-            toastService.ShowToast(localizer["TokenUpdated"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["TokenUpdated"], MudBlazor.Severity.Success);
         }
     }
 }

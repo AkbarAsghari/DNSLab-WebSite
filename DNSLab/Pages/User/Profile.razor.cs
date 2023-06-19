@@ -17,7 +17,7 @@ partial class Profile
     {
         if (await accountRepository.Update(userInfo))
         {
-            toastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
+            Snackbar.Add("تغییرات ذخیره شد", MudBlazor.Severity.Success);
         }
     }
 }

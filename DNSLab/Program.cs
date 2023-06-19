@@ -22,10 +22,6 @@ using System.Text.Unicode;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//ToastService
-builder.Services.AddScoped<ToastService>();
-//Exception Handlerer
-
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IDNSRepository, DNSRepository>();

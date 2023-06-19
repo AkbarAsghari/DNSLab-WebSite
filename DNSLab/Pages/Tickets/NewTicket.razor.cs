@@ -10,11 +10,11 @@ partial class NewTicket
     {
         if (await ticketRepository.AddTicket(ticket))
         {
-            toastService.ShowToast(localizer["TicketSent"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["TicketSent"], MudBlazor.Severity.Success);
             _navManager.NavigateTo("Ticket/MyTickets");
         }
         else
-            toastService.ShowToast(localizer["UnableToSendTicket"], Enums.ToastLevel.Error);
+            Snackbar.Add(localizer["UnableToSendTicket"], MudBlazor.Severity.Error);
 
     }
 }

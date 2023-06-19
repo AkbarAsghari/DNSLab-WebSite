@@ -10,7 +10,7 @@ partial class CreateSiteChange
         if (await pageRepository.AddChangeLog(ChangeLog))
         {
             _navManager.NavigateTo("ChangeLogs/All");
-            toastService.ShowToast(localizer["NewChangeLogAdded"], Enums.ToastLevel.Success);
+            Snackbar.Add(localizer["NewChangeLogAdded"], MudBlazor.Severity.Success);
         }
     }
 }

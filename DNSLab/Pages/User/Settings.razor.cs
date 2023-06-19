@@ -18,6 +18,6 @@ partial class Settings
     private async Task SaveChanges()
     {
         if (await _AccountRepository.UpdateSettings(settings))
-            _ToastService.ShowToast("تغییرات ذخیره شد", Enums.ToastLevel.Success);
+            Snackbar.Add("تغییرات ذخیره شد", MudBlazor.Severity.Success);
     }
 }
