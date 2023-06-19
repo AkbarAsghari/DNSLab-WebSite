@@ -6,27 +6,27 @@
 @inject IStringLocalizer<Resource> localizer
 @inject ToastService _toastService;
 
-<div class="row">
-    <div class="col-xl-4 col-lg-5 col-12">
-        <EditForm Model=user Context="AuthContext">
-            <DataAnnotationsValidator />
-            <div class="card auth-card">
-                <div class="card-header"><BitLabel>@localizer["Login"]</BitLabel></div>
-                <div class="card-body">
-                    <BitTextField Label="@localizer["UsernameOrEmail"]" Class="dir-ltr" Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" IsRequired />
-                    <BitTextField Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="dir-ltr" @bind-Value="@user.Password" IsRequired />
-                </div>
+<MudContainer MaxWidth="MaxWidth.ExtraSmall">
+    <EditForm Model=user Context="AuthContext">
+        <DataAnnotationsValidator />
+        <MudCard>
+            <MudCardHeader>
+                <MudText Typo="Typo.h1">@localizer["Login"]</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudTextField Label="@localizer["UsernameOrEmail"]" Class="dir-ltr" Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" />
+                <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="dir-ltr" @bind-Value="@user.Password" />
+            </MudCardContent>
+            <MudCardActions>
                 <BaseButtonComponent Caption=@localizer["Login"]
                                      IsBussyCaption=@localizer["Loading"]
                                      Color=Color.Primary
                                      Icon=@Icons.Material.Filled.Login
                                      EditContext=AuthContext
                                      OnClick=AuthUser></BaseButtonComponent>
-                <BitLink Class="text-center mt-2" Href="user/ForgetPassword">رمز خودتو فراموش کردی؟</BitLink>
-            </div>
-        </EditForm>
-    </div>
-    <div class="col-xl-8 col-lg-7 col-12">
-        <img class="illustrations" src="../images/illustrations/Authentication-Security.svg" />
-    </div>
-</div>
+                <MudDivider Vertical=true Class="mx-2" />
+                <MudButton Href="user/ForgetPassword" Variant="Variant.Text" Color="Color.Secondary">رمز خودتو فراموش کردی؟</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </EditForm>
+</MudContainer>
