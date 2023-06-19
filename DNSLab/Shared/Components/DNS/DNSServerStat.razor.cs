@@ -1,22 +1,44 @@
 ﻿using DNSLab.DTOs.Statics;
 using DNSLab.Helper.Utilities;
+using MudBlazor;
 
 namespace DNSLab.Shared.Components.DNS;
 partial class DNSServerStat : IDisposable
 {
+
+    //LineChart
+    private ChartOptions options = new ChartOptions();
+    public List<ChartSeries> Series;
+    public string[]? XAxisLabels;
+
+    //PieChart
+    int dataSize = 4;
+    double[]? data;
+    string[]? labels;
+
+    Random random = new Random();
+
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
-    private BitDateRangePicker rangeDatePicker;
     private Timer _timer;
     private bool _autoRefresh = false;
 
     protected override async Task OnInitializedAsync()
     {
-        InitlineChartExample();
-        InitPieChartQueryResponse();
-        InitPieChartQueryType();
-
         await GenerateReport();
+    }
+    void InitLineChart()
+    {
+        options.InterpolationOption = InterpolationOption.NaturalSpline;
+        options.LineStrokeWidth = 0.5D;
+        XAxisLabels = null;
+        Series = new List<ChartSeries>();
+    }
+
+    void InitPieChart()
+    {
+        data = null;
+        labels = null;
     }
 
     void AutoRefresher(bool value)
@@ -51,27 +73,27 @@ partial class DNSServerStat : IDisposable
 
         await GenerateReport();
     }
+    DateRange dateRange;
+    async Task DateRangeChanged(DateRange range)
+    {
+        dateRange = range;
+        await GenerateReport();
+    }
 
     async Task GenerateReport()
     {
-        if (StatType == StatTypeEnum.Custom && (rangeDatePicker == null || rangeDatePicker.Value!.StartDate == null || rangeDatePicker.Value.EndDate == null))
+        if (StatType == StatTypeEnum.Custom && (dateRange == null || dateRange.Start == null || dateRange.End == null))
             return;
-        else if (StatType == StatTypeEnum.Custom && rangeDatePicker != null)
-            _StatResponse = await _StaticRepository.GetStat(StatType, rangeDatePicker.Value!.StartDate!.Value.DateTime, rangeDatePicker.Value.EndDate!.Value.DateTime);
+        else if (StatType == StatTypeEnum.Custom && dateRange != null)
+            _StatResponse = await _StaticRepository.GetStat(StatType, dateRange.Start, dateRange.End);
         else
             _StatResponse = await _StaticRepository.GetStat(StatType);
 
+        InitLineChart();
+        InitPieChart();
 
         BindLineChartData();
-        BindPieChartDataQueryResponse();
-        BindPieChartDataQueryType();
-
-        if (_lineChart != null)
-            await _lineChart.Update();
-        if (_pieChartQueryResponse != null)
-            await _pieChartQueryResponse.Update();
-        if (_pieChartQueryType != null)
-            await _pieChartQueryType.Update();
+        BindPieChartData();
 
         if (StatType != StatTypeEnum.LastHour)
             AutoRefresher(false);
@@ -87,133 +109,43 @@ partial class DNSServerStat : IDisposable
 
     string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
 
-    #region LineChart
-    private BitChart _lineChart;
-    private BitChartLineConfig _lineChartConfig;
 
-    void InitlineChartExample()
-    {
-        _lineChartConfig = new BitChartLineConfig
-        {
-            Options = new BitChartLineOptions
-            {
-                Responsive = true,
-                Animation = new BitChartAnimation
-                {
-                    Duration = 1200,
-                },
-                Tooltips = new BitChartTooltips
-                {
-                    Mode = BitChartInteractionMode.Nearest,
-                    Intersect = true
-                },
-                Hover = new BitChartHover
-                {
-                    Mode = BitChartInteractionMode.Nearest,
-                    Intersect = true
-                },
-            }
-        };
-    }
     void BindLineChartData()
     {
-
-        _lineChartConfig.Data.Labels.Clear();
-        _lineChartConfig.Data.Datasets.Clear();
+        XAxisLabels = new string[_StatResponse.Response.MainChartData.Labels.Count()];
 
         foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
         {
-            _lineChartConfig.Data.Datasets.Add(new BitChartLineDataset<int>(dataset.Data)
+            Series.Add(new ChartSeries
             {
-                Label = dataset.Label,
-                BackgroundColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BackgroundColor)),
-                BorderColor = BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(dataset.BorderColor)),
-                Fill = dataset.Fill,
-                BorderWidth = 1
+                Name = dataset.Label,
+                Data = dataset.Data.Select(x => Convert.ToDouble(x)).ToArray()
             });
         }
 
-        foreach (var label in _StatResponse.Response.MainChartData.Labels)
-            _lineChartConfig.Data.Labels.Add(label.ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd")));
+        for (int i = 0; i < XAxisLabels.Count(); i++)
+            XAxisLabels[i] = _StatResponse.Response.MainChartData.Labels[i].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd"));
 
     }
-    #endregion
 
-    #region PieCharQueryResponse
-    private BitChartPieConfig _pieChartConfigQueryResponse;
-    private BitChart _pieChartQueryResponse;
-
-    private void InitPieChartQueryResponse()
+    void BindPieChartData()
     {
-        _pieChartConfigQueryResponse = new BitChartPieConfig
+        XAxisLabels = new string[_StatResponse.Response.MainChartData.Labels.Count()];
+
+        foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
         {
-            Options = new BitChartPieOptions
+            Series.Add(new ChartSeries
             {
-                Responsive = true,
-            }
-        };
-    }
-
-    void BindPieChartDataQueryResponse()
-    {
-
-        _pieChartConfigQueryResponse.Data.Labels.Clear();
-        _pieChartConfigQueryResponse.Data.Datasets.Clear();
-
-        BitChartPieDataset<int>
-    dataset = new BitChartPieDataset<int>
-        (_StatResponse.Response.QueryResponseChartData.Datasets[0].Data)
-    {
-        BackgroundColor = _StatResponse.Response.QueryResponseChartData.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
-    };
-
-        foreach (var label in _StatResponse.Response.QueryResponseChartData.Labels)
-        {
-            _pieChartConfigQueryResponse.Data.Labels.Add(label);
+                Name = dataset.Label,
+                Data = dataset.Data.Select(x => Convert.ToDouble(x)).ToArray()
+            });
         }
-        _pieChartConfigQueryResponse.Data.Datasets.Add(dataset);
+
+        for (int i = 0; i < XAxisLabels.Count(); i++)
+            XAxisLabels[i] = _StatResponse.Response.MainChartData.Labels[i].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd"));
+
     }
-
-    #endregion
-
-    #region PieCharQueryType
-
-    private BitChartPieConfig _pieChartConfigQueryType;
-    private BitChart _pieChartQueryType;
-
-    private void InitPieChartQueryType()
-    {
-        _pieChartConfigQueryType = new BitChartPieConfig
-        {
-            Options = new BitChartPieOptions
-            {
-                Responsive = true,
-            }
-        };
-    }
-
-    void BindPieChartDataQueryType()
-    {
-
-        _pieChartConfigQueryType.Data.Labels.Clear();
-        _pieChartConfigQueryType.Data.Datasets.Clear();
-
-        BitChartPieDataset<int>
-            dataset = new BitChartPieDataset<int>
-                (_StatResponse.Response.Querytypechartdata.Datasets[0].Data)
-            {
-                BackgroundColor = _StatResponse.Response.Querytypechartdata.Datasets[0].BackgroundColor.Select(x => BitChartColorUtil.FromDrawingColor(ColorHelper.ParseColor(x))).ToArray()
-            };
-
-        foreach (var label in _StatResponse.Response.Querytypechartdata.Labels)
-        {
-            _pieChartConfigQueryType.Data.Labels.Add(label);
-        }
-        _pieChartConfigQueryType.Data.Datasets.Add(dataset);
-    }
-
-    #endregion
-
+    
     public void Dispose()
     {
         if (_timer != null)

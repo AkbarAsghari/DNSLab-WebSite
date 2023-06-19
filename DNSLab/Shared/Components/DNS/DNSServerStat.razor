@@ -10,128 +10,144 @@
 }
 else
 {
-    <div class="row">
-        <BitDropDown Class="col-auto" Style="width:200px" Label="بازه"
-                 DefaultValue="@StatType.ToString()"
-                 Items="GetStatTypeItems()"
-                 ValueChanged="StatTypeOnChange">
-        </BitDropDown>
+    <MudGrid>
+    <MudItem xs="12" md="3">
+        <MudSelect T="string" ValueChanged="StatTypeOnChange" Label="بازه">
+            @foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
+                {
+                    <MudSelectItem Value="@item.ToString()" />
+                }
+            </MudSelect>
+        </MudItem>
         @if (StatType == StatTypeEnum.Custom)
         {
-            <BitDateRangePicker Class="col-auto" Label="بازه زمانی مورد نظر خود را انتخاب کنید"
-                        @ref=rangeDatePicker
-                        ValueChanged="GenerateReport">
-            </BitDateRangePicker>
+            <MudItem xs="12" md="3">
+                <MudDateRangePicker Label="بازه زمانی مورد نظر خود را انتخاب کنید" DateRangeChanged="DateRangeChanged">
+                </MudDateRangePicker>
+            </MudItem>
         }
         @if (StatType == StatTypeEnum.LastHour)
         {
-            <div class="col-auto">
-                <BitLabel>بروزرسانی خودکار</BitLabel>
-                <BitToggleButton OnChange="AutoRefresher" ButtonStyle=@(_autoRefresh ? BitButtonStyle.Standard : BitButtonStyle.Primary) Label="@(_autoRefresh ? "غیرفعال سازی" : "فعالسازی")" />
-            </div>
+            <MudItem xs="12" md="3">
+                <MudSwitch Label="بروزرسانی خودکار" T="bool" CheckedChanged="AutoRefresher" Color="MudBlazor.Color.Primary" />
+            </MudItem>
         }
-    </div>
-
-
+        </MudGrid>
     <div class="stats-panel">
-        <div class="stats-item total-queries">
-            <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)</div>
-            <div class="title">Total Queries</div>
-        </div>
-
-        <div class="stats-item no-error">
-            <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)</div>
-            <div class="title">No Error</div>
-        </div>
-
-        <div class="stats-item server-failure">
-            <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)</div>
-            <div class="title">Server Failure</div>
-        </div>
-
-        <div class="stats-item name-error">
-            <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)</div>
-            <div class="title">NX Domain</div>
-        </div>
-
-        <div class="stats-item refused">
-            <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)</div>
-            <div class="title">Refused</div>
-        </div>
-
-        <div class="stats-item auth-hit">
-            <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)</div>
-            <div class="title">Authoritative</div>
-        </div>
-
-        <div class="stats-item recursions">
-            <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)</div>
-            <div class="title">Recursive</div>
-        </div>
-
-        <div class="stats-item cache-hit">
-            <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)</div>
-            <div class="title">Cached</div>
-        </div>
-
-        <div class="stats-item blocked">
-            <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">@GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)</div>
-            <div class="title">Blocked</div>
-        </div>
-
-        <div class="stats-item clients">
-            <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString("N0").EnglishToPersianNumbers()</div>
-            <div class="percentage">&nbsp;</div>
-            <div class="title">Clients</div>
-        </div>
+    <div class="stats-item total-queries">
+        <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)</div>
+        <div class="title">Total Queries</div>
     </div>
-    <div>
-        <BitChart Config="_lineChartConfig" @ref="_lineChart" />
+
+    <div class="stats-item no-error">
+        <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)</div>
+        <div class="title">No Error</div>
     </div>
-    <div class="row">
-        <div class="col-lg-8 col-md-12">
-            <div>
-                <BitChart Config="_pieChartConfigQueryType" @ref="_pieChartQueryType" />
-            </div>
-            <div>
-                <BitChart Config="_pieChartConfigQueryResponse" @ref="_pieChartQueryResponse" />
-            </div>
+
+    <div class="stats-item server-failure">
+        <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString("N0").EnglishToPersianNumbers()
         </div>
-        <div class="col-lg-4 col-md-12">
-            <h4>Top Domains</h4>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)
+        </div>
+        <div class="title">Server Failure</div>
+    </div>
+
+    <div class="stats-item name-error">
+        <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)</div>
+        <div class="title">NX Domain</div>
+    </div>
+
+    <div class="stats-item refused">
+        <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)</div>
+        <div class="title">Refused</div>
+    </div>
+
+    <div class="stats-item auth-hit">
+        <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString("N0").EnglishToPersianNumbers()
+        </div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)
+        </div>
+        <div class="title">Authoritative</div>
+    </div>
+
+    <div class="stats-item recursions">
+        <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)</div>
+        <div class="title">Recursive</div>
+    </div>
+
+    <div class="stats-item cache-hit">
+        <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)</div>
+        <div class="title">Cached</div>
+    </div>
+
+    <div class="stats-item blocked">
+        <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">
+            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)</div>
+        <div class="title">Blocked</div>
+    </div>
+
+    <div class="stats-item clients">
+        <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString("N0").EnglishToPersianNumbers()</div>
+        <div class="percentage">&nbsp;</div>
+        <div class="title">Clients</div>
+    </div>
+</div>
+
+    <MudPaper Class="pa-4">
+        <MudChart ChartType="ChartType.Line" ChartSeries="@Series" XAxisLabels="@XAxisLabels" Width="100%" Height="auto"
+            LegendPosition=Position.Top ChartOptions="options">
+        </MudChart>
+    </MudPaper>
+    <MudDivider Class="mt-2" />
+    <MudGrid>
+        <MudItem md="8">
+            <MudPaper Class="pa-4">
+                <MudChart ChartType="ChartType.Pie" InputData="@data" InputLabels="@labels"
+                    Width="300px" Height="300px" />
+            </MudPaper>
+        </MudItem>
+        <MudItem md="4">
+            <MudText Typo="Typo.h4">Top Domains</MudText>
             @foreach (var domain in _StatResponse.Response.Topdomains)
             {
-                <div class="row">
-                    <div class="col-9">
-                        <BitLabel>@domain.Name</BitLabel>
-                    </div>
-                    <div class="col-3">
-                        <BitLabel>@domain.Hits</BitLabel>
-                    </div>
-                </div>
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudText>@domain.Name</MudText>
+                    </MudItem>
+                    <MudItem>
+                        <MudText>@domain.Hits</MudText>
+                    </MudItem>
+                </MudGrid>
             }
-            <hr>
-            <h4>Top Clients</h4>
+            <MudDivider Class="mt-2" />
+            <MudText Typo="Typo.h4">Top Clients</MudText>
             @foreach (var client in _StatResponse.Response.Topclients)
             {
-                <div class="row">
-                    <div class="col-9">
-                        <BitLabel>@client.Name</BitLabel>
-                    </div>
-                    <div class="col-3">
-                        <BitLabel>@client.Hits</BitLabel>
-                    </div>
-                </div>
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudText>@client.Name</MudText>
+                    </MudItem>
+                    <MudItem>
+                        <MudText>@client.Hits</MudText>
+                    </MudItem>
+                </MudGrid>
             }
-        </div>
-    </div>
+        </MudItem>
+
+    </MudGrid>
 }
