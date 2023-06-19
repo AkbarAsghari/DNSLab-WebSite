@@ -7,13 +7,13 @@
 <h1>نمودار تعداد دفعات تغییر IP در ۳۰ روز اخیر</h1>
 <BitLabel>در این فرم شما تعداد دفعات تغییرات آی‌پی رکورد های DNS Host (A) به تفکیک روز را در قالب نمودار مشاهده خواهید نمود.</BitLabel>
 <hr />
-@if (_stackedBarChartConfigExample == null)
+@if (XAxisLabels == null)
 {
     <Loading />
 }
 else
 {
     <div>
-        <BitChart Config="_stackedBarChartConfigExample" />
+        <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" XAxisLabels="@XAxisLabels" Width="100%" ChartOptions="new ChartOptions{ YAxisTicks = 1 }"></MudChart>
     </div>
 }
