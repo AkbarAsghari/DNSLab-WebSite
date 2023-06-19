@@ -4,7 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IAuthService authService
 @inject IStringLocalizer<Resource> localizer
-@inject ToastService _toastService;
+@inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
     <EditForm Model=user Context="AuthContext">

@@ -4,6 +4,7 @@ using DNSLab.Resources;
 using DNSLab.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using MudBlazor;
 using System.Net;
 using System.Text.Json;
 
@@ -13,14 +14,14 @@ namespace DNSLab.Helper.Exceptions
     {
 
         private readonly NavigationManager _navManager;
-        private readonly ToastService _toastService;
+        private readonly ISnackbar _Snackbar;
         private readonly ApplicationExceptions _applicationExceptions;
         private readonly IStringLocalizer<Resource> _localizer;
 
-        public HttpResponseExceptionHander(NavigationManager navManager, ToastService toastService, ApplicationExceptions applicationException, IStringLocalizer<Resource> localizer)
+        public HttpResponseExceptionHander(NavigationManager navManager, ISnackbar snackbar, ApplicationExceptions applicationException, IStringLocalizer<Resource> localizer)
         {
             _navManager = navManager;
-            _toastService = toastService;
+            _Snackbar = snackbar;
             _applicationExceptions = applicationException;
             _localizer = localizer;
         }
@@ -66,7 +67,7 @@ namespace DNSLab.Helper.Exceptions
             var existMessage = _applicationExceptions.GetExceptions().FirstOrDefault(x => x.ExceptionStr == error!.Error);
             if (existMessage != null)
             {
-                _toastService.ShowToast(existMessage.NormalMessage, existMessage.Level);
+                _Snackbar.Add(existMessage.NormalMessage, existMessage.Severity);
                 return true;
             }
             return false;

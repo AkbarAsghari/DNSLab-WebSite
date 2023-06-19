@@ -4,7 +4,7 @@
 @inject NavigationManager navigationManager
 @inject IAuthService authService
 @inject IStringLocalizer<Resource> localizer
-@inject ToastService toastService
+@inject ISnackbar Snackbar
 
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
     <EditForm Model=registerUser Context="RegisterContext">
@@ -16,7 +16,7 @@
             <MudCardContent>
                 <MudTextField Label="@localizer["Email"]" Type="BitTextFieldType.Email" Class="dir-ltr" Placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" />
                 <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="dir-ltr" @bind-Value="@registerUser.Password" />
-                <MudSwitch T="bool" Label="قوانین و مقررات سایت را مطالعه و می پذیرم" @bind-Value="isApprovedTOS" />
+                <MudSwitch T="bool" Color="Color.Primary" Label="قوانین و مقررات سایت را مطالعه و می پذیرم" @bind-Checked="isApprovedTOS" />
                 <MudText>
                     <MudLink Target="_blank" Href="legal/tos">مطالعه قوانین و مقررات</MudLink>
                 </MudText>

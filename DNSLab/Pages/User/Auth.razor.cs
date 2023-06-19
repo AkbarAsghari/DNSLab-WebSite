@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.User;
+using MudBlazor;
 
 namespace DNSLab.Pages.User;
 partial class Auth
@@ -9,10 +10,10 @@ partial class Auth
 
     private AuthenticateDTO user = new AuthenticateDTO();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         if (!String.IsNullOrWhiteSpace(RedirectTo) && !RedirectTo.ToLower().EndsWith("dashboard"))
-            _toastService.ShowToast(localizer["PleaseLoginFirst"], Enums.ToastLevel.Info);
+            Snackbar.Add(localizer["PleaseLoginFirst"], Severity.Info);
     }
 
     private async Task AuthUser()

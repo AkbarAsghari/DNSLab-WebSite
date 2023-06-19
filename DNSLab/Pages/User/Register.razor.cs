@@ -20,7 +20,7 @@ partial class Register
         }
         else
         {
-            toastService.ShowToast("لطفا تیک قوانین و مقررات بزنید", ToastLevel.Info);
+            Snackbar.Add("لطفا تیک قوانین و مقررات بزنید", MudBlazor.Severity.Info);
         }
     }
 }
