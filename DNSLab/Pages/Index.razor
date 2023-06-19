@@ -5,9 +5,9 @@
 @inject IStringLocalizer<Resource> localizer
 
 <MudText Align="Align.Center" Typo="Typo.h1">@localizer["IndexH1Message"]</MudText>
-<MudDivider Class="m-2" />
+<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
 <MudText Align="Align.Center" Typo="Typo.subtitle1">@localizer["IndexMessage"]</MudText>
-<MudDivider Class="m-2" />
+<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
 
 <MudText Align="Align.Center">
     آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong>
@@ -67,7 +67,9 @@
         </MudCard>
     </MudItem>
 </MudGrid>
+<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
 <SupportUsButton />
+<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
 <MudGrid Justify="Justify.SpaceBetween">
     <MudItem md="4">
         <LastContents />
