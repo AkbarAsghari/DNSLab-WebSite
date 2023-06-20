@@ -1,16 +1,14 @@
 ﻿@page "/changelog/{*URL}"
 
-<div class="ck-content">
+<MudContainer MaxWidth="MaxWidth.Large" Class="ck-content">
     @if (_ChangeLog != null)
     {
-        <h1>@_ChangeLog.Title</h1>
+        <MudText Typo="Typo.h1">@_ChangeLog.Title</MudText>
         <PageVisitCounter />
+        <MudDivider />
 
-        <hr />
         @((MarkupString)@_ChangeLog.Description)
-        <hr />
-        <div class="text-center">
-            <SupportUsButton />
-        </div>
+
+        <SupportUsButton />
     }
-</div>
+</MudContainer>

@@ -6,7 +6,7 @@
     {
         <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
         <PageSummary FullName="@publishPageDTO.Author.FullName" UserId="@publishPageDTO.Author.ID"
-            PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
+                 PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
         <MudDivider />
         @((MarkupString)@publishPageDTO.Body)
 
@@ -23,4 +23,4 @@
         <PageComments PageId="@publishPageDTO.Id"></PageComments>
         <SupportUsButton />
     }
-    </MudContainer>
+</MudContainer>
