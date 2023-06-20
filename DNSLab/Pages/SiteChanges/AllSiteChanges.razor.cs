@@ -1,12 +1,12 @@
 ﻿using DNSLab.DTOs.Pages;
+using MudBlazor;
 
 namespace DNSLab.Pages.SiteChanges;
 partial class AllSiteChanges
 {
-    IEnumerable<ChangeLogDTO> ChangeLogs;
+    [Inject] private IDialogService DialogService { get; set; }
 
-    Modal DeleteModal { get; set; }
-    ChangeLogDTO deleteRcord { get; set; } = new ChangeLogDTO();
+    IEnumerable<ChangeLogDTO> ChangeLogs;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -22,23 +22,18 @@ partial class AllSiteChanges
         ChangeLogs = await pageRepository.GetAllChangeLogs();
     }
 
-    private async Task AcceptDelete()
-    {
-        if (deleteRcord != null)
-        {
-            if (await pageRepository.DeleteChangeLog(deleteRcord.ID))
-            {
-                await DeleteModal.Close();
-                await LoadSiteChanges();
-            }
-        }
-        deleteRcord = new ChangeLogDTO();
-    }
-
     private async Task DeleteSiteChange(ChangeLogDTO record)
     {
-        deleteRcord = record;
-        await DeleteModal.Open();
+        bool? result = await DialogService.ShowMessageBox(
+            "هشدار",
+            $"آیا از حذف تغییر {record.Title} مطمئن هستید؟",
+            yesText: "حذف", cancelText: "انصراف");
+
+        if (result == true)
+            if (await pageRepository.DeleteChangeLog(record.ID))
+            {
+                await LoadSiteChanges();
+            }
     }
 
     private async Task EditSiteChange(ChangeLogDTO record)
