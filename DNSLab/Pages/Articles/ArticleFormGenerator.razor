@@ -1,7 +1,7 @@
 ﻿@page "/{PageType}/{*URL}"
 @inject IPageRepository _PageRepository
 
-<MudContainer MaxWidth="MaxWidth.Large">
+<MudContainer MaxWidth="MaxWidth.Large" Class="ck-content">
     @if (publishPageDTO != null)
     {
         <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
