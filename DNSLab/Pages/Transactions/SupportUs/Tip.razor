@@ -5,31 +5,34 @@
 @inject IStringLocalizer<Resource> localizer
 @inject ITransactionRepository _TransactionRepository
 
-<EditForm class="container-sm col-lg-4 mt-3" Model=TipTransaction Context="TipCtx">
-    <DataAnnotationsValidator />
-    <h4>حمایت از دی‌ان‌اس لب</h4>
-    <BitTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
-    <BitTextField Label="تلفن همراه" Class="dir-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
-    <BitDropDown Label="مقدار حمایت" IsRtl=true
-                 @bind-Value="@selectedAmountType"
-                 Items="AmountTypes()">
-    </BitDropDown>
-    @if (@selectedAmountType == "0")
-    {
-        <BitTextField Label="مبلغ" Class="dir-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
-    }
-    <BaseButtonComponent Caption=@localizer["Continue"]
-                         IsBussyCaption=@localizer["Loading"]
-                         Color=Color.Success
-                         Icon=@Icons.Material.Filled.Favorite
-                         EditContext=TipCtx
-                         OnClick=Go></BaseButtonComponent>
-    <BaseNavigateButtonComponent Href="/"
-                                 Text="@localizer["Cancel"]"
-                                 Icon=@Icons.Material.Filled.Cancel>
-    </BaseNavigateButtonComponent>
-</EditForm>
-<hr />
-<div class="row">
-    <OurSupporters />
-</div>
+<MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="mb-3">
+    <EditForm Model=TipTransaction Context="TipCtx">
+        <DataAnnotationsValidator />
+        <MudText Typo="Typo.h3">حمایت از دی‌ان‌اس لب</MudText>
+        <MudTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
+        <MudTextField Label="تلفن همراه" Class="dir-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
+        <MudSelect Label="مقدار حمایت" @bind-Value="@selectedAmountType">
+            @foreach (var item in AmountTypes)
+            {
+                <MudSelectItem Value="item.Key">@item.Value</MudSelectItem>
+            }
+        </MudSelect>
+        @if (@selectedAmountType == "0")
+        {
+            <MudTextField Label="مبلغ" Class="dir-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
+        }
+        <MudDivider Class="py-3" />
+        <BaseButtonComponent Caption=@localizer["Continue"]
+                             IsBussyCaption=@localizer["Loading"]
+                             Color=Color.Primary
+                             Icon=@Icons.Material.Filled.Favorite
+                             EditContext=TipCtx
+                             OnClick=Go></BaseButtonComponent>
+        <BaseNavigateButtonComponent Href="/"
+                                     Text="@localizer["Cancel"]"
+                                     Color="Color.Secondary"
+                                     Icon=@Icons.Material.Filled.Cancel>
+        </BaseNavigateButtonComponent>
+    </EditForm>
+</MudContainer>
+<OurSupporters />

@@ -1,4 +1,4 @@
-﻿<div class="h-100 p-1 shadow border border-warning rounded-pill">
-    <h6 class="text-center mb-0"><strong>@((FullName.Length > 20 ? (FullName.Substring(0,20)+ " ...") :  FullName).EnglishToPersianNumbers())</strong></h6>
-    <BitLabel Class="text-center mb-0">@(Amount.ToString("N0").EnglishToPersianNumbers())<small> تومان</small></BitLabel>
+﻿<div class="mud-theme-primary py-4 px-6 mx-2 rounded">
+    <MudText Align="Align.Center" Typo="Typo.h4">@((FullName.Length > 20 ? (FullName.Substring(0,20)+ " ...") :  FullName).EnglishToPersianNumbers())</MudText>
+    <MudText Align="Align.Center">@(Amount.ToString("N0").EnglishToPersianNumbers())<small> تومان</small></MudText>
 </div>

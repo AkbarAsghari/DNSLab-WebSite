@@ -7,15 +7,12 @@ partial class Tip
 
     string Amount { get; set; }
 
-    public List<BitDropDownItem> AmountTypes()
-    {
-        return new List<BitDropDownItem>{
-            new BitDropDownItem{ Value = "20000",Text = "20,000 تومان 🙂" },
-            new BitDropDownItem{ Value = "50000",Text = "50,000 تومان 😃" },
-            new BitDropDownItem{ Value = "100000",Text = "100,000 تومان 😍" },
-            new BitDropDownItem{ Value = "0",Text = "مبلغ دلخواه 😎"},
+    public Dictionary<string, string> AmountTypes = new Dictionary<string, string>{
+            { "20000" , "20,000 تومان 🙂" },
+            { "50000", "50,000 تومان 😃" },
+            { "100000", "100,000 تومان 😍" },
+            { "0", "مبلغ دلخواه 😎"},
         };
-    }
 
     private string selectedAmountType { get; set; } = "50000";
 
