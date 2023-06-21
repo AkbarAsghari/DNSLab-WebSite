@@ -1,22 +1,23 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-<div class="permission_denied">
-    <div id="particles-js-error-pages"></div>
-    <div class="denied__wrapper">
-        <h1>@ErrorCode</h1>
-        <BitLabel Class="text-white">@ErrorMessage</BitLabel>
+<div class="error-page">
+    <div>
         @switch (@ErrorCode)
         {
             @case "404":
-                <img id="planet" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E" />
+                <h1 data-h1="404">404</h1>
+                <p data-p="NOT FOUND">صفحه یافت نشد</p>
                 break;
             @case "500":
-                <img id="planet" src="../images/planets/saturn.svg" />
+                <h1 data-h1="500">500</h1>
+                <p data-p="NOT FOUND">خطای داخلی سرور</p>
                 break;
             @case "503":
-                <img id="planet" src="../images/planets/jupiter.svg" />
+                <h1 data-h1="503">503</h1>
+                <p data-p="NOT FOUND">سرویس در دسترس نمیباشد</p>
                 break;
         }
-        <BaseNavigateButtonComponent Href="/" Text="@localizer["GoHome"]"></BaseNavigateButtonComponent>
     </div>
 </div>
+
+<a href="#" class="back">بازگشت</a>
