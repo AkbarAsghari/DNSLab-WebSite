@@ -1,12 +1,12 @@
 ﻿@page "/download/win"
 @inject IStringLocalizer<Resource> localizer
 
-<MudText Typo="Typo.h1">@localizer["DynamicDNSUpdateClient"]</MudText>
+<MudText Typo="Typo.h1" Class="my-3">@localizer["DynamicDNSUpdateClient"]</MudText>
 <BaseNavigateButtonComponent Target="_blank"
                              Href="https://api.dnslab.link/Files/setup/win/dnslab.msi"
                              Text="@(localizer["DownloadNow"] + "(v1.6.4)")">
 </BaseNavigateButtonComponent>
-<MudText>@localizer["WinClientMessage"]</MudText>
+<MudText Class="my-3 ">@localizer["WinClientMessage"]</MudText>
 <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
     <MudText>
         این اپلیکیشن بصورت متن باز در

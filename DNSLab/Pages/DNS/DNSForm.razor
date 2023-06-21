@@ -1,69 +1,76 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="HostName" Context=DNSContext>
-    <DataAnnotationsValidator />
-    <MudText Typo="Typo.h3">@Title</MudText>
-    <MudGrid>
-        <MudItem md="6">
-            <MudTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" IsRequired IsEnabled="@IsNewRecord" />
-        </MudItem>
-        <MudItem md="6">
-            @switch (HostName.RecordType)
-            {
-                case 1:
-                    <MudTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" IsRequired />
-                    break;
-                case 2:
-                    <MudTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" IsRequired />
-                    break;
-                case 3:
-                    <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" IsRequired />
-                    break;
-                case 4:
-                    <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" IsRequired />
-                    break;
-            }
-        </MudItem>
-        @if (IsNewRecord)
-        {
-            <MudItem sm="12">
-                <MudText>نوع رکورد</MudText>
-                <MudRadioGroup @bind-SelectedOption="@HostName.RecordType">
-                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.A)">@DNSRecordTypeEnum.A</MudRadio>
-                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.AAAA)">@DNSRecordTypeEnum.AAAA</MudRadio>
-                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.CNAME)">@DNSRecordTypeEnum.CNAME</MudRadio>
-                    <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.WebRedirect)">@DNSRecordTypeEnum.WebRedirect</MudRadio>
-                </MudRadioGroup>
-            </MudItem>
-        }
-        <MudItem sm="12">
-            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
-                @switch (HostName.RecordType)
+    <Page Header="@Title">
+        <Body>
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem sm="6" xs="12">
+                    <MudTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" Disabled="@(IsNewRecord == false)" />
+                </MudItem>
+                <MudItem sm="6" xs="12">
+                    @switch (HostName.RecordType)
+                    {
+                        case 1:
+                            <MudTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" Required="true" />
+                            break;
+                        case 2:
+                            <MudTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" Required="true" />
+                            break;
+                        case 3:
+                            <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" Required="true" />
+                            break;
+                        case 4:
+                            <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" Required="true" />
+                            break;
+                    }
+                </MudItem>
+                @if (IsNewRecord)
                 {
-                    case 1:
-                        <MudText>@localizer["DNSHostDescription"]</MudText>
-                        break;
-                    case 2:
-                        <MudText>@localizer["AAAADescription"]</MudText>
-                        break;
-                    case 3:
-                        <MudText>@localizer["DNSAliasDescription"]</MudText>
-                        break;
-                    case 4:
-                        <MudText>@localizer["WebRedirectDescription"]</MudText>
-                        break;
+                    <MudItem sm="12">
+                        <MudText>نوع رکورد</MudText>
+                        <MudRadioGroup @bind-SelectedOption="@HostName.RecordType">
+                            <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.A)">@DNSRecordTypeEnum.A</MudRadio>
+                            <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.AAAA)">@DNSRecordTypeEnum.AAAA</MudRadio>
+                            <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.CNAME)">@DNSRecordTypeEnum.CNAME</MudRadio>
+                            <MudRadio Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.WebRedirect)">@DNSRecordTypeEnum.WebRedirect</MudRadio>
+                        </MudRadioGroup>
+                    </MudItem>
                 }
-            </MudAlert>
-        </MudItem>
-    </MudGrid>
-    <MudDivider />
-    <BaseButtonComponent Caption=@localizer["SaveChanges"]
-                         IsBussyCaption=@localizer["Progressing"]
-                         Color=Color.Primary
-                         Icon=@Icons.Material.Filled.Save
-                         EditContext=DNSContext
-                         OnClick=OnValidSubmit></BaseButtonComponent>
-    <BaseNavigateButtonComponent Text=@localizer["Cancel"]
-                                 Icon=@Icons.Material.Filled.Cancel
-                                 Href="DNS/MyDNS"></BaseNavigateButtonComponent>
+                <MudItem sm="12">
+                    <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
+                        @switch (HostName.RecordType)
+                        {
+                            case 1:
+                                <MudText>@localizer["DNSHostDescription"]</MudText>
+                                break;
+                            case 2:
+                                <MudText>@localizer["AAAADescription"]</MudText>
+                                break;
+                            case 3:
+                                <MudText>@localizer["DNSAliasDescription"]</MudText>
+                                break;
+                            case 4:
+                                <MudText>@localizer["WebRedirectDescription"]</MudText>
+                                break;
+                        }
+                    </MudAlert>
+                </MudItem>
+            </MudGrid>
+        </Body>
+        <Actions>
+            <BaseButtonComponent Caption=@localizer["SaveChanges"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=Color.Primary
+                                 Icon=@Icons.Material.Filled.Save
+                                 EditContext=DNSContext
+                                 OnClick=OnValidSubmit></BaseButtonComponent>
+            <MudDivider Vertical=true Class="mx-1" />
+            <BaseNavigateButtonComponent Text=@localizer["Cancel"]
+                                         Icon=@Icons.Material.Filled.Cancel
+                                         Color="Color.Secondary"
+                                         Href="DNS/MyDNS"></BaseNavigateButtonComponent>
+        </Actions>
+    </Page>
+
 </EditForm>

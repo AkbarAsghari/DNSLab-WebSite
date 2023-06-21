@@ -1,0 +1,13 @@
+﻿<MudText Typo="Typo.h2" Class="my-3">
+    @Header
+</MudText>
+@Body
+<MudGrid Class="mt-3">
+    @Actions
+</MudGrid>
+
+@code {
+    [Parameter] public string Header { get; set; }
+    [Parameter] public RenderFragment Body { get; set; }
+    [Parameter] public RenderFragment Actions { get; set; }
+}

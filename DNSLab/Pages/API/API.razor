@@ -8,8 +8,7 @@
     <BitLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Target="_blank">DNSLab</BitLink>
     در اختیار برنامه نویسان قرار گرفته است برای حمایت از پروژه میتونید ⭐ بدید.
 </MudText>
-<MudDivider/>
-<MudText Typo="Typo.h1">DNSLab CLI's</MudText>
+<MudText Typo="Typo.h1" Class="my-3">DNSLab CLI's</MudText>
 <MudText>
     <BitIcon IconName="BitIconName.CommandPrompt"></BitIcon>
     توسعه دهندگان و کاربران همچنین میتوانند برای استفاده از API های این صفحه از این
@@ -18,20 +17,19 @@
     <BitLink Href="https://github.com/NoobforAl">F . Sarmaly</BitLink>
     نوشته شده است استفاده نمایند.
 </MudText>
-<MudDivider />
-<MudText Typo="Typo.h1">راهنمای API های سایت برای توسعه دهندگان</MudText>
+
+<MudText Typo="Typo.h1" Class="my-3">راهنمای API های سایت برای توسعه دهندگان</MudText>
 <MudText>
     <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" />
     توسعه دهندگان گرامی میتوانند از خدمات زیر بصورت رایگان استفاده نماییند
 </MudText>
-<MudDivider />
-<h2>برای دریافت آی پی عمومی از این سرویس استفاده نمایند</h2>
+
+<MudText Typo="Typo.h2" Class="my-3">برای دریافت آی پی عمومی از این سرویس استفاده نمایند</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://ip.dnslab.link" />
     <BitLink Href="https://ip.dnslab.link" Target="_blank">https://ip.dnslab.link</BitLink>
 </div>
-<hr />
-<MudText Typo="Typo.h2">بررسی پینگ IP یا یک آدرس اینترنتی</MudText>
+<MudText Typo="Typo.h2" Class="my-3">بررسی پینگ IP یا یک آدرس اینترنتی</MudText>
 <MudText>ساختار کلی بصورت زیر میباشد</MudText>
 <MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/Ping?hostOrIPAddress={IP_or_Host}</code></MudText>
 <MudText>خروجی بصورت زیر میباشد</MudText>
@@ -56,8 +54,7 @@
     <CopyToClipboard Text=@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + @IPDTO.IPv4) />
     <BitLink Href="@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + IPDTO.IPv4)" Target="_blank">https://api.dnslab.link/IP/Ping?hostOrIPAddress=@IPDTO.IPv4</BitLink>
 </div>
-<MudDivider/>
-<MudText Typo="Typo.h2">بررسی باز بودن پورت IP یا یک آدرس اینترنتی</MudText>
+<MudText Typo="Typo.h2" Class="my-3">بررسی باز بودن پورت IP یا یک آدرس اینترنتی</MudText>
 <MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></MudText>
 <MudText>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</MudText>
 <div class="dir-ltr">
@@ -69,25 +66,23 @@
     <CopyToClipboard Text=@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress="+ @IPDTO.IPv4+"&port=80") />
     <BitLink Href="@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=" + IPDTO.IPv4 + "&port=80")" Target="_blank">https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</BitLink>
 </div>
-<MudDivider />
-<MudText Typo="Typo.h2">جستجوی معکوس IP برای بدست آوردن آدرس DNS</MudText>
+<MudText Typo="Typo.h2" Class="my-3">جستجوی معکوس IP برای بدست آوردن آدرس DNS</MudText>
 <MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress={IP}</code></MudText>
 <MudText>برای مثال آدرس IP دی‌ان‌اس گوگل</MudText>
 <div class="dir-ltr">
     <CopyToClipboard Text="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" />
     <BitLink Href="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" Target="_blank">https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8</BitLink>
 </div>
-<MudDivider />
-<MudText Typo="Typo.h2">پرس و جو دی‌ان‌اس</MudText>
+<MudText Typo="Typo.h2" Class="my-3">پرس و جو دی‌ان‌اس</MudText>
 <MudText>ساختار کلی بصورت زیر میباشد</MudText>
 <MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></MudText>
 <MudText>در اینجا <code>query</code> برابر است با آدرس مورد نظر که میخواید DNS های آن را پرس و چو کنید (مانند google.com).</MudText>
 <MudText>و <code>queryType</code> برابر است با نوع پرس و جو که در ادامه توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</MudText>
-<MudDivider />
+
 <MudText>برای نوع رکورد A (queryType = 1)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "A",
@@ -98,11 +93,10 @@
 ]
 </pre>
 </code>
-<MudDivider />
-<MudText>برای نوع رکورد NS (queryType = 2)</MudText>
+<MudText Class="my-3">برای نوع رکورد NS (queryType = 2)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "NS",
@@ -119,11 +113,10 @@
 ]
 </pre>
 </code>
-<MudDivider />
-<MudText>برای نوع رکورد CNAME (queryType = 5)</MudText>
+<MudText Class="my-3">برای نوع رکورد CNAME (queryType = 5)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "CNAME",
@@ -134,11 +127,10 @@
 ]
 </pre>
 </code>
-<MudDivider />
-<MudText>برای نوع رکورد SOA (queryType = 6)</MudText>
+<MudText Class="my-3">برای نوع رکورد SOA (queryType = 6)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "SOA",
@@ -155,11 +147,10 @@
 ]
 </pre>
 </code>
-<MudDivider />
-<MudText>برای نوع رکورد MX (queryType = 15)</MudText>
+<MudText Class="my-3">برای نوع رکورد MX (queryType = 15)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "MX",
@@ -185,11 +176,10 @@
 ]
 </pre>
 </code>
-<MudDivider />
-<MudText>برای نوع رکورد TXT (queryType = 16)</MudText>
+<MudText Class="my-3">برای نوع رکورد TXT (queryType = 16)</MudText>
 <MudText>خروجی :</MudText>
 <code>
-<pre>
+<pre class="mud-ltr">
 [
     {
         "recordType": "TXT",

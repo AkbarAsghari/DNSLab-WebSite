@@ -4,10 +4,8 @@
 
 @inject IStringLocalizer<Resource> localizer
 
-<MudText Align="Align.Center" Typo="Typo.h1">@localizer["IndexH1Message"]</MudText>
-<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
-<MudText Align="Align.Center" Typo="Typo.subtitle1">@localizer["IndexMessage"]</MudText>
-<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
+<MudText Align="Align.Center" Typo="Typo.h1" Class="my-4">@localizer["IndexH1Message"]</MudText>
+<MudText Align="Align.Center" Typo="Typo.subtitle1" Class="my-3">@localizer["IndexMessage"]</MudText>
 
 <MudText Align="Align.Center">
     آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong>
@@ -17,7 +15,7 @@
 
 <MudText Typo="Typo.h2">@localizer["StayConnected"]</MudText>
 <MudText>@localizer["StayConnectedMessage"]</MudText>
-<MudGrid Class="mt-8">
+<MudGrid Class="my-8">
     <MudItem xs="12" sm="6" md="4">
         <MudCard Elevation="25" Class="rounded-lg pb-4">
             <MudCardHeader>
@@ -67,10 +65,10 @@
         </MudCard>
     </MudItem>
 </MudGrid>
-<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
+
 <SupportUsButton />
-<MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
-<MudGrid Justify="Justify.SpaceBetween">
+
+<MudGrid Justify="Justify.SpaceBetween" Class="my-5">
     <MudItem md="4">
         <LastContents />
     </MudItem>
