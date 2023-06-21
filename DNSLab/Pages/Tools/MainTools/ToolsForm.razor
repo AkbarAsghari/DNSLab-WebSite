@@ -4,17 +4,19 @@
 @typeparam TItem
 
 <EditForm Model="Model" Context="editCtx">
-    <DataAnnotationsValidator />
-    <MudText Typo="Typo.h3">@Header</MudText>
-    <div class="row gx-3 mb-3">
-        @Body
-    </div>
-    <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
-        EditContext="editCtx">
-    </BaseButtonComponent>
+    <Page Header="@Header">
+        <Body>
+            <DataAnnotationsValidator />
+            @Body
+        </Body>
+        <Actions>
+            <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
+                                 EditContext="editCtx">
+            </BaseButtonComponent>
+        </Actions>
+    </Page>
     @if (Results != null && Results.Count > 0)
     {
-        <MudDivider />
         <MudList>
             @foreach (var item in Results)
             {
@@ -26,4 +28,4 @@
             }
         </MudList>
     }
-    </EditForm>
+</EditForm>
