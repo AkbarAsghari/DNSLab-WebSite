@@ -2,7 +2,7 @@
 
 <EditForm Model="HostName" Context=DNSContext>
     <Page>
-        <Body>
+        <ChildContent>
             <MudText Typo="Typo.h2">@Title</MudText>
             <DataAnnotationsValidator />
             <MudGrid>
@@ -58,7 +58,7 @@
                     </MudAlert>
                 </MudItem>
             </MudGrid>
-        </Body>
+        </ChildContent>
         <Actions>
             <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                  IsBussyCaption=@localizer["Progressing"]

@@ -5,11 +5,11 @@
 
 <EditForm Model="Model" Context="editCtx">
     <Page>
-        <Body>
+        <ChildContent>
             <MudText Typo="Typo.h2">@Header</MudText>
             <DataAnnotationsValidator />
             @Body
-        </Body>
+        </ChildContent>
         <Actions>
             <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
                                  EditContext="editCtx">

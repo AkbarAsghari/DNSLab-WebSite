@@ -1,5 +1,5 @@
-﻿<div class="d-flex flex-column flex-grow-1 gap-4">
-    @Body
+﻿<div class="d-flex flex-column flex-grow-1 gap-4 dnslab-page">
+    @ChildContent
 </div>
 @if (@Actions != null)
 {
@@ -9,6 +9,6 @@
 }
 
 @code {
-    [Parameter] public RenderFragment Body { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
     [Parameter] public RenderFragment Actions { get; set; }
 }

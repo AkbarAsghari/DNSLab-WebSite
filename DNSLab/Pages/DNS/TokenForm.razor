@@ -3,7 +3,7 @@
 
 <EditForm Model="TokenAndDNS" Context=TokenContext>
     <Page>
-        <Body>
+        <ChildContent>
             <MudText Typo="Typo.h2">@Title</MudText>
             <DataAnnotationsValidator />
             <MudTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
@@ -34,7 +34,7 @@
                     </MudGrid>
                 </MudPaper>
             }
-        </Body>
+        </ChildContent>
         <Actions>
             <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                  IsBussyCaption=@localizer["Progressing"]
