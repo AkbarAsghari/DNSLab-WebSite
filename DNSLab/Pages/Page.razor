@@ -1,6 +1,9 @@
-﻿<MudText Typo="Typo.h2" Class="my-3">
-    @Header
-</MudText>
+﻿@if (!String.IsNullOrEmpty(Header))
+{
+    <MudText Typo="Typo.h2" Class="my-3">
+        @Header
+    </MudText>
+}
 <div class="d-flex flex-column flex-grow-1 gap-4">
     @Body
 </div>
