@@ -1,21 +1,23 @@
 ﻿@inject IPageRepository pageRepository
-
-<TimeLine Data="ChangeLogs" TimeLineHeader="تاریخچه تغییرات سایت">
-    <TimeLineItemRenderFragment Context="ctx">
-        <TimeLineItem DateTime="@ctx.ReleaseDate">
-            <Body>
-                @if (!String.IsNullOrWhiteSpace(ctx.InformationLink))
+<MudText Typo="Typo.h3">آخرین تغییرات</MudText>
+<MudTimeline TimelinePosition="TimelinePosition.Right" >
+    @if (ChangeLogs != null)
+        @foreach (var item in ChangeLogs)
+        {
+            <MudTimelineItem Color="Color.Primary">
+                @if (!String.IsNullOrWhiteSpace(item.InformationLink))
                 {
-                      //Change Dnslab Links Routes for navigate to ChangeLog Page;
-                    <MudText><MudLink Href="@(String.IsNullOrEmpty(ctx.InformationLink) ? null :
-                ((ctx.InformationLink.ToLower().StartsWith("https") || ctx.InformationLink.ToLower().StartsWith("http")) ?
-                ctx.InformationLink : $"changelog/{ctx.InformationLink}"))">@ctx.Title</MudLink></MudText>
+                    <MudText>
+                        <MudLink Href="@(String.IsNullOrEmpty(item.InformationLink) ? null :
+                ((item.InformationLink.ToLower().StartsWith("https") || item.InformationLink.ToLower().StartsWith("http")) ?
+                item.InformationLink : $"changelog/{item.InformationLink}"))">@item.Title</MudLink>
+                    </MudText>
                 }
                 else
                 {
-                    <MudText>@ctx.Title</MudText>
+                    <MudText>@item.Title</MudText>
                 }
-            </Body>
-        </TimeLineItem>
-    </TimeLineItemRenderFragment>
-</TimeLine>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">@(item.CreateDate.CalcRelativeTime())</MudText>
+                </MudTimelineItem>
+        }
+</MudTimeline>
