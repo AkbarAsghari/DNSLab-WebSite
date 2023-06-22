@@ -3,8 +3,9 @@
 
 @attribute [Authorize]
 
-<Page Header="گزارش تغییرات هاست نِیم ها">
+<Page>
     <Body>
+        <MudText Typo="Typo.h3">گزارش تغییرات هاست نِیم ها</MudText>
         @if (dNSChangeHistories == null)
         {
             <Loading />

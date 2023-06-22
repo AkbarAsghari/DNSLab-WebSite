@@ -2,8 +2,9 @@
 @inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="TokenAndDNS" Context=TokenContext>
-    <Page Header="@Title">
+    <Page>
         <Body>
+            <MudText Typo="Typo.h2">@Title</MudText>
             <DataAnnotationsValidator />
             <MudTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
             <MudText Typo="Typo.h4">@localizer["SelectDNSTitle"]</MudText>

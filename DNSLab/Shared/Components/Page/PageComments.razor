@@ -2,8 +2,9 @@
 @inject AuthenticationStateProvider auth
 @inject NavigationManager _NavigationManager
 
-<Page Header="نظرات کاربران">
+<Page>
     <Body>
+        <MudText Typo="Typo.h3">نظرات کاربران</MudText>
         <MudAlert ContentAlignment="HorizontalAlignment.Start" Severity="Severity.Info">
             @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
             {

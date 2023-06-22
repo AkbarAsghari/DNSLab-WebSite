@@ -1,8 +1,9 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="HostName" Context=DNSContext>
-    <Page Header="@Title">
+    <Page>
         <Body>
+            <MudText Typo="Typo.h2">@Title</MudText>
             <DataAnnotationsValidator />
             <MudGrid>
                 <MudItem sm="6" xs="12">

@@ -1,10 +1,4 @@
-﻿@if (!String.IsNullOrEmpty(Header))
-{
-    <MudText Typo="Typo.h2" Class="my-3">
-        @Header
-    </MudText>
-}
-<div class="d-flex flex-column flex-grow-1 gap-4">
+﻿<div class="d-flex flex-column flex-grow-1 gap-4">
     @Body
 </div>
 <div class="d-flex flex-row flex-grow-1 gap-4 mt-3">
@@ -12,7 +6,6 @@
 </div>
 
 @code {
-    [Parameter] public string Header { get; set; }
     [Parameter] public RenderFragment Body { get; set; }
     [Parameter] public RenderFragment Actions { get; set; }
 }

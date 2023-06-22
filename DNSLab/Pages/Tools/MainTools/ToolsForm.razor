@@ -4,8 +4,9 @@
 @typeparam TItem
 
 <EditForm Model="Model" Context="editCtx">
-    <Page Header="@Header">
+    <Page>
         <Body>
+            <MudText Typo="Typo.h2">@Header</MudText>
             <DataAnnotationsValidator />
             @Body
         </Body>
