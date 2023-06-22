@@ -6,11 +6,7 @@
         <Body>
             <DataAnnotationsValidator />
             <MudTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]" Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
-            <MudDivider />
             <MudText Typo="Typo.h4">@localizer["SelectDNSTitle"]</MudText>
-            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
-                <MudText>@localizer["SelectDNSDescription"]</MudText>
-            </MudAlert>
             @if (HostSummariesAndChecked == null)
             {
                 <Loading IsInTop="false" />
@@ -23,10 +19,19 @@
             }
             else
             {
-                @foreach (var item in HostSummariesAndChecked)
-                {
-                    <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
-                }
+                <MudPaper Outlined=true Class="rounded">
+                    <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
+                        <MudText>@localizer["SelectDNSDescription"]</MudText>
+                    </MudAlert>
+                    <MudGrid Spacing="0">
+                        @foreach (var item in HostSummariesAndChecked)
+                        {
+                            <MudItem xs="12" sm="6">
+                                <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudPaper>
             }
         </Body>
         <Actions>
