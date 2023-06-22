@@ -3,78 +3,81 @@
 @using System.Globalization
 
 @inject IStringLocalizer<Resource> localizer
+<Page>
+    <Body>
+        <MudText Align="Align.Center" Typo="Typo.h1">@localizer["IndexH1Message"]</MudText>
+        <MudText Align="Align.Center" Typo="Typo.subtitle1">@localizer["IndexMessage"]</MudText>
 
-<MudText Align="Align.Center" Typo="Typo.h1" Class="my-4">@localizer["IndexH1Message"]</MudText>
-<MudText Align="Align.Center" Typo="Typo.subtitle1" Class="my-3">@localizer["IndexMessage"]</MudText>
-
-<MudText Align="Align.Center">
-    آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong>
-    <CopyToClipboard Text="@IPDTO.IPv4" />
-</MudText>
+        <MudText Align="Align.Center">
+            آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong>
+            <CopyToClipboard Text="@IPDTO.IPv4" />
+        </MudText>
 
 
-<MudText Typo="Typo.h2">@localizer["StayConnected"]</MudText>
-<MudText>@localizer["StayConnectedMessage"]</MudText>
-<MudGrid Class="my-8">
-    <MudItem xs="12" sm="6" md="4">
-        <MudCard Elevation="25" Class="rounded-lg pb-4">
-            <MudCardHeader>
-                <CardHeaderAvatar>
-                    <MudIcon Icon="@Icons.Material.Filled.SettingsRemote" Size="Size.Large"></MudIcon>
-                </CardHeaderAvatar>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h3">@localizer["RemoteAccessComputerH2"]</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudText>@localizer["RemoteAccessComputerMessage"]</MudText>
-            </MudCardContent>
-        </MudCard>
-    </MudItem>
-    <MudItem xs="12" sm="6" md="4">
-        <MudCard Elevation="25" Class="rounded-lg pb-4">
-            <MudCardHeader>
-                <CardHeaderAvatar>
-                    <MudIcon Icon="@Icons.Material.Filled.Games" Size="Size.Large"></MudIcon>
-                </CardHeaderAvatar>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h3">@localizer["CreateGameServerH2"]</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudText>@localizer["CreateGameServerMessage"]</MudText>
-            </MudCardContent>
-        </MudCard>
-    </MudItem>
-    <MudItem xs="12" sm="6" md="4">
-        <MudCard Elevation="25" Class="rounded-lg pb-4">
-            <MudCardHeader>
-                <CardHeaderAvatar>
-                    <MudIcon Icon="@Icons.Material.Filled.ScreenShare" Size="Size.Large"></MudIcon>
-                </CardHeaderAvatar>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h3">@localizer["ShareYourLocalProjectH2"]</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudText>@localizer["ShareYourLocalProjectMessage"]</MudText>
-            </MudCardContent>
-            <MudCardActions Class="d-flex justify-center">
-                <MudButton Href="Support/how-to-use-dnslab" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">@localizer["More"]</MudButton>
-            </MudCardActions>
-        </MudCard>
-    </MudItem>
-</MudGrid>
+        <MudText Typo="Typo.h2">@localizer["StayConnected"]</MudText>
+        <MudText>@localizer["StayConnectedMessage"]</MudText>
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+                            <MudIcon Icon="@Icons.Material.Filled.SettingsRemote" Size="Size.Large"></MudIcon>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h3">@localizer["RemoteAccessComputerH2"]</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>@localizer["RemoteAccessComputerMessage"]</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+                            <MudIcon Icon="@Icons.Material.Filled.Games" Size="Size.Large"></MudIcon>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h3">@localizer["CreateGameServerH2"]</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>@localizer["CreateGameServerMessage"]</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+                            <MudIcon Icon="@Icons.Material.Filled.ScreenShare" Size="Size.Large"></MudIcon>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h3">@localizer["ShareYourLocalProjectH2"]</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText>@localizer["ShareYourLocalProjectMessage"]</MudText>
+                    </MudCardContent>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudButton Href="Support/how-to-use-dnslab" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">@localizer["More"]</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
 
-<SupportUsButton />
+        <SupportUsButton />
 
-<MudGrid Justify="Justify.SpaceBetween" Class="my-5">
-    <MudItem md="4">
-        <LastContents />
-    </MudItem>
-    <MudItem md="8">
-        <SiteChangeHistories />
-    </MudItem>
-</MudGrid>
-<PageComments PageId="PageId"></PageComments>
-<Footer />
+        <MudGrid Justify="Justify.SpaceBetween">
+            <MudItem md="4">
+                <LastContents />
+            </MudItem>
+            <MudItem md="8">
+                <SiteChangeHistories />
+            </MudItem>
+        </MudGrid>
+        <PageComments PageId="PageId"></PageComments>
+        <Footer />
+    </Body>
+</Page>
