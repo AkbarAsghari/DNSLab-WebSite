@@ -13,51 +13,44 @@
 else
 {
     <EditForm Model="Message" Context="TicketDetails">
-        <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
-        <ul id="chat">
-            @foreach (var item in messages.OrderBy(x => x.CreateDate))
-            {
-                @if (CurrentUserId == item.UserId)
-                {
-                    <li class="me">
-                        <div class="small">
-                            @item.CreateDate.CalcRelativeTime()
-                        </div>
-                        <div class="message">
-                            @((MarkupString)item.Text.ChangeUrlsToLink())
-                        </div>
-                    </li>
-                }
-                else
-                {
-                    <li class="you">
-                        <div class="small">
-                            @item.CreateDate.CalcRelativeTime()
-                        </div>
-                        <div class="message">
-                            @((MarkupString)item.Text.ChangeUrlsToLink())
-                        </div>
-                    </li>
-                }
-            }
-        </ul>
-        <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
-        <MudTextField Label="@localizer["TicketText"]"
-                  Lines="7"
-                  Variant="Variant.Outlined"
-                  Placeholder="@(localizer["TicketText"] + "...")"
-                  @bind-Value="Message.Text"
-                  MaxLength="@MAX_TEXT_COUNT" />
-        <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
-        <BaseButtonComponent Caption=@localizer["Send"]
-                         IsBussyCaption=@localizer["Progressing"]
-                         Color=Color.Primary
-                         Icon=@Icons.Material.Filled.Send
-                         EditContext="TicketDetails"
-                         OnClick=SendTicket></BaseButtonComponent>
-        <BaseNavigateButtonComponent Text="انصراف"
-                                 Href="Ticket/MyTickets"
-                                 Icon=@Icons.Material.Filled.Cancel>
-        </BaseNavigateButtonComponent>
+        <Page>
+            <ChildContent>
+                <MudText Typo="Typo.h2">@localizer["TicketTitle"] : @ticket.Title</MudText>
+                <MudPaper>
+                    @foreach (var item in messages.OrderBy(x => x.CreateDate))
+                    {
+                        <MudListItem Text="Inbox" IconSize="Size.Large" Icon="@ProfileImageCreator.GenerateSVG(item.UserId,20)">
+                            <MudCard>
+                                <MudCardHeader>
+                                    <MudText>@($"{item.UserFullName} {@item.CreateDate.CalcRelativeTime()}")</MudText>
+                                    </MudCardHeader>
+                                    <MudCardContent Style="white-space: pre-line;">
+                                        @((MarkupString)item.Text.ChangeUrlsToLink())
+                                </MudCardContent>
+                            </MudCard>
+                        </MudListItem>
+                    }
+                </MudPaper>
+                <MudTextField Label="@localizer["TicketText"]" AutoFocus="true"
+                          Lines="7"
+                          Variant="Variant.Outlined"
+                          Placeholder="@(localizer["TicketText"] + "...")"
+                          @bind-Value="Message.Text"
+                          MaxLength="@MAX_TEXT_COUNT" />
+            </ChildContent>
+            <Actions>
+                <BaseButtonComponent Caption=@localizer["Send"]
+                                 IsBussyCaption=@localizer["Progressing"]
+                                 Color=Color.Primary
+                                 Icon=@Icons.Material.Filled.Send
+                                 EditContext="TicketDetails"
+                                 OnClick=SendTicket></BaseButtonComponent>
+                <BaseNavigateButtonComponent Text="انصراف"
+                                         Href="Ticket/MyTickets"
+                                         Color="Color.Secondary"
+                                         Icon=@Icons.Material.Filled.Cancel>
+                </BaseNavigateButtonComponent>
+            </Actions>
+        </Page>
     </EditForm>
 }
