@@ -16,25 +16,24 @@
     </BaseButtonComponent>
     @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() > 0)
     {
-        <MudDivider />
-        @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
-        {
-            <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
-                     ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
-                @if (item.Replies.Count() > 0)
-                {
-                    foreach (var reply in item.Replies)
+        <MudPaper Elevation="0">
+            @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+            {
+                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
+                         ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
+                    @if (item.Replies.Count() > 0)
                     {
-                        <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
-                         ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
+                        foreach (var reply in item.Replies)
+                        {
+                            <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
+                             ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
+                        }
                     }
-                }
-            </PageCommentItem>
-        }
-
+                </PageCommentItem>
+            }
+        </MudPaper>
         if (totalCommentsCount - 3 > 0 && !ShowAll)
         {
-            <MudDivider />
             <MudLink Href="@($"Comment/All/{PageId}")">
                 <MudText Align="Align.Center">... برای نمایش @(totalCommentsCount - 3) نظر دیگر در این صفحه کلیک کنید ...</MudText>
             </MudLink>
