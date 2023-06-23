@@ -3,36 +3,21 @@
 @using System.Linq;
 @using System.Text.RegularExpressions;
 
-<div class="bit-txt bit-txt-fluent bit-txt-enabled-fluent bit-txt-required-fluent">
-    <div class="bit-txt-wrapper">
-        <BitLabel>تگ ها</BitLabel>
-        <div class="bit-txt-field-grp">
-            <input class="txt-field"
-                   placeholder="با ( ویرگول ) جدا کنید"
-                   autocomplete="off"
-                   @bind-value="Value"
-                   @bind-value:event="oninput"
-                   @onkeyup="AddTags" />
-        </div>
-    </div>
-</div>
+<MudTextField T="string" Label="تگ ها"
+              Placeholder="با ( ویرگول ) جدا کنید"
+              Immediate="true" @bind-Value="@Value" 
+              Clearable="true" />
+
 @if (IsContainSpecialCharacter)
 {
-    <BitMessageBar MessageBarType="BitMessageBarType.SevereWarning">
-        <BitLabel Class="text-left m-0 p-1">امکان درج کاراکتر های خاص وجود ندارد</BitLabel>
-    </BitMessageBar>
+    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Right">
+        <MudText>امکان درج کاراکتر های خاص وجود ندارد</MudText>
+    </MudAlert>
 }
-<div class="suggestion-container">
-    <div class="tagsinput">
-        @if (Tags != null && Tags.Any())
-        {
-            @foreach (var tag in Tags)
-            {
-                <span class="tag">
-                    <span class="tag-text">@tag</span>
-                    <span class="tag-remove" @onclick="() => DeleteTag(tag)" />
-                </span>
-            }
-        }
-    </div>
-</div>
+@if (Tags != null && Tags.Any())
+{
+    @foreach (var tag in Tags)
+    {
+        <MudFab StartIcon="@Icons.Material.Filled.Close" Label="@tag" OnClick="() => DeleteTag(tag)" />
+    }
+}

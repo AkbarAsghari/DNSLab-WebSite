@@ -1,36 +1,44 @@
 ﻿using Microsoft.AspNetCore.Components.Web;
+using System;
 
 namespace DNSLab.Shared.Components.Tags;
 partial class TagsInput
 {
-    protected string Value { get; set; }
-    protected bool MenuVisibility { get; set; }
-    protected bool IsContainSpecialCharacter { get; set; }
-    [Parameter] public List<string> Tags { get; set; }
-
-    protected void AddTags(KeyboardEventArgs eventArgs)
+    string input;
+    protected string Value
     {
-        if (Tags == null)
-            Tags = new List<string>();
-
-        IsContainSpecialCharacter = false;
-
-        if (!String.IsNullOrEmpty(Value))
+        get
         {
-            if (eventArgs.Key.Equals(",") || Value.EndsWith(",") || eventArgs.Key.Equals("،") || Value.EndsWith("،"))
+            return input;
+        }
+        set
+        {
+            if (Tags == null)
+                Tags = new List<string>();
+
+            IsContainSpecialCharacter = false;
+
+            if (!String.IsNullOrEmpty(value))
             {
-                Value = Value.Replace(",", String.Empty).Replace("،", String.Empty).Trim();
-
-                if (!String.IsNullOrEmpty(Value)
-                && !Tags.Exists(t => t.Equals(Value, StringComparison.CurrentCultureIgnoreCase)))
+                if (value.EndsWith(",") || value.EndsWith("،"))
                 {
-                    Tags.Add(Value);
-                }
+                    value = Value.Replace(",", String.Empty).Replace("،", String.Empty).Trim();
 
-                Value = string.Empty;
+                    if (!String.IsNullOrEmpty(value)
+                    && !Tags.Exists(t => t.Equals(value, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        Tags.Add(value);
+                    }
+
+                    value = string.Empty;
+                }
             }
+
+            input = value ?? string.Empty;
         }
     }
+    protected bool IsContainSpecialCharacter { get; set; }
+    [Parameter] public List<string> Tags { get; set; }
 
     protected void DeleteTag(string value)
     {

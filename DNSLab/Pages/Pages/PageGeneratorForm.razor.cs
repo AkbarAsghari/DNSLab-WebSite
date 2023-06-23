@@ -5,11 +5,11 @@ partial class PageGeneratorForm
 {
     [Parameter] public string Title { get; set; }
 
-    string selectedPageType
+    string PageType
     {
         get
         {
-            return Page.PageType.ToString();
+            return Enum.GetName(Page.PageType.GetType(), Page.PageType)!;
         }
         set
         {
@@ -17,14 +17,6 @@ partial class PageGeneratorForm
                 value = PageTypeEnum.Article.ToString();
             Page.PageType = (PageTypeEnum)System.Enum.Parse(typeof(PageTypeEnum), value);
         }
-    }
-
-    private List<BitDropDownItem> GetPageTypeItems()
-    {
-        List<BitDropDownItem> result = new List<BitDropDownItem>();
-        foreach (var item in Enum.GetValues(typeof(PageTypeEnum)))
-            result.Add(new BitDropDownItem { Text = item.ToString()!, Value = item.ToString()! });
-        return result;
     }
 
     [Parameter]
