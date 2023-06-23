@@ -475,11 +475,19 @@
     margin-bottom: 16px;
 }
 
+.dnslab-page-section > .mud-typography-h4 {
+    margin-bottom: 16px;
+}
+
 .dnslab-page-section > .mud-typography-subtitle1 {
     margin-bottom: 16px;
 }
 
 .dnslab-page-section > .mud-typography-body1 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-input-control {
     margin-bottom: 16px;
 }
 
