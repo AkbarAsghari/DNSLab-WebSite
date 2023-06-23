@@ -26,15 +26,15 @@
     </MudText>
 
     <MudText Typo="Typo.h2">برای دریافت آی پی عمومی از این سرویس استفاده نمایند</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text="https://ip.dnslab.link" />
         <MudLink Href="https://ip.dnslab.link" Target="_blank">https://ip.dnslab.link</MudLink>
     </div>
     <MudText Typo="Typo.h2">بررسی پینگ IP یا یک آدرس اینترنتی</MudText>
     <MudText>ساختار کلی بصورت زیر میباشد</MudText>
-    <MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/Ping?hostOrIPAddress={IP_or_Host}</code></MudText>
+    <MudText Class="mud-ltr"><code>https://api.dnslab.link/IP/Ping?hostOrIPAddress={IP_or_Host}</code></MudText>
     <MudText>خروجی بصورت زیر میباشد</MudText>
-    <code>
+    <code class="mud-ltr">
 <pre>
 {
     "bufferSize": 32,
@@ -46,37 +46,37 @@
 </pre>
     </code>
     <MudText>برای مثال</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text="https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com" />
         <MudLink Href="https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com" Target="_blank">https://api.dnslab.link/IP/Ping?hostOrIPAddress=google.com</MudLink>
     </div>
     <MudText>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> )</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text=@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + @IPDTO.IPv4) />
         <MudLink Href="@("https://api.dnslab.link/IP/Ping?hostOrIPAddress=" + IPDTO.IPv4)" Target="_blank">https://api.dnslab.link/IP/Ping?hostOrIPAddress=@IPDTO.IPv4</MudLink>
     </div>
     <MudText Typo="Typo.h2">بررسی باز بودن پورت IP یا یک آدرس اینترنتی</MudText>
-    <MudText Class="dir-ltr"><code>https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></MudText>
+    <MudText Class="mud-ltr"><code>https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress={IP_or_Host}&port={Port}</code></MudText>
     <MudText>برای مثال آدرس گوگل و بررسی باز بودن پورت 80</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text="https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" />
         <MudLink Href="https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80" Target="_blank">https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=google.com&port=80</MudLink>
     </div>
     <MudText>برای مثال آی پی شما ( <code><strong>@IPDTO.IPv4</strong></code> ) و پورت 80</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text=@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress="+ @IPDTO.IPv4+"&port=80") />
         <MudLink Href="@("https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=" + IPDTO.IPv4 + "&port=80")" Target="_blank">https://api.dnslab.link/IP/IsIPAndPortOpen?hostOrIPAddress=@IPDTO.IPv4&port=80</MudLink>
     </div>
     <MudText Typo="Typo.h2">جستجوی معکوس IP برای بدست آوردن آدرس DNS</MudText>
-    <MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress={IP}</code></MudText>
+    <MudText Class="mud-ltr"><code>https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress={IP}</code></MudText>
     <MudText>برای مثال آدرس IP دی‌ان‌اس گوگل</MudText>
-    <div class="dir-ltr">
+    <div class="mud-ltr">
         <CopyToClipboard Text="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" />
         <MudLink Href="https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8" Target="_blank">https://api.dnslab.link/DNSLookUp/QueryReverse?IPAddress=8.8.8.8</MudLink>
     </div>
     <MudText Typo="Typo.h2">پرس و جو دی‌ان‌اس</MudText>
     <MudText>ساختار کلی بصورت زیر میباشد</MudText>
-    <MudText Class="dir-ltr"><code>https://api.dnslab.link/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></MudText>
+    <MudText Class="mud-ltr"><code>https://api.dnslab.link/DNSLookUp/Query?Query={"query"}&queryType={"queryType"}</code></MudText>
     <MudText>در اینجا <code>query</code> برابر است با آدرس مورد نظر که میخواید DNS های آن را پرس و چو کنید (مانند google.com).</MudText>
     <MudText>و <code>queryType</code> برابر است با نوع پرس و جو که در ادامه توضیح داده شده است (باید بصورت عدد صحیح وارد شود).</MudText>
 

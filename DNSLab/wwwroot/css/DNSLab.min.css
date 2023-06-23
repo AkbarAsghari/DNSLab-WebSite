@@ -15,6 +15,47 @@
     font-weight: 400
 }
 
-.flex-column .mud-button-group-root,.mud-button-root{
-    width:fit-content!important;
+
+.dnslab-page-section > .mud-typography-h1 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-typography-h2 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-typography-h3 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-typography-subtitle1 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-typography-body1 {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-grid {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-table {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-alert {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .mud-button-root {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .dnslab-button-support-us {
+    margin-bottom: 16px;
+}
+
+.dnslab-page-section > .dnslab-button-pagination {
+    margin-bottom: 16px;
 }

@@ -35,9 +35,9 @@
         if (totalCommentsCount - 3 > 0 && !ShowAll)
         {
             <MudDivider />
-            <BitLink Href="@($"Comment/All/{PageId}")">
+            <MudLink Href="@($"Comment/All/{PageId}")">
                 <MudText Align="Align.Center">... برای نمایش @(totalCommentsCount - 3) نظر دیگر در این صفحه کلیک کنید ...</MudText>
-            </BitLink>
+            </MudLink>
         }
     }
 </Page>

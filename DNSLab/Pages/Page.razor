@@ -1,12 +1,12 @@
-﻿<div class="d-flex flex-column gap-4">
+﻿<div class="dnslab-page-section">
     @ChildContent
+    @if (@Actions != null)
+    {
+        <div class="d-flex flex-row flex-grow-1 gap-4 mt-3">
+            @Actions
+        </div>
+    }
 </div>
-@if (@Actions != null)
-{
-    <div class="d-flex flex-row flex-grow-1 gap-4 mt-3">
-        @Actions
-    </div>
-}
 
 @code {
     [Parameter] public RenderFragment ChildContent { get; set; }
