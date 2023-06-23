@@ -12,59 +12,60 @@
 }
 else
 {
-    <MudText Typo="Typo.h3">@localizer["ChangeLogs"]</MudText>
-    <BaseNavigateButtonComponent Href="ChangeLogs/Create"
-                             Text="@(localizer["CreateNewChangeLog"])">
-    </BaseNavigateButtonComponent>
-    @if (ChangeLogs.Count() == 0)
-    {
-        <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-            <BitLabel>@localizer["ThereIsNoChangeLogs"]</BitLabel>
-        </BitMessageBar>
-    }
-    else
-    {
-        <MudDataGrid Items="ChangeLogs.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
-             Groupable="false">
-            <Columns>
-                <TemplateColumn Title="عنوان">
-                    <CellTemplate>
-                        <MudText Class="text-truncate">@context.Item.Title</MudText>
-                    </CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn Title="لینک">
-                    <CellTemplate>
-                        <MudLink Href="@(String.IsNullOrEmpty(@context.Item.InformationLink) ? null :
+    <Page>
+        <MudText Typo="Typo.h2">@localizer["ChangeLogs"]</MudText>
+        <BaseNavigateButtonComponent Href="ChangeLogs/Create"
+                                 Text="@(localizer["CreateNewChangeLog"])">
+        </BaseNavigateButtonComponent>
+        @if (ChangeLogs.Count() == 0)
+        {
+            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
+                <BitLabel>@localizer["ThereIsNoChangeLogs"]</BitLabel>
+            </BitMessageBar>
+        }
+        else
+        {
+            <MudDataGrid Items="ChangeLogs.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
+                 Groupable="false">
+                <Columns>
+                    <TemplateColumn Title="عنوان">
+                        <CellTemplate>
+                            <MudText Class="text-truncate">@context.Item.Title</MudText>
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <TemplateColumn Title="لینک">
+                        <CellTemplate>
+                            <MudLink Href="@(String.IsNullOrEmpty(@context.Item.InformationLink) ? null :
                 ((context.Item.InformationLink.ToLower().StartsWith("https") || @context.Item.InformationLink.ToLower().StartsWith("http")) ?
                 context.Item.InformationLink : $"changelog/{context.Item.InformationLink}"))" Target="_blank">
-                            <MudText Class="text-truncate"><code>@context.Item.InformationLink</code></MudText>
-                        </MudLink>
-                    </CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn>
-                    <CellTemplate>
-                        <MudText>@(@localizer["CreateDate"] + ":" + @context.Item.CreateDate.ToLocalizerString()) </MudText>
-                        <MudText> @(@context.Item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @context.Item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</MudText>
-                    </CellTemplate>
-                </TemplateColumn>
-                <TemplateColumn CellClass="d-flex justify-end">
-                    <CellTemplate>
-                        <BaseButtonComponent Caption=@localizer["Edit"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Warning
-                                     IsOutLine=true
-                                     Icon=@Icons.Material.Filled.Edit
-                                     OnClick=@(()=>EditSiteChange(context.Item)) />
-                        <BaseButtonComponent Caption=@localizer["Delete"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Error
-                                     IsOutLine=true
-                                     Icon=@Icons.Material.Filled.Delete
-                                     OnClick=@(()=>DeleteSiteChange(context.Item)) />
-                    </CellTemplate>
-                </TemplateColumn>
-            </Columns>
-        </MudDataGrid>
+                                <MudText Class="text-truncate"><code>@context.Item.InformationLink</code></MudText>
+                            </MudLink>
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <TemplateColumn>
+                        <CellTemplate>
+                            <MudText>@(@localizer["CreateDate"] + ":" + @context.Item.CreateDate.ToLocalizerString()) </MudText>
+                            <MudText> @(@context.Item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @context.Item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</MudText>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <TemplateColumn CellClass="d-flex justify-end">
+                            <CellTemplate>
+                                <BaseButtonComponent Caption=@localizer["Edit"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Warning
+                                         IsOutLine=true
+                                         Icon=@Icons.Material.Filled.Edit
+                                         OnClick=@(()=>EditSiteChange(context.Item)) />
+                                <BaseButtonComponent Caption=@localizer["Delete"]
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Error
+                                         IsOutLine=true
+                                         Icon=@Icons.Material.Filled.Delete
+                                         OnClick=@(()=>DeleteSiteChange(context.Item)) />
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
         }
-    }
+    </Page>
 }

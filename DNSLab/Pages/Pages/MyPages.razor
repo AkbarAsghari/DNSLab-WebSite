@@ -7,60 +7,13 @@
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
-@if (pageSummaries == null)
-{
-    <Loading />
-}
-else
-{
-    <Modal @ref="pageModal">
-        <Title>
-            <BitLabel>
-                @if (modalForDeletePage)
-                {
-                    @localizer["AreYouSureDel"]
-                }
-                else
-                {
-                    @localizer["AreYouWantToPublish"]
-                }
-            </BitLabel>
-        </Title>
-        <Body>
-            <BitLabel>@localizer["Title"] : @modalRecord.Title </BitLabel>
-        </Body>
-        <Footer>
-            <BaseButtonComponent Caption=@localizer["Cancel"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Icon=@Icons.Material.Filled.Cancel
-                             OnClick=pageModal.Close></BaseButtonComponent>
-            @if (modalForDeletePage)
-            {
-                <BaseButtonComponent Caption=@localizer["Delete"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Error
-                             Icon=@Icons.Material.Filled.Delete
-                             OnClick=AcceptDelete></BaseButtonComponent>
-            }
-            else
-            {
-                <BaseButtonComponent Caption=@localizer["Publish"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Primary
-                             Icon=@Icons.Material.Filled.Publish
-                             OnClick=AcceptPublish></BaseButtonComponent>
-            }
-
-        </Footer>
-    </Modal>
-
-    <h4>@localizer["AllPages"]</h4>
-    <div class="mb-3">
-        <BaseNavigateButtonComponent Href="Page/Create"
-                                 Text="@(localizer["Create New Page"])">
-        </BaseNavigateButtonComponent>
-    </div>
-    <div class="mb-3">
+<Page>
+    @if (pageSummaries == null)
+    {
+        <Loading />
+    }
+    else
+    {
         @if (pageSummaries.Count() == 0)
         {
             <BitMessageBar MessageBarType="BitMessageBarType.Warning">
@@ -69,56 +22,46 @@ else
         }
         else
         {
-            @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
-            {
-                <hr class="m-1" />
-                <div class="row">
-                    <div class="col-md-10">
-                        <BitLabel Class=" text-muted small m-0">@(@localizer["CreateDate"] + ":" + @item.CreateDate.ToLocalizerString()) @(@item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</BitLabel>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <BitLink Class="text-decoration-none" Href="@($"https://dnslab.link/{item.PageType}/{item.URL}")" Target="_blank">
-                                            <BitLabel>dnslab.link/<code><strong>@item.PageType</strong></code><code>@($"/{@item.URL}")</code></BitLabel>
-                                        </BitLink>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <BitLabel>@item.Title</BitLabel>
-                                    </div>
-                                </div>
-                                <BitLabel Class="col-md-12 text-truncate">@item.Description</BitLabel>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="row p-1">
+            <MudText Typo="Typo.h2">@localizer["AllPages"]</MudText>
+            <BaseNavigateButtonComponent Href="Page/Create"
+                                 Text="@(localizer["Create New Page"])">
+            </BaseNavigateButtonComponent>
+            <MudDataGrid Items="@pageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+                <Columns>
+                    <TemplateColumn Title="@localizer["HostName"]">
+                        <CellTemplate>
+                            <MudLink Class="text-decoration-none" Href="@($"https://dnslab.link/{context.Item.PageType}/{context.Item.URL}")" Target="_blank">
+                                <MudText>
+                                    dnslab.link/<code><strong>@context.Item.PageType</strong></code><code>@($"/{@context.Item.URL}")</code>
+                                </MudText>
+                            </MudLink>
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="x=>x.Description" CellClass="text-truncate" Title="@localizer["Description"]" />
+                    <TemplateColumn CellClass="d-flex justify-end">
+                        <CellTemplate>
                             <BaseButtonComponent Caption=@localizer["Edit"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Warning
-                                     Icon=@Icons.Material.Filled.Edit
-                                     OnClick=@(()=>EditPage(item)) />
-                        </div>
-                        <div class="row p-1">
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Warning
+                                         Icon=@Icons.Material.Filled.Edit
+                                         OnClick=@(()=>EditPage(context.Item)) />
                             <BaseButtonComponent Caption=@localizer["Delete"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Error
-                                     Icon=@Icons.Material.Filled.Delete
-                                     OnClick=@(()=>DeletePage(item)) />
-                        </div>
-                        <div class="row p-1">
-                            @if (!item.IsPublieshed)
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Error
+                                         Icon=@Icons.Material.Filled.Delete
+                                         OnClick=@(()=>DeletePage(context.Item)) />
+                            @if (!context.Item.IsPublieshed)
                             {
                                 <BaseButtonComponent Caption=@localizer["Publish"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Primary
-                                     Icon=@Icons.Material.Filled.Publish
-                                     OnClick=@(()=>PublishPage(item)) />
+                                         IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Primary
+                                         Icon=@Icons.Material.Filled.Publish
+                                         OnClick=@(()=>PublishPage(context.Item)) />
                             }
-                        </div>
-                    </div>
-                </div>
-            }
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+            </MudDataGrid>
         }
-    </div>
-}
+    }
+</Page>
