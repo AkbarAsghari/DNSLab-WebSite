@@ -14,3 +14,7 @@
     src: url(../fonts/Vazir-Regular.woff);
     font-weight: 400
 }
+
+.flex-column .mud-button-group-root,.mud-button-root{
+    width:fit-content!important;
+}
