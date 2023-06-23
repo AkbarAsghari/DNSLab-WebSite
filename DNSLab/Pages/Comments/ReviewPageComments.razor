@@ -3,14 +3,11 @@
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
-<BitPivot OnLinkClick="PivotOnLinkClick" DefaultSelectedKey="NotReviewComments">
-    <BitPivotItem HeaderText="دیدگاه‌های بررسی نشده" Key="NotReviewComments">
-    </BitPivotItem>
-    <BitPivotItem HeaderText="دیدگاه‌های تایید شده" Key="AllApprovedComments">
-    </BitPivotItem>
-    <BitPivotItem HeaderText="دیدگاه‌های تایید نشده" Key="AllNotApprovedComments">
-    </BitPivotItem>
-</BitPivot>
+<MudTabs Elevation="0" Color="@Color.Primary" ActivePanelIndexChanged="PanelChanged">
+    <MudTabPanel Text="دیدگاه‌های بررسی نشده" />
+    <MudTabPanel Text="دیدگاه‌های تایید شده" />
+    <MudTabPanel Text="دیدگاه‌های تایید نشده" />
+</MudTabs>
 
 @if (comments != null)
 {

@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.Comments;
+using static MudBlazor.CategoryTypes;
 
 namespace DNSLab.Pages.Comments;
 partial class ReviewPageComments
@@ -17,21 +18,23 @@ partial class ReviewPageComments
         comments = (await _CommentRepository.GetAllPageCommentsWithInformation(IsApprovedKey)).ToList();
     }
 
-    async Task PivotOnLinkClick(BitPivotItem item)
+    async Task PanelChanged(int index)
     {
-        switch (item.Key)
         {
-            case "NotReviewComments":
-                IsApprovedKey = null;
-                break;
-            case "AllApprovedComments":
-                IsApprovedKey = true;
-                break;
-            case "AllNotApprovedComments":
-                IsApprovedKey = false;
-                break;
+            switch (index)
+            {
+                case 0:
+                    IsApprovedKey = null;
+                    break;
+                case 1:
+                    IsApprovedKey = true;
+                    break;
+                case 2:
+                    IsApprovedKey = false;
+                    break;
+            }
+            await FillCommentsList();
         }
-        await FillCommentsList();
     }
 
     async Task ReviewComment(Guid commentId, bool isApproved)

@@ -1,63 +1,54 @@
-﻿<div class="p-2">
-    <div class="row">
-        <PageLinkItem Title="@PageCommentWithInformation.Page.Title"
-                      Link="@($"{PageCommentWithInformation.Page.PageType}/{PageCommentWithInformation.Page.URL}")"
-                      Description="@PageCommentWithInformation.Page.Description.MakeCut(150)">
-        </PageLinkItem>
-        @if (PageCommentWithInformation.ReplyOf != null)
+﻿
+<PageLinkItem Title="@PageCommentWithInformation.Page.Title"
+              Link="@($"{PageCommentWithInformation.Page.PageType}/{PageCommentWithInformation.Page.URL}")"
+              Description="@PageCommentWithInformation.Page.Description.MakeCut(150)">
+</PageLinkItem>
+@if (PageCommentWithInformation.ReplyOf != null)
+{
+    <MudGrid>
+        <MudItem>
+            <UserProfileImage UserId="@PageCommentWithInformation.ReplyOf.UserId.ToString()" Size="50"></UserProfileImage>
+        </MudItem>
+        <MudItem>
+            <MudText>@PageCommentWithInformation.ReplyOf.FullName</MudText>
+            <MudText>@PageCommentWithInformation.ReplyOf.CreateDate.ToLocalizerString()</MudText>
+        </MudItem>
+    </MudGrid>
+    <MudText Class="comment-text">@PageCommentWithInformation.ReplyOf.Text</MudText>
+}
+<MudGrid>
+    @if (PageCommentWithInformation.ReplyOf != null)
+    {
+        <MudItem xs="1" />
+    }
+    <MudItem>
+        <UserProfileImage UserId="@PageCommentWithInformation.Comment.UserId.ToString()" Size="50"></UserProfileImage>
+    </MudItem>
+    <MudItem>
+        <MudText>@PageCommentWithInformation.Comment.FullName</MudText>
+        <MudText>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</MudText>
+    </MudItem>
+    <MudItem>
+        @if (IsApproved == null || IsApproved == false)
         {
-            <div class="row">
-
-                <div class="col-auto">
-                    <UserProfileImage UserId="@PageCommentWithInformation.ReplyOf.UserId.ToString()" Size="50"></UserProfileImage>
-                </div>
-                <div class="col-auto">
-                    <BitLabel>@PageCommentWithInformation.ReplyOf.FullName</BitLabel>
-                    <BitLabel>@PageCommentWithInformation.ReplyOf.CreateDate.ToLocalizerString()</BitLabel>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <BitLabel Class="comment-text">@PageCommentWithInformation.ReplyOf.Text</BitLabel>
-                </div>
-            </div>
+            <MudButton Color="Color.Primary" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Check" OnClick="AcceptButtonClick">
+                تایید
+            </MudButton>
         }
-        <div class="row">
-            @if (PageCommentWithInformation.ReplyOf != null)
-            {
-                <div class="col-1" />
-            }
-
-            <div class="col-auto">
-                <UserProfileImage UserId="@PageCommentWithInformation.Comment.UserId.ToString()" Size="50"></UserProfileImage>
-            </div>
-            <div class="col-auto">
-                <BitLabel>@PageCommentWithInformation.Comment.FullName</BitLabel>
-                <BitLabel>@PageCommentWithInformation.Comment.CreateDate.ToLocalizerString()</BitLabel>
-            </div>
-            <div class="col-auto">
-                @if (IsApproved == null || IsApproved == false)
-                {
-                    <MudButton StartIcon="@Icons.Material.Filled.Check" OnClick="AcceptButtonClick">
-                        تایید
-                    </MudButton>
-                }
-                @if (IsApproved == null || IsApproved == true)
-                {
-                    <MudButton IconName="@Icons.Material.Filled.Cancel" IconColor="Color.Error" OnClick="RejectButtonClick">
-                        عدم تایید
-                    </MudButton>
-                }
-            </div>
-        </div>
-        <div class="row">
-            @if (PageCommentWithInformation.ReplyOf != null)
-            {
-                <div class="col-1" />
-            }
-            <div class="col">
-                <BitLabel Class="comment-text">@PageCommentWithInformation.Comment.Text</BitLabel>
-            </div>
-        </div>
-    </div>
-</div>
+        @if (IsApproved == null || IsApproved == true)
+        {
+            <MudButton Color="Color.Error" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Cancel" OnClick="RejectButtonClick">
+                عدم تایید
+            </MudButton>
+        }
+    </MudItem>
+</MudGrid>
+<MudGrid>
+    @if (PageCommentWithInformation.ReplyOf != null)
+    {
+        <MudItem xs="1" />
+    }
+    <MudItem xs="11">
+        <MudText Class="comment-text">@PageCommentWithInformation.Comment.Text</MudText>
+    </MudItem>
+</MudGrid>
