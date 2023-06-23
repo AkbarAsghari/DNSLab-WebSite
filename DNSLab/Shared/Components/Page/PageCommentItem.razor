@@ -53,7 +53,7 @@
             }
             else
             {
-                <MudText Class="comment-text">
+                <MudText>
                     @((MarkupString)PageComment.Text.ChangeUrlsToLink())
                 </MudText>
             }
@@ -64,21 +64,3 @@
         @ChildContent
     }
 }
-
-<Modal @ref=DeleteModal>
-    <Title><BitLabel>آیا از حذف دیدگاه مطمئن میباشید؟</BitLabel></Title>
-    <Body>
-        <BitLabel>متن دیدگاه : </BitLabel>
-        <BitLabel>@PageComment.Text</BitLabel>
-    </Body>
-    <Footer>
-        <BaseButtonComponent Caption=@localizer["Cancel"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Icon=@Icons.Material.Filled.Cancel
-                             OnClick=DeleteModal.Close></BaseButtonComponent>
-        <BaseButtonComponent Caption=@localizer["Delete"]
-                             IsBussyCaption=@localizer["Progressing"]
-                             Icon=@Icons.Material.Filled.Delete
-                             OnClick=SubmitDeleteComment></BaseButtonComponent>
-    </Footer>
-</Modal>

@@ -8,9 +8,6 @@ partial class AllHostNames
 
     PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 25 };
 
-    Modal DeleteModal { get; set; }
-    HostNameDTO deleteRcord { get; set; } = new HostNameDTO();
-
     private int totalAmountPages { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
