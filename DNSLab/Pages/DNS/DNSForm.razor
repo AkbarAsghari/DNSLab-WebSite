@@ -7,22 +7,22 @@
             <DataAnnotationsValidator />
             <MudGrid>
                 <MudItem sm="6" xs="12">
-                    <MudTextField Label="@localizer["HostName"]" Class="dir-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" Disabled="@(IsNewRecord == false)" />
+                    <MudTextField Label="@localizer["HostName"]" Class="mud-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" Disabled="@(IsNewRecord == false)" />
                 </MudItem>
                 <MudItem sm="6" xs="12">
                     @switch (HostName.RecordType)
                     {
                         case 1:
-                            <MudTextField Label="@localizer["IPv4Address"]" Class="dir-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" Required="true" />
+                            <MudTextField Label="@localizer["IPv4Address"]" Class="mud-ltr" Placeholder="@IPDTO.IPv4" @bind-Value="@HostName.IPv4Address" Required="true" />
                             break;
                         case 2:
-                            <MudTextField Label="@localizer["IPv6Address"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" Required="true" />
+                            <MudTextField Label="@localizer["IPv6Address"]" Class="mud-ltr" Placeholder=@(localizer["ex"] + ":2001:0db8:85a3:0000:0000:8a2e:0370:7334") @bind-Value="@HostName.IPv6Address" Required="true" />
                             break;
                         case 3:
-                            <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" Required="true" />
+                            <MudTextField Label="@localizer["Target"]" Class="mud-ltr" Placeholder=@(localizer["ex"] + ":MyHost.dnslab.link") @bind-Value="@HostName.HostNameAlias" Required="true" />
                             break;
                         case 4:
-                            <MudTextField Label="@localizer["Target"]" Class="dir-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" Required="true" />
+                            <MudTextField Label="@localizer["Target"]" Class="mud-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" Required="true" />
                             break;
                     }
                 </MudItem>
