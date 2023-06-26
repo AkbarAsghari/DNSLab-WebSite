@@ -17,22 +17,20 @@
 </BaseButtonComponent>
 @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() > 0)
 {
-    <MudPaper Elevation="0">
-        @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
-        {
-            <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
-                     ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
-                @if (item.Replies.Count() > 0)
+    @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+    {
+        <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
+                 ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
+            @if (item.Replies.Count() > 0)
+            {
+                foreach (var reply in item.Replies)
                 {
-                    foreach (var reply in item.Replies)
-                    {
-                        <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
-                         ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
-                    }
+                    <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
+                     ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
                 }
-            </PageCommentItem>
-        }
-    </MudPaper>
+            }
+        </PageCommentItem>
+    }
     if (totalCommentsCount - 3 > 0 && !ShowAll)
     {
         <MudLink Href="@($"Comment/All/{PageId}")">

@@ -1,33 +1,33 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <MudText Typo="Typo.h3">@Title</MudText>
-<EditForm Model="ChangeLog" Context=ChangeLogContext>
-        @if (ChangeLog == null)
-        {
-            <Loading />
-        }
-        else
-        {
-            <MudGrid>
-                <MudItem lg="4">
-                    <MudTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
-                </MudItem>
-                <MudItem lg="4">
-                    <MudDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
-                </MudItem>
-                <MudItem lg="4">
-                    <MudTextField Label="@localizer["InformationLink"]" Class="mud-ltr"
-                              @bind-Value=ChangeLog.InformationLink />
-                </MudItem>
-            </MudGrid>
-            <MudText>@localizer["Description"]</MudText>
-            <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
-        }
+@if (ChangeLog == null)
+{
+    <Loading />
+}
+else
+{
+    <EditForm Model="ChangeLog" Context=ChangeLogContext>
+        <MudGrid>
+            <MudItem lg="4">
+                <MudTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
+            </MudItem>
+            <MudItem lg="4">
+                <MudDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
+            </MudItem>
+            <MudItem lg="4">
+                <MudTextField Label="@localizer["InformationLink"]" Class="mud-ltr"
+                          @bind-Value=ChangeLog.InformationLink />
+            </MudItem>
+        </MudGrid>
+        <MudText>@localizer["Description"]</MudText>
+        <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
         <BaseButtonComponent Caption=@localizer["Save"] IsBussyCaption=@localizer["Progressing"]
-                             Color=Color.Primary Icon=@Icons.Material.Filled.Save EditContext=ChangeLogContext
-                             OnClick=OnValidSubmit>
+                         Color=Color.Primary Icon=@Icons.Material.Filled.Save EditContext=ChangeLogContext
+                         OnClick=OnValidSubmit>
         </BaseButtonComponent>
         <BaseNavigateButtonComponent Color="Color.Secondary" Text="@localizer["Cancel"]" Href="ChangeLogs/All"
-                                     Icon="@Icons.Material.Filled.Cancel">
+                                 Icon="@Icons.Material.Filled.Cancel">
         </BaseNavigateButtonComponent>
-</EditForm>
+    </EditForm>
+}
