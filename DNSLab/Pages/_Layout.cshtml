@@ -8,43 +8,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="google-site-verification" content="DrTiWMFW0QRpDGyQB_BSAorUG0a7srfmTxFb_wUoeRA" />
 
     <base href="~/" />
 
     <link href="DNSLab.styles.css" rel="stylesheet" />
 
     <link href="css/DNSLab.min.css" rel="stylesheet" />
-    <script src="js/DNSLab.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9D712VLVDF"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-9D712VLVDF');
-    </script>
-
-    <script>
-        window.blazorCulture = {
-            get: () => window.localStorage['BlazorCulture'],
-            set: (value) => window.localStorage['BlazorCulture'] = value
-        };
-    </script>
-
-    <script type="application/javascript">
-        $(window).on('popstate', function() {
-            $('.modal').modal('hide');
-            $( ".modal-backdrop" ).remove();
-            $( ".in" ).remove();
-        });
-    </script>
     <component type="typeof(Metadata)" render-mode="ServerPrerendered" />
     <component type="typeof(URLChangeDetection)" render-mode="Server" />
 </head>
