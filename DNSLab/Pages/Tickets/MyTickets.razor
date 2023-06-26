@@ -6,13 +6,17 @@
 @inject NavigationManager navigationManager
 @attribute [Authorize]
 
+<MudCard>
+    <MudCardHeader>
+    <MudText Typo="Typo.h3">@localizer["MyTickets"]</MudText>
+    </MudCardHeader>
+    <MudCardContent>
 @if (tickets == null)
 {
     <Loading />
 }
 else
 {
-    <MudText Typo="Typo.h3">@localizer["MyTickets"]</MudText>
     <BaseNavigateButtonComponent Href="Ticket/New" Text="@(localizer["CreateNewTicket"])">
     </BaseNavigateButtonComponent>
     @if (tickets.Count() == 0)
@@ -71,3 +75,5 @@ else
         </MudDataGrid>
     }
 }
+    </MudCardContent>
+</MudCard>

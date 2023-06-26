@@ -5,25 +5,31 @@
 
 @attribute [Authorize]
 
-<MudText Typo="Typo.h3">تنظیمات</MudText>
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">تنظیمات</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        @if (settings == null)
+        {
+            <Loading />
+        }
+        else
+        {
+            <MudText Typo="Typo.h4">ایمیل</MudText>
+            <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+                <MudText>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</MudText>
+            </MudAlert>
+            <MudSwitch Color=Color.Primary Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت"
+            @bind-Checked="@settings.SendEmailWhenGotTicketReply" />
+            <MudSwitch Color=Color.Primary Label="ارسال ایمیل در صورت تغییر آی‌پی هاست"
+            @bind-Checked="@settings.SendEmailWhenDNSIPChanged" />
+        }
+    </MudCardContent>
+    <MudCardActions>
+        <BaseButtonComponent Caption=@_Localizer["SaveChanges"] IsBussyCaption=@_Localizer["Progressing"]
+            Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick="SaveChanges"></BaseButtonComponent>
+    </MudCardActions>
+</MudCard>
 
-@if (settings == null)
-{
-    <Loading />
-}
-else
-{
-    <MudDivider Class="mt-2" DividerType="DividerType.FullWidth" />
-    <MudText Typo="Typo.h4">ایمیل</MudText>
-    <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
-        <MudText>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</MudText>
-    </MudAlert>
-    <MudSwitch Color=Color.Primary Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت" @bind-Checked="@settings.SendEmailWhenGotTicketReply" />
-    <MudSwitch Color=Color.Primary Label="ارسال ایمیل در صورت تغییر آی‌پی هاست" @bind-Checked="@settings.SendEmailWhenDNSIPChanged" />
-    <MudDivider Class="mt-2" DividerType="DividerType.Inset"/>
-    <BaseButtonComponent Caption=@_Localizer["SaveChanges"]
-                     IsBussyCaption=@_Localizer["Progressing"]
-                     Color=Color.Primary
-                     Icon=@Icons.Material.Filled.Save
-                     OnClick="SaveChanges"></BaseButtonComponent>
-}
+

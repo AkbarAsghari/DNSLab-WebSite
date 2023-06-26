@@ -1,35 +1,43 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
-@if (ChangeLog == null)
-{
-    <Loading />
-}
-else
-{
-    <MudText Typo="Typo.h3">@Title</MudText>
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">@Title</MudText>
+    </MudCardHeader>
     <EditForm Model="ChangeLog" Context=ChangeLogContext>
-        <MudGrid>
-            <MudItem lg="4">
-                <MudTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
-            </MudItem>
-            <MudItem lg="4">
-                <MudDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
-            </MudItem>
-            <MudItem lg="4">
-                <MudTextField Label="@localizer["InformationLink"]" Class="mud-ltr" @bind-Value=ChangeLog.InformationLink />
-            </MudItem>
-        </MudGrid>
-        <MudText>@localizer["Description"]</MudText>
-        <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
-        <BaseButtonComponent Caption=@localizer["Save"]
-                         IsBussyCaption=@localizer["Progressing"]
-                         Color=Color.Primary
-                         Icon=@Icons.Material.Filled.Save
-                         EditContext=ChangeLogContext
-                         OnClick=OnValidSubmit></BaseButtonComponent>
-        <BaseNavigateButtonComponent Text="@localizer["Cancel"]"
-                                 Href="ChangeLogs/All"
-                                 Icon="@Icons.Material.Filled.Cancel">
-        </BaseNavigateButtonComponent>
+        <MudCardContent>
+            @if (ChangeLog == null)
+            {
+                <Loading />
+            }
+            else
+            {
+                <MudGrid>
+                    <MudItem lg="4">
+                        <MudTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
+                    </MudItem>
+                    <MudItem lg="4">
+                        <MudDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
+                    </MudItem>
+                    <MudItem lg="4">
+                        <MudTextField Label="@localizer["InformationLink"]" Class="mud-ltr"
+                        @bind-Value=ChangeLog.InformationLink />
+                    </MudItem>
+                </MudGrid>
+                <MudText>@localizer["Description"]</MudText>
+                <TextEditor @bind-Value=ChangeLog.Description></TextEditor>
+            }
+        </MudCardContent>
+        <MudCardActions>
+            <MudStack Row>
+                <BaseButtonComponent Caption=@localizer["Save"] IsBussyCaption=@localizer["Progressing"]
+                    Color=Color.Primary Icon=@Icons.Material.Filled.Save EditContext=ChangeLogContext
+                    OnClick=OnValidSubmit>
+                </BaseButtonComponent>
+                <BaseNavigateButtonComponent Color="Color.Secondary" Text="@localizer["Cancel"]" Href="ChangeLogs/All"
+                    Icon="@Icons.Material.Filled.Cancel">
+                </BaseNavigateButtonComponent>
+            </MudStack>
+        </MudCardActions>
     </EditForm>
-}
+</MudCard>

@@ -7,17 +7,17 @@
 @attribute [Authorize]
 
 <MudCard>
-    <MudCardHeader>
-        <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
-    </MudCardHeader>
-            <EditForm Model="Message" Context="TicketDetails">
-    <MudCardContent>
-        @if (messages == null)
-        {
-            <Loading IsInTop=true />
-        }
-        else
-        {
+    @if (messages == null)
+    {
+        <Loading IsInTop=true />
+    }
+    else
+    {
+        <MudCardHeader>
+            <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
+        </MudCardHeader>
+        <EditForm Model="Message" Context="TicketDetails">
+            <MudCardContent>
                 <MudPaper>
                     @foreach (var item in messages.OrderBy(x => x.CreateDate))
                     {
@@ -36,14 +36,14 @@
                 <MudTextField Label="@localizer["TicketText"]" AutoFocus="true" Lines="7" Variant="Variant.Outlined"
                     Placeholder="@(localizer["TicketText"] + "...")" @bind-Value="Message.Text"
                     MaxLength="@MAX_TEXT_COUNT" />
-        }
-    </MudCardContent>
-    <MudCardActions>
-                        <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
+            </MudCardContent>
+            <MudCardActions>
+                <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
                     Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket></BaseButtonComponent>
                 <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
                     Icon=@Icons.Material.Filled.Cancel>
                 </BaseNavigateButtonComponent>
-    </MudCardActions>
-            </EditForm>
-</MudCard>
+            </MudCardActions>
+        </EditForm>
+    }
+    </MudCard>
