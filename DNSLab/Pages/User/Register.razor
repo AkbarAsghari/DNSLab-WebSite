@@ -9,28 +9,19 @@
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
     <EditForm Model=registerUser Context="RegisterContext">
         <DataAnnotationsValidator />
-        <MudCard>
-            <MudCardHeader>
-                <MudText Typo="Typo.h1">@localizer["RegisterAccount"]</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudTextField Label="@localizer["Email"]" Type="BitTextFieldType.Email" Class="mud-ltr" Placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" />
-                <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@registerUser.Password" />
-                <MudSwitch T="bool" Color="Color.Primary" Label="قوانین و مقررات سایت را مطالعه و می پذیرم" @bind-Checked="isApprovedTOS" />
-                <MudText>
-                    <MudLink Target="_blank" Href="legal/tos">مطالعه قوانین و مقررات</MudLink>
-                </MudText>
-            </MudCardContent>
-            <MudCardActions>
-                <BaseButtonComponent Caption=@localizer["Register"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Primary
-                                     Icon=@Icons.Material.Filled.PersonAdd
-                                     EditContext=RegisterContext
-                                     OnClick=CreateUser></BaseButtonComponent>
-                <MudDivider Vertical=true Class="mx-2" />
-                <MudButton Href="user/auth" Variant="Variant.Text" Color="Color.Secondary">قبلا ثبت نام کرده ام</MudButton>
-            </MudCardActions>
-        </MudCard>
+        <MudText Typo="Typo.h1">@localizer["RegisterAccount"]</MudText>
+        <MudTextField Label="@localizer["Email"]" Type="BitTextFieldType.Email" Class="mud-ltr" Placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" />
+        <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@registerUser.Password" />
+        <MudSwitch T="bool" Color="Color.Primary" Label="قوانین و مقررات سایت را مطالعه و می پذیرم" @bind-Checked="isApprovedTOS" />
+        <MudText GutterBottom>
+            <MudLink Target="_blank" Href="legal/tos">مطالعه قوانین و مقررات</MudLink>
+        </MudText>
+        <BaseButtonComponent Caption=@localizer["Register"]
+                             IsBussyCaption=@localizer["Progressing"]
+                             Color=Color.Primary
+                             Icon=@Icons.Material.Filled.PersonAdd
+                             EditContext=RegisterContext
+                             OnClick=CreateUser></BaseButtonComponent>
+        <MudButton Href="user/auth" Variant="Variant.Text" Color="Color.Secondary">قبلا ثبت نام کرده ام</MudButton>
     </EditForm>
 </MudContainer>

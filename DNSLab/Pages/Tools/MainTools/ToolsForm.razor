@@ -3,21 +3,13 @@
 
 @typeparam TItem
 <EditForm Model="Model" Context="editCtx">
-<MudCard>
-    <MudCardHeader>
-                <MudText Typo="Typo.h3">@Header</MudText>
-    </MudCardHeader>
-<MudCardContent>
-            <DataAnnotationsValidator />
-            @Body
-</MudCardContent>
-<MudCardActions>
-            <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
-                                 EditContext="editCtx">
-            </BaseButtonComponent>
-</MudCardActions>
-<MudCardContent>
- @if (Results != null && Results.Count > 0)
+    <MudText Typo="Typo.h3" GutterBottom>@Header</MudText>
+    <DataAnnotationsValidator />
+    @ChildContent
+    <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
+                         EditContext="editCtx">
+    </BaseButtonComponent>
+    @if (Results != null && Results.Count > 0)
     {
         <MudList>
             @foreach (var item in Results)
@@ -30,6 +22,4 @@
             }
         </MudList>
     }
-</MudCardContent>
-</MudCard>
 </EditForm>

@@ -7,14 +7,12 @@
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
-<MudCard>
     @if (pageSummaries == null)
     {
         <Loading />
     }
     else
     {
-        <MudCardContent>
             @if (pageSummaries.Count() == 0)
             {
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
@@ -62,6 +60,4 @@
                     </Columns>
                 </MudDataGrid>
             }
-        </MudCardContent>
     }
-    </MudCard>

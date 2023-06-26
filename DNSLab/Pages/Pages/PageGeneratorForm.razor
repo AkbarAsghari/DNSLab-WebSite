@@ -1,49 +1,41 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="Page" Context=PageContext>
-    <MudCard>
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@Title</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudGrid>
-                <MudItem sm="12" md="6">
-                    <MudSelect Label="@localizer["PageType"]" Value="PageType" T="string" ReadOnly=@(!(Page.PublishDate
-                        == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow))>
-                        <MudSelectItem T="string" Value="@("Article" )" />
-                        <MudSelectItem T="string" Value="@("Support")" />
-                    </MudSelect>
-                </MudItem>
-                <MudItem sm="12" md="6">
-                    <MudTextField Class="mud-ltr" Label="@localizer["URL"]" Placeholder="@localizer["EnterURL"]"
-                    @bind-Value="Page.URL" ReadOnly=@(!(Page.PublishDate == null ||
-                        Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow)) Required />
-                 </MudItem>
-                 <MudItem xs="12">
-                     <MudTextField Label="@localizer["Title"]" Placeholder="@localizer["EnterTitle"]"
-                     @bind-Value="Page.Title" Required />
-                 </MudItem>
-                 <MudItem xs="12">
-                     <MudTextField Label="@localizer["Description"]" Placeholder="@localizer["EnterDescription"]"
-                     @bind-Value="Page.Description" Required />
-                 </MudItem>
-                 <MudItem xs="12">
-                     <TagsInput Tags="@Page.Keywords"></TagsInput>
-                 </MudItem>
-                 <MudItem xs="12">
-                     <MudTextField Label="@localizer["Header"]" Placeholder="@localizer["EnterHeader"]"
-                     @bind-Value="Page.Header" Required />
-                 </MudItem>
-                 <MudItem xs="12">
-                     <TextEditor @bind-Value=@Page.Body></TextEditor>
-                 </MudItem>
-             </MudGrid>
-         </MudCardContent>
-         <MudCardActions>
-             <BaseButtonComponent Caption=@localizer["Save"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
-                 Icon=@Icons.Material.Filled.Save EditContext=PageContext OnClick=OnValidSubmit></BaseButtonComponent>
-             <BaseNavigateButtonComponent Href="Page/MyPages" Text="@localizer["Cancel"]" Color="Color.Secondary"
-                 Icon=@Icons.Material.Filled.Cancel></BaseNavigateButtonComponent>
-         </MudCardActions>
-     </MudCard>
- </EditForm>
+    <MudText Typo="Typo.h3">@Title</MudText>
+    <MudGrid>
+        <MudItem sm="12" md="6">
+            <MudSelect Label="@localizer["PageType"]" Value="PageType" T="string" ReadOnly=@(!(Page.PublishDate
+                       == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow))>
+                <MudSelectItem T="string" Value="@("Article" )" />
+                <MudSelectItem T="string" Value="@("Support")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem sm="12" md="6">
+            <MudTextField Class="mud-ltr" Label="@localizer["URL"]" Placeholder="@localizer["EnterURL"]"
+                          @bind-Value="Page.URL" ReadOnly=@(!(Page.PublishDate == null ||
+                          Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow)) Required />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@localizer["Title"]" Placeholder="@localizer["EnterTitle"]"
+                          @bind-Value="Page.Title" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@localizer["Description"]" Placeholder="@localizer["EnterDescription"]"
+                          @bind-Value="Page.Description" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <TagsInput Tags="@Page.Keywords"></TagsInput>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@localizer["Header"]" Placeholder="@localizer["EnterHeader"]"
+                          @bind-Value="Page.Header" Required />
+        </MudItem>
+        <MudItem xs="12">
+            <TextEditor @bind-Value=@Page.Body></TextEditor>
+        </MudItem>
+    </MudGrid>
+    <BaseButtonComponent Caption=@localizer["Save"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
+                         Icon=@Icons.Material.Filled.Save EditContext=PageContext OnClick=OnValidSubmit></BaseButtonComponent>
+    <BaseNavigateButtonComponent Href="Page/MyPages" Text="@localizer["Cancel"]" Color="Color.Secondary"
+                                 Icon=@Icons.Material.Filled.Cancel></BaseNavigateButtonComponent>
+</EditForm>

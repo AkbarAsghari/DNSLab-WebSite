@@ -8,61 +8,55 @@
 @inject ISnackbar Snackbar
 @inject IStringLocalizer<Resource> localizer
 
-<MudCard>
-    <MudCardHeader>
-        <MudText Typo="Typo.h3">تغییر نام کاربری</MudText>
-    </MudCardHeader>
-    <MudCardContent>
+<MudText Typo="Typo.h3">تغییر نام کاربری</MudText>
         @if (userInfo == null)
+{
+    <Loading />
+}
+else
+{
+    <MudText>شما در این بخش میتوانید نام کاربری خود را تغییر دهید.</MudText>
+    <MudText>نام کاربری : @(String.IsNullOrWhiteSpace(Username) ? changeEmail.Email : Username)</MudText>
+    <BaseButtonComponent Caption="تغییر نام کاربری" OnClick="()=> ChangeAccountUsernameModalVisible = true">
+    </BaseButtonComponent>
+
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
+
+    <MudText Typo="Typo.h3">ایمیل</MudText>
+    <MudText>در این بخش میتوانید آدرس ایمیل خود را تغییر دهید و یا اقدام به تایید ایمیل نمایید.</MudText>
+    <MudText>آدرس ایمیل : @changeEmail.Email</MudText>
+    @if (!@userInfo.IsEmailApproved)
+    {
+        @if (ResentButtonClicked)
         {
-            <Loading />
+            <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Start">
+                <MudText>@localizer["ActivationLinkSent"]</MudText>
+            </MudAlert>
         }
         else
         {
-            <MudText>شما در این بخش میتوانید نام کاربری خود را تغییر دهید.</MudText>
-            <MudText>نام کاربری : @(String.IsNullOrWhiteSpace(Username) ? changeEmail.Email : Username)</MudText>
-            <BaseButtonComponent Caption="تغییر نام کاربری" OnClick="()=> ChangeAccountUsernameModalVisible = true">
-            </BaseButtonComponent>
-
-            <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
-
-            <MudText Typo="Typo.h3">ایمیل</MudText>
-            <MudText>در این بخش میتوانید آدرس ایمیل خود را تغییر دهید و یا اقدام به تایید ایمیل نمایید.</MudText>
-            <MudText>آدرس ایمیل : @changeEmail.Email</MudText>
-            @if (!@userInfo.IsEmailApproved)
-            {
-                @if (ResentButtonClicked)
-                {
-                    <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Start">
-                        <MudText>@localizer["ActivationLinkSent"]</MudText>
-                    </MudAlert>
-                }
-                else
-                {
-                    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Start">
-                        <MudText>
-                            @localizer["YourEmailNotApprovedYet"]
-                            <BaseButtonComponent Caption=@localizer["ResendActivationLink"] IsBussyCaption=@localizer["Progressing"]
-                                Color=Color.Success OnClick="ResendActivationLink"></BaseButtonComponent>
-                        </MudText>
-                    </MudAlert>
-                }
-            }
-            <BaseButtonComponent Caption="تغییر ایمیل" IsBussyCaption=@localizer["Loading"] Color=Color.Primary
-                OnClick=@(()=> ChangeAccountEmailModalVisible = true)></BaseButtonComponent>
-
-            <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
-
-            <MudText Typo="Typo.h3">حذف حساب کاربری</MudText>
-            <MudText>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</MudText>
-            <MudAlert Severity="Severity.Normal" ContentAlignment="HorizontalAlignment.Start">
+            <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Start">
                 <MudText>
-                    این بخش در حال توسعه میباشد و بزودی فعال میشود.
+                    @localizer["YourEmailNotApprovedYet"]
+                    <BaseButtonComponent Caption=@localizer["ResendActivationLink"] IsBussyCaption=@localizer["Progressing"]
+                             Color=Color.Success OnClick="ResendActivationLink"></BaseButtonComponent>
                 </MudText>
             </MudAlert>
         }
-    </MudCardContent>
-</MudCard>
+    }
+    <BaseButtonComponent Caption="تغییر ایمیل" IsBussyCaption=@localizer["Loading"] Color=Color.Primary
+                     OnClick=@(()=> ChangeAccountEmailModalVisible = true)></BaseButtonComponent>
+
+    <MudDivider Class="mt-2" DividerType="DividerType.Inset" />
+
+    <MudText Typo="Typo.h3">حذف حساب کاربری</MudText>
+    <MudText>در این قسمت شما میتوانید حساب کاربری خود را از سایت DNSLab حذف نمایید.</MudText>
+    <MudAlert Severity="Severity.Normal" ContentAlignment="HorizontalAlignment.Start">
+        <MudText>
+            این بخش در حال توسعه میباشد و بزودی فعال میشود.
+        </MudText>
+    </MudAlert>
+}
 
 
 <MudDialog @bind-IsVisible=ChangeAccountUsernameModalVisible Options="new DialogOptions {CloseButton=true}">
@@ -86,9 +80,9 @@
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption=@localizer["Cancel"] IsBussyCaption=@localizer["Progressing"] Color="Color.Warning"
-            OnClick="()=>ChangeAccountUsernameModalVisible = false"></BaseButtonComponent>
+                             OnClick="()=>ChangeAccountUsernameModalVisible = false"></BaseButtonComponent>
         <BaseButtonComponent Caption="تغییر نام کاربری" IsBussyCaption=@localizer["Progressing"]
-            OnClick=AcceptChangeAccountUsername></BaseButtonComponent>
+                             OnClick=AcceptChangeAccountUsername></BaseButtonComponent>
     </DialogActions>
 </MudDialog>
 
@@ -103,13 +97,13 @@
             </MudText>
         </MudAlert>
         <MudTextField Label="@localizer["Email"]" Class="mud-ltr" Placeholder="@localizer["YourEmail"]"
-        @bind-Value="@changeEmail.Email" IsRequired=true />
+                      @bind-Value="@changeEmail.Email" IsRequired=true />
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption=@localizer["Cancel"] IsBussyCaption=@localizer["Progressing"] Color="Color.Warning"
-            OnClick="()=>ChangeAccountEmailModalVisible=false"></BaseButtonComponent>
+                             OnClick="()=>ChangeAccountEmailModalVisible=false"></BaseButtonComponent>
         <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Progressing"]
-            Color=Color.Primary OnClick=AcceptChangeEmail></BaseButtonComponent>
+                             Color=Color.Primary OnClick=AcceptChangeEmail></BaseButtonComponent>
     </DialogActions>
 </MudDialog>
 

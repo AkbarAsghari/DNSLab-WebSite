@@ -6,62 +6,44 @@
 @inject IJSRuntime jsRuntime
 @attribute [Authorize]
 
-<MudCard>
-    @if (messages == null)
-    {
-        <MudCard>
-            <MudCardHeader>
-                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="20%" />
-            </MudCardHeader>
-            <MudCardContent>
-                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="250px" Width="100%" />
-            </MudCardContent>
-            <MudCardActions>
-                <MudStack Row>
-                 <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
-                     Width="100px" />
-                 <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
-                     Width="100px" />
-             </MudStack>
-         </MudCardActions>
-     </MudCard>
-    }
-    else
-    {
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
-        </MudCardHeader>
-        <EditForm Model="Message" Context="TicketDetails">
-            <MudCardContent>
-                <MudPaper>
-                    @foreach (var item in messages.OrderBy(x => x.CreateDate))
-                    {
-                        <MudListItem Text="Inbox" IconSize="Size.Large" Icon="@ProfileImageCreator.GenerateSVG(item.UserId,20)">
-                            <MudCard>
-                                <MudCardHeader>
-                                    <MudText>@($"{item.UserFullName} {@item.CreateDate.CalcRelativeTime()}")</MudText>
-                                    </MudCardHeader>
-                                    <MudCardContent Style="white-space: pre-line;">
-                                        @((MarkupString)item.Text.ChangeUrlsToLink())
-                                </MudCardContent>
-                            </MudCard>
-                        </MudListItem>
-                    }
-                </MudPaper>
-                <MudTextField Label="@localizer["TicketText"]" AutoFocus="true" Lines="7" Variant="Variant.Outlined"
-                    Placeholder="@(localizer["TicketText"] + "...")" @bind-Value="Message.Text"
-                    MaxLength="@MAX_TEXT_COUNT" />
-            </MudCardContent>
-            <MudCardActions>
-                <MudStack Row>
-                 <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"]
-                     Color=Color.Primary Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket>
-                 </BaseButtonComponent>
-                 <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
-                     Icon=@Icons.Material.Filled.Cancel>
-                 </BaseNavigateButtonComponent>
-             </MudStack>
-         </MudCardActions>
-     </EditForm>
-    }
-    </MudCard>
+@if (messages == null)
+{
+    <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="20%" />
+    <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="250px" Width="100%" />
+    <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
+             Width="100px" />
+    <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
+             Width="100px" />
+}
+else
+{
+    <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
+    <EditForm Model="Message" Context="TicketDetails">
+        <MudPaper>
+            @foreach (var item in messages.OrderBy(x => x.CreateDate))
+            {
+                <MudListItem Text="Inbox" IconSize="Size.Large" Icon="@ProfileImageCreator.GenerateSVG(item.UserId,20)">
+                    <MudCard>
+                        <MudCardHeader>
+                            <MudText>@($"{item.UserFullName} {@item.CreateDate.CalcRelativeTime()}")</MudText>
+                            </MudCardHeader>
+                            <MudCardContent Style="white-space: pre-line;">
+                                @((MarkupString)item.Text.ChangeUrlsToLink())
+                        </MudCardContent>
+                    </MudCard>
+                </MudListItem>
+            }
+        </MudPaper>
+        <MudTextField Label="@localizer["TicketText"]" AutoFocus="true" Lines="7" Variant="Variant.Outlined"
+                  Placeholder="@(localizer["TicketText"] + "...")" @bind-Value="Message.Text"
+                  MaxLength="@MAX_TEXT_COUNT" />
+        <MudStack Row>
+        <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"]
+                             Color=Color.Primary Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket>
+        </BaseButtonComponent>
+        <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
+                                     Icon=@Icons.Material.Filled.Cancel>
+        </BaseNavigateButtonComponent>
+    </MudStack>
+</EditForm>
+}

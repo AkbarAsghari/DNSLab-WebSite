@@ -115,7 +115,7 @@ else
     </MudPaper>
     <MudDivider Class="mt-2" />
     <MudGrid>
-        <MudItem md="8">
+        <MudItem md="8" xs="12">
             <MudPaper Class="pa-4">
                 <MudChart ChartType="ChartType.Donut" InputData="@QuerytypechartData" InputLabels="@QuerytypechartLabels"
                     Width="300px" Height="300px" @bind-SelectedIndex="QuerytypeSelectedIndex" >
@@ -131,7 +131,7 @@ else
                     InputLabels="@QueryResponsechartLabels" Width="300px" Height="300px" />
             </MudPaper>
         </MudItem>
-        <MudItem md="4">
+        <MudItem md="4" xs="12">
             <MudText Typo="Typo.h4">Top Domains</MudText>
             @foreach (var domain in _StatResponse.Response.Topdomains)
             {

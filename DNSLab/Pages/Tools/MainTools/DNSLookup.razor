@@ -5,26 +5,23 @@
 @inject NavigationManager Navigation
 
 <ToolsForm Header="@localizer["DNSLookup"]" Model="@hostOrIPAddress" OnValidSubmit="OnValidSubmit"
-    IsProgressing="@isProgressing" Results="@result">
-
-    <Body>
-        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
-            <MudText>رکورد DNS را جستجو کنید</MudText>
-            <MudText>دی‌ان‌اس ها از سرور عمومی گوگل به آدرس 8.8.8.8 پرس و جو میشوند</MudText>
-        </MudAlert>
-        <MudGrid>
-            <MudItem lg="6">
-                <MudTextField Label="@localizer["HostOrIPAddress"]" Placeholder="dnslab.link"
-                @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
-            </MudItem>
-            <MudItem lg="2">
-                <MudSelect T="string" Label="نوع رکورد" Variant="Variant.Text" @bind-Value="queryType">
-                    @foreach (var item in DNSQueryTypes)
-                    {
-                        <MudSelectItem Value="@item" />
-                    }
-                </MudSelect>
-            </MudItem>
-        </MudGrid>
-    </Body>
+           IsProgressing="@isProgressing" Results="@result">
+    <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+        <MudText>رکورد DNS را جستجو کنید</MudText>
+        <MudText>دی‌ان‌اس ها از سرور عمومی گوگل به آدرس 8.8.8.8 پرس و جو میشوند</MudText>
+    </MudAlert>
+    <MudGrid>
+        <MudItem lg="6">
+            <MudTextField Label="@localizer["HostOrIPAddress"]" Placeholder="dnslab.link"
+                          @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
+        </MudItem>
+        <MudItem lg="2">
+            <MudSelect T="string" Label="نوع رکورد" Variant="Variant.Text" @bind-Value="queryType">
+                @foreach (var item in DNSQueryTypes)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
 </ToolsForm>

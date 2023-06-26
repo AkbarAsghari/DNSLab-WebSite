@@ -3,100 +3,94 @@
 
 @attribute [Authorize]
 
-<MudCard>
-    <MudCardHeader>
-        <MudText Typo="Typo.h3">گزارش تغییرات هاست نِیم ها</MudText>
-    </MudCardHeader>
-    <MudCardContent>
-        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
-            <MudText>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</MudText>
-        </MudAlert>
+<MudText Typo="Typo.h3">گزارش تغییرات هاست نِیم ها</MudText>
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
+    <MudText>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</MudText>
+</MudAlert>
 @if (dNSChangeHistories == null)
+{
+    <Loading />
+}
+else
+{
+    @if (dNSChangeHistories.Count == 0)
     {
-        <Loading />
+        <MudText>هیج تغییراتی یافت نشد</MudText>
     }
     else
     {
-        @if (dNSChangeHistories.Count == 0)
+        @if (dNSChangeHistories != null)
         {
-            <MudText>هیج تغییراتی یافت نشد</MudText>
-        }
-        else
-        {
-            @if (dNSChangeHistories != null)
-            {
-                <MudTimeline TimelinePosition="TimelinePosition.Right">
-                    @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.A))
-                    {
-                        <MudTimelineItem Color="Color.Primary">
-                            <MudExpansionPanels>
-                                @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.A).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
-                                {
-                                    <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
-                                        @foreach (var x in item.ARecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                            <MudText Color="Color.Primary">@x.IPv4Address</MudText>
-                                            <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
-                                        }
-                                    </MudExpansionPanel>
-                                }
-                            </MudExpansionPanels>
-                        </MudTimelineItem>
-                    }
-                    @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.AAAA))
-                    {
-                        <MudTimelineItem Color="Color.Secondary">
-                            <MudExpansionPanels>
-                                @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.AAAA).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
-                                {
-                                    <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
-                                        @foreach (var x in item.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                            <MudText Color="Color.Secondary">@x.IPv6Address</MudText>
-                                            <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
-                                        }
-                                    </MudExpansionPanel>
-                                }
-                            </MudExpansionPanels>
-                        </MudTimelineItem>
-                    }
-                    @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.CNAME))
-                    {
-                        <MudTimelineItem Color="Color.Warning">
-                            <MudExpansionPanels>
-                                @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.CNAME).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
-                                {
-                                    <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
-                                        @foreach (var x in item.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                            <MudText Color="Color.Warning">@x.HostNameAlias</MudText>
-                                            <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
-                                        }
-                                    </MudExpansionPanel>
-                                }
-                            </MudExpansionPanels>
-                        </MudTimelineItem>
-                    }
-                    @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.WebRedirect))
-                    {
-                        <MudTimelineItem Color="Color.Info">
-                            <MudExpansionPanels>
-                                @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.WebRedirect).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
-                                {
-                                    <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
-                                        @foreach (var x in item.WebRedirectRecordHistories.OrderByDescending(x => x.CreateDate))
-                                        {
-                                            <MudText Color="Color.Info">@x.URLOrIp</MudText>
-                                            <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
-                                        }
-                                    </MudExpansionPanel>
-                                }
-                            </MudExpansionPanels>
-                        </MudTimelineItem>
-                    }
-                </MudTimeline>
-            }
+            <MudTimeline TimelinePosition="TimelinePosition.Right">
+                @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.A))
+                {
+                    <MudTimelineItem Color="Color.Primary">
+                        <MudExpansionPanels>
+                            @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.A).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
+                            {
+                                <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
+                                    @foreach (var x in item.ARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <MudText Color="Color.Primary">@x.IPv4Address</MudText>
+                                        <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
+                                    }
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </MudTimelineItem>
+                }
+                @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.AAAA))
+                {
+                    <MudTimelineItem Color="Color.Secondary">
+                        <MudExpansionPanels>
+                            @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.AAAA).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
+                            {
+                                <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
+                                    @foreach (var x in item.AAAARecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <MudText Color="Color.Secondary">@x.IPv6Address</MudText>
+                                        <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
+                                    }
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </MudTimelineItem>
+                }
+                @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.CNAME))
+                {
+                    <MudTimelineItem Color="Color.Warning">
+                        <MudExpansionPanels>
+                            @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.CNAME).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
+                            {
+                                <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
+                                    @foreach (var x in item.CNameRecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <MudText Color="Color.Warning">@x.HostNameAlias</MudText>
+                                        <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
+                                    }
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </MudTimelineItem>
+                }
+                @if (@dNSChangeHistories.Any(x => x.RecordType == (int)DNSRecordTypeEnum.WebRedirect))
+                {
+                    <MudTimelineItem Color="Color.Info">
+                        <MudExpansionPanels>
+                            @foreach (var item in @dNSChangeHistories.Where(x => x.RecordType == (int)DNSRecordTypeEnum.WebRedirect).OrderByDescending(x => x.UpdateDate == null ? x.CreateDate : x.UpdateDate))
+                            {
+                                <MudExpansionPanel Text="@($"{item.Name} ({(DNSRecordTypeEnum)item.RecordType})")" Dense="true">
+                                    @foreach (var x in item.WebRedirectRecordHistories.OrderByDescending(x => x.CreateDate))
+                                    {
+                                        <MudText Color="Color.Info">@x.URLOrIp</MudText>
+                                        <MudText Class="mud-text-secondary">@($"{x.CreateDate.ToLocalizerString()} ثبت {(x.UpdateDate == null ? "شده است" : $" و {x.UpdateDate.Value.ToLocalizerString()} ویرایش شده است")}")</MudText>
+                                    }
+                                </MudExpansionPanel>
+                            }
+                        </MudExpansionPanels>
+                    </MudTimelineItem>
+                }
+            </MudTimeline>
         }
     }
-    </MudCardContent>
-</MudCard>
+}

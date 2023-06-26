@@ -6,98 +6,94 @@
 
 @attribute [Authorize]
 
-<MudCard>
-    @if (hostNames == null)
+@if (hostNames == null)
+{
+    <Loading />
+}
+else
+{
+    <MudText Typo="Typo.h3">@localizer["HostNames"]</MudText>
+    <BaseNavigateButtonComponent Href="dns/create" Text="@(localizer["CreateHostName"])">
+    </BaseNavigateButtonComponent>
+    @if (hostNames.Count == 0)
     {
-        <Loading />
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>@localizer["ThereIsNoHost"]</MudText>
+        </MudAlert>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>
+                برای اطلاعات بیشتر <MudLink Target="_blank" Href="Support/Create-New-DNS">کلیک</MudLink> کنید
+            </MudText>
+        </MudAlert>
     }
     else
     {
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@localizer["HostNames"]</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <BaseNavigateButtonComponent Href="dns/create" Text="@(localizer["CreateHostName"])">
-            </BaseNavigateButtonComponent>
-            @if (hostNames.Count == 0)
-            {
-                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
-                    <MudText>@localizer["ThereIsNoHost"]</MudText>
-                </MudAlert>
-                <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
-                    <MudText>برای اطلاعات بیشتر <MudLink Target="_blank" Href="Support/Create-New-DNS">کلیک</MudLink> کنید
-                    </MudText>
-                </MudAlert>
-            }
-            else
-            {
-                <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false"
-                    SortMode="@SortMode.None" Groupable="false">
-                    <Columns>
-                        <TemplateColumn Title="@localizer["HostName"]">
-                            <CellTemplate>
-                                <MudLink Href="@($"http://{context.Item.Name}.{context.Item.Domain}")" Target="_blank">
-                                    <MudText><code>@context.Item.Name</code>.@context.Item.Domain</MudText>
-                                </MudLink>
-                            </CellTemplate>
-                        </TemplateColumn>
-                        <TemplateColumn Title="@localizer["Target"]">
-                            <CellTemplate>
-                                <MudText>
-                                    <MudLink>
-                                        @switch ((DNSRecordTypeEnum)context.Item.RecordType)
-                                        {
-                                            case DNSRecordTypeEnum.A:
-                                                @context.Item.IPv4Address
-                                                break;
-                                            case DNSRecordTypeEnum.AAAA:
-                                                @context.Item.IPv6Address
-                                                break;
-                                            case DNSRecordTypeEnum.CNAME:
-                                                @context.Item.HostNameAlias
-                                                break;
-                                            case DNSRecordTypeEnum.WebRedirect:
-                                                @context.Item.URLOrIp.MakeCut(20)
-                                                break;
-                                        }
-                                    </MudLink>
-                                </MudText>
-                            </CellTemplate>
-                        </TemplateColumn>
-                        <TemplateColumn Title="@localizer["Type"]">
-                            <CellTemplate>
-                                <MudText>
-                                    @((DNSRecordTypeEnum)context.Item.RecordType +
-                                ((DNSRecordTypeEnum)context.Item.RecordType == DNSRecordTypeEnum.WebRedirect ?
-                                " (" + context.Item.RedirectHttpResponseStatusCode + ")" :
-                                String.Empty))
-                                </MudText>
-                            </CellTemplate>
-                        </TemplateColumn>
-                        <TemplateColumn>
-                            <CellTemplate>
-                                <MudStack Row>
-                                 <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
-                                     OnClick=@(()=>EditHostName(context.Item)) />
-                                 <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
-                                     OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
-                             </MudStack>
-                         </CellTemplate>
-                     </TemplateColumn>
-                 </Columns>
-             </MudDataGrid>
-                <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
-                <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
-                    <MudText>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <MudLink Target="_blank"
-                            Href="Download/Win">دانلود</MudLink> کنید</MudText>
-                    <MudText>در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <MudLink
-                            Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</MudLink> را مطالعه فرمایید
-                    </MudText>
-                </MudAlert>
-            }
-        </MudCardContent>
-
+        <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false"
+             SortMode="@SortMode.None" Groupable="false">
+            <Columns>
+                <TemplateColumn Title="@localizer["HostName"]">
+                    <CellTemplate>
+                        <MudLink Href="@($"http://{context.Item.Name}.{context.Item.Domain}")" Target="_blank">
+                            <MudText><code>@context.Item.Name</code>.@context.Item.Domain</MudText>
+                        </MudLink>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="@localizer["Target"]">
+                    <CellTemplate>
+                        <MudText>
+                            <MudLink>
+                                @switch ((DNSRecordTypeEnum)context.Item.RecordType)
+                                {
+                                    case DNSRecordTypeEnum.A:
+                                        @context.Item.IPv4Address
+                                        break;
+                                    case DNSRecordTypeEnum.AAAA:
+                                        @context.Item.IPv6Address
+                                        break;
+                                    case DNSRecordTypeEnum.CNAME:
+                                        @context.Item.HostNameAlias
+                                        break;
+                                    case DNSRecordTypeEnum.WebRedirect:
+                                        @context.Item.URLOrIp.MakeCut(20)
+                                        break;
+                                }
+                            </MudLink>
+                        </MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="@localizer["Type"]">
+                    <CellTemplate>
+                        <MudText>
+                            @((DNSRecordTypeEnum)context.Item.RecordType +
+                        ((DNSRecordTypeEnum)context.Item.RecordType == DNSRecordTypeEnum.WebRedirect ?
+                        " (" + context.Item.RedirectHttpResponseStatusCode + ")" :
+                        String.Empty))
+                        </MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn>
+                    <CellTemplate>
+                        <MudStack Row>
+                        <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
+                                         OnClick=@(()=>EditHostName(context.Item)) />
+                        <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
+                                         Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
+                                         OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+        <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
+        <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
+            <MudText>
+                برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <MudLink Target="_blank"
+                                                                                Href="Download/Win">دانلود</MudLink> کنید
+            </MudText>
+            <MudText>
+                در صورتی که سیستم عامل شما ویندوزی نمیباشد یا نمیخواهید اپلیکیشن نصب نمایید <MudLink Target="_blank" Href="Support/Create-New-Token-For-DNS">این مطلب</MudLink> را مطالعه فرمایید
+            </MudText>
+        </MudAlert>
     }
-    </MudCard>
+}

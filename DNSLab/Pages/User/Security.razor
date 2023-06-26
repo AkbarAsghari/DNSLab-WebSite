@@ -8,22 +8,16 @@
 @attribute [Authorize]
 
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
-    <MudCard>
-        <MudCardHeader>
-            <MudText Typo="Typo.h1">تغییر رمز عبور</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <MudTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password"
-                Class="mud-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" />
-            <MudTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password"
-                Class="mud-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" />
-        </MudCardContent>
-        <MudCardActions>
-            <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Loading"]
-                Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SubmitChangePassword>
-            </BaseButtonComponent>
-            <MudButton Href="user/ForgetPassword" Class="mr-2" Variant="Variant.Text" Color="Color.Secondary">رمز خودتو
-                            فراموش کردی؟</MudButton>
-        </MudCardActions>
-    </MudCard>
+    <MudText Typo="Typo.h1">تغییر رمز عبور</MudText>
+    <MudTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password"
+                  Class="mud-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" />
+    <MudTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password"
+                  Class="mud-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" />
+    <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Loading"]
+                         Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SubmitChangePassword>
+    </BaseButtonComponent>
+    <MudButton Href="user/ForgetPassword" Class="mr-2" Variant="Variant.Text" Color="Color.Secondary">
+        رمز خودتو
+        فراموش کردی؟
+    </MudButton>
 </MudContainer>

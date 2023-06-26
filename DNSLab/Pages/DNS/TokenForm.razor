@@ -2,49 +2,42 @@
 @inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="TokenAndDNS" Context=TokenContext>
-    <MudCard>
-        <MudCardHeader>
-            <MudText Typo="Typo.h3">@Title</MudText>
-        </MudCardHeader>
-        <MudCardContent>
-            <DataAnnotationsValidator />
-            <MudTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]"
-                Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
-            <MudText Typo="Typo.h4">@localizer["SelectDNSTitle"]</MudText>
-            @if (HostSummariesAndChecked == null)
-            {
-                <Loading IsInTop="false" />
-            }
-            else if (HostSummariesAndChecked.Count == 0)
-            {
-                <MudAlert Severity="Severity.Warning">
-                    <MudText>@localizer["YouHaveNoActiveDNS"] <BitLink Href="dns/create">@localizer["Click"]</BitLink>
-                    </MudText>
-                </MudAlert>
-            }
-            else
-            {
-                <MudPaper Outlined=true Class="rounded">
-                    <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
-                        <MudText>@localizer["SelectDNSDescription"]</MudText>
-                    </MudAlert>
-                    <MudGrid Spacing="0">
-                        @foreach (var item in HostSummariesAndChecked)
-                        {
-                            <MudItem xs="12" sm="6">
-                                <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
-                            </MudItem>
-                        }
-                    </MudGrid>
-                </MudPaper>
-            }
-        </MudCardContent>
-        <MudCardActions>
-            <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Progressing"]
-                Color=Color.Primary Icon=@Icons.Material.Filled.Save EditContext=TokenContext OnClick=OnValidSubmit>
-            </BaseButtonComponent>
-            <BaseNavigateButtonComponent Text=@localizer["Cancel"] Icon=@Icons.Material.Filled.Cancel
-                Color="Color.Secondary" Href="DNS/MyTokens"></BaseNavigateButtonComponent>
-        </MudCardActions>
-    </MudCard>
+    <MudText Typo="Typo.h3">@Title</MudText>
+    <DataAnnotationsValidator />
+    <MudTextField Label="@localizer["TokenName"]" Placeholder="@localizer["EnterYourTokenName"]"
+                  Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
+    <MudText Typo="Typo.h4">@localizer["SelectDNSTitle"]</MudText>
+    @if (HostSummariesAndChecked == null)
+    {
+        <Loading IsInTop="false" />
+    }
+    else if (HostSummariesAndChecked.Count == 0)
+    {
+        <MudAlert Severity="Severity.Warning">
+            <MudText>
+                @localizer["YouHaveNoActiveDNS"] <BitLink Href="dns/create">@localizer["Click"]</BitLink>
+            </MudText>
+        </MudAlert>
+    }
+    else
+    {
+        <MudPaper Outlined=true Class="rounded">
+            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start">
+                <MudText>@localizer["SelectDNSDescription"]</MudText>
+            </MudAlert>
+            <MudGrid Spacing="0">
+                @foreach (var item in HostSummariesAndChecked)
+                {
+                    <MudItem xs="12" sm="6">
+                        <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudPaper>
+    }
+    <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Progressing"]
+                         Color=Color.Primary Icon=@Icons.Material.Filled.Save EditContext=TokenContext OnClick=OnValidSubmit>
+    </BaseButtonComponent>
+    <BaseNavigateButtonComponent Text=@localizer["Cancel"] Icon=@Icons.Material.Filled.Cancel
+                                 Color="Color.Secondary" Href="DNS/MyTokens"></BaseNavigateButtonComponent>
 </EditForm>
