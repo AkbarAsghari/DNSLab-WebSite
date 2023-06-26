@@ -2,21 +2,22 @@
 @inject IStringLocalizer<Resource> localizer
 
 @typeparam TItem
-
 <EditForm Model="Model" Context="editCtx">
-    <Page>
-        <ChildContent>
-            <MudText Typo="Typo.h2">@Header</MudText>
+<MudCard>
+    <MudCardHeader>
+                <MudText Typo="Typo.h3">@Header</MudText>
+    </MudCardHeader>
+<MudCardContent>
             <DataAnnotationsValidator />
             @Body
-        </ChildContent>
-        <Actions>
+</MudCardContent>
+<MudCardActions>
             <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
                                  EditContext="editCtx">
             </BaseButtonComponent>
-        </Actions>
-    </Page>
-    @if (Results != null && Results.Count > 0)
+</MudCardActions>
+<MudCardContent>
+ @if (Results != null && Results.Count > 0)
     {
         <MudList>
             @foreach (var item in Results)
@@ -29,4 +30,6 @@
             }
         </MudList>
     }
+</MudCardContent>
+</MudCard>
 </EditForm>

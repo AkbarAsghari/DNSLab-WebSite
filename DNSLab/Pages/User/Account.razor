@@ -60,8 +60,8 @@ else
         </MudText>
     </MudAlert>
 
-    <MudDialog @bind-IsVisible=ChangeAccountUsernameModalVisible>
-        <TitleContent><MudText>تغییر نام کاربری</MudText></TitleContent>
+    <MudDialog @bind-IsVisible=ChangeAccountUsernameModalVisible Options="new DialogOptions {CloseButton=true}">
+        <TitleContent><MudText Typo="Typo.h3">تغییر نام کاربری</MudText></TitleContent>
         <DialogContent>
             <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
                 <MudText>
@@ -87,9 +87,9 @@ else
         </DialogActions>
     </MudDialog>
 
-    <MudDialog @bind-IsVisible=ChangeAccountEmailModalVisible>
+    <MudDialog @bind-IsVisible=ChangeAccountEmailModalVisible Options="new DialogOptions {CloseButton=true}">
         <TitleContent>
-            <MudText>@localizer["ChangeEmailAddress"]</MudText>
+            <MudText Typo="Typo.h3">@localizer["ChangeEmailAddress"]</MudText>
         </TitleContent>
         <DialogContent>
             <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">

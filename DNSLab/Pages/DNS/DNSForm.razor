@@ -1,9 +1,11 @@
 ﻿@inject IStringLocalizer<Resource> localizer
 
 <EditForm Model="HostName" Context=DNSContext>
-    <Page>
-        <ChildContent>
-            <MudText Typo="Typo.h2">@Title</MudText>
+    <MudCard>
+        <MudCardHeader>
+            <MudText Typo="Typo.h3">@Title</MudText>
+        </MudCardHeader>
+        <MudCardContent>
             <DataAnnotationsValidator />
             <MudGrid>
                 <MudItem sm="6" xs="12">
@@ -58,8 +60,8 @@
                     </MudAlert>
                 </MudItem>
             </MudGrid>
-        </ChildContent>
-        <Actions>
+        </MudCardContent>
+        <MudCardActions>
             <BaseButtonComponent Caption=@localizer["SaveChanges"]
                                  IsBussyCaption=@localizer["Progressing"]
                                  Color=Color.Primary
@@ -70,7 +72,7 @@
                                          Icon=@Icons.Material.Filled.Cancel
                                          Color="Color.Secondary"
                                          Href="DNS/MyDNS"></BaseNavigateButtonComponent>
-        </Actions>
-    </Page>
+        </MudCardActions>
+    </MudCard>
 
 </EditForm>

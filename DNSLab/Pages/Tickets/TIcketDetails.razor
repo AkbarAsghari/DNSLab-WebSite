@@ -6,16 +6,18 @@
 @inject IJSRuntime jsRuntime
 @attribute [Authorize]
 
-@if (messages == null)
-{
-    <Loading IsInTop=true />
-}
-else
-{
-    <EditForm Model="Message" Context="TicketDetails">
-        <Page>
-            <ChildContent>
-                <MudText Typo="Typo.h2">@localizer["TicketTitle"] : @ticket.Title</MudText>
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">@localizer["TicketTitle"] : @ticket.Title</MudText>
+    </MudCardHeader>
+            <EditForm Model="Message" Context="TicketDetails">
+    <MudCardContent>
+        @if (messages == null)
+        {
+            <Loading IsInTop=true />
+        }
+        else
+        {
                 <MudPaper>
                     @foreach (var item in messages.OrderBy(x => x.CreateDate))
                     {
@@ -31,26 +33,17 @@ else
                         </MudListItem>
                     }
                 </MudPaper>
-                <MudTextField Label="@localizer["TicketText"]" AutoFocus="true"
-                          Lines="7"
-                          Variant="Variant.Outlined"
-                          Placeholder="@(localizer["TicketText"] + "...")"
-                          @bind-Value="Message.Text"
-                          MaxLength="@MAX_TEXT_COUNT" />
-            </ChildContent>
-            <Actions>
-                <BaseButtonComponent Caption=@localizer["Send"]
-                                 IsBussyCaption=@localizer["Progressing"]
-                                 Color=Color.Primary
-                                 Icon=@Icons.Material.Filled.Send
-                                 EditContext="TicketDetails"
-                                 OnClick=SendTicket></BaseButtonComponent>
-                <BaseNavigateButtonComponent Text="انصراف"
-                                         Href="Ticket/MyTickets"
-                                         Color="Color.Secondary"
-                                         Icon=@Icons.Material.Filled.Cancel>
+                <MudTextField Label="@localizer["TicketText"]" AutoFocus="true" Lines="7" Variant="Variant.Outlined"
+                    Placeholder="@(localizer["TicketText"] + "...")" @bind-Value="Message.Text"
+                    MaxLength="@MAX_TEXT_COUNT" />
+        }
+    </MudCardContent>
+    <MudCardActions>
+                        <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
+                    Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket></BaseButtonComponent>
+                <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
+                    Icon=@Icons.Material.Filled.Cancel>
                 </BaseNavigateButtonComponent>
-            </Actions>
-        </Page>
-    </EditForm>
-}
+    </MudCardActions>
+            </EditForm>
+</MudCard>

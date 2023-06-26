@@ -8,25 +8,24 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
     <EditForm Model=user Context="AuthContext">
-        <DataAnnotationsValidator />
         <MudCard>
-            <MudCardHeader>
-                <MudText Typo="Typo.h1">@localizer["Login"]</MudText>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudTextField Label="@localizer["UsernameOrEmail"]" Class="mud-ltr" Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" />
-                <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@user.Password" />
-            </MudCardContent>
-            <MudCardActions>
-                <BaseButtonComponent Caption=@localizer["Login"]
-                                     IsBussyCaption=@localizer["Loading"]
-                                     Color=Color.Primary
-                                     Icon=@Icons.Material.Filled.Login
-                                     EditContext=AuthContext
-                                     OnClick=AuthUser></BaseButtonComponent>
-                <MudDivider Vertical=true Class="mx-2" />
-                <MudButton Href="user/ForgetPassword" Variant="Variant.Text" Color="Color.Secondary">رمز خودتو فراموش کردی؟</MudButton>
-            </MudCardActions>
+                    <MudCardHeader>
+                        <MudText Typo="Typo.h1">@localizer["Login"]</MudText>
+                    </MudCardHeader>
+                    <MudCardContent>
+                    <DataAnnotationsValidator />
+                        <MudTextField Label="@localizer["UsernameOrEmail"]" Class="mud-ltr"
+                            Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" />
+                        <MudTextField InputType="InputType.Password" Label="@localizer["Password"]"
+                            Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@user.Password" />
+                    </MudCardContent>
+                    <MudCardActions>
+                        <BaseButtonComponent Caption=@localizer["Login"] IsBussyCaption=@localizer["Loading"]
+                            Color=Color.Primary Icon=@Icons.Material.Filled.Login EditContext=AuthContext
+                            OnClick=AuthUser></BaseButtonComponent>
+                        <MudButton Href="user/ForgetPassword" Class="mr-2" Variant="Variant.Text" Color="Color.Secondary">رمز خودتو
+                            فراموش کردی؟</MudButton>
+                    </MudCardActions>
         </MudCard>
     </EditForm>
 </MudContainer>

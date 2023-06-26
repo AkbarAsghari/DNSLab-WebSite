@@ -7,18 +7,19 @@
 
 @attribute [Authorize(Roles = "Admin,Writer")]
 
-<Page>
+<MudCard>
     @if (pageSummaries == null)
     {
         <Loading />
     }
     else
     {
-        @if (pageSummaries.Count() == 0)
+        <MudCardContent>
+@if (pageSummaries.Count() == 0)
         {
-            <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-                <BitLabel>@localizer["ThereIsNoPages"]</BitLabel>
-            </BitMessageBar>
+            <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
+                <MudText>@localizer["ThereIsNoPages"]</MudText>
+            </MudAlert>
         }
         else
         {
@@ -63,5 +64,6 @@
                 </Columns>
             </MudDataGrid>
         }
+        </MudCardContent>
     }
-</Page>
+</MudCard>

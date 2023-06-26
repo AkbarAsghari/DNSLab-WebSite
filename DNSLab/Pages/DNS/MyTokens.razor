@@ -7,124 +7,110 @@
 
 
 @attribute [Authorize]
-<Page>
+<MudCard>
     @if (tokenSummaries == null)
     {
         <Loading />
     }
     else
     {
-        <MudText Typo="Typo.h2">@localizer["Tokens"]</MudText>
-        <BaseNavigateButtonComponent Href="dns/createtoken"
-                                 Text="@(localizer["CreateToken"])">
-        </BaseNavigateButtonComponent>
-        @if (tokenSummaries.Count() == 0)
-        {
-            <MudAlert Severity=Severity.Warning ContentAlignment=HorizontalAlignment.Start>
-                <MudText>@localizer["ThereIsNoTokens"]</MudText>
+        <MudCardHeader>
+            <MudText Typo="Typo.h3">@localizer["Tokens"]</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <BaseNavigateButtonComponent Href="dns/createtoken" Text="@(localizer["CreateToken"])">
+            </BaseNavigateButtonComponent>
+            @if (tokenSummaries.Count() == 0)
+            {
+                <MudAlert Severity=Severity.Warning ContentAlignment=HorizontalAlignment.Start>
+                    <MudText>@localizer["ThereIsNoTokens"]</MudText>
+                </MudAlert>
+            }
+            else
+            {
+                <MudDataGrid Items="@tokenSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false"
+                    SortMode="@SortMode.None" Groupable="false">
+                    <Columns>
+                        <PropertyColumn Property="x => x.Name" Title="@localizer["TokenName"]" />
+                        <TemplateColumn CellClass="d-flex justify-start" Title="تاریخ">
+                            <CellTemplate>
+                                <MudText>@localizer["CreateDate"]" : @context.Item.CreateDate.ToLocalizerString()</MudText>
+                                @if (context.Item.UpdateDate is not null)
+                                {
+                                    <MudText>@localizer["UpdateDate"]" : @context.Item.UpdateDate.Value.ToLocalizerString()
+                                    </MudText>
+                                }
+                            </CellTemplate>
+                        </TemplateColumn>
+
+                        <PropertyColumn Property="x => x.HostNameCount" Title="@localizer["HostNamesCount"]" />
+                        <TemplateColumn CellClass="d-flex justify-end">
+                            <CellTemplate>
+                                <MudStack Row>
+                                 <BaseButtonComponent Caption=@localizer["Details"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Primary IsOutLine=true Icon=@Icons.Material.Filled.MoreHoriz
+                                     OnClick=@(()=>OpenToken(context.Item)) />
+                                 <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
+                                     OnClick=@(()=>EditToken(context.Item)) />
+                                 <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
+                                     OnClick=@(()=>DeleteToken(context.Item)) />
+                             </MudStack>
+                         </CellTemplate>
+                     </TemplateColumn>
+                 </Columns>
+             </MudDataGrid>
+            }
+            <MudAlert Severity=Severity.Info ContentAlignment=HorizontalAlignment.Start>
+                <MudText>برای اطلاعات بیشتر لطفا <MudLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب
+                    </MudLink> را مطالعه فرمایید</MudText>
             </MudAlert>
+        </MudCardContent>
+    }
+    </MudCard>
+
+
+    <MudDialog Options="dialogOptions" @bind-IsVisible="showTokenDetails">
+        <TitleContent>
+            <MudText Typo="Typo.h3">@localizer["TokenName"] : @token.Name </MudText>
+        </TitleContent>
+        <DialogContent>
+            @if (@isRevoking)
+        {
+            <MudText>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</MudText>
+            <BaseButtonComponent Caption=@localizer["Continue"] IsBussyCaption=@localizer["Progressing"]
+                Icon=@Icons.Material.Filled.Refresh Color="Color.Warning" OnClick=ContinueRevokeKey />
+            <BaseButtonComponent Caption=@localizer["Cancel"] IsBussyCaption=@localizer["Progressing"]
+                Icon=@Icons.Material.Filled.Cancel OnClick=ChangeRevokeStatus />
         }
         else
         {
-            <MudDataGrid Items="@tokenSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
-                <Columns>
-                    <PropertyColumn Property="x => x.Name" Title="@localizer["TokenName"]" />
-                    <TemplateColumn CellClass="d-flex justify-start" Title="تاریخ">
-                        <CellTemplate>
-                            <MudText>@localizer["CreateDate"]" : @context.Item.CreateDate.ToLocalizerString()</MudText>
-                            @if (context.Item.UpdateDate is not null)
-                            {
-                                <MudText>@localizer["UpdateDate"]" : @context.Item.UpdateDate.Value.ToLocalizerString()</MudText>
-                            }
-                        </CellTemplate>
-                    </TemplateColumn>
-
-                    <PropertyColumn Property="x => x.HostNameCount" Title="@localizer["HostNamesCount"]" />
-                    <TemplateColumn CellClass="d-flex justify-end">
-                        <CellTemplate>
-                            <MudStack Row>
-                            <BaseButtonComponent Caption=@localizer["Details"]
-                                             IsBussyCaption=@localizer["Progressing"]
-                                             Color=Color.Primary
-                                             IsOutLine=true
-                                             Icon=@Icons.Material.Filled.MoreHoriz
-                                             OnClick=@(()=>OpenToken(context.Item)) />
-                            <BaseButtonComponent Caption=@localizer["Edit"]
-                                             IsBussyCaption=@localizer["Progressing"]
-                                             Color=Color.Warning
-                                             IsOutLine=true
-                                             Icon=@Icons.Material.Filled.Edit
-                                             OnClick=@(()=>EditToken(context.Item)) />
-                            <BaseButtonComponent Caption=@localizer["Delete"]
-                                             IsBussyCaption=@localizer["Progressing"]
-                                             Color=Color.Error
-                                             IsOutLine=true
-                                             Icon=@Icons.Material.Filled.Delete
-                                             OnClick=@(()=>DeleteToken(context.Item)) />
-                        </MudStack>
-                    </CellTemplate>
-                </TemplateColumn>
-            </Columns>
-        </MudDataGrid>
+            <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
+            <BaseButtonComponent Caption=@localizer["RevokeKey"] IsBussyCaption=@localizer["Progressing"] IsOutLine=true
+                Color=Color.Error Icon=@Icons.Material.Filled.Refresh OnClick=ChangeRevokeStatus />
         }
-        <MudAlert Severity=Severity.Info ContentAlignment=HorizontalAlignment.Start>
-            <MudText>برای اطلاعات بیشتر لطفا <MudLink Href="Support/Create-New-Token-For-DNS" Target="_blank">این مطلب</MudLink> را مطالعه فرمایید</MudText>
+        <MudText>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل
+            خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</MudText>
+        <MudText>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL
+            در دسترس میباشد</MudText>
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
+            <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)" Target="_blank"
+                Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
+            <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)" Target="_blank"
+                Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
+        </MudButtonGroup>
+        <MudText>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در
+            دسترس میباشد</MudText>
+        <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)" Target="_blank"
+            Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
+        <MudText>لینک بروزرسانی آی پی های توکن</MudText>
+        <MudText>
+            https://api.dnslab.link/DNS/UDIBT?k=@token.Key
+            <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @token.Key) />
+        </MudText>
+        <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
+            این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
         </MudAlert>
-    }
-</Page>
-
-
-<MudDialog Options="dialogOptions" @bind-IsVisible="showTokenDetails">
-    <TitleContent>
-        <MudText Typo="Typo.h3">@localizer["TokenName"] : @token.Name </MudText>
-    </TitleContent>
-    <DialogContent>
-        <Page>
-                @if (@isRevoking)
-                {
-                    <MudText>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</MudText>
-                    <BaseButtonComponent Caption=@localizer["Continue"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Icon=@Icons.Material.Filled.Refresh
-                                     Color="Color.Warning"
-                                     OnClick=ContinueRevokeKey />
-                    <BaseButtonComponent Caption=@localizer["Cancel"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Icon=@Icons.Material.Filled.Cancel
-                                     OnClick=ChangeRevokeStatus />
-                }
-                else
-                {
-                    <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
-                    <BaseButtonComponent Caption=@localizer["RevokeKey"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     IsOutLine=true
-                                     Color=Color.Error
-                                     Icon=@Icons.Material.Filled.Refresh
-                                     OnClick=ChangeRevokeStatus />
-                }
-                <MudText>برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید</MudText>
-                <MudText>فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL در دسترس میباشد</MudText>
-                <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
-                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)"
-                                                 Target="_blank"
-                                                 Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={token.Id}&key={token.Key}")" />
-                    <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)"
-                                                 Target="_blank"
-                                                 Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={token.Id}&key={token.Key}")" />
-                </MudButtonGroup>
-                <MudText>فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در دسترس میباشد</MudText>
-                <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)"
-                                             Target="_blank"
-                                             Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={token.Id}&key={token.Key}")" />
-                <MudText>لینک بروزرسانی آی پی های توکن</MudText>
-                <MudText>
-                    https://api.dnslab.link/DNS/UDIBT?k=@token.Key
-                    <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @token.Key) />
-                </MudText>
-                <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
-                    این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
-                </MudAlert>
-        </Page>
     </DialogContent>
 </MudDialog>

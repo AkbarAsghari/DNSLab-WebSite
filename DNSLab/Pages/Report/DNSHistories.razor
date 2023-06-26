@@ -3,9 +3,15 @@
 
 @attribute [Authorize]
 
-<Page>
-    <MudText Typo="Typo.h3">گزارش تغییرات هاست نِیم ها</MudText>
-    @if (dNSChangeHistories == null)
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">گزارش تغییرات هاست نِیم ها</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
+            <MudText>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</MudText>
+        </MudAlert>
+@if (dNSChangeHistories == null)
     {
         <Loading />
     }
@@ -17,9 +23,6 @@
         }
         else
         {
-            <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
-                <MudText>این صفحه فقط تغییرات ۳۰ روز گذشته را نمایش خواهد داد ، بنابراین ممکن است برخی رکورد ها تاریخچه ای نداشته باشند.</MudText>
-            </MudAlert>
             @if (dNSChangeHistories != null)
             {
                 <MudTimeline TimelinePosition="TimelinePosition.Right">
@@ -95,4 +98,5 @@
             }
         }
     }
-</Page>
+    </MudCardContent>
+</MudCard>

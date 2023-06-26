@@ -6,14 +6,17 @@
 
 @attribute [Authorize(Roles = "Admin")]
 
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">@localizer["ChangeLogs"]</MudText>
+    </MudCardHeader>
+    <MudCardContent>
 @if (ChangeLogs == null)
 {
     <Loading />
 }
 else
 {
-    <Page>
-        <MudText Typo="Typo.h2">@localizer["ChangeLogs"]</MudText>
         <BaseNavigateButtonComponent Href="ChangeLogs/Create"
                                  Text="@(localizer["CreateNewChangeLog"])">
         </BaseNavigateButtonComponent>
@@ -67,5 +70,6 @@ else
                     </Columns>
                 </MudDataGrid>
         }
-    </Page>
-}
+}        
+    </MudCardContent>
+</MudCard>

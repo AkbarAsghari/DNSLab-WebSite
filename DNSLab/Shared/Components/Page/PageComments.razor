@@ -2,61 +2,67 @@
 @inject AuthenticationStateProvider auth
 @inject NavigationManager _NavigationManager
 
-<Page>
-    <MudText Typo="Typo.h3">نظرات کاربران</MudText>
-    <MudAlert ContentAlignment="HorizontalAlignment.Start" Severity="Severity.Info">
-        @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
-        {
-            <MudText>تا کنون هیچ دیدگاهی ثبت نشده است ، شما میتونید اولین نفر باشید.</MudText>
-        }
-        <MudText>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.</MudText>
-    </MudAlert>
-    <BaseButtonComponent Caption="ثبت دیدگاه" Icon="@Icons.Material.Filled.AddComment"
-                         OnClick="async() => await AddNewPageComment()">
-    </BaseButtonComponent>
-    @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() > 0)
-    {
-        <MudPaper Elevation="0">
-            @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h3">نظرات کاربران</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudAlert ContentAlignment="HorizontalAlignment.Start" Severity="Severity.Info">
+            @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() == 0)
             {
-                <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
-                         ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
-                    @if (item.Replies.Count() > 0)
-                    {
-                        foreach (var reply in item.Replies)
-                        {
-                            <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
-                             ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
-                        }
-                    }
-                </PageCommentItem>
+                <MudText>تا کنون هیچ دیدگاهی ثبت نشده است ، شما میتونید اولین نفر باشید.</MudText>
             }
-        </MudPaper>
-        if (totalCommentsCount - 3 > 0 && !ShowAll)
+            <MudText>اگر اطلاعات یا دیدگاهی در مورد مطالب این صفحه دارید، لطفا با ما و کاربران دیگر به اشتراک بگذارید.
+            </MudText>
+        </MudAlert>
+        <BaseButtonComponent Caption="ثبت دیدگاه" Icon="@Icons.Material.Filled.AddComment"
+            OnClick="async() => await AddNewPageComment()">
+        </BaseButtonComponent>
+        @if (PageCommentAndReplies != null && PageCommentAndReplies.Count() > 0)
         {
-            <MudLink Href="@($"Comment/All/{PageId}")">
-                <MudText Align="Align.Center">... برای نمایش @(totalCommentsCount - 3) نظر دیگر در این صفحه کلیک کنید ...</MudText>
-            </MudLink>
+            <MudPaper Elevation="0">
+                @foreach (var item in PageCommentAndReplies.OrderByDescending(x => x.Comment.CreateDate))
+                {
+                    <PageCommentItem PageComment="item.Comment" AuthUserId="CurrentUserId"
+                        ReplyButtonClick="async ()=>await AddNewPageComment(item.Comment)">
+                        @if (item.Replies.Count() > 0)
+                        {
+                            foreach (var reply in item.Replies)
+                            {
+                                <PageCommentItem PageComment="reply" AuthUserId="CurrentUserId"
+                                    ReplyButtonClick="async ()=> await AddNewPageComment(reply)"></PageCommentItem>
+                            }
+                        }
+                    </PageCommentItem>
+                }
+            </MudPaper>
+            if (totalCommentsCount - 3 > 0 && !ShowAll)
+            {
+                <MudLink Href="@($"Comment/All/{PageId}")">
+                    <MudText Align="Align.Center">... برای نمایش @(totalCommentsCount - 3) نظر دیگر در این صفحه کلیک کنید ...
+                    </MudText>
+                </MudLink>
+            }
         }
-    }
-</Page>
+    </MudCardContent>
+</MudCard>
 
-
-<MudDialog @bind-IsVisible="@showDialog" Options="new DialogOptions {MaxWidth=MaxWidth.Small , FullWidth=true}">
+<MudDialog @bind-IsVisible="@showDialog"
+    Options="new DialogOptions {MaxWidth=MaxWidth.Small , FullWidth=true , CloseButton=true}">
     <TitleContent>
         <MudText Typo="Typo.h3">@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</MudText>
-        </TitleContent>
-        <DialogContent>
             <MudText>
                 @(ReplyToId == Guid.Empty ?
                 "اطلاعات یا دیدگاه خود در مورد مطالب این صفحه دارید را در کادر پایین وارد نمایید."
                 : "متن پاسخ خود را وارد نمایید")
         </MudText>
-        <MudTextField Lines="5" @bind-Value="NewPageComment.Text">
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Lines="5" Variant="Variant.Outlined" @bind-Value="NewPageComment.Text">
         </MudTextField>
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption="@(ReplyToId == Guid.Empty ? "ثبت دیدگاه": "ثبت پاسخ")"
-                             Icon="@Icons.Material.Filled.AddComment" OnClick="SubmitComment"></BaseButtonComponent>
+            Icon="@Icons.Material.Filled.AddComment" OnClick="SubmitComment"></BaseButtonComponent>
     </DialogActions>
 </MudDialog>
