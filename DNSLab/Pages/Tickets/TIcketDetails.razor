@@ -9,7 +9,22 @@
 <MudCard>
     @if (messages == null)
     {
-        <Loading IsInTop=true />
+        <MudCard>
+            <MudCardHeader>
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="20%" />
+            </MudCardHeader>
+            <MudCardContent>
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="250px" Width="100%" />
+            </MudCardContent>
+            <MudCardActions>
+                <MudStack Row>
+                 <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
+                     Width="100px" />
+                 <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
+                     Width="100px" />
+             </MudStack>
+         </MudCardActions>
+     </MudCard>
     }
     else
     {
@@ -38,12 +53,15 @@
                     MaxLength="@MAX_TEXT_COUNT" />
             </MudCardContent>
             <MudCardActions>
-                <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
-                    Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket></BaseButtonComponent>
-                <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
-                    Icon=@Icons.Material.Filled.Cancel>
-                </BaseNavigateButtonComponent>
-            </MudCardActions>
-        </EditForm>
+                <MudStack Row>
+                 <BaseButtonComponent Caption=@localizer["Send"] IsBussyCaption=@localizer["Progressing"]
+                     Color=Color.Primary Icon=@Icons.Material.Filled.Send EditContext="TicketDetails" OnClick=SendTicket>
+                 </BaseButtonComponent>
+                 <BaseNavigateButtonComponent Text="انصراف" Href="Ticket/MyTickets" Color="Color.Secondary"
+                     Icon=@Icons.Material.Filled.Cancel>
+                 </BaseNavigateButtonComponent>
+             </MudStack>
+         </MudCardActions>
+     </EditForm>
     }
     </MudCard>

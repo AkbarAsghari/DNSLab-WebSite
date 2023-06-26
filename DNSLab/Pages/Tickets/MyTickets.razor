@@ -13,7 +13,21 @@
     <MudCardContent>
 @if (tickets == null)
 {
-    <Loading />
+    <MudCard>
+            <MudCardHeader>
+                <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Pulse" Height="40px"
+                     Width="100px" />
+            </MudCardHeader>
+            <MudCardContent>
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+                <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Pulse" Height="40px" Width="100%" />
+            </MudCardContent>
+     </MudCard>
 }
 else
 {
