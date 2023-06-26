@@ -74,18 +74,20 @@
                                 </MudText>
                             </CellTemplate>
                         </TemplateColumn>
-                        <TemplateColumn CellClass="d-flex justify-end">
+                        <TemplateColumn>
                             <CellTemplate>
-                                <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
-                                    Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
-                                    OnClick=@(()=>EditHostName(context.Item)) />
-                                <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
-                                    Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
-                                    OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
-                            </CellTemplate>
-                        </TemplateColumn>
-                    </Columns>
-                </MudDataGrid>
+                                <MudStack Row>
+                                 <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
+                                     OnClick=@(()=>EditHostName(context.Item)) />
+                                 <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
+                                     OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
+                             </MudStack>
+                         </CellTemplate>
+                     </TemplateColumn>
+                 </Columns>
+             </MudDataGrid>
                 <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
                 <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
                     <MudText>برای همسانسازی آی‌پی سیستم خود با سایت میتونید نسخه ویندوزی رو <MudLink Target="_blank"

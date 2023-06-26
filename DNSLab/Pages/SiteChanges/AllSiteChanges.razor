@@ -51,8 +51,9 @@ else
                             <MudText> @(@context.Item.UpdateDate != null ? (@localizer["UpdateDate"] + ":" + @context.Item.UpdateDate.Value.ToLocalizerString()) : String.Empty)</MudText>
                             </CellTemplate>
                         </TemplateColumn>
-                        <TemplateColumn CellClass="d-flex justify-end">
+                        <TemplateColumn>
                             <CellTemplate>
+                                <MudStack Row>
                                 <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=Color.Warning
@@ -65,6 +66,7 @@ else
                                          IsOutLine=true
                                          Icon=@Icons.Material.Filled.Delete
                                          OnClick=@(()=>DeleteSiteChange(context.Item)) />
+                                </MudStack>
                             </CellTemplate>
                         </TemplateColumn>
                     </Columns>

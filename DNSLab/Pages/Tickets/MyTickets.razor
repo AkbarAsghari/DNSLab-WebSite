@@ -13,24 +13,24 @@
 else
 {
     <MudText Typo="Typo.h3">@localizer["MyTickets"]</MudText>
-    <BaseNavigateButtonComponent Href="Ticket/New"
-                             Text="@(localizer["CreateNewTicket"])">
+    <BaseNavigateButtonComponent Href="Ticket/New" Text="@(localizer["CreateNewTicket"])">
     </BaseNavigateButtonComponent>
     @if (tickets.Count() == 0)
     {
         <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
-            <MudText>@localizer["ThereIsNoTicket"]</MudText>
-        </MudAlert>
+    <MudText>@localizer["ThereIsNoTicket"]</MudText>
+</MudAlert>
     }
     else
     {
-        <MudDataGrid Items="@tickets.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
-            <Columns>
-                <PropertyColumn Property="x=>x.Title" Title="@localizer["TicketTitle"]" />
-                <TemplateColumn Title="@localizer["CreateDate"]">
-                    <CellTemplate>
-                        <MudText>@localizer["CreateDate"] : @context.Item.CreateDate.ToLocalizerString()</MudText>
-                        @if (@context.Item.UpdateDate != null)
+        <MudDataGrid Items="@tickets.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
+    Groupable="false">
+    <Columns>
+        <PropertyColumn Property="x=>x.Title" Title="@localizer["TicketTitle"]" />
+        <TemplateColumn Title="@localizer["CreateDate"]">
+            <CellTemplate>
+                <MudText>@localizer["CreateDate"] : @context.Item.CreateDate.ToLocalizerString()</MudText>
+                @if (@context.Item.UpdateDate != null)
                         {
                             <MudText>@localizer["UpdateDate"] : @context.Item.UpdateDate.Value.ToLocalizerString()</MudText>
                         }
@@ -49,26 +49,22 @@ else
                         }
                     </CellTemplate>
                 </TemplateColumn>
-                <TemplateColumn CellClass="d-flex justify-end">
+                <TemplateColumn>
                     <CellTemplate>
-                        @if (!context.Item.IsClosed)
-                        {
-                            <BaseButtonComponent Caption=@localizer["Close"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Warning
-                                     Icon=@Icons.Material.Filled.MarkEmailRead
-                                     OnClick=@(()=>CloseTicket(context.Item))></BaseButtonComponent>
-                        }
-                        <BaseButtonComponent Caption=@localizer["Open"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Primary
-                                     Icon=@Icons.Material.Filled.MarkAsUnread
-                                     OnClick=@(()=>OpenTicket(context.Item))></BaseButtonComponent>
-                        <BaseButtonComponent Caption=@localizer["Delete"]
-                                     IsBussyCaption=@localizer["Progressing"]
-                                     Color=Color.Error
-                                     Icon=@Icons.Material.Filled.Delete
-                                     OnClick=@(()=>DeleteTicket(context.Item))></BaseButtonComponent>
+                        <MudStack Row>
+                         @if (!context.Item.IsClosed)
+                            {
+                                <BaseButtonComponent Caption=@localizer["Close"] IsBussyCaption=@localizer["Progressing"]
+                                    Color=Color.Warning Icon=@Icons.Material.Filled.MarkEmailRead
+                                    OnClick=@(()=>CloseTicket(context.Item))></BaseButtonComponent>
+                            }
+                            <BaseButtonComponent Caption=@localizer["Open"] IsBussyCaption=@localizer["Progressing"]
+                                Color=Color.Primary Icon=@Icons.Material.Filled.MarkAsUnread
+                                OnClick=@(()=>OpenTicket(context.Item))></BaseButtonComponent>
+                            <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
+                                Color=Color.Error Icon=@Icons.Material.Filled.Delete OnClick=@(()=>DeleteTicket(context.Item))>
+                            </BaseButtonComponent>
+                        </MudStack>
                     </CellTemplate>
                 </TemplateColumn>
             </Columns>

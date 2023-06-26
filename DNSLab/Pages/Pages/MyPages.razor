@@ -15,55 +15,53 @@
     else
     {
         <MudCardContent>
-@if (pageSummaries.Count() == 0)
-        {
-            <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
-                <MudText>@localizer["ThereIsNoPages"]</MudText>
-            </MudAlert>
-        }
-        else
-        {
-            <MudText Typo="Typo.h2">@localizer["AllPages"]</MudText>
-            <BaseNavigateButtonComponent Href="Page/Create"
-                                 Text="@(localizer["Create New Page"])">
-            </BaseNavigateButtonComponent>
-            <MudDataGrid Items="@pageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None" Groupable="false">
-                <Columns>
-                    <TemplateColumn Title="@localizer["HostName"]">
-                        <CellTemplate>
-                            <MudLink Class="text-decoration-none" Href="@($"https://dnslab.link/{context.Item.PageType}/{context.Item.URL}")" Target="_blank">
-                                <MudText>
-                                    dnslab.link/<code><strong>@context.Item.PageType</strong></code><code>@($"/{@context.Item.URL}")</code>
-                                </MudText>
-                            </MudLink>
-                        </CellTemplate>
-                    </TemplateColumn>
-                    <PropertyColumn Property="x=>x.Description" CellClass="text-truncate" Title="@localizer["Description"]" />
-                    <TemplateColumn CellClass="d-flex justify-end">
-                        <CellTemplate>
-                            <BaseButtonComponent Caption=@localizer["Edit"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Warning
-                                         Icon=@Icons.Material.Filled.Edit
-                                         OnClick=@(()=>EditPage(context.Item)) />
-                            <BaseButtonComponent Caption=@localizer["Delete"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Error
-                                         Icon=@Icons.Material.Filled.Delete
-                                         OnClick=@(()=>DeletePage(context.Item)) />
-                            @if (!context.Item.IsPublieshed)
-                            {
-                                <BaseButtonComponent Caption=@localizer["Publish"]
-                                         IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Primary
-                                         Icon=@Icons.Material.Filled.Publish
-                                         OnClick=@(()=>PublishPage(context.Item)) />
-                            }
-                        </CellTemplate>
-                    </TemplateColumn>
-                </Columns>
-            </MudDataGrid>
-        }
+            @if (pageSummaries.Count() == 0)
+            {
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
+                    <MudText>@localizer["ThereIsNoPages"]</MudText>
+                </MudAlert>
+            }
+            else
+            {
+                <MudText Typo="Typo.h2">@localizer["AllPages"]</MudText>
+                <BaseNavigateButtonComponent Href="Page/Create" Text="@(localizer["Create New Page"])">
+                </BaseNavigateButtonComponent>
+                <MudDataGrid Items="@pageSummaries.OrderByDescending(x => x.CreateDate)" Filterable="false"
+                    SortMode="@SortMode.None" Groupable="false">
+                    <Columns>
+                        <TemplateColumn Title="@localizer["HostName"]">
+                            <CellTemplate>
+                                <MudLink Class="text-decoration-none"
+                                    Href="@($"https://dnslab.link/{context.Item.PageType}/{context.Item.URL}")" Target="_blank">
+                                    <MudText>
+                                        dnslab.link/<code><strong>@context.Item.PageType</strong></code><code>@($"/{@context.Item.URL}")</code>
+                                    </MudText>
+                                </MudLink>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn Property="x=>x.Description" CellClass="text-truncate"
+                            Title="@localizer["Description"]" />
+                        <TemplateColumn>
+                            <CellTemplate>
+                                <MudStack Row>
+                                 <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Warning Icon=@Icons.Material.Filled.Edit
+                                     OnClick=@(()=>EditPage(context.Item)) />
+                                 <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
+                                     Color=Color.Error Icon=@Icons.Material.Filled.Delete
+                                     OnClick=@(()=>DeletePage(context.Item)) />
+                                 @if (!context.Item.IsPublieshed)
+                                    {
+                                        <BaseButtonComponent Caption=@localizer["Publish"] IsBussyCaption=@localizer["Progressing"]
+                                            Color=Color.Primary Icon=@Icons.Material.Filled.Publish
+                                            OnClick=@(()=>PublishPage(context.Item)) />
+                                    }
+                                </MudStack>
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
+            }
         </MudCardContent>
     }
-</MudCard>
+    </MudCard>
