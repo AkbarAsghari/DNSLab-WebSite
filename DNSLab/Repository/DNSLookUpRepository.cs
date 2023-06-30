@@ -25,6 +25,8 @@ namespace DNSLab.Repository
 
             if (type == typeof(ARecordDTO))
                 queryType = 1;
+            if (type == typeof(AaaaRecordDTO))
+                queryType = 28;
             else if (type == typeof(NsRecordDTO))
                 queryType = 2;
             else if (type == typeof(CNAMERecordDTO))

@@ -14,7 +14,7 @@ partial class DNSLookup
 
     private List<string> DNSQueryTypes = new()
     {
-        "A","NS","CNAME","SOA","MX","TXT",
+        "A","AAAA","NS","CNAME","SOA","MX","TXT",
     };
 
     [Parameter, SupplyParameterFromQuery]
@@ -53,6 +53,16 @@ partial class DNSLookup
             case "A":
                 {
                     var response = await _DNSLookUpRepository.Query<ARecordDTO>(hostOrIPAddress.HostOrIPAddress);
+                    foreach (var item in response)
+                        result.Add($"RecordType : {item.RecordType}<br>" +
+                            $"DomainName : {item.DomainName}<br>" +
+                            $"TTL : {item.TTL}<br>" +
+                            $"Address : {item.Address}");
+                }
+                break;
+            case "AAAA":
+                {
+                    var response = await _DNSLookUpRepository.Query<AaaaRecordDTO>(hostOrIPAddress.HostOrIPAddress);
                     foreach (var item in response)
                         result.Add($"RecordType : {item.RecordType}<br>" +
                             $"DomainName : {item.DomainName}<br>" +
@@ -103,7 +113,7 @@ partial class DNSLookup
                 }
                 break;
             case "SOA":
-            {
+                {
                     var response = await _DNSLookUpRepository.Query<SOARecordDTO>(hostOrIPAddress.HostOrIPAddress);
                     foreach (var item in response)
                         result.Add($"RecordType : {item.RecordType}<br>" +
