@@ -5,7 +5,7 @@
 
 <PageTitle>DNSLab</PageTitle>
 <MudRTLProvider RightToLeft=true>
-    <MudThemeProvider Theme="MyCustomTheme" />
+    <MudThemeProvider Theme="MyCustomTheme" IsDarkMode="_isDarkMode" />
     <MudDialogProvider />
     <MudSnackbarProvider />
 
@@ -16,9 +16,10 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
                         OnClick="@((e) => DrawerToggle())" />
                     <MudSpacer />
-                    <MudLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite">
-                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Style="@($"color:{Colors.Shades.White};")" />
-                    </MudLink>
+                    <MudToggleIconButton @bind-Toggled="_isDarkMode"
+                     Icon="@Icons.Material.Filled.DarkMode" Title="تاریک"
+                     ToggledIcon="@Icons.Material.Outlined.LightMode" ToggledTitle="روشن" Color="Color.Inherit" />
+                    <MudIconButton Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Inherit"/>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_drawerOpen">
                     <NavMenu />
@@ -42,6 +43,7 @@
 
 @code {
 
+    bool _isDarkMode = false;
     bool _drawerOpen = true;
 
     void DrawerToggle()
