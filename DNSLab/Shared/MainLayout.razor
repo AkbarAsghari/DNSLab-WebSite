@@ -13,7 +13,12 @@
         <CascadingValue Value="@IPDTO">
             <MudLayout>
                 <MudAppBar>
-                    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+                        OnClick="@((e) => DrawerToggle())" />
+                    <MudSpacer />
+                    <MudLink Href="https://github.com/AkbarAsghari/DNSLab-WebSite">
+                        <MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Style="@($"color:{Colors.Shades.White};")" />
+                    </MudLink>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_drawerOpen">
                     <NavMenu />
