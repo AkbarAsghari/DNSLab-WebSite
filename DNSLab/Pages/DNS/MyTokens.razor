@@ -28,7 +28,7 @@ else
              SortMode="@SortMode.None" Groupable="false">
             <Columns>
                 <PropertyColumn Property="x => x.Name" Title="@localizer["TokenName"]" />
-                <TemplateColumn CellClass="d-flex justify-start" Title="تاریخ">
+                <TemplateColumn Title="تاریخ">
                     <CellTemplate>
                         <MudText>@localizer["CreateDate"]" : @context.Item.CreateDate.ToLocalizerString()</MudText>
                         @if (context.Item.UpdateDate is not null)
