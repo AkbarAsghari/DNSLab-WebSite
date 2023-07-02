@@ -7,12 +7,6 @@
 
 @{
     Layout = "_Layout";
-    this.HttpContext.Response.Cookies.Append(
-        CookieRequestCultureProvider.DefaultCookieName,
-        CookieRequestCultureProvider.MakeCookieValue(
-            new RequestCulture(
-                CultureInfo.CurrentCulture,
-                CultureInfo.CurrentUICulture)));
 
     RenderMode renderMode = RenderMode.Server;
 
