@@ -8,6 +8,8 @@ partial class UserProfileImage
 
     private string GenerateProfilePhoto(string userId)
     {
-        return Identicon.FromValue(userId, size: Size == 0 ? 100 : Size).ToSvg();
+        return Identicon.FromValue(userId, size: Size == 0 ? 100 : Size)
+        .ToSvg()
+        .Replace("#ffffff","none");//Remove White background
     }
 }
