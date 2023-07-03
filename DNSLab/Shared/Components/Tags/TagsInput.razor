@@ -3,21 +3,21 @@
 @using System.Linq;
 @using System.Text.RegularExpressions;
 
-<MudTextField T="string" Label="تگ ها"
-              Placeholder="با ( ویرگول ) جدا کنید"
-              Immediate="true" @bind-Value="@Value" 
-              Clearable="true" />
+<MudTextField T="string" @bind-Text="input" Label="تگ ها" Placeholder="با ( ویرگول ) جدا کنید" Clearable="true"
+    Class="mb-2" />
+<MudIconButton OnClick="SubmitTag" Class="ml-4" Color="Color.Secondary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Add" />
 
 @if (IsContainSpecialCharacter)
 {
     <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Right">
-        <MudText>امکان درج کاراکتر های خاص وجود ندارد</MudText>
-    </MudAlert>
+    <MudText>امکان درج کاراکتر های خاص وجود ندارد</MudText>
+</MudAlert>
 }
 @if (Tags != null && Tags.Any())
 {
     @foreach (var tag in Tags)
     {
-        <MudFab StartIcon="@Icons.Material.Filled.Close" Label="@tag" OnClick="() => DeleteTag(tag)" />
+        <MudFab Size="Size.Small" DisableElevation="true" StartIcon="@Icons.Material.Filled.Close" Label="@tag"
+    OnClick="() => DeleteTag(tag)" />
     }
 }
