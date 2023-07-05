@@ -16,6 +16,8 @@
                     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
                         OnClick="@((e) => DrawerToggle())" />
                     <MudSpacer />
+                    <MudButton Href="Transaction/Tip" EndIcon="@Icons.Material.Filled.Favorite" IconSize="Size.Large" IconColor="Color.Error" Color="Color.Inherit">حمایت از سایت</MudButton>
+                    <MudDivider Vertical="true" FlexItem="true" Class="my-4 mx-4" />
                     <MudIconButton Href="https://github.com/AkbarAsghari/DNSLab-WebSite" Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Inherit"/>
                 </MudAppBar>
                 <MudDrawer @bind-Open="@_drawerOpen">
