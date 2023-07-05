@@ -4,14 +4,13 @@
 
 @if (result.Count > 0)
 {
-    <MudText Typo="Typo.h3">حمایت کنندگان</MudText>
-    <MudGrid>
-        @foreach (var item in result)
-        {
-            <MudItem md="6" lg="4" xl="3">
-                <SupportItem FullName="@item.FullName" Amount="@item.Amount" />
-            </MudItem>
-        }
-    </MudGrid>
-        
+    <MudContainer MaxWidth="MaxWidth.Small">
+        <MudText Typo="Typo.h3">حمایت کنندگان</MudText>
+        <MudDataGrid Items="@result">
+            <Columns>
+                <PropertyColumn Property="x => x.FullName.EnglishToPersianNumbers()" Title="نام و نام خانوادگی" />
+                <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers()' Title="مبلغ" />
+            </Columns>
+        </MudDataGrid>
+    </MudContainer>
 }
