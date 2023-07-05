@@ -11,11 +11,11 @@
         <MudText>دی‌ان‌اس ها از سرور عمومی گوگل به آدرس 8.8.8.8 پرس و جو میشوند</MudText>
     </MudAlert>
     <MudGrid>
-        <MudItem lg="6">
+        <MudItem sm="6" xs="12">
             <MudTextField Label="@localizer["HostOrIPAddress"]" Placeholder="dnslab.link"
                           @bind-Value="@hostOrIPAddress.HostOrIPAddress" />
         </MudItem>
-        <MudItem lg="2">
+        <MudItem lg="2" sm="4" xs="12">
             <MudSelect T="string" Label="نوع رکورد" Variant="Variant.Text" @bind-Value="queryType">
                 @foreach (var item in DNSQueryTypes)
                 {

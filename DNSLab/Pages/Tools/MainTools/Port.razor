@@ -10,11 +10,11 @@
             <MudText>آزمایش می کند که آیا پورت TCP در IP مشخص باز شده است یا خیر</MudText>
         </MudAlert>
         <MudGrid>
-            <MudItem lg=6>
+            <MudItem sm="6" xs="12">
                 <MudTextField Label="@localizer["HostOrIPAddress"]" Placeholder="@IPDTO.IPv4"
                 @bind-Value="@hostOrIPAddressAndPort.HostOrIPAddress" />
             </MudItem>
-            <MudItem lg=6>
+            <MudItem lg="2" sm="4" xs="12">
                 <MudTextField Label="@localizer["PortNumber"]" Placeholder="80"
                 @bind-Value="@hostOrIPAddressAndPort.Port" />
             </MudItem>
