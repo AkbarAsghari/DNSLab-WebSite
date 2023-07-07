@@ -5,11 +5,11 @@
 @if (result.Count > 0)
 {
     <MudContainer MaxWidth="MaxWidth.Small">
-        <MudText Typo="Typo.h3">حمایت کنندگان</MudText>
+        <MudText Typo="Typo.h3">حمایت کنندگان ( @count نفر )</MudText>
         <MudDataGrid Items="@result">
             <Columns>
                 <PropertyColumn Property="x => x.FullName.EnglishToPersianNumbers()" Title="نام و نام خانوادگی" />
-                <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers()' Title="مبلغ" />
+                <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers() + " تومان"' Title="مبلغ" />
             </Columns>
         </MudDataGrid>
     </MudContainer>

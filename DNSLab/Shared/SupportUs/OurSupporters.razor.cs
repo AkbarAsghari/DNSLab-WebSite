@@ -5,13 +5,17 @@ namespace DNSLab.Shared.SupportUs;
 partial class OurSupporters
 {
     List<TipDTO> result = new List<TipDTO>();
+    int count = 0;
 
     protected override async Task OnInitializedAsync()
     {
         var Supporters = await _TransactionRepository.GetTips();
 
-        if (Supporters.Count() > 0)
+        count = Supporters.Count();
+
+        if (count > 0)
         {
+
             StringBuilder sb = new StringBuilder();
 
             var amountUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
