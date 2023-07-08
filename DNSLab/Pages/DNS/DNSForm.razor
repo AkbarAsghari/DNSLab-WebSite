@@ -5,7 +5,7 @@
     <DataAnnotationsValidator />
     <MudGrid>
         <MudItem sm="6" xs="12">
-            <MudTextField Label="@localizer["HostName"]" Class="mud-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" Disabled="@(IsNewRecord == false)" />
+            <MudTextField Label="@localizer["HostName"]" Class="mud-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" />
         </MudItem>
         <MudItem sm="6" xs="12">
             @switch (HostName.RecordType)
