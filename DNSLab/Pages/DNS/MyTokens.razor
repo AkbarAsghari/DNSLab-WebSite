@@ -83,7 +83,7 @@ else
         }
         else
         {
-            <BitLabel>@localizer["TokenKey"] : <code>@token.Key</code></BitLabel>
+            <MudText>@localizer["TokenKey"] : <code>@token.Key</code></MudText>
             <BaseButtonComponent Caption=@localizer["RevokeKey"] IsBussyCaption=@localizer["Progressing"] IsOutLine=true
                              Color=Color.Error Icon=@Icons.Material.Filled.Refresh OnClick=ChangeRevokeStatus />
         }

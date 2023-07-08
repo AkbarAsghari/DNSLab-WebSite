@@ -10,8 +10,8 @@
     <EditForm Model=registerUser Context="RegisterContext">
         <DataAnnotationsValidator />
         <MudText Typo="Typo.h1">@localizer["RegisterAccount"]</MudText>
-        <MudTextField Label="@localizer["Email"]" Type="BitTextFieldType.Email" Class="mud-ltr" Placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" />
-        <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@registerUser.Password" />
+        <MudTextField Label="@localizer["Email"]" Class="mud-ltr" Placeholder="@localizer["Email"]" @bind-Value="@registerUser.Email" />
+        <MudTextField InputType="InputType.Password" Label="@localizer["Password"]" Class="mud-ltr" @bind-Value="@registerUser.Password" />
         <MudSwitch T="bool" Color="Color.Primary" Label="قوانین و مقررات سایت را مطالعه و می پذیرم" @bind-Checked="isApprovedTOS" />
         <MudText GutterBottom>
             <MudLink Target="_blank" Href="legal/tos">مطالعه قوانین و مقررات</MudLink>

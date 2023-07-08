@@ -1,7 +1,7 @@
 ﻿@inject IStaticsRepository _StaticsRepository
 @inject NavigationManager _NavigationManager
 
-<BitLabel>
+<MudText>
     تعداد بازدید : 
     @if (visitCount > -1)
     {
@@ -9,6 +9,6 @@
     }
     else
     {
-        <BitSpinner Size="BitSpinnerSize.Small" Class="d-inline-block"/>
+        <MudProgressCircular Size="Size.Small" Color="Color.Primary" />
     }
-</BitLabel>
+</MudText>

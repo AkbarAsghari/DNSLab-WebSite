@@ -2,7 +2,7 @@
 @inject NavigationManager _NavigationManager
 
 <div class="d-inline">
-    <BitLabel>
+    <MudText>
         @if (!String.IsNullOrWhiteSpace(FullName))
         {
             <text>نویسنده :</text>
@@ -26,7 +26,7 @@
         }
         else
         {
-            <BitSpinner Size="BitSpinnerSize.Small" Class="d-inline-block" />
+           <MudProgressCircular Size="Size.Small" Color="Color.Primary" />
         }
-    </BitLabel>
+    </MudText>
 </div>

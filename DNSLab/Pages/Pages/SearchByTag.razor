@@ -2,15 +2,14 @@
 @inject IPageRepository _PageRepository
 
 <h1 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h1>
-<BitMessageBar MessageBarType="BitMessageBarType.Info">
-    <BitLabel>در این صفحه مطالب متناسب با کلید واژه انتخاب شده برای شما نمایش داده میشود و میتوانید به محتوای مورد نیاز ، سریع تر دسترسی پیدا کنید.</BitLabel>
-    <BitLabel>توجه داشته باشید که مرتب سازی مطالب بر اساس تاریخ انتشار آن میباشد . مطالب جدیدتر در بالای لیست قرار دارند.</BitLabel>
-</BitMessageBar>
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
+    <MudText>در این صفحه مطالب متناسب با کلید واژه انتخاب شده برای شما نمایش داده میشود و میتوانید به محتوای مورد نیاز ، سریع تر دسترسی پیدا کنید.</MudText>
+    <MudText>توجه داشته باشید که مرتب سازی مطالب بر اساس تاریخ انتشار آن میباشد . مطالب جدیدتر در بالای لیست قرار دارند.</MudText>
+</MudAlert>
 
 @if (pageSummaries != null)
 {
-    <BitLabel>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </BitLabel>
-    <hr />
+    <MudText>برای کلمه کلیدی ( @Tag ) به تعداد @pageSummaries.Count().ToString().EnglishToPersianNumbers() مورد مطلب یافت شد. </MudText>
 }
 @if (pageSummaries == null)
 {
@@ -25,7 +24,7 @@ else if (pageSummaries.Count() > 0)
 }
 else
 {
-    <BitMessageBar MessageBarType="BitMessageBarType.Warning">
-        <BitLabel class="text-center">موردی یافت نشد</BitLabel>
-    </BitMessageBar>
+    <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
+        <MudText Align="Align.Center">موردی یافت نشد</MudText>
+    </MudAlert>
 }

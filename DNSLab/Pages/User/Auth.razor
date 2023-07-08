@@ -13,7 +13,7 @@
         <MudTextField Label="@localizer["UsernameOrEmail"]" Class="mud-ltr"
                       Placeholder="@localizer["UsernameOrEmail"]" @bind-Value="@user.UsernameOrEmail" />
         <MudTextField InputType="InputType.Password" Label="@localizer["Password"]"
-                      Type="BitTextFieldType.Password" Class="mud-ltr" @bind-Value="@user.Password" />
+                      Class="mud-ltr" @bind-Value="@user.Password" />
         <BaseButtonComponent Caption=@localizer["Login"] IsBussyCaption=@localizer["Loading"]
                              Color=Color.Primary Icon=@Icons.Material.Filled.Login EditContext=AuthContext
                              OnClick=AuthUser></BaseButtonComponent>

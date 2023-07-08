@@ -9,9 +9,9 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraSmall">
     <MudText Typo="Typo.h1">تغییر رمز عبور</MudText>
-    <MudTextField Label="رمز عبور قبلی" Type="BitTextFieldType.Password" AutoComplete="new-password"
+    <MudTextField Label="رمز عبور قبلی" InputType="InputType.Password"
                   Class="mud-ltr" Placeholder="رمز عبور قبلی" @bind-Value="@changePassword.CurrentPassword" />
-    <MudTextField Label="رمز عبور جدید" Type="BitTextFieldType.Password" AutoComplete="new-password"
+    <MudTextField Label="رمز عبور جدید" InputType="InputType.Password"
                   Class="mud-ltr" Placeholder="رمز جدید" @bind-Value="@changePassword.NewPassword" />
     <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Loading"]
                          Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SubmitChangePassword>

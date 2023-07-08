@@ -18,7 +18,7 @@ else
     </BaseNavigateButtonComponent>
     @if (ChangeLogs.Count() == 0)
     {
-        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right" MessageBarType="BitMessageBarType.Warning">
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
             <MudText>@localizer["ThereIsNoChangeLogs"]</MudText>
         </MudAlert>
     }
