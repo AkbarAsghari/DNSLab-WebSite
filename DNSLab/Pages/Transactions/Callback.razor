@@ -3,18 +3,19 @@
 
 @if (Success == 1)
 {
-    <BitMessageBar MessageBarType="BitMessageBarType.Success">
-        <BitLabel>پرداخت با موفقیت انجام شد</BitLabel>
-        <BitLabel>شناسه پرداخت : @TrackId</BitLabel>
-    </BitMessageBar>
+    <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Right">
+        <MudText>پرداخت با موفقیت انجام شد</MudText>
+        <MudText>شناسه پرداخت : @TrackId</MudText>
+        <MudText>با تشکر از حمایت شما از سایت DNSLab</MudText>
+    </MudAlert>
 }
 else
 {
-    <BitMessageBar MessageBarType="BitMessageBarType.Blocked" role="alert">
-        <BitLabel>پرداخت با شکست مواجه شد</BitLabel>
-        <BitLabel>شناسه : @TrackId</BitLabel>
-        <BitLabel>علت : @Result</BitLabel>
-    </BitMessageBar>
+    <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Right">
+        <MudText>پرداخت با شکست مواجه شد</MudText>
+        <MudText>شناسه : @TrackId</MudText>
+        <MudText>علت : @Result</MudText>
+    </MudAlert>
 }
 <BaseNavigateButtonComponent Href="/"
                              Text="@(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")"
