@@ -1,32 +1,30 @@
 ﻿@inject IStaticsRepository _StaticsRepository
 @inject NavigationManager _NavigationManager
 
-<div class="d-inline">
-    <MudText>
-        @if (!String.IsNullOrWhiteSpace(FullName))
+<MudPaper Class="d-flex align-center flex-grow-1" Elevation="0">
+    @if (!String.IsNullOrWhiteSpace(FullName))
+    {
+        <MudText>نویسنده :</MudText>
+        <UserProfileImage Size=25 UserId="@UserId.ToString()" />
+        <MudText>@FullName</MudText>
+    }
+    @if (PublishDate != null)
+    {
+        <MudText> - انتشار : </MudText>
+        <MudText>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</MudText>
+        @if (UpdateDate != null)
         {
-            <text>نویسنده :</text>
-            <UserProfileImage Size=25 UserId="@UserId.ToString()" />
-            <strong>@FullName</strong>
+            <MudText> - آخرین ویرایش : </MudText>
+            <MudText>@UpdateDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</MudText>
         }
-        @if (PublishDate != null)
-        {
-            <text> - انتشار : </text>
-            <strong>@PublishDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong>
-            @if (UpdateDate != null)
-            {
-                <text> - آخرین ویرایش : </text>
-                <strong>@UpdateDate.Value.CalcRelativeTime().EnglishToPersianNumbers()</strong>
-            }
-        }
-        - تعداد بازدید :
-        @if (visitCount > -1)
-        {
-            <strong>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</strong>
-        }
-        else
-        {
-           <MudProgressCircular Size="Size.Small" Color="Color.Primary" />
-        }
-    </MudText>
-</div>
+    }
+    - تعداد بازدید :
+    @if (visitCount > -1)
+    {
+        <MudText>@(visitCount.ToString().EnglishToPersianNumbers() + " بار")</MudText>
+    }
+    else
+    {
+        <MudProgressCircular Size="Size.Small" Color="Color.Primary" />
+    }
+</MudPaper>
