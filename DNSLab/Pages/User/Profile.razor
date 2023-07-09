@@ -7,38 +7,27 @@
 @attribute [Authorize]
 
 <MudText Typo="Typo.h3">اطلاعات پروفایل</MudText>
-        @if (userInfo == null)
+@if (userInfo == null)
 {
-    <MudGrid>
-        <MudItem md="3" xs="12">
-            <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Wave" Height="200px" Width="200px" />
-        </MudItem>
-        <MudItem md="9" xs="12">
-            <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Wave" Height="40px" Width="100%" />
-            <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Wave" Height="40px" Width="100%" />
-            <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Wave" Height="40px" Width="100%" />
-            <MudSkeleton SkeletonType="SkeletonType.Text" Animation="Animation.Wave" Height="40px" Width="100%" />
-        </MudItem>
-    </MudGrid>
-    <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Wave" Height="40px" Width="150px" />
+    <Loading />
 }
 else
 {
     <MudGrid>
-        <MudItem md="3" xs="12">
-            <UserProfileImage Size=200></UserProfileImage>
-        </MudItem>
-        <MudItem md="9" xs="12">
-            <MudTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]"
-                      @bind-Value="@userInfo.FirstName"></MudTextField>
-            <MudTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]"
-                      @bind-Value="@userInfo.LastName"></MudTextField>
-            <MudTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]"
-                      @bind-Value="@userInfo.Company"></MudTextField>
-            <MudTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]"
-                      @bind-Value="@userInfo.Mobile"></MudTextField>
-        </MudItem>
-    </MudGrid>
-    <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Progressing"]
-                     Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick="SaveChanges"></BaseButtonComponent>
+    <MudItem md="3" xs="12">
+        <UserProfileImage Size=200></UserProfileImage>
+    </MudItem>
+    <MudItem md="9" xs="12">
+        <MudTextField Label="@localizer["FirstName"]" Placeholder="@localizer["YourFirstName"]"
+            @bind-Value="@userInfo.FirstName"></MudTextField>
+        <MudTextField Label="@localizer["LastName"]" Placeholder="@localizer["YourLastName"]"
+            @bind-Value="@userInfo.LastName"></MudTextField>
+        <MudTextField Label="@localizer["Company"]" Placeholder="@localizer["Company"]" @bind-Value="@userInfo.Company">
+        </MudTextField>
+        <MudTextField Label="@localizer["PhoneNumber"]" Placeholder="@localizer["YourPhoneNumber"]"
+            @bind-Value="@userInfo.Mobile"></MudTextField>
+    </MudItem>
+</MudGrid>
+    <BaseButtonComponent Caption=@localizer["SaveChanges"] IsBussyCaption=@localizer["Progressing"] Color=Color.Primary
+        Icon=@Icons.Material.Filled.Save OnClick="SaveChanges"></BaseButtonComponent>
 }
