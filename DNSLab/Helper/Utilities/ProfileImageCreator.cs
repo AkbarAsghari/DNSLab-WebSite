@@ -4,9 +4,13 @@ namespace DNSLab.Helper.Utilities
 {
     public class ProfileImageCreator
     {
-        public static string GenerateSVG(Guid userId, int size = 100)
+        public static string GenerateSVG(Guid userId, int size = 100) => GenerateSVG(userId.ToString(), size);
+
+        public static string GenerateSVG(string value, int size = 100)
         {
-            return Identicon.FromValue(userId, size: size).ToSvg();
+            return Identicon.FromValue(value, size: size)
+            .ToSvg()
+            .Replace("#ffffff", "none");//Remove White background;
         }
     }
 }
