@@ -5,7 +5,7 @@ partial class Ping
 {
     private HostOrIPAddressDTO hostOrIPAddress = new HostOrIPAddressDTO();
     private bool isProgressing = false;
-    private List<string> result  = new List<string>();
+    private List<string> result = new List<string>();
 
     [CascadingParameter] public IPDTO IPDTO { get; set; }
 
@@ -30,6 +30,7 @@ partial class Ping
         Navigation.NavigateTo($"tools/ping?host={hostOrIPAddress.HostOrIPAddress}");
 
         result.Clear();
+        result.Add(String.Empty);
 
         List<PingDTO> pings = new List<PingDTO>();
 
@@ -45,9 +46,9 @@ partial class Ping
             }
 
             if (!ping.Success)
-                result.Add($"<b style='color: red;'>error</b><br>");
+                result[0] += ($"<b style='color: red;'>error</b><br>");
             else
-                result.Add($"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>");
+                result[0] += ($"{ping.BufferSize} bytes from {ping.IP}: icmp_seq={i} ttl={ping.TTL} time={ping.Time} ms<br>");
 
             await this.InvokeAsync(() => StateHasChanged());
             pings.Add(ping!);
@@ -59,18 +60,18 @@ partial class Ping
         int successCount = successPings.Count();
         int unsuccessCount = attemptTimes - successCount;
 
-        result.Add($"<br><br>--- {hostOrIPAddress.HostOrIPAddress} statics ---<br>");
-        result.Add($"packets transmitted : {attemptTimes}<br>");
-        result.Add($"recived : {successCount}<br>");
-        result.Add($"packet loss : {(successCount == 0 ? 100 : unsuccessCount * 100 / successCount)}%<br>");
+        result[0] += ($"<br><br>--- {hostOrIPAddress.HostOrIPAddress} statics ---<br>"
+        + $"packets transmitted : {attemptTimes}<br>"
+        + $"recived : {successCount}<br>"
+        + $"packet loss : {(successCount == 0 ? 100 : unsuccessCount * 100 / successCount)}%<br>");
 
         if (successCount > 0)
         {
             var avgRTT = successPings.Average(x => x.Time);
-            result.Add("<br><br>--- Round Trip Time (rtt) ---<br>");
-            result.Add($"min {successPings.Min(x => x.Time)} ms<br>");
-            result.Add($"avg {avgRTT} ms<br>");
-            result.Add($"max {successPings.Max(x => x.Time)} ms<br>");
+            result[0] += ("<br><br>--- Round Trip Time (rtt) ---<br>"
+            + $"min {successPings.Min(x => x.Time)} ms<br>"
+            + $"avg {avgRTT} ms<br>"
+            + $"max {successPings.Max(x => x.Time)} ms<br>");
         }
 
         isProgressing = false;

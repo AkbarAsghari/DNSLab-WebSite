@@ -7,19 +7,16 @@
     <DataAnnotationsValidator />
     @ChildContent
     <BaseButtonComponent Caption="@localizer["Check"]" Icon=@Icons.Material.Filled.Search OnClick=OnValidSubmit
-                         EditContext="editCtx">
+        EditContext="editCtx">
     </BaseButtonComponent>
     @if (Results != null && Results.Count > 0)
     {
-        <MudList>
-            @foreach (var item in Results)
-            {
-                <MudListItem>
-                    <MudText Class="mud-ltr">
-                        @((MarkupString)item)
-                    </MudText>
-                </MudListItem>
-            }
-        </MudList>
+        @foreach (var item in Results)
+        {
+            <MudDivider Class="mt-2 mb-2"/>
+            <MudText Class="mud-ltr">
+                @((MarkupString)item)
+            </MudText>
+        }
     }
-</EditForm>
+    </EditForm>
