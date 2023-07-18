@@ -29,7 +29,8 @@ partial class ReverseLookup
 
         result.Clear();
 
-        Navigation.NavigateTo($"tools/reverselookup?ip={iP.IPv4}");
+        if (ip != iP.IPv4)
+            Navigation.NavigateTo($"tools/reverselookup?ip={iP.IPv4}");
 
         var response = await _DNSLookUpRepository.QueryReverse(iP.IPv4);
         if (!String.IsNullOrEmpty(response))

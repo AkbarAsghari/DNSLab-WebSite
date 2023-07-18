@@ -27,7 +27,8 @@ partial class Ping
 
         isProgressing = true;
 
-        Navigation.NavigateTo($"tools/ping?host={hostOrIPAddress.HostOrIPAddress}");
+        if (host != hostOrIPAddress.HostOrIPAddress)
+            Navigation.NavigateTo($"tools/ping?host={hostOrIPAddress.HostOrIPAddress}");
 
         result.Clear();
         result.Add(String.Empty);
