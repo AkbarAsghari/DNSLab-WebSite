@@ -47,7 +47,9 @@ partial class DNSLookup
         result.Clear();
 
         if (type != queryType || host != hostOrIPAddress.HostOrIPAddress)
-            Navigation.NavigateTo($"tools/dnslookup?type={queryType}&host={hostOrIPAddress.HostOrIPAddress}");
+            Navigation.NavigateTo($"tools/dnslookup?type={queryType}&host={hostOrIPAddress.HostOrIPAddress}",options: new NavigationOptions{
+                ReplaceHistoryEntry = true
+            });
 
         switch (queryType.ToUpper())
         {

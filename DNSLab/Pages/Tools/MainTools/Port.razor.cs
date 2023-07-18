@@ -32,7 +32,9 @@ partial class Port
         result.Clear();
 
         if (host != $"{hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}")
-            Navigation.NavigateTo($"tools/port?host={hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}");
+            Navigation.NavigateTo($"tools/port?host={hostOrIPAddressAndPort.HostOrIPAddress}:{hostOrIPAddressAndPort.Port}",options: new NavigationOptions{
+                ReplaceHistoryEntry = true
+            });
 
         var response = await iPRepository.IsIPAndPortOpen(hostOrIPAddressAndPort.HostOrIPAddress, hostOrIPAddressAndPort.Port);
         if (response != null)
