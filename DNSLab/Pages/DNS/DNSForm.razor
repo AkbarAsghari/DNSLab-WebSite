@@ -7,7 +7,7 @@
         <MudItem sm="6" xs="12">
             <MudTextField Label="@localizer["HostName"]" Class="mud-ltr" Placeholder="@localizer["EnterYourHostName"]" @bind-Value="@HostName.Name" Disabled=@(IsNewRecord == false && HostName.RecordType == (int)DNSRecordTypeEnum.WebRedirect) />
         </MudItem>
-        <MudItem sm="6" xs="12">
+        <MudItem sm="4" xs="8">
             @switch (HostName.RecordType)
             {
                 case 1:
@@ -23,6 +23,9 @@
                     <MudTextField Label="@localizer["Target"]" Class="mud-ltr" Placeholder=@(localizer["ex"] + ":https://google.com یا "+ "http://" + @IPDTO.IPv4) @bind-Value="@HostName.URLOrIp" Required="true" />
                     break;
             }
+        </MudItem>
+        <MudItem sm="2" xs="4">
+            <MudNumericField @bind-Value="@HostName.Ttl" Label="مقدار TTL" Min="0" Max="3600" />
         </MudItem>
         @if (IsNewRecord)
         {
@@ -57,7 +60,7 @@
             @if (IsNewRecord == false && HostName.RecordType != (int)DNSRecordTypeEnum.WebRedirect)
             {
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Right">
-                    <MudText>توجه داشته باشید در صورت ویرایش نام هاست نِیم بعلت Cache شدن رکورد ها در ISP ها به مدت 300 ثانیه ممکن است نام قبلی همچنان مقدار برگشتی داشته باشد.</MudText>
+                    <MudText>توجه داشته باشید در صورت ویرایش نام هاست نِیم بعلت Cache شدن رکورد ها در ISP ها به مدت @HostName.Ttl ثانیه ممکن است نام قبلی همچنان مقدار برگشتی داشته باشد.</MudText>
                 </MudAlert>
             }
         </MudItem>

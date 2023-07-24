@@ -60,5 +60,6 @@ namespace DNSLab.DTOs.DNS
         }
         public int? RedirectHttpResponseStatusCode { get; set; }
         public int RecordType { get; set; }
+        public int Ttl { get; set; } = 300;
     }
 }
