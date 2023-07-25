@@ -25,7 +25,7 @@
             }
         </MudItem>
         <MudItem sm="2" xs="4">
-            <MudNumericField @bind-Value="@HostName.Ttl" Label="مقدار TTL" Min="0" Max="3600" />
+            <MudNumericField @bind-Value="@HostName.Ttl" Label="مقدار TTL" Min="0" Max="3600" Disabled="true" />
         </MudItem>
         @if (IsNewRecord)
         {
