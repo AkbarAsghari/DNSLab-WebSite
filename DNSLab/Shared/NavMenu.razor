@@ -18,6 +18,7 @@
                 <MudNavGroup Title="پنل ادمین" Icon="@Icons.Material.Filled.AdminPanelSettings">
                     <MudNavLink Href="/ChangeLogs/All">تغییرات سایت</MudNavLink>
                     <MudNavLink Href="/DNS/AllHostNames">همه هاست نِیم ها</MudNavLink>
+                    <MudNavLink Href="/user/AllUsers">کاربرات سایت</MudNavLink>
                 </MudNavGroup>
             }
             @if (IsInRoleAsync("Writer").Result || IsInRoleAsync("Admin").Result)

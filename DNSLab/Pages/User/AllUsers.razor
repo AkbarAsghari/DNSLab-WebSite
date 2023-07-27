@@ -9,31 +9,30 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Username</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Email</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">CreateDate</th>
-                <th scope="col">Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in allUsers)
-            {
-                <tr>
-                    <td>@user.Username</td>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>@user.Mobile</td>
-                    <td>@user.CreateDate</td>
-                    <td>@user.Role</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <MudText Typo="Typo.h3">لیست کاربران سایت</MudText>
+    <MudDataGrid Items="@allUsers.OrderByDescending(x => x.CreateDate)" Filterable SortMode="SortMode.Single" Groupable="false" HorizontalScrollbar>
+        <Columns>
+            <TemplateColumn>
+                <CellTemplate>
+                    <UserProfileImage Size=30 UserId="@context.Item.ID.ToString()"></UserProfileImage>
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x=>x.Email" Title="ایمیمل" />
+            <PropertyColumn Property="x=>x.IsEmailApproved" Title="ایمیل تایید شده است ؟" />
+            <PropertyColumn Property="x=>x.Username" Title="نام کاربری" />
+            <PropertyColumn Property="x=>x.Mobile" Title="شماره همراه" />
+            <PropertyColumn Property="x=>x.FirstName" Title="نام" />
+            <PropertyColumn Property="x=>x.LastName" Title="نام خانوادگی" />
+            <PropertyColumn Property="x=>x.Company" Title="نام شرکت" />
+            <TemplateColumn Title="تاریخ ثبت نام">
+                <CellTemplate>
+                    <MudText>@context.Item.CreateDate.ToLocalizerString()</MudText>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    <PagerContent>
+        <MudDataGridPager T="UserDTO" />
+    </PagerContent>
+    </MudDataGrid>
+    <MudDivider />
 }
