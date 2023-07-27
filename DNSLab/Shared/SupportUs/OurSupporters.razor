@@ -4,13 +4,19 @@
 
 @if (result.Count > 0)
 {
-    <MudContainer MaxWidth="MaxWidth.Small">
-        <MudText Typo="Typo.h3">حمایت کنندگان ( @count نفر )</MudText>
-        <MudDataGrid Items="@result">
-            <Columns>
-                <PropertyColumn Property="x => x.FullName.EnglishToPersianNumbers()" Title="نام و نام خانوادگی" />
-                <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers() + " تومان"' Title="مبلغ" />
-            </Columns>
-        </MudDataGrid>
-    </MudContainer>
+    <MudText Typo="Typo.h3" Class="mt-2">حمایت کنندگان ( @count نفر )</MudText>
+    <MudDataGrid Items="@result" SortMode="SortMode.None" HorizontalScrollbar Dense Breakpoint="Breakpoint.None">
+    <Columns>
+        <PropertyColumn Property="x => x.FullName.EnglishToPersianNumbers()" Title="نام و نام خانوادگی" />
+        <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers() + " تومان"' Title="مبلغ" />
+        <TemplateColumn Title="زمان پرداخت">
+            <CellTemplate>
+                <MudText>@context.Item.PaidDate.ToLocalizerString(showOnlyDate:true)</MudText>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="TipDTO" DisableRowsPerPage=true />
+    </PagerContent>
+</MudDataGrid>
 }

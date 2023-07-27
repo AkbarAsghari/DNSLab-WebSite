@@ -13,6 +13,11 @@ namespace DNSLab.Helper.Extensions
 
         public static string ToLocalizerString(this DateTime dateTime,bool showOnlyDate = false)
         {
+            if (dateTime == DateTime.MinValue)
+            {
+                return String.Empty;
+            }
+
             DateTime localDateTime = dateTime.ToLocalTime();
 
             if (showOnlyDate)

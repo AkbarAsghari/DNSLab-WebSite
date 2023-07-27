@@ -20,8 +20,8 @@ partial class OurSupporters
 
             var amountUnknownSupportersCoffee = Supporters.Where(x => String.IsNullOrWhiteSpace(x.FullName));
 
-            result.Add(new TipDTO { FullName = $"{amountUnknownSupportersCoffee.Count()} فرد ناشناس", Amount = amountUnknownSupportersCoffee.Sum(x => x.Amount) });
-            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).OrderByDescending(x => x.Amount).Select(x => new TipDTO { FullName = x.FullName, Amount = x.Amount }));
+            result.Add(new TipDTO { FullName = $"{amountUnknownSupportersCoffee.Count()} فرد ناشناس", Amount = amountUnknownSupportersCoffee.Sum(x => x.Amount), PaidDate = amountUnknownSupportersCoffee.Max(x => x.PaidDate) });
+            result.AddRange(Supporters.Where(x => !String.IsNullOrWhiteSpace(x.FullName)).OrderByDescending(x => x.Amount).Select(x => new TipDTO { FullName = x.FullName, Amount = x.Amount, PaidDate = x.PaidDate }));
             if (result.Count > 4)
             {
                 result[0].FullName = "💕" + result[0].FullName;
