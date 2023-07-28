@@ -2,7 +2,7 @@
 @using System.Text
 @inject ITransactionRepository _TransactionRepository
 
-<MudText Class="mt-7">@_TipsInformation.PrecentTowardsToCurrentMonthGoal.ToString().EnglishToPersianNumbers()% رسیدن به هدف @(_TipsInformation.Goal.ToString().EnglishToPersianNumbers()) تومان در ماه</MudText>
+<MudText Class="mt-7">@_TipsInformation.PrecentTowardsToCurrentMonthGoal.ToString().EnglishToPersianNumbers()% رسیدن به هدف @(_TipsInformation.Goal.ToString("N0").EnglishToPersianNumbers()) تومان در ماه</MudText>
 <MudProgressLinear Color="Color.Secondary" Rounded Size="Size.Medium" Value="_TipsInformation.PrecentTowardsToCurrentMonthGoal" Class="mb-7" />
 @if (_TipsInformation.CurrentPaidsUsers != null)
 {
@@ -17,7 +17,8 @@
             </MudAvatarGroup>
         </MudItem>
         <MudItem>
-            <MudText>@_TipsInformation.CurrentPaidsUsers.Count().ToString().EnglishToPersianNumbers() نفر</MudText>
+            <MudText>@_TipsInformation.CurrentPaidsCount.ToString().EnglishToPersianNumbers() نفر</MudText>
+            <MudText>@_TipsInformation.CurrentPaidsAmount.ToString("N0").EnglishToPersianNumbers() تومان</MudText>
         </MudItem>
     </MudGrid>
 }
@@ -36,7 +37,8 @@
             </MudAvatarGroup>
         </MudItem>
         <MudItem>
-            <MudText>@_TipsInformation.PastPaidsUsers.Count().ToString().EnglishToPersianNumbers() نفر</MudText>
+            <MudText>@_TipsInformation.PastPaidsCount.ToString().EnglishToPersianNumbers() نفر</MudText>
+            <MudText>@_TipsInformation.PastPaidsAmount.ToString("N0").EnglishToPersianNumbers() تومان</MudText>
         </MudItem>
     </MudGrid>
 }
