@@ -6,7 +6,7 @@
         <Authorized>
             <EditForm Model=TipTransaction Context="TipCtx">
                 <DataAnnotationsValidator />
-                <MudTextField Label="مبلغ به تومان" Mask="amountMask" @bind-Value="TipTransaction.Amount" />
+                <MudNumericField Label="مبلغ به تومان" MaxLength="8" Min="5000" Max="99999999" @bind-Value="TipTransaction.Amount" />
                 <MudDivider Class="py-3" />
                 <BaseButtonComponent Caption=پرداخت
                                      IsBussyCaption=@("در حال انتقال به درگاه بانکی")

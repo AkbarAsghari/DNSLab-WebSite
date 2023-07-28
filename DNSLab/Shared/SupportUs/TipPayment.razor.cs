@@ -8,8 +8,6 @@ partial class TipPayment
 {
     public TipTransactionDTO TipTransaction { get; set; } = new TipTransactionDTO { };
 
-    public IMask amountMask = new RegexMask(@"^\d{0,8}$");
-
     private async Task Go()
     {
         var result = await _TransactionRepository.Tip(TipTransaction);
