@@ -7,6 +7,6 @@ namespace DNSLab.Interfaces.Repository
     {
         Task<string> Tip(TipTransactionDTO request);
         Task<bool> Verify(long trackId);
-        Task<IEnumerable<TipDTO>> GetTips();
+        Task<TipsInformationDTO> GetTipsInformation();
     }
 }

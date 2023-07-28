@@ -2,21 +2,41 @@
 @using System.Text
 @inject ITransactionRepository _TransactionRepository
 
-@if (result.Count > 0)
+<MudText Class="mt-7">@_TipsInformation.PrecentTowardsToCurrentMonthGoal.ToString().EnglishToPersianNumbers()% رسیدن به هدف @(_TipsInformation.Goal.ToString().EnglishToPersianNumbers()) تومان در ماه</MudText>
+<MudProgressLinear Color="Color.Secondary" Rounded Size="Size.Medium" Value="_TipsInformation.PrecentTowardsToCurrentMonthGoal" Class="mb-7" />
+@if (_TipsInformation.CurrentPaidsUsers != null)
 {
-    <MudText Typo="Typo.h3" Class="mt-2">حمایت کنندگان ( @count نفر )</MudText>
-    <MudDataGrid Items="@result" SortMode="SortMode.None" HorizontalScrollbar Dense Breakpoint="Breakpoint.None">
-    <Columns>
-        <PropertyColumn Property="x => x.FullName.EnglishToPersianNumbers()" Title="نام و نام خانوادگی" />
-        <PropertyColumn Property='x => x.Amount.ToString("N0").EnglishToPersianNumbers() + " تومان"' Title="مبلغ" />
-        <TemplateColumn Title="زمان پرداخت">
-            <CellTemplate>
-                <MudText>@context.Item.PaidDate.ToLocalizerString(showOnlyDate:true)</MudText>
-            </CellTemplate>
-        </TemplateColumn>
-    </Columns>
-    <PagerContent>
-        <MudDataGridPager T="TipDTO" DisableRowsPerPage=true />
-    </PagerContent>
-</MudDataGrid>
+    <MudText Typo="Typo.h4" Class="my-2">حامی های این ماه</MudText>
+    <MudGrid Class="d-flex align-center flex-grow-1">
+        <MudItem>
+            <MudAvatarGroup Max="10" Spacing="2" MaxColor="Color.Primary">
+                @foreach (var item in _TipsInformation.CurrentPaidsUsers)
+                {
+                    <MudAvatar Style="background-color:white"><UserProfileImage UserId="@item.ToString()" Size="50" /></MudAvatar>
+                }
+            </MudAvatarGroup>
+        </MudItem>
+        <MudItem>
+            <MudText>@_TipsInformation.CurrentPaidsUsers.Count().ToString().EnglishToPersianNumbers() نفر</MudText>
+        </MudItem>
+    </MudGrid>
+}
+
+
+@if (_TipsInformation.PastPaidsUsers != null)
+{
+    <MudText Typo="Typo.h4" Class="my-2">حامی های ماه قبل</MudText>
+    <MudGrid Class="d-flex align-center flex-grow-1">
+        <MudItem>
+            <MudAvatarGroup Max="10" Spacing="2" MaxColor="Color.Primary">
+                @foreach (var item in _TipsInformation.PastPaidsUsers)
+                {
+                    <MudAvatar Style="background-color:white"><UserProfileImage UserId="@item.ToString()" Size="50" /></MudAvatar>
+                }
+            </MudAvatarGroup>
+        </MudItem>
+        <MudItem>
+            <MudText>@_TipsInformation.PastPaidsUsers.Count().ToString().EnglishToPersianNumbers() نفر</MudText>
+        </MudItem>
+    </MudGrid>
 }

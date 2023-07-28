@@ -18,16 +18,16 @@ namespace DNSLab.Repository
             _memoryCache = memoryCache;
         }
 
-        public async Task<IEnumerable<TipDTO>> GetTips()
+        public async Task<TipsInformationDTO> GetTipsInformation()
         {
-            if (!_memoryCache.TryGetValue(CacheKeyEnum.Tips, out IEnumerable<TipDTO> cacheValue))
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.TipsInformation, out TipsInformationDTO cacheValue))
             {
-                var result = await _httpService.Get<IEnumerable<TipDTO>>($"/Transaction/GetTips");
+                var result = await _httpService.Get<TipsInformationDTO>($"/Transaction/GetTipsInformation");
                 cacheValue = result.Response;
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                         .SetSlidingExpiration(TimeSpan.FromSeconds(5));
 
-                _memoryCache.Set(CacheKeyEnum.Tips, cacheValue, cacheEntryOptions);
+                _memoryCache.Set(CacheKeyEnum.TipsInformation, cacheValue, cacheEntryOptions);
             }
             return cacheValue;
         }

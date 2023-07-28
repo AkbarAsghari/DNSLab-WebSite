@@ -11,7 +11,7 @@
         GetCommentReplies,
         GetLastChanges,
         GetTodayIPChangesCount,
-        Tips,
+        TipsInformation,
         GetAllPagesSummaryByTag,
         GetPageMetadata,
         GetLastContents
