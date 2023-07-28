@@ -1,9 +1,4 @@
 ﻿@page "/Transaction/Tip"
-@using DNSLab.DTOs.Transactions
-
-@inject NavigationManager navigationManager
-@inject IStringLocalizer<Resource> localizer
-@inject ITransactionRepository _TransactionRepository
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mb-3">
     <MudGrid>
@@ -36,34 +31,7 @@
             <MudText>امیدواریم حمایت های شما باعث بشه بصورت تمام وقت تمرکز خودمان را بر روی DNSLab قرار بدیم.</MudText>
         </MudItem>
         <MudItem md="4" xs="12">
-            <EditForm Model=TipTransaction Context="TipCtx">
-                <DataAnnotationsValidator />
-                <MudText Typo="Typo.h3">حمایت از دی‌ان‌اس لب</MudText>
-                <MudTextField Label="نام و نام خانوادگی" Placeholder="نام و نام خانوادگی (اختیاری)" @bind-Value="TipTransaction.FullName" />
-                <MudTextField Label="تلفن همراه" Class="mud-ltr" Placeholder="تلفن همراه 09123456789 (اختیاری)" @bind-Value="TipTransaction.Mobile" />
-                <MudSelect Label="مقدار حمایت" @bind-Value="@selectedAmountType">
-                    @foreach (var item in AmountTypes)
-                    {
-                        <MudSelectItem Value="item.Key">@item.Value</MudSelectItem>
-                    }
-                </MudSelect>
-                @if (@selectedAmountType == "0")
-                {
-                    <MudTextField Label="مبلغ" Class="mud-ltr" Placeholder="مبلغ دلخواه (تومان)" @bind-Value="Amount" />
-                }
-                <MudDivider Class="py-3" />
-                <BaseButtonComponent Caption=@localizer["Continue"]
-                                     IsBussyCaption=@localizer["Loading"]
-                                     Color=Color.Primary
-                                     Icon=@Icons.Material.Filled.Favorite
-                                     EditContext=TipCtx
-                                     OnClick=Go></BaseButtonComponent>
-                <BaseNavigateButtonComponent Href="/"
-                                             Text="@localizer["Cancel"]"
-                                             Color="Color.Secondary"
-                                             Icon=@Icons.Material.Filled.Cancel>
-                </BaseNavigateButtonComponent>
-            </EditForm>
+            <TipPayment />
             <OurSupporters />
         </MudItem>
     </MudGrid>

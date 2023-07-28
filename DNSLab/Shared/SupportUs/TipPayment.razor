@@ -1,0 +1,24 @@
+﻿@inject NavigationManager navigationManager
+@inject ITransactionRepository _TransactionRepository
+
+<MudPaper Outlined Class="pa-2">
+    <AuthorizeView>
+        <Authorized>
+            <EditForm Model=TipTransaction Context="TipCtx">
+                <DataAnnotationsValidator />
+                <MudTextField Label="مبلغ به تومان" Mask="amountMask" @bind-Value="TipTransaction.Amount" />
+                <MudDivider Class="py-3" />
+                <BaseButtonComponent Caption=پرداخت
+                                     IsBussyCaption=@("در حال انتقال به درگاه بانکی")
+                                     Color=Color.Primary
+                                     Icon=@Icons.Material.Filled.Favorite
+                                     EditContext=TipCtx
+                                     OnClick=Go></BaseButtonComponent>
+            </EditForm>
+        </Authorized>
+        <NotAuthorized>
+            <MudText>برای پرداخت ابتدا باید وارد شوید</MudText>
+            <MudButton Href="@($"/user/auth?RedirectTo={new Uri(navigationManager.Uri).AbsolutePath}")" Color="Color.Primary" Variant="Variant.Filled">ورود به سیستم</MudButton>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudPaper>
