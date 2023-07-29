@@ -8,20 +8,21 @@
     <MudTabPanel Text="دیدگاه‌های تایید شده" />
     <MudTabPanel Text="دیدگاه‌های تایید نشده" />
 </MudTabs>
-
-@if (comments != null)
-{
-    @foreach (var item in comments)
+<MudContainer MaxWidth="MaxWidth.Large">
+    @if (comments != null)
     {
-        <CommentWithInformationItem PageCommentWithInformation="item"
-                            IsApproved="IsApprovedKey"
-                            AcceptButtonClick="()=> ReviewComment(item.Comment.Id,true)"
-                            RejectButtonClick="()=> ReviewComment(item.Comment.Id,false)">
-        </CommentWithInformationItem>
-    }
+        @foreach (var item in comments)
+        {
 
-}
-else
-{
-    <Loading />
-}
+            <CommentWithInformationItem PageCommentWithInformation="item"
+                                IsApproved="IsApprovedKey"
+                                AcceptButtonClick="()=> ReviewComment(item.Comment.Id,true)"
+                                RejectButtonClick="()=> ReviewComment(item.Comment.Id,false)">
+            </CommentWithInformationItem>
+        }
+    }
+    else
+    {
+        <Loading />
+    }
+</MudContainer>
