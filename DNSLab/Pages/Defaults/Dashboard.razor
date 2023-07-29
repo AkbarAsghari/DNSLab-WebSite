@@ -1,72 +1,69 @@
 ﻿@page "/Dashboard"
 
-@inject IAccountRepository accountReository
-@inject IDNSRepository dnsRepository
-@inject AuthenticationStateProvider auth
+@inject IDashboardRepository dashboardRepository
+
 
 @attribute [Authorize]
 
 <AuthorizeView Roles="Admin" Context="adminContext">
     <DNSLab.Shared.Components.DNS.DNSServerStat />
 </AuthorizeView>
-<AuthorizeView Roles="User" Context="userContext">
-    <MudGrid>
-        <MudItem md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4" Style="min-height:15rem">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h6">تعداد هاست نِیم ها</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudText Typo="Typo.h2" >@activeDNSCount.ToString().EnglishToPersianNumbers()</MudText>
-                    <MudText Typo="Typo.body2">هاست نِیم بصورت فعال یافت شد</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" Href="dns/mydns">برای مدیریت کلیک کنید</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4" Style="min-height:15rem">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h6">تعداد بروزرسانی ها</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudText Typo="Typo.h2">@last24HoursChangesCount.ToString().EnglishToPersianNumbers()</MudText>
-                    <MudText Typo="Typo.body2">دفعه در ۲۴ ساعت گذشته هاست نِیم های شما تغییر کرده‌اند</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary" Href="/Report/IPChangesChart">برای نمایش جدول تغییرات کلیک کنید</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem md="4">
-            <MudCard Elevation="25" Class="rounded-lg pb-4" Style="min-height:15rem">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h6">تعداد کاربران سایت</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudText Typo="Typo.h2">@usersCount.ToString().EnglishToPersianNumbers()</MudText>
-                    <MudText Typo="Typo.body2">نفر تاکنون در سایت ثبت نام کرده‌اند</MudText>
-                </MudCardContent>
-                <AuthorizeView Roles="Admin" Context="adminContext">
-                    <MudCardActions>
-                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="/User/AllUsers">برای نمایش کاربران کلیک کنید</MudButton>
-                    </MudCardActions>
-                </AuthorizeView>
 
-            </MudCard>
-        </MudItem>
-    </MudGrid>
-    @if (!isLoadingActiveDNSCount && activeDNSCount == 0)
-    {
-        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
-            <MudText>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <MudLink Href="DNS/MyDNS">کلیک</MudLink> کنید.</MudText>
-        </MudAlert>
-    }
-</AuthorizeView>
+@if (_Dashboard != null)
+{
+    <AuthorizeView Roles="User" Context="userContext">
+        <MudGrid>
+            <MudItem md="4">
+                <MudCard Elevation="25" Class="rounded-lg">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">تعداد هاست نِیم های فعال</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Align="Align.Center" Typo="Typo.h2">@_Dashboard.ActiveDNSCount.ToString().EnglishToPersianNumbers()</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="dns/mydns">برای مدیریت کلیک کنید</MudButton>
+                        </MudCardActions>
+                        </MudCard>
+                        </MudItem>
+                        <MudItem md="4">
+                        <MudCard Elevation="25" Class="rounded-lg">
+                        <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">تعداد بروزرسانی های ۲۴ ساعت اخیر</MudText>
+                        </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                        <MudText Align="Align.Center" Typo="Typo.h2">@_Dashboard.IPChangeCountInLast24Hours.ToString().EnglishToPersianNumbers()</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                        <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="/Report/IPChangesChart">برای نمایش جدول تغییرات کلیک کنید</MudButton>
+                        </MudCardActions>
+                        </MudCard>
+                        </MudItem>
+                        <MudItem md="4">
+                        <MudCard Elevation="25" Class="rounded-lg">
+                        <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Align="Align.Center" Typo="Typo.h6">تعداد تیکت های باز</MudText>
+                        </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                        <MudText Align="Align.Center" Typo="Typo.h2">@_Dashboard.OpenTicketsCount.ToString().EnglishToPersianNumbers()</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                        <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="/Ticket/MyTickets">مدیریت تیکت ها</MudButton>
+                        </MudCardActions>
+                        </MudCard>
+                        </MudItem>
+                        </MudGrid>
+                        @if (_Dashboard.ActiveDNSCount == 0)
+        {
+            <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
+                <MudText>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <MudLink Href="DNS/MyDNS">کلیک</MudLink> کنید.</MudText>
+            </MudAlert>
+        }
+    </AuthorizeView>
+}

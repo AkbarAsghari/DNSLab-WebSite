@@ -31,28 +31,10 @@ namespace DNSLab.Repository
             return response.Response;
         }
 
-        public async Task<int> GetActiveDNSCount()
-        {
-            var response = await _httpService.Get<int>($"/DNS/GetActiveDNSCount");
-            if (response.Success)
-                return response.Response;
-
-            return 0;
-        }
-
         public async Task<HostNameDTO> GetHostName(Guid hostNameId)
         {
             var response = await _httpService.Get<HostNameDTO>($"/DNS/Get?Id={hostNameId}");
             return response.Response;
-        }
-
-        public async Task<int> GetLast24HoursChangesCount()
-        {
-            var response = await _httpService.Get<int>($"/DNS/GetLast24HoursChangesCount");
-            if (response.Success)
-                return response.Response;
-
-            return 0;
         }
 
         public async Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories()
