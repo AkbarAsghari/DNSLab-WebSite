@@ -18,11 +18,11 @@
     </MudItem>
     <MudItem md="3">
         <MudText Typo="Typo.h4">@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</MudText>
-        <MudText>تا کنون حدود @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</MudText>
+        <MudText>تا کنون @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</MudText>
     </MudItem>
     <MudItem md="3">
         <MudText Typo="Typo.h4">@(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</MudText>
-        <MudText>امروز حدود @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
+        <MudText>امروز @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
     </MudItem>
 </MudGrid>
 <MudText Typo="Typo.h2">ما را در شبکه های اجتماعی دنبال کنید</MudText>
