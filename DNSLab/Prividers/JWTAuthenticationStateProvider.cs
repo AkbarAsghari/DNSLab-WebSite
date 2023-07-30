@@ -26,21 +26,24 @@ namespace DNSLab.Prividers
             this.localStorage = localStorage;
             this.HttpClient = httpClient;
         }
+public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+{
+    try
+    {
+        var token = await localStorage.GetAsync<string>(TokenKey);
 
-        public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+        if (token.Success && !String.IsNullOrEmpty(token.Value))
         {
-            try
-            {
-                var token = await localStorage.GetAsync<string>(TokenKey);
-
-                if (token.Success)
-                    if (!String.IsNullOrEmpty(token.Value))
-                        return BuildAuthenticationState(token.Value);
-            }
-            catch (Exception ex){ }
-
-            return Anonymouse;
+            return BuildAuthenticationState(token.Value);
         }
+    }
+    catch (Exception ex)
+    {
+        // Handle the exception appropriately, e.g. log it
+    }
+
+    return Anonymouse;
+}
 
         public AuthenticationState BuildAuthenticationState(string token)
         {
