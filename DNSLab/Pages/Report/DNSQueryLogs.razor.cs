@@ -26,7 +26,7 @@ partial class DNSQueryLogs
 
     protected override async Task OnInitializedAsync()
     {
-        HostNames = await dnsRepository.GetHostSummaries();
+        HostNames = await dnsRepository.GetOwnHostNamesDomain();
         if (HostNames.Count() > 0)
         {
             SelectedHostName = HostNames.First().Id;

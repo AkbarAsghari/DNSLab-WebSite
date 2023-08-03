@@ -182,5 +182,14 @@ namespace DNSLab.Repository
 
             return null;
         }
+
+        public async Task<IEnumerable<HostSummaryDTO>> GetOwnHostNamesDomain()
+        {
+            var response = await _httpService.Get<IEnumerable<HostSummaryDTO>>($"/DNS/GetOwnHostNamesDomain");
+            if (response.Success)
+                return response.Response;
+
+            return new List<HostSummaryDTO>();
+        }
     }
 }
