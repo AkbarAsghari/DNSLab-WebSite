@@ -1,6 +1,7 @@
 ﻿using DNSLab.DTOs.DNS;
 using DNSLab.DTOs.Pagination;
 using DNSLab.Enums;
+using DNSLab.Enums.DNSQueryLogs;
 using DNSLab.Helper.Extensions;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
@@ -155,6 +156,27 @@ namespace DNSLab.Repository
         public async Task<IEnumerable<GetLast30DayIPChangesCountDTO>> GetLast30DayIPChangesCount()
         {
             var response = await _httpService.Get<IEnumerable<GetLast30DayIPChangesCountDTO>>($"/DNS/GetLast30DayIPChangesCount");
+            if (response.Success)
+                return response.Response;
+
+            return null;
+        }
+
+        public async Task<QueryLogsResponseDTO> QueryLogs(Guid hostId, int pageNumber = 1, int entriesPerPage = 10, bool descendingOrder = true, DateTime? start = null, DateTime? end = null, string? clientIpAddress = null, ProtocolEnum? protocol = null, ResponseTypeEnum? responseType = null, RCodeEnum? rCode = null, DNSRecordTypeEnum? qType = null, ClassEnum? @class = null)
+        {
+            var response = await _httpService.Get<QueryLogsResponseDTO>($"/DNS/QueryLogs?hostId={hostId}" +
+                $"&pageNumber={pageNumber}" +
+                $"&entriesPerPage={entriesPerPage}" +
+                $"&descendingOrder={descendingOrder}" +
+                $"&start={start}" +
+                $"&end={end}" +
+                $"&clientIpAddress={clientIpAddress}" +
+                $"&protocol={protocol}" +
+                $"&responseType={responseType}" +
+                $"&rCode={rCode}" +
+                $"&qType={qType}" +
+                $"&class={@class}");
+
             if (response.Success)
                 return response.Response;
 
