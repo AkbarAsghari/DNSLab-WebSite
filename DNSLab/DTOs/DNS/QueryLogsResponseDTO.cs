@@ -8,29 +8,29 @@ namespace DNSLab.DTOs.DNS
 {
     public class QueryLogsResponseDTO
     {
-        public Response response { get; set; }
+        public Response Response { get; set; }
     }
 
     public class Response
     {
-        public int pageNumber { get; set; }
-        public int totalPages { get; set; }
-        public int totalEntries { get; set; }
-        public Entry[] entries { get; set; }
+        public int PageNumber { get; set; }
+        public int TotalPages { get; set; }
+        public int TotalEntries { get; set; }
+        public Entry[] Entries { get; set; }
     }
 
     public class Entry
     {
-        public int rowNumber { get; set; }
-        public DateTime timestamp { get; set; }
-        public string clientIpAddress { get; set; }
-        public string protocol { get; set; }
-        public string responseType { get; set; }
-        public string rcode { get; set; }
-        public string qname { get; set; }
-        public string qtype { get; set; }
-        public string qclass { get; set; }
-        public string answer { get; set; }
+        public int RowNumber { get; set; }
+        public DateTime Timestamp { get; set; }
+        public string ClientIpAddress { get; set; }
+        public string Protocol { get; set; }
+        public string ResponseType { get; set; }
+        public string Rcode { get; set; }
+        public string Qname { get; set; }
+        public string Qtype { get; set; }
+        public string Qclass { get; set; }
+        public string Answer { get; set; }
     }
 
 }

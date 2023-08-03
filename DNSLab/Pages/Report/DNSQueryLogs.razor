@@ -1,0 +1,120 @@
+﻿@page "/Logs/Query"
+@using DNSLab.Enums.DNSQueryLogs;
+@inject IDNSRepository dnsRepository
+
+@attribute [Authorize]
+
+<MudText Typo="Typo.h3">گزارش پرس و جو های DNS</MudText>
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
+    <MudText>این اطلاعات حداکثر تا 7 روز نگهداری میشود</MudText>
+</MudAlert>
+@if (HostNames == null)
+{
+    <Loading />
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="12" md="3">
+            <MudSelect T="Guid" Label="هاست نِیم" @bind-Value="SelectedHostName">
+                @foreach (var item in HostNames)
+                {
+                    <MudSelectItem T="Guid" Value="@item.Id">@item.Address</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudNumericField Label="صفحه" Min="1" Max="100" @bind-Value="PageNumber" />
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudNumericField Label="تعداد رکورد در هر صفحه" Min="10" Max="500" @bind-Value="EntriesPerPage" />
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="bool" Label="مرتب سازی" @bind-Value="OrderByDESC">
+                <MudSelectItem T="bool" Value="true">نزولی</MudSelectItem>
+                <MudSelectItem T="bool" Value="false">صعودی</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudDateRangePicker Culture="@GetPersianCulture()" Label="بازه زمانی" @bind-DateRange="SelectedDateRange" />
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudTextField Mask="@ipv4Mask" Label="IPv4 Address" HelperText="@ipv4Mask.Mask"
+                      @bind-Value="ClientIpAddress" Variant="@Variant.Text" Clearable />
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="ProtocolEnum?" Label="پروتکل" @bind-Value="SelectedProtocol">
+                <MudSelectItem T="ProtocolEnum?" Value="null">همه</MudSelectItem>
+                <MudSelectItem T="ProtocolEnum?" Value="ProtocolEnum.UDP">@ProtocolEnum.UDP</MudSelectItem>
+                <MudSelectItem T="ProtocolEnum?" Value="ProtocolEnum.TCP">@ProtocolEnum.TCP</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="ResponseTypeEnum?" Label="نوع پاسخ" @bind-Value="SelectedResponseType">
+                <MudSelectItem T="ResponseTypeEnum?" Value="null">همه</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.Authoritative">@ResponseTypeEnum.Authoritative</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.Recursive">@ResponseTypeEnum.Recursive</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.Cached">@ResponseTypeEnum.Cached</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.Blocked">@ResponseTypeEnum.Blocked</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.UpstreamBlocked">@ResponseTypeEnum.UpstreamBlocked</MudSelectItem>
+                <MudSelectItem T="ResponseTypeEnum?" Value="ResponseTypeEnum.CacheBlocked">@ResponseTypeEnum.CacheBlocked</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="RCodeEnum?" Label="کد پاسخ" @bind-Value="SelectedRCode">
+                <MudSelectItem T="RCodeEnum?" Value="null">همه</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NoError">No Error</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.FormatError">Format Error</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.ServerFailure">Server Failure</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NxDomain">Nx Domain</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NotImplemented">Not Implemented</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.Refused">Refused</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.YXDomain">YX Domain</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.YXRRSet">YX RRSet</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NXRRSet">NX RRSet</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NotAuth">Not Auth</MudSelectItem>
+                <MudSelectItem T="RCodeEnum?" Value="RCodeEnum.NotZone">Not Zone</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="RecordTypeEnum?" Label="نوع" @bind-Value="SelectedRecordType">
+                <MudSelectItem T="RecordTypeEnum?" Value="null">همه</MudSelectItem>
+                <MudSelectItem T="RecordTypeEnum?" Value="RecordTypeEnum.A">@RecordTypeEnum.A</MudSelectItem>
+                <MudSelectItem T="RecordTypeEnum?" Value="RecordTypeEnum.AAAA">@RecordTypeEnum.AAAA</MudSelectItem>
+                <MudSelectItem T="RecordTypeEnum?" Value="RecordTypeEnum.CNAME">@RecordTypeEnum.CNAME</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="3">
+            <MudSelect T="ClassEnum?" Label="کلاس" @bind-Value="SelectedClass">
+                <MudSelectItem T="ClassEnum?" Value="null">همه</MudSelectItem>
+                <MudSelectItem T="ClassEnum?" Value="ClassEnum.IN">@ClassEnum.IN</MudSelectItem>
+                <MudSelectItem T="ClassEnum?" Value="ClassEnum.CS">@ClassEnum.CS</MudSelectItem>
+                <MudSelectItem T="ClassEnum?" Value="ClassEnum.CH">@ClassEnum.CH</MudSelectItem>
+                <MudSelectItem T="ClassEnum?" Value="ClassEnum.NONE">@ClassEnum.NONE</MudSelectItem>
+                <MudSelectItem T="ClassEnum?" Value="ClassEnum.ANY">@ClassEnum.ANY</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    <BaseButtonComponent Caption="جستجو" Color="Color.Primary" Icon="@Icons.Material.Filled.Search" IsBussyCaption="در حال جستحو لاگ" OnClick="Search" />
+
+    @if (Logs != null)
+    {
+        <MudDataGrid Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
+        <Columns>
+            <PropertyColumn Property="x=>x.RowNumber" Title="#" />
+            <PropertyColumn Property="x=>x.Timestamp" Title="زمان" />
+            <PropertyColumn Property="x=>x.ClientIpAddress" Title="آی پی کلاینت" />
+            <PropertyColumn Property="x=>x.Protocol" Title="پروتکل" />
+            <PropertyColumn Property="x=>x.ResponseType" Title="نوع پاسخ" />
+            <PropertyColumn Property="x=>x.Rcode" Title="کد پاسخ" />
+            <PropertyColumn Property="x=>x.Qname" Title="آدرس" />
+            <PropertyColumn Property="x=>x.Qtype" Title="نوع" />
+            <PropertyColumn Property="x=>x.Qclass" Title="کلاس" />
+            <PropertyColumn Property="x=>x.Answer" Title="پاسخ" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="Entry" />
+        </PagerContent>
+    </MudDataGrid>
+    }
+}

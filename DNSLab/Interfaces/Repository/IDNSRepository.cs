@@ -19,7 +19,7 @@ namespace DNSLab.Interfaces.Repository
 
         Task<IEnumerable<DNSChangeHistoryDTO>> GetDNSChangeHistories();
         Task<IEnumerable<HostSummaryDTO>> GetHostSummaries();
-        Task<QueryLogsResponseDTO> QueryLogs(Guid hostId, int pageNumber = 1, int entriesPerPage = 10, bool descendingOrder = true, DateTime? start = null, DateTime? end = null, string? clientIpAddress = null, ProtocolEnum? protocol = null, ResponseTypeEnum? responseType = null, RCodeEnum? rCode = null, DNSRecordTypeEnum? qType = null, ClassEnum? @class = null);
+        Task<QueryLogsResponseDTO> QueryLogs(Guid hostId, int pageNumber = 1, int entriesPerPage = 10, bool descendingOrder = true, DateTime? start = null, DateTime? end = null, string? clientIpAddress = null, ProtocolEnum? protocol = null, ResponseTypeEnum? responseType = null, RCodeEnum? rCode = null, RecordTypeEnum? qType = null, ClassEnum? @class = null);
 
         Task<bool> GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNSDTO createToken);
         Task<string> RevokeTokenKey(Guid tokenId);

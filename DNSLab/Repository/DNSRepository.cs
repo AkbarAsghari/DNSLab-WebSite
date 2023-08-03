@@ -162,7 +162,7 @@ namespace DNSLab.Repository
             return null;
         }
 
-        public async Task<QueryLogsResponseDTO> QueryLogs(Guid hostId, int pageNumber = 1, int entriesPerPage = 10, bool descendingOrder = true, DateTime? start = null, DateTime? end = null, string? clientIpAddress = null, ProtocolEnum? protocol = null, ResponseTypeEnum? responseType = null, RCodeEnum? rCode = null, DNSRecordTypeEnum? qType = null, ClassEnum? @class = null)
+        public async Task<QueryLogsResponseDTO> QueryLogs(Guid hostId, int pageNumber = 1, int entriesPerPage = 10, bool descendingOrder = true, DateTime? start = null, DateTime? end = null, string? clientIpAddress = null, ProtocolEnum? protocol = null, ResponseTypeEnum? responseType = null, RCodeEnum? rCode = null, RecordTypeEnum? qType = null, ClassEnum? @class = null)
         {
             var response = await _httpService.Get<QueryLogsResponseDTO>($"/DNS/QueryLogs?hostId={hostId}" +
                 $"&pageNumber={pageNumber}" +
