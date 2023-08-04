@@ -1,4 +1,5 @@
 ﻿using DNSLab.DTOs.DNS;
+using DNSLab.DTOs.Pagination;
 using DNSLab.Enums.DNSQueryLogs;
 using MudBlazor;
 using System.Globalization;
@@ -48,6 +49,12 @@ partial class DNSQueryLogs
             SelectedRCode,
             SelectedRecordType,
             SelectedClass);
+    }
+
+    private async Task SelectedPageChange(int page)
+    {
+        PageNumber = page;
+        await Search();
     }
 
     public IMask ipv4Mask = RegexMask.IPv4();

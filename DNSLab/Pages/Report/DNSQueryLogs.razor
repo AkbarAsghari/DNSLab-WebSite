@@ -39,7 +39,7 @@ else
             <MudDateRangePicker Culture="@GetPersianCulture()" Label="بازه زمانی" @bind-DateRange="SelectedDateRange" />
         </MudItem>
         <MudItem xs="12" md="3">
-            <MudTextField Mask="@ipv4Mask" Label="IPv4 Address" HelperText="@ipv4Mask.Mask"
+            <MudTextField Mask="@ipv4Mask" Label="آدرس آی‌پی کلاینت" HelperText="@ipv4Mask.Mask"
                       @bind-Value="ClientIpAddress" Variant="@Variant.Text" Clearable />
         </MudItem>
         <MudItem xs="12" md="3">
@@ -99,7 +99,7 @@ else
 
     @if (Logs != null)
     {
-        <MudDataGrid Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
+        <MudDataGrid Class="mt-2" Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
         <Columns>
             <PropertyColumn Property="x=>x.RowNumber" Title="#" />
             <PropertyColumn Property="x=>x.Timestamp" Title="زمان" />
@@ -112,9 +112,7 @@ else
             <PropertyColumn Property="x=>x.Qclass" Title="کلاس" />
             <PropertyColumn Property="x=>x.Answer" Title="پاسخ" />
         </Columns>
-        <PagerContent>
-            <MudDataGridPager T="Entry" />
-        </PagerContent>
     </MudDataGrid>
+        <Pagination TotalAmountPages="Logs.Response.TotalPages" CurrentPage="PageNumber" Radius="EntriesPerPage" SelectedPage="SelectedPageChange"></Pagination>
     }
 }
