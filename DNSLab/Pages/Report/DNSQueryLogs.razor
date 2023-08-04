@@ -102,7 +102,11 @@ else
         <MudDataGrid Class="mt-2" Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
         <Columns>
             <PropertyColumn Property="x=>x.RowNumber" Title="#" />
-            <PropertyColumn Property="x=>x.Timestamp" Title="زمان" />
+            <TemplateColumn Title="زمان">
+                <CellTemplate>
+                    <MudText>@context.Item.Timestamp.ToLocalizerString()</MudText>
+                </CellTemplate>
+            </TemplateColumn>
             <PropertyColumn Property="x=>x.ClientIpAddress" Title="آی پی کلاینت" />
             <PropertyColumn Property="x=>x.Protocol" Title="پروتکل" />
             <PropertyColumn Property="x=>x.ResponseType" Title="نوع پاسخ" />

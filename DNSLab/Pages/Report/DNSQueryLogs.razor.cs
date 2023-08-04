@@ -13,7 +13,7 @@ partial class DNSQueryLogs
     bool OrderByDESC { get; set; } = true;
     int PageNumber { get; set; } = 1;
     int EntriesPerPage { get; set; } = 10;
-    private DateRange SelectedDateRange = new DateRange(DateTime.Now.AddDays(-1).Date, DateTime.Now.Date);
+    private DateRange SelectedDateRange = new DateRange(DateTime.Now.Date, DateTime.Now.Date);
     string? ClientIpAddress { get; set; }
     ProtocolEnum? SelectedProtocol { get; set; }
     ResponseTypeEnum? SelectedResponseType { get; set; }
@@ -37,12 +37,30 @@ partial class DNSQueryLogs
 
     public async Task Search()
     {
+        DateTime? fromDate = null, toDate = null;
+
+        if (SelectedDateRange.Start.HasValue)
+        {
+            fromDate = new DateTime(SelectedDateRange.Start.Value.Year,
+                SelectedDateRange.Start.Value.Month,
+                SelectedDateRange.Start.Value.Day,
+                00, 00, 00);
+        }
+
+        if (SelectedDateRange.End.HasValue)
+        {
+            toDate = new DateTime(SelectedDateRange.End.Value.Year,
+               SelectedDateRange.End.Value.Month,
+               SelectedDateRange.End.Value.Day,
+               23, 59, 59);
+        }
+
         Logs = await dnsRepository.QueryLogs(SelectedHostName,
             PageNumber,
             EntriesPerPage,
             OrderByDESC,
-            SelectedDateRange.Start,
-            SelectedDateRange.End,
+            fromDate,
+            toDate,
             ClientIpAddress,
             SelectedProtocol,
             SelectedResponseType,
