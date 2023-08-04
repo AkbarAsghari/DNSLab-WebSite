@@ -9,13 +9,13 @@ else
 {
     <EditForm Model="ChangeLog" Context=ChangeLogContext>
         <MudGrid>
-            <MudItem lg="4">
+            <MudItem lg="4" xs="12">
                 <MudTextField Label="@localizer["ChangeTitle"]" @bind-Value=ChangeLog.Title />
             </MudItem>
-            <MudItem lg="4">
+            <MudItem lg="4" xs="12">
                 <MudDatePicker Label="@localizer["ReleaseDate"]" @bind-Value=selectedDate />
             </MudItem>
-            <MudItem lg="4">
+            <MudItem lg="4" xs="12">
                 <MudTextField Label="@localizer["InformationLink"]" Class="mud-ltr"
                           @bind-Value=ChangeLog.InformationLink />
             </MudItem>
