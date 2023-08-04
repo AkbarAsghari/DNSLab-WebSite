@@ -36,7 +36,7 @@ else
             </MudSelect>
         </MudItem>
         <MudItem xs="12" md="6">
-            <MudDateRangePicker Culture="@GetPersianCulture()" Label="بازه زمانی" @bind-DateRange="SelectedDateRange" />
+            <MudDateRangePicker Culture="@GetPersianCulture()" Label="بازه زمانی" PickerVariant="PickerVariant.Dialog" IsDateDisabledFunc="((DateTime dt)=> dt < DateTime.Now.AddDays(-7) || dt > DateTime.Now)" @bind-DateRange="SelectedDateRange" />
         </MudItem>
         <MudItem xs="12" md="3">
             <MudTextField Mask="@ipv4Mask" Label="آدرس آی‌پی کلاینت" HelperText="@ipv4Mask.Mask"
