@@ -1,15 +1,15 @@
-﻿@if (IsBussy)
-{
-    <MudProgressCircular Class="mt-2" Color="Color" Indeterminate="true">
-        <MudText>در حال پردازش</MudText>
-    </MudProgressCircular>
-}
-else
-{
-    <MudButton Class="mt-2" Color=@Color ButtonType="(EditContext == null ? ButtonType.Button : ButtonType.Submit)"
-           StartIcon="@Icon"
+﻿<MudButton Class="mt-2" Disabled="@IsBussy" OnClick="ButtonClickedEvent"
            Variant="@(IsOutLine  ? Variant.Outlined : Variant.Filled)"
-           OnClick="ButtonClickedEvent">
-        @Caption
-    </MudButton>
-}
+           StartIcon="@Icon"
+           ButtonType="(EditContext == null ? ButtonType.Button : ButtonType.Submit)"
+           Color=@Color>
+    @if (IsBussy)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+        <MudText Class="ms-2">@IsBussyCaption</MudText>
+    }
+    else
+    {
+        <MudText>@Caption</MudText>
+    }
+</MudButton>
