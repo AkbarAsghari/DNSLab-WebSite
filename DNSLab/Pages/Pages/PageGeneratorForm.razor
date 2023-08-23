@@ -4,10 +4,11 @@
     <MudText Typo="Typo.h3">@Title</MudText>
     <MudGrid>
         <MudItem sm="12" md="6">
-            <MudSelect Label="@localizer["PageType"]" Value="PageType" T="string" ReadOnly=@(!(Page.PublishDate
-                       == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow))>
-                <MudSelectItem T="string" Value="@("Article" )" />
-                <MudSelectItem T="string" Value="@("Support")" />
+            <MudSelect Label="@localizer["PageType"]" 
+            @bind-Value="@Page.PageType"
+                       ReadOnly=@(!(Page.PublishDate == null || Page.PublishDate.Value.AddHours(3) > DateTime.UtcNow))>
+                <MudSelectItem Value="@PageTypeEnum.Article">@PageTypeEnum.Article.ToString()</MudSelectItem>
+                <MudSelectItem Value="@PageTypeEnum.Support">@PageTypeEnum.Support.ToString()</MudSelectItem>
             </MudSelect>
         </MudItem>
         <MudItem sm="12" md="6">

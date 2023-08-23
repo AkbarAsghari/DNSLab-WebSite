@@ -3,9 +3,9 @@
 @using System.Linq;
 @using System.Text.RegularExpressions;
 
-<MudTextField T="string" @bind-Text="input" Label="تگ ها" Placeholder="با ( ویرگول ) جدا کنید" Clearable="true"
+<MudTextField T="string" @bind-Text="input" Label="تگ ها" Clearable="true"
     Class="mb-2" />
-<MudIconButton OnClick="SubmitTag" Class="ml-4" Color="Color.Secondary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Add" />
+<MudIconButton OnClick="SubmitTag" Class="ml-4" Color="Color.Primary" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Add" />
 
 @if (IsContainSpecialCharacter)
 {
@@ -17,7 +17,7 @@
 {
     @foreach (var tag in Tags)
     {
-        <MudFab Size="Size.Small" DisableElevation="true" StartIcon="@Icons.Material.Filled.Close" Label="@tag"
+        <MudFab Size="Size.Small" Class="mr-1" Color="Color.Secondary" DisableElevation="true" StartIcon="@Icons.Material.Filled.Close" Label="@tag"
     OnClick="() => DeleteTag(tag)" />
     }
 }

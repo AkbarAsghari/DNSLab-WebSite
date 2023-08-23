@@ -11,6 +11,7 @@ partial class CreatePage
         Title = String.Empty,
         Description = String.Empty,
         Keywords = new List<string>(),
+        PageType = PageTypeEnum.Article,
         Body = "مطلب خود را در اینجا بنویسید.",
     };
 

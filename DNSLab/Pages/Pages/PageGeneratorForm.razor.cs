@@ -5,20 +5,6 @@ partial class PageGeneratorForm
 {
     [Parameter] public string Title { get; set; }
 
-    string PageType
-    {
-        get
-        {
-            return Enum.GetName(Page.PageType.GetType(), Page.PageType)!;
-        }
-        set
-        {
-            if (value == null)
-                value = PageTypeEnum.Article.ToString();
-            Page.PageType = (PageTypeEnum)System.Enum.Parse(typeof(PageTypeEnum), value);
-        }
-    }
-
     [Parameter]
     public PageDTO Page { get; set; } = new PageDTO
     {
