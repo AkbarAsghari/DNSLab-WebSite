@@ -36,16 +36,17 @@ namespace DNSLab.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DNSLab.Resources.Resource", typeof(Resource).Assembly);
-                    resourceMan = temp;
-                }
-                return resourceMan;
-            }
-        }
-        
+       
+          private const string ResourceName = "DNSLab.Resources.Resource";
+          private static readonly Type ResourceType = typeof(Resource);
+          private static global::System.Resources.ResourceManager resourceMan;
+
+           public static global::System.Resources.ResourceManager ResourceManager {
+           get {
+                return resourceMan ??= new global::System.Resources.ResourceManager(ResourceName, ResourceType.Assembly);
+    }
+}
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
