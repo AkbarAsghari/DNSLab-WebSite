@@ -45,13 +45,13 @@ else
                     <CellTemplate>
                         <MudStack Row>
                         <BaseButtonComponent Caption=@localizer["Details"] IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Primary IsOutLine=true Icon=@Icons.Material.Filled.MoreHoriz
+                                         Color=Color.Primary Icon=@Icons.Material.Filled.MoreHoriz
                                          OnClick=@(()=>OpenToken(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Warning IsOutLine=true Icon=@Icons.Material.Filled.Edit
+                                         Color=Color.Warning Icon=@Icons.Material.Filled.Edit
                                          OnClick=@(()=>EditToken(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
-                                         Color=Color.Error IsOutLine=true Icon=@Icons.Material.Filled.Delete
+                                         Color=Color.Error Icon=@Icons.Material.Filled.Delete
                                          OnClick=@(()=>DeleteToken(context.Item)) />
                     </MudStack>
                 </CellTemplate>

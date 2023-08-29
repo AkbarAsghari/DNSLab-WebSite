@@ -53,13 +53,11 @@ else
                         <BaseButtonComponent Caption=@localizer["Edit"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=Color.Warning
-                                         IsOutLine=true
                                          Icon=@Icons.Material.Filled.Edit
                                          OnClick=@(()=>EditSiteChange(context.Item)) />
                         <BaseButtonComponent Caption=@localizer["Delete"]
                                          IsBussyCaption=@localizer["Progressing"]
                                          Color=Color.Error
-                                         IsOutLine=true
                                          Icon=@Icons.Material.Filled.Delete
                                          OnClick=@(()=>DeleteSiteChange(context.Item)) />
                     </MudStack>
