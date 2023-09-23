@@ -33,8 +33,7 @@ partial class DNSServerStat : IDisposable
     }
     void InitLineChart()
     {
-        options.InterpolationOption = InterpolationOption.NaturalSpline;
-        options.LineStrokeWidth = 0.5D;
+        options.LineStrokeWidth = 0.2D;
         XAxisLabels = null;
         Series = new List<ChartSeries>();
     }
