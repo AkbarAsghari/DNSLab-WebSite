@@ -1,6 +1,7 @@
 ﻿@using System.Drawing;
 @using DNSLab.DTOs.Statics;
 @using DNSLab.Helper.Utilities;
+@using ApexCharts;
 @attribute [Authorize(Roles = "Admin")]
 @inject IStaticsRepository _StaticRepository
 
@@ -11,9 +12,9 @@
 else
 {
     <MudGrid>
-    <MudItem xs="12" md="3">
-        <MudSelect T="string" ValueChanged="StatTypeOnChange" Label="بازه">
-            @foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
+        <MudItem xs="12" md="3">
+            <MudSelect T="string" ValueChanged="StatTypeOnChange" Label="بازه">
+                @foreach (var item in Enum.GetValues(typeof(StatTypeEnum)))
                 {
                     <MudSelectItem Value="@item.ToString()" />
                 }
@@ -32,103 +33,123 @@ else
                 <MudSwitch Label="بروزرسانی خودکار" T="bool" CheckedChanged="AutoRefresher" Color="MudBlazor.Color.Primary" />
             </MudItem>
         }
-        </MudGrid>
+    </MudGrid>
     <div class="stats-panel">
-    <div class="stats-item total-queries">
-        <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)</div>
-        <div class="title">Total Queries</div>
-    </div>
-
-    <div class="stats-item no-error">
-        <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)</div>
-        <div class="title">No Error</div>
-    </div>
-
-    <div class="stats-item server-failure">
-        <div class="number">@_StatResponse.Response.Stats.TotalServerFailure.ToString("N0").EnglishToPersianNumbers()
+        <div class="stats-item total-queries">
+            <div class="number">@_StatResponse.Response.Stats.TotalQueries.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalQueries)
+            </div>
+            <div class="title">Total Queries</div>
         </div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)
+
+        <div class="stats-item no-error">
+            <div class="number">@_StatResponse.Response.Stats.TotalNoError.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNoError)
+            </div>
+            <div class="title">No Error</div>
         </div>
-        <div class="title">Server Failure</div>
-    </div>
 
-    <div class="stats-item name-error">
-        <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)</div>
-        <div class="title">NX Domain</div>
-    </div>
-
-    <div class="stats-item refused">
-        <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)</div>
-        <div class="title">Refused</div>
-    </div>
-
-    <div class="stats-item auth-hit">
-        <div class="number">@_StatResponse.Response.Stats.TotalAuthoritative.ToString("N0").EnglishToPersianNumbers()
+        <div class="stats-item server-failure">
+            <div class="number">
+                @_StatResponse.Response.Stats.TotalServerFailure.ToString("N0").EnglishToPersianNumbers()
+            </div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalServerFailure)
+            </div>
+            <div class="title">Server Failure</div>
         </div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)
+
+        <div class="stats-item name-error">
+            <div class="number">@_StatResponse.Response.Stats.TotalNxDomain.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalNxDomain)
+            </div>
+            <div class="title">NX Domain</div>
         </div>
-        <div class="title">Authoritative</div>
+
+        <div class="stats-item refused">
+            <div class="number">@_StatResponse.Response.Stats.TotalRefused.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRefused)
+            </div>
+            <div class="title">Refused</div>
+        </div>
+
+        <div class="stats-item auth-hit">
+            <div class="number">
+                @_StatResponse.Response.Stats.TotalAuthoritative.ToString("N0").EnglishToPersianNumbers()
+            </div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalAuthoritative)
+            </div>
+            <div class="title">Authoritative</div>
+        </div>
+
+        <div class="stats-item recursions">
+            <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)
+            </div>
+            <div class="title">Recursive</div>
+        </div>
+
+        <div class="stats-item cache-hit">
+            <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)
+            </div>
+            <div class="title">Cached</div>
+        </div>
+
+        <div class="stats-item blocked">
+            <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">
+                @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)
+            </div>
+            <div class="title">Blocked</div>
+        </div>
+
+        <div class="stats-item clients">
+            <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString("N0").EnglishToPersianNumbers()</div>
+            <div class="percentage">&nbsp;</div>
+            <div class="title">Clients</div>
+        </div>
     </div>
 
-    <div class="stats-item recursions">
-        <div class="number">@_StatResponse.Response.Stats.TotalRecursive.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalRecursive)</div>
-        <div class="title">Recursive</div>
-    </div>
+    <MudPaper Class="pa-4 mud-ltr">
+        <ApexChart TItem="ChartData" @ref="chart">
 
-    <div class="stats-item cache-hit">
-        <div class="number">@_StatResponse.Response.Stats.TotalCached.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalCached)</div>
-        <div class="title">Cached</div>
-    </div>
+            @foreach (var item in QueryChartDatas)
+            {
+                <ApexPointSeries TItem="ChartData"
+                         Items="item.ChartDatas"
+                         SeriesType="@SeriesType.Area"
+                         Name="@item.QuertType"
+                         XValue="@(e => e.Lable)"
+                         YAggregate="@(e => e.Sum(e => e.Value))"/>
+            }
 
-    <div class="stats-item blocked">
-        <div class="number">@_StatResponse.Response.Stats.TotalBlocked.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">
-            @GetPrecentage(_StatResponse.Response.Stats.TotalQueries,_StatResponse.Response.Stats.TotalBlocked)</div>
-        <div class="title">Blocked</div>
-    </div>
-
-    <div class="stats-item clients">
-        <div class="number">@_StatResponse.Response.Stats.TotalClients.ToString("N0").EnglishToPersianNumbers()</div>
-        <div class="percentage">&nbsp;</div>
-        <div class="title">Clients</div>
-    </div>
-</div>
-
-    <MudPaper Class="pa-4">
-        <MudChart ChartType="ChartType.Line" ChartSeries="@Series" XAxisLabels="@XAxisLabels" Width="100%" Height="auto"
-            LegendPosition=Position.Top ChartOptions="options">
-        </MudChart>
+           
+        </ApexChart>
     </MudPaper>
     <MudDivider Class="mt-2" />
     <MudGrid>
         <MudItem md="8" xs="12">
             <MudPaper Class="pa-4">
-                <MudChart ChartType="ChartType.Donut" InputData="@QuerytypechartData" InputLabels="@QuerytypechartLabels"
-                    Width="300px" Height="300px" @bind-SelectedIndex="QuerytypeSelectedIndex" >
+              @*  <MudChart ChartType="ChartType.Donut" InputData="@QuerytypechartData" InputLabels="@QuerytypechartLabels"
+                      Width="300px" Height="300px" @bind-SelectedIndex="QuerytypeSelectedIndex">
                     <CustomGraphics>
                         <text class="donut-inner-text" x="50%" y="35%" dominant-baseline="middle" text-anchor="middle"
-                            fill="black" font-family="vazir-bold" font-size="2">@QuerytypechartLabels[QuerytypeSelectedIndex]</text>
+                              fill="black" font-family="vazir-bold" font-size="2">@QuerytypechartLabels[QuerytypeSelectedIndex]</text>
                         <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-                            fill="black" font-family="vazir-bold" font-size="5">@QuerytypechartData[QuerytypeSelectedIndex].ToString().EnglishToPersianNumbers()</text>
+                              fill="black" font-family="vazir-bold" font-size="5">@QuerytypechartData[QuerytypeSelectedIndex].ToString().EnglishToPersianNumbers()</text>
                     </CustomGraphics>
                 </MudChart>
                 <MudDivider Class="mt-2" />
                 <MudChart ChartType="ChartType.Pie" InputData="@QueryResponsechartData"
-                    InputLabels="@QueryResponsechartLabels" Width="300px" Height="300px" />
+                      InputLabels="@QueryResponsechartLabels" Width="300px" Height="300px" />*@
             </MudPaper>
         </MudItem>
         <MudItem md="4" xs="12">

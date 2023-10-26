@@ -1,4 +1,5 @@
-﻿using DNSLab.DTOs.Statics;
+﻿using ApexCharts;
+using DNSLab.DTOs.Statics;
 using DNSLab.Helper.Utilities;
 using MudBlazor;
 
@@ -6,10 +7,20 @@ namespace DNSLab.Shared.Components.DNS;
 partial class DNSServerStat : IDisposable
 {
 
-    //LineChart
-    private ChartOptions options = new ChartOptions();
-    public List<ChartSeries> Series;
-    public string[]? XAxisLabels;
+    class ChartData
+    {
+        public string Lable { get; set; }
+        public int Value { get; set; }
+    }
+
+    class QueryChartData
+    {
+        public string QuertType { get; set; }
+        public List<ChartData> ChartDatas { get; set; }
+    }
+
+    List<QueryChartData> QueryChartDatas = new List<QueryChartData>();
+    ApexChart<ChartData> chart;
 
     //PieChart
     int QuerytypeSelectedIndex = 0;
@@ -30,12 +41,6 @@ partial class DNSServerStat : IDisposable
     protected override async Task OnInitializedAsync()
     {
         await GenerateReport();
-    }
-    void InitLineChart()
-    {
-        options.LineStrokeWidth = 0.2D;
-        XAxisLabels = null;
-        Series = new List<ChartSeries>();
     }
 
     void InitPieChart()
@@ -94,7 +99,6 @@ partial class DNSServerStat : IDisposable
         else
             _StatResponse = await _StaticRepository.GetStat(StatType);
 
-        InitLineChart();
         InitPieChart();
 
         BindLineChartData();
@@ -108,21 +112,34 @@ partial class DNSServerStat : IDisposable
     string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
 
 
-    void BindLineChartData()
+    async void BindLineChartData()
     {
-        XAxisLabels = new string[_StatResponse.Response.MainChartData.Labels.Length];
+        QueryChartDatas.Clear();
 
-        foreach (var dataset in _StatResponse.Response.MainChartData.Datasets)
+        for (int i = 0; i < _StatResponse.Response.MainChartData.Datasets.Length; i++)
         {
-            Series.Add(new ChartSeries
+            QueryChartData queryChartData = new QueryChartData()
             {
-                Name = dataset.Label,
-                Data = dataset.Data.Select(x => Convert.ToDouble(x)).ToArray()
-            });
+                QuertType = _StatResponse.Response.MainChartData.Datasets[i].Label,
+                ChartDatas = new List<ChartData>()
+            };
+
+            for (int j = 0; j < _StatResponse.Response.MainChartData.Datasets[i].Data.Count(); j++)
+            {
+                queryChartData.ChartDatas.Add(
+                       new ChartData
+                       {
+                           Lable = _StatResponse.Response.MainChartData.Labels[j].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd")),
+                           Value = _StatResponse.Response.MainChartData.Datasets[i].Data[j]
+                       });
+            }
+            QueryChartDatas.Add(queryChartData);
         }
 
-        for (int i = 0; i < XAxisLabels.Length; i++)
-            XAxisLabels[i] = _StatResponse.Response.MainChartData.Labels[i].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd"));
+        if (chart != null)
+        {
+            await chart.RenderAsync();
+        }
     }
 
     void BindQueryTypePieChartData()
