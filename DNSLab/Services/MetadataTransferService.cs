@@ -73,15 +73,15 @@ namespace DNSLab.Services
             _metadataProvider = metadataProvider ?? throw new ArgumentNullException(nameof(metadataProvider));
         }
 
-        public void Start()
+        public async void Start()
         {
             _navigationManager.LocationChanged += _navigationManager_LocationChanged;
-            UpdateMetadata(_navigationManager.Uri);
+            await UpdateMetadata(_navigationManager.Uri);
         }
 
-        private async Task _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
+        private void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
         {
-            await UpdateMetadata(e.Location);
+            UpdateMetadata(e.Location).GetAwaiter();
         }
 
         private async Task UpdateMetadata(string url)

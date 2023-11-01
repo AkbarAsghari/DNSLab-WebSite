@@ -1,8 +1,9 @@
 ﻿using DNSLab.Interfaces.Repository;
+using DNSLab.Services;
 
 namespace DNSLab.Prividers
 {
-    public class MetadataProvider
+    public class MetadataProvider : IMetadataProvider
     {
         private readonly IPageRepository _pageRepository;
         public MetadataProvider(IPageRepository pageRepository)

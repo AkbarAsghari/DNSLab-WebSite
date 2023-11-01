@@ -6,7 +6,7 @@ partial class Metadata
     bool isComplate = false;
     protected override async Task OnInitializedAsync()
     {
-        await MetadataTransferService.Start();
+        MetadataTransferService.Start();
         MetadataTransferService.PropertyChanged += OnMetadataChanged!;
         isComplate = true;
     }
