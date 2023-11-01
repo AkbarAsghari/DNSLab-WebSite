@@ -2,11 +2,12 @@
 using DNSLab.DTOs.Statics;
 using DNSLab.Helper.Utilities;
 using MudBlazor;
+using MudBlazor.Utilities;
 
 namespace DNSLab.Shared.Components.DNS;
 partial class DNSServerStat : IDisposable
 {
-
+    [CascadingParameter] public bool _isDarkMode { get; set; } = false;
     class ChartData
     {
         public string Lable { get; set; }
@@ -20,18 +21,18 @@ partial class DNSServerStat : IDisposable
     }
 
     List<QueryChartData> QueryChartDatas = new List<QueryChartData>();
-    ApexChart<ChartData> chart;
+    ApexChart<ChartData> LineChart;
 
     //PieChart
-    int QuerytypeSelectedIndex = 0;
-    double[]? QuerytypechartData;
-    string[]? QuerytypechartLabels;
 
-    //PieChart
-    double[]? QueryResponsechartData;
-    string[]? QueryResponsechartLabels;
+    class QueryTypeData
+    {
+        public string QueryType { get; set; }
+        public int Count { get; set; }
+    }
 
-    Random random = new Random();
+    List<QueryTypeData> QueryTypeChartData = new List<QueryTypeData>();
+    ApexChart<QueryTypeData> QueryTypePieChart;
 
     private StatResponse _StatResponse = null;
     private StatTypeEnum StatType = StatTypeEnum.LastHour;
@@ -41,14 +42,6 @@ partial class DNSServerStat : IDisposable
     protected override async Task OnInitializedAsync()
     {
         await GenerateReport();
-    }
-
-    void InitPieChart()
-    {
-        QuerytypechartData = null;
-        QuerytypechartLabels = null;
-        QueryResponsechartData = null;
-        QueryResponsechartLabels = null;
     }
 
     void AutoRefresher(bool value)
@@ -99,20 +92,14 @@ partial class DNSServerStat : IDisposable
         else
             _StatResponse = await _StaticRepository.GetStat(StatType);
 
-        InitPieChart();
-
-        BindLineChartData();
-        BindQueryTypePieChartData();
-        BindQueryResponsePieChartData();
+        await BindLineChartData();
+        await BindQueryTypePieChartData();
 
         if (StatType != StatTypeEnum.LastHour)
             AutoRefresher(false);
     }
 
-    string GetPrecentage(int total, int current) => (total == 0 ? 0 : ((current * 100 / total))).ToString().EnglishToPersianNumbers() + "%";
-
-
-    async void BindLineChartData()
+    async Task BindLineChartData()
     {
         QueryChartDatas.Clear();
 
@@ -136,38 +123,30 @@ partial class DNSServerStat : IDisposable
             QueryChartDatas.Add(queryChartData);
         }
 
-        if (chart != null)
+        if (LineChart != null)
         {
-            await chart.RenderAsync();
+            await LineChart.RenderAsync();
         }
     }
 
-    void BindQueryTypePieChartData()
+    async Task BindQueryTypePieChartData()
     {
-        QuerytypechartLabels = new string[_StatResponse.Response.Querytypechartdata.Labels.Length];
-        QuerytypechartData = new double[_StatResponse.Response.Querytypechartdata.Datasets[0].Data.Length];
+        QueryTypeChartData.Clear();
 
-        for (int i = 0; i < QuerytypechartData.Length; i++)
+        for (int i = 0; i < _StatResponse.Response.Querytypechartdata.Datasets[0].Data.Length; i++)
         {
-            QuerytypechartData[i] = (_StatResponse.Response.Querytypechartdata.Datasets[0].Data[i]);
+            QueryTypeChartData.Add(new QueryTypeData
+            {
+                QueryType = _StatResponse.Response.Querytypechartdata.Labels[i],
+                Count = _StatResponse.Response.Querytypechartdata.Datasets[0].Data[i]
+            });
         }
-        for (int i = 0; i < QuerytypechartLabels.Count(); i++)
-            QuerytypechartLabels[i] = _StatResponse.Response.Querytypechartdata.Labels[i];
-    }
 
-    void BindQueryResponsePieChartData()
-    {
-        QueryResponsechartLabels = new string[_StatResponse.Response.QueryResponseChartData.Labels.Length];
-        QueryResponsechartData = new double[_StatResponse.Response.QueryResponseChartData.Datasets[0].Data.Length];
-
-        for (int i = 0; i < QueryResponsechartData.Length; i++)
+        if (QueryTypePieChart != null)
         {
-            QueryResponsechartData[i] = (_StatResponse.Response.QueryResponseChartData.Datasets[0].Data[i]);
+            await QueryTypePieChart.RenderAsync();
         }
-        for (int i = 0; i < QueryResponsechartLabels.Count(); i++)
-            QueryResponsechartLabels[i] = _StatResponse.Response.QueryResponseChartData.Labels[i];
     }
-
     public void Dispose()
     {
         if (_timer != null)
