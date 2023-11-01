@@ -1,69 +1,85 @@
-﻿using DNSLab.Prividers;
+using DNSLab.Prividers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace DNSLab.Services
 {
+    public interface IMetadataProvider
+    {
+        Task<MetadataValue> GetMetaData(string url);
+    }
+
     public class MetadataTransferService : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly NavigationManager _navigationManager;
-        private readonly MetadataProvider _metadataProvider;
 
-        private string _title;
+        private readonly NavigationManager _navigationManager;
+        private readonly IMetadataProvider _metadataProvider;
+
+        private string _title = string.Empty;
         public string Title
         {
             get => _title;
             set
             {
-                _title = value;
-                OnPropertyChanged();
+                if (_title != value)
+                {
+                    _title = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
-
-        private string _description;
+        private string _description = string.Empty;
         public string Description
         {
             get => _description;
             set
             {
-                _description = value;
-                OnPropertyChanged();
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
-        private string[] _keywords;
+        private string[] _keywords = Array.Empty<string>();
         public string[] Keywords
         {
             get => _keywords;
             set
             {
-                _keywords = value;
-                OnPropertyChanged();
+                if (_keywords != value)
+                {
+                    _keywords = value ?? Array.Empty<string>();
+                    OnPropertyChanged();
+                }
             }
         }
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public MetadataTransferService(NavigationManager navigationManager, MetadataProvider metadataProvider)
+        public MetadataTransferService(NavigationManager navigationManager, IMetadataProvider metadataProvider)
         {
-            _navigationManager = navigationManager;
-            _metadataProvider = metadataProvider;
+            _navigationManager = navigationManager ?? throw new ArgumentNullException(nameof(navigationManager));
+            _metadataProvider = metadataProvider ?? throw new ArgumentNullException(nameof(metadataProvider));
         }
 
-        public async Task Start()
+        public void Start()
         {
             _navigationManager.LocationChanged += _navigationManager_LocationChanged;
-            await UpdateMetadata(_navigationManager.Uri);
+            UpdateMetadata(_navigationManager.Uri);
         }
 
-        private async void _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
+        private async Task _navigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
         {
             await UpdateMetadata(e.Location);
         }
