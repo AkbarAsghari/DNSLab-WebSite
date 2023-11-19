@@ -1,0 +1,35 @@
+﻿@page "/Subscriptions/Plans"
+
+
+<MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Pricing</MudText>
+<MudText Align="Align.Center">Some long pricing text should go here maybe? who knows what text you would want here, i guess i cant fill it in for you.</MudText>
+<MudGrid Class="mt-8">
+
+    @if (PlansInfo != null)
+    {
+        foreach (var plan in PlansInfo)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h2" Align="Align.Center">@plan.Name</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <div class="d-flex justify-center">
+                            <MudText Typo="Typo.h3">@plan.TotalPrice.ToString().EnglishToPersianNumbers() تومان</MudText>
+                            <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">@(plan.Creadit > 1 ? $"ماهیانه {plan.PricePerMonth.ToString().EnglishToPersianNumbers()} تومان" : "-----")</MudText>
+                            </div>
+                            <MudText Class="mx-auto mt-4" Style="width:300px;">
+                                @plan.Description
+                            </MudText>
+                        </MudCardContent>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Style="width:50%;">شروع</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+        }
+    }
+</MudGrid>

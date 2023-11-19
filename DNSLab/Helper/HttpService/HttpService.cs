@@ -18,8 +18,8 @@ namespace DNSLab.Helper.HttpService
         private HttpResponseMessage _httpResponseMessage;
 
 #if DEBUG
-        private const string BaseAddress = "https://api.dnslab.link";
-        //private const string BaseAddress = "http://localhost";
+        //private const string BaseAddress = "https://api.dnslab.link";
+        private const string BaseAddress = "http://localhost";
 #else
         private const string BaseAddress = "https://api.dnslab.link";
 #endif
@@ -43,7 +43,18 @@ namespace DNSLab.Helper.HttpService
         {
             url = BaseAddress + url;
 
-            _httpResponseMessage = await _httpClient.GetAsync(url);
+            try
+            {
+                _httpResponseMessage = await _httpClient.GetAsync(url);
+            }
+            catch (Exception)
+            {
+            }
+
+            if (_httpResponseMessage == null)
+            {
+                return new HttpResponseWraper<TResponse>(default, false, _httpResponseMessage);
+            }
             await httpResponseExceptionHander.HandlerExceptionAsync(_httpResponseMessage);
 
             if (_httpResponseMessage.IsSuccessStatusCode)
