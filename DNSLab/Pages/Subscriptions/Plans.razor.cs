@@ -1,6 +1,7 @@
 ﻿using DNSLab.DTOs.Subscriptions;
 using DNSLab.Interfaces.Repository;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace DNSLab.Pages.Subscriptions;
 
@@ -25,7 +26,16 @@ partial class Plans
         });
 
         if (!String.IsNullOrEmpty(result))
+        {
             navigationManager.NavigateTo(result);
+        }
+
+        if (result == "/")
+        {
+            Snackbar.Add("نسخه آزمایشی برای شما فعال شد", MudBlazor.Severity.Success);
+        }
+
+
         _DisabledBuyButton = false;
     }
 }
