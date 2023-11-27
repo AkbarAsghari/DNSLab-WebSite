@@ -79,12 +79,12 @@ namespace DNSLab.Prividers
                 }
             },
             {
-                "transaction/tip",
+                "subscriptions/plans",
                 new()
                 {
-                    Title = "حمایت از دی ان اس لب",
-                    Description = "صفحه دریافت اطلاعات اولیه حمایت از دی ان اس لب",
-                    Keywords = new string[] { "حمایت از ما", "حمایت از دی ان اس لب" }
+                    Title = "خرید اشتراک",
+                    Description = "صفحه خرید اشتراک سایت dnslab",
+                    Keywords = new string[] { "اشتراک", "خرید اشتراک", "شارژ حساب کاربری" }
                 }
             },
             {

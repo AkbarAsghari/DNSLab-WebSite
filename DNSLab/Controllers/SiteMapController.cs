@@ -30,7 +30,7 @@ namespace DNSLab.Controllers
             "https://dnslab.link/503",
             "https://dnslab.link/user/logout",
             "https://dnslab.link/transaction/callback",
-            "https://dnslab.link/transaction/tip",
+            "https://dnslab.link/transaction/subscriptions/plans",
             "https://dnslab.link/comment/all/{pageid:guid}",
         };
 
