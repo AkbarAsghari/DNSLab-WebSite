@@ -18,29 +18,6 @@ namespace DNSLab.Repository
             _memoryCache = memoryCache;
         }
 
-        public async Task<TipsInformationDTO> GetTipsInformation()
-        {
-            if (!_memoryCache.TryGetValue(CacheKeyEnum.TipsInformation, out TipsInformationDTO cacheValue))
-            {
-                var result = await _httpService.Get<TipsInformationDTO>($"/Transaction/GetTipsInformation");
-                cacheValue = result.Response;
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(5));
-
-                _memoryCache.Set(CacheKeyEnum.TipsInformation, cacheValue, cacheEntryOptions);
-            }
-            return cacheValue;
-        }
-
-        public async Task<string> Tip(TipTransactionDTO request)
-        {
-            var response = await _httpService.Post<TipTransactionDTO, string>($"/Transaction/Tip", request);
-            if (!response.Success)
-                return String.Empty;
-            else
-                return response.Response;
-        }
-
         public async Task<bool> Verify(long trackId)
         {
             var response = await _httpService.Get<bool>($"/Transaction/Verify?trackid={trackId}");
