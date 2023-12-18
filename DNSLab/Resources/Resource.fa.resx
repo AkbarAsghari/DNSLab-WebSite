@@ -864,4 +864,10 @@
   <data name="AllHostNames" xml:space="preserve">
     <value>همه هاست نِیم ها</value>
   </data>
+  <data name="Subscription_Required" xml:space="preserve">
+    <value>اشتراک لازم است</value>
+  </data>
+  <data name="To_Reactivate_The_Free_Subscription_The_Previous_Must_Expired" xml:space="preserve">
+    <value>برای فعال سازی مجدد اشتراک رایگان باید قبلی منقضی شده باشد</value>
+  </data>
 </root>

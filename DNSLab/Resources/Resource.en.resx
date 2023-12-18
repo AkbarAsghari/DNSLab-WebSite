@@ -864,4 +864,10 @@
   <data name="AllHostNames" xml:space="preserve">
     <value>All HostNames</value>
   </data>
+  <data name="Subscription_Required" xml:space="preserve">
+    <value>Subscription Required</value>
+  </data>
+  <data name="To_Reactivate_The_Free_Subscription_The_Previous_Must_Expired" xml:space="preserve">
+    <value>To reactivate the free subscription, the previous one must have expired</value>
+  </data>
 </root>

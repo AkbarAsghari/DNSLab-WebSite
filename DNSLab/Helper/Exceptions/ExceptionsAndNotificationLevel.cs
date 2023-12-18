@@ -263,6 +263,16 @@ namespace DNSLab.Helper.Exceptions
                          ExceptionStr = "Redirect_Http_Response_Status_Code_Is_Not_Valid",
                          Severity = Severity.Warning,
                          NormalMessage = _localizer["Redirect_Http_Response_Status_Code_Is_Not_Valid"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "Subscription_Required",
+                         Severity = Severity.Warning,
+                         NormalMessage = _localizer["Subscription_Required"]
+                    },new ExceptionsAndNotificationLevel()
+                    {
+                         ExceptionStr = "To_Reactivate_The_Free_Subscription_The_Previous_Must_Expired",
+                         Severity = Severity.Warning,
+                         NormalMessage = _localizer["To_Reactivate_The_Free_Subscription_The_Previous_Must_Expired"]
                     }
                 };
             }

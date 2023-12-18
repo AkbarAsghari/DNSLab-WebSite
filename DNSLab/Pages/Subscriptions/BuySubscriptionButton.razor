@@ -1,0 +1,17 @@
+﻿<AuthorizeView>
+    <NotAuthorized>
+
+    </NotAuthorized>
+    <Authorized>
+        @if (_IsSubscipted)
+        {
+
+        }
+        else
+        {
+            <MudButton Href="/Subscriptions/Plans" EndIcon="@Icons.Material.Filled.WorkspacePremium" IconSize="Size.Large"
+                   IconColor="Color.Warning" Color="Color.Inherit">خرید اشتراک</MudButton>
+        }
+    </Authorized>
+</AuthorizeView>
+
