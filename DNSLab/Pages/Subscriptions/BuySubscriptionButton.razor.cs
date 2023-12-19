@@ -1,4 +1,5 @@
-﻿using DNSLab.Interfaces.Repository;
+﻿using DNSLab.DTOs.Subscriptions;
+using DNSLab.Interfaces.Repository;
 using DNSLab.Pages.User;
 using Microsoft.AspNetCore.Components.Authorization;
 
@@ -9,8 +10,9 @@ partial class BuySubscriptionButton
     [Inject] ISubscriptionsRepository SubscriptionsRepository { get; set; }
     [Inject] AuthenticationStateProvider Auth { get; set; }
 
-    bool _IsSubscipted = false;
-    protected override async Task OnParametersSetAsync()
+    bool? _IsSubscipted = null;
+    bool _ShowSubscriptionDetails = false;
+    protected override async Task OnInitializedAsync()
     {
         var user = (await Auth.GetAuthenticationStateAsync()).User;
 
@@ -18,5 +20,15 @@ partial class BuySubscriptionButton
         {
             _IsSubscipted = await SubscriptionsRepository.IsSubscripted();
         }
+    }
+
+    IEnumerable<SubscriptionInfoDTO> Subscriptions { get; set; } = null;
+    async Task ShowSubscriptionDetails()
+    {
+        _ShowSubscriptionDetails = true;
+
+        Subscriptions = await SubscriptionsRepository.GetActiveSubscriptions();
+
+
     }
 }
