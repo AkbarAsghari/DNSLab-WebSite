@@ -1,6 +1,7 @@
 ﻿@page "/About"
 @inject IAccountRepository accountReository
 @inject IDNSRepository dnsRepository
+@inject ISubscriptionsRepository subscriptionsRepository
 
 <MudText Typo="Typo.h1" Align="Align.Center">تغییر آی‌پی همیشه خوب نیست</MudText>
 <MudText Align="Align.Center">ما با تمرکز بر مهندسی و پیشرو بودن در فناوری، تلاش می کنیم خدمات قابل اعتمادی ایجاد کنیم که کاربرها رو خوشحال کند.</MudText>
@@ -9,20 +10,24 @@
 <MudText>ماموریت دی‌ان‌اس لب ایجاد راه حل های ایمن، قابل اعتماد است که کاربر ها بتوانند از آنها برای اتصال، مدیریت و تعامل با دستگاه های متصل به اینترنت خود استفاده کنند. ما در تلاش هستیم تا راه حل هایی ساده، شهودی و جذاب به مشتریان ارائه دهیم.</MudText>
 <MudGrid>
     <MudItem md="3">
-        <MudText Typo="Typo.h4">۱۴۰۰</MudText>
+        <MudText Typo="Typo.h3">۱۴۰۰</MudText>
         <MudText>دی‌ان‌اس لب در سال ۱۴۰۰ از یک ایده برای حل مشکل آی‌پی داینامیک شروع شد.</MudText>
     </MudItem>
     <MudItem md="3">
-        <MudText Typo="Typo.h4">@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers())</MudText>
+        <MudText Typo="Typo.h3">@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers())</MudText>
         <MudText>@(isLoadingUsersCount? "---" : usersCount.ToString().EnglishToPersianNumbers()) نفر از دی‌ان‌اس لب برای دسترسی از راه دور به رایانه های خود، اجرای سرور خانگی، نظارت بر دوربین IP و مدیریت DNS وب سایت های خود از جمله موارد دیگر استفاده می کنند.</MudText>
     </MudItem>
-    <MudItem md="3">
-        <MudText Typo="Typo.h4">@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</MudText>
+    <MudItem md="2">
+        <MudText Typo="Typo.h3">@(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers())</MudText>
         <MudText>تا کنون @(isLoadingDNSCount? "---" : dNSCount.ToString().EnglishToPersianNumbers()) هاست نِیم در سایت دی‌ان‌اس لب ایجاد شده است.</MudText>
     </MudItem>
-    <MudItem md="3">
-        <MudText Typo="Typo.h4">@(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</MudText>
-        <MudText>امروز @(isLoadingTodayIPChangesCount? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
+    <MudItem md="2">
+        <MudText Typo="Typo.h3">@(isLoadingTodayIPChangesCount ? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers())</MudText>
+            <MudText>امروز @(isLoadingTodayIPChangesCount ? "---" : todayIPChangesCount.ToString().EnglishToPersianNumbers()) آی پی تغییر یافته است.</MudText>
+    </MudItem>
+    <MudItem md="2">
+        <MudText Typo="Typo.h3" Class="d-flex"> <MudIcon Icon="@Icons.Material.Filled.WorkspacePremium" Color="Color.Warning" Class="d-flex" />@(isLoadingGetActiveSubscriptionCount ? "---" : activeSubscriptionCount.ToString().EnglishToPersianNumbers())</MudText>
+            <MudText>در حال حاضر @(isLoadingGetActiveSubscriptionCount ? "---" : activeSubscriptionCount.ToString().EnglishToPersianNumbers()) نفر اشتراک فعال دارند.</MudText>
     </MudItem>
 </MudGrid>
 <MudText Typo="Typo.h2">ما را در شبکه های اجتماعی دنبال کنید</MudText>

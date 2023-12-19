@@ -10,5 +10,6 @@ namespace DNSLab.Interfaces.Repository
         Task<IEnumerable<SubscriptionInfoDTO>> GetActiveSubscriptions();
         Task<IEnumerable<SubscriptionInfoDTO>> GetAllSubscriptions();
         Task<bool> IsSubscripted();
+        Task<int> GetActiveSubscriptionCount();
     }
 }

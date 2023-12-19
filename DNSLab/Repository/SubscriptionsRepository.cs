@@ -10,11 +10,32 @@ namespace DNSLab.Repository
     public class SubscriptionsRepository : ISubscriptionsRepository
     {
         private readonly IHttpService _httpService;
+        private readonly IMemoryCache _memoryCache;
 
-        public SubscriptionsRepository(IHttpService httpService)
+        public SubscriptionsRepository(IHttpService httpService, IMemoryCache memoryCache)
         {
             this._httpService = httpService;
+            _memoryCache = memoryCache;
         }
+
+        public async Task<int> GetActiveSubscriptionCount()
+        {
+            if (!_memoryCache.TryGetValue(CacheKeyEnum.GetActiveSubscriptionCount, out int cacheValue))
+            {
+                var response = await _httpService.Get<int>($"/Subscription/GetActiveSubscriptionCount");
+
+                if (!response.Success)
+                    cacheValue = 0;
+                else
+                    cacheValue = response.Response;
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+
+                _memoryCache.Set(CacheKeyEnum.GetActiveSubscriptionCount, cacheValue, cacheEntryOptions);
+            }
+            return cacheValue;
+        }
+
         public async Task<IEnumerable<SubscriptionInfoDTO>> GetActiveSubscriptions()
         {
             var response = await _httpService.Get<IEnumerable<SubscriptionInfoDTO>>($"/Subscription/GetActiveSubscriptions");

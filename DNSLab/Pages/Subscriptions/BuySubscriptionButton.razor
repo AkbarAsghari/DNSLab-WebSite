@@ -21,7 +21,7 @@ else
     <DialogContent>
         @if (Subscriptions != null)
         {
-            <MudDataGrid Items="@Subscriptions.OrderByDescending(x => x.End)" Filterable="false"
+            <MudDataGrid Items="@Subscriptions" Filterable="false"
                      SortMode="@SortMode.None" Groupable="false">
                 <Columns>
                     <TemplateColumn Title="پلن">
@@ -43,6 +43,9 @@ else
                         <CellTemplate>
                             @switch (context.Item.TransactionStatus)
                             {
+                                case (int)TransactionStatusEnum.AwaitingPayment:
+                                    <MudText Color="Color.Secondary">در انتظار پرداخت</MudText>
+                                    break;
                                 case (int)TransactionStatusEnum.PaidConfirmed:
                                     <MudText Color="Color.Success" >موفق</MudText>
                                     break;
@@ -72,7 +75,7 @@ else
                                 case (int)TransactionStatusEnum.TheAmountOfDailyInternetPaymentIsMoreThanTheAllowedLimit:
                                 case (int)TransactionStatusEnum.SwitchError:
                                 default:
-                                    <MudText Color="Color.Warning">خطای نامعلوم</MudText>
+                                    <MudText Color="Color.Error">خطای نامعلوم</MudText>
                                     break;
                             }
                         </CellTemplate>

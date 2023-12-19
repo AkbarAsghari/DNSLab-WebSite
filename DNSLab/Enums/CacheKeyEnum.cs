@@ -14,6 +14,7 @@
         TipsInformation,
         GetAllPagesSummaryByTag,
         GetPageMetadata,
-        GetLastContents
+        GetLastContents,
+        GetActiveSubscriptionCount
     }
 }
