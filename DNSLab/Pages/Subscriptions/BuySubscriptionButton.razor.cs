@@ -20,6 +20,10 @@ partial class BuySubscriptionButton
         {
             _IsSubscipted = await SubscriptionsRepository.IsSubscripted();
         }
+        else
+        {
+            _IsSubscipted = false;
+        }
     }
 
     IEnumerable<SubscriptionInfoDTO> Subscriptions { get; set; } = null;
