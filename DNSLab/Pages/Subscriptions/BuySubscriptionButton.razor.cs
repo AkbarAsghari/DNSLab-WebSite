@@ -26,13 +26,8 @@ partial class BuySubscriptionButton
         }
     }
 
-    IEnumerable<SubscriptionInfoDTO> Subscriptions { get; set; } = null;
     async Task ShowSubscriptionDetails()
     {
         _ShowSubscriptionDetails = true;
-
-        Subscriptions = await SubscriptionsRepository.GetActiveSubscriptions();
-
-
     }
 }
