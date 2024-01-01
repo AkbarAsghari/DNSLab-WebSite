@@ -73,7 +73,7 @@ namespace DNSLab.Helper.Exceptions
                     config.ActionColor = Color.Success;
                     config.Onclick = snackbar =>
                     {
-                        _navManager.NavigateTo("Subscriptions/Plans", true);
+                        _navManager.NavigateTo("Subscriptions/Plans");
                         return Task.CompletedTask;
                     };
                 });
