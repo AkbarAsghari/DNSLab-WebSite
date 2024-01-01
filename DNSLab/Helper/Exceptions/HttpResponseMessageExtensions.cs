@@ -67,7 +67,16 @@ namespace DNSLab.Helper.Exceptions
             var existMessage = _applicationExceptions.GetExceptions().FirstOrDefault(x => x.ExceptionStr == error!.Error);
             if (existMessage != null)
             {
-                _Snackbar.Add(existMessage.NormalMessage, existMessage.Severity);
+                _Snackbar.Add(existMessage.NormalMessage, existMessage.Severity, configure: String.IsNullOrEmpty(existMessage.ActionUrl) ? null : config =>
+                {
+                    config.Action = existMessage.ActionContent;
+                    config.ActionColor = Color.Success;
+                    config.Onclick = snackbar =>
+                    {
+                        _navManager.NavigateTo("Subscriptions/Plans", true);
+                        return Task.CompletedTask;
+                    };
+                });
                 return true;
             }
             return false;

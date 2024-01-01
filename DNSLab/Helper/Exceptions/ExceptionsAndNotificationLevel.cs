@@ -10,6 +10,8 @@ namespace DNSLab.Helper.Exceptions
         public string ExceptionStr { get; set; }
         public Severity Severity { get; set; }
         public string NormalMessage { get; set; }
+        public string ActionUrl { get; set; }
+        public string ActionContent { get; set; }
     }
 
     public sealed class ApplicationExceptions
@@ -36,7 +38,7 @@ namespace DNSLab.Helper.Exceptions
                     {
                          ExceptionStr = "Email_Is_Duplicate",
                          Severity = Severity.Error,
-                         NormalMessage = _localizer["Email_Is_Duplicate"] 
+                         NormalMessage = _localizer["Email_Is_Duplicate"]
                     },new ExceptionsAndNotificationLevel()
                     {
                          ExceptionStr = "Mobile_Is_Duplicate",
@@ -267,7 +269,9 @@ namespace DNSLab.Helper.Exceptions
                     {
                          ExceptionStr = "Subscription_Required",
                          Severity = Severity.Warning,
-                         NormalMessage = _localizer["Subscription_Required"]
+                         NormalMessage = _localizer["Subscription_Required"],
+                         ActionContent = "خرید اشتراک",
+                         ActionUrl = "Subscriptions/Plans"
                     },new ExceptionsAndNotificationLevel()
                     {
                          ExceptionStr = "To_Reactivate_The_Free_Subscription_The_Previous_Must_Expired",
