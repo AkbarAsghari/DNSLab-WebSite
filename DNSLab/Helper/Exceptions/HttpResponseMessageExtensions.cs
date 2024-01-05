@@ -70,10 +70,11 @@ namespace DNSLab.Helper.Exceptions
                 _Snackbar.Add(existMessage.NormalMessage, existMessage.Severity, configure: String.IsNullOrEmpty(existMessage.ActionUrl) ? null : config =>
                 {
                     config.Action = existMessage.ActionContent;
-                    config.ActionColor = Color.Success;
+                    config.ActionColor = Color.Secondary;
+                    config.ActionVariant = Variant.Filled;
                     config.Onclick = snackbar =>
                     {
-                        _navManager.NavigateTo("Subscriptions/Plans");
+                        _navManager.NavigateTo(existMessage.ActionUrl);
                         return Task.CompletedTask;
                     };
                 });
