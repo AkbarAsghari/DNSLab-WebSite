@@ -45,6 +45,9 @@ namespace DNSLab.Helper.Exceptions
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.Conflict:
                         break;
+                    case HttpStatusCode.TooManyRequests:
+
+                        break;
                     case HttpStatusCode.NotFound:
                         _navManager.NavigateTo("/404", true);
                         break;
@@ -62,6 +65,19 @@ namespace DNSLab.Helper.Exceptions
             string content = await response.Content!.ReadAsStringAsync();
             if (String.IsNullOrEmpty(content))
                 return false;
+
+            if (response.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                var tooManyRequest = JsonSerializer.Deserialize<TooManyRequestDTO>(content!, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                _Snackbar.Add($"تعداد درخواست بیش از حد مجاز میباشد (تعداد مجاز {tooManyRequest!.MaximumAllowed} در {tooManyRequest.Per} میباشد لطفا {tooManyRequest.Remain} ثانیه صبر کنید).",
+                    Severity.Error,
+                    configure: config =>
+                    {
+                        config.DuplicatesBehavior = SnackbarDuplicatesBehavior.Prevent;
+                    }, key: tooManyRequest.Error);
+
+                return true;
+            }
 
             var error = JsonSerializer.Deserialize<ErrorDTO>(content!, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             var existMessage = _applicationExceptions.GetExceptions().FirstOrDefault(x => x.ExceptionStr == error!.Error);
