@@ -48,6 +48,12 @@ namespace DNSLab.Repository
             return response.Response;
         }
 
+        public async Task<IEnumerable<SubscriptionTransactionDTO>> GetAllSubscriptionTransactions()
+        {
+            var response = await _httpService.Get<IEnumerable<SubscriptionTransactionDTO>>($"/Subscription/GetAllSubscriptionTransactions");
+            return response.Response;
+        }
+
         public async Task<IEnumerable<PlanInfoDTO>> GetPlans()
         {
             var response = await _httpService.Get<IEnumerable<PlanInfoDTO>>($"/Subscription/GetPlans");
@@ -60,9 +66,9 @@ namespace DNSLab.Repository
             return response.Response;
         }
 
-        public async Task<string> Subscription(SubscriptionTransactionDTO request)
+        public async Task<string> Subscription(SubscriptionDTO request)
         {
-            var response = await _httpService.Post<SubscriptionTransactionDTO, string>($"/Subscription/Subscription", request);
+            var response = await _httpService.Post<SubscriptionDTO, string>($"/Subscription/Subscription", request);
             if (!response.Success)
                 return String.Empty;
             else

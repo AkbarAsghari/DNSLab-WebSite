@@ -20,7 +20,7 @@ partial class Plans
     async Task Buy(int id)
     {
         _DisabledBuyButton = true;
-        var result = await _SubscriptionsRepository.Subscription(new DTOs.Transactions.SubscriptionTransactionDTO
+        var result = await _SubscriptionsRepository.Subscription(new DTOs.Transactions.SubscriptionDTO
         {
             Plan = id
         });

@@ -71,6 +71,10 @@
             <MudNavGroup Title="صورتحساب و اشتراک" Icon="@Icons.Material.Filled.Payment">
                 <MudNavLink Href="/Subscriptions/Plans">خرید اشتراک</MudNavLink>
                 <MudNavLink Href="/Subscriptions/ActivePlans">اشتراک های فعال</MudNavLink>
+                @if (IsInRoleAsync("Admin").Result)
+                {
+                    <MudNavLink Href="/Subscriptions/AllSubscriptionsTransactions">تمام تراکنش های اشتراک ها</MudNavLink>
+                }
             </MudNavGroup>
         </Authorized>
     </AuthorizeView>
