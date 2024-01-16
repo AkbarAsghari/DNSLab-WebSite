@@ -122,11 +122,8 @@ partial class DNSServerStat : IDisposable
             }
             QueryChartDatas.Add(queryChartData);
         }
-        StateHasChanged();
-        if (LineChart != null)
-        {
-            await LineChart.UpdateSeriesAsync();
-        }
+        await InvokeAsync(() => StateHasChanged());
+        await LineChart.UpdateSeriesAsync();
     }
 
     async Task BindQueryTypePieChartData()
@@ -141,11 +138,8 @@ partial class DNSServerStat : IDisposable
                 Count = _StatResponse.Response.Querytypechartdata.Datasets[0].Data[i]
             });
         }
-        StateHasChanged();
-        if (QueryTypePieChart != null)
-        {
-            await QueryTypePieChart.UpdateSeriesAsync();
-        }
+        await InvokeAsync(() => StateHasChanged());
+        await QueryTypePieChart.UpdateSeriesAsync();
     }
     public void Dispose()
     {
