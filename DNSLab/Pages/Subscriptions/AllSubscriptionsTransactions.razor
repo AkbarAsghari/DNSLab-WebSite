@@ -1,11 +1,11 @@
 ﻿@page "/Subscriptions/AllSubscriptionsTransactions"
+@using DNSLab.DTOs.Transactions
 @attribute [Authorize(Roles = "Admin")]
 
 <MudText Typo="Typo.h3">تمام تراکنش های اشتراک ها</MudText>
 @if (SubscriptionTransactions != null)
 {
-    <MudDataGrid Items="@SubscriptionTransactions" Filterable="false"
-             SortMode="@SortMode.None" Groupable="false">
+    <MudDataGrid Items="@SubscriptionTransactions" Breakpoint="Breakpoint.None">
         <Columns>
             <TemplateColumn>
                 <CellTemplate>
@@ -15,26 +15,36 @@
             <TemplateColumn Title="پلن">
                 <CellTemplate>
                     <MudText>@context.Item.PlanName</MudText>
-                </CellTemplate>
-            </TemplateColumn>
-            <TemplateColumn Title="مبلغ">
-                <CellTemplate>
-                    <MudText>@context.Item.Amount</MudText>
-                </CellTemplate>
-            </TemplateColumn>
-            <TemplateColumn Title="تاریخ تراکنش">
-                <CellTemplate>
-                    <MudText>@context.Item.CreateDate.ToLocalizerString()</MudText>
-                </CellTemplate>
-            </TemplateColumn>
-            <TemplateColumn Title="پرداخت در">
-                <CellTemplate>
-                    <MudText>@(context.Item.PaidAt.HasValue ? context.Item.PaidAt!.Value.ToLocalizerString() : String.Empty)</MudText>
-                </CellTemplate>
-            </TemplateColumn>
-            <TemplateColumn Title="وضعیت تراکنش">
-                <CellTemplate>
-                    @switch (context.Item.TransactionStatusId)
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="مبلغ">
+                    <CellTemplate>
+                        <MudText>@context.Item.Amount</MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="تاریخ تراکنش">
+                    <CellTemplate>
+                        <MudText>@context.Item.CreateDate.ToLocalizerString()</MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="شماره کارت">
+                    <CellTemplate>
+                        <MudText>@(String.IsNullOrEmpty(context.Item.CardNumber) ? String.Empty : context.Item.CardNumber!.EnglishToPersianNumbers())</MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="پرداخت در">
+                    <CellTemplate>
+                        <MudText>@(context.Item.PaidAt.HasValue ? context.Item.PaidAt.Value.ToUniversalTime().ToLocalizerString() : String.Empty)</MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="تایید در">
+                    <CellTemplate>
+                        <MudText>@(context.Item.VerifiedAt.HasValue ? context.Item.VerifiedAt.Value.ToUniversalTime().ToLocalizerString() : String.Empty)</MudText>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn Title="وضعیت تراکنش">
+                    <CellTemplate>
+                        @switch (context.Item.TransactionStatusId)
                     {
                         case (int)TransactionStatusEnum.AwaitingPayment:
                             <MudText Color="Color.Secondary">در انتظار پرداخت</MudText>
@@ -74,5 +84,8 @@
                 </CellTemplate>
             </TemplateColumn>
         </Columns>
+        <PagerContent>
+            <MudDataGridPager T="SubscriptionTransactionDTO" />
+        </PagerContent>
     </MudDataGrid>
 }
