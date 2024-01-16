@@ -123,7 +123,10 @@ partial class DNSServerStat : IDisposable
             QueryChartDatas.Add(queryChartData);
         }
         await InvokeAsync(() => StateHasChanged());
-        await LineChart.UpdateSeriesAsync();
+        if (LineChart != null)
+        {
+            await LineChart.UpdateSeriesAsync();
+        }
     }
 
     async Task BindQueryTypePieChartData()
@@ -139,7 +142,10 @@ partial class DNSServerStat : IDisposable
             });
         }
         await InvokeAsync(() => StateHasChanged());
-        await QueryTypePieChart.UpdateSeriesAsync();
+        if (QueryTypePieChart != null)
+        {
+            await QueryTypePieChart.UpdateSeriesAsync();
+        }
     }
     public void Dispose()
     {
