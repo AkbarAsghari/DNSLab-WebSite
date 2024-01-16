@@ -116,16 +116,16 @@ partial class DNSServerStat : IDisposable
                 queryChartData.ChartDatas.Add(
                        new ChartData
                        {
-                           Lable = _StatResponse.Response.MainChartData.Labels[j].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd")),
+                           Lable = _StatResponse.Response.MainChartData.Labels[j].ToLocalTime().ToString(_StatResponse.Response.MainChartData.LabelFormat.Replace("DD", "dd").Replace("YYYY", "yyyy")),
                            Value = _StatResponse.Response.MainChartData.Datasets[i].Data[j]
                        });
             }
             QueryChartDatas.Add(queryChartData);
         }
-
+        StateHasChanged();
         if (LineChart != null)
         {
-            await LineChart.RenderAsync();
+            await LineChart.UpdateSeriesAsync();
         }
     }
 
@@ -141,10 +141,10 @@ partial class DNSServerStat : IDisposable
                 Count = _StatResponse.Response.Querytypechartdata.Datasets[0].Data[i]
             });
         }
-
+        StateHasChanged();
         if (QueryTypePieChart != null)
         {
-            await QueryTypePieChart.RenderAsync();
+            await QueryTypePieChart.UpdateSeriesAsync();
         }
     }
     public void Dispose()

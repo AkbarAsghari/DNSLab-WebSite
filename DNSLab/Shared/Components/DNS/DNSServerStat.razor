@@ -35,35 +35,50 @@ else
         }
     </MudGrid>
 
-    <MudPaper Class="pa-4 mud-ltr">
-        <ApexChart TItem="ChartData" @ref="LineChart" Title="All Queries" Options="new ApexChartOptions<ChartData>{Theme= new Theme{Mode=_isDarkMode ? Mode.Dark : Mode.Light}}">
+    <MudPaper Class="pa-1 mud-ltr">
+        <MudGrid Spacing="2">
+            <MudItem xs="12" sm="6" md="5" lg="4">
+                <ApexChart TItem="QueryTypeData" @ref="QueryTypePieChart" Title="Query Types" Options="new ApexChartOptions<QueryTypeData>{Theme= new Theme{Mode=_isDarkMode ? Mode.Dark : Mode.Light}}">
+                    <ApexPointSeries TItem="QueryTypeData"
+                                     Items="QueryTypeChartData"
+                                     SeriesType="SeriesType.Pie"
+                                     XValue="@(e => e.QueryType)"
+                                     YValue="@(e=> e.Count)"
+                                     OrderByDescending="e=>e.Y" />
+                </ApexChart>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="7" lg="8">
+                <ApexChart TItem="ChartData" @ref="LineChart" Title="All Queries" Options="new ApexChartOptions<ChartData>{Theme= new Theme{Mode=_isDarkMode ? Mode.Dark : Mode.Light}}">
 
-            @foreach (var item in QueryChartDatas)
-            {
-                <ApexPointSeries TItem="ChartData"
-                         Items="item.ChartDatas"
-                         SeriesType="@SeriesType.Area"
-                         Name="@item.QuertType"
-                         XValue="@(e => e.Lable)"
-                         YAggregate="@(e => e.Sum(e => e.Value))" />
-            }
-
-
-        </ApexChart>
+                    @foreach (var item in QueryChartDatas)
+                    {
+                        <ApexPointSeries TItem="ChartData"
+                                         Items="item.ChartDatas"
+                                         SeriesType="@SeriesType.Area"
+                                         Name="@item.QuertType"
+                                         XValue="@(e => e.Lable)"
+                                         YAggregate="@(e => e.Sum(e => e.Value))" />
+                    }
+                </ApexChart>
+            </MudItem>
+        </MudGrid>
     </MudPaper>
+
     <MudDivider Class="mt-2" />
     <MudGrid>
         <MudItem md="6" xs="12">
-            <MudPaper Class="pa-4 mud-ltr">
-                <ApexChart TItem="QueryTypeData" @ref="QueryTypePieChart" Title="Query Types" Options="new ApexChartOptions<QueryTypeData>{Theme= new Theme{Mode=_isDarkMode ? Mode.Dark : Mode.Light}}">
-                    <ApexPointSeries TItem="QueryTypeData"
-                                 Items="QueryTypeChartData"
-                                 SeriesType="SeriesType.Pie"
-                                 XValue="@(e => e.QueryType)"
-                                 YValue="@(e=> e.Count)"
-                                 OrderByDescending="e=>e.Y" />
-                </ApexChart>
-            </MudPaper>
+            <MudText Typo="Typo.h4">Top Clients</MudText>
+            @foreach (var client in _StatResponse.Response.Topclients)
+            {
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudText>@client.Name</MudText>
+                        </MudItem>
+                        <MudItem>
+                            <MudText>@client.Hits</MudText>
+                        </MudItem>
+                    </MudGrid>
+            }
         </MudItem>
         <MudItem md="6" xs="12">
             <MudText Typo="Typo.h4">Top Domains</MudText>
@@ -72,24 +87,11 @@ else
                 <MudGrid>
                     <MudItem xs="9">
                         <MudText>@domain.Name</MudText>
-                    </MudItem>
-                    <MudItem>
-                        <MudText>@domain.Hits</MudText>
-                    </MudItem>
-                </MudGrid>
-            }
-            <MudDivider Class="mt-2" />
-            <MudText Typo="Typo.h4">Top Clients</MudText>
-            @foreach (var client in _StatResponse.Response.Topclients)
-            {
-                <MudGrid>
-                    <MudItem xs="9">
-                        <MudText>@client.Name</MudText>
-                    </MudItem>
-                    <MudItem>
-                        <MudText>@client.Hits</MudText>
-                    </MudItem>
-                </MudGrid>
+                        </MudItem>
+                        <MudItem>
+                            <MudText>@domain.Hits</MudText>
+                        </MudItem>
+                    </MudGrid>
             }
         </MudItem>
 
