@@ -1,0 +1,129 @@
+﻿<MudText Typo="Typo.h3">مودم های Mikrotik</MudText>
+
+<MudText>
+    برای بروزرسانی خودکار آی پی در مودم های میکروتیک ابتدا باید یک توکن (Token) برای
+    بروزرسانی آی پی ایجاد نمایید.
+</MudText>
+
+<MudText Typo="Typo.h4" Class="mt-2">لیست توکن ها</MudText>
+<MudButton OnClick="AddNewToken" Size="Size.Small" Class="my-1" Color="Color.Primary" Variant="Variant.Filled">
+    ایجاد توکن جدید
+</MudButton>
+<MudItem xs="12" sm="10" md="9" lg="7">
+    @if (tokens == null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudPaper Class="pa-4" Style="position:relative;">
+            <MudOverlay Visible="ShowTokensOverlay" DarkBackground="true" OnClick="EnabledTokensList" Absolute="true" />
+            <MudDataGrid Breakpoint="Breakpoint.None" SortMode="SortMode.None" Groupable="false" Items="@tokens.OrderByDescending(x => x.CreateDate)" Outlined Dense>
+             <Columns>
+                 <PropertyColumn Property="x => x.Name" Title="عنوان توکن" />
+                 <PropertyColumn Property="x => x.HostNameCount" Title="تعداد هاست نیم فعال بر روی این توکن" />
+                 <TemplateColumn Title="عملیات">
+                     <CellTemplate>
+                         <MudStack Row>
+                             <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Warning" Size="Size.Small" OnClick="()=> EditTokenAsync(context.Item)"></MudIconButton>
+                             <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small" OnClick="()=> DeleteTokenAsync(context.Item)"></MudIconButton>
+                             <MudIconButton Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success" Size="Size.Small" OnClick="()=> SelectToken(context.Item)"></MudIconButton>
+                         </MudStack>
+                     </CellTemplate>
+                 </TemplateColumn>
+             </Columns>
+         </MudDataGrid>
+     </MudPaper>
+
+
+    }
+</MudItem>
+
+@if (Token != null)
+{
+    <MudText Typo="Typo.h4" Class="my-2">نام توکن : @Token.Name </MudText>
+    @if (@isRevoking)
+    {
+        <MudText>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</MudText>
+        <MudButton EndIcon=@Icons.Material.Filled.Refresh Color="Color.Warning" Variant="Variant.Filled" Size="Size.Small" OnClick=ContinueRevokeKey>ادامه</MudButton>
+        <MudButton EndIcon=@Icons.Material.Filled.Cancel Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" OnClick=ChangeRevokeStatus>انصراف</MudButton>
+    }
+    else
+    {
+        <MudText>کلید توکن : <code>@Token.Key</code></MudText>
+        <MudButton EndIcon=@Icons.Material.Filled.Refresh Color="Color.Warning" Variant="Variant.Filled" Size="Size.Small" OnClick=ChangeRevokeStatus>تغییر کلید</MudButton>
+    }
+    <MudText>
+        برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل
+        خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید
+    </MudText>
+    <MudText>
+        فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL
+        در دسترس میباشد
+    </MudText>
+    <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
+        <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)" Target="_blank"
+                                     Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={Token.Id}&key={Token.Key}")" />
+        <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)" Target="_blank"
+                                     Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={Token.Id}&key={Token.Key}")" />
+    </MudButtonGroup>
+    <MudText>
+        فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در
+        دسترس میباشد
+    </MudText>
+    <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)" Target="_blank"
+                                 Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={Token.Id}&key={Token.Key}")" />
+    <MudText>لینک بروزرسانی آی پی های توکن</MudText>
+    <MudText>
+        https://api.dnslab.link/DNS/UDIBT?k=@Token.Key
+        <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + Token.Key) />
+    </MudText>
+    <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
+        این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
+    </MudAlert>
+}
+
+
+<MudDialog Options="new DialogOptions{MaxWidth = MaxWidth.Medium}" @bind-IsVisible="showEditOrAddTokenModal">
+    <TitleContent><MudText Typo="Typo.h4">@TokenModalTitle</MudText></TitleContent>
+        <DialogContent>
+            <MudTextField Label="نام توکن" Placeholder="یک نام برای توکن خود وارد نمایید"
+                          Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
+            <MudText Typo="Typo.h4" Class="my-2">هاست نیم های این توکن را انتخاب نمایید</MudText>
+            @if (HostSummariesAndChecked == null)
+        {
+            <Loading IsInTop="false" />
+        }
+        else if (HostSummariesAndChecked.Count == 0)
+        {
+            <MudAlert Severity="Severity.Warning" Dense>
+             <MudText>
+                 شما تا به حال هیچ هاست نیمی ثبت نکرده اید. <MudLink Href="dns/create">ایجاد هاست نِیم جدید</MudLink>
+             </MudText>
+         </MudAlert>
+        }
+        else
+        {
+            <MudPaper Outlined=true Class="rounded">
+                <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
+                 <MudText>توضیحات DNS انتخاب شده</MudText>
+             </MudAlert>
+             <MudGrid Spacing="0">
+                 @foreach (var item in HostSummariesAndChecked)
+                    {
+                        <MudItem xs="12" sm="6">
+                            <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudPaper>
+        }
+    </DialogContent>
+    <DialogActions>
+        <BaseButtonComponent Caption="ذخیره اطلاعات" IsBussyCaption="در حال ذخیره سازی اطلاعات"
+                             Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SaveModal>
+        </BaseButtonComponent>
+        <BaseButtonComponent Caption="انصراف" Icon=@Icons.Material.Filled.Cancel
+                             Color="Color.Secondary" OnClick="()=> showEditOrAddTokenModal = false"></BaseButtonComponent>
+    </DialogActions>
+</MudDialog>
