@@ -23,7 +23,7 @@ partial class Scripts
     {
         tokens = await _DNSRepository.GetTokenSummary();
 
-        HostNames = await _DNSRepository.GetOwnHostNamesDomain();
+        HostNames = await _DNSRepository.GetHostSummaries();
         if (HostNames.Count() > 0)
         {
             SelectedHostName = HostNames.First();

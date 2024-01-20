@@ -13,7 +13,7 @@ partial class Routers
 
     protected override async Task OnInitializedAsync()
     {
-        HostNames = await DNSRepository.GetOwnHostNamesDomain();
+        HostNames = await DNSRepository.GetHostSummaries();
         if (HostNames.Count() > 0)
         {
             SelectedHostName = HostNames.First();
