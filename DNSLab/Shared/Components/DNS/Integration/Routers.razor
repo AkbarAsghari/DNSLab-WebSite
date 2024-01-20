@@ -1,5 +1,52 @@
 ﻿<MudText Typo="Typo.h3">روتر ها (مودم های اینترنت)</MudText>
 
-@code {
+<MudText>برای بروزرسانی آی پی توسط روتر (مودم های اینترنت) مانند D-Link و TP-Link یا سایر مودم ها باید مراحل زیر را به ترتیب انجام دهید.</MudText>
 
-}
+<MudText Typo="Typo.h4">تنظیم DNS مودم</MudText>
+<MudText>برای تنظیم DNS باید از مسیر های زیر در مودم های مختلف وارد تنظیمات DNS مودم شوید.</MudText>
+<MudText Class="mud-ltr">D-Link : ADVANCED > DNS</MudText>
+<MudText Class="mud-ltr">TP-Link : Interface Setup > LAN</MudText>
+<MudText>پس از ورود به تنظیمات DNS تنظیمات را بصورت زیر انجام دهید</MudText>
+<MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+     <MudText Class="mud-ltr">Primary DNS Server : 194.147.142.136</MudText>
+     <MudText Class="mud-ltr">Secondary DNS Server : [یکی از دی ان اس های عمومی (8.8.8.8 - 8.8.4.4 - 1.1.1.1 - 1.0.0.1) یا دلخواه خودتان]</MudText>
+ </MudAlert>
+ <MudText>پس از تنظیم DNS باید وارد تنظیمات DDNS شویم.</MudText>
+ <MudText Typo="Typo.h4">تنظیم DDNS یا Dynamic DNS</MudText>
+ <MudText>مسیر تنظیمات DDNS در مودم های مختلف بصورت زیر میباشد.</MudText>
+ <MudText Class="mud-ltr">D-Link : ADVANCED > Dynamic DNS</MudText>
+ <MudText Class="mud-ltr">TP-Link : Access Management > DDNS</MudText>
+ <MudText>پس از ورود به بخش تنظیمات مراحل زیر را انجام دهید </MudText>
+ <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Start">
+     <MudText Inline>
+        یکی از هاست نِیم ها را انتخاب نمایید.
+        @if (HostNames != null)
+        {
+            <MudSelect Dense T="HostSummaryDTO" Margin="Margin.Dense" Variant="Variant.Filled" @bind-Value="SelectedHostName">
+                 @foreach (var item in HostNames)
+                {
+                    <MudSelectItem T="HostSummaryDTO" Value="@item">@item.Address</MudSelectItem>
+                }
+            </MudSelect>
+        }
+    </MudText>
+    <MudText>DDNS Provider : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
+    <MudText>
+        Hostname : در این قسمت مقدار 
+        @if (HostNames != null)
+        {
+            <strong>@SelectedHostName.Address</strong>
+            <CopyToClipboard Text="@SelectedHostName!.Address" />
+        }
+        else
+        {
+            <text>لطفا یک هاست نِیم را انتخاب نمایید</text>
+        }
+         را وارد نمایید.
+    </MudText>
+    <MudText>Username : در این قسمت نام کاربری خود را وارد نمایید.</MudText>
+    <MudText>Password : در این قسمت رمز عبور کاربری خود را وارد نمایید.</MudText>
+</MudAlert>
+<MudText>
+    پس از تنظیمات بالا مودم شما بصورت خودکار در صورت تغییر آی پی مودم ، به سرور DNSLab اطلاع رسانی خواهد کرد و آی پی جدید جایگزین قبلی خواهد شد.
+</MudText>
