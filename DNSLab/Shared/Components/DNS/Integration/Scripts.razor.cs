@@ -30,8 +30,6 @@ partial class Scripts
         }
     }
 
-
-
     string TokenModalTitle { get; set; } = String.Empty;
     TokenAndDNSDTO TokenAndDNS { get; set; } = new TokenAndDNSDTO();
 

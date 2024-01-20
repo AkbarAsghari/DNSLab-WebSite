@@ -33,7 +33,7 @@
     <MudText>DDNS Provider : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
     <MudText>
         Hostname : در این قسمت مقدار 
-        @if (HostNames != null)
+        @if (SelectedHostName != null)
         {
             <strong>@SelectedHostName.Address</strong>
             <CopyToClipboard Text="@SelectedHostName!.Address" />

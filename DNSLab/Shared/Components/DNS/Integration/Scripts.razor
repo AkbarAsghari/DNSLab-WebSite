@@ -76,6 +76,50 @@ else
     </MudAlert>
 }
 
+
+<MudDialog Options="new DialogOptions{MaxWidth = MaxWidth.Medium}" @bind-IsVisible="showEditOrAddTokenModal">
+    <TitleContent><MudText Typo="Typo.h4">@TokenModalTitle</MudText></TitleContent>
+        <DialogContent>
+            <MudTextField Label="نام توکن" Placeholder="یک نام برای توکن خود وارد نمایید"
+                          Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
+            <MudText Typo="Typo.h4" Class="my-2">هاست نیم های این توکن را انتخاب نمایید</MudText>
+            @if (HostSummariesAndChecked == null)
+        {
+            <Loading IsInTop="false" />
+        }
+        else if (HostSummariesAndChecked.Count == 0)
+        {
+            <MudAlert Severity="Severity.Warning" Dense>
+             <MudText>
+                 شما تا به حال هیچ هاست نیمی ثبت نکرده اید. <MudLink Href="dns/create">ایجاد هاست نِیم جدید</MudLink>
+             </MudText>
+         </MudAlert>
+        }
+        else
+        {
+            <MudPaper Outlined=true Class="rounded">
+                <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
+                 <MudText>در این بخش شما باید هاست نِیم (هایی) که میخواهید با این توکن بروزرسانیی شود را انتخاب نمایید.</MudText>
+             </MudAlert>
+             <MudGrid Spacing="0">
+                 @foreach (var item in HostSummariesAndChecked)
+                    {
+                        <MudItem xs="12" sm="6">
+                            <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudPaper>
+        }
+    </DialogContent>
+    <DialogActions>
+        <BaseButtonComponent Caption="ذخیره اطلاعات" IsBussyCaption="در حال ذخیره سازی اطلاعات"
+                             Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SaveModalAsync>
+        </BaseButtonComponent>
+        <BaseButtonComponent Caption="انصراف" Icon=@Icons.Material.Filled.Cancel
+                             Color="Color.Secondary" OnClick="()=> showEditOrAddTokenModal = false"></BaseButtonComponent>
+    </DialogActions>
+</MudDialog>
 <MudDivider DividerType="DividerType.FullWidth" Class="my-6" />
 
 <MudText Typo="Typo.h4" Class="my-3">بروزرسانی هاست نِیم بصورت مستقیم با URL</MudText>
