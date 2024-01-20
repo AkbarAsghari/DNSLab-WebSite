@@ -1,5 +1,6 @@
 ﻿<MudText Typo="Typo.h3">مودم های Mikrotik</MudText>
 
+<MudText Typo="Typo.h4">ساخت توکن برای بروزرسانی IP رکورد DNS</MudText>
 <MudText>
     برای بروزرسانی خودکار آی پی در مودم های میکروتیک ابتدا باید یک توکن (Token) برای
     بروزرسانی آی پی ایجاد نمایید.
@@ -34,53 +35,58 @@
              </Columns>
          </MudDataGrid>
      </MudPaper>
-
-
     }
 </MudItem>
 
-@if (Token != null)
+@if (Token == null)
 {
-    <MudText Typo="Typo.h4" Class="my-2">نام توکن : @Token.Name </MudText>
-    @if (@isRevoking)
-    {
-        <MudText>توکن قبل غیر فعال و توکن جدید ایجاد خواهد شد</MudText>
-        <MudButton EndIcon=@Icons.Material.Filled.Refresh Color="Color.Warning" Variant="Variant.Filled" Size="Size.Small" OnClick=ContinueRevokeKey>ادامه</MudButton>
-        <MudButton EndIcon=@Icons.Material.Filled.Cancel Color="Color.Success" Variant="Variant.Filled" Size="Size.Small" OnClick=ChangeRevokeStatus>انصراف</MudButton>
-    }
-    else
-    {
-        <MudText>کلید توکن : <code>@Token.Key</code></MudText>
-        <MudButton EndIcon=@Icons.Material.Filled.Refresh Color="Color.Warning" Variant="Variant.Filled" Size="Size.Small" OnClick=ChangeRevokeStatus>تغییر کلید</MudButton>
-    }
+    <MudAlert Severity="Severity.Info" Dense ContentAlignment="HorizontalAlignment.Start">
+         برای ادامه فرآیند یک Token را انتخاب نمایید
+     </MudAlert>
+}
+else
+{
+    <MudText Typo="Typo.h4" Class="mt-2">ساخت Script در میکروتیک</MudText>
     <MudText>
-        برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل
-        خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید
+        برای ایجاد اسکریپت ، وارد تنظیمات میکروتیک میشویم و از قسمت System زیر منوی Scripts را انتخاب مینماییم. سپس دکمه Add New را میزنیم تا یک اسکریپت جدید بنویسیم بعد از آن مانند تصویر زیر اطلاعات اسکریپت را وارد نمایید.
+    </MudText>
+
+    <MudText>
+        تنظیمات را به ترتیب زیر انجام دهید
     </MudText>
     <MudText>
-        فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL
-        در دسترس میباشد
+        Name : در این بخش یک نام دلخواه به اسکریپت خود بدهید.
     </MudText>
-    <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
-        <BaseNavigateButtonComponent Text="دانلود فایل sh. (wget)" Target="_blank"
-                                     Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={Token.Id}&key={Token.Key}")" />
-        <BaseNavigateButtonComponent Text="دانلود فایل sh. (curl)" Target="_blank"
-                                     Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={Token.Id}&key={Token.Key}")" />
-    </MudButtonGroup>
     <MudText>
-        فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در
-        دسترس میباشد
+        Policy : در اینجا فقط کافیست دسترسی Test و Read را تیک بزنید.
     </MudText>
-    <BaseNavigateButtonComponent Text="دانلود فایل ps1. (RestMethod)" Target="_blank"
-                                 Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={Token.Id}&key={Token.Key}")" />
-    <MudText>لینک بروزرسانی آی پی های توکن</MudText>
     <MudText>
-        https://api.dnslab.link/DNS/UDIBT?k=@Token.Key
-        <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + Token.Key) />
+        Source : در این بخش دستور زیر را بنویسید.
     </MudText>
-    <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
-        این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+         <MudText Class="mud-ltr">/tool fetch url="https://api.dnslab.link/DNS/UDIBT?k=@Token.Key"</MudText>
+        </MudAlert>
+    <MudText>نکته : در برخی مودم های (?) قابل قبول نمیباشد در این صورت از دستور زیر استفاده نمایید</MudText>
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+         <MudText Class="mud-ltr">/tool fetch url="https://api.dnslab.link/DNS/UDIBT/@Token.Key"</MudText>
+        </MudAlert>
+
+    <MudAlert Severity="Severity.Warning" Class="my-1" Dense ContentAlignment="HorizontalAlignment.Start">
+         <MudText>شما میتوانید کلید توکن خود را که در حال حاضر (@Token.Key) میباشد با استفاده از <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="ContinueRevokeKey">تغییر کلید توکن</MudButton> تغییر دهید.</MudText>
+
     </MudAlert>
+
+    <MudText>مرحله بعد باید یک Job برای فراخوانی مرتب این اسکریپت ایجاد نماییم.</MudText>
+    <MudText Typo="Typo.h4">ساخت Job در میکروتیک</MudText>
+    <MudText>
+        حالا برای این که اسکریپت ما هر سه دقیقه اجرا شود و آدرس آی‌پی میکروتیک بروزرسانی شود وارد System سپس Scheduler شده و یک scheduler جدید ایجاد میکنیم، فقط کافی در قسمت Interval تایم 3 دقیقه را مثل عکس زیر وارد کنیم و در قسمت On Event نیز اسم script خود را که در اینجا DDNS-Token هست را وارد نماییم.
+    </MudText>
+    <MudText>
+        از این به بعد شما فقط کافیه نام DNS های انتخابی در توکن رو در مرورگر وارد کنید تا وارد تنظیمات میکروتیک خودتون بشید.
+    </MudText>
+    <MudText>
+        پیروز و موفق باشید .
+    </MudText>
 }
 
 
@@ -106,7 +112,7 @@
         {
             <MudPaper Outlined=true Class="rounded">
                 <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
-                 <MudText>توضیحات DNS انتخاب شده</MudText>
+                 <MudText>در این بخش شما باید هاست نِیم (هایی) که میخواهید با این توکن بروزرسانیی شود را انتخاب نمایید.</MudText>
              </MudAlert>
              <MudGrid Spacing="0">
                  @foreach (var item in HostSummariesAndChecked)
@@ -121,7 +127,7 @@
     </DialogContent>
     <DialogActions>
         <BaseButtonComponent Caption="ذخیره اطلاعات" IsBussyCaption="در حال ذخیره سازی اطلاعات"
-                             Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SaveModal>
+                             Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SaveModalAsync>
         </BaseButtonComponent>
         <BaseButtonComponent Caption="انصراف" Icon=@Icons.Material.Filled.Cancel
                              Color="Color.Secondary" OnClick="()=> showEditOrAddTokenModal = false"></BaseButtonComponent>

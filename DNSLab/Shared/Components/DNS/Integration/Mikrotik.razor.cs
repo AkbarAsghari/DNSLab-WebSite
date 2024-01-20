@@ -10,6 +10,7 @@ partial class Mikrotik
     IEnumerable<TokenSummaryDTO> tokens;
     [Inject] private IDialogService DialogService { get; set; }
     [Inject] private IDNSRepository _DNSRepository { get; set; }
+    [Inject] private ISnackbar Snackbar { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -86,25 +87,55 @@ partial class Mikrotik
     }
     private void EnabledTokensList()
     {
+        Token = null;
         ShowTokensOverlay = false;
     }
 
-    bool isRevoking = false;
-    private void ChangeRevokeStatus() => isRevoking = !isRevoking;
-
     private async Task ContinueRevokeKey()
     {
-        var newTokenKey = await _DNSRepository.RevokeTokenKey(Token.Id);
+        bool? result = await DialogService.ShowMessageBox(
+           "هشدار",
+           $"آیا از تغییر کلید توکن {Token.Name} مطمئن هستید؟",
+           yesText: "تغییر", cancelText: "انصراف");
 
-        if (!String.IsNullOrEmpty(newTokenKey))
+        if (result == true)
         {
-            Token.Key = newTokenKey;
-            isRevoking = false;
+            var newTokenKey = await _DNSRepository.RevokeTokenKey(Token.Id);
+
+            if (!String.IsNullOrEmpty(newTokenKey))
+            {
+                Token.Key = newTokenKey;
+            }
         }
     }
 
-    private void SaveModal()
+    private async Task SaveModalAsync()
     {
+        TokenAndDNS.HostNameIds.Clear();
+        HostSummariesAndChecked.Where(x => x.IsChecked == true).ToList().ForEach(x => TokenAndDNS.HostNameIds.Add(x.Id));
 
+        bool isSuccess = false;
+        if (TokenAndDNS.Id == Guid.Empty)
+        {
+            if (await _DNSRepository.GenerateTokenForAccessToUpdateHostNameSystem(TokenAndDNS))
+            {
+                Snackbar.Add("توکن با موفقیت ایجاد گردید", Severity.Success);
+                isSuccess = true;
+            }
+        }
+        else
+        {
+            if (await _DNSRepository.UpdateTokensDomainNameSystems(TokenAndDNS))
+            {
+                Snackbar.Add("توکن با موفقیت ویرایش شد", Severity.Success);
+                isSuccess = true;
+            }
+        }
+
+        if (isSuccess)
+        {
+            showEditOrAddTokenModal = false;
+            await OnInitializedAsync();
+        }
     }
 }
