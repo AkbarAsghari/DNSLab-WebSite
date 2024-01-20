@@ -1,7 +1,8 @@
 ﻿@page "/DNS/Integration"
+@attribute [Authorize]
 
-<MudText Typo="Typo.h3">Integration</MudText>
-
+<MudText Typo="Typo.h3">یکپارچه سازی</MudText>
+<MudText>در اینجا شما میتوانید به چندین روش مختلف با توجه به نیاز خود آی پی هاست نِیم خود را بروزرسانی کنید.</MudText>
 <MudTabs Outlined="true" Position="Position.Top" Rounded="true" Border="true"
          ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6">
     <MudTabPanel Text="Routers" Icon="@Icons.Material.Filled.Router">
@@ -12,5 +13,8 @@
     </MudTabPanel>
     <MudTabPanel Text="Scripts" Icon="@Icons.Custom.FileFormats.FileCode">
         <DNSLab.Shared.Components.DNS.Integration.Scripts />
+    </MudTabPanel>
+    <MudTabPanel Text="Software" Icon="@Icons.Material.Filled.InstallDesktop">
+        <DNSLab.Shared.Components.DNS.Integration.Software />
     </MudTabPanel>
 </MudTabs>
