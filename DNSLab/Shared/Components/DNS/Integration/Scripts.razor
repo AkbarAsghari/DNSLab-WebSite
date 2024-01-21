@@ -76,12 +76,11 @@ else
 }
 
 
-<MudDialog Options="new DialogOptions{MaxWidth = MaxWidth.Medium}" @bind-IsVisible="showEditOrAddTokenModal">
+<MudDialog Options="new DialogOptions{}" @bind-IsVisible="showEditOrAddTokenModal">
     <TitleContent><MudText Typo="Typo.h4">@TokenModalTitle</MudText></TitleContent>
         <DialogContent>
-            <MudTextField Label="نام توکن" Placeholder="یک نام برای توکن خود وارد نمایید"
+            <MudTextField Label="نام توکن" Class="mb-1" Placeholder="یک نام برای توکن خود وارد نمایید"
                           Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
-            <MudText Typo="Typo.h4" Class="my-2">هاست نیم های این توکن را انتخاب نمایید</MudText>
             @if (HostSummariesAndChecked == null)
         {
             <Loading IsInTop="false" />
@@ -96,27 +95,25 @@ else
         }
         else
         {
-            <MudPaper Outlined=true Class="rounded">
-                <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
-                 <MudText>در این بخش شما باید هاست نِیم (هایی) که میخواهید با این توکن بروزرسانیی شود را انتخاب نمایید.</MudText>
-             </MudAlert>
-             <MudGrid Spacing="0">
-                 @foreach (var item in HostSummariesAndChecked)
+            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
+             <MudText>در این بخش شما باید هاست نِیم (هایی) که میخواهید با این توکن بروزرسانیی شود را انتخاب نمایید.</MudText>
+         </MudAlert>
+            <MudPaper Outlined=true Class="rounded mt-1">
+
+                <MudGrid Spacing="0">
+                    @foreach (var item in HostSummariesAndChecked)
                     {
                         <MudItem xs="12" sm="6">
-                            <MudCheckBox @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
-                        </MudItem>
+                            <MudCheckBox Dense @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                         </MudItem>
                     }
                 </MudGrid>
             </MudPaper>
         }
     </DialogContent>
     <DialogActions>
-        <BaseButtonComponent Caption="ذخیره اطلاعات" IsBussyCaption="در حال ذخیره سازی اطلاعات"
-                             Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick=SaveModalAsync>
-        </BaseButtonComponent>
-        <BaseButtonComponent Caption="انصراف" Icon=@Icons.Material.Filled.Cancel
-                             Color="Color.Secondary" OnClick="()=> showEditOrAddTokenModal = false"></BaseButtonComponent>
+        <MudButton Size="Size.Small" Color=Color.Primary Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Save OnClick=SaveModalAsync>ذخیره اطلاعات</MudButton>
+        <MudButton Size="Size.Small" Color=Color.Secondary Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Cancel OnClick="()=> showEditOrAddTokenModal = false">انصراف</MudButton>
     </DialogActions>
 </MudDialog>
 <MudDivider DividerType="DividerType.FullWidth" Class="my-6" />
