@@ -10,7 +10,7 @@
 <MudButton OnClick="AddNewToken" Size="Size.Small" Class="my-1" Color="Color.Primary" Variant="Variant.Filled">
     ایجاد توکن جدید
 </MudButton>
-<MudItem xs="12" sm="10" md="9" lg="7">
+<MudItem xs="12" sm="11" md="10" lg="9">
     @if (tokens == null)
     {
         <Loading />
@@ -18,17 +18,19 @@
     else
     {
         <MudPaper Class="pa-4" Style="position:relative;">
-            <MudOverlay Visible="ShowTokensOverlay" DarkBackground="true" OnClick="EnabledTokensList" Absolute="true" />
-            <MudDataGrid Breakpoint="Breakpoint.None" SortMode="SortMode.None" Groupable="false" Items="@tokens.OrderByDescending(x => x.CreateDate)" Outlined Dense>
+            <MudOverlay Visible="ShowTokensOverlay" DarkBackground="true" OnClick="EnabledTokensList" Absolute="true">
+                <MudText>برای انتخاب مجدد کلیک کنید</MudText>
+            </MudOverlay>
+            <MudDataGrid SortMode="SortMode.None" Groupable="false" Items="@tokens.OrderByDescending(x => x.CreateDate)" Outlined Dense>
              <Columns>
                  <PropertyColumn Property="x => x.Name" Title="عنوان توکن" />
                  <PropertyColumn Property="x => x.HostNameCount" Title="تعداد هاست نیم فعال بر روی این توکن" />
                  <TemplateColumn Title="عملیات">
                      <CellTemplate>
                          <MudStack Row>
-                             <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Warning" Size="Size.Small" OnClick="()=> EditTokenAsync(context.Item)"></MudIconButton>
-                             <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" Size="Size.Small" OnClick="()=> DeleteTokenAsync(context.Item)"></MudIconButton>
-                             <MudIconButton Icon="@Icons.Material.Filled.AddCircle" Color="Color.Success" Size="Size.Small" OnClick="()=> SelectToken(context.Item)"></MudIconButton>
+                             <MudButton EndIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="()=> EditTokenAsync(context.Item)">ویرایش</MudButton>
+                             <MudButton EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="()=> DeleteTokenAsync(context.Item)">حذف</MudButton>
+                             <MudButton EndIcon="@Icons.Material.Filled.Check" Variant="Variant.Filled" Color="Color.Success" Size="Size.Small" OnClick="()=> SelectToken(context.Item)">انتخاب</MudButton>
                          </MudStack>
                      </CellTemplate>
                  </TemplateColumn>
@@ -48,28 +50,34 @@ else
 {
     <MudText Typo="Typo.h4" Class="mt-2">ساخت Script در میکروتیک</MudText>
     <MudText>
-        برای ایجاد اسکریپت ، وارد تنظیمات میکروتیک میشویم و از قسمت System زیر منوی Scripts را انتخاب مینماییم. سپس دکمه Add New را میزنیم تا یک اسکریپت جدید بنویسیم بعد از آن مانند تصویر زیر اطلاعات اسکریپت را وارد نمایید.
+        برای ایجاد اسکریپت ، وارد تنظیمات میکروتیک میشویم و از قسمت System زیر منوی Scripts را انتخاب مینماییم. سپس دکمه Add New را میزنیم تا یک اسکریپت جدید بنویسیم بعد از آن اطلاعات اسکریپت را وارد نمایید.
     </MudText>
 
     <MudText>
         تنظیمات را به ترتیب زیر انجام دهید
     </MudText>
     <MudText>
-        Name : در این بخش یک نام دلخواه به اسکریپت خود بدهید.
+        <strong>Name</strong> : در این بخش یک نام دلخواه به اسکریپت خود بدهید.
     </MudText>
     <MudText>
-        Policy : در اینجا فقط کافیست دسترسی Test و Read را تیک بزنید.
+        <strong>Policy</strong> : در اینجا فقط کافیست دسترسی Test و Read را تیک بزنید.
     </MudText>
     <MudText>
-        Source : در این بخش دستور زیر را بنویسید.
+        <strong>Source</strong> : در این بخش دستور زیر را بنویسید.
     </MudText>
     <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
-         <MudText Class="mud-ltr">/tool fetch url="https://api.dnslab.link/DNS/UDIBT?k=@Token.Key"</MudText>
-        </MudAlert>
+         <MudText Class="mud-ltr">
+             <CopyToClipboard Text=@($"/tool fetch url=\"https://api.dnslab.link/DNS/UDIBT?k={@Token.Key}\"") />
+             /tool fetch url="https://api.dnslab.link/DNS/UDIBT?k=@Token.Key"
+        </MudText>
+    </MudAlert>
     <MudText>نکته : در برخی مودم های (?) قابل قبول نمیباشد در این صورت از دستور زیر استفاده نمایید</MudText>
     <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
-         <MudText Class="mud-ltr">/tool fetch url="https://api.dnslab.link/DNS/UDIBT/@Token.Key"</MudText>
-        </MudAlert>
+         <MudText Class="mud-ltr">
+             <CopyToClipboard Text=@($"/tool fetch url=\"https://api.dnslab.link/DNS/UDIBT/{@Token.Key}\"") />
+             /tool fetch url="https://api.dnslab.link/DNS/UDIBT/@Token.Key"
+        </MudText>
+    </MudAlert>
 
     <MudAlert Severity="Severity.Warning" Class="my-1" Dense ContentAlignment="HorizontalAlignment.Start">
          <MudText>شما میتوانید کلید توکن خود را که در حال حاضر (@Token.Key) میباشد با استفاده از <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="ContinueRevokeKey">تغییر کلید توکن</MudButton> تغییر دهید.</MudText>

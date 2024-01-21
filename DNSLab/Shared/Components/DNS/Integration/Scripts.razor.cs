@@ -24,10 +24,6 @@ partial class Scripts
         tokens = await _DNSRepository.GetTokenSummary();
 
         HostNames = await _DNSRepository.GetHostSummaries();
-        if (HostNames.Count() > 0)
-        {
-            SelectedHostName = HostNames.First();
-        }
     }
 
     string TokenModalTitle { get; set; } = String.Empty;

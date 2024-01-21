@@ -22,7 +22,7 @@
         یکی از هاست نِیم ها را انتخاب نمایید.
         @if (HostNames != null)
         {
-            <MudSelect Dense T="HostSummaryDTO" Margin="Margin.Dense" Variant="Variant.Filled" @bind-Value="SelectedHostName">
+            <MudSelect Dense T="HostSummaryDTO" Margin="Margin.Dense" Label="هاست نِیم" Variant="Variant.Filled" @bind-Value="SelectedHostName">
                  @foreach (var item in HostNames)
                 {
                     <MudSelectItem T="HostSummaryDTO" Value="@item">@item.Address</MudSelectItem>
@@ -30,22 +30,18 @@
             </MudSelect>
         }
     </MudText>
-    <MudText>DDNS Provider : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
-    <MudText>
-        Hostname : در این قسمت مقدار 
-        @if (SelectedHostName != null)
-        {
+    @if (SelectedHostName != null)
+    {
+        <MudText><strong>DDNS Provider</strong> : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
+        <MudText>
+            <strong>Hostname</strong> : در این قسمت مقدار
             <strong>@SelectedHostName.Address</strong>
             <CopyToClipboard Text="@SelectedHostName!.Address" />
-        }
-        else
-        {
-            <text>لطفا یک هاست نِیم را انتخاب نمایید</text>
-        }
-         را وارد نمایید.
-    </MudText>
-    <MudText>Username : در این قسمت نام کاربری خود را وارد نمایید.</MudText>
-    <MudText>Password : در این قسمت رمز عبور کاربری خود را وارد نمایید.</MudText>
+            را وارد نمایید.
+        </MudText>
+        <MudText><strong>Username</strong> : در این قسمت نام کاربری خود را وارد نمایید.</MudText>
+        <MudText><strong>Password</strong> : در این قسمت رمز عبور کاربری خود را وارد نمایید.</MudText>
+    }
 </MudAlert>
 <MudText>
     پس از تنظیمات بالا مودم شما بصورت خودکار در صورت تغییر آی پی مودم ، به سرور DNSLab اطلاع رسانی خواهد کرد و آی پی جدید جایگزین قبلی خواهد شد.
