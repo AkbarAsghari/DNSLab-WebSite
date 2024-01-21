@@ -7,7 +7,7 @@
 <MudButton OnClick="AddNewToken" Size="Size.Small" Class="my-1" Color="Color.Primary" Variant="Variant.Filled">
     ایجاد توکن جدید
 </MudButton>
-<MudItem xs="12" sm="11" md="10" lg="9">
+<MudItem xs="12" sm="11" md="10" lg="9" Class="mb-2">
     @if (tokens == null)
     {
         <Loading />
@@ -63,10 +63,12 @@ else
     </MudText>
     <MudButton Size="Size.Small" Color="Color.Primary" Target="_blank" Variant="Variant.Filled" Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={Token.Id}&key={Token.Key}")">دانلود فایل ps1. (RestMethod)</MudButton>
     <MudText>لینک بروزرسانی آی پی های توکن</MudText>
-    <MudText>
-        https://api.dnslab.link/DNS/UDIBT?k=@Token.Key
-        <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @Token.Key) />
-    </MudText>
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+         <MudText>
+             https://api.dnslab.link/DNS/UDIBT?k=@Token.Key
+            <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @Token.Key) />
+        </MudText>
+    </MudAlert>
     <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
         این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
     </MudAlert>

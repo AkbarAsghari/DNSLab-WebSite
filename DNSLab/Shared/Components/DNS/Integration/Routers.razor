@@ -16,33 +16,36 @@
  <MudText>مسیر تنظیمات DDNS در مودم های مختلف بصورت زیر میباشد.</MudText>
  <MudText Class="mud-ltr">D-Link : ADVANCED > Dynamic DNS</MudText>
  <MudText Class="mud-ltr">TP-Link : Access Management > DDNS</MudText>
- <MudText>پس از ورود به بخش تنظیمات مراحل زیر را انجام دهید </MudText>
- <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Start">
-     <MudText Inline>
-        یکی از هاست نِیم ها را انتخاب نمایید.
-        @if (HostNames != null)
-        {
+ <MudText>پس از ورود به بخش تنظیمات DDNS مراحل زیر را انجام دهید.</MudText>
+ <MudText Inline>
+    برای شروع یکی از هاست نیم های زیر را انتخاب نمایید.
+    @if (HostNames != null)
+    {
+        <MudItem xs="12" sm="9" md="6" lg="4">
             <MudSelect Dense T="HostSummaryDTO" Margin="Margin.Dense" Label="هاست نِیم" Variant="Variant.Filled" @bind-Value="SelectedHostName">
                  @foreach (var item in HostNames)
                 {
                     <MudSelectItem T="HostSummaryDTO" Value="@item">@item.Address</MudSelectItem>
                 }
             </MudSelect>
-        }
-    </MudText>
-    @if (SelectedHostName != null)
-    {
-        <MudText><strong>DDNS Provider</strong> : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
-        <MudText>
-            <strong>Hostname</strong> : در این قسمت مقدار
-            <strong>@SelectedHostName.Address</strong>
+        </MudItem>
+    }
+</MudText>
+@if (SelectedHostName != null)
+{
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Start">
+
+         <MudText><strong>DDNS Provider</strong> : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
+         <MudText>
+             <strong>Hostname</strong> : در این قسمت مقدار
+             <strong>@SelectedHostName.Address</strong>
             <CopyToClipboard Text="@SelectedHostName!.Address" />
             را وارد نمایید.
         </MudText>
         <MudText><strong>Username</strong> : در این قسمت نام کاربری خود را وارد نمایید.</MudText>
         <MudText><strong>Password</strong> : در این قسمت رمز عبور کاربری خود را وارد نمایید.</MudText>
-    }
-</MudAlert>
+    </MudAlert>
+}
 <MudText>
     پس از تنظیمات بالا مودم شما بصورت خودکار در صورت تغییر آی پی مودم ، به سرور DNSLab اطلاع رسانی خواهد کرد و آی پی جدید جایگزین قبلی خواهد شد.
 </MudText>
