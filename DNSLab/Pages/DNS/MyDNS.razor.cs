@@ -9,7 +9,7 @@ partial class MyDNS
 
     List<HostNameDTO> hostNames;
 
-    PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 5 };
+    PaginationDTO paginationDTO = new PaginationDTO() { RecordsPerPage = 15 };
 
     private int totalAmountPages { get; set; }
 

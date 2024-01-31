@@ -29,7 +29,7 @@ else
     else
     {
         <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false"
-                     SortMode="@SortMode.None" Groupable="false">
+                     SortMode="@SortMode.None" Groupable="false" Dense>
             <Columns>
                 <TemplateColumn Title="@localizer["HostName"]">
                     <CellTemplate>
@@ -74,17 +74,15 @@ else
                 <TemplateColumn>
                     <CellTemplate>
                         <MudStack Row>
-                         <BaseButtonComponent Caption=@localizer["Edit"] IsBussyCaption=@localizer["Progressing"]
-                                              Color=Color.Warning Icon=@Icons.Material.Filled.Edit
-                                              OnClick=@(()=>EditHostName(context.Item)) />
-                         <BaseButtonComponent Caption=@localizer["Delete"] IsBussyCaption=@localizer["Progressing"]
-                                              Color=Color.Error Icon=@Icons.Material.Filled.Delete
-                                              OnClick=@(()=>DeleteHostNameAsync(context.Item)) />
-                     </MudStack>
-                 </CellTemplate>
-             </TemplateColumn>
-         </Columns>
-     </MudDataGrid>
+                         <MudButton Size="Size.Small" Variant="Variant.Filled" Color=Color.Warning EndIcon=@Icons.Material.Filled.Edit
+                                    OnClick=@(()=>EditHostName(context.Item))>@localizer["Edit"]</MudButton>
+                                <MudButton Color=Color.Error Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Delete
+                                           OnClick=@(()=>DeleteHostNameAsync(context.Item))>@localizer["Delete"]</MudButton>
+                            </MudStack>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+            </MudDataGrid>
         <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
         <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
             <MudText>
