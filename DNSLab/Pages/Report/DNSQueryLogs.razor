@@ -99,7 +99,7 @@ else
 
     @if (Logs != null)
     {
-        <MudDataGrid Class="mt-2" Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
+        <MudDataGrid Class="mt-2" Items="@Logs.Response.Entries" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar Dense>
         <Columns>
             <PropertyColumn Property="x=>x.RowNumber" Title="#" />
             <TemplateColumn Title="زمان">

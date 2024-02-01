@@ -24,7 +24,7 @@ else
     else
     {
         <MudDataGrid Items="@tickets.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
-    Groupable="false">
+    Groupable="false" Dense>
     <Columns>
         <PropertyColumn Property="x=>x.Title" Title="@localizer["TicketTitle"]" />
         <TemplateColumn Title="@localizer["CreateDate"]">

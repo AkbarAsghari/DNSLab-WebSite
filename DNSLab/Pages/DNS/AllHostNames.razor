@@ -14,7 +14,7 @@ else
 {
     <MudText Typo="Typo.h3">@localizer["AllHostNames"]</MudText>
     <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
-        Groupable="false">
+        Groupable="false" Dense>
         <Columns>
             <TemplateColumn>
                 <CellTemplate>

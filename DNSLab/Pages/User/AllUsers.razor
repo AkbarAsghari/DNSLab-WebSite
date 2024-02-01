@@ -10,7 +10,7 @@
 else
 {
     <MudText Typo="Typo.h3">لیست کاربران سایت</MudText>
-    <MudDataGrid Items="@allUsers.OrderByDescending(x => x.CreateDate)" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar>
+    <MudDataGrid Items="@allUsers.OrderByDescending(x => x.CreateDate)" Filterable SortMode="SortMode.Single" Breakpoint="Breakpoint.None" HorizontalScrollbar Dense>
         <Columns>
             <TemplateColumn>
                 <CellTemplate>

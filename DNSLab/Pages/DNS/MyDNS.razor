@@ -28,6 +28,12 @@ else
     }
     else
     {
+        <MudAlert Severity=Severity.Success Class="my-2" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>
+                برای یکپارچه سازی آی پی مودم یا شبکه خود با سایت برو روی این <MudLink Target="_blank"
+                                                                                      Href="dns/integration">لینک</MudLink> کلیک کنید.
+            </MudText>
+        </MudAlert>
         <MudDataGrid Items="@hostNames.OrderByDescending(x => x.CreateDate)" Filterable="false"
                      SortMode="@SortMode.None" Groupable="false" Dense>
             <Columns>
@@ -84,11 +90,5 @@ else
                 </Columns>
             </MudDataGrid>
         <Pagination CurrentPage=@paginationDTO.Page TotalAmountPages=totalAmountPages SelectedPage=SelectedPage />
-        <MudAlert Severity=Severity.Success ContentAlignment="HorizontalAlignment.Start">
-            <MudText>
-                برای یکپارچه سازی آی پی مودم یا شبکه خود با سایت برو روی این <MudLink Target="_blank"
-                                                                                      Href="dns/integration">لینک</MudLink> کلیک کنید.
-            </MudText>
-        </MudAlert>
     }
 }

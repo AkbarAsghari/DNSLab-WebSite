@@ -25,7 +25,7 @@ else
     else
     {
         <MudDataGrid Items="ChangeLogs.OrderByDescending(x => x.CreateDate)" Filterable="false" SortMode="@SortMode.None"
-             Groupable="false">
+             Groupable="false" Dense>
             <Columns>
                 <TemplateColumn Title="عنوان">
                     <CellTemplate>
