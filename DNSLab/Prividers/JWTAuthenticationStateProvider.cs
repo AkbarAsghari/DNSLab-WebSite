@@ -37,7 +37,7 @@ namespace DNSLab.Prividers
                     if (!String.IsNullOrEmpty(token.Value))
                         return BuildAuthenticationState(token.Value);
             }
-            catch (Exception ex){ }
+            catch (Exception ex) { }
 
             return Anonymouse;
         }
@@ -45,7 +45,20 @@ namespace DNSLab.Prividers
         public AuthenticationState BuildAuthenticationState(string token)
         {
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParsClaimsFromJWT(token), "jwt")));
+
+            var claims = ParsClaimsFromJWT(token);
+
+            // Checks the exp field of the token
+            var expiry = claims.Where(claim => claim.Type.Equals("exp")).FirstOrDefault();
+            if (expiry == null)
+                return Anonymouse;
+
+            // The exp field is in Unix time
+            var datetime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expiry.Value));
+            if (datetime.UtcDateTime <= DateTime.UtcNow)
+                return Anonymouse;
+
+            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(claims, "jwt")));
         }
 
         private IEnumerable<Claim> ParsClaimsFromJWT(string token)
