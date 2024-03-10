@@ -2,6 +2,8 @@
 namespace DNSLab.Pages.Transactions;
 partial class Callback
 {
+    [Inject] NavigationManager _NavigationManager { get; set; }
+
     [Parameter]
     [SupplyParameterFromQuery]
     public long? TrackId { get; set; }
@@ -63,5 +65,10 @@ partial class Callback
                     break;
             }
         }
+    }
+
+    public void NavigateToHome()
+    {
+        _NavigationManager.NavigateTo("/", true);
     }
 }

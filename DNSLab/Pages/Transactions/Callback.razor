@@ -6,18 +6,17 @@
     <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Right">
         <MudText>پرداخت با موفقیت انجام شد</MudText>
         <MudText>شناسه پرداخت : @TrackId</MudText>
-        <MudText>با تشکر از حمایت شما از سایت DNSLab</MudText>
-    </MudAlert>
+            <MudText>با تشکر از حمایت شما از سایت DNSLab</MudText>
+        </MudAlert>
 }
 else
 {
     <MudAlert Severity="Severity.Error" ContentAlignment="HorizontalAlignment.Right">
         <MudText>پرداخت با شکست مواجه شد</MudText>
         <MudText>شناسه : @TrackId</MudText>
-        <MudText>علت : @Result</MudText>
-    </MudAlert>
+            <MudText>علت : @Result</MudText>
+        </MudAlert>
 }
-<BaseNavigateButtonComponent Href="/"
-                             Text="@(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")"
-                             Icon=@Icons.Material.Filled.Home>
-</BaseNavigateButtonComponent>
+<MudButton StartIcon=@Icons.Material.Filled.Home Variant="Variant.Filled" Color="Color.Primary" OnClick="NavigateToHome">
+    @(IsVerified == null ? "در حال بررسی تراکنش..." : "بازگشت")
+</MudButton>
