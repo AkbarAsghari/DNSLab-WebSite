@@ -4,8 +4,9 @@
 @inject ISnackbar Snackbar
 
 <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">تعرفه اشتراک ها</MudText>
-<MudText Align="Align.Center">در این بخش میتوانید اشتراک استفاده از سایت را تهیه فرمایید.</MudText>
-<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Right">
+<MudText Align="Align.Start">در این بخش میتوانید اشتراک استفاده از سایت را تهیه فرمایید.</MudText>
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+    <MudText>لطفا قبل از خرید اشتراک از نسخه آزمایشی استفاده نمایید تا مطمئن شوید سرویس به درستی بر روی اینترنت شما کار میکند (بعلت مشکلاتی از قبیل NAT و ... )</MudText>
     <MudText>در صورت بروز هرگونه مشکل در تهیه اشتراک ، در قسمت پشتیبانی بصورت <MudLink Href="/Ticket/MyTickets">تیکت</MudLink> اطلاع دهید با سپاس.</MudText>
 </MudAlert>
 <MudGrid Class="mt-8">
@@ -16,20 +17,20 @@
         {
             <MudItem xs="12" sm="6" md="4">
                 <MudCard Elevation="25" Outlined Class="rounded-lg pb-4" Style="height:100%">
-                <MudStack Justify="Justify.SpaceBetween" Style="height:100%" Row=false>
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.h2" Align="Align.Center">@plan.Name</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent>
-                    <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h3">@plan.TotalPrice.ToString().EnglishToPersianNumbers() تومان</MudText>
-                        <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">@(plan.Creadit > 1 ? $"ماهیانه {plan.PricePerMonth.ToString().EnglishToPersianNumbers()} تومان" : " ")</MudText>
-                                </div>
-                                <MudText Class="mx-auto mt-4" Style="width:300px;">
-                                    <MudList>
-                                        @if (@plan.Description != null)
+                     <MudStack Justify="Justify.SpaceBetween" Style="height:100%" Row=false>
+                         <MudCardHeader>
+                             <CardHeaderContent>
+                                 <MudText Typo="Typo.h2" Align="Align.Center">@plan.Name</MudText>
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <div class="d-flex justify-center">
+                                    <MudText Typo="Typo.h3">@plan.TotalPrice.ToString().EnglishToPersianNumbers() تومان</MudText>
+                                <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">@(plan.Creadit > 1 ? $"ماهیانه {plan.PricePerMonth.ToString().EnglishToPersianNumbers()} تومان" : " ")</MudText>
+                            </div>
+                            <MudText Class="mx-auto mt-4" Style="width:300px;">
+                                <MudList>
+                                    @if (@plan.Description != null)
                                         @foreach (var item in @plan.Description.Split('\n'))
                                         {
                                             <MudListItem Dense="true" Icon="@Icons.Material.Filled.Check" IconSize="Size.Small">
@@ -41,10 +42,10 @@
                         </MudCardContent>
                         <MudCardActions Class="d-flex justify-center">
                             <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large" Disabled="_DisabledBuyButton" Style="width:50%;" OnClick="()=> Buy(plan.Id)">@(plan.Creadit == 0 ? "فعال سازی" : "خرید")</MudButton>
-                            </MudCardActions>
-                        </MudStack>
-                    </MudCard>
-                </MudItem>
+                        </MudCardActions>
+                    </MudStack>
+                </MudCard>
+            </MudItem>
         }
     }
 </MudGrid>
