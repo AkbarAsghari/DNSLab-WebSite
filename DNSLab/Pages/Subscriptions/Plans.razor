@@ -3,11 +3,15 @@
 
 @inject ISnackbar Snackbar
 
-<MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">تعرفه اشتراک ها</MudText>
-<MudText Align="Align.Start">در این بخش میتوانید اشتراک استفاده از سایت را تهیه فرمایید.</MudText>
-<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
-    <MudText>لطفا قبل از خرید اشتراک از نسخه آزمایشی استفاده نمایید تا مطمئن شوید سرویس به درستی بر روی اینترنت شما کار میکند (بعلت مشکلاتی از قبیل NAT و ... )</MudText>
-    <MudText>در صورت بروز هرگونه مشکل در تهیه اشتراک ، در قسمت پشتیبانی بصورت <MudLink Href="/Ticket/MyTickets">تیکت</MudLink> اطلاع دهید با سپاس.</MudText>
+<MudText Typo="Typo.h3" GutterBottom="true">تعرفه اشتراک ها</MudText>
+<MudText Class="my-2">در این بخش میتوانید اشتراک استفاده از سایت را تهیه فرمایید.</MudText>
+
+<MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start" Dense>
+    <MudText>لطفا قبل از خرید اشتراک از نسخه آزمایشی استفاده نمایید تا مطمئن شوید سرویس به درستی بر روی اینترنت شما کار میکند (به علت مشکلاتی از قبیل NAT و ... )</MudText>
+</MudAlert>
+
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start" Dense>
+    <MudText>در صورت بروز هرگونه مشکل در تهیه اشتراک ، در قسمت پشتیبانی بصورت <MudButton Size="Size.Small" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.SupportAgent" Color="Color.Info" Href="/Ticket/MyTickets">تیکت</MudButton> اطلاع دهید با سپاس.</MudText>
 </MudAlert>
 <MudGrid Class="mt-8">
 
@@ -15,7 +19,7 @@
     {
         foreach (var plan in PlansInfo)
         {
-            <MudItem xs="12" sm="6" md="4">
+            <MudItem xs="12" sm="6" md="4" lg="3">
                 <MudCard Elevation="25" Outlined Class="rounded-lg pb-4" Style="height:100%">
                      <MudStack Justify="Justify.SpaceBetween" Style="height:100%" Row=false>
                          <MudCardHeader>
@@ -28,7 +32,7 @@
                                     <MudText Typo="Typo.h3">@plan.TotalPrice.ToString().EnglishToPersianNumbers() تومان</MudText>
                                 <MudText Typo="Typo.h5" Class="ml-1 mt-5" Color="Color.Secondary">@(plan.Creadit > 1 ? $"ماهیانه {plan.PricePerMonth.ToString().EnglishToPersianNumbers()} تومان" : " ")</MudText>
                             </div>
-                            <MudText Class="mx-auto mt-4" Style="width:300px;">
+                            <MudText Class="mx-auto mt-4">
                                 <MudList>
                                     @if (@plan.Description != null)
                                         @foreach (var item in @plan.Description.Split('\n'))
