@@ -30,7 +30,7 @@ else
         @if (StatType == StatTypeEnum.LastHour)
         {
             <MudItem xs="12" md="3">
-                <MudSwitch Label="بروزرسانی خودکار" T="bool" CheckedChanged="AutoRefresher" Color="MudBlazor.Color.Primary" />
+                <MudSwitch Label="بروزرسانی خودکار" T="bool" ValueChanged="AutoRefresher" Color="MudBlazor.Color.Primary" />
             </MudItem>
         }
     </MudGrid>

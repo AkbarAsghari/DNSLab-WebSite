@@ -17,9 +17,9 @@ else
         <MudText>در صورتی که آدرس ایمیل تایید نشده باشد امکان استفاده از این بخش وجود ندارد.</MudText>
     </MudAlert>
     <MudSwitch T="bool" Color=Color.Primary Label="ارسال ایمیل در صورت دریافت پاسخ به تیکت"
-           @bind-Checked="@settings.SendEmailWhenGotTicketReply" />
+               @bind-Value="@settings.SendEmailWhenGotTicketReply" />
     <MudSwitch T="bool" Color=Color.Primary Label="ارسال ایمیل در صورت تغییر آی‌پی هاست"
-           @bind-Checked="@settings.SendEmailWhenDNSIPChanged" />
+               @bind-Value="@settings.SendEmailWhenDNSIPChanged" />
 }
 <BaseButtonComponent Caption=@_Localizer["SaveChanges"] IsBussyCaption=@_Localizer["Progressing"]
                      Color=Color.Primary Icon=@Icons.Material.Filled.Save OnClick="SaveChanges"></BaseButtonComponent>
