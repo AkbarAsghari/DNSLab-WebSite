@@ -1,4 +1,5 @@
 ﻿@page "/Tag/{Tag}"
+@using DNSLab.Components.Shared.Components.Page
 @inject IPageRepository _PageRepository
 
 <h1 class="border-bottom pb-2 mb-0">جستوجو بر اساس کلمات کلیدی ( @Tag )</h1>
@@ -19,7 +20,7 @@ else if (pageSummaries.Count() > 0)
 {
     @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
     {
-        <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+        <PageLinkItem Title="@item.Title" Link="@($"Blog/{@item.PageType}/{@item.URL}")" Description="@item.Description" />
     }
 }
 else
