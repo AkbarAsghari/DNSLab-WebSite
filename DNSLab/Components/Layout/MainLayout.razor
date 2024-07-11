@@ -8,7 +8,14 @@
     <MudLayout>
         <MudAppBar Elevation="1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-            <MudText Typo="Typo.h5" Class="ml-3">Application</MudText>
+            <MudLink Href="/" Underline="Underline.None">
+                <MudStack AlignItems="AlignItems.Center" Row>
+                    <MudText Align="Align.Center" Typo="Typo.h3">
+                        DNSLab
+                    </MudText>
+                    <MudImage Src="favicon.ico" ObjectFit="ObjectFit.Cover"></MudImage>
+                </MudStack>
+            </MudLink>
             <MudSpacer />
             <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
             <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
@@ -18,14 +25,7 @@
         </MudDrawer>
         <MudMainContent Class="mt-16 pa-4">
             <CascadingValue Value="@IPDTO">
-                <AuthorizeView>
-                    <Authorized>
-                        @Body
-                    </Authorized>
-                    <NotAuthorized>
-                        @Body
-                    </NotAuthorized>
-                </AuthorizeView>
+                @Body
             </CascadingValue>
         </MudMainContent>
     </MudLayout>
