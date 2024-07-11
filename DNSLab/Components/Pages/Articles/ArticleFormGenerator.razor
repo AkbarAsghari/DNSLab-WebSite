@@ -1,4 +1,4 @@
-﻿@* @page "/{PageType}/{*URL}" *@
+﻿@page "/Blog/{PageType}/{*URL}"
 @using DNSLab.Components.Shared.Components.Page
 @inject IPageRepository _PageRepository
 
@@ -7,7 +7,7 @@
     {
         <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
         <PageSummary FullName="@publishPageDTO.Author.FullName" UserId="@publishPageDTO.Author.ID"
-                 PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
+                     PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />
         <MudDivider Class="mb-1 mt-2" />
         @((MarkupString)@publishPageDTO.Body)
 
