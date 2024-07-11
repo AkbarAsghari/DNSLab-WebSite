@@ -1,0 +1,154 @@
+﻿<MudText Typo="Typo.h4" Class="my-3">بروزرسانی یک یا چند هاست نیم با استفاده از Token</MudText>
+<MudText>
+    برای این کار ابتدا باید یک توکن ایجاد نموده و آن را انتخاب نمایید.
+</MudText>
+
+<MudText Typo="Typo.h4" Class="mt-2">لیست توکن ها</MudText>
+<MudButton OnClick="AddNewToken" Size="Size.Small" Class="my-1" Color="Color.Primary" Variant="Variant.Filled">
+    ایجاد توکن جدید
+</MudButton>
+<MudItem xs="12" sm="11" md="10" lg="9" Class="mb-2">
+    @if (tokens == null)
+    {
+        <Loading />
+    }
+    else
+    {
+        <MudPaper Class="pa-4" Style="position:relative;">
+            <MudOverlay Visible="ShowTokensOverlay" DarkBackground="true" OnClick="EnabledTokensList" Absolute="true">
+                <MudText>برای انتخاب مجدد کلیک کنید</MudText>
+            </MudOverlay>
+            <MudDataGrid SortMode="SortMode.None" Groupable="false" Items="@tokens.OrderByDescending(x => x.CreateDate)" Outlined Dense>
+             <Columns>
+                 <PropertyColumn Property="x => x.Name" Title="عنوان توکن" />
+                 <PropertyColumn Property="x => x.HostNameCount" Title="تعداد هاست نیم فعال بر روی این توکن" />
+                 <TemplateColumn Title="عملیات">
+                     <CellTemplate>
+                         <MudStack Row>
+                             <MudButton EndIcon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="()=> EditTokenAsync(context.Item)">ویرایش</MudButton>
+                             <MudButton EndIcon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="()=> DeleteTokenAsync(context.Item)">حذف</MudButton>
+                             <MudButton EndIcon="@Icons.Material.Filled.Check" Variant="Variant.Filled" Color="Color.Success" Size="Size.Small" OnClick="()=> SelectToken(context.Item)">انتخاب</MudButton>
+                         </MudStack>
+                     </CellTemplate>
+                 </TemplateColumn>
+             </Columns>
+         </MudDataGrid>
+     </MudPaper>
+    }
+</MudItem>
+
+@if (Token == null)
+{
+    <MudAlert Severity="Severity.Info" Dense ContentAlignment="HorizontalAlignment.Start">
+         برای ادامه فرآیند یک Token را انتخاب نمایید
+     </MudAlert>
+}
+else
+{
+    <MudText>
+        برای بروزرسانی IP هاست نِیم های متصل به این توکن میتوانید بدون نیاز به نصب برنامه روی سیستم عامل
+        خود ، دستورات زیر را در استارت آپ سیستم عامل خود قرار دهید قرار دهید
+    </MudText>
+    <MudText>
+        فایل های زیر با پسوند .sh هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه wget و cURL
+        در دسترس میباشد
+    </MudText>
+    <MudButtonGroup Size="Size.Small" Color="Color.Primary" Variant="Variant.Filled">
+        <MudButton Color="Color.Primary" Target="_blank" Variant="Variant.Filled" Href="@($"https://api.dnslab.link/DNS/shell/wget?tokenId={Token.Id}&key={Token.Key}")">دانلود فایل sh. (wget)</MudButton>
+        <MudButton Color="Color.Primary" Target="_blank" Variant="Variant.Filled" Href="@($"https://api.dnslab.link/DNS/shell/curl?tokenId={Token.Id}&key={Token.Key}")">دانلود فایل sh. (curl)</MudButton>
+    </MudButtonGroup>
+    <MudText>
+        فایل زیر با پسوند .ps1 هستند برای بروزرسانی آی پی با تکرار 5 دقیقه که با دو کتابخانه RestMethod در
+        دسترس میباشد
+    </MudText>
+    <MudButton Size="Size.Small" Color="Color.Primary" Target="_blank" Variant="Variant.Filled" Href="@($"https://api.dnslab.link/DNS/powershell/restmethod?tokenId={Token.Id}&key={Token.Key}")">دانلود فایل ps1. (RestMethod)</MudButton>
+    <MudText>لینک بروزرسانی آی پی های توکن</MudText>
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+         <MudText>
+             https://api.dnslab.link/DNS/UDIBT?k=@Token.Key
+            <CopyToClipboard Text=@("https://api.dnslab.link/DNS/UDIBT?k=" + @Token.Key) />
+        </MudText>
+    </MudAlert>
+    <MudAlert Severity="Severity.Warning" Dense=true ContentAlignment="HorizontalAlignment.Start">
+        این آدرس در هر جایی فراخوانی شود آی پی سیستم جایگزین خواهد شد
+    </MudAlert>
+    <MudAlert Severity="Severity.Warning" Class="my-1" Dense ContentAlignment="HorizontalAlignment.Start">
+         <MudText>شما میتوانید کلید توکن خود را که در حال حاضر (@Token.Key) میباشد با استفاده از <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small" OnClick="ContinueRevokeKey">تغییر کلید توکن</MudButton> تغییر دهید.</MudText>
+    </MudAlert>
+}
+
+
+<MudDialog @bind-IsVisible="showEditOrAddTokenModal">
+    <TitleContent><MudText Typo="Typo.h4">@TokenModalTitle</MudText></TitleContent>
+        <DialogContent>
+            <MudTextField Label="نام توکن" Class="mb-1" Placeholder="یک نام برای توکن خود وارد نمایید"
+                          Variant="Variant.Outlined" @bind-Value="@TokenAndDNS.Name" />
+            @if (HostSummariesAndChecked == null)
+        {
+            <Loading IsInTop="false" />
+        }
+        else if (HostSummariesAndChecked.Count == 0)
+        {
+            <MudAlert Severity="Severity.Warning" Dense>
+             <MudText>
+                 شما تا به حال هیچ هاست نیمی ثبت نکرده اید. <MudLink Href="dns/create">ایجاد هاست نِیم جدید</MudLink>
+             </MudText>
+         </MudAlert>
+        }
+        else
+        {
+            <MudAlert Severity=Severity.Info ContentAlignment="HorizontalAlignment.Start" Dense>
+             <MudText>در این بخش شما باید هاست نِیم (هایی) که میخواهید با این توکن بروزرسانیی شود را انتخاب نمایید.</MudText>
+         </MudAlert>
+            <MudPaper Outlined=true Class="rounded mt-1">
+
+                <MudGrid Spacing="0">
+                    @foreach (var item in HostSummariesAndChecked)
+                    {
+                        <MudItem xs="12" sm="6">
+                            <MudCheckBox T="bool" Dense @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                         </MudItem>
+                    }
+                </MudGrid>
+            </MudPaper>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Size="Size.Small" Color=Color.Primary Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Save OnClick=SaveModalAsync>ذخیره اطلاعات</MudButton>
+        <MudButton Size="Size.Small" Color=Color.Secondary Variant="Variant.Filled" EndIcon=@Icons.Material.Filled.Cancel OnClick="()=> showEditOrAddTokenModal = false">انصراف</MudButton>
+    </DialogActions>
+</MudDialog>
+<MudDivider DividerType="DividerType.FullWidth" Class="my-6" />
+
+<MudText Typo="Typo.h4" Class="my-3">بروزرسانی هاست نِیم بصورت مستقیم با URL</MudText>
+<MudText Inline>
+    برای شروع یکی از هاست نیم های زیر را انتخاب نمایید.
+    @if (HostNames != null)
+    {
+        <MudItem xs="12" sm="9" md="6" lg="4">
+            <MudSelect Dense T="HostSummaryDTO" Margin="Margin.Dense" Label="هاست نِیم" Variant="Variant.Filled" @bind-Value="SelectedHostName">
+                 @foreach (var item in HostNames)
+                {
+                    <MudSelectItem T="HostSummaryDTO" Value="@item">@item.Address</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+    }
+</MudText>
+
+@if (SelectedHostName != null)
+{
+    <MudText>برای این کار کافیست URL زیر را فراخوانی کنید.</MudText>
+    <MudAlert Severity="Severity.Success" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Left">
+         <MudText>
+             https://{Username}:{Password}@@api.dnslab.link/nic/update?hostname=@SelectedHostName.Address&myIp=@IPDTO.IPv4
+            <CopyToClipboard Text=@($"https://{{Username}}:{{Password}}@api.dnslab.link/nic/update?hostname={SelectedHostName.Address}&myIp={IPDTO.IPv4}") />
+        </MudText>
+    </MudAlert>
+
+    <MudAlert Severity="Severity.Info" Class="my-1" NoIcon Dense ContentAlignment="HorizontalAlignment.Start">
+         <MudText>تعریف مقادیر URL</MudText>
+         <MudText>به جای {Username} نام کاربری خود را قرار دهید و همچنین به جای {Password} مقدار رمز عبور خود را قرار دهید</MudText>
+         <MudText>و در قسمت myIp آی پی جدید را باید وارد نمایید (در صورت عدم ورود اطلاعات آی پی بصورت خودکار آی پی عمومی شما '@IPDTO.IPv4' قرار خواهد گرفت) .</MudText>
+    </MudAlert>
+}
