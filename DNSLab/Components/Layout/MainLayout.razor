@@ -9,15 +9,6 @@
         <MudAppBar Elevation="1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             <MudSpacer />
-            <MudLink Href="/" Underline="Underline.None">
-                <MudStack AlignItems="AlignItems.Center" Row>
-                    <MudText Align="Align.Center" Typo="Typo.h3">
-                        DNSLab
-                    </MudText>
-                    <MudImage Src="favicon.ico" ObjectFit="ObjectFit.Cover"></MudImage>
-                </MudStack>
-            </MudLink>
-            <MudSpacer />
             <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
             <MudDivider Vertical="true" FlexItem="true" Class="my-4 mx-2" />
             <DNSLab.Components.Pages.Subscriptions.BuySubscriptionButton />
@@ -25,14 +16,14 @@
             <MudIconButton Href="https://github.com/AkbarAsghari/DNSLab-WebSite"
                            Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Inherit" />
         </MudAppBar>
-        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-            <NavMenu />
-        </MudDrawer>
-        <MudMainContent Class="mt-16 pa-4">
-            <CascadingValue Value="@IPDTO">
+        <CascadingValue Value="@IPDTO">
+            <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+                <NavMenu />
+            </MudDrawer>
+            <MudMainContent Class="mt-16 pa-4">
                 @Body
-            </CascadingValue>
-        </MudMainContent>
+            </MudMainContent>
+        </CascadingValue>
     </MudLayout>
 </MudRTLProvider>
 

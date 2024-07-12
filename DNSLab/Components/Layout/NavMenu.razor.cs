@@ -7,7 +7,7 @@ namespace DNSLab.Components.Layout
 {
     partial class NavMenu
     {
-        //[CascadingParameter] public IPDTO IPDTO { get; set; }
+        [CascadingParameter] public IPDTO IPDTO { get; set; }
         [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
 
         public async Task<bool> IsInRoleAsync(string role)

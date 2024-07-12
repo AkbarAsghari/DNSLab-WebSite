@@ -20,7 +20,7 @@ else if (pageSummaries.Count() > 0)
 {
     @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
     {
-        <PageLinkItem Title="@item.Title" Link="@($"Blog/{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+        <PageLinkItem Title="@item.Title" Link="@($"Page/{@item.PageType}/{@item.URL}")" Description="@item.Description" />
     }
 }
 else

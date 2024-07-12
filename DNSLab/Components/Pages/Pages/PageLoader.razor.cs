@@ -18,6 +18,8 @@ partial class PageLoader
             var pageMetadata = await _PageRepository.GetPageMetadata($"{PageType}/{URL}");
 
             keywords = pageMetadata.Keywords;
+
+            await InvokeAsync(() => StateHasChanged());
         }
     }
 }
