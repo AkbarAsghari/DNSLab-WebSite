@@ -120,7 +120,7 @@ partial class MainLayout
         BackgroundGray = "#151521",
         AppbarText = "#92929f",
         AppbarBackground = "rgba(26,26,39,0.8)",
-        DrawerBackground = "#1a1a27",
+        DrawerBackground = "rgba(26,26,39,0.8)",
         ActionDefault = "#74718e",
         ActionDisabled = "#9999994d",
         ActionDisabledBackground = "#605f6d4d",
