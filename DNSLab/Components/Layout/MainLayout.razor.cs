@@ -13,6 +13,25 @@ partial class MainLayout
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
 
+    private MudThemeProvider _mudThemeProvider;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            await _mudThemeProvider.WatchSystemPreference(OnSystemPreferenceChanged);
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnSystemPreferenceChanged(bool newValue)
+    {
+        _isDarkMode = newValue;
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -120,11 +139,5 @@ partial class MainLayout
         TableLines = "#33323e",
         Divider = "#292838",
         OverlayLight = "#1e1e2d80",
-    };
-
-    public string DarkLightModeButtonIcon => _isDarkMode switch
-    {
-        true => Icons.Material.Rounded.AutoMode,
-        false => Icons.Material.Outlined.DarkMode,
     };
 }
