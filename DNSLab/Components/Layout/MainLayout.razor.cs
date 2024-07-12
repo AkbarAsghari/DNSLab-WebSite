@@ -48,22 +48,22 @@ partial class MainLayout
                 H1 = new H1
                 {
                     FontFamily = boldFontFamily,
-                    FontSize = "3.75rem"
+                    FontSize = "2.75rem"
                 },
                 H2 = new H2
                 {
                     FontFamily = boldFontFamily,
-                    FontSize = "2.75rem"
+                    FontSize = "2.25rem"
                 },
                 H3 = new H3
                 {
                     FontFamily = boldFontFamily,
-                    FontSize = "1.75rem"
+                    FontSize = "2.0rem"
                 },
                 H4 = new H4
                 {
                     FontFamily = boldFontFamily,
-                    FontSize = "0.75rem"
+                    FontSize = "1.75rem"
                 },
                 H5 = new H5
                 {
