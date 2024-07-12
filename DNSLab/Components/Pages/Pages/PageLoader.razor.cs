@@ -10,16 +10,13 @@ partial class PageLoader
     PublishPageDTO publishPageDTO;
     string[] keywords;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
-        if (firstRender)
-        {
-            publishPageDTO = await _PageRepository.GetPageByURL(url: $"{PageType}/{URL}");
-            var pageMetadata = await _PageRepository.GetPageMetadata($"{PageType}/{URL}");
+        publishPageDTO = await _PageRepository.GetPageByURL(url: $"{PageType}/{URL}");
+        var pageMetadata = await _PageRepository.GetPageMetadata($"{PageType}/{URL}");
 
-            keywords = pageMetadata.Keywords;
+        keywords = pageMetadata.Keywords;
 
-            await InvokeAsync(() => StateHasChanged());
-        }
+        await InvokeAsync(() => StateHasChanged());
     }
 }
