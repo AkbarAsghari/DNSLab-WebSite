@@ -1,3 +1,4 @@
+using ApexCharts;
 using Blazored.LocalStorage;
 using DNSLab.Components;
 using DNSLab.Helper.Exceptions;
@@ -5,9 +6,11 @@ using DNSLab.Helper.HttpService;
 using DNSLab.Interfaces.Auth;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
+using DNSLab.Middlewares;
 using DNSLab.Prividers;
 using DNSLab.Repository;
 using DNSLab.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Hosting;
@@ -97,6 +100,8 @@ namespace DNSLab
             });
 
             builder.Services.AddMemoryCache();
+
+            builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, BlazorAuthorizationMiddlewareResultHandler>();
 
             var app = builder.Build();
 
