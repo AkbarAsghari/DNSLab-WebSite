@@ -10,7 +10,7 @@ partial class MainLayout
 
     private IPDTO IPDTO = new IPDTO();
     private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
 
     private MudThemeProvider _mudThemeProvider;
