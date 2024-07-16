@@ -59,7 +59,7 @@ else
 }
 
 
-<MudDialog @bind-IsVisible=ChangeAccountUsernameModalVisible Options="new DialogOptions {CloseButton=true}">
+<MudDialog @bind-Visible=ChangeAccountUsernameModalVisible Options="new DialogOptions {CloseButton=true}">
     <TitleContent>
         <MudText Typo="Typo.h3">تغییر نام کاربری</MudText>
     </TitleContent>
@@ -86,7 +86,7 @@ else
     </DialogActions>
 </MudDialog>
 
-<MudDialog @bind-IsVisible=ChangeAccountEmailModalVisible Options="new DialogOptions {CloseButton=true}">
+<MudDialog @bind-Visible=ChangeAccountEmailModalVisible Options="new DialogOptions {CloseButton=true}">
     <TitleContent>
         <MudText Typo="Typo.h3">@localizer["ChangeEmailAddress"]</MudText>
     </TitleContent>

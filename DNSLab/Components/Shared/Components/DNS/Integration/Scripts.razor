@@ -78,7 +78,7 @@ else
 }
 
 
-<MudDialog @bind-IsVisible="showEditOrAddTokenModal">
+<MudDialog @bind-Visible="showEditOrAddTokenModal">
     <TitleContent><MudText Typo="Typo.h4">@TokenModalTitle</MudText></TitleContent>
         <DialogContent>
             <MudTextField Label="نام توکن" Class="mb-1" Placeholder="یک نام برای توکن خود وارد نمایید"
@@ -106,7 +106,7 @@ else
                     @foreach (var item in HostSummariesAndChecked)
                     {
                         <MudItem xs="12" sm="6">
-                            <MudCheckBox T="bool" Dense @bind-Checked="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
+                            <MudCheckBox T="bool" Dense @bind-Value="@item.IsChecked" Label="@item.Address" Color="Color.Primary" />
                          </MudItem>
                     }
                 </MudGrid>

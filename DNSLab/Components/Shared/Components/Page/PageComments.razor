@@ -41,7 +41,7 @@
     }
 }
 
-<MudDialog @bind-IsVisible="@showDialog"
+<MudDialog @bind-Visible="@showDialog"
            Options="new DialogOptions {MaxWidth=MaxWidth.Small , FullWidth=true , CloseButton=true}">
     <TitleContent>
         <MudText Typo="Typo.h3">@(ReplyToId == Guid.Empty ? "ثبت دیدگاه جدید" : "پاسخ به دیدگاه")</MudText>
