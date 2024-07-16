@@ -1,0 +1,21 @@
+﻿@inject NavigationManager _NavigationManager
+
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+          <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
+            <Authorizing>
+                <text>Please wait, we are authorizing you...</text>
+            </Authorizing>
+            <NotAuthorized>
+                @if (context.User.Identity == null)
+                {
+                    <DNSLab.Components.Pages.User.Auth RedirectTo="@_NavigationManager.Uri"></DNSLab.Components.Pages.User.Auth>
+                }
+                else if (!context.User.IsInRole("Admin"))
+                {
+                    <MudText>Only system Admins Can See this Page.</MudText>
+                }
+            </NotAuthorized>
+        </AuthorizeRouteView>
+    </Found>
+</Router>

@@ -1,0 +1,22 @@
+﻿@page "/Articles"
+@using DNSLab.Components.Shared.Components.Page
+@inject IPageRepository _PageRepository
+
+<MudText Typo="Typo.h3">آموزش</MudText>
+<MudDivider Class="mt-2" />
+@if (pageSummaries == null)
+{
+    <Loading />
+}
+else
+{
+    <MudList T="object">
+        @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
+        {
+            <MudListItem>
+                <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+            </MudListItem>
+            <MudDivider />
+        }
+    </MudList>
+}
