@@ -16,7 +16,7 @@ else
         @foreach (var item in pageSummaries.OrderByDescending(x => x.CreateDate))
         {
             <MudListItem>
-                <PageLinkItem Title="@item.Title" Link="@($"{@item.PageType}/{@item.URL}")" Description="@item.Description" />
+                <PageLinkItem Title="@item.Title" Link="@($"Blog/{@item.PageType}/{@item.URL}")" Description="@item.Description" />
             </MudListItem>
             <MudDivider />
         }
