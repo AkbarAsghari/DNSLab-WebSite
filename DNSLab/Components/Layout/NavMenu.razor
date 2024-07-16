@@ -5,7 +5,7 @@
             <MudNavLink Href="/user/register" Icon="@Icons.Material.Filled.PersonAdd">ثبت نام</MudNavLink>
         </NotAuthorized>
         <Authorized>
-            <MudStack AlignItems="AlignItems.Center">
+            <MudStack AlignItems="AlignItems.Center" Class="my-2">
                 <MudLink Href="/" Underline="Underline.None">
                     <MudStack AlignItems="AlignItems.Center" Row>
                         <MudText Align="Align.Center" Typo="Typo.h3">
@@ -16,6 +16,7 @@
                 </MudLink>
                 <MudText Typo="Typo.body2" Align="Align.Center" Class="px-4 mud-text-secondary">Your Public IP : @IPDTO.IPv4 </MudText>
             </MudStack>
+            <MudDivider />
             <MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
             @if (IsInRoleAsync("Admin").Result)
             {
