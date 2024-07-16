@@ -30,9 +30,9 @@ else
                 <TemplateColumn Title="@localizer["HostName"]">
                     <CellTemplate>
                         <MudLink Class="text-decoration-none"
-                                 Href="@($"https://dnslab.link/Blog/{context.Item.PageType}/{context.Item.URL}")" Target="_blank">
+                                 Href="@($"https://dnslab.link/Page/{context.Item.PageType}/{context.Item.URL}")" Target="_blank">
                             <MudText>
-                                dnslab.link/Blog/<code><strong>@context.Item.PageType</strong></code><code>@($"/{@context.Item.URL}")</code>
+                                dnslab.link/Page/<code><strong>@context.Item.PageType</strong></code><code>@($"/{@context.Item.URL}")</code>
                             </MudText>
                         </MudLink>
                     </CellTemplate>

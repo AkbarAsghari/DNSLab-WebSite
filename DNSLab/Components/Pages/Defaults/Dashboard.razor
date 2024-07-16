@@ -25,41 +25,41 @@
                     </MudCardContent>
                     <MudCardActions>
                         <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="dns/mydns">برای مدیریت کلیک کنید</MudButton>
-                        </MudCardActions>
-                        </MudCard>
-                        </MudItem>
-                        <MudItem md="4" xs="12">
-                        <MudCard Elevation="25" Class="rounded-lg">
-                        <MudCardHeader>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem md="4" xs="12">
+                <MudCard Elevation="25" Class="rounded-lg">
+                    <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Align="Align.Center" Typo="Typo.h6">تعداد بروزرسانی های ۲۴ ساعت اخیر</MudText>
                         </CardHeaderContent>
-                        </MudCardHeader>
-                        <MudCardContent>
+                    </MudCardHeader>
+                    <MudCardContent>
                         <MudText Align="Align.Center" Typo="Typo.h2">@_Dashboard.IPChangeCountInLast24Hours.ToString().EnglishToPersianNumbers()</MudText>
-                        </MudCardContent>
-                        <MudCardActions>
+                    </MudCardContent>
+                    <MudCardActions>
                         <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="/Report/IPChangesChart">برای نمایش جدول تغییرات کلیک کنید</MudButton>
-                        </MudCardActions>
-                        </MudCard>
-                        </MudItem>
-                        <MudItem md="4" xs="12">
-                        <MudCard Elevation="25" Class="rounded-lg">
-                        <MudCardHeader>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem md="4" xs="12">
+                <MudCard Elevation="25" Class="rounded-lg">
+                    <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Align="Align.Center" Typo="Typo.h6">تعداد تیکت های باز</MudText>
                         </CardHeaderContent>
-                        </MudCardHeader>
-                        <MudCardContent>
+                    </MudCardHeader>
+                    <MudCardContent>
                         <MudText Align="Align.Center" Typo="Typo.h2">@_Dashboard.OpenTicketsCount.ToString().EnglishToPersianNumbers()</MudText>
-                        </MudCardContent>
-                        <MudCardActions>
+                    </MudCardContent>
+                    <MudCardActions>
                         <MudButton Variant="Variant.Filled" FullWidth Color="Color.Primary" Href="/Ticket/MyTickets">مدیریت تیکت ها</MudButton>
-                        </MudCardActions>
-                        </MudCard>
-                        </MudItem>
-                        </MudGrid>
-                        @if (_Dashboard.ActiveDNSCount == 0)
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+        @if (_Dashboard.ActiveDNSCount == 0)
         {
             <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start">
                 <MudText>شما تا کنون هیچ هاست نِیمی ثبت نکرده‌اید برای ایجاد هاست نِیم <MudLink Href="DNS/MyDNS">کلیک</MudLink> کنید.</MudText>
