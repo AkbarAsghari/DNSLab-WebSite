@@ -1,7 +1,7 @@
 ﻿using DNSLab.DTOs.IP;
 using DNSLab.DTOs.Pages;
 
-namespace DNSLab.Components.Pages.Support;
+namespace DNSLab.Components.Pages.Pages;
 partial class Support
 {
     [CascadingParameter] public IPDTO IPDTO { get; set; }

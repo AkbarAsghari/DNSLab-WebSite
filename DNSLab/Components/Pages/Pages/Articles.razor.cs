@@ -1,6 +1,6 @@
 ﻿using DNSLab.DTOs.Pages;
 
-namespace DNSLab.Components.Pages.Articles;
+namespace DNSLab.Components.Pages.Pages;
 partial class Articles
 {
     IEnumerable<PageSummaryDTO> pageSummaries;
