@@ -6,6 +6,7 @@ using DNSLab.Helper.HttpService;
 using DNSLab.Interfaces.Auth;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
+using DNSLab.Middlewares;
 using DNSLab.Prividers;
 using DNSLab.Repository;
 using DNSLab.Services;
@@ -60,11 +61,7 @@ namespace DNSLab
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<HttpClient>();
 
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = "CustomScheme";
-                options.DefaultChallengeScheme = "CustomScheme";
-            }).AddScheme<CustomAuthOptions, CustomAuthenticationHandler>("CustomScheme", options => { }); ;
+            builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, BlazorAuthorizationMiddlewareResultHandler>();
 
             builder.Services.AddScoped<JWTAuthenticationStateProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
