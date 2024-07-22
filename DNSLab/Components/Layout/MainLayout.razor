@@ -1,10 +1,11 @@
 ﻿@inherits LayoutComponentBase
 
 <MudThemeProvider Theme="@_theme" @ref="_mudThemeProvider" IsDarkMode="_isDarkMode" />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+
 <MudRTLProvider RightToLeft>
+    <MudPopoverProvider />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
     <MudLayout>
         <MudAppBar Elevation="1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
