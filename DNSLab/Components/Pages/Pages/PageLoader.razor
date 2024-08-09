@@ -5,8 +5,6 @@
 <MudContainer MaxWidth="MaxWidth.Large" Class="ck-content">
     @if (publishPageDTO != null)
     {
-        <PageTitle>@publishPageDTO.Header</PageTitle>
-
         <MudText Typo="Typo.h1">@publishPageDTO.Header</MudText>
         <PageSummary FullName="@publishPageDTO.Author.FullName" UserId="@publishPageDTO.Author.ID"
                      PublishDate="@publishPageDTO.PublishDate" UpdateDate="@publishPageDTO.UpdateDate" />

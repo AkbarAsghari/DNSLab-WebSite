@@ -53,7 +53,7 @@ namespace DNSLab.Providers
             }
             else
             {
-                var apiMetadata = await _pageRepository.GetPageMetadata(new Uri(route).LocalPath.Substring(1));
+                var apiMetadata = await _pageRepository.GetPageMetadata(new Uri(route).LocalPath.Substring(6));
                 if (apiMetadata != null)
                 {
                     MetadataValue = new MetadataValue
