@@ -1,4 +1,3 @@
-using ApexCharts;
 using Blazored.LocalStorage;
 using DNSLab.Components;
 using DNSLab.Helper.Exceptions;
@@ -6,14 +5,12 @@ using DNSLab.Helper.HttpService;
 using DNSLab.Interfaces.Auth;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
-using DNSLab.Middlewares;
 using DNSLab.Providers;
 using DNSLab.Repository;
 using DNSLab.Services;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.Extensions.Hosting;
 using MudBlazor;
 using MudBlazor.Services;
 using System.IO.Compression;
@@ -61,8 +58,6 @@ namespace DNSLab
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<HttpClient>();
 
-            builder.Services.AddSingleton<IAuthorizationMiddlewareResultHandler, BlazorAuthorizationMiddlewareResultHandler>();
-
             builder.Services.AddScoped<JWTAuthenticationStateProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
             builder.Services.AddScoped<IAuthService>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
@@ -104,6 +99,8 @@ namespace DNSLab
 
             builder.Services.AddMemoryCache();
 
+            builder.Services.AddAuthentication()
+                .AddScheme<AuthenticationSchemeOptions, CustomAuthenticationHandler>("DNSLab", options => { });
             var app = builder.Build();
 
             var supportedCultures = new[] { "fa-FA", "en-EN" };
@@ -128,7 +125,8 @@ namespace DNSLab
             app.UseAntiforgery();
 
             app.MapRazorComponents<App>()
-                .AddInteractiveServerRenderMode();
+                .AddInteractiveServerRenderMode()
+                .AllowAnonymous();
 
             app.Run();
         }
