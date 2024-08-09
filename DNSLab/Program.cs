@@ -7,7 +7,7 @@ using DNSLab.Interfaces.Auth;
 using DNSLab.Interfaces.Helper;
 using DNSLab.Interfaces.Repository;
 using DNSLab.Middlewares;
-using DNSLab.Prividers;
+using DNSLab.Providers;
 using DNSLab.Repository;
 using DNSLab.Services;
 using Microsoft.AspNetCore.Authorization;

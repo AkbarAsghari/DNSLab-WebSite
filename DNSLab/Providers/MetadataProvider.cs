@@ -1,7 +1,7 @@
 ﻿using DNSLab.Interfaces.Repository;
 using DNSLab.Services;
 
-namespace DNSLab.Prividers
+namespace DNSLab.Providers
 {
     public class MetadataProvider : IMetadataProvider
     {

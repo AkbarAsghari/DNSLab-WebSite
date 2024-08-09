@@ -1,4 +1,4 @@
-﻿namespace DNSLab.Prividers
+﻿namespace DNSLab.Providers
 {
     public class AuthenticationStateCascadingProvider
     {

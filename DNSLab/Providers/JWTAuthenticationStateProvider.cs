@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace DNSLab.Prividers
+namespace DNSLab.Providers
 {
     public class JWTAuthenticationStateProvider : AuthenticationStateProvider, IAuthService
     {

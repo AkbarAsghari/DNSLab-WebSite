@@ -1,4 +1,4 @@
-using DNSLab.Prividers;
+using DNSLab.Providers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using System;
