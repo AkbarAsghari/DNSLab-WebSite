@@ -2,21 +2,18 @@
 
 <Router AppAssembly="typeof(Program).Assembly" @rendermode="new InteractiveServerRenderMode(prerender: false)">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
+          <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
             <Authorizing>
-                <Loading IsInTop/>
-            </Authorizing>              
+                <Loading IsInTop />
+            </Authorizing>
             <NotAuthorized>
-                @if (context.User.Identity?.IsAuthenticated == false)
+                @if (context.User.Identity == null)
                 {
-                    if (!context.User.IsInRole("Admin"))
-                    {
-                        <MudText>فقط ادیمن های سیستم اجازه دسترسی به این صفحه را دارند</MudText>
-                    }
-                    else
-                    {
-                        <DNSLab.Components.Pages.User.Auth RedirectTo="@_NavigationManager.Uri"></DNSLab.Components.Pages.User.Auth>
-                    }
+                    <DNSLab.Components.Pages.User.Auth RedirectTo="@_NavigationManager.Uri"></DNSLab.Components.Pages.User.Auth>
+                }
+                else if (!context.User.IsInRole("Admin"))
+                {
+                    <MudText>Only system Admins Can See this Page.</MudText>
                 }
             </NotAuthorized>
         </AuthorizeRouteView>
