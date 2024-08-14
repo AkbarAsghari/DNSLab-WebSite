@@ -10,14 +10,14 @@ namespace DNSLab.Repository
         private HubConnection _HubConnection;
 
         object _locker = new object();
-        public async Task CheckOnlineUsersCount(string ipAddress)
+        public async Task StartListening(string ipAddress)
         {
             lock (_locker)
             {
                 if (_HubConnection == null)
                 {
                     _HubConnection = new HubConnectionBuilder()
-                   .WithUrl(new Uri("https://api.dnslab.link/dnslabhub"))
+                   .WithUrl(new Uri("http://localhost/dnslabhub"))
                    .Build();
 
                     _HubConnection.On<int>("OnlineUsersCountChanged", count => OnUpdateUsersCount?.Invoke(count));
@@ -29,8 +29,6 @@ namespace DNSLab.Repository
             {
                 await _HubConnection.StartAsync();
             }
-
-            await _HubConnection.SendAsync("Online", ipAddress);
         }
     }
 }

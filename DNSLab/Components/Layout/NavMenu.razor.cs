@@ -16,7 +16,7 @@ namespace DNSLab.Components.Layout
         protected override async Task OnInitializedAsync()
         {
             _RealTimeCommunicationRepository.OnUpdateUsersCount += OnlineUsersCountUpdate;
-            await _RealTimeCommunicationRepository.CheckOnlineUsersCount(IPDTO.IPv4);
+            await _RealTimeCommunicationRepository.StartListening(IPDTO.IPv4);
         }
 
         private void OnlineUsersCountUpdate(int count)

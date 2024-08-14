@@ -4,7 +4,7 @@ namespace DNSLab.Interfaces.Repository
 {
     public interface IRealTimeCommunicationRepository
     {
-        Task CheckOnlineUsersCount(string ipAddress);
+        Task StartListening(string ipAddress);
         event UpdateUsersCountEventHandler OnUpdateUsersCount;
     }
 }
