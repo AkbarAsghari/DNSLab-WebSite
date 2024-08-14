@@ -17,7 +17,7 @@ namespace DNSLab.Repository
                 if (_HubConnection == null)
                 {
                     _HubConnection = new HubConnectionBuilder()
-                   .WithUrl(new Uri("http://localhost/dnslabhub"))
+                   .WithUrl(new Uri("https://api.dnslab.link/dnslabhub"))
                    .Build();
 
                     _HubConnection.On<int>("OnlineUsersCountChanged", count => OnUpdateUsersCount?.Invoke(count));
