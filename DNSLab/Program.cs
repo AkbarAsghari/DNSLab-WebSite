@@ -55,6 +55,10 @@ namespace DNSLab
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
             builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
             builder.Services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
+
+            //RealTime 
+            builder.Services.AddSingleton<IRealTimeCommunicationRepository, RealTimeCommunicationRepository>();
+
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddScoped<HttpClient>();
 

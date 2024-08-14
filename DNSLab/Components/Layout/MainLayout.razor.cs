@@ -1,4 +1,6 @@
 ﻿using DNSLab.DTOs.IP;
+using DNSLab.Interfaces.Repository;
+using DNSLab.Repository;
 using Microsoft.AspNetCore.Http;
 using MudBlazor;
 
@@ -24,6 +26,8 @@ partial class MainLayout
             StateHasChanged();
         }
     }
+
+  
 
     private async Task OnSystemPreferenceChanged(bool newValue)
     {
