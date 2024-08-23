@@ -31,11 +31,11 @@
         {
             <MudItem sm="12">
                 <MudText>نوع رکورد</MudText>
-                <MudRadioGroup T="int" @bind-SelectedOption="@HostName.RecordType">
-                    <MudRadio T="int" Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.A)">@DNSRecordTypeEnum.A</MudRadio>
-                    <MudRadio T="int" Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.AAAA)">@DNSRecordTypeEnum.AAAA</MudRadio>
-                    <MudRadio T="int" Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.CNAME)">@DNSRecordTypeEnum.CNAME</MudRadio>
-                    <MudRadio T="int" Color="Color.Primary" Option="@((int)DNSRecordTypeEnum.WebRedirect)">@DNSRecordTypeEnum.WebRedirect</MudRadio>
+                <MudRadioGroup T="int" @bind-Value="@HostName.RecordType">
+                    <MudRadio T="int" Color="Color.Primary" Value="@((int)DNSRecordTypeEnum.A)">@DNSRecordTypeEnum.A</MudRadio>
+                    <MudRadio T="int" Color="Color.Primary" Value="@((int)DNSRecordTypeEnum.AAAA)">@DNSRecordTypeEnum.AAAA</MudRadio>
+                    <MudRadio T="int" Color="Color.Primary" Value="@((int)DNSRecordTypeEnum.CNAME)">@DNSRecordTypeEnum.CNAME</MudRadio>
+                    <MudRadio T="int" Color="Color.Primary" Value="@((int)DNSRecordTypeEnum.WebRedirect)">@DNSRecordTypeEnum.WebRedirect</MudRadio>
                 </MudRadioGroup>
             </MudItem>
         }
