@@ -5,16 +5,16 @@
 
 @inject IStringLocalizer<Resource> localizer
 <MudText Align="Align.Center" Typo="Typo.h1">@localizer["IndexH1Message"]</MudText>
-<MudText Align="Align.Center" Typo="Typo.subtitle1">@localizer["IndexMessage"]</MudText>
+<MudText Align="Align.Center" Typo="Typo.subtitle1" Class="mt-12">@localizer["IndexMessage"]</MudText>
 
 <MudText Align="Align.Center">
     آی پی عمومی شما <strong>@IPDTO.IPv4.EnglishToPersianNumbers()</strong>
     <CopyToClipboard Text="@IPDTO.IPv4" />
 </MudText>
 
-<MudText Typo="Typo.h2">@localizer["StayConnected"]</MudText>
+<MudText Typo="Typo.h2" Class="mt-12">@localizer["StayConnected"]</MudText>
 <MudText>@localizer["StayConnectedMessage"]</MudText>
-<MudGrid Class="mt-2">
+<MudGrid Class="mt-12">
     <MudItem xs="12" sm="6" md="4">
         <MudCard Elevation="25" Class="rounded-lg pb-4" Style="min-height:17rem">
             <MudCardHeader>
@@ -66,7 +66,7 @@
     </MudItem>
 </MudGrid>
 
-<MudGrid Justify="Justify.SpaceBetween">
+<MudGrid Justify="Justify.SpaceBetween" Class="mt-12">
     <MudItem md="4">
         <LastContents />
     </MudItem>
