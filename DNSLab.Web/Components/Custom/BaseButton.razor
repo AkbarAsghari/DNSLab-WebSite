@@ -1,0 +1,34 @@
+﻿@inherits MudButton
+
+@if (base.Disabled)
+{
+    <MudButton Disabled Variant="base.Variant"
+               Style="@base.Style"
+               StartIcon="@base.StartIcon"
+               EndIcon="@base.EndIcon"
+               Class="@base.Class"
+               ButtonType="base.ButtonType"
+               FullWidth="base.FullWidth">
+        @_ProcessingRenderFragment
+    </MudButton>
+}
+else
+{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+    RenderFragment? _ProcessingRenderFragment { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        _ProcessingRenderFragment = (__builder) =>
+        {
+            <MudProgressCircular Class="ml-2" Size="Size.Small" Indeterminate="true" />
+        };
+
+        _ProcessingRenderFragment += base.ChildContent;
+
+        return Task.CompletedTask;
+    }
+}

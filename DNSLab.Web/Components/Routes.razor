@@ -1,0 +1,19 @@
+﻿<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
+            <Authorizing>
+                <MudText>Please wait, we are authorizing you...</MudText>
+            </Authorizing>
+            <NotAuthorized>
+                @if (context.User.Identity == null)
+                {
+                    <DNSLab.Web.Components.Pages.Accounts.Login />
+                }
+                else if (!context.User.IsInRole("Admin"))
+                {
+                    <MudText>Only system Admins Can See this Page.</MudText>
+                }
+            </NotAuthorized>
+        </AuthorizeRouteView>
+    </Found>
+</Router>

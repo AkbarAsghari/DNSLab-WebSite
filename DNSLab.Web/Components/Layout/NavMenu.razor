@@ -1,0 +1,30 @@
+﻿<AuthorizeView>
+    <Authorized>
+        <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
+            <MudNavMenu>
+                <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+                <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
+                <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+                <MudNavGroup Title="حساب کاربری" Icon="@Icons.Material.Filled.AccountBox">
+                    <AuthorizeView Roles="@AuthorizeRoles.Admin" Context="_AdminCTX">
+                        <Authorized>
+                            <MudNavLink Href="/Accounts/All">لیست کاربران</MudNavLink>
+                            <MudDivider />
+                        </Authorized>
+                    </AuthorizeView>
+                    <MudNavLink Href="/Accounts/information">اطلاعات حساب کاربری</MudNavLink>
+                    <MudNavLink Href="/Accounts/SignOut">خروج</MudNavLink>
+                </MudNavGroup>
+            </MudNavMenu>
+        </MudDrawer>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private bool _drawerOpen = true;
+    public void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+        StateHasChanged();
+    }
+}

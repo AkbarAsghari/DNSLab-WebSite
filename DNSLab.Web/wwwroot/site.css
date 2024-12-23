@@ -1,0 +1,20 @@
+﻿@font-face {
+    font-family: vazir-bold;
+    src: url(../fonts/Vazir-Bold.woff);
+    font-weight: 700
+}
+
+@font-face {
+    font-family: vazir-light;
+    src: url(../fonts/Vazir-Light.woff)
+}
+
+@font-face {
+    font-family: vazir-regular;
+    src: url(../fonts/Vazir-Regular.woff);
+    font-weight: 400
+}
+
+.baackdrop-bluered {
+    backdrop-filter: blur(2px) !important
+}

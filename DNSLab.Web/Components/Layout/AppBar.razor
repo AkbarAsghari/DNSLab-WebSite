@@ -1,0 +1,25 @@
+﻿<MudAppBar Elevation="0" Class="baackdrop-bluered">
+    <AuthorizeView>
+        <Authorized>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="MenuOnClick" />
+        </Authorized>
+    </AuthorizeView>
+    <MudHidden Invert Breakpoint="Breakpoint.Xs">
+        <MudText>@GlobalSettings.ApplicationName</MudText>
+    </MudHidden>
+    <MudHidden Breakpoint="Breakpoint.Xs">
+        <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
+    </MudHidden>
+    <MudSpacer />
+    <AuthorizeView>
+        <NotAuthorized>
+            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login" Href="/Accounts/Login">ورود</BaseButton>
+            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.AppRegistration" Href="/Accounts/Register">ثبت نام</BaseButton>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudAppBar>
+
+@code {
+    [Parameter]
+    public EventCallback MenuOnClick { get; set; }
+}

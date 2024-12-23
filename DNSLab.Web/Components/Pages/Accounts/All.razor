@@ -1,0 +1,24 @@
+﻿@page "/Accounts/All"
+@attribute [Authorize(Roles = AuthorizeRoles.Admin)]
+
+<MudText Typo="Typo.h3" Class="mb-3">لیست تمام کاربران</MudText>
+
+
+@if (_AllUsers == null)
+{
+    
+}
+else
+{
+    <MudDataGrid Items="@_AllUsers">
+        <Columns>
+            <PropertyColumn Property="x => x.ID" Title="ID" />
+            <PropertyColumn Property="x => x.FirstName" />
+            <PropertyColumn Property="x => x.LastName" />
+            <PropertyColumn Property="x => x.Username" />
+            <PropertyColumn Property="x => x.Email" />
+            <PropertyColumn Property="x => x.Mobile" />
+            <PropertyColumn Property="x => x.Role" />
+        </Columns>
+    </MudDataGrid>
+}

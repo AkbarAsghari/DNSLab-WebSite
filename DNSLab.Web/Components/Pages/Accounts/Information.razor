@@ -1,0 +1,92 @@
+﻿@page "/Accounts/Information"
+
+@attribute [Authorize]
+
+<MudText Typo="Typo.h3" Class="mb-2">حساب کاربری</MudText>
+
+@if (_CurrentUser != null)
+{
+    <MudCard Outlined>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.FirstName" Label="نام" />
+                </MudItem>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.LastName" Label="نام خانوادگی" />
+                </MudItem>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Company" Label="نام سازمان" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions>
+            <BaseButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveInformation">ذخیره تغییرات</BaseButton>
+        </MudCardActions>
+    </MudCard>
+    <MudCard Outlined Class="mt-2">
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Mobile" Label="شماره همراه" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditMobile" Adornment="Adornment.End" />
+                </MudItem>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Email" Label="آدرس ایمیل" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditEmail" Adornment="Adornment.End" />
+                </MudItem>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Username" Label="نام کاربری" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditUsername" Adornment="Adornment.End" />
+                </MudItem>
+                <MudItem xs="12" md="6" lg="4">
+                    <MudTextField T="string" Variant="Variant.Outlined" Text="**********" Label="رمز عبور" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditPassword" Adornment="Adornment.End" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+
+    <MudDialog @bind-Visible="_EditMobileDialogVisible" Options="new DialogOptions{ MaxWidth = MaxWidth.ExtraSmall , FullWidth = true }">
+        <TitleContent>
+            <MudText Typo="Typo.h3">تغییر شماره همراه</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm @ref="_EditMobileForm">
+                <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_NewMobile" Label="شماره همراه" />
+                <BaseButton Variant="Variant.Filled" Class="mt-2" Color="Color.Primary" FullWidth OnClick="SaveNewMobile">ذخیره شماره همراه جدید</BaseButton>
+            </MudForm>
+        </DialogContent>
+    </MudDialog>
+
+    <MudDialog @bind-Visible="_EditUsernameDialogVisible" Options="new DialogOptions{ MaxWidth = MaxWidth.ExtraSmall , FullWidth = true }">
+        <TitleContent>
+            <MudText Typo="Typo.h3">تغییر نام کاربری</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_NewUsername" Label="نام کاربری" />
+            <BaseButton Variant="Variant.Filled" Class="mt-2" Color="Color.Primary" FullWidth OnClick="SaveNewUsername">ذخیره نام کاربری جدید</BaseButton>
+        </DialogContent>
+    </MudDialog>
+
+    <MudDialog @bind-Visible="_EditEmailDialogVisible" Options="new DialogOptions{ MaxWidth = MaxWidth.ExtraSmall , FullWidth = true }">
+        <TitleContent>
+            <MudText Typo="Typo.h3">تغییر آدرس ایمیل</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm @ref="_EditEmailForm">
+                <MudTextField T="string" Variant="Variant.Outlined" Required RequiredError="آدرس ایمیل را وارد نمایید" @bind-Value="_NewEmailAddress" Label="آدرس ایمیل" />
+                <BaseButton Variant="Variant.Filled" Class="mt-2" Color="Color.Primary" FullWidth OnClick="SaveNewEmail">ذخیره آدرس ایمیل جدید</BaseButton>
+            </MudForm>
+        </DialogContent>
+    </MudDialog>
+
+    <MudDialog @bind-Visible="_EditPasswordDialogVisible" Options="new DialogOptions{ MaxWidth = MaxWidth.ExtraSmall , FullWidth = true }">
+        <TitleContent>
+            <MudText Typo="Typo.h3">تغییر رمز عبور</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm @ref="_EditPasswordForm">
+                <MudTextField T="string" InputType="InputType.Password" Variant="Variant.Outlined" Required RequiredError="رمز عبور جاری را وارد نمایید" @bind-Value="_ChangePasswordDTO.CurrentPassword" Label="رمز عبور جاری" />
+                <MudTextField T="string" InputType="InputType.Password" Variant="Variant.Outlined" Required RequiredError="رمز عبور جدید را وارد نمایید" @bind-Value="_ChangePasswordDTO.NewPassword" Label="رمز عبور جدید" />
+                <BaseButton Variant="Variant.Filled" Class="mt-2" Color="Color.Primary" FullWidth OnClick="SaveNewPassword">ذخیره رمز عبور جدید</BaseButton>
+            </MudForm>
+        </DialogContent>
+    </MudDialog>
+}

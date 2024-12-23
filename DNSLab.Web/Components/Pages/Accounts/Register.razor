@@ -1,0 +1,18 @@
+﻿@page "/Accounts/Register"
+
+<MudStack AlignItems="AlignItems.Center">
+    <MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="mt-6">
+        <MudCard Outlined Class="pa-5">
+            <MudText Typo="Typo.h3" Class="my-3">ثبت نام</MudText>
+            <MudText>سلام</MudText>
+            <MudText>لطفا ایمیل خود را وارد نمایید</MudText>
+            <EditForm Model="_RegisterUserDTO" Context="ctx">
+                <DataAnnotationsValidator />
+                <MudTextField T="string" Placeholder="ایمیل" Variant="Variant.Outlined" Class="my-2 mud-ltr" For="()=>_RegisterUserDTO.Email" @bind-Value="_RegisterUserDTO.Email"></MudTextField>
+                <MudTextField T="string" InputType="InputType.Password" Placeholder="رمز عبور" Variant="Variant.Outlined" Class="my-2 mud-ltr" For="()=>_RegisterUserDTO.Password" @bind-Value="_RegisterUserDTO.Password"></MudTextField>
+                <MudTextField T="string" InputType="InputType.Password" Placeholder="تکرار رمز عبور" Variant="Variant.Outlined" Class="my-2 mud-ltr" For="()=>_RegisterUserDTO.ConfirmPassword" @bind-Value="_RegisterUserDTO.ConfirmPassword"></MudTextField>
+                <BaseButton Color="Color.Primary" ButtonType="ButtonType.Submit" EditContext="ctx" OnClick="RegisterUser" Variant="Variant.Filled" FullWidth>ثبت نام</BaseButton>
+            </EditForm>
+        </MudCard>
+    </MudContainer>
+</MudStack>
