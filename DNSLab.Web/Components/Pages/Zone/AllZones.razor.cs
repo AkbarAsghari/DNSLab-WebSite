@@ -1,5 +1,6 @@
 ﻿
 using DNSLab.Web.Components.Dialogs;
+using DNSLab.Web.Components.Dialogs.Zone;
 using DNSLab.Web.DTOs.Repositories.Zone;
 using DNSLab.Web.Interfaces.Repositories;
 using Microsoft.AspNetCore.Components;
@@ -48,6 +49,18 @@ namespace DNSLab.Web.Components.Pages.Zone
                 TotalItems = data.Count(),
                 Items = data
             };
+        }
+
+        async Task NewZone()
+        {
+            var options = new DialogOptions() { CloseButton = true, FullWidth = true , MaxWidth = MaxWidth.ExtraSmall };
+
+            var dialog = await _DialogService.ShowAsync<AddZoneDialog>("اضافه کردن Zone جدید", options);
+            var result = await dialog.Result;
+            if (!result!.Canceled)
+            {
+                await _DataGrid.ReloadServerData();
+            }
         }
 
         async Task EditZone(ZoneDTO zone)
@@ -106,7 +119,7 @@ namespace DNSLab.Web.Components.Pages.Zone
             {
                 zone.Disable = !zone.Disable;
 
-                _Snackbar.Add($"دامنه {zone.Name} {(zone.Disable ? "غیر فعال" : "فعال")} شد", zone.Disable ? Severity.Error : Severity.Success);
+                _Snackbar.Add($"دامنه {zone.Name} {(zone.Disable ? "غیر فعال" : "فعال")} شد", zone.Disable ? Severity.Warning : Severity.Success);
             }
         }
     }

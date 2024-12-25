@@ -1,12 +1,16 @@
 ﻿@using DNSLab.Web.DTOs.Repositories.Zone
 @attribute [Route(AllRoutes.AllZones)]
 
+<MudText Typo="Typo.h2">Zone ها</MudText>
+<MudStack Row Justify="Justify.FlexEnd">
+    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone">اضافه کردن Zone</BaseButton>
+</MudStack>
 <MudDataGrid @ref="_DataGrid" T="ZoneDTO" ServerData="ServerReload" Dense Hover Bordered>
     <Columns>
-        <PropertyColumn Property="x=>x.Name" Title="دامنه" />
+        <PropertyColumn Property="x=>x.Name" Title="Zone" />
         <TemplateColumn Title="نوع">
             <CellTemplate>
-                <MudAlert Severity="Severity.Normal" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
                     <MudText Typo="Typo.caption">Primary</MudText>
                 </MudAlert>
             </CellTemplate>
@@ -20,24 +24,16 @@
         </TemplateColumn>
         <TemplateColumn>
             <CellTemplate>
-                <BaseIconButton Size="Size.Small"
-                                Icon="@(context.Item.Disable ? Icons.Material.Filled.Lock : Icons.Material.Filled.LockOpen)"
-                                Color="@(context.Item.Disable ? Color.Inherit : Color.Success)"
-                                Variant="Variant.Filled"
-                                OnClick="()=>DisableZone(context.Item)">
-                </BaseIconButton>
-                <BaseIconButton Size="Size.Small"
-                                Icon="@Icons.Material.Filled.Edit"
-                                Color="Color.Warning"
-                                Variant="Variant.Filled"
-                                OnClick="()=>EditZone(context.Item)">
-                </BaseIconButton>
-                <BaseIconButton Size="Size.Small"
-                                Icon="@Icons.Material.Filled.Delete"
-                                Color="Color.Error"
-                                Variant="Variant.Filled"
-                                OnClick="()=>DeleteZone(context.Item)">
-                </BaseIconButton>
+                <MudStack Row Justify="Justify.FlexEnd">
+                    <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.TopLeft">
+                        <MudMenuItem OnClick="() => EditZone(context.Item)">ویرایش Zone</MudMenuItem>
+                        <MudMenuItem OnClick="() => DisableZone(context.Item)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
+                        <MudMenuItem Disabled />
+                        <MudMenuItem OnClick="() => DeleteZone(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Filled.Delete">
+                            <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
+                        </MudMenuItem>
+                    </MudMenu>
+                </MudStack>
             </CellTemplate>
         </TemplateColumn>
     </Columns>

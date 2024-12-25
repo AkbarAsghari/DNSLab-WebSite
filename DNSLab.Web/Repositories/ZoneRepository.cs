@@ -13,9 +13,9 @@ namespace DNSLab.Web.Repositories
             return await _HttpServiceProvider.Post<ZoneDTO, bool>($"{APIController}/CreateZone", model);
         }
 
-        public Task<bool> DeleteZone(Guid Id)
+        public async Task<bool> DeleteZone(Guid Id)
         {
-            throw new NotImplementedException();
+            return await _HttpServiceProvider.Delete<bool>($"{APIController}/DeleteZone?Id={Id}");
         }
 
         public async Task<bool> DisableZone(Guid Id)
