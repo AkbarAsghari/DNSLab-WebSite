@@ -17,6 +17,7 @@ builder.Services.AddScoped<IHttpServiceProvider, HttpServiceProvider>();
 
 //Repository
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IZoneRepository, ZoneRepository>();
 
 
 builder.Services.AddHttpContextAccessor();

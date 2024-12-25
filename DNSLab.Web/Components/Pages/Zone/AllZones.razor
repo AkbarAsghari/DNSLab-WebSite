@@ -1,0 +1,44 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Zone
+@attribute [Route(AllRoutes.AllZones)]
+
+<MudDataGrid @ref="_DataGrid" T="ZoneDTO" ServerData="ServerReload" Dense Hover Bordered>
+    <Columns>
+        <PropertyColumn Property="x=>x.Name" Title="دامنه" />
+        <TemplateColumn Title="نوع">
+            <CellTemplate>
+                <MudAlert Severity="Severity.Normal" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                    <MudText Typo="Typo.caption">Primary</MudText>
+                </MudAlert>
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn Title="وضعیت">
+            <CellTemplate>
+                <MudAlert Severity="@(context.Item.Disable ? Severity.Warning : Severity.Success)" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                    <MudText Typo="Typo.caption">@(context.Item.Disable ? "غیر فعال" : "فعال")</MudText>
+                </MudAlert>
+            </CellTemplate>
+        </TemplateColumn>
+        <TemplateColumn>
+            <CellTemplate>
+                <BaseIconButton Size="Size.Small"
+                                Icon="@(context.Item.Disable ? Icons.Material.Filled.Lock : Icons.Material.Filled.LockOpen)"
+                                Color="@(context.Item.Disable ? Color.Inherit : Color.Success)"
+                                Variant="Variant.Filled"
+                                OnClick="()=>DisableZone(context.Item)">
+                </BaseIconButton>
+                <BaseIconButton Size="Size.Small"
+                                Icon="@Icons.Material.Filled.Edit"
+                                Color="Color.Warning"
+                                Variant="Variant.Filled"
+                                OnClick="()=>EditZone(context.Item)">
+                </BaseIconButton>
+                <BaseIconButton Size="Size.Small"
+                                Icon="@Icons.Material.Filled.Delete"
+                                Color="Color.Error"
+                                Variant="Variant.Filled"
+                                OnClick="()=>DeleteZone(context.Item)">
+                </BaseIconButton>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>

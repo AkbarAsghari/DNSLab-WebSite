@@ -3,8 +3,9 @@
         <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
             <MudNavMenu>
                 <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-                <MudNavLink Href="counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add">Counter</MudNavLink>
-                <MudNavLink Href="weather" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List">Weather</MudNavLink>
+                <MudNavGroup Title="DNS">
+                    <MudNavLink Href="@AllRoutes.AllZones">Zone</MudNavLink>
+                </MudNavGroup>
                 <MudNavGroup Title="حساب کاربری" Icon="@Icons.Material.Filled.AccountBox">
                     <AuthorizeView Roles="@AuthorizeRoles.Admin" Context="_AdminCTX">
                         <Authorized>
