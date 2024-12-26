@@ -25,9 +25,9 @@
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row Justify="Justify.FlexEnd">
-                    <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.TopLeft">
-                        <MudMenuItem OnClick="() => EditZone(context.Item)">ویرایش Zone</MudMenuItem>
-                        <MudMenuItem OnClick="() => DisableZone(context.Item)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
+                    <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                        <MudMenuItem OnClick="() => EditZone(context.Item)" Icon="@Icons.Material.Filled.Edit">ویرایش Zone</MudMenuItem>
+                        <MudMenuItem OnClick="() => DisableZone(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
                         <MudMenuItem Disabled />
                         <MudMenuItem OnClick="() => DeleteZone(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Filled.Delete">
                             <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
