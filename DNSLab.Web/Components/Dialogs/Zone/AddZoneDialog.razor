@@ -3,11 +3,13 @@
 
 <MudDialog ContentClass="py-2">
     <DialogContent>
-        <MudTextField T="string" @bind-Value="_NewZone.Name" Label="Zone" Placeholder="example.com" Class="mud-ltr" FullWidth />
+        <MudText>لطفا نام دامنه خود را مانند (example.com) وارد نمایید.</MudText>
+        <MudText>بعد از ساخت Zone شما میتوانید رکورد های خود را مدیریت کنید.</MudText>
+        <MudTextField T="string" @bind-Value="_NewZone.Name" Placeholder="example.com" Class="mud-ltr" FullWidth />
     </DialogContent>
     <DialogActions>
         <BaseButton OnClick="Cancel">انصراف</BaseButton>
-        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">اضافه کردن</BaseButton>
+        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">ایجاد دامنه</BaseButton>
     </DialogActions>
 </MudDialog>
 

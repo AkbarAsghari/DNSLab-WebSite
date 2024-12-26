@@ -41,7 +41,7 @@ namespace DNSLab.Web.Components.Pages.Zone
             }
             else
             {
-                //data = data.OrderByDirection(SortDirection.Descending, o => o.CreateDate);
+                data = data.OrderByDirection(SortDirection.Descending, o => o.Name);
             }
 
             return new GridData<ZoneDTO>
@@ -53,9 +53,9 @@ namespace DNSLab.Web.Components.Pages.Zone
 
         async Task NewZone()
         {
-            var options = new DialogOptions() { CloseButton = true, FullWidth = true , MaxWidth = MaxWidth.ExtraSmall };
+            var options = new DialogOptions() { CloseButton = true, FullWidth = true , MaxWidth = MaxWidth.Small };
 
-            var dialog = await _DialogService.ShowAsync<AddZoneDialog>("اضافه کردن Zone جدید", options);
+            var dialog = await _DialogService.ShowAsync<AddZoneDialog>("اضافه کردن دامنه جدید", options);
             var result = await dialog.Result;
             if (!result!.Canceled)
             {

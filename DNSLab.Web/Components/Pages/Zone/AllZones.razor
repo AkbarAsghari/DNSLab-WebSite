@@ -1,13 +1,12 @@
 ﻿@using DNSLab.Web.DTOs.Repositories.Zone
 @attribute [Route(AllRoutes.AllZones)]
 
-<MudText Typo="Typo.h2">Zone ها</MudText>
-<MudStack Row Justify="Justify.FlexEnd">
-    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone">اضافه کردن Zone</BaseButton>
+<MudStack Row Justify="Justify.FlexEnd" Class="mb-2">
+    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone" EndIcon="@Icons.Material.Rounded.Add">افزودن دامنه</BaseButton>
 </MudStack>
-<MudDataGrid @ref="_DataGrid" T="ZoneDTO" ServerData="ServerReload" Dense Hover Bordered>
+<MudDataGrid @ref="_DataGrid" T="ZoneDTO" ServerData="ServerReload" Dense Hover Bordered Outlined>
     <Columns>
-        <PropertyColumn Property="x=>x.Name" Title="Zone" />
+        <PropertyColumn Property="x=>x.Name" Title="دامنه" />
         <TemplateColumn Title="نوع">
             <CellTemplate>
                 <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
@@ -26,10 +25,10 @@
             <CellTemplate>
                 <MudStack Row Justify="Justify.FlexEnd">
                     <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
-                        <MudMenuItem OnClick="() => EditZone(context.Item)" Icon="@Icons.Material.Filled.Edit">ویرایش Zone</MudMenuItem>
+                        <MudMenuItem OnClick="() => EditZone(context.Item)" Icon="@Icons.Material.Rounded.TableRows">مدیریت رکوردها</MudMenuItem>
                         <MudMenuItem OnClick="() => DisableZone(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
                         <MudMenuItem Disabled />
-                        <MudMenuItem OnClick="() => DeleteZone(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Filled.Delete">
+                        <MudMenuItem OnClick="() => DeleteZone(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">
                             <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
                         </MudMenuItem>
                     </MudMenu>
