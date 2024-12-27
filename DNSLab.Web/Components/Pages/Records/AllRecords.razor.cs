@@ -71,7 +71,7 @@ partial class AllRecords
         {
             var parameters = new DialogParameters<BaseDialog>
                 {
-                    { x => x.ContentText, $"شما در حال غیر فعال سازی {($"{record.Name}.{_Zone!.Name}")} میباشید آیا تایید میکنید؟" },
+                    { x => x.ContentText, $"شما در حال غیر فعال سازی {record.Name}.{_Zone!.Name} میباشید آیا تایید میکنید؟" },
                     { x => x.ButtonText, "غیر فعال" },
                     { x => x.Color, Color.Warning }
                 };
@@ -91,7 +91,30 @@ partial class AllRecords
         {
             record.Disable = !record.Disable;
 
-            _Snackbar.Add($"دامنه {record.Name} {(record.Disable ? "غیر فعال" : "فعال")} شد", record.Disable ? Severity.Warning : Severity.Success);
+            _Snackbar.Add($"رکورد {record.Name}.{_Zone!.Name} {(record.Disable ? "غیر فعال" : "فعال")} شد", record.Disable ? Severity.Warning : Severity.Success);
+        }
+    }
+
+    async Task DeleteRecord(BaseRecordDTO record)
+    {
+        var parameters = new DialogParameters<BaseDialog>
+            {
+                { x => x.ContentText, $"شما در حال حذف {record.Name}.{_Zone!.Name} میباشید آیا تایید میکنید؟" },
+                { x => x.ButtonText, "حذف" },
+                { x => x.Color, Color.Error }
+            };
+
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+
+        var dialog = await _DialogService.ShowAsync<BaseDialog>("حذف", parameters, options);
+        var result = await dialog.Result;
+        if (!result!.Canceled)
+        {
+            if (await _ZoneRepository.DeleteZone(record.Id))
+            {
+                _Snackbar.Add($"رکورد {record.Name}.{_Zone!.Name} حذف شد", Severity.Success);
+                await _DataGrid.ReloadServerData();
+            }
         }
     }
 }
