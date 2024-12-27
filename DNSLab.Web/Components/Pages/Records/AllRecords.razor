@@ -74,7 +74,7 @@
             <CellTemplate>
                 <MudStack Row Justify="Justify.FlexEnd">
                     <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
-                        <MudMenuItem Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
+                        <MudMenuItem OnClick="()=> EditRecord(context.Item)" Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
                         <MudMenuItem OnClick="()=> DisableRecord(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
                         <MudMenuItem Disabled />
                         <MudMenuItem OnClick="()=> DeleteRecord(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">

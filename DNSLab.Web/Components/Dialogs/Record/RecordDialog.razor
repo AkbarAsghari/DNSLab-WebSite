@@ -2,16 +2,16 @@
 <MudDialog ContentClass="py-2">
     <DialogContent>
         <MudStack>
-            <MudTextField T="string" @bind-Value="_NewRecord.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
+            <MudTextField T="string" @bind-Value="Record.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
             <MudText Typo="Typo.caption" Class="mb-2">@Zone.Name</MudText>
-            <MudSelect T="RecordTypeEnum" @bind-Value="_NewRecord.Type" Variant="Variant.Outlined" Label="نوع">
+            <MudSelect T="RecordTypeEnum" @bind-Value="Record.Type" Variant="Variant.Outlined" Label="نوع" Disabled="Record.Id != Guid.Empty">
                 @foreach (RecordTypeEnum item in (RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum)))
                 {
                     <MudSelectItem T="RecordTypeEnum" Value="item">@item</MudSelectItem>
                 }
             </MudSelect>
-            <MudNumericField T="uint" @bind-Value="_NewRecord.TTL" Variant="Variant.Outlined" Min="0" Max="uint.MaxValue" Placeholder="3600" Label="TTL" />
-            @switch (_NewRecord.Type)
+            <MudNumericField T="uint" @bind-Value="Record.TTL" Variant="Variant.Outlined" Min="0" Max="uint.MaxValue" Placeholder="3600" Label="TTL" />
+            @switch (Record.Type)
             {
                 case RecordTypeEnum.A:
                     <MudTextField T="string" @bind-Value="_ARecord.IPv4Address" Variant="Variant.Outlined" Placeholder="1.2.3.4" Class="mud-ltr" Label="IPv4" />
@@ -32,11 +32,11 @@
                 default:
                     break;
             }
-            <MudTextField T="string" @bind-Value="_NewRecord.Comment" Variant="Variant.Outlined" Lines="3" MaxLines="5" Label="یادداشت" />
+            <MudTextField T="string" @bind-Value="Record.Comment" Variant="Variant.Outlined" Lines="3" MaxLines="5" Label="یادداشت" />
         </MudStack>
     </DialogContent>
     <DialogActions>
         <BaseButton OnClick="Cancel">انصراف</BaseButton>
-        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">ایجاد دامنه</BaseButton>
+        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">@(Record.Id == Guid.Empty ? "ایجاد دامنه" : "ویرایش")</BaseButton>
     </DialogActions>
 </MudDialog>

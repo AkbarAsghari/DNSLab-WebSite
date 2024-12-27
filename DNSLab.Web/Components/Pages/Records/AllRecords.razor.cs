@@ -112,7 +112,7 @@ partial class AllRecords
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
-            if (await _ZoneRepository.DeleteZone(record.Id))
+            if (await _RecordRepository.DeleteRecord(record.Type, record.Id))
             {
                 _Snackbar.Add($"رکورد {record.Name}.{_Zone!.Name} حذف شد", Severity.Success);
                 await _DataGrid.ReloadServerData();
@@ -122,11 +122,25 @@ partial class AllRecords
 
     async Task NewRecord()
     {
-        var parameters = new DialogParameters<AddRecordDialog>() { { "Zone", _Zone } };
+        var parameters = new DialogParameters<RecordDialog>() { { "Zone", _Zone } };
 
         var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
 
-        var dialog = await _DialogService.ShowAsync<AddRecordDialog>("اضافه کردن رکورد جدید", parameters, options);
+        var dialog = await _DialogService.ShowAsync<RecordDialog>("اضافه کردن رکورد جدید", parameters, options);
+        var result = await dialog.Result;
+        if (!result!.Canceled)
+        {
+            await _DataGrid.ReloadServerData();
+        }
+    }
+
+    async Task EditRecord(BaseRecordDTO record)
+    {
+        var parameters = new DialogParameters<RecordDialog>() { { "Zone", _Zone }, { "Record", record.Clone() } };
+
+        var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
+
+        var dialog = await _DialogService.ShowAsync<RecordDialog>("ویرایش رکورد", parameters, options);
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
