@@ -12,21 +12,3 @@
         <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">ایجاد دامنه</BaseButton>
     </DialogActions>
 </MudDialog>
-
-@code {
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
-
-    [Inject] IZoneRepository _ZoneRepository { get; set; }
-
-    ZoneDTO _NewZone = new();
-
-    async Task Submit()
-    {
-        if (await _ZoneRepository.CreateZone(_NewZone))
-        {
-            _MudDialog.Close(DialogResult.Ok(true));
-        }
-    }
-
-    private void Cancel() => _MudDialog.Cancel();
-}

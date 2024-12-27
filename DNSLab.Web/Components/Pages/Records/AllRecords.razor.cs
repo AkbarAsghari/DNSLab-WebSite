@@ -1,4 +1,6 @@
 ﻿using DNSLab.Web.Components.Dialogs;
+using DNSLab.Web.Components.Dialogs.Record;
+using DNSLab.Web.Components.Dialogs.Zone;
 using DNSLab.Web.DTOs.Repositories.Record;
 using DNSLab.Web.DTOs.Repositories.Zone;
 using DNSLab.Web.Interfaces.Repositories;
@@ -115,6 +117,20 @@ partial class AllRecords
                 _Snackbar.Add($"رکورد {record.Name}.{_Zone!.Name} حذف شد", Severity.Success);
                 await _DataGrid.ReloadServerData();
             }
+        }
+    }
+
+    async Task NewRecord()
+    {
+        var parameters = new DialogParameters<AddRecordDialog>() { { "Zone", _Zone } };
+
+        var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
+
+        var dialog = await _DialogService.ShowAsync<AddRecordDialog>("اضافه کردن رکورد جدید", parameters, options);
+        var result = await dialog.Result;
+        if (!result!.Canceled)
+        {
+            await _DataGrid.ReloadServerData();
         }
     }
 }

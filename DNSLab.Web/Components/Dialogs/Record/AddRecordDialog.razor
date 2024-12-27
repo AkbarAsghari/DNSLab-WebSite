@@ -1,0 +1,42 @@
+﻿@using DNSLab.Web.Enums
+<MudDialog ContentClass="py-2">
+    <DialogContent>
+        <MudStack>
+            <MudTextField T="string" @bind-Value="_NewRecord.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
+            <MudText Typo="Typo.caption" Class="mb-2">@Zone.Name</MudText>
+            <MudSelect T="RecordTypeEnum" @bind-Value="_NewRecord.Type" Variant="Variant.Outlined" Label="نوع">
+                @foreach (RecordTypeEnum item in (RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum)))
+                {
+                    <MudSelectItem T="RecordTypeEnum" Value="item">@item</MudSelectItem>
+                }
+            </MudSelect>
+            <MudNumericField T="uint" @bind-Value="_NewRecord.TTL" Variant="Variant.Outlined" Min="0" Max="uint.MaxValue" Placeholder="3600" Label="TTL" />
+            @switch (_NewRecord.Type)
+            {
+                case RecordTypeEnum.A:
+                    <MudTextField T="string" @bind-Value="_ARecord.IPv4Address" Variant="Variant.Outlined" Placeholder="1.2.3.4" Class="mud-ltr" Label="IPv4" />
+                    break;
+                case RecordTypeEnum.AAAA:
+                    <MudTextField T="string" @bind-Value="_AAARecord.IPv6Address" Variant="Variant.Outlined" Placeholder="2001:0000:130F:0000:0000:09C0:876A:130B" Class="mud-ltr" Label="IPv6" />
+                    break;
+                case RecordTypeEnum.TXT:
+                    <MudTextField T="string" @bind-Value="_TXTRecord.TextData" Variant="Variant.Outlined" Lines="3" MaxLines="5" Placeholder="Text Data ..." Class="mud-ltr" Label="Text Data" />
+                    break;
+                case RecordTypeEnum.CNAME:
+                    <MudTextField T="string" @bind-Value="_CNAMERecord.CName" Variant="Variant.Outlined" Placeholder="api.dnslab.link" Class="mud-ltr" Label="CName" />
+                    break;
+                case RecordTypeEnum.MX:
+                    <MudTextField T="string" @bind-Value="_MXRecord.Exchange" Variant="Variant.Outlined" Placeholder="api.dnslab.link" Class="mud-ltr" Label="Exchange" />
+                    <MudNumericField T="UInt16" @bind-Value="_MXRecord.Preference" Variant="Variant.Outlined" Min="UInt16.MinValue" Max="UInt16.MaxValue" Placeholder="1" Label="Preference" />
+                    break;
+                default:
+                    break;
+            }
+            <MudTextField T="string" @bind-Value="_NewRecord.Comment" Variant="Variant.Outlined" Lines="3" MaxLines="5" Label="یادداشت" />
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <BaseButton OnClick="Cancel">انصراف</BaseButton>
+        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">ایجاد دامنه</BaseButton>
+    </DialogActions>
+</MudDialog>

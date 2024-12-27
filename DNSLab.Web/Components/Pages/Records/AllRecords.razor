@@ -5,9 +5,10 @@
     <MudStack Spacing="1">
         @if (_Zone != null)
         {
+            <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Secondary" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllZones">بازگشت</BaseButton>
             <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
                 <MudText Typo="Typo.h5">@_Zone.Name</MudText>
-                <BaseIconButton Icon="@Icons.Material.Filled.Refresh" Color="Color.Primary" OnClick="Refresh" />
+                <BaseIconButton Icon="@Icons.Material.Filled.Sync" Color="Color.Primary" OnClick="Refresh" />
             </MudStack>
             <MudStack Row Spacing="0">
                 <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">
@@ -19,12 +20,12 @@
             </MudStack>
         }
     </MudStack>
-    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add">افزودن رکورد</BaseButton>
+    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="NewRecord">افزودن رکورد</BaseButton>
 </MudStack>
 
 <MudDataGrid @ref="_DataGrid" T="BaseRecordDTO" ServerData="ServerReload" Dense Hover Bordered Outlined>
     <Columns>
-        <PropertyColumn Property="x=>x.Name" Title="دامنه" />
+        <PropertyColumn Property="x=>x.Name" Title="نام" />
         <PropertyColumn Property="x=>x.Type" Title="نوع">
             <CellTemplate>
                 <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
