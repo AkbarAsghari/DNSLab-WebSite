@@ -25,7 +25,7 @@
             <CellTemplate>
                 <MudStack Row Justify="Justify.FlexEnd">
                     <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
-                        <MudMenuItem OnClick="() => EditZone(context.Item)" Icon="@Icons.Material.Rounded.TableRows">مدیریت رکوردها</MudMenuItem>
+                        <MudMenuItem Href="@(AllRoutes.AllRecords+"/"+context.Item.Id)" Icon="@Icons.Material.Rounded.TableRows">مدیریت رکوردها</MudMenuItem>
                         <MudMenuItem OnClick="() => DisableZone(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
                         <MudMenuItem Disabled />
                         <MudMenuItem OnClick="() => DeleteZone(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">

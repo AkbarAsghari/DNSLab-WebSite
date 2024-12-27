@@ -8,6 +8,7 @@ namespace DNSLab.Web.Interfaces.Repositories
         Task<bool> DeleteZone(Guid Id);
         Task<bool> DisableZone(Guid Id);
         Task<bool> EnableZone(Guid Id);
+        Task<ZoneDTO?> GetZone(Guid Id);
         Task<IEnumerable<ZoneDTO>?> GetZones();
     }
 }

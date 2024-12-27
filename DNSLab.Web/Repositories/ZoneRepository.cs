@@ -28,6 +28,11 @@ namespace DNSLab.Web.Repositories
             throw new NotImplementedException();
         }
 
+        public async Task<ZoneDTO?> GetZone(Guid Id)
+        {
+            return await _HttpServiceProvider.Get<ZoneDTO?>($"{APIController}/GetZone?Id={Id}");
+        }
+
         public async Task<IEnumerable<ZoneDTO>?> GetZones()
         {
             return await _HttpServiceProvider.Get<IEnumerable<ZoneDTO>?>($"{APIController}/GetZones");

@@ -1,0 +1,87 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Record
+@attribute [Route(AllRoutes.AllRecords + "/{ZoneId:guid}")]
+
+<MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.End" Class="mb-2">
+    <MudStack Spacing="1">
+        @if (_Zone != null)
+        {
+            <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
+                <MudText Typo="Typo.h5">@_Zone.Name</MudText>
+                <BaseIconButton Icon="@Icons.Material.Filled.Refresh" Color="Color.Primary" OnClick="Refresh" />
+            </MudStack>
+            <MudStack Row Spacing="0">
+                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">
+                    <MudText Typo="Typo.caption">Primary</MudText>
+                </MudChip>
+                <MudChip T="string" Size="Size.Small" Color="@(_Zone.Disable ? Color.Warning : Color.Success)" Variant="Variant.Filled">
+                    <MudText Typo="Typo.caption">@(_Zone.Disable ? "غیر فعال" : "فعال")</MudText>
+                </MudChip>
+            </MudStack>
+        }
+    </MudStack>
+    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add">افزودن رکورد</BaseButton>
+</MudStack>
+
+<MudDataGrid @ref="_DataGrid" T="BaseRecordDTO" ServerData="ServerReload" Dense Hover Bordered Outlined>
+    <Columns>
+        <PropertyColumn Property="x=>x.Name" Title="دامنه" />
+        <PropertyColumn Property="x=>x.Type" Title="نوع">
+            <CellTemplate>
+                <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                    <MudText Typo="Typo.caption">@context.Item.Type</MudText>
+                </MudAlert>
+            </CellTemplate>
+        </PropertyColumn>
+        <PropertyColumn Property="x=>x.TTL" Title="TTL" />
+        <PropertyColumn Property="x=>x.RData" Title="مقدار" CellClass="mud-ltr" Sortable="false">
+            <CellTemplate>
+                <MudText Typo="Typo.caption">
+                    @switch (context.Item.Type)
+                    {
+                        case Enums.RecordTypeEnum.A:
+                            <text>IPv4 : @(context.Item.CastTo<ARecordDTO>()!.IPv4Address)</text>
+                            break;
+                        case Enums.RecordTypeEnum.AAAA:
+                            <text>IPv6 : @(context.Item.CastTo<AAAARecordDTO>()!.IPv6Address)</text>
+                            break;
+                        case Enums.RecordTypeEnum.TXT:
+                            <text>Text Data : @(context.Item.CastTo<TXTRecordDTO>()!.TextData)</text>
+                            break;
+                        case Enums.RecordTypeEnum.MX:
+                            <text>Exchange : @(context.Item.CastTo<MXRecordDTO>()!.Exchange)</text>
+                            <MudFlexBreak />
+                            <text>Preference : @(context.Item.CastTo<MXRecordDTO>()!.Preference)</text>
+                            break;
+                        case Enums.RecordTypeEnum.CNAME:
+                            <text>CName : @(context.Item.CastTo<CNAMERecordDTO>()!.CName)</text>
+                            break;
+                        default:
+                            break;
+                    }
+                </MudText>
+            </CellTemplate>
+        </PropertyColumn>
+        <PropertyColumn Property="x=>x.Comment" Title="یادداشت" />
+        <PropertyColumn Property="x=>x.Disable" Title="وضعیت">
+            <CellTemplate>
+                <MudAlert Severity="@(context.Item.Disable ? Severity.Warning : Severity.Success)" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                    <MudText Typo="Typo.caption">@(context.Item.Disable ? "غیر فعال" : "فعال")</MudText>
+                </MudAlert>
+            </CellTemplate>
+        </PropertyColumn>
+        <TemplateColumn>
+            <CellTemplate>
+                <MudStack Row Justify="Justify.FlexEnd">
+                    <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                        <MudMenuItem Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
+                        <MudMenuItem OnClick="()=> DisableRecord(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
+                        <MudMenuItem Disabled />
+                        <MudMenuItem IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">
+                            <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
+                        </MudMenuItem>
+                    </MudMenu>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
