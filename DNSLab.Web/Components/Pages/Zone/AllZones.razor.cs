@@ -15,51 +15,36 @@ namespace DNSLab.Web.Components.Pages.Zone
         [Inject] ISnackbar _Snackbar { get; set; }
         [Inject] IDialogService _DialogService { get; set; }
 
-        MudDataGrid<ZoneDTO> _DataGrid { get; set; }
+        IEnumerable<ZoneDTO>? _Zones { get; set; }
+        bool _IsLoading = false;
 
-        private async Task<GridData<ZoneDTO>> ServerReload(GridState<ZoneDTO> state)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            var data = await _ZoneRepository.GetZones();
+            if (firstRender)
+            {
+                _IsLoading = true;
 
-            if (data == null)
-            {
-                return new GridData<ZoneDTO>();
-            }
+                _Zones = await _ZoneRepository.GetZones();
 
-            var sortDefinition = state.SortDefinitions.FirstOrDefault();
-            if (sortDefinition != null)
-            {
-                switch (sortDefinition.SortBy)
-                {
-                    case nameof(ZoneDTO.Name):
-                        data = data.OrderByDirection(
-                            sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
-                            o => o.Name
-                        );
-                        break;
-                }
+                _IsLoading = false;
+                await InvokeAsync(() => StateHasChanged());
             }
-            else
-            {
-                data = data.OrderByDirection(SortDirection.Descending, o => o.Name);
-            }
+        }
 
-            return new GridData<ZoneDTO>
-            {
-                TotalItems = data.Count(),
-                Items = data
-            };
+        Task Refresh()
+        {
+            return OnAfterRenderAsync(true);
         }
 
         async Task NewZone()
         {
-            var options = new DialogOptions() { CloseButton = true, FullWidth = true , MaxWidth = MaxWidth.Small };
+            var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
 
             var dialog = await _DialogService.ShowAsync<AddZoneDialog>("اضافه کردن دامنه جدید", options);
             var result = await dialog.Result;
             if (!result!.Canceled)
             {
-                await _DataGrid.ReloadServerData();
+                await Refresh();
             }
         }
 
@@ -86,7 +71,7 @@ namespace DNSLab.Web.Components.Pages.Zone
                 if (await _ZoneRepository.DeleteZone(zone.Id))
                 {
                     _Snackbar.Add($"دامنه {zone.Name} حذف شد", Severity.Success);
-                    await _DataGrid.ReloadServerData();
+                    await Refresh();
                 }
             }
         }

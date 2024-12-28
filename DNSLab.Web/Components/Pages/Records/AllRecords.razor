@@ -1,5 +1,6 @@
 ﻿@using DNSLab.Web.DTOs.Repositories.Record
 @attribute [Route(AllRoutes.AllRecords + "/{ZoneId:guid}")]
+@attribute [Authorize]
 
 <MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.End" Class="mb-2">
     <MudStack Spacing="1">
@@ -8,7 +9,7 @@
             <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllZones">بازگشت</BaseButton>
             <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
                 <MudText Typo="Typo.h5">@_Zone.Name</MudText>
-                <BaseIconButton Icon="@Icons.Material.Filled.Sync" Color="Color.Primary" OnClick="Refresh" />
+                <BaseIconButton Icon="@Icons.Material.Filled.Sync" Color="Color.Secondary" Variant="Variant.Filled" Size="Size.Small" OnClick="Refresh" />
             </MudStack>
             <MudStack Row Spacing="0">
                 <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">
@@ -23,7 +24,12 @@
     <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="NewRecord">افزودن رکورد</BaseButton>
 </MudStack>
 
-<MudDataGrid @ref="_DataGrid" T="BaseRecordDTO" ServerData="ServerReload" Dense Hover Bordered Outlined>
+<MudDataGrid T="BaseRecordDTO" Items="_Records" Dense Hover Bordered Outlined Loading="_IsLoading">
+    <NoRecordsContent>
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+            <MudText>تا به حال هیچ رکوردی ثبت نشده است!</MudText>
+        </MudAlert>
+    </NoRecordsContent>
     <Columns>
         <PropertyColumn Property="x=>x.Name" Title="نام" />
         <PropertyColumn Property="x=>x.Type" Title="نوع">

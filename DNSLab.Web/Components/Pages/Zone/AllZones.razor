@@ -1,10 +1,17 @@
 ﻿@using DNSLab.Web.DTOs.Repositories.Zone
 @attribute [Route(AllRoutes.AllZones)]
+@attribute [Authorize]
 
 <MudStack Row Justify="Justify.FlexEnd" Class="mb-2">
     <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone" EndIcon="@Icons.Material.Rounded.Add">افزودن دامنه</BaseButton>
 </MudStack>
-<MudDataGrid @ref="_DataGrid" T="ZoneDTO" ServerData="ServerReload" Dense Hover Bordered Outlined>
+
+<MudDataGrid T="ZoneDTO" Items="_Zones" Loading="_IsLoading" Dense Hover Bordered Outlined>
+    <NoRecordsContent>
+        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+            <MudText>تا به حال هیچ دامنه‌ای ثبت نشده است!</MudText>
+        </MudAlert>
+    </NoRecordsContent>
     <Columns>
         <PropertyColumn Property="x=>x.Name" Title="دامنه" />
         <TemplateColumn Title="نوع">

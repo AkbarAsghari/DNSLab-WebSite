@@ -18,51 +18,26 @@ partial class AllRecords
     [Parameter] public Guid ZoneId { get; set; }
 
     ZoneDTO? _Zone { get; set; }
+    IEnumerable<BaseRecordDTO>? _Records { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    bool _IsLoading = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _Zone = await _ZoneRepository.GetZone(ZoneId);
-    }
-
-    MudDataGrid<BaseRecordDTO> _DataGrid { get; set; }
-
-    private async Task<GridData<BaseRecordDTO>> ServerReload(GridState<BaseRecordDTO> state)
-    {
-        var data = await _RecordRepository.GetRecords(ZoneId);
-
-        if (data == null)
+        if (firstRender)
         {
-            return new GridData<BaseRecordDTO>();
+            _IsLoading = true;
+
+            _Zone = await _ZoneRepository.GetZone(ZoneId);
+            _Records = await _RecordRepository.GetRecords(ZoneId);
+
+            _IsLoading = false;
+            await InvokeAsync(()=> StateHasChanged());
         }
-
-        var sortDefinition = state.SortDefinitions.FirstOrDefault();
-        if (sortDefinition != null)
-        {
-            switch (sortDefinition.SortBy)
-            {
-                case nameof(ZoneDTO.Name):
-                    data = data.OrderByDirection(
-                        sortDefinition.Descending ? SortDirection.Descending : SortDirection.Ascending,
-                        o => o.Name
-                    );
-                    break;
-            }
-        }
-        else
-        {
-            data = data.OrderByDirection(SortDirection.Descending, o => o.Name);
-        }
-
-        return new GridData<BaseRecordDTO>
-        {
-            TotalItems = data.Count(),
-            Items = data
-        };
     }
 
     Task Refresh()
     {
-        return _DataGrid.ReloadServerData();
+        return OnAfterRenderAsync(true);
     }
 
     async Task DisableRecord(BaseRecordDTO record)
@@ -115,7 +90,7 @@ partial class AllRecords
             if (await _RecordRepository.DeleteRecord(record.Type, record.Id))
             {
                 _Snackbar.Add($"رکورد {record.Name}.{_Zone!.Name} حذف شد", Severity.Success);
-                await _DataGrid.ReloadServerData();
+                await Refresh();
             }
         }
     }
@@ -130,7 +105,7 @@ partial class AllRecords
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
-            await _DataGrid.ReloadServerData();
+            await Refresh();
         }
     }
 
@@ -144,7 +119,7 @@ partial class AllRecords
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
-            await _DataGrid.ReloadServerData();
+            await Refresh();
         }
     }
 }
