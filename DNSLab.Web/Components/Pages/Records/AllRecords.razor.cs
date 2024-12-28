@@ -20,7 +20,7 @@ partial class AllRecords
     ZoneDTO? _Zone { get; set; }
     IEnumerable<BaseRecordDTO>? _Records { get; set; }
 
-    bool _IsLoading = false;
+    bool _IsLoading = true;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

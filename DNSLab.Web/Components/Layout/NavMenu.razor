@@ -2,22 +2,40 @@
     <Authorized>
         <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
             <MudNavMenu>
-                <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
-                <MudNavGroup Title="DNS">
-                    <MudNavLink Href="@AllRoutes.AllZones">Zone</MudNavLink>
+                <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">داشبورد</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.Cloud" Href="@AllRoutes.AllZones">دامنه‌ ها</MudNavLink>
+                <MudNavGroup Title="Dynamic DNS" Icon="@Icons.Material.Filled.CloudSync">
+                    <MudNavLink Href="">هاست‌نیم ها</MudNavLink>
+                    <MudNavLink Href="">یکپارچه سازی</MudNavLink>
                 </MudNavGroup>
-                <MudNavGroup Title="حساب کاربری" Icon="@Icons.Material.Filled.AccountBox">
-                    <AuthorizeView Roles="@AuthorizeRoles.Admin" Context="_AdminCTX">
-                        <Authorized>
-                            <MudNavLink Href="/Accounts/All">لیست کاربران</MudNavLink>
-                            <MudDivider />
-                        </Authorized>
-                    </AuthorizeView>
-                    <MudNavLink Href="/Accounts/information">اطلاعات حساب کاربری</MudNavLink>
-                    <MudNavLink Href="/Accounts/SignOut">خروج</MudNavLink>
+                <MudNavGroup Title="گزارش ها" Icon="@Icons.Material.Filled.MultilineChart">
+                    <MudNavLink Href="/Report/DNSHistories">گزارش تغییرات هاست نِیم ها</MudNavLink>
+                    <MudNavLink Href="/Report/IPChangesChart">جدول تغییرات آی پی</MudNavLink>
+                    <MudNavLink Href="/Logs/Query">گزارش کوئری های دریافتی</MudNavLink>
                 </MudNavGroup>
+                <MudNavGroup Title="برای توسعه دهندگان" Icon="@Icons.Material.Filled.Code">
+                    <MudNavLink Href="/API">API ها</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="ابزار ها" Icon="@Icons.Material.Filled.Construction">
+                    <MudNavLink Href="/tools/ping">Ping</MudNavLink>
+                    <MudNavLink Href="/tools/port">Port Checker</MudNavLink>
+                    <MudNavLink Href="/tools/dnslookup">DNS Lookup</MudNavLink>
+                    <MudNavLink Href="/tools/reverselookup">Reverse Lookup</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="پشتیبانی" Icon="@Icons.Material.Filled.SupportAgent">
+                    <MudNavLink Href="/Ticket/MyTickets">ارسال تیکت</MudNavLink>
+                </MudNavGroup>
+                <MudNavGroup Title="صورتحساب و اشتراک" Icon="@Icons.Material.Filled.Payment">
+                    <MudNavLink Href="/Subscriptions/Plans">خرید اشتراک</MudNavLink>
+                    <MudNavLink Href="/Subscriptions/ActivePlans">اشتراک های فعال</MudNavLink>
+                </MudNavGroup>
+                <MudNavLink Href="/Accounts/information" Icon="@Icons.Material.Filled.AccountBox">حساب کاربری</MudNavLink>
+              
+                <MudNavLink Href="/About" Icon="@Icons.Material.Filled.Info">درباره ما</MudNavLink>
+                <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
             </MudNavMenu>
         </MudDrawer>
+
     </Authorized>
 </AuthorizeView>
 
