@@ -51,6 +51,6 @@ partial class DNSLookup
             ReplaceHistoryEntry = true
         });
 
-        _Result = await _DNSClientRepository.Query(_QueryType, query);
+        _Result = await _DNSClientRepository.Query(_QueryType, query, _NameServer);
     }
 }
