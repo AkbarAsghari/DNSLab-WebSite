@@ -26,5 +26,22 @@ namespace DNSLab.Web.Extensions
 
             return (T)inst?.Invoke(obj, null)!;
         }
+
+        public static string PrettyJson(this string? unPrettyJson)
+        {
+            if (String.IsNullOrEmpty(unPrettyJson))
+            {
+                return String.Empty;
+            }
+
+            var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
+
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
+
+            return JsonSerializer.Serialize(jsonElement, options);
+        }
     }
 }
