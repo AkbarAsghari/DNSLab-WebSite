@@ -24,6 +24,38 @@
     <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="NewRecord">افزودن رکورد</BaseButton>
 </MudStack>
 
+@if (_RequiredToUpdateNameServers != null && _RequiredToUpdateNameServers.Count() > 0)
+{
+    <MudAlert Class="mb-2" Severity="Severity.Warning" Variant="Variant.Outlined" ContentAlignment="HorizontalAlignment.Start">
+        <MudText>برای استفاده از خدمات DNSLab ، باید NS زیر را به جای مقادیر قبلی در تنظیمات دامنه‌ی خود وارد کنید.</MudText>
+        <MudText>توجه داشته باشید که تغییر NS در دامنه ممکن است تا 72 ساعت زمان ببرد.</MudText>
+        <MudGrid Justify="Justify.SpaceBetween">
+            <MudItem xs="12" sm="6">
+                <MudAlert Severity="Severity.Error" NoIcon Dense Variant="Variant.Text">
+                    @foreach (var item in _RequiredToUpdateNameServers)
+                    {
+                        <MudText Class="mud-ltr">@item</MudText>
+                    }
+                </MudAlert>
+            </MudItem>
+            <MudItem xs="12" sm="1">
+                <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowCircleLeft" Color="Color.Primary" Size="Size.Large" />
+                </MudHidden>
+                <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowCircleDown" Color="Color.Primary" Size="Size.Large" />
+                </MudHidden>
+            </MudItem>
+            <MudItem xs="12" sm="5">
+                <MudAlert Severity="Severity.Success" NoIcon Dense Variant="Variant.Text">
+                    <MudText Class="mud-ltr">jupiter.ns.dnslab.link</MudText>
+                </MudAlert>
+            </MudItem>
+        </MudGrid>
+
+    </MudAlert>
+}
+
 <MudDataGrid T="BaseRecordDTO" Items="_Records" Dense Hover Bordered Outlined Loading="_IsLoading">
     <NoRecordsContent>
         <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>

@@ -19,6 +19,7 @@ partial class AllRecords
 
     ZoneDTO? _Zone { get; set; }
     IEnumerable<BaseRecordDTO>? _Records { get; set; }
+    IEnumerable<string>? _RequiredToUpdateNameServers { get; set; }
 
     bool _IsLoading = true;
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -28,6 +29,7 @@ partial class AllRecords
             _IsLoading = true;
 
             _Zone = await _ZoneRepository.GetZone(ZoneId);
+            _RequiredToUpdateNameServers = await _ZoneRepository.GetRequiredToUpdateNameServers(ZoneId);
             _Records = await _RecordRepository.GetRecords(ZoneId);
 
             _IsLoading = false;

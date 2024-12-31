@@ -10,5 +10,6 @@ namespace DNSLab.Web.Interfaces.Repositories
         Task<bool> EnableZone(Guid Id);
         Task<ZoneDTO?> GetZone(Guid Id);
         Task<IEnumerable<ZoneDTO>?> GetZones();
+        Task<IEnumerable<string>?> GetRequiredToUpdateNameServers(Guid zoneId);
     }
 }
