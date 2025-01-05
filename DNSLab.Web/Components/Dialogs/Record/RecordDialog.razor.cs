@@ -12,7 +12,7 @@ partial class RecordDialog
     [Inject] IRecordRepository _RecordRepository { get; set; }
 
     [Parameter] public ZoneDTO Zone { get; set; }
-    [Parameter] public BaseRecordDTO Record { get; set; } = new() { Type = Enums.RecordTypeEnum.A };
+    [Parameter] public BaseRecordDTO Record { get; set; } = new() { Type = Enums.RecordTypeEnum.A , TTL = 3600 };
 
     ARecordDTO _ARecord = new();
     AAAARecordDTO _AAARecord = new();

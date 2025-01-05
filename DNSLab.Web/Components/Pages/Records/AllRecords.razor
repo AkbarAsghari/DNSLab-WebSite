@@ -28,7 +28,10 @@
 {
     <MudAlert Class="mb-2" Severity="Severity.Warning" Variant="Variant.Outlined" ContentAlignment="HorizontalAlignment.Start">
         <MudText>برای استفاده از خدمات DNSLab ، باید NS زیر را به جای مقادیر قبلی در تنظیمات دامنه‌ی خود وارد کنید.</MudText>
-        <MudText>توجه داشته باشید که تغییر NS در دامنه ممکن است تا 72 ساعت زمان ببرد.</MudText>
+        <MudText>
+            توجه داشته باشید که تغییر NS در دامنه ممکن است تا 72 ساعت زمان ببرد.
+            <BaseButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small" EndIcon="@Icons.Material.Filled.Refresh" OnClick="CheckNameServers">بررسی مجدد</BaseButton>
+        </MudText>
         <MudGrid Justify="Justify.SpaceBetween">
             <MudItem xs="12" sm="6">
                 <MudAlert Severity="Severity.Error" NoIcon Dense Variant="Variant.Text">

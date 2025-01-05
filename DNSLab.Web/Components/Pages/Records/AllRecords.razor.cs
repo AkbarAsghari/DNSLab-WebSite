@@ -29,12 +29,21 @@ partial class AllRecords
             _IsLoading = true;
 
             _Zone = await _ZoneRepository.GetZone(ZoneId);
-            _RequiredToUpdateNameServers = await _ZoneRepository.GetRequiredToUpdateNameServers(ZoneId);
             _Records = await _RecordRepository.GetRecords(ZoneId);
 
             _IsLoading = false;
-            await InvokeAsync(()=> StateHasChanged());
+            await InvokeAsync(() => StateHasChanged());
         }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CheckNameServers();
+    }
+
+    async Task CheckNameServers()
+    {
+        _RequiredToUpdateNameServers = await _ZoneRepository.GetRequiredToUpdateNameServers(ZoneId);
     }
 
     Task Refresh()
