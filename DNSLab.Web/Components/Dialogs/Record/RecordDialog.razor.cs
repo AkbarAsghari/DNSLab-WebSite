@@ -10,9 +10,11 @@ partial class RecordDialog
     [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
 
     [Inject] IRecordRepository _RecordRepository { get; set; }
+    [Inject] IDDNSRepository _DDNSRepository { get; set; }
 
     [Parameter] public ZoneDTO Zone { get; set; }
     [Parameter] public BaseRecordDTO Record { get; set; } = new() { Type = Enums.RecordTypeEnum.A , TTL = 3600 };
+    [Parameter] public bool IsDDNS { get; set; } = false;
 
     ARecordDTO _ARecord = new();
     AAAARecordDTO _AAARecord = new();
@@ -70,20 +72,41 @@ partial class RecordDialog
                 break;
         }
 
-        if (Record.Id == Guid.Empty)
+        if (IsDDNS)
         {
-            if (await _RecordRepository.AddRecord(Zone.Id, Record))
+            if (Record.Id == Guid.Empty)
             {
-                _MudDialog.Close(DialogResult.Ok(true));
+                if (await _DDNSRepository.AddRecord(Zone.Id, Record))
+                {
+                    _MudDialog.Close(DialogResult.Ok(true));
+                }
             }
+            //else
+            //{
+            //    if (await _DDNSRepository.UpdateRecord(Record))
+            //    {
+            //        _MudDialog.Close(DialogResult.Ok(true));
+            //    }
+            //}
         }
         else
         {
-            if (await _RecordRepository.UpdateRecord(Record))
+            if (Record.Id == Guid.Empty)
             {
-                _MudDialog.Close(DialogResult.Ok(true));
+                if (await _RecordRepository.AddRecord(Zone.Id, Record))
+                {
+                    _MudDialog.Close(DialogResult.Ok(true));
+                }
+            }
+            else
+            {
+                if (await _RecordRepository.UpdateRecord(Record))
+                {
+                    _MudDialog.Close(DialogResult.Ok(true));
+                }
             }
         }
+        
 
     }
 

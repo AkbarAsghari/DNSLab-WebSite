@@ -2,10 +2,12 @@
 <MudDialog ContentClass="py-2">
     <DialogContent>
         <MudStack>
-            <MudTextField T="string" @bind-Value="Record.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
-            <MudText Typo="Typo.caption" Class="mb-2">@Zone.Name</MudText>
+            <MudStack Row AlignItems="AlignItems.Center" Spacing="0">
+                <MudTextField T="string" Class="mud-ltr" Variant="Variant.Outlined" ReadOnly Label="دامنه" Text="@($".{Zone.Name}")" />
+                <MudTextField T="string" @bind-Value="Record.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
+            </MudStack>
             <MudSelect T="RecordTypeEnum" @bind-Value="Record.Type" Variant="Variant.Outlined" Label="نوع" Disabled="Record.Id != Guid.Empty">
-                @foreach (RecordTypeEnum item in (RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum)))
+                @foreach (RecordTypeEnum item in (IsDDNS ? ((RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum))).Where(x => x == RecordTypeEnum.A) : (RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum))))
                 {
                     <MudSelectItem T="RecordTypeEnum" Value="item">@item</MudSelectItem>
                 }
