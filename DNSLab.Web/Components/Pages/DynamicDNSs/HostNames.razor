@@ -15,7 +15,7 @@ else
             <MudStack Spacing="1">
                 <MudText Typo="Typo.h3">@zone.Item1.Name</MudText>
             </MudStack>
-            <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="()=> NewRecord(zone.Item1)">افزودن هاست نِیم</BaseButton>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="()=> NewRecord(zone.Item1)">افزودن هاست نِیم</MudButton>
         </MudStack>
 
         <MudDataGrid T="BaseRecordDTO" Items="zone.Item2" Dense Hover Bordered Outlined Loading="false">

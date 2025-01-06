@@ -3,7 +3,7 @@
 @attribute [Authorize]
 
 <MudStack Row Justify="Justify.FlexEnd" Class="mb-2">
-    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone" EndIcon="@Icons.Material.Rounded.Add">افزودن دامنه</BaseButton>
+    <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewZone" EndIcon="@Icons.Material.Rounded.Add">افزودن دامنه</MudButton>
 </MudStack>
 
 <MudDataGrid T="ZoneDTO" Items="_Zones" Loading="_IsLoading" Dense Hover Bordered Outlined>
