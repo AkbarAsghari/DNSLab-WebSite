@@ -7,7 +7,7 @@
                 <MudTextField T="string" @bind-Value="Record.Name" Variant="Variant.Outlined" Placeholder="@("@")" Class="mud-ltr" FullWidth Label="نام" />
             </MudStack>
             <MudSelect T="RecordTypeEnum" @bind-Value="Record.Type" Variant="Variant.Outlined" Label="نوع" Disabled="Record.Id != Guid.Empty">
-                @foreach (RecordTypeEnum item in (IsDDNS ? ((RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum))).Where(x => x == RecordTypeEnum.A) : (RecordTypeEnum[])Enum.GetValues(typeof(RecordTypeEnum))))
+                @foreach (RecordTypeEnum item in (IsDDNS ? DNSSettings.SupportedRecordForDDNS : DNSSettings.SupportedRecordForDomain))
                 {
                     <MudSelectItem T="RecordTypeEnum" Value="item">@item</MudSelectItem>
                 }
