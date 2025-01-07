@@ -2,7 +2,7 @@
 @attribute [Route(AllRoutes.AllRecords + "/{ZoneId:guid}")]
 @attribute [Authorize]
 
-<MudCard>
+<MudCard  Elevation="0" Outlined>
     <MudCardHeader>
         <CardHeaderContent>
             <MudStack Spacing="1">
@@ -10,7 +10,7 @@
                 {
                     <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
                         <MudText Typo="Typo.h5">@_Zone.Name</MudText>
-                        <BaseIconButton Icon="@Icons.Material.Filled.Sync" Variant="Variant.Filled" Size="Size.Small" OnClick="Refresh" />
+                        <BaseIconButton Icon="@Icons.Material.Filled.Sync" Variant="Variant.Filled" DropShadow="false" Size="Size.Small" OnClick="Refresh" />
                         <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllZones">بازگشت</BaseButton>
                     </MudStack>
                     <MudStack Row Spacing="0">
