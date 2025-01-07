@@ -2,128 +2,136 @@
 @attribute [Route(AllRoutes.AllRecords + "/{ZoneId:guid}")]
 @attribute [Authorize]
 
-<MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.End" Class="mb-2">
-    <MudStack Spacing="1">
-        <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllZones">بازگشت</BaseButton>
-        @if (_Zone != null)
+<MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudStack Spacing="1">
+                @if (_Zone != null)
+                {
+                    <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.h5">@_Zone.Name</MudText>
+                        <BaseIconButton Icon="@Icons.Material.Filled.Sync" Variant="Variant.Filled" Size="Size.Small" OnClick="Refresh" />
+                        <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllZones">بازگشت</BaseButton>
+                    </MudStack>
+                    <MudStack Row Spacing="0">
+                        <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">
+                            <MudText Typo="Typo.caption">Primary</MudText>
+                        </MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(_Zone.Disable ? Color.Warning : Color.Success)" Variant="Variant.Filled">
+                            <MudText Typo="Typo.caption">@(_Zone.Disable ? "غیر فعال" : "فعال")</MudText>
+                        </MudChip>
+                    </MudStack>
+                }
+            </MudStack>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="NewRecord">افزودن رکورد</MudButton>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+
+        @if (_RequiredToUpdateNameServers != null && _RequiredToUpdateNameServers.Count() > 0)
         {
-            <MudStack Row Spacing="1" AlignItems="AlignItems.Center">
-                <MudText Typo="Typo.h5">@_Zone.Name</MudText>
-                <BaseIconButton Icon="@Icons.Material.Filled.Sync" Variant="Variant.Filled" Size="Size.Small" OnClick="Refresh" />
-            </MudStack>
-            <MudStack Row Spacing="0">
-                <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Filled">
-                    <MudText Typo="Typo.caption">Primary</MudText>
-                </MudChip>
-                <MudChip T="string" Size="Size.Small" Color="@(_Zone.Disable ? Color.Warning : Color.Success)" Variant="Variant.Filled">
-                    <MudText Typo="Typo.caption">@(_Zone.Disable ? "غیر فعال" : "فعال")</MudText>
-                </MudChip>
-            </MudStack>
-        }
-    </MudStack>
-    <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="NewRecord">افزودن رکورد</MudButton>
-</MudStack>
-
-@if (_RequiredToUpdateNameServers != null && _RequiredToUpdateNameServers.Count() > 0)
-{
-    <MudAlert Class="mb-2" Severity="Severity.Warning" Variant="Variant.Outlined" ContentAlignment="HorizontalAlignment.Start">
-        <MudText>برای استفاده از خدمات DNSLab ، باید NS زیر را به جای مقادیر قبلی در تنظیمات دامنه‌ی خود وارد کنید.</MudText>
-        <MudText>
-            توجه داشته باشید که تغییر NS در دامنه ممکن است تا 72 ساعت زمان ببرد.
-            <BaseButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small" EndIcon="@Icons.Material.Filled.Refresh" OnClick="CheckNameServers">بررسی مجدد</BaseButton>
-        </MudText>
-        <MudGrid Justify="Justify.SpaceBetween">
-            <MudItem xs="12" sm="6">
-                <MudAlert Severity="Severity.Error" NoIcon Dense Variant="Variant.Text">
-                    @foreach (var item in _RequiredToUpdateNameServers)
-                    {
-                        <MudText Class="mud-ltr">@item</MudText>
-                    }
-                </MudAlert>
-            </MudItem>
-            <MudItem xs="12" sm="1">
-                <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowCircleLeft" Color="Color.Primary" Size="Size.Large" />
-                </MudHidden>
-                <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert>
-                    <MudIcon Icon="@Icons.Material.Filled.ArrowCircleDown" Color="Color.Primary" Size="Size.Large" />
-                </MudHidden>
-            </MudItem>
-            <MudItem xs="12" sm="5">
-                <MudAlert Severity="Severity.Success" NoIcon Dense Variant="Variant.Text">
-                    <MudText Class="mud-ltr">jupiter.ns.dnslab.link</MudText>
-                </MudAlert>
-            </MudItem>
-        </MudGrid>
-
-    </MudAlert>
-}
-
-<MudDataGrid T="BaseRecordDTO" Items="_Records" Dense Hover Bordered Outlined Loading="_IsLoading">
-    <NoRecordsContent>
-        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
-            <MudText>تا به حال هیچ رکوردی ثبت نشده است!</MudText>
-        </MudAlert>
-    </NoRecordsContent>
-    <Columns>
-        <PropertyColumn Property="x=>x.Name" Title="نام" />
-        <PropertyColumn Property="x=>x.Type" Title="نوع">
-            <CellTemplate>
-                <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
-                    <MudText Typo="Typo.caption">@context.Item.Type</MudText>
-                </MudAlert>
-            </CellTemplate>
-        </PropertyColumn>
-        <PropertyColumn Property="x=>x.TTL" Title="TTL" />
-        <PropertyColumn Property="x=>x.RData" Title="مقدار" CellClass="mud-ltr" Sortable="false">
-            <CellTemplate>
-                <MudText Typo="Typo.caption">
-                    @switch (context.Item.Type)
-                    {
-                        case Enums.RecordTypeEnum.A:
-                            <text>IPv4 : @(context.Item.CastTo<ARecordDTO>()!.IPv4Address)</text>
-                            break;
-                        case Enums.RecordTypeEnum.AAAA:
-                            <text>IPv6 : @(context.Item.CastTo<AAAARecordDTO>()!.IPv6Address)</text>
-                            break;
-                        case Enums.RecordTypeEnum.TXT:
-                            <text>Text Data : @(context.Item.CastTo<TXTRecordDTO>()!.TextData)</text>
-                            break;
-                        case Enums.RecordTypeEnum.MX:
-                            <text>Exchange : @(context.Item.CastTo<MXRecordDTO>()!.Exchange)</text>
-                            <MudFlexBreak />
-                            <text>Preference : @(context.Item.CastTo<MXRecordDTO>()!.Preference)</text>
-                            break;
-                        case Enums.RecordTypeEnum.CNAME:
-                            <text>CName : @(context.Item.CastTo<CNAMERecordDTO>()!.CName)</text>
-                            break;
-                        default:
-                            break;
-                    }
+            <MudAlert Class="mb-2" Severity="Severity.Warning" Variant="Variant.Outlined" ContentAlignment="HorizontalAlignment.Start">
+                <MudText>برای استفاده از خدمات DNSLab ، باید NS زیر را به جای مقادیر قبلی در تنظیمات دامنه‌ی خود وارد کنید.</MudText>
+                <MudText>
+                    توجه داشته باشید که تغییر NS در دامنه ممکن است تا 72 ساعت زمان ببرد.
+                    <BaseButton Variant="Variant.Text" Color="Color.Default" Size="Size.Small" EndIcon="@Icons.Material.Filled.Refresh" OnClick="CheckNameServers">بررسی مجدد</BaseButton>
                 </MudText>
-            </CellTemplate>
-        </PropertyColumn>
-        <PropertyColumn Property="x=>x.Comment" Title="یادداشت" />
-        <PropertyColumn Property="x=>x.Disable" Title="وضعیت">
-            <CellTemplate>
-                <MudAlert Severity="@(context.Item.Disable ? Severity.Warning : Severity.Success)" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
-                    <MudText Typo="Typo.caption">@(context.Item.Disable ? "غیر فعال" : "فعال")</MudText>
+                <MudGrid Justify="Justify.SpaceBetween">
+                    <MudItem xs="12" sm="6">
+                        <MudAlert Severity="Severity.Error" NoIcon Dense Variant="Variant.Text">
+                            @foreach (var item in _RequiredToUpdateNameServers)
+                            {
+                                <MudText Class="mud-ltr">@item</MudText>
+                            }
+                        </MudAlert>
+                    </MudItem>
+                    <MudItem xs="12" sm="1">
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                            <MudIcon Icon="@Icons.Material.Filled.ArrowCircleLeft" Color="Color.Primary" Size="Size.Large" />
+                        </MudHidden>
+                        <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert>
+                            <MudIcon Icon="@Icons.Material.Filled.ArrowCircleDown" Color="Color.Primary" Size="Size.Large" />
+                        </MudHidden>
+                    </MudItem>
+                    <MudItem xs="12" sm="5">
+                        <MudAlert Severity="Severity.Success" NoIcon Dense Variant="Variant.Text">
+                            <MudText Class="mud-ltr">jupiter.ns.dnslab.link</MudText>
+                        </MudAlert>
+                    </MudItem>
+                </MudGrid>
+
+            </MudAlert>
+        }
+
+        <MudDataGrid T="BaseRecordDTO" Items="_Records" Dense Hover Bordered Outlined Loading="_IsLoading">
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                    <MudText>تا به حال هیچ رکوردی ثبت نشده است!</MudText>
                 </MudAlert>
-            </CellTemplate>
-        </PropertyColumn>
-        <TemplateColumn>
-            <CellTemplate>
-                <MudStack Row Justify="Justify.FlexEnd">
-                    <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
-                        <MudMenuItem OnClick="()=> EditRecord(context.Item)" Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
-                        <MudMenuItem OnClick="()=> DisableRecord(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
-                        <MudMenuItem Disabled />
-                        <MudMenuItem OnClick="()=> DeleteRecord(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">
-                            <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
-                        </MudMenuItem>
-                    </MudMenu>
-                </MudStack>
-            </CellTemplate>
-        </TemplateColumn>
-    </Columns>
-</MudDataGrid>
+            </NoRecordsContent>
+            <Columns>
+                <PropertyColumn Property="x=>x.Name" Title="نام" />
+                <PropertyColumn Property="x=>x.Type" Title="نوع">
+                    <CellTemplate>
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                            <MudText Typo="Typo.caption">@context.Item.Type</MudText>
+                        </MudAlert>
+                    </CellTemplate>
+                </PropertyColumn>
+                <PropertyColumn Property="x=>x.TTL" Title="TTL" />
+                <PropertyColumn Property="x=>x.RData" Title="مقدار" CellClass="mud-ltr" Sortable="false">
+                    <CellTemplate>
+                        <MudText Typo="Typo.caption">
+                            @switch (context.Item.Type)
+                            {
+                                case Enums.RecordTypeEnum.A:
+                                    <text>IPv4 : @(context.Item.CastTo<ARecordDTO>()!.IPv4Address)</text>
+                                    break;
+                                case Enums.RecordTypeEnum.AAAA:
+                                    <text>IPv6 : @(context.Item.CastTo<AAAARecordDTO>()!.IPv6Address)</text>
+                                    break;
+                                case Enums.RecordTypeEnum.TXT:
+                                    <text>Text Data : @(context.Item.CastTo<TXTRecordDTO>()!.TextData)</text>
+                                    break;
+                                case Enums.RecordTypeEnum.MX:
+                                    <text>Exchange : @(context.Item.CastTo<MXRecordDTO>()!.Exchange)</text>
+                                    <MudFlexBreak />
+                                    <text>Preference : @(context.Item.CastTo<MXRecordDTO>()!.Preference)</text>
+                                    break;
+                                case Enums.RecordTypeEnum.CNAME:
+                                    <text>CName : @(context.Item.CastTo<CNAMERecordDTO>()!.CName)</text>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        </MudText>
+                    </CellTemplate>
+                </PropertyColumn>
+                <PropertyColumn Property="x=>x.Comment" Title="یادداشت" />
+                <PropertyColumn Property="x=>x.Disable" Title="وضعیت">
+                    <CellTemplate>
+                        <MudAlert Severity="@(context.Item.Disable ? Severity.Warning : Severity.Success)" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                            <MudText Typo="Typo.caption">@(context.Item.Disable ? "غیر فعال" : "فعال")</MudText>
+                        </MudAlert>
+                    </CellTemplate>
+                </PropertyColumn>
+                <TemplateColumn>
+                    <CellTemplate>
+                        <MudStack Row Justify="Justify.FlexEnd">
+                            <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                                <MudMenuItem OnClick="()=> EditRecord(context.Item)" Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
+                                <MudMenuItem OnClick="()=> DisableRecord(context.Item)" Icon="@(context.Item.Disable? Icons.Material.Filled.ToggleOn : Icons.Material.Outlined.ToggleOff)">@(context.Item.Disable ? "فعال سازی" : "غیر فعال سازی")</MudMenuItem>
+                                <MudMenuItem Disabled />
+                                <MudMenuItem OnClick="()=> DeleteRecord(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">
+                                    <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
+                                </MudMenuItem>
+                            </MudMenu>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
+    </MudCardContent>
+</MudCard>
