@@ -16,6 +16,5 @@ namespace DNSLab.Web.Interfaces.Repositories
         Task<string?> RevokeTokenKey(Guid Id);
         Task<IEnumerable<UpdateTokenDTO>?> GetTokens();
         Task<UpdateTokenAndRecordsDTO?> GetToken(Guid Id);
-        Task<IEnumerable<BaseRecordDTO>?> GetDDNSRecords();
     }
 }
