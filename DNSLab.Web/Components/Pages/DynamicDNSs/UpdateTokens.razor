@@ -1,0 +1,47 @@
+﻿@using DNSLab.Web.DTOs.Repositories.DDNS
+@attribute [Route(AllRoutes.UpdateTokens)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">توکن ها</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewToken" EndIcon="@Icons.Material.Rounded.Add">افزودن توکن</MudButton>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudDataGrid T="UpdateTokenDTO" Items="_Tokens" Loading="_IsLoading" Dense Hover Bordered Outlined>
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                    <MudText Typo="Typo.caption">تا به حال هیچ توکنی ثبت نشده است!</MudText>
+                </MudAlert>
+            </NoRecordsContent>
+            <Columns>
+                <PropertyColumn Property="x=>x.Name" Title="نام" />
+                <TemplateColumn Title="کلید">
+                    <CellTemplate>
+                        <MudAlert Severity="Severity.Normal" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Key" Dense ContentAlignment="HorizontalAlignment.Center">
+                            <MudText Typo="Typo.caption">@context.Item.Key</MudText>
+                        </MudAlert>
+                    </CellTemplate>
+                </TemplateColumn>
+                <TemplateColumn>
+                    <CellTemplate>
+                        <MudStack Row Justify="Justify.FlexEnd">
+                            <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                                <MudMenuItem OnClick="()=> EditToken(context.Item)" Icon="@Icons.Material.Rounded.Edit">ویرایش</MudMenuItem>
+                                <MudMenuItem OnClick="()=> RevokeTokenKey(context.Item)" Icon="@Icons.Material.Rounded.Key">تغییر کلید</MudMenuItem>
+                                <MudMenuItem Disabled />
+                                <MudMenuItem OnClick="()=> DeleteToken(context.Item)" IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete">
+                                    <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
+                                </MudMenuItem>
+                            </MudMenu>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
+    </MudCardContent>
+</MudCard>

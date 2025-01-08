@@ -48,11 +48,6 @@ namespace DNSLab.Web.Components.Pages.Zone
             }
         }
 
-        async Task EditZone(ZoneDTO zone)
-        {
-
-        }
-
         async Task DeleteZone(ZoneDTO zone)
         {
             var parameters = new DialogParameters<BaseDialog>

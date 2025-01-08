@@ -11,4 +11,9 @@
     <PackageReference Include="MD.PersianDateTime.Standard" Version="2.5.0" />
     <PackageReference Include="MudBlazor" Version="7.*" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Components\Pages\DynamicDNSs\UpdateTokens.razor" />
+  </ItemGroup>
 </Project>

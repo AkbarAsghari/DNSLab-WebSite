@@ -6,6 +6,7 @@
         public const string AllRecords = "/Records";
         public const string DNSLookup = "/Tools/DNSLookup";
         public const string DDNSHostNames = "/DDNS/HostNames";
+        public const string UpdateTokens = "/DDNS/UpdateTokens";
 
     }
 }

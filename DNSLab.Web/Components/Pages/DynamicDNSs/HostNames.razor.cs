@@ -19,7 +19,7 @@ namespace DNSLab.Web.Components.Pages.DynamicDNSs
 
         protected override async Task OnInitializedAsync()
         {
-            _AllRecords = await _DDNSRepository.GetDDNSRecords();
+            _AllRecords = await _DDNSRepository.GetDDNSDomainAndRecords();
         }
 
         async Task Refresh()
