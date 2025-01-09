@@ -41,11 +41,11 @@ partial class UpdateTokens
     {
         var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
 
-        var dialog = await _DialogService.ShowAsync<UpdateTokenDialog>("اضافه کردن توکن جدید", options);
+        var dialog = await _DialogService.ShowAsync<UpdateTokenDialog>("اضافه کردن کلید جدید", options);
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
-            _Snackbar.Add("توکن جدید با موفقیت اضافه شد", Severity.Success);
+            _Snackbar.Add("کلید جدید با موفقیت اضافه شد", Severity.Success);
             await Refresh();
         }
     }
@@ -58,11 +58,11 @@ partial class UpdateTokens
 
         var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
 
-        var dialog = await _DialogService.ShowAsync<UpdateTokenDialog>("ویرایش توکن", parameters, options);
+        var dialog = await _DialogService.ShowAsync<UpdateTokenDialog>("ویرایش کلید", parameters, options);
         var result = await dialog.Result;
         if (!result!.Canceled)
         {
-            _Snackbar.Add("توکن با موفقیت ویرایش شد", Severity.Success);
+            _Snackbar.Add("کلید با موفقیت ویرایش شد", Severity.Success);
             await Refresh();
         }
     }
@@ -84,7 +84,7 @@ partial class UpdateTokens
         {
             if (await _DDNSRepository.DeleteToken(token.Id))
             {
-                _Snackbar.Add($"توکن {token.Name} حذف شد", Severity.Success);
+                _Snackbar.Add($"کلید {token.Name} حذف شد", Severity.Success);
                 await Refresh();
             }
         }
@@ -94,7 +94,7 @@ partial class UpdateTokens
     {
         var parameters = new DialogParameters<BaseDialog>
             {
-                { x => x.ContentText, $"شما در حال تغییر کلید {token.Name} میباشید آیا تایید میکنید؟ بعد از این عملیات دیگر امکان بروزرسانی با توکن قبلی وجود ندارد (توکن فعلی : {token.Key})" },
+                { x => x.ContentText, $"شما در حال تغییر کلید {token.Name} میباشید آیا تایید میکنید؟ بعد از این عملیات دیگر امکان بروزرسانی با کلید قبلی وجود ندارد (کلید فعلی : {token.Key})" },
                 { x => x.ButtonText, "تغییر کلید" },
                 { x => x.Color, Color.Warning }
             };
@@ -108,7 +108,7 @@ partial class UpdateTokens
             var newKey = await _DDNSRepository.RevokeTokenKey(token.Id);
             if (!String.IsNullOrEmpty(newKey))
             {
-                _Snackbar.Add($"کلید توکن {token.Name} با موفقیت به {newKey} تغییر یافت", Severity.Success);
+                _Snackbar.Add($"کلید {token.Name} با موفقیت به {newKey} تغییر یافت", Severity.Success);
                 token.Key = newKey;
             }
         }

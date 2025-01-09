@@ -5,17 +5,17 @@
 <MudCard Elevation="0" Outlined>
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText Typo="Typo.h5">توکن ها</MudText>
+            <MudText Typo="Typo.h5">کلید ها</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewToken" EndIcon="@Icons.Material.Rounded.Add">افزودن توکن</MudButton>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" OnClick="NewToken" EndIcon="@Icons.Material.Rounded.Add">افزودن کلید</MudButton>
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
         <MudDataGrid T="UpdateTokenDTO" Items="_Tokens" Loading="_IsLoading" Dense Hover Bordered Outlined>
             <NoRecordsContent>
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
-                    <MudText Typo="Typo.caption">تا به حال هیچ توکنی ثبت نشده است!</MudText>
+                    <MudText Typo="Typo.caption">تا به حال هیچ کلیدی ایجاد نشده است!</MudText>
                 </MudAlert>
             </NoRecordsContent>
             <Columns>

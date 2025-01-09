@@ -6,14 +6,14 @@
             @if (_AllRecords.Where(x => x.Item2.Count() > 0).Count() == 0)
             {
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start" Dense>
-                    <MudText>برای ایجاد توکن باید هاست نِیم ایجاد گردد</MudText>
+                    <MudText>برای ایجاد کلید باید هاست نِیم ایجاد گردد</MudText>
                 </MudAlert>
             }
             else
             {
-                <MudTextField T="string" @bind-Value="Token.Name" Variant="Variant.Outlined" Label="نام توکن" />
+                <MudTextField T="string" @bind-Value="Token.Name" Variant="Variant.Outlined" Label="نام کلید" />
                 <MudAlert Class="my-2" Severity="Severity.Info" NoIcon ContentAlignment="HorizontalAlignment.Start" Dense>
-                    <MudText>هاست نِیم هایی که میخواهید با این توکن بروزرسانی شوند را انتخاب نمایید</MudText>
+                    <MudText>هاست نِیم هایی که میخواهید با این کلید بروزرسانی شوند را انتخاب نمایید</MudText>
                 </MudAlert>
                 @foreach (var zone in _AllRecords.Where(x => x.Item2.Count() > 0))
                 {
@@ -34,7 +34,7 @@
         <BaseButton OnClick="Cancel">انصراف</BaseButton>
         @if (_AllRecords != null && _AllRecords.Where(x => x.Item2.Count() > 0).Count() > 0)
         {
-            <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">@(Token.Id == Guid.Empty ? "ایجاد توکن" : "ویرایش")</BaseButton>
+            <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">@(Token.Id == Guid.Empty ? "ایجاد کلید" : "ویرایش")</BaseButton>
         }
     </DialogActions>
 </MudDialog>
