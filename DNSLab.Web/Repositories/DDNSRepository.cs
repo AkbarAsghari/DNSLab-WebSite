@@ -36,6 +36,21 @@ namespace DNSLab.Web.Repositories
             return await _HttpServiceProvider.Get<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?>($"{APIController}/GetDDNSDomainAndRecords");
         }
 
+        public async Task<byte[]?> GetStreamPowerShellRestMethod(Guid Id)
+        {
+            return await _HttpServiceProvider.Get<byte[]?>($"{APIController}/PowerShell/RestMethod?Id={Id}");
+        }
+
+        public async Task<byte[]?> GetStreamShellCurl(Guid Id)
+        {
+            return await _HttpServiceProvider.Get<byte[]?>($"{APIController}/Shell/Curl?Id={Id}");
+        }
+
+        public async Task<byte[]?> GetStreamShellWget(Guid Id)
+        {
+            return await _HttpServiceProvider.Get<byte[]?>($"{APIController}/Shell/Wget?Id={Id}");
+        }
+
         public async Task<UpdateTokenAndRecordsDTO?> GetToken(Guid Id)
         {
             return await _HttpServiceProvider.Get<UpdateTokenAndRecordsDTO?>($"{APIController}/GetToken?Id={Id}");
@@ -44,6 +59,11 @@ namespace DNSLab.Web.Repositories
         public async Task<IEnumerable<UpdateTokenDTO>?> GetTokens()
         {
             return await _HttpServiceProvider.Get<IEnumerable<UpdateTokenDTO>?>($"{APIController}/GetTokens");
+        }
+
+        public async Task<string?> GetUpdateTokenLink(Guid Id)
+        {
+            return await _HttpServiceProvider.Get<string?>($"{APIController}/GetUpdateTokenLink?Id={Id}");
         }
 
         public async Task<string?> RevokeTokenKey(Guid Id)

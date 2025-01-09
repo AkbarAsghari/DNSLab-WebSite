@@ -6,6 +6,7 @@ using DNSLab.Web.DTOs.Repositories.DDNS;
 using DNSLab.Web.Interfaces.Repositories;
 using DNSLab.Web.Repositories;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace DNSLab.Web.Components.Pages.DynamicDNSs;
 
@@ -14,6 +15,7 @@ partial class UpdateTokens
     [Inject] IDDNSRepository _DDNSRepository { get; set; }
     [Inject] IDialogService _DialogService { get; set; }
     [Inject] ISnackbar _Snackbar { get; set; }
+    [Inject] IJSRuntime _JSRuntime { get; set; }
 
     IEnumerable<UpdateTokenDTO>? _Tokens { get; set; }
 
@@ -111,6 +113,48 @@ partial class UpdateTokens
                 _Snackbar.Add($"کلید {token.Name} با موفقیت به {newKey} تغییر یافت", Severity.Success);
                 token.Key = newKey;
             }
+        }
+    }
+
+    async Task CopyLink(UpdateTokenDTO token)
+    {
+        var updateTokenLink = await _DDNSRepository.GetUpdateTokenLink(token.Id);
+
+        if (!String.IsNullOrEmpty(updateTokenLink))
+        {
+            if (await _JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", updateTokenLink))
+            {
+                _Snackbar.Add("لینک کپی شد", Severity.Info);
+            }
+        }
+    }
+
+    async Task DownloadScript(Guid tokenId, int i)
+    {
+        string fileName = String.Empty;
+        byte[]? bytes = null;
+
+        switch (i)
+        {
+            case 1:
+                bytes = await _DDNSRepository.GetStreamShellWget(tokenId);
+                fileName = "script.sh";
+                break;
+            case 2:
+                bytes = await _DDNSRepository.GetStreamShellCurl(tokenId);
+                fileName = "script.sh";
+                break;
+            case 3:
+                bytes = await _DDNSRepository.GetStreamPowerShellRestMethod(tokenId);
+                fileName = "script.ps1";
+                break;
+            default:
+                break;
+        }
+
+        if (bytes != null)
+        {
+            await _JSRuntime.InvokeVoidAsync("downloadFileFromStream", fileName, bytes);
         }
     }
 }
