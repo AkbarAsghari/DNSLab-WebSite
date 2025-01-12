@@ -1,0 +1,54 @@
+﻿@attribute [Route(AllRoutes.RouterSettings)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">تنظیمات مودم (روتر)</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>برای بروزرسانی آی پی توسط روتر (مودم های اینترنت) مانند D-Link و TP-Link یا سایر مودم ها باید مراحل زیر را به ترتیب انجام دهید.</MudText>
+        </MudAlert>
+        <MudText Typo="Typo.h6">تنظیم DNS مودم</MudText>
+        <MudText>I. برای تنظیم DNS باید از مسیر های زیر در مودم های مختلف وارد تنظیمات DNS مودم شوید.</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">D-Link : ADVANCED > DNS</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">TP-Link : Interface Setup > LAN</MudText>
+        <MudText>II. برای تنظیمپس از ورود به تنظیمات DNS تنظیمات را بصورت زیر انجام دهید.</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">Primary DNS Server : 194.147.142.136</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">Secondary DNS Server : [یکی از دی ان اس های عمومی (8.8.8.8 - 8.8.4.4 - 1.1.1.1 - 1.0.0.1) یا دلخواه خودتان]</MudText>
+        <MudText>پس از تنظیم DNS باید وارد تنظیمات DDNS شویم.</MudText>
+        <MudText Typo="Typo.h6">تنظیم DDNS یا Dynamic DNS</MudText>
+        <MudText>III. مسیر تنظیمات DDNS در مودم های مختلف بصورت زیر میباشد.</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">D-Link : ADVANCED > Dynamic DNS</MudText>
+        <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">TP-Link : Access Management > DDNS</MudText>
+        <MudText>IV. پس از ورود به بخش تنظیمات DDNS برای ادامه لطفا هاست نِیم مورد نظر خود را انتخاب نمایید.</MudText>
+        @if (_AllRecords != null)
+        {
+            <MudItem xs="12" sm="9" md="6" lg="4">
+                <MudSelect Class="my-2" Dense T="string" Margin="Margin.Dense" Label="هاست نِیم" Variant="Variant.Outlined" @bind-Value="_SelectedHostName">
+                    @foreach (var zone in _AllRecords.Where(x => x.Item2.Count() > 0))
+                    {
+                        @foreach (var record in zone.Item2)
+                        {
+                            <MudSelectItem T="string" Value="@($"{record.Name}.{zone.Item1.Name}")">@($"{record.Name}.{zone.Item1.Name}")</MudSelectItem>
+                        }
+                    }
+                </MudSelect>
+            </MudItem>
+        }
+        @if (!String.IsNullOrEmpty(_SelectedHostName))
+        {
+            <MudText Color="Color.Primary"><strong>DDNS Provider</strong> : باید یکی از سایت های dyndns.org یا no-ip.com را انتخاب نمایید.</MudText>
+            <MudText Color="Color.Primary">
+                <strong>Hostname</strong> : در این قسمت مقدار
+                <strong>@_SelectedHostName</strong>
+                را وارد نمایید.
+            </MudText>
+            <MudText Color="Color.Primary"><strong>Username</strong> : در این قسمت نام کاربری خود را وارد نمایید.</MudText>
+            <MudText Color="Color.Primary"><strong>Password</strong> : در این قسمت رمز عبور کاربری خود را وارد نمایید.</MudText>
+            <MudText>پس از تنظیمات بالا مودم شما بصورت خودکار در صورت تغییر آی پی مودم ، به سرور DNSLab اطلاع رسانی خواهد کرد و آی پی جدید جایگزین قبلی خواهد شد.</MudText>
+        }
+    </MudCardContent>
+</MudCard>
