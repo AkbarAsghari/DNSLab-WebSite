@@ -1,0 +1,46 @@
+﻿@using DNSLab.Web.DTOs.Repositories.DDNS
+@attribute [Route(AllRoutes.MikroTikSettings)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">تنظیمات MikroTik</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudText>برای بروزرسانی آی پی توسط MikroTik مراحل زیر را به ترتیب باید انجام دهید.</MudText>
+        </MudAlert>
+        <MudText Typo="Typo.h6">ساخت کلید برای بروزرسانی IP رکوردهای DNS</MudText>
+        <MudText>برای بروزرسانی خودکار آی پی در میکروتیک ابتدا باید یک کلید برای بروزرسانی آی پی ایجاد نمایید.</MudText>
+        <MudText Typo="Typo.h6">لیست کلید ها</MudText>
+        <UpdateTokens IsSelectableList OnTokenSelect="SelectToken" />
+        @if (_Token == null)
+        {
+            <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+                <MudText>برای ادامه فرآیند یک کلید را انتخاب نمایید</MudText>
+            </MudAlert>
+        }
+        else
+        {
+            <MudText Typo="Typo.h6">ساخت Script در میکروتیک</MudText>
+            <MudText>برای ایجاد اسکریپت ، وارد تنظیمات میکروتیک میشویم و از قسمت System زیر منوی Scripts را انتخاب مینماییم. سپس دکمه Add New را میزنیم تا یک اسکریپت جدید بنویسیم بعد از آن اطلاعات اسکریپت را وارد نمایید.</MudText>
+            <MudText>تنظیمات را به ترتیب زیر انجام دهید</MudText>
+            <MudText>Name : در این بخش یک نام دلخواه به اسکریپت خود بدهید.</MudText>
+            <MudText>Policy : در اینجا فقط کافیست دسترسی Test و Read را تیک بزنید.</MudText>
+            <MudText>Source : در این بخش دستور زیر را بنویسید.</MudText>
+            <MudText Class="mud-ltr" Align="Align.End" Color="Color.Primary">/tool fetch url="https://api.dnslab.link/DDNS/U?k=@_Token.Key"</MudText>
+            <MudAlert Severity="Severity.Warning" Dense ContentAlignment="HorizontalAlignment.Start" Variant="Variant.Text">
+                <MudText>نکته : در برخی مودم ها علامت (?) قابل قبول نمیباشد در این صورت از دستور زیر استفاده نمایید</MudText>
+            </MudAlert>
+            <MudAlert Severity="Severity.Warning" Dense NoIcon ContentAlignment="HorizontalAlignment.End" Variant="Variant.Text">
+                <MudText Class="mud-ltr" Align="Align.End" Color="Color.Warning">/tool fetch url="https://api.dnslab.link/DDNS/U/@_Token.Key"</MudText>
+            </MudAlert>
+            <MudText>مرحله بعد باید یک Job برای فراخوانی مرتب این اسکریپت ایجاد نماییم.</MudText>
+            <MudText Typo="Typo.h6">ساخت Job در میکروتیک</MudText>
+            <MudText>حالا برای این که اسکریپت ما هر سه دقیقه اجرا شود و آدرس آی‌پی میکروتیک بروزرسانی شود وارد System سپس Scheduler شده و یک scheduler جدید ایجاد میکنیم، فقط کافی در قسمت Interval تایم 3 دقیقه را مثل عکس زیر وارد کنیم و در قسمت On Event نیز اسم script خود را که در اینجا DDNS-Token هست را وارد نماییم.</MudText>
+            <MudText>از این به بعد شما فقط کافیه نام DNS های انتخابی در توکن رو در مرورگر وارد کنید تا وارد تنظیمات میکروتیک خودتون بشید.</MudText>
+        }
+    </MudCardContent>
+</MudCard>

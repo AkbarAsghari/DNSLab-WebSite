@@ -20,7 +20,6 @@ namespace DNSLab.Web.Interfaces.Repositories
         Task<byte[]?> GetStreamShellWget(Guid Id);
         Task<byte[]?> GetStreamShellCurl(Guid Id);
         Task<byte[]?> GetStreamPowerShellRestMethod(Guid Id);
-        Task<string?> GetUpdateTokenLink(Guid Id);
 
     }
 }

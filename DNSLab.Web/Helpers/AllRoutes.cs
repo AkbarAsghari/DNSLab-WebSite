@@ -8,6 +8,7 @@
         public const string DDNSHostNames = "/DDNS/HostNames";
         public const string UpdateTokens = "/DDNS/UpdateTokens";
         public const string RouterSettings = "/DDNS/RouterSettings";
+        public const string MikroTikSettings = "/DDNS/MikroTikSettings";
 
     }
 }

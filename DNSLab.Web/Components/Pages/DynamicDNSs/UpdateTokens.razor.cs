@@ -17,6 +17,8 @@ partial class UpdateTokens
     [Inject] ISnackbar _Snackbar { get; set; }
     [Inject] IJSRuntime _JSRuntime { get; set; }
 
+    [Parameter] public bool IsSelectableList { get; set; }
+
     IEnumerable<UpdateTokenDTO>? _Tokens { get; set; }
 
     bool _IsLoading = false;
@@ -114,18 +116,15 @@ partial class UpdateTokens
                 token.Key = newKey;
             }
         }
+
+        await OnTokenSelect.InvokeAsync(token);
     }
 
     async Task CopyLink(UpdateTokenDTO token)
     {
-        var updateTokenLink = await _DDNSRepository.GetUpdateTokenLink(token.Id);
-
-        if (!String.IsNullOrEmpty(updateTokenLink))
+        if (await _JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", $"https://api.dnslab.link/DDNS/U?k={token.Key}"))
         {
-            if (await _JSRuntime.InvokeAsync<bool>("clipboardCopy.copyText", updateTokenLink))
-            {
-                _Snackbar.Add("لینک کپی شد", Severity.Info);
-            }
+            _Snackbar.Add("لینک کپی شد", Severity.Info);
         }
     }
 
@@ -157,4 +156,13 @@ partial class UpdateTokens
             await _JSRuntime.InvokeVoidAsync("downloadFileFromStream", fileName, bytes);
         }
     }
+
+    async Task SelectToken(UpdateTokenDTO token)
+    {
+        await OnTokenSelect.InvokeAsync(token);
+    }
+
+    [Parameter]
+    public EventCallback<UpdateTokenDTO> OnTokenSelect { get; set; }
+
 }

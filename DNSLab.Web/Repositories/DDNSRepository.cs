@@ -61,11 +61,6 @@ namespace DNSLab.Web.Repositories
             return await _HttpServiceProvider.Get<IEnumerable<UpdateTokenDTO>?>($"{APIController}/GetTokens");
         }
 
-        public async Task<string?> GetUpdateTokenLink(Guid Id)
-        {
-            return await _HttpServiceProvider.Get<string?>($"{APIController}/GetUpdateTokenLink?Id={Id}");
-        }
-
         public async Task<string?> RevokeTokenKey(Guid Id)
         {
             return await _HttpServiceProvider.Put<string?>($"{APIController}/RevokeTokenKey?Id={Id}");

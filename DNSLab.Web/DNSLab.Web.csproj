@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\Pages\DynamicDNSs\MikroTikSettings.razor" />
     <_ContentIncludedByDefault Remove="Components\Pages\DynamicDNSs\RouterSettings.razor" />
     <_ContentIncludedByDefault Remove="wwwroot\dnslab.js" />
   </ItemGroup>
@@ -23,6 +24,7 @@
 
 
   <ItemGroup>
+    <None Include="Components\Pages\DynamicDNSs\MikroTikSettings.razor" />
     <None Include="Components\Pages\DynamicDNSs\RouterSettings.razor" />
     <None Include="Components\Pages\DynamicDNSs\UpdateTokens.razor" />
     <None Include="wwwroot\dnslab.js" />
@@ -31,5 +33,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Components\Pages\DynamicDNSs\RouterSettings.razor" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\Pages\DynamicDNSs\MikroTikSettings.razor" />
   </ItemGroup>
 </Project>
