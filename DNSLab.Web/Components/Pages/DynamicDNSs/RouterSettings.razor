@@ -27,7 +27,7 @@
         @if (_AllRecords != null)
         {
             <MudItem xs="12" sm="9" md="6" lg="4">
-                <MudSelect Class="my-2" Dense T="string" Margin="Margin.Dense" Label="هاست نِیم" Variant="Variant.Outlined" @bind-Value="_SelectedHostName">
+                <MudSelect Class="my-2" T="string" Label="هاست نِیم" Variant="Variant.Outlined" @bind-Value="_SelectedHostName">
                     @foreach (var zone in _AllRecords.Where(x => x.Item2.Count() > 0))
                     {
                         @foreach (var record in zone.Item2)
