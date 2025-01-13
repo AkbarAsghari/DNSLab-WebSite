@@ -21,6 +21,7 @@ builder.Services.AddScoped<IZoneRepository, ZoneRepository>();
 builder.Services.AddScoped<IRecordRepository, RecordRepository>();
 builder.Services.AddScoped<IDNSClientRepository, DNSClientRepository>();
 builder.Services.AddScoped<IDDNSRepository, DDNSRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 
 builder.Services.AddHttpContextAccessor();

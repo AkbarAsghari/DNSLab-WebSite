@@ -14,11 +14,10 @@
         </MudAlert>
         <MudText Typo="Typo.h6">ساخت کلید برای بروزرسانی IP رکوردهای DNS</MudText>
         <MudText>برای بروزرسانی خودکار آی پی در میکروتیک ابتدا باید یک کلید برای بروزرسانی آی پی ایجاد نمایید.</MudText>
-        <MudText Typo="Typo.h6">لیست کلید ها</MudText>
         <UpdateTokens IsSelectableList OnTokenSelect="SelectToken" />
         @if (_Token == null)
         {
-            <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start">
+            <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start" Class="mt-2">
                 <MudText>برای ادامه فرآیند یک کلید را انتخاب نمایید</MudText>
             </MudAlert>
         }
