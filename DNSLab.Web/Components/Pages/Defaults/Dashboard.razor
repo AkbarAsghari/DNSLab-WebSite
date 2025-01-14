@@ -10,34 +10,34 @@
     <MudCardContent>
         <MudGrid>
             <MudItem xs="12" md="6" lg="3">
-                <MudPaper Style="@($"color:{Colors.Orange.Darken4}; background:{Colors.Orange.Lighten2};")" Outlined>
+                <MudPaper Style="@($"color:{Colors.Orange.Lighten1};")" Outlined>
                     <MudStack AlignItems="AlignItems.Center" Class="py-1" Spacing="1">
                         <MudText>دامنه ها</MudText>
-                        <MudText Typo="Typo.h3">@ZoneCount</MudText>
+                        <MudText Typo="Typo.h3">@ZoneCount.EnglishToPersianNumbers()</MudText>
                     </MudStack>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12" md="6" lg="3">
-                <MudPaper Style="@($"color:{Colors.Green.Darken4}; background:{Colors.Green.Lighten2};")" Outlined>
+                <MudPaper Style="@($"color:{Colors.Green.Lighten1};")" Outlined>
                     <MudStack AlignItems="AlignItems.Center" Class="py-1" Spacing="1">
                         <MudText>رکورد ها</MudText>
-                        <MudText Typo="Typo.h3">@RecordsCount</MudText>
+                        <MudText Typo="Typo.h3">@RecordsCount.EnglishToPersianNumbers()</MudText>
                     </MudStack>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12" md="6" lg="3">
-                <MudPaper Style="@($"color:{Colors.Teal.Darken4}; background:{Colors.Teal.Lighten2};")" Outlined>
+                <MudPaper Style="@($"color:{Colors.Teal.Lighten1};")" Outlined>
                     <MudStack AlignItems="AlignItems.Center" Class="py-1" Spacing="1">
                         <MudText>هاست‌نِیم ها</MudText>
-                        <MudText Typo="Typo.h3">@DDNSsCount</MudText>
+                        <MudText Typo="Typo.h3">@DDNSsCount.EnglishToPersianNumbers()</MudText>
                     </MudStack>
                 </MudPaper>
             </MudItem>
             <MudItem xs="12" md="6" lg="3">
-                <MudPaper Style="@($"color:{Colors.BlueGray.Darken4}; background:{Colors.BlueGray.Lighten2};")" Outlined>
+                <MudPaper Style="@($"color:{Colors.Blue.Lighten1};")" Outlined>
                     <MudStack AlignItems="AlignItems.Center" Class="py-1" Spacing="1">
                         <MudText>هاست‌نِیم های بروز شده (24 س)</MudText>
-                        <MudText Typo="Typo.h3">@TodayDDNSIpChangesCount</MudText>
+                        <MudText Typo="Typo.h3">@TodayDDNSIpChangesCount.EnglishToPersianNumbers()</MudText>
                     </MudStack>
                 </MudPaper>
             </MudItem>
