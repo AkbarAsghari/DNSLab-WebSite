@@ -93,5 +93,11 @@ namespace DNSLab.Web.Extensions
             return EnglishToPersianNumbers(input.Value.ToString());
         }
 
+        public static string EnglishToPersianNumbers(this long input)
+        {
+            if (input == null) return String.Empty;
+            return EnglishToPersianNumbers(input.ToString());
+        }
+
     }
 }

@@ -1,0 +1,32 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Wallet
+@attribute [Route(AllRoutes.WalletTransactions)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">تراکنش‌ها</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudDataGrid T="WalletTransactionDTO" Items="_WalletTransactions" Loading="_IsLoading" Dense Hover Bordered Outlined>
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                    <MudText Typo="Typo.caption">هیچ تراکنشی یافت نشد</MudText>
+                </MudAlert>
+            </NoRecordsContent>
+            <Columns>
+                <PropertyColumn Property="x=>x.TransactionType" Title="نوع" />
+                <TemplateColumn Title="مبغ">
+                    <CellTemplate>
+                        <MudAlert Severity="@(@context.Item.Incremental ? Severity.Success : Severity.Error)" Variant="Variant.Text" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                            <MudText>@context.Item.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                        </MudAlert>
+                    </CellTemplate>
+                </TemplateColumn>
+                <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
+                <PropertyColumn Property="x=>x.CreateDate" Title="زمان" />
+            </Columns>
+        </MudDataGrid>
+    </MudCardContent>
+</MudCard>

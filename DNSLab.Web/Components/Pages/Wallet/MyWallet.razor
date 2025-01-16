@@ -1,0 +1,23 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Wallet
+@attribute [Route(AllRoutes.MyWallet)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudIcon Icon="@Icons.Material.Rounded.Wallet" />
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">کیف پول</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudStack Row AlignItems="AlignItems.Center">
+            @if (_Wallet != null)
+            {
+                <MudText Typo="Typo.h3">@_Wallet.Balance.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                <MudText Typo="Typo.caption">ريال</MudText>
+            }
+        </MudStack>
+    </MudCardContent>
+</MudCard>
