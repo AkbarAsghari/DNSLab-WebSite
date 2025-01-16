@@ -1,4 +1,5 @@
-﻿@using DNSLab.Web.DTOs.Repositories.Wallet
+﻿@using ApexCharts
+@using DNSLab.Web.DTOs.Repositories.Wallet
 @attribute [Route(AllRoutes.MyWallet)]
 @attribute [Authorize]
 
@@ -12,12 +13,57 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudStack Row AlignItems="AlignItems.Center">
-            @if (_Wallet != null)
-            {
-                <MudText Typo="Typo.h3">@_Wallet.Balance.Separate3Digits().EnglishToPersianNumbers()</MudText>
-                <MudText Typo="Typo.caption">ريال</MudText>
-            }
-        </MudStack>
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudStack Row AlignItems="AlignItems.Center">
+                    @if (_Wallet != null)
+                    {
+                        <MudText Typo="Typo.h3">@_Wallet.Balance.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                        <MudText Typo="Typo.caption">ريال</MudText>
+                    }
+                </MudStack>
+            </MudItem>
+            <MudFlexBreak />
+            <MudItem xs="12" md="5">
+                <ApexChart TItem="Tuple<DateTime,int>" Options="_Last30DaysTransactionsChartDataChartDataOptions">
+                    @if (_Last30DaysTransactionsChartDataChartData != null)
+                    {
+                        <ApexPointSeries TItem="Tuple<DateTime,int>"
+                                         Items="_Last30DaysTransactionsChartDataChartData"
+                                         SeriesType="@SeriesType.Area"
+                                         Name="مقدار"
+                                         XValue="@(e => e.Item1.ToPersianDate())"
+                                         YValue="@(e => e.Item2)"
+                                         OrderBy="e=>e.X" />
+                    }
+                </ApexChart>
+            </MudItem>
+            <MudItem xs="12" md="7">
+                <MudDataGrid T="WalletTransactionDTO" Items="_WalletTransactions" Loading="_IsLoading" Dense Hover Bordered Outlined>
+                    <NoRecordsContent>
+                        <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                            <MudText Typo="Typo.caption">هیچ تراکنشی یافت نشد</MudText>
+                        </MudAlert>
+                    </NoRecordsContent>
+                    <Columns>
+                        <PropertyColumn Property="x=>x.TransactionType" Title="نوع" />
+                        <TemplateColumn Title="مبغ">
+                            <CellTemplate>
+                                <MudAlert Severity="@(@context.Item.Incremental ? Severity.Success : Severity.Error)" Variant="Variant.Text" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                                    <MudText>@context.Item.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                                </MudAlert>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
+                        <TemplateColumn Title="زمان">
+                            <CellTemplate>
+                                <MudText>@context.Item.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
+            </MudItem>
+        </MudGrid>
+
     </MudCardContent>
 </MudCard>

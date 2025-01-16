@@ -18,6 +18,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="5.0.1" />
     <PackageReference Include="MD.PersianDateTime.Standard" Version="2.5.0" />
     <PackageReference Include="MudBlazor" Version="7.*" />
   </ItemGroup>

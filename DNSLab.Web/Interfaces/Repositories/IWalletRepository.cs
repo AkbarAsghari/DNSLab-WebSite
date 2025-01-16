@@ -6,5 +6,6 @@ namespace DNSLab.Web.Interfaces.Repositories
     {
         Task<WalletDTO?> GetWallet();
         Task<IEnumerable<WalletTransactionDTO>?> GetWalletTransactions();
+        Task<IEnumerable<Tuple<DateTime, int>>?> GetLast30DaysTransactionsChartData();
     }
 }

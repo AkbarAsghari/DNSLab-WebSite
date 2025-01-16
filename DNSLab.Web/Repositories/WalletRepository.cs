@@ -9,6 +9,11 @@ namespace DNSLab.Web.Repositories
     {
         const string APIController = "Wallet";
 
+        public async Task<IEnumerable<Tuple<DateTime, int>>?> GetLast30DaysTransactionsChartData()
+        {
+            return await _HttpServiceProvider.Get<IEnumerable<Tuple<DateTime, int>>?>($"{APIController}/GetLast30DaysTransactionsChartData");
+        }
+
         public async Task<WalletDTO?> GetWallet()
         {
             return await _HttpServiceProvider.Get<WalletDTO?>($"{APIController}/GetWallet");

@@ -1,3 +1,4 @@
+using ApexCharts;
 using DNSLab.Web.Components;
 using DNSLab.Web.Exceptions;
 using DNSLab.Web.Interfaces.Providers;
@@ -34,6 +35,8 @@ builder.Services.AddScoped<JWTAuthenticationStateProvider>();
 builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 builder.Services.AddScoped<IAuthenticationProvider>(provider => provider.GetRequiredService<JWTAuthenticationStateProvider>());
 
+//Apex Chart
+builder.Services.AddApexCharts();
 
 // Add MudBlazor services
 builder.Services.AddMudServices(config =>

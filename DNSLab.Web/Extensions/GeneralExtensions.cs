@@ -11,7 +11,8 @@ namespace DNSLab.Web.Extensions
 
         public static string Separate3Digits(this int value) => Separate3Digits(value);
 
-        public static string ToPersianDateTime(this DateTime value) => new PersianDateTime(value).ToLongDateTimeString();
+        public static string ToPersianDateTime(this DateTime value) => new PersianDateTime(value).ToString();
+        public static string ToPersianDate(this DateTime value) => new PersianDateTime(value).ToShortDateString();
 
         public static T? CastTo<T>(this BaseRecordDTO record) where T : BaseRecordDataDTO
         {
