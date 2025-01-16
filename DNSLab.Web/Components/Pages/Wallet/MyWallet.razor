@@ -54,12 +54,6 @@
                                 </MudAlert>
                             </CellTemplate>
                         </TemplateColumn>
-                        <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
-                        <TemplateColumn Title="زمان">
-                            <CellTemplate>
-                                <MudText>@context.Item.CreateDate.ToPersianDateTime().EnglishToPersianNumbers()</MudText>
-                            </CellTemplate>
-                        </TemplateColumn>
                     </Columns>
                 </MudDataGrid>
             </MudItem>

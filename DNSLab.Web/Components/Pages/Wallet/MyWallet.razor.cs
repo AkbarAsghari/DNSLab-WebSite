@@ -20,7 +20,7 @@ partial class MyWallet
     {
         _IsLoading = true;
         _Wallet = await _WalletRepository.GetWallet();
-        _WalletTransactions = await _WalletRepository.GetWalletTransactions();
+        _WalletTransactions = await _WalletRepository.GetWalletTransactions(0, 5);
         _Last30DaysTransactionsChartDataChartData = await _WalletRepository.GetLast30DaysTransactionsChartData();
         _IsLoading = false;
     }
@@ -29,7 +29,7 @@ partial class MyWallet
     {
         Fill = new Fill { Opacity = 0 },
         Theme = new Theme { Mode = Mode.Dark, },
-        Xaxis = new XAxis { AxisBorder = new AxisBorder { Show = false, }, Labels = new XAxisLabels { Show = false },AxisTicks = new AxisTicks {Show = false } },
+        Xaxis = new XAxis { AxisBorder = new AxisBorder { Show = false, }, Labels = new XAxisLabels { Show = false }, AxisTicks = new AxisTicks { Show = false } },
         Yaxis = new List<YAxis> { new YAxis { Show = false } },
         Grid = new Grid { Show = false },
         Chart = new Chart { Background = "transparent", Toolbar = new Toolbar { Tools = new ApexCharts.Tools { Zoomin = false, Zoomout = false, Download = false, Reset = false, Pan = false, Zoom = false } } },

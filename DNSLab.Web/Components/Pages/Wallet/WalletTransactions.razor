@@ -9,7 +9,7 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudDataGrid T="WalletTransactionDTO" Items="_WalletTransactions" Loading="_IsLoading" Dense Hover Bordered Outlined>
+        <MudDataGrid T="WalletTransactionDTO" VirtualizeServerData="ServerDataFunc" Virtualize Dense Hover Bordered Outlined FixedHeader Height="70vh" ItemSize="55">
             <NoRecordsContent>
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
                     <MudText Typo="Typo.caption">هیچ تراکنشی یافت نشد</MudText>
@@ -25,8 +25,15 @@
                     </CellTemplate>
                 </TemplateColumn>
                 <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
-                <PropertyColumn Property="x=>x.CreateDate" Title="زمان" />
+                <PropertyColumn Property="x=>x.CreateDate.ToPersianDateTime()" Title="زمان" />
             </Columns>
+            <RowLoadingContent>
+                <tr class="mud-table-row" style="height:55px">
+                    <td class="mud-table-cell" colspan="1000">
+                        در حال بارگذازی...
+                    </td>
+                </tr>
+            </RowLoadingContent>
         </MudDataGrid>
     </MudCardContent>
 </MudCard>
