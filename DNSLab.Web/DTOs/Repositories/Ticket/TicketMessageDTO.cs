@@ -13,5 +13,6 @@ namespace DNSLab.Web.DTOs.Repositories.Ticket
         public string Message { get; set; } = default!;
         public DateTime CreateDate { get; set; } = DateTime.Now;
         public DateTime? UpdateDate { get; set; }
+        public UserInfoDTO? User { get; set; }
     }
 }

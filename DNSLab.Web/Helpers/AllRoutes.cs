@@ -13,6 +13,6 @@
         public const string MyWallet = "/Wallet/My";
         public const string WalletTransactions = "/Wallet/Transactions";
         public const string AllTickets = "/Tickets/All";
-
+        public const string TicketMessages = "/Tickets/Messages";
     }
 }

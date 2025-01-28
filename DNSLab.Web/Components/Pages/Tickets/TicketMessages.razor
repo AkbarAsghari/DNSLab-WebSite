@@ -1,0 +1,42 @@
+﻿@using DNSLab.Web.Utilities
+@attribute [Route(AllRoutes.TicketMessages + "/{TicketId:guid}")]
+@attribute [Authorize]
+
+@if (_Ticket != null)
+{
+    <MudCard Elevation="0" Outlined>
+        <MudCardHeader>
+            <CardHeaderContent>
+                @if (_Ticket != null)
+                {
+                    <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllTickets">بازگشت</BaseButton>
+                    <MudText Typo="Typo.h5">@_Ticket.Title</MudText>
+                }
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            @foreach (var item in _Ticket.Messages)
+            {
+                <MudCard Elevation="0" Class="pa-1 mb-1">
+                    <MudCardHeader Class="pb-0">
+                        <CardHeaderAvatar>
+                            @((MarkupString)ProfileImageCreator.GenerateSVG(item.User!.Id, 40))
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                <MudText Class="mb-2">@item.User!.FullName</MudText>
+                                <MudText Typo="Typo.caption">تاریخ ثبت : @item.CreateDate.ToLocalTime().ToPersianDateTime()</MudText>
+                            </MudStack>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText HtmlTag="pre" Style="white-space: pre-wrap;">@item.Message</MudText>
+                    </MudCardContent>
+                </MudCard>
+            }
+
+
+        </MudCardContent>
+    </MudCard>
+
+}
