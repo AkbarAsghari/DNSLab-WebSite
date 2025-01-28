@@ -1,4 +1,5 @@
-﻿@attribute [Route(AllRoutes.AllTickets)]
+﻿@using DNSLab.Web.DTOs.Repositories.Ticket
+@attribute [Route(AllRoutes.AllTickets)]
 @attribute [Authorize]
 
 <MudCard Elevation="0" Outlined>
@@ -7,10 +8,27 @@
             <MudText Typo="Typo.h5">تیکت ها</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add">ثبت تیکت جدید</MudButton>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Add" OnClick="AddTicket">ثبت تیکت جدید</MudButton>
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
-
+        <MudDataGrid T="TicketDTO" Items="_Tickets?.OrderByDescending(x=>x.CreateDate)" Dense Hover Bordered Outlined Loading="_IsLoading">
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                    <MudText>تا به حال هیچ رکوردی ثبت نشده است!</MudText>
+                </MudAlert>
+            </NoRecordsContent>
+            <Columns>
+                <PropertyColumn Property="x=>x.Title" Title="عنوان" />
+                <PropertyColumn Property="x=>x.Status" Title="وضعیت">
+                    <CellTemplate>
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                            <MudText Typo="Typo.caption">@context.Item.Status!.Name</MudText>
+                        </MudAlert>
+                    </CellTemplate>
+                </PropertyColumn>
+                <PropertyColumn Property="x=>x.CreateDate.ToLocalTime().ToPersianDateTime()" Title="تاریخ ثبت" />
+            </Columns>
+        </MudDataGrid>
     </MudCardContent>
 </MudCard>

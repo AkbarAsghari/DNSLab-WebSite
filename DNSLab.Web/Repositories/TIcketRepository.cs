@@ -4,7 +4,7 @@ using DNSLab.Web.Interfaces.Repositories;
 
 namespace DNSLab.Web.Repositories
 {
-    public class TIcketRepository(IHttpServiceProvider _HttpServiceProvider) : ITIcketRepository
+    public class TicketRepository(IHttpServiceProvider _HttpServiceProvider) : ITicketRepository
     {
         const string APIController = "Ticket";
         public async Task<bool> AddTicket(TicketDTO model)

@@ -2,7 +2,7 @@
 
 namespace DNSLab.Web.Interfaces.Repositories
 {
-    public interface ITIcketRepository
+    public interface ITicketRepository
     {
         Task<bool> AddTicket(TicketDTO model);
         Task<bool> DeleteTicket(Guid id);

@@ -1,0 +1,11 @@
+﻿<MudDialog ContentClass="py-2">
+    <DialogContent>
+        <MudText>لطفا اطلاعات مشکل خود را در کادر زیر مطرح کنید</MudText>
+        <MudTextField T="string" @bind-Value="_NewTicket.Title" Variant="Variant.Outlined" Label="عنوان" FullWidth />
+        <MudTextField T="string" @bind-Value="_Message" Variant="Variant.Outlined" Label="توضیحات" Lines="7" MaxLines="7" FullWidth />
+    </DialogContent>
+    <DialogActions>
+        <BaseButton OnClick="Cancel">انصراف</BaseButton>
+        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">ایجاد تیکت</BaseButton>
+    </DialogActions>
+</MudDialog>
