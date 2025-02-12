@@ -10,19 +10,11 @@
                     <MudNavLink Href="@AllRoutes.RouterSettings">تنظیمات مودم (روتر)</MudNavLink>
                     <MudNavLink Href="@AllRoutes.MikroTikSettings">تنظیمات MikroTik</MudNavLink>
                 </MudNavGroup>
-                <MudNavGroup Title="گزارش ها" Icon="@Icons.Material.Filled.MultilineChart">
-                    <MudNavLink Href="/Report/DNSHistories">گزارش تغییرات هاست نِیم ها</MudNavLink>
-                    <MudNavLink Href="/Report/IPChangesChart">جدول تغییرات آی پی</MudNavLink>
-                    <MudNavLink Href="/Logs/Query">گزارش کوئری های دریافتی</MudNavLink>
-                </MudNavGroup>
-                <MudNavGroup Title="برای توسعه دهندگان" Icon="@Icons.Material.Filled.Code">
-                    <MudNavLink Href="/API">API ها</MudNavLink>
-                </MudNavGroup>
                 <MudNavGroup Title="ابزار ها" Icon="@Icons.Material.Filled.Construction">
-                    <MudNavLink Href="/tools/ping">Ping</MudNavLink>
-                    <MudNavLink Href="/tools/port">Port Checker</MudNavLink>
-                    <MudNavLink Href="/tools/dnslookup">DNS Lookup</MudNavLink>
-                    <MudNavLink Href="/tools/reverselookup">Reverse Lookup</MudNavLink>
+                    <MudNavLink Href="@AllRoutes.Ping">Ping</MudNavLink>
+                    <MudNavLink Href="@AllRoutes.PortChecker">Port Checker</MudNavLink>
+                    <MudNavLink Href="@AllRoutes.DNSLookup">DNS Lookup</MudNavLink>
+                    <MudNavLink Href="@AllRoutes.ReverseLookup">Reverse Lookup</MudNavLink>
                 </MudNavGroup>
                 <MudNavGroup Title="پشتیبانی" Icon="@Icons.Material.Filled.SupportAgent">
                     <MudNavLink Href="@AllRoutes.AllTickets">ارسال تیکت</MudNavLink>
@@ -31,10 +23,9 @@
                     <MudNavLink Href="@AllRoutes.MyWallet">موجودی</MudNavLink>
                     <MudNavLink Href="@AllRoutes.WalletTransactions">تمام تراکنش ها</MudNavLink>
                 </MudNavGroup>
-                <MudNavLink Href="/Accounts/information" Icon="@Icons.Material.Filled.AccountBox">حساب کاربری</MudNavLink>
+                <MudNavLink Href="@AllRoutes.MyAccount" Icon="@Icons.Material.Filled.AccountBox">حساب کاربری</MudNavLink>
               
-                <MudNavLink Href="/About" Icon="@Icons.Material.Filled.Info">درباره ما</MudNavLink>
-                <MudNavLink Href="/user/logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
+                <MudNavLink Href="@AllRoutes.Logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
             </MudNavMenu>
         </MudDrawer>
 

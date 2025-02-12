@@ -6,6 +6,9 @@
         public const string AllZones = "/Zones/All";
         public const string AllRecords = "/Records";
         public const string DNSLookup = "/Tools/DNSLookup";
+        public const string Ping = "/Tools/Ping";
+        public const string ReverseLookup = "/Tools/ReverseLookup";
+        public const string PortChecker = "/Tools/PortChecker";
         public const string DDNSHostNames = "/DDNS/HostNames";
         public const string UpdateTokens = "/DDNS/UpdateTokens";
         public const string RouterSettings = "/DDNS/RouterSettings";
@@ -14,5 +17,11 @@
         public const string WalletTransactions = "/Wallet/Transactions";
         public const string AllTickets = "/Tickets/All";
         public const string TicketMessages = "/Tickets/Messages";
+        
+        public const string MyAccount = "/Accounts/My";
+        public const string Login = "/Accounts/Login";
+        public const string Logout = "/Accounts/Logout";
+        public const string RegisterAccount = "/Accounts/Register";
+        public const string AllAcounts = "/Accounts/All";
     }
 }
