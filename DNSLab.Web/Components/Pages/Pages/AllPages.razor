@@ -12,7 +12,7 @@
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>
-        <MudDataGrid T="PageInfoDTO" Items="_Pages" Loading="_IsLoading" Dense Hover Bordered Outlined HorizontalScrollbar>
+        <MudDataGrid T="PageInfoDTO" Items="_Pages?.OrderByDescending(x=>x.UpdateDate?? x.CreateDate)" Loading="_IsLoading" Dense Hover Bordered Outlined HorizontalScrollbar>
             <NoRecordsContent>
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
                     <MudText Typo="Typo.caption">تا به حال هیچ صفحه‌ای ثبت نشده است!</MudText>
@@ -21,7 +21,6 @@
             <Columns>
                 <PropertyColumn Property="x=>x.Title" Title="عنوان" StickyRight />
                 <PropertyColumn Property="x=>x.VisitCount" Title="تعداد بازدید" />
-                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
                 <PropertyColumn Property="x=>x.URL" Title="URL" />
                 <PropertyColumn Property="x=>x.CreateDate" Title="ایجاد">
                     <CellTemplate>
@@ -44,6 +43,7 @@
                         }
                     </CellTemplate>
                 </PropertyColumn>
+                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
                 <TemplateColumn StickyLeft>
                     <CellTemplate>
                         <MudStack Row Justify="Justify.FlexEnd">

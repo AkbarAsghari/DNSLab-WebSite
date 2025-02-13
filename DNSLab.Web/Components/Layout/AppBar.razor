@@ -11,10 +11,19 @@
         <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
     </MudHidden>
     <MudSpacer />
+    <MudStack Spacing="2" Row>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Web" Href="@AllRoutes.Login">بلاگ</BaseButton>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</BaseButton>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</BaseButton>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Money" Href="@AllRoutes.Login">تعرفه ها</BaseButton>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</BaseButton>
+        <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.Login">درباره ما</BaseButton>
+    </MudStack>
     <AuthorizeView>
         <NotAuthorized>
-            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Login" Href="@AllRoutes.Login">ورود</BaseButton>
-            <BaseButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.AppRegistration" Href="@AllRoutes.RegisterAccount">ثبت نام</BaseButton>
+            <MudSpacer />
+            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Login" Href="@AllRoutes.Login">ورود</BaseButton>
+            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Filled.AppRegistration" Href="@AllRoutes.RegisterAccount">ثبت نام</BaseButton>
         </NotAuthorized>
     </AuthorizeView>
 </MudAppBar>

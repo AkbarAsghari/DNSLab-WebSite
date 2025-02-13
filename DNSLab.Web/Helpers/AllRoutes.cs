@@ -2,30 +2,30 @@
 {
     public sealed class AllRoutes
     {
-        public const string Dashboard = "/Dashboard";
-        public const string AllZones = "/Zones/All";
-        public const string AllRecords = "/Records";
-        public const string DNSLookup = "/Tools/DNSLookup";
-        public const string Ping = "/Tools/Ping";
-        public const string ReverseLookup = "/Tools/ReverseLookup";
-        public const string PortChecker = "/Tools/PortChecker";
-        public const string DDNSHostNames = "/DDNS/HostNames";
-        public const string UpdateTokens = "/DDNS/UpdateTokens";
-        public const string RouterSettings = "/DDNS/RouterSettings";
-        public const string MikroTikSettings = "/DDNS/MikroTikSettings";
-        public const string MyWallet = "/Wallet/My";
-        public const string WalletTransactions = "/Wallet/Transactions";
-        public const string AllTickets = "/Tickets/All";
-        public const string TicketMessages = "/Tickets/Messages";
+        public const string Dashboard = "/dashboard";
+        public const string AllZones = "/zones/all";
+        public const string AllRecords = "/records";
+        public const string DNSLookup = "/tools/dnslookup";
+        public const string Ping = "/tools/ping";
+        public const string ReverseLookup = "/tools/reverselookup";
+        public const string PortChecker = "/tools/portchecker";
+        public const string DDNSHostNames = "/ddns/hostnames";
+        public const string UpdateTokens = "/ddns/updatetokens";
+        public const string RouterSettings = "/ddns/routersettings";
+        public const string MikroTikSettings = "/ddns/mikrotiksettings";
+        public const string MyWallet = "/wallet/my";
+        public const string WalletTransactions = "/wallet/transactions";
+        public const string AllTickets = "/tickets/all";
+        public const string TicketMessages = "/tickets/messages";
         
-        public const string MyAccount = "/Accounts/My";
-        public const string Login = "/Accounts/Login";
-        public const string Logout = "/Accounts/Logout";
-        public const string RegisterAccount = "/Accounts/Register";
-        public const string AllAcounts = "/Accounts/All";
+        public const string MyAccount = "/accounts/my";
+        public const string Login = "/accounts/login";
+        public const string Logout = "/accounts/logout";
+        public const string RegisterAccount = "/accounts/register";
+        public const string AllAcounts = "/accounts/all";
 
-        public const string AllPages = "/Pages/All";
-        public const string Page = "/Pages/Page";
-        public const string Blog = "/Blog";
+        public const string AllPages = "/pages/all";
+        public const string Page = "/pages/page";
+        public const string Blog = "/blog";
     }
 }
