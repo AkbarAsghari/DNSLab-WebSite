@@ -23,5 +23,8 @@
         public const string Logout = "/Accounts/Logout";
         public const string RegisterAccount = "/Accounts/Register";
         public const string AllAcounts = "/Accounts/All";
+
+        public const string AllPages = "/Pages/All";
+        public const string Page = "/Pages/Page";
     }
 }

@@ -1,0 +1,38 @@
+﻿@attribute [Route(AllRoutes.Page + "/{PageId:guid}")]
+@attribute [Route(AllRoutes.Page)]
+@attribute [Authorize]
+@using PSC.Blazor.Components.MarkdownEditor
+@using PSC.Blazor.Components.MarkdownEditor.EventsArgs
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">ویرایش صفحه</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudStack Row>
+                <MudSwitch T="bool" Label="انتشار" Color="Color.Primary" @bind-Value="_Page.IsPublished" />
+                <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" EndIcon="@Icons.Material.Rounded.Save" OnClick="Submit">ذخیره اطلاعات</BaseButton>
+            </MudStack>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid Spacing="1">
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" Label="عنوان" Variant="Variant.Outlined" @bind-Value="_Page.Title" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" Label="URL" Variant="Variant.Outlined" Class="mud-ltr" @bind-Value="_Page.URL" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField T="string" Label="توضیحات" Lines="5" Variant="Variant.Outlined" @bind-Value="_Page.Description" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField T="string" Label="عنوان متن" Variant="Variant.Outlined" @bind-Value="_Page.Header" />
+            </MudItem>
+            <MudItem xs="12">
+                <MarkdownEditor @ref="_MarkdownEditor" Direction="rtl" @bind-Value="@_Page.Body" SpellChecker="false"  />
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>

@@ -1,4 +1,4 @@
-﻿<AuthorizeView>
+﻿<AuthorizeView Context="_AuthCTX">
     <Authorized>
         <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
             <MudNavMenu>
@@ -24,7 +24,14 @@
                     <MudNavLink Href="@AllRoutes.WalletTransactions">تمام تراکنش ها</MudNavLink>
                 </MudNavGroup>
                 <MudNavLink Href="@AllRoutes.MyAccount" Icon="@Icons.Material.Filled.AccountBox">حساب کاربری</MudNavLink>
-              
+
+                @if (_AuthCTX.User.IsInRole(AuthorizeRoles.Admin))
+                {
+                    <MudNavGroup Title="مدیریت" Icon="@Icons.Material.Filled.AdminPanelSettings">
+                        <MudNavLink Href="@AllRoutes.AllPages">مطالب سایت</MudNavLink>
+                    </MudNavGroup>
+                }
+
                 <MudNavLink Href="@AllRoutes.Logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
             </MudNavMenu>
         </MudDrawer>

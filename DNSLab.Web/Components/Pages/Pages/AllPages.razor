@@ -1,0 +1,67 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Page
+@attribute [Route(AllRoutes.AllPages)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">مطالب سایت</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" Href="@AllRoutes.Page" EndIcon="@Icons.Material.Rounded.Add">افزودن صفحه جدید</MudButton>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudDataGrid T="PageInfoDTO" Items="_Pages" Loading="_IsLoading" Dense Hover Bordered Outlined HorizontalScrollbar>
+            <NoRecordsContent>
+                <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                    <MudText Typo="Typo.caption">تا به حال هیچ صفحه‌ای ثبت نشده است!</MudText>
+                </MudAlert>
+            </NoRecordsContent>
+            <Columns>
+                <PropertyColumn Property="x=>x.Title" Title="عنوان" StickyRight />
+                <PropertyColumn Property="x=>x.VisitCount" Title="تعداد بازدید" />
+                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
+                <PropertyColumn Property="x=>x.URL" Title="URL" />
+                <PropertyColumn Property="x=>x.CreateDate" Title="ایجاد">
+                    <CellTemplate>
+                        <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDate()</MudText>
+                    </CellTemplate>
+                </PropertyColumn>
+                <PropertyColumn Property="x=>x.UpdateDate" Title="ویرایش">
+                    <CellTemplate>
+                        @if (context.Item.UpdateDate != null)
+                        {
+                            <MudText>@context.Item.UpdateDate.Value.ToLocalTime().ToPersianDate()</MudText>
+                        }
+                    </CellTemplate>
+                </PropertyColumn>
+                <PropertyColumn Property="x=>x.PublishDate" Title="انتشار">
+                    <CellTemplate>
+                        @if (context.Item.PublishDate != null)
+                        {
+                            <MudText>@context.Item.PublishDate.Value.ToLocalTime().ToPersianDate()</MudText>
+                        }
+                    </CellTemplate>
+                </PropertyColumn>
+                <TemplateColumn StickyLeft>
+                    <CellTemplate>
+                        <MudStack Row Justify="Justify.FlexEnd">
+                            <MudMenu Dense Size="Size.Small" Icon="@Icons.Material.Filled.MoreVert" DropShadow AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopRight">
+                                <MudMenuItem Href="@(AllRoutes.Page+"/"+context.Item.Id)" Icon="@Icons.Material.Rounded.TableRows">ویرایش</MudMenuItem>
+                                @if (context.Item.IsPublished)
+                                {
+                                    <MudMenuItem Icon="@Icons.Material.Rounded.OpenInBrowser" Href="@($"https://dnslab.link/blog/"+context.Item.URL)" Target="_blank">باز کردن صفحه</MudMenuItem>
+                                }
+                                <MudMenuItem Disabled />
+                                <MudMenuItem IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete" OnClick="()=> DeletePage(context.Item)">
+                                    <MudText Color="Color.Error" Typo="Typo.caption">حذف</MudText>
+                                </MudMenuItem>
+                            </MudMenu>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+        </MudDataGrid>
+    </MudCardContent>
+</MudCard>
