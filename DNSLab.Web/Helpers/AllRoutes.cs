@@ -26,5 +26,6 @@
 
         public const string AllPages = "/Pages/All";
         public const string Page = "/Pages/Page";
+        public const string Blog = "/Blog";
     }
 }

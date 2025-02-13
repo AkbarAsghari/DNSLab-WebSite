@@ -76,9 +76,12 @@ namespace DNSLab.Web.Providers
             return await GenerateHttpResponseWraper<TResponse>(await _HttpClient.DeleteAsync(_BaseUrl + url));
         }
 
-        public async Task<TResponse?> Get<TResponse>(string url)
+        public async Task<TResponse?> Get<TResponse>(string url, bool checkToken = true)
         {
-            await CheckTokenAsync();
+            if (checkToken)
+            {
+                await CheckTokenAsync();
+            }
             return await GenerateHttpResponseWraper<TResponse>(await _HttpClient.GetAsync(_BaseUrl + url));
 
         }

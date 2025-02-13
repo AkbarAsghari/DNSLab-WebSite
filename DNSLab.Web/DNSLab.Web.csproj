@@ -20,9 +20,9 @@
   <ItemGroup>
     <PackageReference Include="Blazor-ApexCharts" Version="5.0.1" />
     <PackageReference Include="Jdenticon-net" Version="3.1.2" />
+    <PackageReference Include="Markdig" Version="0.40.0" />
     <PackageReference Include="MD.PersianDateTime.Standard" Version="2.5.0" />
     <PackageReference Include="MudBlazor" Version="7.*" />
-    <PackageReference Include="PSC.Blazor.Components.MarkdownEditor" Version="8.0.5" />
   </ItemGroup>
 
 

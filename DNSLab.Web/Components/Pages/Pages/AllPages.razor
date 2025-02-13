@@ -51,7 +51,7 @@
                                 <MudMenuItem Href="@(AllRoutes.Page+"/"+context.Item.Id)" Icon="@Icons.Material.Rounded.TableRows">ویرایش</MudMenuItem>
                                 @if (context.Item.IsPublished)
                                 {
-                                    <MudMenuItem Icon="@Icons.Material.Rounded.OpenInBrowser" Href="@($"https://dnslab.link/blog/"+context.Item.URL)" Target="_blank">باز کردن صفحه</MudMenuItem>
+                                    <MudMenuItem Icon="@Icons.Material.Rounded.OpenInBrowser" Href="@($"{AllRoutes.Blog}/{context.Item.URL}")">باز کردن صفحه</MudMenuItem>
                                 }
                                 <MudMenuItem Disabled />
                                 <MudMenuItem IconColor="Color.Error" IconSize="Size.Small" Icon="@Icons.Material.Rounded.Delete" OnClick="()=> DeletePage(context.Item)">

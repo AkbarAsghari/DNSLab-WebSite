@@ -1,0 +1,22 @@
+﻿@attribute [Route(AllRoutes.Blog + "/{Url}")]
+
+@attribute [AllowAnonymous]
+
+@if (_Page != null)
+{
+    <PageTitle>@_Page.Title</PageTitle>
+    <MudCard Outlined Elevation="0">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.FlexEnd">
+                    <MudText Typo="Typo.caption">تاریخ انتشار : @_Page.PublishDate?.ToPersianDateTime()</MudText>
+                    <MudText Typo="Typo.caption">آخرین بروزرسانی : @_Page.UpdateDate?.ToPersianDateTime()</MudText>
+                    <MudText Typo="Typo.caption">تعداد بازدید : @_Page.VisitCount</MudText>
+                </MudStack>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MarkdownViewer MarkdownText="@_Page.Body" />
+        </MudCardContent>
+    </MudCard>
+}

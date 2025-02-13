@@ -1,7 +1,6 @@
 ﻿using DNSLab.Web.DTOs.Repositories.Page;
 using DNSLab.Web.Interfaces.Repositories;
 using Microsoft.AspNetCore.Components;
-using PSC.Blazor.Components.MarkdownEditor;
 
 namespace DNSLab.Web.Components.Pages.Pages;
 
@@ -14,8 +13,6 @@ partial class Page
 
     PageDTO _Page = new();
 
-    MarkdownEditor _MarkdownEditor;
-
     protected override async Task OnInitializedAsync()
     {
         if (PageId != Guid.Empty)
@@ -24,8 +21,6 @@ partial class Page
             if (existPage != null)
             {
                 _Page = existPage;
-                await _MarkdownEditor.SetValueAsync(_Page.Body);
-                await InvokeAsync(() => StateHasChanged());
             }
         }
     }

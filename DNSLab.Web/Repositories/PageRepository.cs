@@ -34,7 +34,7 @@ namespace DNSLab.Web.Repositories
 
         public Task<PageDTO?> GetPageByUrl(string url)
         {
-            return _HttpServiceProvider.Get<PageDTO?>($"{APIController}/GetPageByUrl?url={url}");
+            return _HttpServiceProvider.Get<PageDTO?>($"{APIController}/GetPageByUrl?url={url}", false);
         }
 
         public Task<bool> UpdatePage(PageDTO model)

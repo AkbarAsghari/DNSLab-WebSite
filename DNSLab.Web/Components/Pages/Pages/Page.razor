@@ -1,8 +1,6 @@
 ﻿@attribute [Route(AllRoutes.Page + "/{PageId:guid}")]
 @attribute [Route(AllRoutes.Page)]
 @attribute [Authorize]
-@using PSC.Blazor.Components.MarkdownEditor
-@using PSC.Blazor.Components.MarkdownEditor.EventsArgs
 
 <MudCard Elevation="0" Outlined>
     <MudCardHeader>
@@ -31,7 +29,7 @@
                 <MudTextField T="string" Label="عنوان متن" Variant="Variant.Outlined" @bind-Value="_Page.Header" />
             </MudItem>
             <MudItem xs="12">
-                <MarkdownEditor @ref="_MarkdownEditor" Direction="rtl" @bind-Value="@_Page.Body" SpellChecker="false"  />
+                <MudTextField T="string" Label="متن (MD)" Variant="Variant.Outlined" Lines="12" @bind-Value="@_Page.Body" />
             </MudItem>
         </MudGrid>
     </MudCardContent>
