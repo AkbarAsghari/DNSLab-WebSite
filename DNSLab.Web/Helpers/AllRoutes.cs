@@ -2,6 +2,7 @@
 {
     public sealed class AllRoutes
     {
+        public const string Home = "/";
         public const string Dashboard = "/dashboard";
         public const string AllZones = "/zones/all";
         public const string AllRecords = "/records";
