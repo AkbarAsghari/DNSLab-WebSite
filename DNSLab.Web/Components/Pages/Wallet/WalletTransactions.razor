@@ -9,7 +9,7 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudDataGrid T="WalletTransactionDTO" VirtualizeServerData="ServerDataFunc" Virtualize Dense Hover Bordered Outlined FixedHeader SortMode="SortMode.None" Height="70vh" ItemSize="55">
+        <MudDataGrid T="WalletTransactionDTO" VirtualizeServerData="ServerDataFunc" Virtualize Dense Hover Bordered Outlined FixedHeader SortMode="SortMode.None" Height="70vh" Loading="_Loading" ItemSize="55">
             <NoRecordsContent>
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
                     <MudText Typo="Typo.caption">هیچ تراکنشی یافت نشد</MudText>

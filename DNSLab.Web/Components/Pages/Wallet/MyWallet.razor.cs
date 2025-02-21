@@ -29,9 +29,9 @@ partial class MyWallet
 
     async Task IncreaseBalance()
     {
-        var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.Small };
+        var options = new DialogOptions() { CloseButton = true, FullWidth = true, MaxWidth = MaxWidth.ExtraSmall };
 
-        var dialog = await _DialogService.ShowAsync<IncreaseBalanceDialog>("افزودن موجودی", options);
+        var dialog = await _DialogService.ShowAsync<IncreaseBalanceDialog>("افزایش موجودی", options);
         var result = await dialog.Result;
         if (!result!.Canceled)
         {

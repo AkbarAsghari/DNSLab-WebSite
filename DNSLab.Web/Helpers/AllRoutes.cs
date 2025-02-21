@@ -28,5 +28,7 @@
         public const string AllPages = "/pages/all";
         public const string Page = "/pages/page";
         public const string Blog = "/blog";
+
+        public const string CallBackPayment = "payment/callback";
     }
 }

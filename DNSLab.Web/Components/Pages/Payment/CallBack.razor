@@ -1,0 +1,25 @@
+﻿@attribute [Route(AllRoutes.CallBackPayment)]
+@attribute [Authorize]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderActions>
+            <MudButton EndIcon="@Icons.Material.Rounded.ArrowForward" Variant="Variant.Filled" Color="Color.Default" Size="MudBlazor.Size.Small" Href="@AllRoutes.MyWallet">بازگشت</MudButton>
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        @if (IsVerified == null)
+        {
+            <MudStack AlignItems="AlignItems.Center">
+                <MudProgressCircular Color="Color.Primary" Indeterminate />
+            </MudStack>
+        }
+        else
+        {
+            <MudAlert ContentAlignment="HorizontalAlignment.Start" Severity="@(IsVerified == true ? Severity.Success : Severity.Warning)">
+                <MudText>@(IsVerified == true ? "موفق" : "نا موفق")</MudText>
+                <MudText Typo="Typo.caption">توضیحات : @Result</MudText>
+            </MudAlert>
+        }
+    </MudCardContent>
+</MudCard>

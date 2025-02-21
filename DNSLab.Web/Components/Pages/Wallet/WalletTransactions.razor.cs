@@ -16,6 +16,7 @@ partial class WalletTransactions
     }
 
     bool _IsFirstLoad = true;
+    bool _Loading = true;
     private async Task<GridData<WalletTransactionDTO>> ServerDataFunc(GridStateVirtualize<WalletTransactionDTO> gridState, CancellationToken token)
     {
         try
@@ -41,6 +42,7 @@ partial class WalletTransactions
             }
         }
         catch { }
+        finally { _Loading = false; }
 
         return new GridData<WalletTransactionDTO>
         {

@@ -45,7 +45,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Components\Pages\Payment\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 </Project>
