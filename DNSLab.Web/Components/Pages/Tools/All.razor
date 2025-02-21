@@ -1,0 +1,41 @@
+﻿@attribute [Route(AllRoutes.AllTools)]
+
+<MudCard Elevation="0" Outlined>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">ابزار ها</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid Spacing="1">
+            <MudItem xs="12" md="6">
+                <MudLink Underline="Underline.None" Href="@AllRoutes.Ping">
+                    <MudPaper Class="pa-5">
+                        <MudText Align="Align.Center" Typo="Typo.h2">Ping</MudText>
+                    </MudPaper>
+                </MudLink>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudLink Underline="Underline.None" Href="@AllRoutes.PortChecker">
+                    <MudPaper Class="pa-5">
+                        <MudText Align="Align.Center" Typo="Typo.h2">Port Checker</MudText>
+                    </MudPaper>
+                </MudLink>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudLink Underline="Underline.None" Href="@AllRoutes.DNSLookup">
+                    <MudPaper Class="pa-5">
+                        <MudText Align="Align.Center" Typo="Typo.h2">DNS Lookup</MudText>
+                    </MudPaper>
+                </MudLink>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudLink Underline="Underline.None" Href="@AllRoutes.ReverseLookup">
+                    <MudPaper Class="pa-5">
+                        <MudText Align="Align.Center" Typo="Typo.h2">Reverse Lookup</MudText>
+                    </MudPaper>
+                </MudLink>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>

@@ -3,6 +3,12 @@
         <MudNavLink Href="@AllRoutes.Home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
         <AuthorizeView Context="_AuthCTX">
             <Authorized>
+                @if (_AuthCTX.User.IsInRole(AuthorizeRoles.Admin))
+                {
+                    <MudNavGroup Title="مدیریت" Icon="@Icons.Material.Filled.AdminPanelSettings">
+                        <MudNavLink Href="@AllRoutes.AllPages">مطالب سایت</MudNavLink>
+                    </MudNavGroup>
+                }
                 <MudNavLink Href="@AllRoutes.Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">داشبورد</MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.Cloud" Href="@AllRoutes.AllZones">دامنه‌ ها</MudNavLink>
                 <MudNavGroup Title="Dynamic DNS" Icon="@Icons.Material.Filled.CloudSync">
@@ -17,20 +23,13 @@
                     <MudNavLink Href="@AllRoutes.PaymentTransactions">پرداحت ها</MudNavLink>
                 </MudNavGroup>
                 <MudNavLink Href="@AllRoutes.MyAccount" Icon="@Icons.Material.Filled.AccountBox">حساب کاربری</MudNavLink>
-
-                @if (_AuthCTX.User.IsInRole(AuthorizeRoles.Admin))
-                {
-                    <MudNavGroup Title="مدیریت" Icon="@Icons.Material.Filled.AdminPanelSettings">
-                        <MudNavLink Href="@AllRoutes.AllPages">مطالب سایت</MudNavLink>
-                    </MudNavGroup>
-                }
             </Authorized>
         </AuthorizeView>
         <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.AllBlogs">بلاگ</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.AllTools">ابزار ها</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.ItIsUnderDevelopment">API</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Rounded.Money" Href="@AllRoutes.Login">تعرفه ها</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Money" Href="@AllRoutes.ItIsUnderDevelopment">تعرفه ها</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.About">درباره ما</MudNavLink>
         <AuthorizeView>
             <Authorized>

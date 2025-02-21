@@ -4,15 +4,20 @@
     {
         public const string Home = "/";
 
+        public const string ItIsUnderDevelopment = "/itisunderdevelopment";
+
         public const string Dashboard = "/dashboard";
         public const string About = "/about";
 
         public const string AllZones = "/zones/all";
         public const string AllRecords = "/records";
+
+        public const string AllTools = "/tools/all";
         public const string DNSLookup = "/tools/dnslookup";
         public const string Ping = "/tools/ping";
         public const string ReverseLookup = "/tools/reverselookup";
         public const string PortChecker = "/tools/portchecker";
+
         public const string DDNSHostNames = "/ddns/hostnames";
         public const string UpdateTokens = "/ddns/updatetokens";
         public const string RouterSettings = "/ddns/routersettings";
