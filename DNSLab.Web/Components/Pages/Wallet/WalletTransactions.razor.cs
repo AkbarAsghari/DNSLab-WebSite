@@ -15,11 +15,19 @@ partial class WalletTransactions
         _TotalTransactionsCount = await _WalletRepository.GetWalletTransactionsCount();
     }
 
+    bool _IsFirstLoad = true;
     private async Task<GridData<WalletTransactionDTO>> ServerDataFunc(GridStateVirtualize<WalletTransactionDTO> gridState, CancellationToken token)
     {
         try
         {
-            await Task.Delay(1000, token);
+            if (_IsFirstLoad)
+            {
+                _IsFirstLoad = false;
+            }
+            else
+            {
+                await Task.Delay(300, token);
+            }
 
             var walletTransactions = await _WalletRepository.GetWalletTransactions(gridState.StartIndex, gridState.Count);
 
