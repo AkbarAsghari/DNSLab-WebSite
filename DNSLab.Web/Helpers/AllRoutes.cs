@@ -14,8 +14,11 @@
         public const string UpdateTokens = "/ddns/updatetokens";
         public const string RouterSettings = "/ddns/routersettings";
         public const string MikroTikSettings = "/ddns/mikrotiksettings";
+
         public const string MyWallet = "/wallet/my";
         public const string WalletTransactions = "/wallet/transactions";
+        public const string WalletPayments = "/wallet/payments";
+
         public const string AllTickets = "/tickets/all";
         public const string TicketMessages = "/tickets/messages";
         
