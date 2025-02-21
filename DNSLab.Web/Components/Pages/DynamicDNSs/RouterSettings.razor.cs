@@ -14,7 +14,7 @@ partial class RouterSettings
 
     protected override async Task OnInitializedAsync()
     {
-        _AllRecords = await _DDNSRepository.GetDDNSDomainAndRecords();
+        _AllRecords = await _DDNSRepository.GetDDNSDomainAndRecordsForToken();
     }
 
 }

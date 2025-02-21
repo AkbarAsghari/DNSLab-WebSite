@@ -24,7 +24,8 @@ public static class DNSSettings
     public static List<RecordTypeEnum> SupportedRecordForDDNS = new List<RecordTypeEnum>
     {
         RecordTypeEnum.A,
-        RecordTypeEnum.CNAME
+        RecordTypeEnum.AAAA,
+        RecordTypeEnum.CNAME,
     };
 }
 
