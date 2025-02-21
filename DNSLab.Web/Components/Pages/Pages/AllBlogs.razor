@@ -13,32 +13,34 @@
                 @foreach (var item in _Pages.OrderByDescending(x => x.PublishDate))
                 {
                     <MudItem xs="12">
-                        <MudCard Outlined>
-                            <MudCardHeader>
-                                <CardHeaderAvatar>
-                                    <MudButton Size="Size.Large" Color="Color.Surface" Variant="Variant.Filled">@item.Title.Substring(0, 1)</MudButton>
-                                </CardHeaderAvatar>
-                                <CardHeaderContent>
-                                    <MudText>@item.Title</MudText>
-                                </CardHeaderContent>
-                                <CardHeaderActions>
-                                    <MudStack Spacing="0">
-                                        <MudStack Row Spacing="1">
-                                            <MudIcon Icon="@Icons.Material.Rounded.AccountBox" Size="Size.Small" />
-                                            <MudText Typo="Typo.caption">@item.User.FullName</MudText>
+                        <MudLink Href="@($"{AllRoutes.Blog}/{@item.URL}")">
+                            <MudCard Outlined>
+                                <MudCardHeader>
+                                    <CardHeaderAvatar>
+                                        <MudButton Size="Size.Large" Color="Color.Surface" Variant="Variant.Filled">@item.Title.Substring(0, 1)</MudButton>
+                                    </CardHeaderAvatar>
+                                    <CardHeaderContent>
+                                        <MudText>@item.Title</MudText>
+                                    </CardHeaderContent>
+                                    <CardHeaderActions>
+                                        <MudStack Spacing="0">
+                                            <MudStack Row Spacing="1">
+                                                <MudIcon Icon="@Icons.Material.Rounded.AccountBox" Size="Size.Small" />
+                                                <MudText Typo="Typo.caption">@item.User.FullName</MudText>
+                                            </MudStack>
+                                            <MudStack Row Spacing="1">
+                                                <MudIcon Icon="@Icons.Material.Rounded.CalendarMonth" Size="Size.Small" />
+                                                <MudText Typo="Typo.caption">@item.CreateDate.ToPersianDateTime()</MudText>
+                                            </MudStack>
+                                            <MudStack Row Spacing="1">
+                                                <MudIcon Icon="@Icons.Material.Rounded.Visibility" Size="Size.Small" />
+                                                <MudText Typo="Typo.caption">@item.VisitCount</MudText>
+                                            </MudStack>
                                         </MudStack>
-                                        <MudStack Row Spacing="1">
-                                            <MudIcon Icon="@Icons.Material.Rounded.CalendarMonth" Size="Size.Small" />
-                                            <MudText Typo="Typo.caption">@item.CreateDate.ToPersianDateTime()</MudText>
-                                        </MudStack>
-                                        <MudStack Row Spacing="1">
-                                            <MudIcon Icon="@Icons.Material.Rounded.Visibility" Size="Size.Small" />
-                                            <MudText Typo="Typo.caption">@item.VisitCount</MudText>
-                                        </MudStack>
-                                    </MudStack>
-                                </CardHeaderActions>
-                            </MudCardHeader>
-                        </MudCard>
+                                    </CardHeaderActions>
+                                </MudCardHeader>
+                            </MudCard>
+                        </MudLink>
                     </MudItem>
                 }
             </MudGrid>
