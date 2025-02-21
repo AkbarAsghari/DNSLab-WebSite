@@ -26,7 +26,7 @@
                 }
             </Authorized>
         </AuthorizeView>
-        <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.Login">بلاگ</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.AllBlogs">بلاگ</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</MudNavLink>
@@ -41,7 +41,7 @@
 </MudDrawer>
 
 @code {
-    private bool _drawerOpen = false;
+    private bool _drawerOpen = true;
     public void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;

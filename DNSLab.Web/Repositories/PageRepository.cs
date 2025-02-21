@@ -24,7 +24,7 @@ namespace DNSLab.Web.Repositories
 
         public Task<IEnumerable<PageInfoDTO>?> GetLastPages()
         {
-            return _HttpServiceProvider.Get<IEnumerable<PageInfoDTO>?>($"{APIController}/GetLastPages");
+            return _HttpServiceProvider.Get<IEnumerable<PageInfoDTO>?>($"{APIController}/GetLastPages", false);
         }
 
         public Task<PageDTO?> GetPage(Guid id)
