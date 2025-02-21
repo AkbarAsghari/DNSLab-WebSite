@@ -1,0 +1,10 @@
+﻿<MudDialog ContentClass="py-2">
+    <DialogContent>
+        <MudText>لطفا منبلغ خود را وارد نمایید</MudText>
+        <MudTextField T="int" @bind-Value="_Amount" Placeholder="5000" Class="mud-ltr" FullWidth />
+    </DialogContent>
+    <DialogActions>
+        <BaseButton OnClick="()=>_MudDialog.Close()">انصراف</BaseButton>
+        <BaseButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Pay">پرداخت</BaseButton>
+    </DialogActions>
+</MudDialog>
