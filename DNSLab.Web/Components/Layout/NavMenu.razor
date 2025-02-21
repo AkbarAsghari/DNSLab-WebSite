@@ -1,7 +1,8 @@
-﻿<AuthorizeView Context="_AuthCTX">
-    <Authorized>
-        <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
-            <MudNavMenu>
+﻿<MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
+    <MudNavMenu>
+        <MudNavLink Href="@AllRoutes.Home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
+        <AuthorizeView Context="_AuthCTX">
+            <Authorized>
                 <MudNavLink Href="@AllRoutes.Dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">داشبورد</MudNavLink>
                 <MudNavLink Icon="@Icons.Material.Filled.Cloud" Href="@AllRoutes.AllZones">دامنه‌ ها</MudNavLink>
                 <MudNavGroup Title="Dynamic DNS" Icon="@Icons.Material.Filled.CloudSync">
@@ -23,30 +24,24 @@
                         <MudNavLink Href="@AllRoutes.AllPages">مطالب سایت</MudNavLink>
                     </MudNavGroup>
                 }
-
+            </Authorized>
+        </AuthorizeView>
+        <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.Login">بلاگ</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Money" Href="@AllRoutes.Login">تعرفه ها</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.Login">درباره ما</MudNavLink>
+        <AuthorizeView>
+            <Authorized>
                 <MudNavLink Href="@AllRoutes.Logout" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error">خروج</MudNavLink>
-            </MudNavMenu>
-        </MudDrawer>
-    </Authorized>
-    <NotAuthorized>
-        <MudHidden Breakpoint="Breakpoint.Sm" Invert>
-            <MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
-                <MudNavMenu>
-                    <MudNavLink Href="@AllRoutes.Home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.Login">بلاگ</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.Money" Href="@AllRoutes.Login">تعرفه ها</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.Login">درباره ما</MudNavLink>
-                </MudNavMenu>
-            </MudDrawer>
-        </MudHidden>
-    </NotAuthorized>
-</AuthorizeView>
+            </Authorized>
+        </AuthorizeView>
+    </MudNavMenu>
+</MudDrawer>
 
 @code {
-    private bool _drawerOpen = true;
+    private bool _drawerOpen = false;
     public void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;

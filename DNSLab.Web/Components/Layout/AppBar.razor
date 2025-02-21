@@ -1,21 +1,6 @@
 ﻿<MudAppBar Elevation="0" Class="baackdrop-bluered">
-    <MudHidden Invert Breakpoint="Breakpoint.Sm">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="MenuOnClick" />
-        <MudText>@GlobalSettings.ApplicationName</MudText>
-    </MudHidden>
-    <MudHidden Breakpoint="Breakpoint.Sm">
-        <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
-        <MudSpacer />
-        <MudStack Spacing="2" Row>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Web" Href="@AllRoutes.Login">بلاگ</BaseButton>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.Login">ابزار ها</BaseButton>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Code" Href="@AllRoutes.Login">API</BaseButton>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Money" Href="@AllRoutes.Login">تعرفه ها</BaseButton>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</BaseButton>
-            <BaseButton Variant="Variant.Text" EndIcon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.Login">درباره ما</BaseButton>
-        </MudStack>
-    </MudHidden>
-
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="MenuOnClick" />
+    <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
     <AuthorizeView>
         <NotAuthorized>
             <MudSpacer />
