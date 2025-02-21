@@ -17,7 +17,6 @@
 
         public const string MyWallet = "/wallet/my";
         public const string WalletTransactions = "/wallet/transactions";
-        public const string WalletPayments = "/wallet/payments";
 
         public const string AllTickets = "/tickets/all";
         public const string TicketMessages = "/tickets/messages";
@@ -33,5 +32,6 @@
         public const string Blog = "/blog";
 
         public const string CallBackPayment = "payment/callback";
+        public const string PaymentTransactions = "/payment/transactions";
     }
 }
