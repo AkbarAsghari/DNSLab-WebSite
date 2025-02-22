@@ -50,7 +50,7 @@
                     </NoRecordsContent>
                     <Columns>
                         <PropertyColumn Property="x=>x.TransactionType" Title="نوع" />
-                        <TemplateColumn Title="مبغ">
+                        <TemplateColumn Title="مبغ (ريال)">
                             <CellTemplate>
                                 <MudAlert Severity="@(@context.Item.Incremental ? Severity.Success : Severity.Error)" Variant="Variant.Text" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
                                     <MudText>@context.Item.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
