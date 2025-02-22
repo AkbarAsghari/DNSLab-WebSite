@@ -9,6 +9,10 @@
 }
 else
 {
+    <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Start"> 
+        <MudText>هزینه بروزرسانی یک هاست نیم رایگان میباشد.</MudText>
+        <MudText>در صورتی که تعداد هاست نِیم های شما بیشتر از یک عدد باشد ، به ازای هر بروزرسانی هزینه ای از کیف پول شما کسر خواهد شد.</MudText>
+    </MudAlert>
     @foreach (var zone in _AllRecords)
     {
         <MudCard Class="mb-2" Elevation="0" Outlined>
