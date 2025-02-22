@@ -25,7 +25,7 @@
                         <CardHeaderContent>
                             <MudStack Row Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
                                 <MudText Class="mb-2">@item.User!.FullName</MudText>
-                                <MudText Typo="Typo.caption">تاریخ ثبت : @item.CreateDate.ToLocalTime().ToPersianDateTime()</MudText>
+                                <MudText Typo="Typo.caption">تاریخ ثبت : @item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                             </MudStack>
                         </CardHeaderContent>
                     </MudCardHeader>

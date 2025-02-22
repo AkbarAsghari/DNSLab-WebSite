@@ -8,9 +8,9 @@
         <MudCardHeader>
             <CardHeaderContent>
                 <MudStack Row AlignItems="AlignItems.Center" Justify="Justify.FlexEnd">
-                    <MudText Typo="Typo.caption">تاریخ انتشار : @_Page.PublishDate?.ToPersianDateTime()</MudText>
-                    <MudText Typo="Typo.caption">آخرین بروزرسانی : @_Page.UpdateDate?.ToPersianDateTime()</MudText>
-                    <MudText Typo="Typo.caption">تعداد بازدید : @_Page.VisitCount</MudText>
+                    <MudText Typo="Typo.caption">تاریخ انتشار : @_Page.PublishDate?.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                    <MudText Typo="Typo.caption">آخرین بروزرسانی : @_Page.UpdateDate?.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                    <MudText Typo="Typo.caption">تعداد بازدید : @_Page.VisitCount.ToString().EnglishToPersianNumbers()</MudText>
                 </MudStack>
             </CardHeaderContent>
         </MudCardHeader>

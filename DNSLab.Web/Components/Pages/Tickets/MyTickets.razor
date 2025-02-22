@@ -27,7 +27,11 @@
                         </MudAlert>
                     </CellTemplate>
                 </PropertyColumn>
-                <PropertyColumn Property="x=>x.CreateDate.ToLocalTime().ToPersianDateTime()" Title="تاریخ ثبت" />
+                <PropertyColumn Property="x=>x.CreateDate" Title="تاریخ ثبت">
+                    <CellTemplate>
+                        <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                    </CellTemplate>
+                </PropertyColumn>
                 <TemplateColumn>
                     <CellTemplate>
                         <MudStack Row Justify="Justify.FlexEnd">

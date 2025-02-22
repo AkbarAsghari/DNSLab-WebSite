@@ -20,18 +20,18 @@
             </NoRecordsContent>
             <Columns>
                 <PropertyColumn Property="x=>x.Title" Title="عنوان" StickyRight />
-                <PropertyColumn Property="x=>x.VisitCount" Title="تعداد بازدید" />
+                <PropertyColumn Property="x=>x.VisitCount.ToString().EnglishToPersianNumbers()" Title="تعداد بازدید" />
                 <PropertyColumn Property="x=>x.URL" Title="URL" />
                 <PropertyColumn Property="x=>x.CreateDate" Title="ایجاد">
                     <CellTemplate>
-                        <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDate()</MudText>
+                        <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                     </CellTemplate>
                 </PropertyColumn>
                 <PropertyColumn Property="x=>x.UpdateDate" Title="ویرایش">
                     <CellTemplate>
                         @if (context.Item.UpdateDate != null)
                         {
-                            <MudText>@context.Item.UpdateDate.Value.ToLocalTime().ToPersianDate()</MudText>
+                            <MudText>@context.Item.UpdateDate.Value.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                         }
                     </CellTemplate>
                 </PropertyColumn>
@@ -39,7 +39,7 @@
                     <CellTemplate>
                         @if (context.Item.PublishDate != null)
                         {
-                            <MudText>@context.Item.PublishDate.Value.ToLocalTime().ToPersianDate()</MudText>
+                            <MudText>@context.Item.PublishDate.Value.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                         }
                     </CellTemplate>
                 </PropertyColumn>

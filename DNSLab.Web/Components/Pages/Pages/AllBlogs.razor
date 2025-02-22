@@ -30,7 +30,7 @@
                                             </MudStack>
                                             <MudStack Row Spacing="1">
                                                 <MudIcon Icon="@Icons.Material.Rounded.CalendarMonth" Size="Size.Small" />
-                                                <MudText Typo="Typo.caption">@item.CreateDate.ToPersianDateTime()</MudText>
+                                                <MudText Typo="Typo.caption">@item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                                             </MudStack>
                                             <MudStack Row Spacing="1">
                                                 <MudIcon Icon="@Icons.Material.Rounded.Visibility" Size="Size.Small" />
