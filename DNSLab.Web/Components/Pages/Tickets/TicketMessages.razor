@@ -15,9 +15,9 @@
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
-            @foreach (var item in _Ticket.Messages)
+            @foreach (var item in _Ticket.Messages.OrderBy(x => x.CreateDate))
             {
-                <MudCard Elevation="0" Class="pa-1 mb-1">
+                <MudCard Elevation="0">
                     <MudCardHeader Class="pb-0">
                         <CardHeaderAvatar>
                             @((MarkupString)ProfileImageCreator.GenerateSVG(item.User!.Id, 40))
@@ -34,6 +34,11 @@
                     </MudCardContent>
                 </MudCard>
             }
+
+            <MudTextField T="string" Lines="3" Label="متن پیام" Class="mt-2" Variant="Variant.Outlined" @bind-Value="_TicketMessage.Message" />
         </MudCardContent>
+        <MudCardActions>
+            <BaseButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SendMessage">ارسال پیام</BaseButton>
+        </MudCardActions>
     </MudCard>
 }

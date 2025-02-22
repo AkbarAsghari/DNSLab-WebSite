@@ -20,4 +20,17 @@ partial class TicketMessages
             await InvokeAsync(StateHasChanged);
         }
     }
+
+    TicketMessageDTO _TicketMessage { get; set; } = new();
+
+    async Task SendMessage()
+    {
+        _TicketMessage.TicketId = TicketId;
+
+        if (await _TicketRepository.AddTicketMessage(_TicketMessage))
+        {
+            _TicketMessage.Message = String.Empty;
+            await OnAfterRenderAsync(true);
+        }
+    }
 }
