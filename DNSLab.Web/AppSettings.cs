@@ -7,7 +7,12 @@ public sealed class GlobalSettings
     public const string ApplicationName = "DNSLab";
     public const bool RightToLeft = true;
     public const bool DarkMode = true;
-    public const string APIBaseAddress = "https://localhost:7046/";
+
+#if DEBUG
+    public const string APIBaseAddress = "https://api.dnslab.link/";
+#else
+    public const string APIBaseAddress = "https://api.dnslab.link/";
+#endif
 }
 
 public static class DNSSettings

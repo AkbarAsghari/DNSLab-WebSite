@@ -12,7 +12,7 @@
                     <MudSelectItem T="RecordTypeEnum" Value="item">@item</MudSelectItem>
                 }
             </MudSelect>
-            <MudNumericField T="uint" @bind-Value="Record.TTL" Variant="Variant.Outlined" Min="0" Max="uint.MaxValue" Placeholder="3600" Label="TTL" />
+            <MudNumericField T="uint" @bind-Value="Record.TTL" Variant="Variant.Outlined" Min="0" Max="uint.MaxValue" Placeholder="60" Label="TTL" />
             @switch (Record.Type)
             {
                 case RecordTypeEnum.A:
