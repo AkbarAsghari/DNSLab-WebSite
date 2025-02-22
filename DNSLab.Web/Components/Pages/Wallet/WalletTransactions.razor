@@ -25,7 +25,11 @@
                     </CellTemplate>
                 </TemplateColumn>
                 <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
-                <PropertyColumn Property="x=>x.CreateDate.ToPersianDateTime()" Title="زمان" />
+                <PropertyColumn Property="x=>x.CreateDate" Title="زمان">
+                    <CellTemplate>
+                        <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                    </CellTemplate>
+                </PropertyColumn>
             </Columns>
             <RowLoadingContent>
                 <tr class="mud-table-row" style="height:55px">
