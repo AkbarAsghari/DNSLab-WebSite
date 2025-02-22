@@ -24,7 +24,6 @@ partial class RecordDialog
 
     protected override void OnInitialized()
     {
-        Record.TTL = (uint)(IsDDNS ? 60 : 3600);
         if (Record.RData != null)
         {
             switch (Record.Type)
@@ -47,6 +46,10 @@ partial class RecordDialog
                 default:
                     break;
             }
+        }
+        else
+        {
+            Record.TTL = (uint)(IsDDNS ? 60 : 3600);
         }
     }
 
