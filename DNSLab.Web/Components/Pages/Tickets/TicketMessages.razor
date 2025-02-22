@@ -10,7 +10,7 @@
                 @if (_Ticket != null)
                 {
                     <BaseButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" DropShadow="false" StartIcon="@Icons.Material.Rounded.ArrowForward" Href="@AllRoutes.AllTickets">بازگشت</BaseButton>
-                    <MudText Typo="Typo.h5">@_Ticket.Title</MudText>
+                    <MudText Typo="Typo.h5">موضوع : @_Ticket.Title</MudText>
                 }
             </CardHeaderContent>
         </MudCardHeader>
@@ -34,9 +34,6 @@
                     </MudCardContent>
                 </MudCard>
             }
-
-
         </MudCardContent>
     </MudCard>
-
 }

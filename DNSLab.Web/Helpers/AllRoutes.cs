@@ -27,6 +27,7 @@
         public const string WalletTransactions = "/wallet/transactions";
 
         public const string AllTickets = "/tickets/all";
+        public const string MyTickets = "/tickets/my";
         public const string TicketMessages = "/tickets/messages";
         
         public const string MyAccount = "/accounts/my";

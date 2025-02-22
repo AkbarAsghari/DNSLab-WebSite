@@ -6,6 +6,7 @@
                 @if (_AuthCTX.User.IsInRole(AuthorizeRoles.Admin))
                 {
                     <MudNavGroup Title="مدیریت" Icon="@Icons.Material.Filled.AdminPanelSettings">
+                        <MudNavLink Href="@AllRoutes.AllTickets">تیکت ها</MudNavLink>
                         <MudNavLink Href="@AllRoutes.AllPages">مطالب سایت</MudNavLink>
                     </MudNavGroup>
                 }
@@ -28,7 +29,7 @@
         <MudNavLink Icon="@Icons.Material.Rounded.Web" Href="@AllRoutes.AllBlogs">بلاگ</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Construction" Href="@AllRoutes.AllTools">ابزار ها</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Code" Href="@AllRoutes.ItIsUnderDevelopment">API</MudNavLink>
-        <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.AllTickets">پشتیبانی</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Rounded.SupportAgent" Href="@AllRoutes.MyTickets">پشتیبانی</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Money" Href="@AllRoutes.ItIsUnderDevelopment">تعرفه ها</MudNavLink>
         <MudNavLink Icon="@Icons.Material.Rounded.Computer" Href="@AllRoutes.About">درباره ما</MudNavLink>
         <AuthorizeView>

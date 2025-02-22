@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace DNSLab.Web.Components.Pages.Tickets;
 
-partial class AllTickets
+partial class MyTickets
 {
     [Inject] ITicketRepository _TicketRepository { get; set; }
     [Inject] IDialogService _DialogService { get; set; }
@@ -23,7 +23,7 @@ partial class AllTickets
         {
             _IsLoading = true;
 
-            _Tickets = await _TicketRepository.GetAllTickets();
+            _Tickets = await _TicketRepository.GetMyTickets();
 
             _IsLoading = false;
             await InvokeAsync(() => StateHasChanged());
