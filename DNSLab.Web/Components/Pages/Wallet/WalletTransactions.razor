@@ -24,7 +24,7 @@
                         </MudAlert>
                     </CellTemplate>
                 </TemplateColumn>
-                <PropertyColumn Property="x=>x.PaymentStatus" Title="وضعیت پرداخت" />
+                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
                 <PropertyColumn Property="x=>x.CreateDate" Title="زمان">
                     <CellTemplate>
                         <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
