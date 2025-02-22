@@ -30,7 +30,7 @@
     <None Include="Components\Pages\DynamicDNSs\MikroTikSettings.razor" />
     <None Include="Components\Pages\DynamicDNSs\RouterSettings.razor" />
     <None Include="Components\Pages\DynamicDNSs\UpdateTokens.razor" />
-    <None Include="wwwroot\dnslab.js" />
+    <None Include="wwwroot\js\dnslab.js" />
   </ItemGroup>
 
 
@@ -41,10 +41,5 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Components\Pages\DynamicDNSs\MikroTikSettings.razor" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 </Project>
