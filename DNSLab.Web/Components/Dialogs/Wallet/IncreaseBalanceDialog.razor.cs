@@ -14,7 +14,7 @@ partial class IncreaseBalanceDialog
 
     async Task Pay()
     {
-        string? paymentUrl = await _PaymentRepository.RequestPaymentUrl(_Amount);
+        string? paymentUrl = await _PaymentRepository.RequestPaymentUrl(_Amount * 10);
 
         if (!String.IsNullOrEmpty(paymentUrl))
         {

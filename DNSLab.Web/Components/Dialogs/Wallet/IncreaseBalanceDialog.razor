@@ -1,7 +1,7 @@
 ﻿<MudDialog ContentClass="py-2">
     <DialogContent>
-        <MudText>لطفا منبلغ خود را وارد نمایید</MudText>
-        <MudTextField T="int" @bind-Value="_Amount" Placeholder="5000" Class="mud-ltr" FullWidth />
+        <MudText>لطفا منبلغ خود را به صورت تومان وارد نمایید</MudText>
+        <MudTextField T="int" @bind-Value="_Amount" Placeholder="5000 تومان" Class="mud-ltr" FullWidth />
     </DialogContent>
     <DialogActions>
         <BaseButton OnClick="()=>_MudDialog.Close()">انصراف</BaseButton>
