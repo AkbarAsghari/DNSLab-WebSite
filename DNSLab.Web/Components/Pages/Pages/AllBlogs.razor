@@ -13,7 +13,7 @@
                 @foreach (var item in _Pages.OrderByDescending(x => x.PublishDate))
                 {
                     <MudItem xs="12">
-                        <MudLink Href="@($"{AllRoutes.Blog}/{@item.URL}")">
+                        <MudLink Href="@($"{AllRoutes.Blog}/{@item.URL}")" Underline="Underline.None">
                             <MudCard Outlined>
                                 <MudCardHeader>
                                     <CardHeaderAvatar>
