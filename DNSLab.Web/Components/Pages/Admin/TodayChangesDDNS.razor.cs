@@ -8,7 +8,7 @@ using DNSLab.Web.DTOs.Repositories.Zone;
 
 namespace DNSLab.Web.Components.Pages.Admin
 {
-    partial class AllHostNames
+    partial class TodayChangesDDNS
     {
         [Inject] IDDNSRepository _DDNSRepository { get; set; }
         [Inject] IRecordRepository _RecordRepository { get; set; }
@@ -19,7 +19,7 @@ namespace DNSLab.Web.Components.Pages.Admin
 
         protected override async Task OnInitializedAsync()
         {
-            _AllRecords = await _DDNSRepository.GetAllDDNSDomainAndRecords();
+            _AllRecords = await _DDNSRepository.GetTodayChangesDDNSDomainAndRecords();
         }
 
         async Task Refresh()
@@ -82,7 +82,7 @@ namespace DNSLab.Web.Components.Pages.Admin
             }
         }
 
-        async Task EditRecord(BaseRecordDTO record , ZoneDTO zone)
+        async Task EditRecord(BaseRecordDTO record, ZoneDTO zone)
         {
             var parameters = new DialogParameters<RecordDialog>() { { "Zone", zone }, { "Record", record.Clone() } };
 

@@ -8,7 +8,7 @@ namespace DNSLab.Web.Interfaces.Repositories
     {
         Task<IEnumerable<ZoneDTO>?> GetAllZones();
         Task<bool> AddRecord(Guid zoneId, BaseRecordDTO model);
-        Task<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?> GetAllDDNSDomainAndRecords();
+        Task<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?> GetTodayChangesDDNSDomainAndRecords();
         Task<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?> GetDDNSDomainAndRecords();
         Task<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?> GetDDNSDomainAndRecordsForToken();
 

@@ -1,5 +1,5 @@
 ﻿@using DNSLab.Web.DTOs.Repositories.Record
-@attribute [Route(AllRoutes.AllDDNSHostNames)]
+@attribute [Route(AllRoutes.TodayChangesDDNS)]
 @attribute [Authorize(Roles = AuthorizeRoles.Admin)]
 
 
@@ -54,6 +54,19 @@ else
                                                 break;
                                         }
                                     </MudText>
+                                </CellTemplate>
+                            </PropertyColumn>
+                            <PropertyColumn Property="x=>x.CreateDate" Title="تاریخ ثبت">
+                                <CellTemplate>
+                                    <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                                </CellTemplate>
+                            </PropertyColumn>
+                            <PropertyColumn Property="x=>x.LastModified" Title="آخرین ویرایش">
+                                <CellTemplate>
+                                    @if (context.Item.LastModified != null)
+                                    {
+                                        <MudText>@context.Item.LastModified.Value.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
+                                    }
                                 </CellTemplate>
                             </PropertyColumn>
                             <PropertyColumn Property="x=>x.Comment" Title="یادداشت" />
