@@ -1,35 +1,29 @@
-﻿@using DNSLab.Web.DTOs.Repositories.Wallet
-@attribute [Route(AllRoutes.WalletTransactions)]
+﻿@using DNSLab.Web.DTOs.Repositories.Payment
+@attribute [Route(AllRoutes.Payments)]
 @attribute [Authorize]
 
 <MudCard Elevation="0" Outlined>
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText Typo="Typo.h5">تراکنش‌ها</MudText>
+            <MudText Typo="Typo.h5">پرداخت‌ها</MudText>
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudDataGrid T="WalletTransactionDTO" VirtualizeServerData="ServerDataFunc" Virtualize Dense Hover Bordered Outlined FixedHeader SortMode="SortMode.None" Height="70vh" Striped ItemSize="55">
+        <MudDataGrid T="PaymentDTO" VirtualizeServerData="ServerDataFunc" Virtualize Dense Hover Bordered Outlined FixedHeader Striped SortMode="SortMode.None" Height="70vh" ItemSize="55">
             <NoRecordsContent>
                 <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
                     <MudText Typo="Typo.caption">هیچ تراکنشی یافت نشد</MudText>
                 </MudAlert>
             </NoRecordsContent>
             <Columns>
-                <PropertyColumn Property="x=>x.TransactionType" Title="نوع" />
-                <TemplateColumn Title="مبغ(ريال)">
-                    <CellTemplate>
-                        <MudAlert Severity="@(@context.Item.Incremental ? Severity.Success : Severity.Error)" Variant="Variant.Text" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
-                            <MudText>@context.Item.Amount.Separate3Digits().EnglishToPersianNumbers()</MudText>
-                        </MudAlert>
-                    </CellTemplate>
-                </TemplateColumn>
-                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
+                <PropertyColumn Property="x=>x.Amount" Title="مبلغ (ريال)" />
                 <PropertyColumn Property="x=>x.CreateDate" Title="زمان">
                     <CellTemplate>
                         <MudText>@context.Item.CreateDate.ToLocalTime().ToPersianDateTime().EnglishToPersianNumbers()</MudText>
                     </CellTemplate>
                 </PropertyColumn>
+                <PropertyColumn Property="x=>x.Status" Title="وضعیت" />
+                <PropertyColumn Property="x=>x.Description" Title="توضیحات" />
             </Columns>
             <RowLoadingContent>
                 <tr class="mud-table-row" style="height:55px">

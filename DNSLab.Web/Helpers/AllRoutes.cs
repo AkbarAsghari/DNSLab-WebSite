@@ -42,7 +42,8 @@
         public const string AllBlogs = "/blog/all";
 
         public const string CallBackPayment = "payment/callback";
-        public const string PaymentTransactions = "/payment/transactions";
+        public const string Payments = "/payment/payments";
+        public const string AllPayments = "/payment/allpayments";
 
         public const string TodayChangesDDNS = "/admin/todaychangesddns";
     }
