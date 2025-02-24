@@ -1,0 +1,73 @@
+﻿@using DNSLab.Web.DTOs.Repositories.Record
+@attribute [Route(AllRoutes.AllDDNSHostNames)]
+@attribute [Authorize(Roles = AuthorizeRoles.Admin)]
+
+
+@if (_AllRecords == null)
+{
+
+}
+else
+{
+    @foreach (var zone in _AllRecords.OrderByDescending(x => x.Item2.Count() > 0 ? x.Item2.Max(c => c.CreateDate) : DateTime.UtcNow))
+    {
+        <MudCard Class="mb-2" Elevation="0" Outlined>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h5">@zone.Item1.Name</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                @if (zone.Item2.Count() > 0)
+                {
+                    <MudDataGrid T="BaseRecordDTO" Items="zone.Item2.OrderByDescending(x=> x.CreateDate)" Dense Hover Bordered Outlined Loading="false">
+                        <NoRecordsContent>
+                            <MudAlert Severity="Severity.Warning" ContentAlignment="HorizontalAlignment.Center" NoIcon>
+                                <MudText Typo="Typo.caption">تا به حال هیچ رکوردی ثبت نشده است!</MudText>
+                            </MudAlert>
+                        </NoRecordsContent>
+                        <Columns>
+                            <PropertyColumn Property="x=>x.Name" Title="نام" />
+                            <PropertyColumn Property="x=>x.Type" Title="نوع">
+                                <CellTemplate>
+                                    <MudAlert Severity="Severity.Info" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                                        <MudText Typo="Typo.caption">@context.Item.Type</MudText>
+                                    </MudAlert>
+                                </CellTemplate>
+                            </PropertyColumn>
+                            <PropertyColumn Property="x=>x.TTL" Title="TTL" />
+                            <PropertyColumn Property="x=>x.RData" Title="مقدار" CellClass="mud-ltr" Sortable="false">
+                                <CellTemplate>
+                                    <MudText Typo="Typo.caption">
+                                        @switch (context.Item.Type)
+                                        {
+                                            case Enums.RecordTypeEnum.A:
+                                                <text>IPv4 : @(context.Item.CastTo<ARecordDTO>()!.IPv4Address)</text>
+                                                break;
+                                            case Enums.RecordTypeEnum.AAAA:
+                                                <text>IPv6 : @(context.Item.CastTo<AAAARecordDTO>()!.IPv6Address)</text>
+                                                break;
+                                            case Enums.RecordTypeEnum.CNAME:
+                                                <text>CName : @(context.Item.CastTo<CNAMERecordDTO>()!.CName)</text>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    </MudText>
+                                </CellTemplate>
+                            </PropertyColumn>
+                            <PropertyColumn Property="x=>x.Comment" Title="یادداشت" />
+                            <PropertyColumn Property="x=>x.Disable" Title="وضعیت">
+                                <CellTemplate>
+                                    <MudAlert Severity="@(context.Item.Disable ? Severity.Warning : Severity.Success)" Variant="Variant.Filled" NoIcon Dense ContentAlignment="HorizontalAlignment.Center">
+                                        <MudText Typo="Typo.caption">@(context.Item.Disable ? "غیر فعال" : "فعال")</MudText>
+                                    </MudAlert>
+                                </CellTemplate>
+                            </PropertyColumn>
+                        </Columns>
+                    </MudDataGrid>
+                }
+            </MudCardContent>
+        </MudCard>
+    }
+}

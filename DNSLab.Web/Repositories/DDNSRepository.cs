@@ -26,6 +26,11 @@ namespace DNSLab.Web.Repositories
             return await _HttpServiceProvider.Delete<bool>($"{APIController}/DeleteToken?Id={Id}");
         }
 
+        public async Task<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?> GetAllDDNSDomainAndRecords()
+        {
+            return await _HttpServiceProvider.Get<IEnumerable<Tuple<ZoneDTO, IEnumerable<BaseRecordDTO>>>?>($"{APIController}/GetAllDDNSDomainAndRecords");
+        }
+
         public async Task<IEnumerable<ZoneDTO>?> GetAllZones()
         {
             return await _HttpServiceProvider.Get<IEnumerable<ZoneDTO>?>($"{APIController}/GetAllZones");

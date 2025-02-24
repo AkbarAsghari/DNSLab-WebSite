@@ -43,5 +43,7 @@
 
         public const string CallBackPayment = "payment/callback";
         public const string PaymentTransactions = "/payment/transactions";
+
+        public const string AllDDNSHostNames = "/admin/allddnshostnames";
     }
 }
