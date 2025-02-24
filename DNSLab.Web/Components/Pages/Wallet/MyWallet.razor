@@ -3,6 +3,9 @@
 @attribute [Route(AllRoutes.MyWallet)]
 @attribute [Authorize]
 
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Start" Dense Class="mb-2"> 
+    <MudText>در صورت نیاز به افزایش موجودی کیف پول از دکمه افزایش موجودی استفاده نمایید.</MudText>
+</MudAlert>
 <MudCard Elevation="0" Outlined>
     <MudCardHeader>
         <CardHeaderAvatar>
@@ -21,8 +24,8 @@
                 <MudStack Row AlignItems="AlignItems.Center">
                     @if (_Wallet != null)
                     {
-                        <MudText Typo="Typo.h3">@_Wallet.Balance.Separate3Digits().EnglishToPersianNumbers()</MudText>
-                        <MudText Typo="Typo.caption">ريال</MudText>
+                            <MudText Typo="Typo.h3">@_Wallet.Balance.Separate3Digits().EnglishToPersianNumbers()</MudText>
+                            <MudText Typo="Typo.caption">ريال</MudText>
                     }
                 </MudStack>
             </MudItem>
@@ -31,13 +34,13 @@
                 <ApexChart TItem="Tuple<DateTime,int>" Options="_Last30DaysTransactionsChartDataChartDataOptions">
                     @if (_Last30DaysTransactionsChartDataChartData != null)
                     {
-                        <ApexPointSeries TItem="Tuple<DateTime,int>"
-                                         Items="_Last30DaysTransactionsChartDataChartData"
-                                         SeriesType="@SeriesType.Area"
-                                         Name="مقدار"
-                                         XValue="@(e => e.Item1.ToPersianDate())"
-                                         YValue="@(e => e.Item2)"
-                                         OrderBy="e=>e.X" />
+                            <ApexPointSeries TItem="Tuple<DateTime,int>"
+                                             Items="_Last30DaysTransactionsChartDataChartData"
+                                             SeriesType="@SeriesType.Area"
+                                             Name="مقدار"
+                                             XValue="@(e => e.Item1.ToPersianDate())"
+                                             YValue="@(e => e.Item2)"
+                                             OrderBy="e=>e.X" />
                     }
                 </ApexChart>
             </MudItem>
