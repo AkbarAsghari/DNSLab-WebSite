@@ -6,7 +6,7 @@ namespace DNSLab.Web.Components.Dialogs.Ticket;
 
 partial class AddTicket
 {
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
     [Inject] ITicketRepository _TicketRepository { get; set; }
 

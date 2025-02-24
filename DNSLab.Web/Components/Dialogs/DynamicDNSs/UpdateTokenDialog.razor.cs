@@ -10,7 +10,7 @@ namespace DNSLab.Web.Components.Dialogs.DynamicDNSs;
 
 partial class UpdateTokenDialog
 {
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
     [Inject] IDDNSRepository _DDNSRepository { get; set; }
 

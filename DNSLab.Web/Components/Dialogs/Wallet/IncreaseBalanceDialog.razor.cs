@@ -8,7 +8,7 @@ partial class IncreaseBalanceDialog
     [Inject] IPaymentRepository _PaymentRepository { get; set; }
     [Inject] NavigationManager _NavigationManager { get; set; }
 
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
     int _Amount = 5000; //Toman
 

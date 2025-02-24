@@ -6,7 +6,7 @@ namespace DNSLab.Web.Components.Dialogs.Zone;
 
 partial class AddZoneDialog
 {
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
     [Inject] IZoneRepository _ZoneRepository { get; set; }
 

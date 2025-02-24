@@ -64,7 +64,7 @@ builder.Services.AddRazorComponents()
     .AddCircuitOptions(option =>
     {
         //only add details when debugging
-        option.DetailedErrors = true;
+        option.DetailedErrors = builder.Environment.IsDevelopment();
     });
 
 var app = builder.Build();

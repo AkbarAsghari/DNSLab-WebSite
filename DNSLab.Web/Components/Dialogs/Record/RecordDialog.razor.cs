@@ -7,7 +7,7 @@ namespace DNSLab.Web.Components.Dialogs.Record;
 
 partial class RecordDialog
 {
-    [CascadingParameter] MudDialogInstance _MudDialog { get; set; }
+    [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
     [Inject] IRecordRepository _RecordRepository { get; set; }
     [Inject] IDDNSRepository _DDNSRepository { get; set; }
