@@ -10,11 +10,11 @@ partial class IncreaseBalanceDialog
 
     [CascadingParameter] IMudDialogInstance _MudDialog { get; set; }
 
-    int _Amount = 5000; //Toman
+    int _Amount = 50000; //Rial
 
     async Task Pay()
     {
-        string? paymentUrl = await _PaymentRepository.RequestPaymentUrl(_Amount * 10);
+        string? paymentUrl = await _PaymentRepository.RequestPaymentUrl(_Amount);
 
         if (!String.IsNullOrEmpty(paymentUrl))
         {
