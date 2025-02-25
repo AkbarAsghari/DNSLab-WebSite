@@ -1,4 +1,5 @@
 ﻿<MudDrawer @bind-Open="_drawerOpen" Overlay="false" Class="baackdrop-bluered" ClipMode="DrawerClipMode.Always">
+    <MudText Typo="Typo.caption" Align="Align.Center">version : @GlobalSettings.Version</MudText>
     <MudNavMenu>
         <MudNavLink Href="@AllRoutes.Home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">خانه</MudNavLink>
         <AuthorizeView Context="_AuthCTX">
