@@ -6,8 +6,7 @@ public sealed class GlobalSettings
 {
     public const string ApplicationName = "DNSLab";
     public const bool RightToLeft = true;
-    public const bool DarkMode = true;
-    public const string Version = "1.0.3.8";
+    public const string Version = "1.0.4.0";
 
 #if DEBUG
     //public const string APIBaseAddress = "https://localhost:7046/";
