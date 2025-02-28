@@ -4,7 +4,7 @@
     {
         public const string Home = "/";
 
-        public const string ItIsUnderDevelopment = "/itisunderdevelopment";
+        public const string ItIsUnderDevelopment = "/it-is-under-development";
 
         public const string Dashboard = "/dashboard";
         public const string About = "/about";
@@ -19,9 +19,9 @@
         public const string PortChecker = "/tools/portchecker";
 
         public const string DDNSHostNames = "/ddns/hostnames";
-        public const string UpdateTokens = "/ddns/updatetokens";
-        public const string RouterSettings = "/ddns/routersettings";
-        public const string MikroTikSettings = "/ddns/mikrotiksettings";
+        public const string UpdateTokens = "/ddns/update-tokens";
+        public const string RouterSettings = "/ddns/router-settings";
+        public const string MikroTikSettings = "/ddns/mikrotik-settings";
 
         public const string MyWallet = "/wallet/my";
         public const string WalletTransactions = "/wallet/transactions";
@@ -46,8 +46,8 @@
 
         public const string CallBackPayment = "payment/callback";
         public const string Payments = "/payment/payments";
-        public const string AllPayments = "/payment/allpayments";
+        public const string AllPayments = "/payment/all-payments";
 
-        public const string TodayChangesDDNS = "/admin/todaychangesddns";
+        public const string TodayChangesDDNS = "/admin/today-changes-ddns";
     }
 }
