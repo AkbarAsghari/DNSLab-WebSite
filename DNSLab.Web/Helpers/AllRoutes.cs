@@ -29,12 +29,14 @@
         public const string AllTickets = "/tickets/all";
         public const string MyTickets = "/tickets/my";
         public const string TicketMessages = "/tickets/messages";
-        
+
         public const string MyAccount = "/accounts/my";
         public const string Login = "/accounts/login";
         public const string Logout = "/accounts/logout";
         public const string RegisterAccount = "/accounts/register";
         public const string AllAcounts = "/accounts/all";
+        public const string ForgetPassword = "/accounts/forget";
+        public const string ResetPassword = "/accounts/reset";
 
         public const string AllPages = "/pages/all";
         public const string Page = "/pages/page";

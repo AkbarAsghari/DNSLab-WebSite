@@ -52,7 +52,7 @@ namespace DNSLab.Web.Repositories
 
         public async Task<bool> ForgetPasswordAsync(ForgetPasswordDTO model)
         {
-            return await _HttpServiceProvider.Post<ForgetPasswordDTO, bool>($"{APIController}/", model);
+            return await _HttpServiceProvider.Post<ForgetPasswordDTO, bool>($"{APIController}/ForgetPasswordAsync", model);
         }
 
         public async Task<IEnumerable<UserDTO>?> GetAllAsync()
