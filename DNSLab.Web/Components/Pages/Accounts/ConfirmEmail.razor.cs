@@ -9,8 +9,13 @@ partial class ConfirmEmail
     [Parameter] public string Token { get; set; }
 
     bool _IsSuccess = false;
-    public async Task SavePassword()
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        _IsSuccess = await _AccountRepository.ConfirmEmailWithTokenAsync(Token);
+        if (firstRender)
+        {
+            _IsSuccess = await _AccountRepository.ConfirmEmailWithTokenAsync(Token);
+            await InvokeAsync(StateHasChanged);
+        }
     }
 }
