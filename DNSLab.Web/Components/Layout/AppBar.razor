@@ -1,6 +1,13 @@
 ﻿<MudAppBar Elevation="0" Class="baackdrop-bluered">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="MenuOnClick" />
     <MudText Typo="Typo.h5" Class="ml-3">@GlobalSettings.ApplicationName</MudText>
+    <MudButton Href="https://github.com/AkbarAsghari/DNSLab.Web" StartIcon="@Icons.Custom.Brands.GitHub" Size="Size.Small">
+        <MudHidden Breakpoint="Breakpoint.Xs">
+            <MudText Typo="Typo.caption">
+                Github
+            </MudText>
+        </MudHidden>
+    </MudButton>
     <AuthorizeView>
         <NotAuthorized>
             <MudSpacer />
