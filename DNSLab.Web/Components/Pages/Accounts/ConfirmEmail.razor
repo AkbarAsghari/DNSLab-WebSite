@@ -1,0 +1,16 @@
+﻿@attribute [Route(AllRoutes.ConfirmEmail + "/{Token}")]
+
+<MudStack AlignItems="AlignItems.Center">
+    <MudContainer MaxWidth="MaxWidth.ExtraSmall" Class="mt-6">
+        <MudCard Outlined Class="pa-5">
+            <MudText Typo="Typo.h3" Class="my-3">تایید ایمیل</MudText>
+            @if (_IsSuccess)
+            {
+                <MudAlert ContentAlignment="HorizontalAlignment.Start" Dense Severity="Severity.Success">
+                    <MudText>ایمیل شما با موفقیت تایید شد.</MudText>
+                </MudAlert>
+                <BaseButton Href="@AllRoutes.Home" Class="mt-2" Color="Color.Primary">بازکشت به خانه</BaseButton>
+            }
+        </MudCard>
+    </MudContainer>
+</MudStack>

@@ -37,6 +37,7 @@
         public const string AllAcounts = "/accounts/all";
         public const string ForgetPassword = "/accounts/forget";
         public const string ResetPassword = "/accounts/reset";
+        public const string ConfirmEmail = "/accounts/confirmemail";
 
         public const string AllPages = "/pages/all";
         public const string Page = "/pages/page";
