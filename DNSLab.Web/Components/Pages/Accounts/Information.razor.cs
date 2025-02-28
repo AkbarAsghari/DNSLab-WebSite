@@ -8,7 +8,7 @@ partial class Information
     [Inject] IAccountRepository _AccountRepository { get; set; }
     [Inject] ISnackbar _Snackbar { get; set; }
 
-    UserDTO? _CurrentUser = new();
+    UserDTO? _CurrentUser;
     protected override async Task OnInitializedAsync()
     {
         _CurrentUser = await _AccountRepository.GetCurrentUserAsync();
@@ -30,6 +30,11 @@ partial class Information
         }
     }
 
+    bool _IsConfirmEmailLinkResend = false;
+    async Task ResendConfirmEmailLink()
+    {
+        _IsConfirmEmailLinkResend = await _AccountRepository.ResendConfirmEmailTokenAsync();
+    }
 
     bool _EditMobileDialogVisible = false;
     void EditMobile()
@@ -110,6 +115,7 @@ partial class Information
                 _NewEmailAddress = String.Empty;
                 _EditEmailDialogVisible = false;
                 _Snackbar.Add("ایمیل شما با موفقیت تغییر یافت . کد تایید به ایمیل شما ارسال شد", Severity.Success);
+                await OnInitializedAsync();
             }
         }
     }

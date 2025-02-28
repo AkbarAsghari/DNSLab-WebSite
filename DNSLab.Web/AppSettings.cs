@@ -6,11 +6,11 @@ public sealed class GlobalSettings
 {
     public const string ApplicationName = "DNSLab";
     public const bool RightToLeft = true;
-    public const string Version = "1.0.6.4";
+    public const string Version = "1.0.8.0";
 
 #if DEBUG
-    public const string APIBaseAddress = "https://localhost:7046/";
-    //public const string APIBaseAddress = "https://api.dnslab.link/";
+    //public const string APIBaseAddress = "https://localhost:7046/";
+    public const string APIBaseAddress = "https://api.dnslab.link/";
 
 #else
     public const string APIBaseAddress = "https://api.dnslab.link/";

@@ -1,11 +1,15 @@
 ﻿@attribute [Route(AllRoutes.MyAccount)]
 @attribute [Authorize]
 
-<MudText Typo="Typo.h3" Class="mb-2">حساب کاربری</MudText>
 
 @if (_CurrentUser != null)
 {
     <MudCard Outlined>
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h3" Class="mb-2">حساب کاربری</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
         <MudCardContent>
             <MudGrid>
                 <MudItem xs="12" md="6" lg="4">
@@ -23,6 +27,7 @@
             <BaseButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveInformation">ذخیره تغییرات</BaseButton>
         </MudCardActions>
     </MudCard>
+
     <MudCard Outlined Class="mt-2">
         <MudCardContent>
             <MudGrid>
@@ -31,6 +36,24 @@
                 </MudItem>
                 <MudItem xs="12" md="6" lg="4">
                     <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Email" Label="آدرس ایمیل" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditEmail" Adornment="Adornment.End" />
+                    @if (_CurrentUser.IsEmailApproved)
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Success">آدرس ایمیل تایید شده است.</MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.caption" Color="Color.Warning">
+                            آدرس ایمیل تایید نشده است.
+                            @if (_IsConfirmEmailLinkResend)
+                            {
+                                <MudText Color="Color.Success" Typo="Typo.caption">لینک ارسال شد</MudText>
+                            }
+                            else
+                            {
+                                <BaseButton Color="Color.Warning" Size="Size.Small" Variant="Variant.Outlined" OnClick="ResendConfirmEmailLink">ارسال مجدد لینک</BaseButton>
+                            }
+                        </MudText>
+                    }
                 </MudItem>
                 <MudItem xs="12" md="6" lg="4">
                     <MudTextField T="string" Variant="Variant.Outlined" @bind-Value="_CurrentUser.Username" Label="نام کاربری" ReadOnly AdornmentIcon="@Icons.Material.Filled.Edit" OnAdornmentClick="EditUsername" Adornment="Adornment.End" />

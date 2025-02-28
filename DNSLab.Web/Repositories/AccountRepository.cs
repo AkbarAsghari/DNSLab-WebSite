@@ -41,7 +41,7 @@ namespace DNSLab.Web.Repositories
 
         public async Task<bool> ConfirmEmailWithTokenAsync(string token)
         {
-            return await _HttpServiceProvider.Post<bool>($"{APIController}/");
+            return await _HttpServiceProvider.Post<bool>($"{APIController}/ConfirmEmailWithTokenAsync");
         }
 
         public async Task<bool> DeactivateAccountAsync()
@@ -77,7 +77,7 @@ namespace DNSLab.Web.Repositories
 
         public async Task<bool> ResendConfirmEmailTokenAsync()
         {
-            return await _HttpServiceProvider.Post<bool>($"{APIController}/");
+            return await _HttpServiceProvider.Post<bool>($"{APIController}/ResendConfirmEmailTokenAsync");
         }
 
         public async Task<bool> ResetPasswordAsync(ResetPasswordDTO model)
