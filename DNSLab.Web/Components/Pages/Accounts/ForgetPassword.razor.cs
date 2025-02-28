@@ -1,5 +1,4 @@
-﻿using DNSLab.Web.Interfaces.Providers;
-using DNSLab.Web.Interfaces.Repositories;
+﻿using DNSLab.Web.Interfaces.Repositories;
 using Microsoft.AspNetCore.Components;
 
 namespace DNSLab.Web.Components.Pages.Accounts;

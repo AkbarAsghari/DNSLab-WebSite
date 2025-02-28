@@ -82,7 +82,7 @@ namespace DNSLab.Web.Repositories
 
         public async Task<bool> ResetPasswordAsync(ResetPasswordDTO model)
         {
-            return await _HttpServiceProvider.Post<ResetPasswordDTO, bool>($"{APIController}/", model);
+            return await _HttpServiceProvider.Post<ResetPasswordDTO, bool>($"{APIController}/ResetPasswordAsync", model);
         }
 
         public async Task<bool> UpdateAsync(UpdateUserPersonalInfoDTO model)
